@@ -2,21 +2,38 @@
 import SideBarFooter from "./SideBarFooter.astro";
 import { Image } from "astro:assets";
 import SideBarMenu from "./SideBarMenu.astro";
+
 const { sideBarActiveItemID } = Astro.props;
 ---
 
 <div class="drawer-side z-40">
   <label for="my-drawer" class="drawer-overlay"></label>
+
   <aside class="px-2 pt-2 h-auto min-h-full w-[19rem] bg-base-200 text-base-content flex flex-col">
-    <div class="w-fit mx-auto mt-5 mb-6">
+    <div class="w-fit mx-auto mt-5 mb-4 text-center">
       <a href="/">
         <div class="avatar transition ease-in-out hover:scale-[102%] block m-auto">
           <div class="w-[8.5rem]">
-            <Image class="mask mask-circle" format="webp" width={300} height={300} src="/profile.webp" alt="Profile image" />
+            <Image
+              class="mask mask-circle"
+              format="webp"
+              width={300}
+              height={300}
+              src="/profile.webp"
+              alt="Vincenzo Di Perna profile image"
+            />
           </div>
         </div>
       </a>
+
+      <div class="mt-4 px-3">
+        <h1 class="text-xl font-bold leading-tight">Vincenzo Di Perna</h1>
+        <p class="text-sm opacity-80 mt-1">
+          Blockchain Systems & Digital Assets Engineer
+        </p>
+      </div>
     </div>
+
     <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
     <SideBarFooter />
   </aside>
