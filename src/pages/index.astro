@@ -1,78 +1,298 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
-import { getCollection } from "astro:content";
-import createSlug from "../lib/createSlug"
-
-const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const last_posts = posts.slice(0, 3);
 ---
 
 <BaseLayout sideBarActiveItemID="home">
-  <div class="pb-12 mt-5">
-    <div class="text-xl py-1">Hey there 👋</div>
-    <div class="text-5xl font-bold">I'm Manuel Ernesto</div>
-    <div class="text-3xl py-3 font-bold">Software Engineer and Entrepreneur</div>
-    <div class="py-2">
-      <text class="text-lg">
-        This is <b>Astrofy</b> a free and open-source template for your Personal Portfolio Website built with Astro and TailwindCSS.
-        Create in minutes a website with Blog, CV, Project Section, Store and RSS Feed. I hope you find
-        it useful!
-      </text>
-    </div>
-    <div class="mt-8">
-      <a class="btn" href="https://twitter.com/manuelernestog" target="_blank"> Let's connect!</a>
-      <a href="https://github.com/manuelernestog/astrofy" target="_blank" class="btn btn-outline ml-5">
-        Get This template
+  <section class="pb-12 mt-5">
+    <div class="text-xl py-1">Hi, I'm</div>
+
+    <h1 class="text-5xl font-bold leading-tight">
+      Vincenzo Di Perna
+    </h1>
+
+    <h2 class="text-3xl py-3 font-bold">
+      Blockchain Systems & Digital Assets Engineer
+    </h2>
+
+    <p class="py-2 text-lg leading-relaxed">
+      I hold a PhD in Blockchain & DLT and work at the intersection of distributed systems,
+      blockchain benchmarking, reproducible experimentation, protocol evaluation, and
+      digital-asset analytics.
+    </p>
+
+    <p class="py-2 text-lg leading-relaxed">
+      My work focuses on understanding how blockchain systems behave under realistic
+      network conditions, how performance and energy efficiency vary across protocols,
+      and how data-driven methods can support better evaluation of decentralized
+      infrastructures.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a class="btn btn-primary" href="/projects">
+        View Projects
+      </a>
+
+      <a class="btn btn-outline" href="/cv">
+        View CV
+      </a>
+
+      <a
+        class="btn btn-outline"
+        href="https://github.com/vindipe"
+        target="_blank"
+      >
+        GitHub
+      </a>
+
+      <a
+        class="btn btn-outline"
+        href="https://www.linkedin.com/in/vincenzo-di-perna/"
+        target="_blank"
+      >
+        LinkedIn
       </a>
     </div>
-  </div>
+  </section>
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-2">My last projects {"</>"}</div>
-  </div>
+  <section class="mb-12">
+    <h2 class="text-3xl w-full font-bold mb-5">
+      What I work on
+    </h2>
 
-  <HorizontalCard
-    title="Demo Project 1"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="NEW"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 2"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 3"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
-  />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Blockchain benchmarking</h3>
+          <p>
+            Experimental evaluation of blockchain platforms across performance,
+            latency, energy usage, repeatability, and predictability dimensions.
+          </p>
+        </div>
+      </div>
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
-  </div>
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Distributed systems</h3>
+          <p>
+            Network-aware experimentation, workload design, topology effects,
+            emulation, orchestration, and reproducibility of system-level studies.
+          </p>
+        </div>
+      </div>
 
-  {
-    last_posts.map((post) => (
-      <>
-        <HorizontalCard
-          title={post.data.title}
-          img={post.data.heroImage}
-          desc={post.data.description}
-          url={"/blog/" + createSlug(post.data.title, post.slug)}
-          target="_self"
-          badge={post.data.badge}
-        />
-        <div class="divider my-0" />
-      </>
-    ))
-  }
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Digital assets & protocol analytics</h3>
+          <p>
+            Data-oriented analysis of blockchain ecosystems, DeFi, CBDC-related
+            infrastructures, and economic efficiency indicators.
+          </p>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Research engineering</h3>
+          <p>
+            Building reproducible software artifacts, datasets, dashboards, and
+            experimental pipelines that connect academic research with technical practice.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-3xl w-full font-bold mb-2">
+      Featured projects {"</>"}
+    </h2>
+
+    <p class="mb-5 opacity-80">
+      A selection of research, engineering, and product-oriented projects.
+    </p>
+
+    <HorizontalCard
+      title="Lilith — Topology-Aware Blockchain Benchmarking"
+      img="/post_img.webp"
+      desc="A reproducible benchmarking framework integrating network emulation and blockchain workload generation to study performance, energy usage, and variability under programmable network conditions."
+      url="https://doi.org/10.5281/zenodo.11409100"
+      badge="Research artifact"
+    />
+
+    <div class="divider my-0"></div>
+
+    <HorizontalCard
+      title="Blockchain Repeatability Dataset"
+      img="/post_img.webp"
+      desc="A dataset and experimental campaign designed to study repeatability and performance predictability across blockchains, workloads, and network topologies."
+      url="https://doi.org/10.5281/zenodo.15545963"
+      badge="Dataset"
+    />
+
+    <div class="divider my-0"></div>
+
+    <HorizontalCard
+      title="DeFi Navigator"
+      img="/post_img.webp"
+      desc="A data-oriented dashboard concept for exploring DeFi and digital-asset ecosystems through structured indicators, visual analytics, and interactive views."
+      url="/projects"
+      target="_self"
+      badge="Dashboard"
+    />
+
+    <div class="divider my-0"></div>
+
+    <HorizontalCard
+      title="Comodit"
+      img="/post_img.webp"
+      desc="A personal product concept for creating interactive physical/digital overlay maps, with possible applications in tourism, venues, games, local communities, and tokenized assets."
+      url="/projects"
+      target="_self"
+      badge="Product idea"
+    />
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-3xl w-full font-bold mb-5">
+      Selected publications
+    </h2>
+
+    <div class="space-y-4">
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="card-title">
+              Topology-aware blockchain benchmarking
+            </h3>
+            <span class="badge badge-secondary">ACM DEBS'25</span>
+          </div>
+          <p>
+            Research on how network topology and workload conditions affect blockchain
+            performance, variability, and evaluation reliability.
+          </p>
+          <div class="card-actions justify-end">
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://dl.acm.org/doi/10.1145/3701717.3730540"
+              target="_blank"
+            >
+              View paper
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="card-title">
+              Blockchain performance, energy, and economic efficiency
+            </h3>
+            <span class="badge badge-secondary">IEEE ICBC'25</span>
+          </div>
+          <p>
+            Work connecting blockchain performance, energy consumption, and economic
+            efficiency through reproducible evaluation and data-driven analysis.
+          </p>
+          <div class="card-actions justify-end">
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://ieeexplore.ieee.org/document/11114569"
+              target="_blank"
+            >
+              View paper
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="card-title">
+              Additional blockchain and digital-asset research
+            </h3>
+            <span class="badge badge-outline">Research</span>
+          </div>
+          <p>
+            Additional publications and working papers on blockchain systems,
+            decentralized infrastructures, digital assets, and related evaluation methods.
+          </p>
+          <div class="card-actions justify-end">
+            <a
+              class="btn btn-sm btn-outline"
+              href="/cv"
+            >
+              See CV
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-3xl w-full font-bold mb-5">
+      Interactive lab
+    </h2>
+
+    <div class="card bg-base-100 shadow-sm">
+      <div class="card-body">
+        <h3 class="card-title">
+          Dynamic charts and dashboard-style demos
+        </h3>
+
+        <p>
+          This site will also host lightweight interactive visualizations, such as
+          line plots and dashboard previews inspired by my DeFi Navigator and
+          blockchain benchmarking work.
+        </p>
+
+        <p class="opacity-80">
+          The first version will use static data files and client-side JavaScript,
+          making it compatible with GitHub Pages while keeping the site simple and fast.
+        </p>
+
+        <div class="card-actions justify-end">
+          <a class="btn btn-sm btn-outline" href="/projects">
+            Explore projects
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-3xl w-full font-bold mb-5">
+      Let's connect
+    </h2>
+
+    <div class="card bg-base-100 shadow-sm">
+      <div class="card-body">
+        <p>
+          I am interested in research engineering, blockchain infrastructure,
+          protocol analytics, digital assets, benchmarking, reproducible experimentation,
+          and product-oriented projects at the intersection of systems and data.
+        </p>
+
+        <div class="card-actions justify-end mt-4">
+          <a
+            class="btn btn-primary"
+            href="mailto:vincenzopaolo.diperna@outlook.com"
+          >
+            Contact me
+          </a>
+
+          <a
+            class="btn btn-outline"
+            href="https://www.linkedin.com/in/vincenzo-di-perna/"
+            target="_blank"
+          >
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
