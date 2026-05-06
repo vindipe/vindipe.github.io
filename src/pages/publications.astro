@@ -1,0 +1,233 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Publications | Vincenzo Di Perna"
+  description="Selected publications, artifacts, and research outputs by Vincenzo Di Perna."
+  sideBarActiveItemID="publications"
+>
+  <section class="mb-10">
+    <h1 class="text-4xl font-bold mb-4">Publications</h1>
+
+    <p class="text-lg leading-relaxed opacity-90">
+      Selected publications, research artifacts, datasets, and working papers on
+      blockchain systems, distributed infrastructures, benchmarking, reproducible
+      experimentation, energy analysis, and digital assets.
+    </p>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-3xl font-bold mb-5">Selected peer-reviewed publications</h2>
+
+    <div class="grid gap-5">
+      <article class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">
+              Topology-aware blockchain benchmarking
+            </h3>
+            <span class="badge badge-secondary">ACM DEBS'25</span>
+          </div>
+
+          <p>
+            Research on how network topology, workload design, and controlled
+            experimental conditions affect blockchain performance, energy usage,
+            and variability.
+          </p>
+
+          <div class="flex flex-wrap gap-2 mt-2">
+            <span class="badge badge-outline">Blockchain benchmarking</span>
+            <span class="badge badge-outline">Network topology</span>
+            <span class="badge badge-outline">Reproducibility</span>
+            <span class="badge badge-outline">Energy analysis</span>
+          </div>
+
+          <div class="card-actions justify-end mt-4">
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://dl.acm.org/doi/10.1145/3701717.3730540"
+              target="_blank"
+            >
+              DOI / Paper
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">
+              Blockchain performance, energy, and economic efficiency
+            </h3>
+            <span class="badge badge-secondary">IEEE ICBC'25</span>
+          </div>
+
+          <p>
+            Work connecting performance, energy consumption, and economic-efficiency
+            dimensions in blockchain evaluation through reproducible experiments
+            and data-driven analysis.
+          </p>
+
+          <div class="flex flex-wrap gap-2 mt-2">
+            <span class="badge badge-outline">Performance</span>
+            <span class="badge badge-outline">Energy</span>
+            <span class="badge badge-outline">Economic efficiency</span>
+            <span class="badge badge-outline">Digital assets</span>
+          </div>
+
+          <div class="card-actions justify-end mt-4">
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://ieeexplore.ieee.org/document/11114569"
+              target="_blank"
+            >
+              IEEE Xplore
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">
+              Additional blockchain systems research
+            </h3>
+            <span class="badge badge-outline">Workshop / preprint</span>
+          </div>
+
+          <p>
+            Additional research outputs on blockchain evaluation, decentralized
+            infrastructures, protocol analysis, and related digital-asset topics.
+          </p>
+
+          <div class="card-actions justify-end mt-4">
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://ceur-ws.org/Vol-4105/paper09.pdf"
+              target="_blank"
+            >
+              CEUR paper
+            </a>
+
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5034378"
+              target="_blank"
+            >
+              SSRN
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-3xl font-bold mb-5">Research artifacts & datasets</h2>
+
+    <div class="grid gap-5">
+      <article class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">
+              Lilith — A Topology-Aware Blockchain Benchmarking Framework
+            </h3>
+            <span class="badge badge-secondary">Artifact</span>
+          </div>
+
+          <p>
+            Public research artifact supporting topology-aware blockchain
+            benchmarking, workload execution, network emulation, and reproducible
+            experimental analysis.
+          </p>
+
+          <div class="card-actions justify-end mt-4">
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://doi.org/10.5281/zenodo.11409100"
+              target="_blank"
+            >
+              Zenodo DOI
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">
+              Blockchain Repeatability Dataset for Topology-Aware Benchmarking
+            </h3>
+            <span class="badge badge-secondary">Dataset</span>
+          </div>
+
+          <p>
+            Dataset designed to quantify repeatability, variability, and performance
+            predictability across blockchain platforms, workloads, and network
+            topologies.
+          </p>
+
+          <div class="card-actions justify-end mt-4">
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://doi.org/10.5281/zenodo.15545963"
+              target="_blank"
+            >
+              Zenodo DOI
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-3xl font-bold mb-5">Research themes</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Blockchain systems evaluation</h3>
+          <p>
+            Performance, latency, throughput, topology effects, workload sensitivity,
+            benchmarking methodology, and experimental reliability.
+          </p>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Energy and efficiency</h3>
+          <p>
+            Energy-aware blockchain analysis, normalized efficiency indicators,
+            and trade-offs between performance, consumption, and protocol behavior.
+          </p>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Repeatability and predictability</h3>
+          <p>
+            Experimental repeatability, performance predictability, robust dispersion
+            metrics, and statistical analysis of blockchain variability.
+          </p>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Digital assets and infrastructures</h3>
+          <p>
+            Digital-asset analytics, DeFi/CBDC-related systems, protocol data,
+            and economic perspectives on decentralized infrastructures.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
