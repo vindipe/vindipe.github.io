@@ -3,90 +3,312 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import TimeLineElement from "../components/cv/TimeLine.astro";
 ---
 
-<BaseLayout title="Resume" sideBarActiveItemID="cv">
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Profile</div>
-  </div>
+<BaseLayout
+  title="CV | Vincenzo Di Perna"
+  description="CV of Vincenzo Di Perna, Blockchain Systems & Digital Assets Engineer."
+  sideBarActiveItemID="cv"
+>
+  <section class="mb-10">
+    <h1 class="text-4xl font-bold mb-4">CV</h1>
 
-  <div class="mb-10 text-justify">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-    aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-    cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </div>
+    <p class="text-lg leading-relaxed opacity-90">
+      I am a Blockchain Systems & Digital Assets Engineer with a PhD in Blockchain & DLT,
+      focused on distributed systems, blockchain benchmarking, reproducible experimentation,
+      protocol evaluation, data analysis, and digital-asset infrastructures.
+    </p>
 
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Education</div>
-  </div>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a class="btn btn-primary" href="/cv/Di_Perna_CV.pdf" target="_blank">
+        Download CV
+      </a>
 
-  <div class="time-line-container grid gap-4 mb-10">
-    <TimeLineElement
-      title="Title Name"
-      subtitle="[start year] to [end year] at [Study Center Name], [City], [Country]"
-    />
-    <TimeLineElement
-      title="Title Name"
-      subtitle="[start year] to [end year] at [Study Center Name], [City], [Country]"
-    />
-  </div>
+      <a class="btn btn-outline" href="https://github.com/vindipe" target="_blank">
+        GitHub
+      </a>
 
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Experience</div>
-  </div>
+      <a class="btn btn-outline" href="https://www.linkedin.com/in/vincenzo-di-perna/" target="_blank">
+        LinkedIn
+      </a>
+    </div>
+  </section>
 
-  <div class="time-line-container mb-10">
-    <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-    </TimeLineElement>
-    <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-    </TimeLineElement>
-    <TimeLineElement
-      title="Job Title at Project or Company Name"
-      subtitle="From [Start Date] to [End Date] at [Company], [City], [Country]"
-    >
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-    </TimeLineElement>
-  </div>
+  <section class="mb-10">
+    <h2 class="text-3xl w-full font-bold mb-5">Profile</h2>
 
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Certifications</div>
-  </div>
+    <div class="text-justify leading-relaxed">
+      <p class="mb-4">
+        My work combines distributed systems research, experimental methodology,
+        blockchain infrastructure evaluation, and data-driven analysis. During my PhD,
+        I designed and used reproducible benchmarking pipelines to study how blockchain
+        systems behave under different workloads, network topologies, and operational
+        conditions.
+      </p>
 
-  <ul class="list-disc mx-6 mb-10 grid gap-2">
-    <li>
-      <a href="#" target="_blank"> Certification Name (with link)</a>
-    </li>
-    <li>
-      <a href="#" target="_blank"> Certification Name (with link)</a>
-    </li>
-  </ul>
+      <p class="mb-4">
+        I am particularly interested in performance and latency evaluation, energy
+        efficiency, repeatability, performance predictability, protocol analytics,
+        DeFi/CBDC-related infrastructures, and research engineering practices that
+        make experimental results easier to reproduce and compare.
+      </p>
 
-  <div class="mb-5">
-    <div class="text-3xl w-full font-bold">Skills</div>
-  </div>
+      <p>
+        I am open to engineering, R&D, data, research, and hybrid roles where rigorous
+        experimentation, distributed systems knowledge, and blockchain/digital-asset
+        expertise can support practical technical decisions.
+      </p>
+    </div>
+  </section>
 
-  <ul class="list-disc md:columns-5 columns-2 mx-6">
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-    <li>Skill Name</li>
-  </ul>
+  <section class="mb-10">
+    <h2 class="text-3xl w-full font-bold mb-5">Education</h2>
+
+    <div class="time-line-container grid gap-4">
+      <TimeLineElement
+        title="PhD in Blockchain & Distributed Ledger Technologies"
+        subtitle="University of Neuchâtel, Switzerland"
+      >
+        Dissertation focused on comparing blockchain systems across performance,
+        energy, repeatability, predictability, and economic-efficiency dimensions.
+        Research included topology-aware benchmarking, reproducible experimentation,
+        workload design, network emulation, and statistical analysis of blockchain
+        system behavior.
+      </TimeLineElement>
+
+      <TimeLineElement
+        title="MSc-level studies in Computer Science / Security / Distributed Systems"
+        subtitle="Academic background in computer systems, networks, and security"
+      >
+        Training across computer systems, networking, cybersecurity, software
+        engineering, and distributed infrastructures, later specialized toward
+        blockchain systems and empirical evaluation.
+      </TimeLineElement>
+
+      <TimeLineElement
+        title="BSc in Computer Systems & Networks Security"
+        subtitle="Academic foundation in systems, networks, and security"
+      >
+        Foundation in operating systems, computer networks, system security,
+        programming, and technical problem solving.
+      </TimeLineElement>
+    </div>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-3xl w-full font-bold mb-5">Research & Engineering Experience</h2>
+
+    <div class="time-line-container grid gap-4">
+      <TimeLineElement
+        title="Blockchain Benchmarking & Distributed Systems Research"
+        subtitle="PhD research and related publications"
+      >
+        Designed, executed, and analyzed reproducible blockchain experiments across
+        multiple platforms, workloads, and network conditions. Evaluated throughput,
+        latency, energy usage, variability, repeatability, and performance predictability
+        under controlled experimental settings.
+      </TimeLineElement>
+
+      <TimeLineElement
+        title="Lilith — Topology-Aware Blockchain Benchmarking Framework"
+        subtitle="Research artifact and experimental toolchain"
+      >
+        Built a benchmarking framework integrating blockchain workload generation,
+        network emulation, orchestration, and data analysis. Used it to study how
+        topology and workload interactions affect blockchain performance and energy
+        behavior.
+      </TimeLineElement>
+
+      <TimeLineElement
+        title="Digital Assets, DeFi & CBDC-Oriented Data Workflows"
+        subtitle="Protocol analytics, dashboards, and structured data analysis"
+      >
+        Worked on data-oriented analysis and dashboard concepts for digital assets,
+        DeFi/CBDC-related infrastructures, and blockchain ecosystem indicators,
+        connecting technical protocol behavior with analytical and economic perspectives.
+      </TimeLineElement>
+
+      <TimeLineElement
+        title="Research Engineering & Reproducibility"
+        subtitle="Software artifacts, datasets, pipelines, and experimental methodology"
+      >
+        Developed scripts, datasets, reproducible workflows, statistical analyses,
+        and documentation to support repeatable experiments and transparent evaluation
+        of blockchain systems.
+      </TimeLineElement>
+    </div>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-3xl w-full font-bold mb-5">Selected Publications</h2>
+
+    <div class="grid gap-4">
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">
+            Topology-aware blockchain benchmarking
+            <span class="badge badge-secondary">ACM DEBS'25</span>
+          </h3>
+          <p>
+            Study of how network topology and workload characteristics influence
+            blockchain performance, energy usage, and experimental variability.
+          </p>
+          <div class="card-actions justify-end">
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://dl.acm.org/doi/10.1145/3701717.3730540"
+              target="_blank"
+            >
+              View paper
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">
+            Blockchain performance, energy, and economic efficiency
+            <span class="badge badge-secondary">IEEE ICBC'25</span>
+          </h3>
+          <p>
+            Work connecting blockchain performance, energy consumption, and economic
+            efficiency through reproducible benchmarking and data-driven evaluation.
+          </p>
+          <div class="card-actions justify-end">
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://ieeexplore.ieee.org/document/11114569"
+              target="_blank"
+            >
+              View paper
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">
+            Additional blockchain systems and digital-asset research
+            <span class="badge badge-outline">Research</span>
+          </h3>
+          <p>
+            Additional publications, workshop papers, artifacts, and working papers
+            on blockchain evaluation, decentralized infrastructures, and digital assets.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-3xl w-full font-bold mb-5">Projects & Artifacts</h2>
+
+    <div class="grid gap-4">
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Lilith</h3>
+          <p>
+            Topology-aware blockchain benchmarking framework integrating workload
+            generation, network emulation, orchestration, and experiment analysis.
+          </p>
+          <div class="card-actions justify-end">
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://doi.org/10.5281/zenodo.11409100"
+              target="_blank"
+            >
+              Zenodo artifact
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Blockchain Repeatability Dataset</h3>
+          <p>
+            Dataset and repeated experimental campaign for studying blockchain
+            performance variability, repeatability, and predictability.
+          </p>
+          <div class="card-actions justify-end">
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://doi.org/10.5281/zenodo.15545963"
+              target="_blank"
+            >
+              Zenodo dataset
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">DeFi Navigator</h3>
+          <p>
+            Dashboard-oriented concept for exploring digital-asset and DeFi ecosystems
+            through indicators, visual analytics, and structured data workflows.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-3xl w-full font-bold mb-5">Technical Skills</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Programming & scripting</h3>
+          <ul class="list-disc mx-6 grid gap-1">
+            <li>Python</li>
+            <li>Bash</li>
+            <li>Rust familiarity</li>
+            <li>JavaScript / TypeScript basics</li>
+            <li>Git and GitHub workflows</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Systems & infrastructure</h3>
+          <ul class="list-disc mx-6 grid gap-1">
+            <li>Linux</li>
+            <li>Docker</li>
+            <li>Network emulation</li>
+            <li>Distributed systems experimentation</li>
+            <li>Benchmark orchestration</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Blockchain & digital assets</h3>
+          <ul class="list-disc mx-6 grid gap-1">
+            <li>Blockchain benchmarking</li>
+            <li>Protocol evaluation</li>
+            <li>DeFi and digital-asset analytics</li>
+            <li>CBDC-related research context</li>
+            <li>Performance, latency, and energy analysis</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h3 class="card-title">Data & experimentation</h3>
+          <ul class="list-disc mx-6 grid gap-1">
+            <li>Reproducible experiments</li>
+            <li>Experimental design</li>
+            <li>Statistical analysis</li>
+            <li>Data pipelines</li>
+            <li>Dashboard-style visual analytics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

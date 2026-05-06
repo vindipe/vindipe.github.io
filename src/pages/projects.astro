@@ -3,49 +3,132 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
 ---
 
-<BaseLayout title = "Projects" sideBarActiveItemID="projects">
-  <div>
-    <div class="text-3xl w-full font-bold mb-5">Projects Header</div>
-  </div>
+<BaseLayout
+  title="Projects | Vincenzo Di Perna"
+  description="Research, engineering, data, and product projects by Vincenzo Di Perna."
+  sideBarActiveItemID="projects"
+>
+  <section class="mb-10">
+    <h1 class="text-4xl font-bold mb-4">Projects</h1>
 
-  <HorizontalCard
-    title="Demo Project 1"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="NEW"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 2"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
+    <p class="text-lg leading-relaxed opacity-90">
+      A selection of research artifacts, datasets, dashboards, and product-oriented
+      concepts developed around blockchain systems, distributed infrastructures,
+      digital assets, benchmarking, and data-driven experimentation.
+    </p>
+  </section>
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Projects Header</div>
-  </div>
+  <section class="mb-12">
+    <h2 class="text-3xl w-full font-bold mb-2">Research artifacts</h2>
 
-  <HorizontalCard
-    title="Demo Project 3"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 4"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
-  <div class="divider my-0"></div>
-  <HorizontalCard
-    title="Demo Project 5"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-  />
+    <p class="mb-5 opacity-80">
+      Reproducible software and experimental assets developed to support blockchain
+      systems research and empirical evaluation.
+    </p>
+
+    <HorizontalCard
+      title="Lilith — Topology-Aware Blockchain Benchmarking Framework"
+      img="/post_img.webp"
+      desc="A reproducible benchmarking toolchain integrating network emulation and workload generation to study blockchain performance, energy usage, latency, and variability under programmable network conditions."
+      url="https://doi.org/10.5281/zenodo.11409100"
+      badge="Framework"
+    />
+
+    <div class="divider my-0"></div>
+
+    <HorizontalCard
+      title="Blockchain Repeatability Dataset"
+      img="/post_img.webp"
+      desc="A large-scale experimental dataset designed to analyze repeatability and performance predictability across blockchain platforms, workloads, and network topologies."
+      url="https://doi.org/10.5281/zenodo.15545963"
+      badge="Dataset"
+    />
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-3xl w-full font-bold mb-2">Data & analytics projects</h2>
+
+    <p class="mb-5 opacity-80">
+      Projects and prototypes focused on structured data analysis, visual analytics,
+      protocol evaluation, and digital-asset ecosystems.
+    </p>
+
+    <HorizontalCard
+      title="DeFi Navigator"
+      img="/post_img.webp"
+      desc="A dashboard-oriented concept for exploring DeFi and digital-asset ecosystems through indicators, interactive views, and data-driven visual analysis."
+      url="#"
+      badge="Dashboard"
+    />
+
+    <div class="divider my-0"></div>
+
+    <HorizontalCard
+      title="Blockchain Performance & Energy Analysis Pipelines"
+      img="/post_img.webp"
+      desc="Experimental analysis workflows for processing benchmark outputs, computing throughput, latency, energy, variability, repeatability, and efficiency metrics."
+      url="#"
+      badge="Data pipeline"
+    />
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-3xl w-full font-bold mb-2">Product concepts</h2>
+
+    <p class="mb-5 opacity-80">
+      Early-stage ideas and prototypes connecting software engineering, digital
+      infrastructure, blockchain, and real-world user-facing applications.
+    </p>
+
+    <HorizontalCard
+      title="Comodit"
+      img="/post_img.webp"
+      desc="A product concept for creating interactive physical/digital overlay maps, with possible applications in tourism, beach venues, local communities, games, and tokenized real-world assets."
+      url="#"
+      badge="Product idea"
+    />
+
+    <div class="divider my-0"></div>
+
+    <HorizontalCard
+      title="Interactive Lab"
+      img="/post_img.webp"
+      desc="A future section of this website dedicated to lightweight interactive charts, line plots, and dashboard-style demos hosted directly on GitHub Pages."
+      url="#"
+      badge="Coming soon"
+    />
+  </section>
+
+  <section class="mb-12">
+    <div class="card bg-base-100 shadow-sm">
+      <div class="card-body">
+        <h2 class="card-title">Open to collaboration</h2>
+
+        <p>
+          I am interested in research engineering, blockchain benchmarking,
+          protocol analytics, digital-asset data products, reproducible experiments,
+          and software projects that connect distributed systems research with
+          practical tools.
+        </p>
+
+        <div class="card-actions justify-end mt-4">
+          <a
+            class="btn btn-primary"
+            href="https://github.com/vindipe"
+            target="_blank"
+          >
+            View GitHub
+          </a>
+
+          <a
+            class="btn btn-outline"
+            href="https://www.linkedin.com/in/vincenzo-di-perna/"
+            target="_blank"
+          >
+            Contact on LinkedIn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
