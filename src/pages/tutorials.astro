@@ -1,0 +1,154 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Tutorials | Vincenzo Di Perna"
+  description="Short tutorials and technical notes on blockchain systems, benchmarking, digital assets, and reproducible experimentation."
+  sideBarActiveItemID="tutorials"
+>
+  <section class="mb-10">
+    <h1 class="text-4xl font-bold mb-4">Tutorials</h1>
+
+    <p class="text-lg leading-relaxed opacity-90">
+      Short technical tutorials and notes on blockchain systems, benchmarking,
+      digital assets, distributed infrastructures, and reproducible experimentation.
+      This section is designed to explain complex topics in a practical and accessible way.
+    </p>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-3xl font-bold mb-5">Blockchain fundamentals</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <article class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">What is a blockchain?</h3>
+            <span class="badge badge-outline">Beginner</span>
+          </div>
+          <p>
+            A short explanation of blocks, transactions, validation, consensus,
+            and why distributed ledgers differ from traditional databases.
+          </p>
+        </div>
+      </article>
+
+      <article class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">Public vs permissioned blockchains</h3>
+            <span class="badge badge-outline">Beginner</span>
+          </div>
+          <p>
+            A practical comparison between open public networks and controlled
+            permissioned infrastructures, with examples of where each model fits.
+          </p>
+        </div>
+      </article>
+
+      <article class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">Consensus in simple terms</h3>
+            <span class="badge badge-outline">Intermediate</span>
+          </div>
+          <p>
+            A compact guide to how distributed participants agree on the state of
+            a ledger, and why consensus affects latency, throughput, and security.
+          </p>
+        </div>
+      </article>
+
+      <article class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">Transactions, finality, and latency</h3>
+            <span class="badge badge-outline">Intermediate</span>
+          </div>
+          <p>
+            A short tutorial on the difference between transaction submission,
+            confirmation, finality, and the latency metrics used in blockchain evaluation.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-3xl font-bold mb-5">Benchmarking & evaluation</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <article class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">How to benchmark a blockchain</h3>
+            <span class="badge badge-secondary">Benchmarking</span>
+          </div>
+          <p>
+            A practical overview of workloads, clients, validators, throughput,
+            latency, repeated runs, and why experimental setup matters.
+          </p>
+        </div>
+      </article>
+
+      <article class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">Why network topology matters</h3>
+            <span class="badge badge-secondary">Systems</span>
+          </div>
+          <p>
+            A short explanation of how latency, bandwidth, topology, and network
+            emulation can influence blockchain performance and predictability.
+          </p>
+        </div>
+      </article>
+
+      <article class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">Repeatability vs predictability</h3>
+            <span class="badge badge-secondary">Methodology</span>
+          </div>
+          <p>
+            A note on the difference between obtaining similar results under the
+            same setup and predicting behavior across controlled conditions.
+          </p>
+        </div>
+      </article>
+
+      <article class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <div class="flex flex-wrap gap-2 items-center">
+            <h3 class="card-title">Energy efficiency in blockchain experiments</h3>
+            <span class="badge badge-secondary">Energy</span>
+          </div>
+          <p>
+            A brief introduction to measuring and interpreting energy usage in
+            blockchain experiments, including normalization and caveats.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <div class="card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title">More tutorials coming soon</h2>
+        <p>
+          I will progressively expand this section with concise tutorials, practical
+          examples, diagrams, and short explainers connected to blockchain systems,
+          digital assets, benchmarking, and research engineering.
+        </p>
+
+        <div class="card-actions justify-end mt-4">
+          <a class="btn btn-primary" href="/contact">
+            Suggest a topic
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
