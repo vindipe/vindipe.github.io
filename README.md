@@ -287,3 +287,8 @@ Astrofy is licensed under the MIT license — see the [LICENSE](https://github.c
 </a>
 
 Made with [contrib.rocks](https://contrib.rocks).
+
+## Credits
+
+This website is based on the Astrofy template by Manuel Ernesto, licensed under the MIT License.
+The content, text, images, and personal material are © Vincenzo Di Perna unless otherwise stated.
