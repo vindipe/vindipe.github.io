@@ -1,0 +1,336 @@
+<div class="network-background" aria-hidden="true">
+    <canvas id="network-background-canvas"></canvas>
+</div>
+
+<style>
+    .network-background {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        overflow: hidden;
+        opacity: 0.5;
+    }
+
+    #network-background-canvas {
+        width: 100vw;
+        height: 100vh;
+        display: block;
+    }
+</style>
+
+<script is:inline>
+    function startNetworkBackground() {
+        const canvas = document.getElementById("network-background-canvas");
+        if (!canvas) return;
+
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let mouseX = null;
+        let mouseY = null;
+        let scrollY = window.scrollY || 0;
+
+        const nodes = [];
+        const pulses = [];
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function resizeCanvas() {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+            width = window.innerWidth;
+            height = window.innerHeight;
+
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            canvas.style.width = width + "px";
+            canvas.style.height = height + "px";
+
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function createNodes() {
+            nodes.length = 0;
+
+            const nodeCount = width < 768 ? 90 : 170;
+
+            for (let i = 0; i < nodeCount; i++) {
+                nodes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: random(-0.22, 0.22),
+                    vy: random(-0.22, 0.22),
+                    r: random(1.2, 2.4),
+                });
+            }
+        }
+
+        function distance(a, b) {
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+            return Math.sqrt(dx * dx + dy * dy);
+        }
+
+        function edgeKey(i, j) {
+            return i < j ? i + "-" + j : j + "-" + i;
+        }
+
+        function updateNodes() {
+            const scrollWave = scrollY * 0.003;
+
+            for (const node of nodes) {
+                node.x +=
+                    node.vx + Math.sin(scrollWave + node.y * 0.012) * 0.035;
+                node.y +=
+                    node.vy + Math.cos(scrollWave + node.x * 0.012) * 0.035;
+
+                if (node.x < -20) node.x = width + 20;
+                if (node.x > width + 20) node.x = -20;
+                if (node.y < -20) node.y = height + 20;
+                if (node.y > height + 20) node.y = -20;
+
+                if (mouseX !== null && mouseY !== null) {
+                    const dx = node.x - mouseX;
+                    const dy = node.y - mouseY;
+                    const d = Math.sqrt(dx * dx + dy * dy);
+
+                    if (d < 150 && d > 0) {
+                        const force = (150 - d) / 150;
+                        node.x += (dx / d) * force * 0.45;
+                        node.y += (dy / d) * force * 0.45;
+                    }
+                }
+            }
+        }
+
+        function drawEdge(i, j, forced, drawnEdges) {
+            const key = edgeKey(i, j);
+            if (drawnEdges.has(key)) return;
+
+            drawnEdges.add(key);
+
+            const a = nodes[i];
+            const b = nodes[j];
+            const d = distance(a, b);
+
+            const maxDistance = width < 768 ? 145 : 210;
+
+            const opacity = forced
+            ? 0.22
+            : Math.max(0.055, (1 - Math.min(d, maxDistance) / maxDistance) * 0.44);
+
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = "rgba(15, 23, 42, " + opacity + ")";
+            ctx.lineWidth = forced ? 1.05 : 0.9;
+            ctx.stroke();
+        }
+
+        function drawConnectedGraph() {
+            const drawnEdges = new Set();
+            const nearestLinks = width < 768 ? 4 : 6;
+            const proximityDistance = width < 768 ? 130 : 190;
+
+            // Backbone: ogni nodo viene collegato al nodo precedente più vicino.
+            // Questo evita componenti completamente isolate.
+            for (let i = 1; i < nodes.length; i++) {
+                let nearestIndex = 0;
+                let nearestDistance = Infinity;
+
+                for (let j = 0; j < i; j++) {
+                    const d = distance(nodes[i], nodes[j]);
+
+                    if (d < nearestDistance) {
+                        nearestDistance = d;
+                        nearestIndex = j;
+                    }
+                }
+
+                drawEdge(i, nearestIndex, true, drawnEdges);
+            }
+
+            // Link extra verso i vicini.
+            for (let i = 0; i < nodes.length; i++) {
+                const neighbours = [];
+
+                for (let j = 0; j < nodes.length; j++) {
+                    if (i === j) continue;
+
+                    neighbours.push({
+                        index: j,
+                        distance: distance(nodes[i], nodes[j]),
+                    });
+                }
+
+                neighbours.sort((a, b) => a.distance - b.distance);
+
+                for (let k = 0; k < nearestLinks; k++) {
+                    const neighbour = neighbours[k];
+                    if (neighbour)
+                        drawEdge(i, neighbour.index, false, drawnEdges);
+                }
+            }
+
+            // Link di prossimità per aumentare la densità.
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const d = distance(nodes[i], nodes[j]);
+
+                    if (d < proximityDistance) {
+                        drawEdge(i, j, false, drawnEdges);
+                    }
+                }
+            }
+        }
+
+        function drawNodes() {
+            for (const node of nodes) {
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
+                ctx.fillStyle = "rgba(15, 23, 42, 0.72)";
+                ctx.fill();
+            }
+        }
+
+        function drawPulses() {
+            for (let i = pulses.length - 1; i >= 0; i--) {
+                const pulse = pulses[i];
+
+                pulse.radius += 2.4;
+                pulse.alpha *= 0.955;
+
+                if (pulse.alpha < 0.01) {
+                    pulses.splice(i, 1);
+                    continue;
+                }
+
+                ctx.beginPath();
+                ctx.arc(pulse.x, pulse.y, pulse.radius, 0, Math.PI * 2);
+                ctx.strokeStyle = "rgba(250, 204, 21, " + pulse.alpha + ")";
+                ctx.lineWidth = 1.8;
+                ctx.stroke();
+
+                for (const node of nodes) {
+                    const dx = node.x - pulse.x;
+                    const dy = node.y - pulse.y;
+                    const d = Math.sqrt(dx * dx + dy * dy);
+
+                    if (
+                        d < pulse.radius + 38 &&
+                        d > pulse.radius - 38 &&
+                        d > 0
+                    ) {
+                        const force = 0.3 * pulse.alpha;
+                        node.x += (dx / d) * force;
+                        node.y += (dy / d) * force;
+                    }
+                }
+            }
+        }
+
+        function clearProtectedAreas() {
+            const protectedElements = document.querySelectorAll(
+                [
+                    "header",
+                    "footer",
+                    ".drawer-side",
+                    "main h1",
+                    "main h2",
+                    "main h3",
+                    "main p",
+                    "main a",
+                    "main button",
+                    "main .btn",
+                    "main .card",
+                    "main .avatar",
+                    "main img",
+                ].join(", "),
+            );
+
+            ctx.save();
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.fillStyle = "rgba(0, 0, 0, 1)";
+
+            protectedElements.forEach((element) => {
+                const rect = element.getBoundingClientRect();
+
+                if (
+                    rect.bottom < 0 ||
+                    rect.top > height ||
+                    rect.right < 0 ||
+                    rect.left > width
+                ) {
+                    return;
+                }
+
+                const padding = 2;
+
+                ctx.fillRect(
+                    rect.left - padding,
+                    rect.top - padding,
+                    rect.width + padding * 2,
+                    rect.height + padding * 2,
+                );
+            });
+
+            ctx.restore();
+        }
+
+        function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        updateNodes();
+        drawConnectedGraph();
+        drawNodes();
+        drawPulses();
+        clearProtectedAreas();
+
+        requestAnimationFrame(draw);
+        }
+
+        window.addEventListener("resize", () => {
+            resizeCanvas();
+            createNodes();
+        });
+
+        window.addEventListener("mousemove", (event) => {
+            mouseX = event.clientX;
+            mouseY = event.clientY;
+        });
+
+        window.addEventListener("mouseleave", () => {
+            mouseX = null;
+            mouseY = null;
+        });
+
+        window.addEventListener(
+            "scroll",
+            () => {
+                scrollY = window.scrollY || 0;
+            },
+            { passive: true },
+        );
+
+        window.addEventListener("click", (event) => {
+            pulses.push({
+                x: event.clientX,
+                y: event.clientY,
+                radius: 8,
+                alpha: 0.65,
+            });
+        });
+
+        resizeCanvas();
+        createNodes();
+        draw();
+    }
+
+    startNetworkBackground();
+    document.addEventListener("astro:page-load", startNetworkBackground);
+</script>
