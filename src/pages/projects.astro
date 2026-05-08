@@ -26,23 +26,23 @@ import HorizontalCard from "../components/HorizontalCard.astro";
       systems research and empirical evaluation.
     </p>
 
-    <HorizontalCard
-      title="Lilith — Topology-Aware Blockchain Benchmarking Framework"
-      img="/post_img.webp"
-      desc="A reproducible benchmarking toolchain integrating network emulation and workload generation to study blockchain performance, energy usage, latency, and variability under programmable network conditions."
-      url="https://doi.org/10.5281/zenodo.11409100"
-      badge="Framework"
-    />
+    <div class="space-y-4">
+      <HorizontalCard
+        title="Lilith — Topology-Aware Blockchain Benchmarking Framework"
+        img="/post_img.webp"
+        desc="A reproducible benchmarking toolchain integrating network emulation and workload generation to study blockchain performance, energy usage, latency, and variability under programmable network conditions."
+        url="https://doi.org/10.5281/zenodo.11409100"
+        badge="Framework"
+      />
 
-    <div class="divider my-0"></div>
-
-    <HorizontalCard
-      title="Blockchain Repeatability Dataset"
-      img="/post_img.webp"
-      desc="A large-scale experimental dataset designed to analyze repeatability and performance predictability across blockchain platforms, workloads, and network topologies."
-      url="https://doi.org/10.5281/zenodo.15545963"
-      badge="Dataset"
-    />
+      <HorizontalCard
+        title="Blockchain Repeatability Dataset"
+        img="/post_img.webp"
+        desc="A large-scale experimental dataset designed to analyze repeatability and performance predictability across blockchain platforms, workloads, and network topologies."
+        url="https://doi.org/10.5281/zenodo.15545963"
+        badge="Dataset"
+      />
+    </div>
   </section>
 
   <section class="mb-12">
@@ -60,38 +60,5 @@ import HorizontalCard from "../components/HorizontalCard.astro";
       url="#"
       badge="Data pipeline"
     />
-  </section>
-
-  <section class="mb-12">
-    <div class="card bg-base-100 shadow-md">
-      <div class="card-body">
-        <h2 class="card-title">Open to collaboration</h2>
-
-        <p>
-          I am interested in research engineering, blockchain benchmarking,
-          protocol analytics, digital-asset data analysis, reproducible experiments,
-          and software projects that connect distributed systems research with
-          practical tools.
-        </p>
-
-        <div class="card-actions justify-end mt-4">
-          <a
-            class="btn btn-primary"
-            href="https://github.com/vindipe"
-            target="_blank"
-          >
-            View GitHub
-          </a>
-
-          <a
-            class="btn btn-outline"
-            href="https://www.linkedin.com/in/vincenzo-di-perna/"
-            target="_blank"
-          >
-            Contact on LinkedIn
-          </a>
-        </div>
-      </div>
-    </div>
   </section>
 </BaseLayout>
