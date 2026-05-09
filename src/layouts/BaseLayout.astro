@@ -8,14 +8,18 @@ import { ViewTransitions } from "astro:transitions";
 
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
 
-const {
-  image,
+const { 
+  image = "/og/vincenzo-di-perna-og.png",
   title = SITE_TITLE,
   description = SITE_DESCRIPTION,
   includeSidebar = true,
   sideBarActiveItemID,
-  ogType,
+  ogType = "website",
 } = Astro.props;
+
+const site = Astro.site ?? new URL("https://vindipe.github.io/");
+const canonicalURL = new URL(Astro.url.pathname, site).toString();
+const imageURL = new URL(image, site).toString();
 ---
 
 <!doctype html>
