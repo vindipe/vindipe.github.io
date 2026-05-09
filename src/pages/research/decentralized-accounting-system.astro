@@ -1,0 +1,438 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const conceptFigures = [
+  {
+    title: "Solid architecture",
+    src: "/research/theses/master/solid-architecture.png",
+    desc: "The thesis uses Solid Pods as a privacy-preserving storage layer for business documents, invoices, orders, and data access control.",
+  },
+  {
+    title: "ERP domain",
+    src: "/research/theses/master/erp-domain.png",
+    desc: "The work starts from the accounting and ERP context, where administrative processes can become costly, manual, and error-prone.",
+  },
+  {
+    title: "Invoice formats",
+    src: "/research/theses/master/invoice-formats.png",
+    desc: "The thesis discusses the evolution from paper invoices to PDF/XML and electronic billing formats.",
+  },
+  {
+    title: "eBill flow",
+    src: "/research/theses/master/ebill-flow.png",
+    desc: "The eBill process is used as a reference for designing a more digital and traceable billing workflow.",
+  },
+];
+
+const architectureFigures = [
+  {
+    title: "Restaurant flow",
+    src: "/research/theses/master/restaurant-flow.png",
+    desc: "A model of incoming and outgoing restaurant flows, including customers, business actors, services, bills, and payments.",
+  },
+  {
+    title: "Restaurant timeline",
+    src: "/research/theses/master/restaurant-timeline.png",
+    desc: "A timeline of the customer experience, from entry to menu selection, ordering, service, billing, and payment.",
+  },
+  {
+    title: "Infrastructure components",
+    src: "/research/theses/master/infrastructure-components.png",
+    desc: "The implementation combines web technologies, Solid, Ethereum, MetaMask, QR codes, eBill concepts, and deployment tooling.",
+  },
+  {
+    title: "Infrastructure layers",
+    src: "/research/theses/master/infrastructure-layers.png",
+    desc: "The proposed architecture separates interface, API, Solid, Pods, menu, eBill, and hash/blockchain layers.",
+  },
+  {
+    title: "Wallet-blockchain structure",
+    src: "/research/theses/master/wallet-blockchain-structure.png",
+    desc: "The payment side connects Ethereum, MetaMask, Web3.js, and blockchain transactions.",
+  },
+  {
+    title: "Solid graph interactions",
+    src: "/research/theses/master/solid-graph-interactions.png",
+    desc: "The Solid-based data flow models how orders, bills, storage, and access-controlled resources interact.",
+  },
+];
+
+const prototypeScreens = [
+  {
+    title: "Menu and cart",
+    src: "/research/theses/master/menu-cart-switches.png",
+    desc: "The user interface separates menu browsing from cart management.",
+  },
+  {
+    title: "Product list",
+    src: "/research/theses/master/product-list.png",
+    desc: "Products are loaded from the restaurant data layer and exposed through the web interface.",
+  },
+  {
+    title: "Product description",
+    src: "/research/theses/master/product-description.png",
+    desc: "The prototype includes product details and purchase actions.",
+  },
+  {
+    title: "Quantity update",
+    src: "/research/theses/master/quantity-update.png",
+    desc: "The cart supports quantity changes before order confirmation.",
+  },
+  {
+    title: "Get bill phase",
+    src: "/research/theses/master/get-bill.png",
+    desc: "The customer can move from ordering to bill generation.",
+  },
+  {
+    title: "Billing phase",
+    src: "/research/theses/master/billing-phase.png",
+    desc: "The billing workflow produces a payable state before final settlement.",
+  },
+  {
+    title: "MetaMask experience",
+    src: "/research/theses/master/metamask-experience.png",
+    desc: "MetaMask is used to confirm the blockchain payment transaction.",
+  },
+  {
+    title: "Table QR code",
+    src: "/research/theses/master/table-qr-code.png",
+    desc: "QR codes are used to identify the table and connect the physical restaurant space with the digital workflow.",
+  },
+  {
+    title: "Digital bill QR code",
+    src: "/research/theses/master/digital-bill-qr-code.png",
+    desc: "The invoice flow includes QR-based identification for payment and document retrieval.",
+  },
+  {
+    title: "Pre-invoice",
+    src: "/research/theses/master/pre-invoice.png",
+    desc: "The prototype generates a pre-invoice containing order, payment, and blockchain-related information.",
+  },
+];
+
+const contributions = [
+  "Designed a decentralized document-management and accounting prototype for a restaurant/SME scenario.",
+  "Combined Ethereum blockchain transactions with Solid Pods to separate verifiable payment events from private business documents.",
+  "Used QR codes to connect physical restaurant tables, bills, and digital interaction flows.",
+  "Integrated MetaMask and Web3-style payment interaction into the customer-facing workflow.",
+  "Explored how accounting, ERP, eBill, and blockchain concepts can be connected in a practical software prototype.",
+];
+---
+
+<BaseLayout
+  title="Decentralized Accounting System | Research | Vincenzo Di Perna"
+  description="Master's thesis on a decentralized accounting and document-management system using blockchain transactions, Solid Pods, MetaMask, QR codes, and eBill-inspired workflows."
+  sideBarActiveItemID="research"
+>
+  <section class="mb-8">
+    <a href="/research" class="btn btn-sm btn-outline mb-6">
+      ← Back to Research
+    </a>
+
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-2 items-center mb-3">
+          <h1 class="text-4xl font-bold">
+            Decentralized Accounting System
+          </h1>
+          <span class="badge badge-secondary">Master's thesis</span>
+          <span class="badge badge-outline">University of Pisa</span>
+        </div>
+
+        <p class="text-lg leading-relaxed opacity-90">
+          This thesis explored the design and implementation of a decentralized
+          accounting and document-management system for a restaurant use case.
+          The prototype combines blockchain-based transactions, Solid Pods for
+          privacy-preserving document storage, MetaMask payments, QR-code-based
+          interaction, and eBill-inspired billing workflows.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mt-5">
+          <span class="badge badge-outline">Blockchain</span>
+          <span class="badge badge-outline">Ethereum</span>
+          <span class="badge badge-outline">Solid Pods</span>
+          <span class="badge badge-outline">MetaMask</span>
+          <span class="badge badge-outline">QR codes</span>
+          <span class="badge badge-outline">eBill</span>
+          <span class="badge badge-outline">SME accounting</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">2021/22</p>
+          <p class="opacity-80">academic year</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">SME</p>
+          <p class="opacity-80">restaurant use case</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">Solid</p>
+          <p class="opacity-80">private document storage</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">ETH</p>
+          <p class="opacity-80">blockchain transaction layer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Context</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The thesis starts from a practical problem: accounting and document
+          management in small and medium-sized businesses can be costly, manual,
+          error-prone, and difficult to verify. In a restaurant scenario, payments,
+          invoices, orders, customer interactions, and supplier operations create
+          a flow of documents that must remain consistent, auditable, and
+          accessible to the right actors.
+        </p>
+
+        <p class="leading-relaxed opacity-90 mt-3">
+          The proposed solution uses blockchain as a transparent and tamper-aware
+          transaction layer, while Solid Pods provide a separate privacy-preserving
+          storage layer for documents and business data that should not be placed
+          directly on-chain.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Conceptual background</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The work connects multiple concepts: ERP systems, electronic billing,
+          Ethereum, smart contracts, Web3, Solid Pods, QR codes, and digital
+          wallets. The key design idea is to avoid treating blockchain as a
+          general-purpose database: verifiable payment events can be anchored
+          on-chain, while sensitive documents remain stored in controlled,
+          access-managed Pods.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
+          {
+            conceptFigures.map((item) => (
+              <div class="card bg-base-200/50 border border-base-300">
+                <figure class="px-4 pt-4">
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    class="rounded-lg bg-base-100"
+                    loading="lazy"
+                  />
+                </figure>
+
+                <div class="card-body p-4">
+                  <h3 class="font-bold">{item.title}</h3>
+                  <p class="text-sm opacity-80">{item.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Architecture and design</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The prototype models the restaurant as an interaction between physical
+          space, customer actions, digital ordering, document storage, and payment
+          confirmation. QR codes connect tables and invoices to the web
+          interface, Solid manages private resources, and the blockchain layer
+          handles payment-related verification.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
+          {
+            architectureFigures.map((item) => (
+              <div class="card bg-base-200/50 border border-base-300">
+                <figure class="px-4 pt-4">
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    class="rounded-lg bg-base-100"
+                    loading="lazy"
+                  />
+                </figure>
+
+                <div class="card-body p-4">
+                  <h3 class="font-bold">{item.title}</h3>
+                  <p class="text-sm opacity-80">{item.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Prototype workflow</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The implemented prototype follows the customer journey: access the
+          table-specific interface, browse the menu, manage the cart, generate
+          the bill, confirm payment, and obtain a digital document that can be
+          connected to the accounting workflow.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
+          {
+            prototypeScreens.map((item) => (
+              <div class="card bg-base-200/50 border border-base-300">
+                <figure class="px-4 pt-4">
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    class="rounded-lg bg-base-100"
+                    loading="lazy"
+                  />
+                </figure>
+
+                <div class="card-body p-4">
+                  <h3 class="font-bold">{item.title}</h3>
+                  <p class="text-sm opacity-80">{item.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Implementation stack</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Backend and web interface</h3>
+              <p class="text-sm opacity-80">
+                Node.js, Express, EJS, JavaScript, static assets, and Heroku-oriented deployment.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Decentralized data</h3>
+              <p class="text-sm opacity-80">
+                Solid Pods, Inrupt APIs, WebID, access-control policies, containers, and document resources.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Payment and verification</h3>
+              <p class="text-sm opacity-80">
+                Ethereum, MetaMask, Web3 interaction, QR codes, billing states, and transaction references.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Main contribution</h2>
+
+        <ul class="list-disc pl-5 space-y-2 opacity-90">
+          {contributions.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Relationship with later research</h2>
+
+        <p class="leading-relaxed opacity-90">
+          This thesis anticipates several directions that later became central in
+          my research profile: blockchain systems, experimental prototypes,
+          digital assets, privacy-aware data management, and the connection
+          between technical infrastructure and real organisational workflows.
+        </p>
+
+        <div class="card-actions mt-4">
+          <a
+            href="/research/dynamic-taxonomy-defi-tradfi"
+            class="btn btn-sm btn-outline"
+          >
+            Related DeFi / digital assets work
+          </a>
+
+          <a
+            href="/research/topology-aware-blockchain-benchmarking"
+            class="btn btn-sm btn-outline"
+          >
+            Related blockchain systems work
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Links</h2>
+
+        <div class="flex flex-wrap gap-3 mt-2">
+          <a
+            href="/research/theses/files/master-thesis-decentralized-accounting-system.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary btn-sm"
+          >
+            Open master's thesis PDF
+          </a>
+
+          <a
+            href="/research"
+            class="btn btn-outline btn-sm"
+          >
+            Back to research
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

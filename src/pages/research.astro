@@ -71,6 +71,50 @@ const artifacts = [
   ],
 },
 ];
+
+const academicTheses = [
+  {
+    title: "Comparing Blockchains: Performance, Energy, and Economic Efficiencies",
+    badge: "PhD thesis",
+    status: "Coming soon",
+    disabled: true,
+    desc: "Doctoral thesis focused on blockchain benchmarking, network topology effects, repeatability, performance predictability, energy analysis, and economic-efficiency indicators. The dedicated page will be enabled after the thesis is publicly available.",
+    tags: [
+      "PhD thesis",
+      "Blockchain systems",
+      "Benchmarking",
+      "Energy",
+      "Economic efficiency",
+    ],
+  },
+  {
+    title: "Decentralized Accounting System",
+    badge: "Master's thesis",
+    href: "/research/decentralized-accounting-system",
+    desc: "Master's thesis on an efficient document-management and accounting system implemented with blockchain transactions, Solid Pods, MetaMask, QR codes, and eBill-inspired workflows.",
+    tags: [
+      "Ethereum",
+      "Solid Pods",
+      "Document management",
+      "SME accounting",
+      "Prototype",
+    ],
+  },
+  {
+    title: "Threat Modeling Process: Strumenti per la gestione del processo di modellamento delle minacce",
+    badge: "Bachelor's thesis",
+    href: "/research/theses/files/bachelor-thesis-threat-modeling-process.pdf",
+    external: true,
+    desc: "Bachelor's thesis on threat modeling, secure software development, threat intelligence, monitoring tools, log analysis, visualization, containerization, and security-oriented infrastructure.",
+    tags: [
+      "Threat modeling",
+      "Cybersecurity",
+      "Monitoring",
+      "Docker",
+      "Kubernetes",
+    ],
+  },
+];
 ---
 
 <BaseLayout
@@ -182,38 +226,66 @@ const artifacts = [
     </div>
   </section>
 
-<section class="mb-12">
-  <h2 class="text-3xl font-bold mb-5">Doctoral Thesis</h2>
+  <section class="mb-12">
+    <h2 class="text-3xl font-bold mb-5">Academic Theses</h2>
 
-  <article class="network-protected card bg-base-100 shadow-md opacity-80">
-      <article class="card-body">
-        <div class="flex flex-wrap gap-2 items-center">
-          <h3 class="card-title">
-            Comparing Blockchains: Performance, Energy, and Economic
-            Efficiencies
-          </h3>
-          <span class="badge badge-warning">Coming soon</span>
-        </div>
+    <div class="grid gap-5">
+      {
+        academicTheses.map((item) =>
+          item.disabled ? (
+            <article class="network-protected card bg-base-100 shadow-md opacity-80">
+              <div class="card-body">
+                <div class="flex flex-wrap gap-2 items-center">
+                  <h3 class="card-title">{item.title}</h3>
+                  <span class="badge badge-secondary">{item.badge}</span>
+                  <span class="badge badge-warning">{item.status}</span>
+                </div>
 
-<p>
-  Doctoral thesis focused on blockchain benchmarking, network topology
-  effects, repeatability, performance predictability, energy analysis,
-  and economic-efficiency indicators. The dedicated thesis page will be
-  enabled after the thesis is publicly available.
-</p>
+                <p>{item.desc}</p>
 
-        <div class="flex flex-wrap gap-2 mt-2">
-          <span class="badge badge-outline">PhD thesis</span>
-          <span class="badge badge-outline">Blockchain systems</span>
-          <span class="badge badge-outline">Benchmarking</span>
-          <span class="badge badge-outline">Efficiency</span>
-        </div>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  {item.tags.map((tag) => (
+                    <span class="badge badge-outline">{tag}</span>
+                  ))}
+                </div>
 
-        <div class="card-actions justify-end mt-4">
-          <span class="btn btn-sm btn-disabled">Page not available yet</span>
-        </div>
-      </div>
-    </article>
+                <div class="card-actions justify-end mt-4">
+                  <span class="btn btn-sm btn-disabled">Page not available yet</span>
+                </div>
+              </div>
+            </article>
+          ) : (
+            <a
+              href={item.href}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
+              class="network-protected card bg-base-100 shadow-md transition ease-in-out hover:shadow-2xl hover:scale-[101%]"
+            >
+              <article class="card-body">
+                <div class="flex flex-wrap gap-2 items-center">
+                  <h3 class="card-title">{item.title}</h3>
+                  <span class="badge badge-secondary">{item.badge}</span>
+                </div>
+
+                <p>{item.desc}</p>
+
+                <div class="flex flex-wrap gap-2 mt-2">
+                  {item.tags.map((tag) => (
+                    <span class="badge badge-outline">{tag}</span>
+                  ))}
+                </div>
+
+                <div class="card-actions justify-end mt-4">
+                  <span class="btn btn-sm btn-outline">
+                    {item.external ? "Open thesis PDF" : "Open thesis page"}
+                  </span>
+                </div>
+              </article>
+            </a>
+          )
+        )
+      }
+    </div>
   </section>
 
   <section class="mb-12">
