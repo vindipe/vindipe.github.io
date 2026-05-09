@@ -1,0 +1,173 @@
+<section id="token-ownership-lab" class="network-protected card bg-base-100 shadow-md">
+  <div class="card-body">
+    <div class="flex flex-wrap gap-2 items-center mb-2">
+      <h3 class="card-title">Tokens, incentives & ownership</h3>
+      <span class="badge badge-secondary">Tokenomics</span>
+      <span class="badge badge-outline">Distribution</span>
+      <span class="badge badge-outline">Concentration</span>
+    </div>
+
+    <p class="opacity-80 mb-4">
+      Change token distribution events and observe how ownership concentration
+      changes. This is a toy model, not a financial model.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
+      <div class="grid gap-3">
+        <div data-token-bars class="grid gap-3"></div>
+
+        <div class="flex flex-wrap gap-2">
+          <button class="btn btn-primary" data-token-action="equal-airdrop">
+            Equal airdrop
+          </button>
+
+          <button class="btn btn-outline" data-token-action="whale-buy">
+            Whale accumulation
+          </button>
+
+          <button class="btn btn-outline" data-token-action="staking">
+            Staking rewards
+          </button>
+
+          <button class="btn btn-outline" data-token-action="reset">
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+        <p class="font-semibold mb-2">Concentration meter</p>
+
+        <div class="stats stats-vertical w-full bg-base-100 mb-4">
+          <div class="stat">
+            <div class="stat-title">Largest holder</div>
+            <div class="stat-value text-2xl" data-largest-holder>—</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-title">HHI-style score</div>
+            <div class="stat-value text-2xl" data-hhi-score>—</div>
+          </div>
+        </div>
+
+        <p data-token-status class="text-sm opacity-80">
+          Try different distribution events.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initTokenOwnershipLab() {
+    const root = document.querySelector("#token-ownership-lab");
+
+    if (!root || root.dataset.initialized === "true") {
+    return;
+    }
+
+    root.dataset.initialized = "true";
+
+    const bars = root.querySelector("[data-token-bars]");
+    const largestHolderOutput = root.querySelector("[data-largest-holder]");
+    const hhiOutput = root.querySelector("[data-hhi-score]");
+    const status = root.querySelector("[data-token-status]");
+
+    const initialBalances = {
+      Community: 250,
+      Builders: 250,
+      Treasury: 250,
+      Whale: 250,
+    };
+
+    let balances = { ...initialBalances };
+
+    function totalSupply() {
+      return Object.values(balances).reduce((sum, value) => sum + value, 0);
+    }
+
+    function concentrationScore() {
+      const total = totalSupply();
+
+      return Object.values(balances).reduce((sum, value) => {
+        const share = value / total;
+        return sum + share * share;
+      }, 0);
+    }
+
+    function render() {
+      const total = totalSupply();
+
+      bars.innerHTML = Object.entries(balances)
+        .map(([holder, balance]) => {
+          const percentage = Math.round((balance / total) * 100);
+
+          return `
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>${holder}</span>
+                <span class="font-mono">${balance} TOK · ${percentage}%</span>
+              </div>
+              <progress class="progress progress-primary w-full" value="${percentage}" max="100"></progress>
+            </div>
+          `;
+        })
+        .join("");
+
+      const largest = Object.entries(balances).sort((a, b) => b[1] - a[1])[0];
+      largestHolderOutput.textContent = `${largest[0]} ${Math.round((largest[1] / total) * 100)}%`;
+      hhiOutput.textContent = concentrationScore().toFixed(3);
+    }
+
+    function equalAirdrop() {
+      Object.keys(balances).forEach((holder) => {
+        balances[holder] += 50;
+      });
+
+      status.textContent =
+        "Equal airdrop: all groups receive the same amount, so relative concentration changes little.";
+      render();
+    }
+
+    function whaleBuy() {
+      balances.Whale += 220;
+      balances.Community = Math.max(0, balances.Community - 80);
+      balances.Builders = Math.max(0, balances.Builders - 70);
+      balances.Treasury = Math.max(0, balances.Treasury - 70);
+
+      status.textContent =
+        "Whale accumulation: one actor gains a larger share, increasing ownership concentration.";
+      render();
+    }
+
+    function stakingRewards() {
+      Object.entries(balances).forEach(([holder, balance]) => {
+        balances[holder] += Math.round(balance * 0.08);
+      });
+
+      status.textContent =
+        "Proportional staking rewards: larger holders receive larger absolute rewards, so concentration may persist.";
+      render();
+    }
+
+    function reset() {
+      balances = { ...initialBalances };
+      status.textContent = "Distribution reset to equal ownership.";
+      render();
+    }
+
+    root.querySelector('[data-token-action="equal-airdrop"]').addEventListener("click", equalAirdrop);
+    root.querySelector('[data-token-action="whale-buy"]').addEventListener("click", whaleBuy);
+    root.querySelector('[data-token-action="staking"]').addEventListener("click", stakingRewards);
+    root.querySelector('[data-token-action="reset"]').addEventListener("click", reset);
+
+    render();
+  }
+
+  initTokenOwnershipLab();
+
+  if (!window.__tokenOwnershipLabPageLoadRegistered) {
+    window.__tokenOwnershipLabPageLoadRegistered = true;
+    document.addEventListener("astro:page-load", initTokenOwnershipLab);
+  }
+</script>

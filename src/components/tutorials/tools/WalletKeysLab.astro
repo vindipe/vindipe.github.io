@@ -1,0 +1,186 @@
+<section id="wallet-keys-lab" class="network-protected card bg-base-100 shadow-md">
+  <div class="card-body">
+    <div class="flex flex-wrap gap-2 items-center mb-2">
+      <h3 class="card-title">Wallets, keys & ownership</h3>
+      <span class="badge badge-secondary">Toy signatures</span>
+      <span class="badge badge-outline">Addresses</span>
+      <span class="badge badge-outline">Authorization</span>
+    </div>
+
+    <p class="opacity-80 mb-4">
+      This toy lab shows the relationship between identity, transaction messages,
+      signatures, and verification. It is educational, not production cryptography.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1fr] gap-4">
+      <div class="grid gap-3">
+        <button class="btn btn-primary" data-wallet-action="generate">
+          Generate toy wallet
+        </button>
+
+        <label class="form-control">
+          <span class="label-text font-semibold">Transaction message</span>
+          <textarea
+            class="textarea textarea-bordered min-h-24"
+            data-wallet-message
+          >Send 10 TOK from Alice to Bob</textarea>
+        </label>
+
+        <div class="flex flex-wrap gap-2">
+          <button class="btn btn-outline" data-wallet-action="sign">
+            Sign transaction
+          </button>
+
+          <button class="btn btn-outline" data-wallet-action="verify">
+            Verify signature
+          </button>
+
+          <button class="btn btn-outline" data-wallet-action="tamper">
+            Tamper message
+          </button>
+        </div>
+      </div>
+
+      <div class="grid gap-3">
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Wallet identity</p>
+          <p class="text-sm opacity-80">
+            Address:
+            <span class="font-mono break-all" data-wallet-address>—</span>
+          </p>
+          <p class="text-sm opacity-80">
+            Public identity:
+            <span class="font-mono break-all" data-wallet-public>—</span>
+          </p>
+        </div>
+
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Signature</p>
+          <p class="font-mono text-xs break-all opacity-80" data-wallet-signature>
+            Generate a wallet and sign a transaction.
+          </p>
+        </div>
+
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Status</p>
+          <p class="text-sm opacity-80" data-wallet-status>
+            A wallet authorizes actions by signing messages.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initWalletKeysLab() {
+    const root = document.querySelector("#wallet-keys-lab");
+
+    if (!root || root.dataset.initialized === "true") {
+      return;
+    }
+
+    root.dataset.initialized = "true";
+
+    const messageInput = root.querySelector("[data-wallet-message]");
+    const addressOutput = root.querySelector("[data-wallet-address]");
+    const publicOutput = root.querySelector("[data-wallet-public]");
+    const signatureOutput = root.querySelector("[data-wallet-signature]");
+    const status = root.querySelector("[data-wallet-status]");
+
+    let wallet = null;
+    let signature = null;
+    let signedMessage = null;
+
+    async function sha256(text) {
+      const encoded = new TextEncoder().encode(text);
+      const digest = await crypto.subtle.digest("SHA-256", encoded);
+
+      return Array.from(new Uint8Array(digest))
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("");
+    }
+
+    async function generateWallet() {
+      const seed = crypto.getRandomValues(new Uint32Array(4)).join("-");
+      const publicIdentity = await sha256(`public:${seed}`);
+      const address = `0x${publicIdentity.slice(0, 40)}`;
+
+      wallet = {
+        seed,
+        publicIdentity,
+        address,
+      };
+
+      signature = null;
+      signedMessage = null;
+
+      addressOutput.textContent = address;
+      publicOutput.textContent = publicIdentity.slice(0, 32) + "...";
+      signatureOutput.textContent = "No signature yet.";
+      status.textContent =
+        "Toy wallet generated. In real systems, the private key must remain secret.";
+    }
+
+    async function signMessage() {
+      if (!wallet) {
+        await generateWallet();
+      }
+
+      signedMessage = messageInput.value;
+      signature = await sha256(`${wallet.seed}|${signedMessage}`);
+
+      signatureOutput.textContent = signature;
+      status.textContent =
+        "Transaction signed. The signature is bound to this exact message.";
+    }
+
+    async function verifySignature() {
+      if (!wallet || !signature || !signedMessage) {
+        status.textContent = "Nothing to verify yet. Generate a wallet and sign a transaction first.";
+        return;
+      }
+
+      const expected = await sha256(`${wallet.seed}|${messageInput.value}`);
+
+      if (expected === signature) {
+        status.textContent =
+          "Signature verified: the message matches the signed transaction.";
+      } else {
+        status.textContent =
+          "Verification failed: the message changed after signing.";
+      }
+    }
+
+    function tamperMessage() {
+      messageInput.value = `${messageInput.value} [tampered]`;
+      status.textContent =
+        "Message changed. Try verifying the old signature again.";
+    }
+
+    root
+      .querySelector('[data-wallet-action="generate"]')
+      .addEventListener("click", generateWallet);
+
+    root
+      .querySelector('[data-wallet-action="sign"]')
+      .addEventListener("click", signMessage);
+
+    root
+      .querySelector('[data-wallet-action="verify"]')
+      .addEventListener("click", verifySignature);
+
+    root
+      .querySelector('[data-wallet-action="tamper"]')
+      .addEventListener("click", tamperMessage);
+
+    generateWallet();
+  }
+
+  initWalletKeysLab();
+
+  if (!window.__walletKeysLabPageLoadRegistered) {
+    window.__walletKeysLabPageLoadRegistered = true;
+    document.addEventListener("astro:page-load", initWalletKeysLab);
+  }
+</script>

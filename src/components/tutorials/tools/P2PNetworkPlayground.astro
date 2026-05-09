@@ -1,0 +1,344 @@
+<section id="p2p-network-playground" class="network-protected card bg-base-100 shadow-md">
+  <div class="card-body">
+    <div class="flex flex-wrap gap-2 items-center mb-2">
+      <h3 class="card-title">P2P network simulator</h3>
+      <span class="badge badge-secondary">Propagation</span>
+      <span class="badge badge-outline">Faults</span>
+      <span class="badge badge-outline">Partitions</span>
+    </div>
+
+    <p class="opacity-80 mb-4">
+      Select a node, remove peers, split the network, and broadcast a transaction
+      to see how connectivity affects propagation in a peer-to-peer system.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_0.8fr] gap-4">
+      <div class="rounded-xl bg-base-200 border border-base-300 p-3">
+        <svg
+          data-p2p-svg
+          viewBox="0 0 720 400"
+          class="w-full h-[24rem] rounded-lg"
+          role="img"
+          aria-label="Interactive peer-to-peer network"
+        >
+          <g data-p2p-links></g>
+          <g data-p2p-nodes></g>
+        </svg>
+      </div>
+
+      <div class="grid gap-3 content-start">
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Selected node</p>
+          <p data-p2p-selected class="text-2xl font-bold">A</p>
+          <p class="text-sm opacity-70">
+            Click a node to select it. Drag nodes to move them.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <button class="btn btn-primary" data-p2p-action="broadcast">
+            Broadcast
+          </button>
+
+          <button class="btn btn-outline" data-p2p-action="remove">
+            Remove node
+          </button>
+
+          <button class="btn btn-outline" data-p2p-action="partition">
+            Toggle partition
+          </button>
+
+          <button class="btn btn-outline" data-p2p-action="reset">
+            Reset
+          </button>
+        </div>
+
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Status</p>
+          <p data-p2p-status class="text-sm opacity-80">
+            Select a node and broadcast a transaction.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initP2PNetworkPlayground() {
+    const root = document.querySelector("#p2p-network-playground");
+
+    if (!root || root.dataset.initialized === "true") {
+      return;
+    }
+
+    root.dataset.initialized = "true";
+
+    const svg = root.querySelector("[data-p2p-svg]");
+    const linksLayer = root.querySelector("[data-p2p-links]");
+    const nodesLayer = root.querySelector("[data-p2p-nodes]");
+    const selectedLabel = root.querySelector("[data-p2p-selected]");
+    const status = root.querySelector("[data-p2p-status]");
+
+    const initialNodes = [
+      { id: "A", x: 110, y: 100, online: true },
+      { id: "B", x: 300, y: 70, online: true },
+      { id: "C", x: 520, y: 120, online: true },
+      { id: "D", x: 160, y: 300, online: true },
+      { id: "E", x: 370, y: 280, online: true },
+      { id: "F", x: 600, y: 310, online: true },
+    ];
+
+    const links = [
+      ["A", "B"],
+      ["A", "D"],
+      ["B", "C"],
+      ["B", "D"],
+      ["B", "E"],
+      ["C", "E"],
+      ["C", "F"],
+      ["D", "E"],
+      ["E", "F"],
+    ];
+
+    let nodes = structuredClone(initialNodes);
+    let selectedId = "A";
+    let draggingId = null;
+    let partitioned = false;
+    let reached = new Set();
+
+    const leftPartition = new Set(["A", "B", "D"]);
+
+    function getNode(id) {
+      return nodes.find((node) => node.id === id);
+    }
+
+    function samePartition(source, target) {
+      return leftPartition.has(source.id) === leftPartition.has(target.id);
+    }
+
+    function isLinkActive(source, target) {
+      return (
+        source.online &&
+        target.online &&
+        (!partitioned || samePartition(source, target))
+      );
+    }
+
+    function svgPoint(event) {
+      const point = svg.createSVGPoint();
+      point.x = event.clientX;
+      point.y = event.clientY;
+      return point.matrixTransform(svg.getScreenCTM().inverse());
+    }
+
+    function render() {
+      selectedLabel.textContent = selectedId;
+
+      linksLayer.innerHTML = links
+        .map(([sourceId, targetId]) => {
+          const source = getNode(sourceId);
+          const target = getNode(targetId);
+          const active = isLinkActive(source, target);
+
+          return `
+            <line
+              x1="${source.x}"
+              y1="${source.y}"
+              x2="${target.x}"
+              y2="${target.y}"
+              stroke="currentColor"
+              stroke-width="${active ? 3 : 2}"
+              stroke-opacity="${active ? 0.35 : 0.12}"
+              stroke-dasharray="${active ? "0" : "8 8"}"
+            />
+          `;
+        })
+        .join("");
+
+      nodesLayer.innerHTML = nodes
+        .map((node) => {
+          const selected = node.id === selectedId;
+          const isReached = reached.has(node.id);
+
+          return `
+            <g
+              data-p2p-node="${node.id}"
+              transform="translate(${node.x}, ${node.y})"
+              style="cursor: grab; opacity: ${node.online ? 1 : 0.35};"
+            >
+              <circle
+                r="28"
+                fill="currentColor"
+                fill-opacity="${isReached ? 0.28 : 0.08}"
+                stroke="currentColor"
+                stroke-width="${selected ? 6 : 4}"
+              ></circle>
+              <text
+                text-anchor="middle"
+                dominant-baseline="central"
+                font-size="18"
+                font-weight="800"
+                fill="currentColor"
+                style="pointer-events: none;"
+              >${node.id}</text>
+            </g>
+          `;
+        })
+        .join("");
+
+      nodesLayer.querySelectorAll("[data-p2p-node]").forEach((nodeElement) => {
+        nodeElement.addEventListener("pointerdown", (event) => {
+          selectedId = nodeElement.getAttribute("data-p2p-node");
+          draggingId = selectedId;
+          reached = new Set();
+          status.textContent = `Node ${selectedId} selected.`;
+          render();
+          event.preventDefault();
+        });
+      });
+    }
+
+    function buildAdjacency() {
+      const adjacency = new Map();
+
+      nodes.forEach((node) => {
+        if (node.online) {
+          adjacency.set(node.id, []);
+        }
+      });
+
+      links.forEach(([sourceId, targetId]) => {
+        const source = getNode(sourceId);
+        const target = getNode(targetId);
+
+        if (!source.online || !target.online) {
+          return;
+        }
+
+        if (!isLinkActive(source, target)) {
+          return;
+        }
+
+        adjacency.get(sourceId).push(targetId);
+        adjacency.get(targetId).push(sourceId);
+      });
+
+      return adjacency;
+    }
+
+    function broadcast() {
+      reached = new Set();
+
+      const source = getNode(selectedId);
+
+      if (!source.online) {
+        status.textContent = `Node ${selectedId} is offline. Select another node or reset the network.`;
+        render();
+        return;
+      }
+
+      const adjacency = buildAdjacency();
+      const queue = [selectedId];
+      const visited = new Set([selectedId]);
+      const order = [selectedId];
+
+      while (queue.length > 0) {
+        const current = queue.shift();
+
+        for (const neighbor of adjacency.get(current) ?? []) {
+          if (visited.has(neighbor)) {
+            continue;
+          }
+
+          visited.add(neighbor);
+          queue.push(neighbor);
+          order.push(neighbor);
+        }
+      }
+
+      order.forEach((nodeId, index) => {
+        window.setTimeout(() => {
+          reached.add(nodeId);
+          status.textContent = `Transaction reached ${reached.size} of ${
+            nodes.filter((node) => node.online).length
+          } online nodes.`;
+          render();
+        }, index * 350);
+      });
+    }
+
+    function removeSelected() {
+      const node = getNode(selectedId);
+      node.online = false;
+      reached = new Set();
+      status.textContent = `Node ${selectedId} was removed.`;
+      render();
+    }
+
+    function togglePartition() {
+      partitioned = !partitioned;
+      reached = new Set();
+      status.textContent = partitioned
+        ? "Network partition enabled: some links are now unavailable."
+        : "Network partition disabled: cross-group links are available again.";
+      render();
+    }
+
+    function reset() {
+      nodes = structuredClone(initialNodes);
+      selectedId = "A";
+      draggingId = null;
+      partitioned = false;
+      reached = new Set();
+      status.textContent = "Network restored.";
+      render();
+    }
+
+    function handlePointerMove(event) {
+      if (!draggingId) {
+        return;
+      }
+
+      const point = svgPoint(event);
+      const node = getNode(draggingId);
+
+      node.x = Math.max(40, Math.min(680, point.x));
+      node.y = Math.max(40, Math.min(360, point.y));
+
+      render();
+    }
+
+    function handlePointerUp() {
+      draggingId = null;
+    }
+
+    root
+      .querySelector('[data-p2p-action="broadcast"]')
+      .addEventListener("click", broadcast);
+
+    root
+      .querySelector('[data-p2p-action="remove"]')
+      .addEventListener("click", removeSelected);
+
+    root
+      .querySelector('[data-p2p-action="partition"]')
+      .addEventListener("click", togglePartition);
+
+    root
+      .querySelector('[data-p2p-action="reset"]')
+      .addEventListener("click", reset);
+
+    window.addEventListener("pointermove", handlePointerMove);
+    window.addEventListener("pointerup", handlePointerUp);
+
+    render();
+  }
+
+  initP2PNetworkPlayground();
+
+  if (!window.__p2pNetworkPlaygroundPageLoadRegistered) {
+    window.__p2pNetworkPlaygroundPageLoadRegistered = true;
+    document.addEventListener("astro:page-load", initP2PNetworkPlayground);
+  }
+</script>

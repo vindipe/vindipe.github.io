@@ -1,0 +1,139 @@
+<section id="public-permissioned-lab" class="network-protected card bg-base-100 shadow-md">
+  <div class="card-body">
+    <div class="flex flex-wrap gap-2 items-center mb-2">
+      <h3 class="card-title">Public vs permissioned networks</h3>
+      <span class="badge badge-secondary">Access model</span>
+      <span class="badge badge-outline">Governance</span>
+    </div>
+
+    <p class="opacity-80 mb-4">
+      Switch between public and permissioned modes to see how access, validation,
+      reading, writing, and governance assumptions change.
+    </p>
+
+    <div class="flex flex-wrap gap-2 mb-4">
+      <button class="btn btn-primary" data-network-mode="public">
+        Public network
+      </button>
+
+      <button class="btn btn-outline" data-network-mode="permissioned">
+        Permissioned network
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3" data-feature-grid></div>
+
+      <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+        <p class="font-semibold mb-2">Scenario</p>
+
+        <div class="grid gap-2 mb-4">
+          <button class="btn btn-sm btn-outline" data-network-action="join">
+            New node tries to join
+          </button>
+
+          <button class="btn btn-sm btn-outline" data-network-action="validate">
+            Node tries to validate a block
+          </button>
+
+          <button class="btn btn-sm btn-outline" data-network-action="read">
+            User tries to read ledger data
+          </button>
+        </div>
+
+        <p data-network-status class="text-sm opacity-80">
+          Choose a scenario to compare network models.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initPublicPermissionedLab() {
+    const root = document.querySelector("#public-permissioned-lab");
+
+    if (!root || root.dataset.initialized === "true") {
+    return;
+    }
+
+    root.dataset.initialized = "true";
+
+    const grid = root.querySelector("[data-feature-grid]");
+    const status = root.querySelector("[data-network-status]");
+    const modeButtons = root.querySelectorAll("[data-network-mode]");
+
+    let mode = "public";
+
+    const features = {
+      public: [
+        ["Who can join?", "Anyone can usually join without prior approval."],
+        ["Who can validate?", "Validation depends on protocol rules, stake, mining power, or node role."],
+        ["Who can read?", "Ledger data is generally publicly visible."],
+        ["Governance", "Governance is often distributed, informal, token-based, or protocol-community driven."],
+      ],
+      permissioned: [
+        ["Who can join?", "Participants are admitted by an organization, consortium, or governance process."],
+        ["Who can validate?", "Only approved validators can participate in consensus."],
+        ["Who can read?", "Reading may be public, restricted, or role-based."],
+        ["Governance", "Governance is usually formalized among known institutions or operators."],
+      ],
+    };
+
+    const scenarios = {
+      public: {
+        join: "The new node can usually join the network, download data, and connect to peers.",
+        validate: "The node can validate only if it satisfies protocol-specific requirements.",
+        read: "The user can generally inspect public ledger data.",
+      },
+      permissioned: {
+        join: "The new node must be approved before joining the network.",
+        validate: "The node cannot validate unless it is part of the approved validator set.",
+        read: "The user may need permission, credentials, or a specific role to read data.",
+      },
+    };
+
+    function render() {
+      grid.innerHTML = features[mode]
+        .map(
+          ([title, text]) => `
+            <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+              <p class="font-semibold mb-1">${title}</p>
+              <p class="text-sm opacity-80">${text}</p>
+            </div>
+          `,
+        )
+        .join("");
+
+      modeButtons.forEach((button) => {
+        const isActive = button.getAttribute("data-network-mode") === mode;
+        button.classList.toggle("btn-primary", isActive);
+        button.classList.toggle("btn-outline", !isActive);
+      });
+    }
+
+    modeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        mode = button.getAttribute("data-network-mode");
+        status.textContent = `Mode changed to ${mode}. Try a scenario.`;
+        render();
+      });
+    });
+
+    root.querySelectorAll("[data-network-action]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const action = button.getAttribute("data-network-action");
+        status.textContent = scenarios[mode][action];
+      });
+    });
+
+    render();
+  }
+
+  initPublicPermissionedLab();
+
+  if (!window.__publicPermissionedLabPageLoadRegistered) {
+    window.__publicPermissionedLabPageLoadRegistered = true;
+    document.addEventListener("astro:page-load", initPublicPermissionedLab);
+  }
+</script>

@@ -1,0 +1,172 @@
+<section id="fees-scalability-lab" class="network-protected card bg-base-100 shadow-md">
+  <div class="card-body">
+    <div class="flex flex-wrap gap-2 items-center mb-2">
+      <h3 class="card-title">Fees, blockspace & scalability</h3>
+      <span class="badge badge-secondary">Congestion</span>
+      <span class="badge badge-outline">Throughput</span>
+      <span class="badge badge-outline">User cost</span>
+    </div>
+
+    <p class="opacity-80 mb-4">
+      Blockchains have limited capacity. When demand is higher than available
+      blockspace, transactions compete for inclusion and fees become more
+      important.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
+      <div class="grid gap-4">
+        <label class="form-control">
+          <span class="label-text font-semibold">Incoming transactions</span>
+          <input
+            type="range"
+            min="10"
+            max="200"
+            value="90"
+            class="range range-primary"
+            data-fees-demand
+          />
+          <span class="text-sm opacity-70">
+            <span data-fees-demand-value>90</span> tx
+          </span>
+        </label>
+
+        <label class="form-control">
+          <span class="label-text font-semibold">Block capacity</span>
+          <input
+            type="range"
+            min="10"
+            max="200"
+            value="70"
+            class="range range-primary"
+            data-fees-capacity
+          />
+          <span class="text-sm opacity-70">
+            <span data-fees-capacity-value>70</span> tx/block
+          </span>
+        </label>
+
+        <label class="form-control">
+          <span class="label-text font-semibold">Average fee willingness</span>
+          <input
+            type="range"
+            min="1"
+            max="100"
+            value="35"
+            class="range range-primary"
+            data-fees-willingness
+          />
+          <span class="text-sm opacity-70">
+            <span data-fees-willingness-value>35</span>/100
+          </span>
+        </label>
+
+        <button class="btn btn-outline" data-fees-action="spike">
+          Simulate demand spike
+        </button>
+      </div>
+
+      <div class="grid gap-3">
+        <div class="stats stats-vertical bg-base-100 shadow">
+          <div class="stat">
+            <div class="stat-title">Included now</div>
+            <div class="stat-value text-2xl" data-fees-included>—</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-title">Pending queue</div>
+            <div class="stat-value text-2xl" data-fees-pending>—</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-title">Congestion</div>
+            <div class="stat-value text-2xl" data-fees-congestion>—</div>
+          </div>
+        </div>
+
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Interpretation</p>
+          <p class="text-sm opacity-80" data-fees-status>
+            Move the sliders to simulate different demand and capacity conditions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initFeesScalabilityLab() {
+    const root = document.querySelector("#fees-scalability-lab");
+
+    if (!root || root.dataset.initialized === "true") {
+      return;
+    }
+
+    root.dataset.initialized = "true";
+
+    const demand = root.querySelector("[data-fees-demand]");
+    const capacity = root.querySelector("[data-fees-capacity]");
+    const willingness = root.querySelector("[data-fees-willingness]");
+
+    const demandValue = root.querySelector("[data-fees-demand-value]");
+    const capacityValue = root.querySelector("[data-fees-capacity-value]");
+    const willingnessValue = root.querySelector("[data-fees-willingness-value]");
+
+    const includedOutput = root.querySelector("[data-fees-included]");
+    const pendingOutput = root.querySelector("[data-fees-pending]");
+    const congestionOutput = root.querySelector("[data-fees-congestion]");
+    const status = root.querySelector("[data-fees-status]");
+
+    function render() {
+      const txDemand = Number(demand.value);
+      const blockCapacity = Number(capacity.value);
+      const feeWillingness = Number(willingness.value);
+
+      const included = Math.min(txDemand, blockCapacity);
+      const pending = Math.max(0, txDemand - blockCapacity);
+      const congestion = txDemand / blockCapacity;
+
+      demandValue.textContent = txDemand;
+      capacityValue.textContent = blockCapacity;
+      willingnessValue.textContent = feeWillingness;
+
+      includedOutput.textContent = `${included} tx`;
+      pendingOutput.textContent = `${pending} tx`;
+      congestionOutput.textContent = `${congestion.toFixed(2)}x`;
+
+      if (pending === 0) {
+        status.textContent =
+          "Capacity is enough for current demand. Fees are less likely to become a bottleneck.";
+      } else if (feeWillingness < 40) {
+        status.textContent =
+          "Demand exceeds capacity and users are not willing to pay much. Many transactions may remain pending.";
+      } else if (feeWillingness < 75) {
+        status.textContent =
+          "Demand exceeds capacity. Some users may be included, while others wait or raise fees.";
+      } else {
+        status.textContent =
+          "High fee willingness can prioritize transactions, but it can also make the system expensive for smaller users.";
+      }
+    }
+
+    function spike() {
+      demand.value = Math.min(200, Number(demand.value) + 60);
+      render();
+    }
+
+    [demand, capacity, willingness].forEach((input) => {
+      input.addEventListener("input", render);
+    });
+
+    root.querySelector('[data-fees-action="spike"]').addEventListener("click", spike);
+
+    render();
+  }
+
+  initFeesScalabilityLab();
+
+  if (!window.__feesScalabilityLabPageLoadRegistered) {
+    window.__feesScalabilityLabPageLoadRegistered = true;
+    document.addEventListener("astro:page-load", initFeesScalabilityLab);
+  }
+</script>

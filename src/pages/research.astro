@@ -12,8 +12,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     <p class="text-lg leading-relaxed opacity-90">
       Selected research, research artifacts, datasets, and working papers on
-      blockchain systems, distributed infrastructures, benchmarking, reproducible
-      experimentation, energy analysis, and digital assets.
+      blockchain systems, distributed infrastructures, benchmarking,
+      reproducible experimentation, energy analysis, and digital assets.
     </p>
   </section>
 
@@ -24,9 +24,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <article class="card bg-base-100 shadow-md">
         <div class="card-body">
           <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">
-              Topology-aware blockchain benchmarking
-            </h3>
+            <h3 class="card-title">Topology-aware blockchain benchmarking</h3>
             <span class="badge badge-secondary">ACM DEBS '25</span>
           </div>
 
@@ -48,6 +46,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               class="btn btn-sm btn-outline"
               href="https://dl.acm.org/doi/10.1145/3701717.3730540"
               target="_blank"
+              rel="noopener noreferrer"
             >
               DOI / Paper
             </a>
@@ -65,9 +64,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
 
           <p>
-            Work connecting performance, energy consumption, and economic-efficiency
-            dimensions in blockchain evaluation through reproducible experiments
-            and data-driven analysis.
+            Work connecting performance, energy consumption, and
+            economic-efficiency dimensions in blockchain evaluation through
+            reproducible experiments and data-driven analysis.
           </p>
 
           <div class="flex flex-wrap gap-2 mt-2">
@@ -82,6 +81,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               class="btn btn-sm btn-outline"
               href="https://ieeexplore.ieee.org/document/11114569"
               target="_blank"
+              rel="noopener noreferrer"
             >
               IEEE Xplore
             </a>
@@ -91,20 +91,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       <article class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
+          <div
+            class="flex flex-col md:flex-row md:items-start md:justify-between gap-2"
+          >
             <h3 class="card-title">
-              Dynamic Taxonomy: a Bridge from DeFi to TradFi
+              Dynamic Taxonomy: A Bridge from DeFi to TradFi
             </h3>
-            <span class="badge badge-outline shrink-0">SSRN</span>
+            <div class="flex flex-wrap gap-2">
+              <span class="badge badge-outline shrink-0">SSRN</span>
+              <span class="badge badge-outline shrink-0"
+                >CCAF collaboration</span
+              >
+            </div>
           </div>
 
           <p>
-            Working paper on digital assets, decentralized finance, traditional
-            finance, and taxonomy-oriented analysis.
+            Iqbal Mabruri, Carles Cerqueda, Christopher Jack, Alexis Lui, Yue
+            Wu, Wenbin Wu, Vincenzo P. Di Perna, Keith Bear, and Bryan Zheng
+            Zhang.
           </p>
 
           <p class="opacity-80">
-            SSRN working paper.
+            SSRN working paper developed in collaboration with the Cambridge
+            Centre for Alternative Finance (CCAF), focused on digital assets,
+            decentralized finance, traditional finance, and taxonomy-oriented
+            analysis.
           </p>
 
           <div class="card-actions justify-end mt-4">
@@ -112,6 +123,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               class="btn btn-sm btn-outline"
               href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5034378"
               target="_blank"
+              rel="noopener noreferrer"
             >
               SSRN
             </a>
@@ -136,8 +148,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
           <p>
             Public research artifact supporting topology-aware blockchain
-            benchmarking, workload execution, network emulation, and reproducible
-            experimental analysis.
+            benchmarking, workload execution, network emulation, and
+            reproducible experimental analysis.
           </p>
 
           <div class="card-actions justify-end mt-4">
@@ -145,6 +157,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               class="btn btn-sm btn-outline"
               href="https://doi.org/10.5281/zenodo.11409100"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Zenodo DOI
             </a>
@@ -162,9 +175,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
 
           <p>
-            Dataset designed to quantify repeatability, variability, and performance
-            predictability across blockchain platforms, workloads, and network
-            topologies.
+            Dataset designed to quantify repeatability, variability, and
+            performance predictability across blockchain platforms, workloads,
+            and network topologies.
           </p>
 
           <div class="card-actions justify-end mt-4">
@@ -172,6 +185,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               class="btn btn-sm btn-outline"
               href="https://doi.org/10.5281/zenodo.15545963"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Zenodo DOI
             </a>
@@ -189,8 +203,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="card-body">
           <h3 class="card-title">Blockchain systems evaluation</h3>
           <p>
-            Performance, latency, throughput, topology effects, workload sensitivity,
-            benchmarking methodology, and experimental reliability.
+            Performance, latency, throughput, topology effects, workload
+            sensitivity, benchmarking methodology, and experimental reliability.
           </p>
         </div>
       </div>
@@ -200,7 +214,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <h3 class="card-title">Energy and efficiency</h3>
           <p>
             Energy-aware blockchain analysis, normalized efficiency indicators,
-            and trade-offs between performance, consumption, and protocol behavior.
+            and trade-offs between performance, consumption, and protocol
+            behavior.
           </p>
         </div>
       </div>
@@ -209,8 +224,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="card-body">
           <h3 class="card-title">Repeatability and predictability</h3>
           <p>
-            Experimental repeatability, performance predictability, robust dispersion
-            metrics, and statistical analysis of blockchain variability.
+            Experimental repeatability, performance predictability, robust
+            dispersion metrics, and statistical analysis of blockchain
+            variability.
           </p>
         </div>
       </div>
@@ -219,8 +235,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="card-body">
           <h3 class="card-title">Digital assets and infrastructures</h3>
           <p>
-            Digital-asset analytics, digital-asset and CBDC-related systems, protocol data,
-            and economic perspectives on decentralized infrastructures.
+            Digital-asset analytics, digital-asset and CBDC-related systems,
+            protocol data, and economic perspectives on decentralized
+            infrastructures.
           </p>
         </div>
       </div>

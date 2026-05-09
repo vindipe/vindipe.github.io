@@ -12,21 +12,37 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
     <h1 class="text-4xl font-bold mb-4">CV</h1>
 
     <p class="text-lg leading-relaxed opacity-90">
-      I am a Blockchain Systems & Digital Assets Engineer with a PhD in Blockchain & DLT,
-      focused on distributed systems, blockchain benchmarking, reproducible experimentation,
-      protocol evaluation, data analysis, and digital-asset infrastructures.
+      I am a Blockchain Systems & Digital Assets Engineer with a PhD in
+      Blockchain & DLT, focused on distributed systems, blockchain benchmarking,
+      reproducible experimentation, protocol evaluation, data analysis, and
+      digital-asset infrastructures.
     </p>
 
     <div class="mt-6 flex flex-wrap gap-3">
-      <a class="btn btn-primary" href="/cv/Di_Perna_CV.pdf" target="_blank">
+      <a
+        class="btn btn-primary"
+        href="/cv/Di_Perna_CV.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         Download CV
       </a>
 
-      <a class="btn btn-outline" href="https://github.com/vindipe" target="_blank">
+      <a
+        class="btn btn-outline"
+        href="https://github.com/vindipe"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         GitHub
       </a>
 
-      <a class="btn btn-outline" href="https://www.linkedin.com/in/vincenzo-di-perna/" target="_blank">
+      <a
+        class="btn btn-outline"
+        href="https://www.linkedin.com/in/vincenzo-di-perna/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         LinkedIn
       </a>
     </div>
@@ -38,23 +54,25 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
     <div class="text-justify leading-relaxed">
       <p class="mb-4">
         My work combines distributed systems research, experimental methodology,
-        blockchain infrastructure evaluation, and data-driven analysis. During my PhD,
-        I designed and used reproducible benchmarking pipelines to study how blockchain
-        systems behave under different workloads, network topologies, and operational
-        conditions.
+        blockchain infrastructure evaluation, and data-driven analysis. During
+        my PhD, I designed and used reproducible benchmarking pipelines to study
+        how blockchain systems behave under different workloads, network
+        topologies, and operational conditions.
       </p>
 
       <p class="mb-4">
-        I am particularly interested in performance and latency evaluation, energy
-        efficiency, repeatability, performance predictability, protocol analytics,
-        digital-asset and CBDC-related infrastructures, and research engineering practices that
-        make experimental results easier to reproduce and compare.
+        I am particularly interested in performance and latency evaluation,
+        energy efficiency, repeatability, performance predictability, protocol
+        analytics, digital-asset and CBDC-related infrastructures, and research
+        engineering practices that make experimental results easier to reproduce
+        and compare.
       </p>
 
       <p>
-        I am open to engineering, R&D, data, research, and hybrid roles where rigorous
-        experimentation, distributed systems knowledge, and blockchain/digital-asset
-        expertise can support practical technical decisions.
+        I am open to engineering, R&D, data, research, and hybrid roles where
+        rigorous experimentation, distributed systems knowledge, and
+        blockchain/digital-asset expertise can support practical technical
+        decisions.
       </p>
     </div>
   </section>
@@ -69,10 +87,10 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
         date="2022–2025"
       >
         Dissertation focused on comparing blockchain systems across performance,
-        energy, repeatability, predictability, and economic-efficiency dimensions.
-        Research included topology-aware benchmarking, reproducible experimentation,
-        workload design, network emulation, and statistical analysis of blockchain
-        system behavior.
+        energy, repeatability, predictability, and economic-efficiency
+        dimensions. Research included topology-aware benchmarking, reproducible
+        experimentation, workload design, network emulation, and statistical
+        analysis of blockchain system behavior.
       </TimeLineElement>
 
       <TimeLineElement
@@ -80,8 +98,8 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
         subtitle="Università di Pisa, Italy"
         date="2019–2022"
       >
-        Graduate studies focused on ICT architectures, software systems, networks,
-        security, and technical design of digital infrastructures.
+        Graduate studies focused on ICT architectures, software systems,
+        networks, security, and technical design of digital infrastructures.
       </TimeLineElement>
 
       <TimeLineElement
@@ -89,8 +107,8 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
         subtitle="Università degli Studi di Milano, Italy"
         date="2015–2019"
       >
-        Foundation in computer systems, operating systems, networks, cybersecurity,
-        programming, and technical problem solving.
+        Foundation in computer systems, operating systems, networks,
+        cybersecurity, programming, and technical problem solving.
       </TimeLineElement>
     </div>
   </section>
@@ -98,80 +116,76 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
   <section class="mb-10">
     <h2 class="text-3xl w-full font-bold mb-5">Certifications</h2>
 
-    <div class="grid gap-4">
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
-            <h3 class="card-title">
-              Blockchain for Business Certificate
-            </h3>
-            <span class="badge badge-outline shrink-0">2023</span>
-          </div>
-
-          <p>
-            SUPSI / USI / Franklin University Switzerland / City of Lugano.
-          </p>
-
-          <p class="opacity-80">
-            Professional certificate focused on blockchain applications, business
-            use cases, and digital-asset-related innovation.
-          </p>
-        </div>
-      </div>
+    <div class="time-line-container grid gap-4">
+      <TimeLineElement
+        title="Blockchain for Business Certificate"
+        subtitle="SUPSI / USI / Franklin University Switzerland / City of Lugano"
+        date="2023"
+        variant="warning"
+      >
+        Professional certificate focused on blockchain applications, business
+        use cases, digital-asset-related innovation, and the connection between
+        blockchain technologies, institutions, and real-world business contexts.
+      </TimeLineElement>
     </div>
-  </section> 
+  </section>
 
   <section class="mb-10">
-    <h2 class="text-3xl w-full font-bold mb-5">Research & Engineering Experience</h2>
+    <h2 class="text-3xl w-full font-bold mb-5">
+      Research & Engineering Experience
+    </h2>
 
     <div class="time-line-container grid gap-4">
       <TimeLineElement
         title="Blockchain Benchmarking & Distributed Systems Research"
         subtitle="PhD research and related research"
       >
-        Designed, executed, and analyzed reproducible blockchain experiments across
-        multiple platforms, workloads, and network conditions. Evaluated throughput,
-        latency, energy usage, variability, repeatability, and performance predictability
-        under controlled experimental settings.
+        Designed, executed, and analyzed reproducible blockchain experiments
+        across multiple platforms, workloads, and network conditions. Evaluated
+        throughput, latency, energy usage, variability, repeatability, and
+        performance predictability under controlled experimental settings.
       </TimeLineElement>
 
       <TimeLineElement
         title="Lilith — Topology-Aware Blockchain Benchmarking Framework"
         subtitle="Research artifact and experimental toolchain"
       >
-        Built a benchmarking framework integrating blockchain workload generation,
-        network emulation, orchestration, and data analysis. Used it to study how
-        topology and workload interactions affect blockchain performance and energy
-        behavior.
+        Built a benchmarking framework integrating blockchain workload
+        generation, network emulation, orchestration, and data analysis. Used it
+        to study how topology and workload interactions affect blockchain
+        performance and energy behavior.
       </TimeLineElement>
 
       <TimeLineElement
         title="Digital Assets & CBDC-Oriented Data Workflows"
         subtitle="Protocol analytics, dashboards, and structured data analysis"
       >
-        Worked on data-oriented analysis and dashboard concepts for digital assets,
-        digital-asset and CBDC-related infrastructures, and blockchain ecosystem indicators,
-        connecting technical protocol behavior with analytical and economic perspectives.
+        Worked on data-oriented analysis and dashboard concepts for digital
+        assets, digital-asset and CBDC-related infrastructures, and blockchain
+        ecosystem indicators, connecting technical protocol behavior with
+        analytical and economic perspectives.
       </TimeLineElement>
 
       <TimeLineElement
         title="Research Engineering & Reproducibility"
         subtitle="Software artifacts, datasets, pipelines, and experimental methodology"
       >
-        Developed scripts, datasets, reproducible workflows, statistical analyses,
-        and documentation to support repeatable experiments and transparent evaluation
-        of blockchain systems.
+        Developed scripts, datasets, reproducible workflows, statistical
+        analyses, and documentation to support repeatable experiments and
+        transparent evaluation of blockchain systems.
       </TimeLineElement>
     </div>
   </section>
 
   <section class="mb-10">
-    <h2 class="text-3xl w-full font-bold mb-5">Selected Publications</h2>
+    <h2 class="text-3xl w-full font-bold mb-5">Publications</h2>
 
     <div class="grid gap-4">
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
+          <div
+            class="flex flex-col md:flex-row md:items-start md:justify-between gap-2"
+          >
             <h3 class="card-title">
               Impact of Network Topologies on Blockchain Performance
             </h3>
@@ -179,8 +193,8 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
           </div>
 
           <p>
-            Vincenzo P. Di Perna, Marco Bernardo, Francesco Fabris,
-            Sebastião Amaro, Miguel Matos, and Valerio Schiavoni.
+            Vincenzo P. Di Perna, Marco Bernardo, Francesco Fabris, Sebastião
+            Amaro, Miguel Matos, and Valerio Schiavoni.
           </p>
 
           <p class="opacity-80">
@@ -193,6 +207,7 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
               class="btn btn-sm btn-outline"
               href="https://dl.acm.org/doi/10.1145/3701717.3730540"
               target="_blank"
+              rel="noopener noreferrer"
             >
               DOI / Paper
             </a>
@@ -202,16 +217,19 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
 
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
+          <div
+            class="flex flex-col md:flex-row md:items-start md:justify-between gap-2"
+          >
             <h3 class="card-title">
-              Blockchain Energy Consumption: Unveiling the Impact of Network Topologies
+              Blockchain Energy Consumption: Unveiling the Impact of Network
+              Topologies
             </h3>
             <span class="badge badge-secondary shrink-0">IEEE ICBC '25</span>
           </div>
 
           <p>
-            Vincenzo P. Di Perna, Valerio Schiavoni, Francesco Fabris,
-            and Marco Bernardo.
+            Vincenzo P. Di Perna, Valerio Schiavoni, Francesco Fabris, and Marco
+            Bernardo.
           </p>
 
           <p class="opacity-80">
@@ -224,6 +242,7 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
               class="btn btn-sm btn-outline"
               href="https://ieeexplore.ieee.org/document/11114569"
               target="_blank"
+              rel="noopener noreferrer"
             >
               IEEE Xplore
             </a>
@@ -233,16 +252,19 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
 
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
+          <div
+            class="flex flex-col md:flex-row md:items-start md:justify-between gap-2"
+          >
             <h3 class="card-title">
-              An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies
+              An Entropy-Based Approach to Evaluating the Economic Efficiency of
+              Cryptocurrencies
             </h3>
             <span class="badge badge-secondary shrink-0">DLT '25</span>
           </div>
 
           <p>
-            Vincenzo P. Di Perna, Michele Foderaro, Francesco Fabris,
-            and Marco Bernardo.
+            Vincenzo P. Di Perna, Michele Foderaro, Francesco Fabris, and Marco
+            Bernardo.
           </p>
 
           <p class="opacity-80">
@@ -255,6 +277,7 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
               class="btn btn-sm btn-outline"
               href="https://ceur-ws.org/Vol-4105/paper09.pdf"
               target="_blank"
+              rel="noopener noreferrer"
             >
               CEUR paper
             </a>
@@ -264,20 +287,31 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
 
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
+          <div
+            class="flex flex-col md:flex-row md:items-start md:justify-between gap-2"
+          >
             <h3 class="card-title">
-              Dynamic Taxonomy: a Bridge from DeFi to TradFi
+              Dynamic Taxonomy: A Bridge from DeFi to TradFi
             </h3>
-            <span class="badge badge-secondary shrink-0">SSRN</span>
+            <div class="flex flex-wrap gap-2">
+              <span class="badge badge-secondary shrink-0">SSRN</span>
+              <span class="badge badge-outline shrink-0"
+                >CCAF collaboration</span
+              >
+            </div>
           </div>
 
           <p>
-            Working paper on digital assets, decentralized finance, traditional
-            finance, and taxonomy-oriented analysis.
+            Iqbal Mabruri, Carles Cerqueda, Christopher Jack, Alexis Lui, Yue
+            Wu, Wenbin Wu, Vincenzo P. Di Perna, Keith Bear, and Bryan Zheng
+            Zhang.
           </p>
 
           <p class="opacity-80">
-            SSRN working paper.
+            SSRN working paper developed in collaboration with the Cambridge
+            Centre for Alternative Finance (CCAF), focused on digital assets,
+            decentralized finance, traditional finance, and taxonomy-oriented
+            analysis.
           </p>
 
           <div class="card-actions justify-end">
@@ -285,6 +319,7 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
               class="btn btn-sm btn-outline"
               href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5034378"
               target="_blank"
+              rel="noopener noreferrer"
             >
               SSRN
             </a>
@@ -295,21 +330,23 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
   </section>
 
   <section class="mb-10">
-    <h2 class="text-3xl w-full font-bold mb-5">Projects & Artifacts</h2>
+    <h2 class="text-3xl w-full font-bold mb-5">Tools & Artifacts</h2>
 
     <div class="grid gap-4">
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
           <h3 class="card-title">Lilith</h3>
           <p>
-            Topology-aware blockchain benchmarking framework integrating workload
-            generation, network emulation, orchestration, and experiment analysis.
+            Topology-aware blockchain benchmarking framework integrating
+            workload generation, network emulation, orchestration, and
+            experiment analysis.
           </p>
           <div class="card-actions justify-end">
             <a
               class="btn btn-sm btn-outline"
               href="https://doi.org/10.5281/zenodo.11409100"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Zenodo artifact
             </a>
@@ -329,13 +366,14 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
               class="btn btn-sm btn-outline"
               href="https://doi.org/10.5281/zenodo.15545963"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Zenodo dataset
             </a>
           </div>
         </div>
       </div>
-</div>
+    </div>
   </section>
 
   <section class="mb-10">
@@ -344,52 +382,194 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <h3 class="card-title">Programming & scripting</h3>
+          <h3 class="card-title">Programming, scripting & automation</h3>
+
           <ul class="list-disc mx-6 grid gap-1">
-            <li>Python</li>
-            <li>Bash</li>
-            <li>Rust familiarity</li>
-            <li>JavaScript / TypeScript basics</li>
-            <li>Git and GitHub workflows</li>
+            <li>
+              Python for orchestration, data processing, experiment automation,
+              and analysis workflows
+            </li>
+            <li>
+              Bash scripting for Linux automation, reproducible runs, and
+              command-line pipelines
+            </li>
+            <li>
+              Rust familiarity for systems-oriented programming and low-level
+              software concepts
+            </li>
+            <li>
+              JavaScript / TypeScript basics for web interfaces, personal-site
+              tooling, and frontend integration
+            </li>
+            <li>
+              Familiarity with Go, C, and C++ from systems, networking, and
+              academic contexts
+            </li>
+            <li>
+              Git, GitHub, branching, pull requests, repository organization,
+              and basic CI workflows
+            </li>
           </ul>
         </div>
       </div>
 
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <h3 class="card-title">Systems & infrastructure</h3>
+          <h3 class="card-title">Data analysis, statistics & visualization</h3>
+
           <ul class="list-disc mx-6 grid gap-1">
-            <li>Linux</li>
-            <li>Docker</li>
-            <li>Network emulation</li>
-            <li>Distributed systems experimentation</li>
-            <li>Benchmark orchestration</li>
+            <li>
+              Structured analysis of benchmark outputs, logs, experimental
+              traces, and performance datasets
+            </li>
+            <li>
+              Throughput, latency, energy, variability, repeatability, and
+              predictability metrics
+            </li>
+            <li>
+              Statistical reasoning for experimental comparison, including ANOVA
+              and ICC-style variance analysis
+            </li>
+            <li>
+              Data cleaning, aggregation, transformation, and reproducible
+              analysis pipelines
+            </li>
+            <li>
+              Python-based analytics with notebooks, scripts, CSV/JSON
+              processing, and publication-ready figures
+            </li>
+            <li>
+              Dashboard-style visual analytics for protocol, digital-asset, and
+              infrastructure indicators
+            </li>
           </ul>
         </div>
       </div>
 
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <h3 class="card-title">Blockchain & digital assets</h3>
+          <h3 class="card-title">Distributed systems & infrastructure</h3>
+
           <ul class="list-disc mx-6 grid gap-1">
-            <li>Blockchain benchmarking</li>
-            <li>Protocol evaluation</li>
-            <li>Digital-asset analytics</li>
-            <li>CBDC-related research context</li>
-            <li>Performance, latency, and energy analysis</li>
+            <li>
+              Linux-based development, debugging, scripting, and experimental
+              execution environments
+            </li>
+            <li>
+              Docker-based deployment, containerized experiments, and
+              reproducible software environments
+            </li>
+            <li>
+              Network emulation and controlled experimental topologies for
+              distributed-system evaluation
+            </li>
+            <li>
+              Benchmark orchestration across multiple nodes, workloads,
+              platforms, and configurations
+            </li>
+            <li>
+              Understanding of latency, bandwidth, topology effects,
+              coordination, consensus, and system variability
+            </li>
+            <li>
+              Experience designing experiments inspired by geo-distributed
+              infrastructures and cloud regions
+            </li>
           </ul>
         </div>
       </div>
 
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <h3 class="card-title">Data & experimentation</h3>
+          <h3 class="card-title">Blockchain, DLT & digital assets</h3>
+
           <ul class="list-disc mx-6 grid gap-1">
-            <li>Reproducible experiments</li>
-            <li>Experimental design</li>
-            <li>Statistical analysis</li>
-            <li>Data pipelines</li>
-            <li>Dashboard-style visual analytics</li>
+            <li>
+              Blockchain benchmarking, protocol evaluation, and empirical
+              comparison of DLT platforms
+            </li>
+            <li>
+              Performance and latency analysis across consensus protocols,
+              workloads, and network conditions
+            </li>
+            <li>
+              Energy-efficiency evaluation and normalized energy-per-transaction
+              analysis
+            </li>
+            <li>
+              Experience with EVM-style systems, permissioned BFT systems,
+              public PoS platforms, and experimental blockchain stacks
+            </li>
+            <li>
+              Digital-asset analytics, DeFi/CBDC-related research context, and
+              protocol-level data interpretation
+            </li>
+            <li>
+              Interest in RWA, tokenization, ownership models, economic
+              efficiency, and fairer value distribution
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <h3 class="card-title">
+            Benchmarking & reproducible experimentation
+          </h3>
+
+          <ul class="list-disc mx-6 grid gap-1">
+            <li>
+              Design of repeatable experimental campaigns across blockchain
+              platforms, workloads, and topologies
+            </li>
+            <li>
+              Integration of workload generation, network emulation,
+              orchestration, monitoring, and analysis steps
+            </li>
+            <li>
+              Use of repeated runs to study variability, worst-case deviations,
+              repeatability, and predictability
+            </li>
+            <li>
+              Experiment documentation, artifact preparation, datasets, scripts,
+              and reproducibility-oriented workflows
+            </li>
+            <li>
+              Awareness of measurement limitations, confounding factors,
+              environmental control, and methodological caveats
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <h3 class="card-title">
+            Research engineering & technical communication
+          </h3>
+
+          <ul class="list-disc mx-6 grid gap-1">
+            <li>
+              Translation of research questions into executable experiments,
+              metrics, datasets, and evaluation pipelines
+            </li>
+            <li>
+              Technical writing for papers, reports, documentation,
+              reproducibility packages, and research artifacts
+            </li>
+            <li>
+              Preparation of figures, tables, methodological explanations, and
+              evidence-based technical narratives
+            </li>
+            <li>
+              Cross-domain communication across distributed systems, blockchain
+              infrastructure, digital assets, and economic analysis
+            </li>
+            <li>
+              Personal-site and portfolio development with Astro, Tailwind CSS,
+              HTML/CSS, and GitHub Pages
+            </li>
           </ul>
         </div>
       </div>

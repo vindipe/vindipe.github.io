@@ -27,6 +27,10 @@
 
 <script is:inline>
     function startNetworkBackground() {
+        if (typeof window.__networkBackgroundCleanup === "function") {
+            window.__networkBackgroundCleanup();
+        }
+
         const canvas = document.getElementById("network-background-canvas");
         if (!canvas) return;
 
@@ -38,6 +42,7 @@
         let mouseX = null;
         let mouseY = null;
         let scrollY = window.scrollY || 0;
+        let animationFrameId = null;
 
         const nodes = [];
         const pulses = [];
@@ -320,50 +325,60 @@
             drawPulses();
             clearProtectedAreas();
 
-            requestAnimationFrame(draw);
+            animationFrameId = window.requestAnimationFrame(draw);
         }
 
-        window.addEventListener("resize", () => {
+        const handleResize = () => {
             resizeCanvas();
             createNodes();
-        });
+        };
 
-        window.addEventListener("mousemove", (event) => {
+        const handleMouseMove = (event) => {
             mouseX = event.clientX;
             mouseY = event.clientY;
-        });
+        };
 
-        window.addEventListener("mouseleave", () => {
+        const handleMouseLeave = () => {
             mouseX = null;
             mouseY = null;
-        });
+        };
 
-        window.addEventListener(
-            "scroll",
-            () => {
-                scrollY = window.scrollY || 0;
-            },
-            { passive: true },
-        );
+        const handleScroll = () => {
+            scrollY = window.scrollY || 0;
+        };
 
-        window.addEventListener(
-        "touchstart",
-        (event) => {
+        const handleTouchStart = (event) => {
             const touch = event.touches[0];
 
             if (!touch) {
-            return;
+                return;
             }
 
             pulses.push({
-            x: touch.clientX,
-            y: touch.clientY,
-            radius: 8,
-            alpha: 0.65,
+                x: touch.clientX,
+                y: touch.clientY,
+                radius: 8,
+                alpha: 0.65,
             });
-        },
-        { passive: true }
-        );
+        };
+
+        window.addEventListener("resize", handleResize);
+        window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("mouseleave", handleMouseLeave);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        window.addEventListener("touchstart", handleTouchStart, { passive: true });
+
+        window.__networkBackgroundCleanup = () => {
+            if (animationFrameId !== null) {
+                window.cancelAnimationFrame(animationFrameId);
+            }
+
+            window.removeEventListener("resize", handleResize);
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("mouseleave", handleMouseLeave);
+            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("touchstart", handleTouchStart);
+        };
 
         resizeCanvas();
         createNodes();
@@ -371,5 +386,9 @@
     }
 
     startNetworkBackground();
-    document.addEventListener("astro:page-load", startNetworkBackground);
+
+    if (!window.__networkBackgroundPageLoadRegistered) {
+        window.__networkBackgroundPageLoadRegistered = true;
+        document.addEventListener("astro:page-load", startNetworkBackground);
+    }
 </script>

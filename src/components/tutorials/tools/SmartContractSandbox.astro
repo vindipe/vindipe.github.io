@@ -1,0 +1,167 @@
+<section id="smart-contract-sandbox" class="network-protected card bg-base-100 shadow-md">
+  <div class="card-body">
+    <div class="flex flex-wrap gap-2 items-center mb-2">
+      <h3 class="card-title">Smart contract sandbox</h3>
+      <span class="badge badge-secondary">State machine</span>
+      <span class="badge badge-outline">Balances</span>
+      <span class="badge badge-outline">Rules</span>
+    </div>
+
+    <p class="opacity-80 mb-4">
+      This toy contract manages balances. Try valid and invalid transfers to see
+      how smart contracts update state only when predefined rules are satisfied.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1fr] gap-4">
+      <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+        <label class="form-control mb-3">
+          <span class="label-text font-semibold">From</span>
+          <select class="select select-bordered" data-contract-from>
+            <option>Alice</option>
+            <option>Bob</option>
+            <option>Carol</option>
+          </select>
+        </label>
+
+        <label class="form-control mb-3">
+          <span class="label-text font-semibold">To</span>
+          <select class="select select-bordered" data-contract-to>
+            <option>Bob</option>
+            <option>Alice</option>
+            <option>Carol</option>
+          </select>
+        </label>
+
+        <label class="form-control mb-4">
+          <span class="label-text font-semibold">Amount</span>
+          <input
+            class="input input-bordered"
+            type="number"
+            min="1"
+            value="10"
+            data-contract-amount
+          />
+        </label>
+
+        <div class="flex flex-wrap gap-2">
+          <button class="btn btn-primary" data-contract-action="transfer">
+            Execute transfer
+          </button>
+
+          <button class="btn btn-outline" data-contract-action="reset">
+            Reset state
+          </button>
+        </div>
+      </div>
+
+      <div class="grid gap-3">
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-2">Contract state</p>
+          <div data-contract-balances class="grid gap-2"></div>
+        </div>
+
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Execution result</p>
+          <p data-contract-status class="text-sm opacity-80">
+            Submit a transfer to execute the contract rules.
+          </p>
+        </div>
+
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Rule</p>
+          <p class="text-sm opacity-80">
+            A transfer succeeds only if sender and receiver are different, the
+            amount is positive, and the sender has enough balance.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initSmartContractSandbox() {
+    const root = document.querySelector("#smart-contract-sandbox");
+
+    if (!root || root.dataset.initialized === "true") {
+    return;
+    }
+
+    root.dataset.initialized = "true";
+
+    const fromInput = root.querySelector("[data-contract-from]");
+    const toInput = root.querySelector("[data-contract-to]");
+    const amountInput = root.querySelector("[data-contract-amount]");
+    const balancesOutput = root.querySelector("[data-contract-balances]");
+    const status = root.querySelector("[data-contract-status]");
+
+    const initialBalances = {
+      Alice: 100,
+      Bob: 40,
+      Carol: 20,
+    };
+
+    let balances = { ...initialBalances };
+
+    function render() {
+      balancesOutput.innerHTML = Object.entries(balances)
+        .map(
+          ([account, balance]) => `
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>${account}</span>
+                <span class="font-mono">${balance} TOK</span>
+              </div>
+              <progress class="progress progress-primary w-full" value="${balance}" max="120"></progress>
+            </div>
+          `,
+        )
+        .join("");
+    }
+
+    function transfer() {
+      const from = fromInput.value;
+      const to = toInput.value;
+      const amount = Number(amountInput.value);
+
+      if (from === to) {
+        status.textContent = "Transaction rejected: sender and receiver cannot be the same account.";
+        return;
+      }
+
+      if (!Number.isFinite(amount) || amount <= 0) {
+        status.textContent = "Transaction rejected: amount must be positive.";
+        return;
+      }
+
+      if (balances[from] < amount) {
+        status.textContent = `Transaction rejected: ${from} has only ${balances[from]} TOK.`;
+        return;
+      }
+
+      balances[from] -= amount;
+      balances[to] += amount;
+
+      status.textContent = `Transaction executed: ${from} sent ${amount} TOK to ${to}. The contract state changed deterministically.`;
+      render();
+    }
+
+    function reset() {
+      balances = { ...initialBalances };
+      status.textContent = "Contract state restored.";
+      render();
+    }
+
+    root.querySelector('[data-contract-action="transfer"]').addEventListener("click", transfer);
+    root.querySelector('[data-contract-action="reset"]').addEventListener("click", reset);
+
+    render();
+  }
+
+  initSmartContractSandbox();
+
+  if (!window.__smartContractSandboxPageLoadRegistered) {
+    window.__smartContractSandboxPageLoadRegistered = true;
+    document.addEventListener("astro:page-load", initSmartContractSandbox);
+  }
+</script>

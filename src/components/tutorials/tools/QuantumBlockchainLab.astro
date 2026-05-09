@@ -1,0 +1,198 @@
+<section id="quantum-blockchain-lab" class="network-protected card bg-base-100 shadow-md">
+  <div class="card-body">
+    <div class="flex flex-wrap gap-2 items-center mb-2">
+      <h3 class="card-title">Quantum & blockchain impact</h3>
+      <span class="badge badge-secondary">Quantum risk</span>
+      <span class="badge badge-outline">Signatures</span>
+      <span class="badge badge-outline">Post-quantum migration</span>
+    </div>
+
+    <p class="opacity-80 mb-4">
+      This lab separates what quantum computing could threaten from what it does
+      not automatically break. It is a conceptual simulator, not a cryptographic
+      risk calculator.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1fr] gap-4">
+      <div class="grid gap-3">
+        <label class="form-control">
+          <span class="label-text font-semibold">Blockchain component</span>
+          <select class="select select-bordered" data-quantum-component>
+            <option value="hashes">Hashes and block fingerprints</option>
+            <option value="signatures">User transaction signatures</option>
+            <option value="validators">Validator signatures and consensus keys</option>
+            <option value="mempool">Mempool and exposed pending transactions</option>
+            <option value="migration">Post-quantum migration strategy</option>
+          </select>
+        </label>
+
+        <label class="form-control">
+          <span class="label-text font-semibold">Scenario</span>
+          <select class="select select-bordered" data-quantum-scenario>
+            <option value="today">Today: no large fault-tolerant quantum attacker</option>
+            <option value="future">Future: powerful quantum attacker exists</option>
+            <option value="pq">Migration: post-quantum signatures deployed</option>
+          </select>
+        </label>
+
+        <button class="btn btn-primary" data-quantum-action="evaluate">
+          Evaluate impact
+        </button>
+      </div>
+
+      <div class="grid gap-3">
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Impact level</p>
+          <p class="text-3xl font-bold" data-quantum-level>—</p>
+        </div>
+
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Explanation</p>
+          <p class="text-sm opacity-80" data-quantum-explanation>
+            Choose a component and evaluate the scenario.
+          </p>
+        </div>
+
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Mitigation idea</p>
+          <p class="text-sm opacity-80" data-quantum-mitigation>
+            Post-quantum migration is about replacing vulnerable cryptographic
+            assumptions before they become practically exploitable.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initQuantumBlockchainLab() {
+    const root = document.querySelector("#quantum-blockchain-lab");
+
+    if (!root || root.dataset.initialized === "true") {
+      return;
+    }
+
+    root.dataset.initialized = "true";
+
+    const componentInput = root.querySelector("[data-quantum-component]");
+    const scenarioInput = root.querySelector("[data-quantum-scenario]");
+    const levelOutput = root.querySelector("[data-quantum-level]");
+    const explanationOutput = root.querySelector("[data-quantum-explanation]");
+    const mitigationOutput = root.querySelector("[data-quantum-mitigation]");
+
+    const matrix = {
+      hashes: {
+        today: [
+          "Low",
+          "Hash functions remain a core security primitive. Quantum algorithms can reduce effective security margins, but this is different from directly recovering private keys.",
+          "Use adequate hash sizes and maintain cryptographic agility."
+        ],
+        future: [
+          "Medium",
+          "A powerful quantum attacker may weaken the security margin of hash-based assumptions, but hashes are generally not the first catastrophic failure point compared with classical public-key signatures.",
+          "Prefer conservative hash parameters and protocols that can upgrade primitives."
+        ],
+        pq: [
+          "Low",
+          "Post-quantum migration mostly targets public-key cryptography, but robust hash choices remain important.",
+          "Keep hash choices conservative and upgradeable."
+        ],
+      },
+      signatures: {
+        today: [
+          "Medium",
+          "Current blockchains often rely on classical digital signatures. The practical risk depends on whether a capable quantum attacker exists and whether public keys are exposed.",
+          "Avoid unnecessary public-key exposure and prepare migration paths."
+        ],
+        future: [
+          "High",
+          "If a sufficiently powerful quantum attacker can break the signature scheme, exposed public keys could become dangerous for transaction authorization.",
+          "Migrate accounts and protocols to post-quantum signature schemes."
+        ],
+        pq: [
+          "Lower",
+          "Post-quantum signatures are designed to resist quantum attacks, but they may bring larger signatures, different verification costs, and migration complexity.",
+          "Use standardized or well-reviewed post-quantum schemes and test operational costs."
+        ],
+      },
+      validators: {
+        today: [
+          "Medium",
+          "Validator keys are critical because they authorize consensus messages. Their compromise can affect safety, liveness, or trust assumptions.",
+          "Use key rotation, monitoring, and migration planning."
+        ],
+        future: [
+          "High",
+          "If validator signature schemes become quantum-vulnerable, consensus infrastructure may require coordinated upgrades.",
+          "Plan protocol-level post-quantum validator signatures."
+        ],
+        pq: [
+          "Lower",
+          "Post-quantum validator signatures reduce the quantum risk but may affect bandwidth, block size, and verification costs.",
+          "Benchmark the performance impact before deployment."
+        ],
+      },
+      mempool: {
+        today: [
+          "Low",
+          "Pending transactions already reveal some information, but a large quantum attacker is not available in this simplified scenario.",
+          "Reduce unnecessary exposure and monitor wallet behavior."
+        ],
+        future: [
+          "Medium",
+          "If public keys or signature material are exposed before confirmation, timing and migration assumptions may matter more.",
+          "Use safer account designs and fast migration paths for exposed keys."
+        ],
+        pq: [
+          "Lower",
+          "Post-quantum authorization reduces the risk of signature-breaking attacks on pending transactions.",
+          "Combine PQ signatures with good transaction-handling practices."
+        ],
+      },
+      migration: {
+        today: [
+          "Medium",
+          "The problem is not only cryptography; it is coordination. Blockchains need upgrade paths, wallet support, standards, and user migration.",
+          "Design cryptographic agility before an emergency."
+        ],
+        future: [
+          "High",
+          "Late migration is risky because dormant accounts, exposed keys, and ecosystem coordination become harder under pressure.",
+          "Start with hybrid support, account migration tools, and clear governance processes."
+        ],
+        pq: [
+          "Medium",
+          "Even after PQ deployment, old accounts, bridges, smart contracts, and legacy signatures may remain exposed.",
+          "Track legacy risk and provide migration incentives."
+        ],
+      },
+    };
+
+    function evaluate() {
+      const component = componentInput.value;
+      const scenario = scenarioInput.value;
+      const [level, explanation, mitigation] = matrix[component][scenario];
+
+      levelOutput.textContent = level;
+      explanationOutput.textContent = explanation;
+      mitigationOutput.textContent = mitigation;
+    }
+
+    root
+      .querySelector('[data-quantum-action="evaluate"]')
+      .addEventListener("click", evaluate);
+
+    componentInput.addEventListener("change", evaluate);
+    scenarioInput.addEventListener("change", evaluate);
+
+    evaluate();
+  }
+
+  initQuantumBlockchainLab();
+
+  if (!window.__quantumBlockchainLabPageLoadRegistered) {
+    window.__quantumBlockchainLabPageLoadRegistered = true;
+    document.addEventListener("astro:page-load", initQuantumBlockchainLab);
+  }
+</script>
