@@ -21,5 +21,6 @@ pnpm-debug.log*
 # Astro
 .astro/
 
-# Windows / WSL alternate data stream metadata
-*Zone.Identifier
+# Windows / WSL / Dropbox metadata
+*:Zone.Identifier
+*:com.dropbox.attrs

@@ -1,11 +1,31 @@
 ---
-const { title, subtitle, date } = Astro.props;
+const { title, subtitle, date, variant = "primary" } = Astro.props;
+
+const variants = {
+  primary: {
+    dot: "bg-primary",
+    line: "bg-primary",
+    badge: "badge-outline",
+  },
+  warning: {
+    dot: "bg-warning",
+    line: "bg-warning",
+    badge: "badge-warning",
+  },
+};
+
+const color = variants[variant] ?? variants.primary;
 ---
 
 <div class="flex">
   <div class="education__time">
-    <span class="w-4 h-4 bg-primary block rounded-full mt-1"></span>
-    <span class="education__line bg-primary block h-full w-[2px] translate-x-[7px]"></span>
+    <span class:list={["w-4 h-4 block rounded-full mt-1", color.dot]}></span>
+    <span
+      class:list={[
+        "education__line block h-full w-[2px] translate-x-[7px]",
+        color.line,
+      ]}
+    ></span>
   </div>
 
   <div class="experience__data bd-grid px-5 w-full">
@@ -15,11 +35,13 @@ const { title, subtitle, date } = Astro.props;
         <span class="font-light text-sm">{subtitle}</span>
       </div>
 
-      {date && (
-        <span class="badge badge-outline shrink-0 md:ml-4">
-          {date}
-        </span>
-      )}
+      {
+        date && (
+          <span class:list={["badge shrink-0 md:ml-4", color.badge]}>
+            {date}
+          </span>
+        )
+      }
     </div>
 
     <p class="my-2 text-justify">

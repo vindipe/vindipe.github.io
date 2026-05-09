@@ -4,61 +4,134 @@ import HorizontalCard from "../components/HorizontalCard.astro";
 ---
 
 <BaseLayout
-  title="Projects | Vincenzo Di Perna"
-  description="Research, engineering, data, and blockchain systems projects by Vincenzo Di Perna."
+  title="Projects and Tools | Vincenzo Di Perna"
+  description="Research artifacts, software tools, experimental pipelines, and work-in-progress projects by Vincenzo Di Perna."
   sideBarActiveItemID="projects"
 >
   <section class="mb-10">
-    <h1 class="text-4xl font-bold mb-4">Projects</h1>
+    <h1 class="text-4xl font-bold mb-4">Projects and Tools</h1>
 
     <p class="text-lg leading-relaxed opacity-90">
-      A selection of research artifacts, datasets, analysis pipelines, and
-      engineering work around blockchain systems, distributed infrastructures,
-      digital assets, benchmarking, and reproducible experimentation.
+      A selection of research artifacts, software tools, datasets, analysis
+      pipelines, and exploratory projects around blockchain systems, distributed
+      infrastructures, digital assets, benchmarking, reproducible experimentation,
+      real-world assets, and fairer value distribution.
     </p>
   </section>
 
   <section class="mb-12">
-    <h2 class="text-3xl w-full font-bold mb-2">Research artifacts</h2>
+    <div class="flex items-center gap-3 mb-2">
+      <h2 class="text-3xl w-full font-bold">Countering Wealth Concentration</h2>
+      <span class="badge badge-warning whitespace-nowrap">Work in progress</span>
+    </div>
 
     <p class="mb-5 opacity-80">
-      Reproducible software and experimental assets developed to support blockchain
-      systems research and empirical evaluation.
+      Exploratory work on how blockchain systems, digital assets, incentive
+      mechanisms, and decentralized infrastructures can be designed or evaluated
+      to reduce excessive concentration of value, ownership, governance power,
+      and access to economic opportunities.
     </p>
 
-    <div class="space-y-4">
-      <HorizontalCard
-        title="Lilith — Topology-Aware Blockchain Benchmarking Framework"
-        img="/post_img.webp"
-        desc="A reproducible benchmarking toolchain integrating network emulation and workload generation to study blockchain performance, energy usage, latency, and variability under programmable network conditions."
-        url="https://doi.org/10.5281/zenodo.11409100"
-        badge="Framework"
-      />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="card-title">Wealth concentration analysis toolkit</h3>
+            <span class="badge badge-warning">In progress</span>
+          </div>
 
-      <HorizontalCard
-        title="Blockchain Repeatability Dataset"
-        img="/post_img.webp"
-        desc="A large-scale experimental dataset designed to analyze repeatability and performance predictability across blockchain platforms, workloads, and network topologies."
-        url="https://doi.org/10.5281/zenodo.15545963"
-        badge="Dataset"
-      />
+          <p>
+            A planned set of data-analysis workflows for studying concentration
+            patterns in token ownership, protocol governance, and digital-asset
+            ecosystems.
+          </p>
+
+          <div class="card-actions justify-end mt-4">
+            <span class="badge badge-outline">Token distribution</span>
+            <span class="badge badge-outline">Governance</span>
+            <span class="badge badge-outline">Analytics</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="card-title">Fair value distribution models</h3>
+            <span class="badge badge-warning">In progress</span>
+          </div>
+
+          <p>
+            Conceptual and experimental work on mechanisms that could support
+            broader participation, fairer access, and less extractive forms of
+            digital value creation.
+          </p>
+
+          <div class="card-actions justify-end mt-4">
+            <span class="badge badge-outline">Mechanism design</span>
+            <span class="badge badge-outline">Digital assets</span>
+            <span class="badge badge-outline">Economic fairness</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="mb-12">
-    <h2 class="text-3xl w-full font-bold mb-2">Data & analysis pipelines</h2>
+    <div class="flex items-center gap-3 mb-2">
+      <h2 class="text-3xl w-full font-bold">Real-World Assets — RWA</h2>
+      <span class="badge badge-warning whitespace-nowrap">Work in progress</span>
+    </div>
 
     <p class="mb-5 opacity-80">
-      Workflows focused on structured data analysis, experimental processing,
-      protocol evaluation, and blockchain system metrics.
+      Early-stage work on the representation, evaluation, and possible
+      tokenization of real-world assets within blockchain-based infrastructures,
+      with attention to ownership, verification, governance, market structure,
+      and practical deployment constraints.
     </p>
 
-    <HorizontalCard
-      title="Blockchain Performance & Energy Analysis Pipelines"
-      img="/post_img.webp"
-      desc="Experimental analysis workflows for processing benchmark outputs, computing throughput, latency, energy, variability, repeatability, and efficiency metrics."
-      url="#"
-      badge="Data pipeline"
-    />
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="card-title">RWA system design notes</h3>
+            <span class="badge badge-warning">In progress</span>
+          </div>
+
+          <p>
+            A developing research and engineering track focused on how physical
+            or off-chain assets can be represented, verified, transferred, and
+            governed through digital-asset infrastructures.
+          </p>
+
+          <div class="card-actions justify-end mt-4">
+            <span class="badge badge-outline">Asset tokenization</span>
+            <span class="badge badge-outline">Verification</span>
+            <span class="badge badge-outline">Governance</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="card-title">RWA benchmarking perspective</h3>
+            <span class="badge badge-warning">In progress</span>
+          </div>
+
+          <p>
+            A planned evaluation angle connecting RWA platforms with system
+            performance, operational assumptions, transaction costs, settlement
+            behavior, and infrastructure reliability.
+          </p>
+
+          <div class="card-actions justify-end mt-4">
+            <span class="badge badge-outline">Benchmarking</span>
+            <span class="badge badge-outline">Settlement</span>
+            <span class="badge badge-outline">Infrastructure</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </BaseLayout>

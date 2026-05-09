@@ -1,0 +1,172 @@
+<section id="consensus-game" class="network-protected card bg-base-100 shadow-md">
+  <div class="card-body">
+    <div class="flex flex-wrap gap-2 items-center mb-2">
+      <h3 class="card-title">Consensus game</h3>
+      <span class="badge badge-secondary">Validators</span>
+      <span class="badge badge-outline">Quorum</span>
+      <span class="badge badge-outline">Finality</span>
+    </div>
+
+    <p class="opacity-80 mb-4">
+      Toggle validators online or faulty, propose a block, and see whether the
+      network reaches enough votes to finalize it.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
+      <div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4" data-validator-grid></div>
+
+        <div class="flex flex-wrap gap-2">
+          <button class="btn btn-primary" data-consensus-action="propose">
+            Propose block
+          </button>
+
+          <button class="btn btn-outline" data-consensus-action="random-fault">
+            Random fault
+          </button>
+
+          <button class="btn btn-outline" data-consensus-action="reset">
+            Reset validators
+          </button>
+        </div>
+      </div>
+
+      <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+        <p class="font-semibold mb-2">Consensus status</p>
+
+        <div class="stats stats-vertical w-full bg-base-100 mb-4">
+          <div class="stat">
+            <div class="stat-title">Online honest votes</div>
+            <div class="stat-value text-2xl" data-votes>0</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-title">Required quorum</div>
+            <div class="stat-value text-2xl" data-quorum>5</div>
+          </div>
+        </div>
+
+        <p data-consensus-status class="text-sm opacity-80">
+          Toggle validators and propose a block.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initConsensusGame() {
+    const root = document.querySelector("#consensus-game");
+
+    if (!root || root.dataset.initialized === "true") {
+    return;
+    }
+
+    root.dataset.initialized = "true";
+
+    const grid = root.querySelector("[data-validator-grid]");
+    const votesOutput = root.querySelector("[data-votes]");
+    const quorumOutput = root.querySelector("[data-quorum]");
+    const status = root.querySelector("[data-consensus-status]");
+
+    let validators = [
+      { id: "V1", state: "honest" },
+      { id: "V2", state: "honest" },
+      { id: "V3", state: "honest" },
+      { id: "V4", state: "honest" },
+      { id: "V5", state: "honest" },
+      { id: "V6", state: "honest" },
+      { id: "V7", state: "honest" },
+    ];
+
+    const quorum = 5;
+
+    function stateBadge(state) {
+      if (state === "honest") return "badge-success";
+      if (state === "offline") return "badge-neutral";
+      return "badge-error";
+    }
+
+    function countVotes() {
+      return validators.filter((validator) => validator.state === "honest").length;
+    }
+
+    function render() {
+      grid.innerHTML = validators
+        .map(
+          (validator) => `
+            <button
+              type="button"
+              class="card bg-base-200 border border-base-300 hover:shadow-md"
+              data-validator="${validator.id}"
+            >
+              <div class="card-body p-4">
+                <p class="font-bold">${validator.id}</p>
+                <span class="badge ${stateBadge(validator.state)}">${validator.state}</span>
+              </div>
+            </button>
+          `,
+        )
+        .join("");
+
+      votesOutput.textContent = countVotes();
+      quorumOutput.textContent = quorum;
+
+      grid.querySelectorAll("[data-validator]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const id = button.getAttribute("data-validator");
+          const validator = validators.find((item) => item.id === id);
+
+          if (validator.state === "honest") {
+            validator.state = "offline";
+          } else if (validator.state === "offline") {
+            validator.state = "faulty";
+          } else {
+            validator.state = "honest";
+          }
+
+          status.textContent = `${id} changed state. Honest validators vote for the block; offline or faulty validators do not.`;
+          render();
+        });
+      });
+    }
+
+    function proposeBlock() {
+      const votes = countVotes();
+
+      if (votes >= quorum) {
+        status.textContent = `Block finalized: ${votes}/${validators.length} validators voted honestly, reaching the quorum of ${quorum}.`;
+      } else {
+        status.textContent = `Block not finalized: only ${votes}/${validators.length} honest votes. The network did not reach quorum.`;
+      }
+
+      render();
+    }
+
+    function randomFault() {
+      const index = Math.floor(Math.random() * validators.length);
+      validators[index].state = validators[index].state === "faulty" ? "offline" : "faulty";
+      status.textContent = `${validators[index].id} experienced a random failure.`;
+      render();
+    }
+
+    function reset() {
+      validators = validators.map((validator) => ({ ...validator, state: "honest" }));
+      status.textContent = "All validators are honest again.";
+      render();
+    }
+
+    root.querySelector('[data-consensus-action="propose"]').addEventListener("click", proposeBlock);
+    root.querySelector('[data-consensus-action="random-fault"]').addEventListener("click", randomFault);
+    root.querySelector('[data-consensus-action="reset"]').addEventListener("click", reset);
+
+    render();
+  }
+
+  initConsensusGame();
+
+  if (!window.__consensusGamePageLoadRegistered) {
+    window.__consensusGamePageLoadRegistered = true;
+    document.addEventListener("astro:page-load", initConsensusGame);
+  }
+</script>

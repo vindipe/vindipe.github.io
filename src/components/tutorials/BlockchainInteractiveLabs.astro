@@ -1,0 +1,262 @@
+---
+import LabGuide from "./LabGuide.astro";
+
+import CryptoPlayground from "./tools/CryptoPlayground.astro";
+import P2PNetworkPlayground from "./tools/P2PNetworkPlayground.astro";
+import ConsensusGame from "./tools/ConsensusGame.astro";
+import SmartContractSandbox from "./tools/SmartContractSandbox.astro";
+import PublicPermissionedLab from "./tools/PublicPermissionedLab.astro";
+import TokenOwnershipLab from "./tools/TokenOwnershipLab.astro";
+import WalletKeysLab from "./tools/WalletKeysLab.astro";
+import QuantumBlockchainLab from "./tools/QuantumBlockchainLab.astro";
+import FeesScalabilityLab from "./tools/FeesScalabilityLab.astro";
+
+const labs = [
+  {
+    id: "crypto",
+    title: "Cryptography playground",
+    status: "Playable",
+    desc: "Understand hashing, tamper detection, and why blocks can be linked through cryptographic fingerprints.",
+    tags: ["Hashing", "Tamper detection", "Block links"],
+  },
+  {
+    id: "wallets",
+    title: "Wallets, keys & ownership",
+    status: "Playable",
+    desc: "See how private keys, public keys, addresses, and signatures connect users to blockchain assets.",
+    tags: ["Wallets", "Keys", "Signatures"],
+  },
+  {
+    id: "p2p",
+    title: "P2P network simulator",
+    status: "Playable",
+    desc: "Move nodes, remove peers, split the network, and broadcast a transaction across a distributed network.",
+    tags: ["Nodes", "Links", "Propagation"],
+  },
+  {
+    id: "consensus",
+    title: "Consensus game",
+    status: "Playable",
+    desc: "Simulate validators voting on blocks and see why failures, delays, and quorum thresholds matter.",
+    tags: ["Validators", "Votes", "Finality"],
+  },
+  {
+    id: "smart-contract",
+    title: "Smart contract sandbox",
+    status: "Playable",
+    desc: "Interact with a tiny contract state machine to understand balances, rules, and deterministic execution.",
+    tags: ["State", "Rules", "Execution"],
+  },
+  {
+    id: "permissioned",
+    title: "Public vs permissioned networks",
+    status: "Playable",
+    desc: "Compare open and controlled blockchain networks by changing who can join, validate, read, and govern.",
+    tags: ["Access", "Governance", "Validation"],
+  },
+  {
+    id: "tokens",
+    title: "Tokens, incentives & ownership",
+    status: "Playable",
+    desc: "Explore token distribution, rewards, concentration, and how incentives can affect ownership structures.",
+    tags: ["Tokenomics", "Incentives", "Concentration"],
+  },
+  {
+    id: "fees",
+    title: "Fees, blockspace & scalability",
+    status: "Playable",
+    desc: "Experiment with transaction demand, block capacity, fees, congestion, and throughput limits.",
+    tags: ["Fees", "Blockspace", "Scalability"],
+  },
+  {
+    id: "quantum",
+    title: "Quantum & blockchain impact",
+    status: "Playable",
+    desc: "Understand what quantum computing could affect, what it would not magically break, and why post-quantum migration matters.",
+    tags: ["Quantum", "Signatures", "PQC"],
+  },
+];
+---
+
+<section id="blockchain-interactive-labs" class="mb-12">
+  <h2 class="text-3xl font-bold mb-2">Blockchain fundamentals — interactive labs</h2>
+
+  <p class="mb-5 opacity-80">
+    Select a topic to open its guided interactive tool below. Each lab explains
+    where the concept appears inside a blockchain, how to use the simulator, what
+    to observe, and what to explore next.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
+    {
+      labs.map((lab, index) => (
+        <button
+          type="button"
+          class:list={[
+            "network-protected card bg-base-100 shadow-md text-left transition hover:shadow-2xl hover:scale-[101%]",
+            index === 0 ? "ring-2 ring-primary" : "",
+          ]}
+          data-lab-card={lab.id}
+          aria-expanded={index === 0 ? "true" : "false"}
+        >
+          <div class="card-body">
+            <div class="flex flex-wrap gap-2 items-center">
+              <h3 class="card-title">{lab.title}</h3>
+              <span class="badge badge-secondary">{lab.status}</span>
+            </div>
+
+            <p>{lab.desc}</p>
+
+            <div class="card-actions justify-end mt-2">
+              {lab.tags.map((tag) => (
+                <span class="badge badge-outline">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="rounded-2xl border border-base-300 bg-base-200 p-3 md:p-5">
+    <div data-lab-panel="crypto">
+      <LabGuide
+        title="Cryptography playground"
+        context="Blockchains use cryptographic hashes to fingerprint data and digital signatures to prove that an action was authorized by the holder of a private key."
+        howToPlay="Edit the transaction text, compute its hash, mine a toy block, and then tamper with the data."
+        observe="A tiny input change produces a completely different hash. This is why tampering becomes visible when blocks and transactions are fingerprinted."
+        nextStep="After hashes, open Wallets, keys & ownership to understand how users authorize transactions."
+      />
+      <CryptoPlayground />
+    </div>
+
+    <div data-lab-panel="wallets" hidden>
+      <LabGuide
+        title="Wallets, keys & ownership"
+        context="A wallet does not literally store coins. It manages keys. The private key authorizes actions, the public key helps verify signatures, and the address identifies an account or destination."
+        howToPlay="Generate a toy identity, sign a transaction, then try to verify it or tamper with the message."
+        observe="The same signature only works for the original message and the matching public identity. If the message changes, verification fails."
+        nextStep="After signatures, open Quantum & blockchain impact to see why future quantum computers matter for some signature schemes."
+      />
+      <WalletKeysLab />
+    </div>
+
+    <div data-lab-panel="p2p" hidden>
+      <LabGuide
+        title="P2P network simulator"
+        context="A blockchain network is a peer-to-peer system: transactions and blocks must propagate across many nodes before the network can converge on a shared view."
+        howToPlay="Select a node, drag nodes around, remove a node, create a partition, and broadcast a transaction."
+        observe="Connectivity affects propagation. If nodes are offline or the network splits, some peers may not receive the transaction."
+        nextStep="After propagation, open Consensus game to see how validators agree on blocks."
+      />
+      <P2PNetworkPlayground />
+    </div>
+
+    <div data-lab-panel="consensus" hidden>
+      <LabGuide
+        title="Consensus game"
+        context="Consensus protocols let distributed validators agree on which block becomes part of the chain, even when some validators are offline, delayed, or faulty."
+        howToPlay="Toggle validators between honest, offline, and faulty states, then propose a block."
+        observe="Finality requires enough valid votes. If too many validators fail, the block cannot be finalized."
+        nextStep="After consensus, open Public vs permissioned networks to compare different validator-access models."
+      />
+      <ConsensusGame />
+    </div>
+
+    <div data-lab-panel="smart-contract" hidden>
+      <LabGuide
+        title="Smart contract sandbox"
+        context="A smart contract is code that updates blockchain state according to predefined rules. Every node must be able to reproduce the same result."
+        howToPlay="Choose sender, receiver, and amount. Execute valid and invalid transfers."
+        observe="The contract changes state only when its rules are satisfied. Invalid transactions are rejected."
+        nextStep="After contract execution, open Fees, blockspace & scalability to understand why execution capacity is limited."
+      />
+      <SmartContractSandbox />
+    </div>
+
+    <div data-lab-panel="permissioned" hidden>
+      <LabGuide
+        title="Public vs permissioned networks"
+        context="Not all blockchains are open in the same way. Public systems prioritize open participation, while permissioned systems restrict who can join, validate, or read."
+        howToPlay="Switch between public and permissioned modes, then test joining, validating, and reading."
+        observe="The trust model changes depending on who controls access and validation."
+        nextStep="After access models, open Tokens, incentives & ownership to see how economic power can concentrate."
+      />
+      <PublicPermissionedLab />
+    </div>
+
+    <div data-lab-panel="tokens" hidden>
+      <LabGuide
+        title="Tokens, incentives & ownership"
+        context="Tokens can represent value, governance power, access rights, rewards, or ownership claims. Their distribution affects decentralization and economic power."
+        howToPlay="Trigger an equal airdrop, whale accumulation, or staking rewards."
+        observe="Some mechanisms preserve concentration, while others can spread or concentrate ownership."
+        nextStep="After ownership, open Fees, blockspace & scalability to see how demand and fees affect users."
+      />
+      <TokenOwnershipLab />
+    </div>
+
+    <div data-lab-panel="fees" hidden>
+      <LabGuide
+        title="Fees, blockspace & scalability"
+        context="Blockchains have limited capacity. When transaction demand exceeds available blockspace, users compete through fees and some transactions are delayed."
+        howToPlay="Change transaction demand, block capacity, and average fee willingness."
+        observe="Congestion increases when demand exceeds capacity. Higher fee pressure can prioritize some transactions while pricing out others."
+        nextStep="After fees, explore smart contracts or consensus again to connect execution, capacity, and finality."
+      />
+      <FeesScalabilityLab />
+    </div>
+
+    <div data-lab-panel="quantum" hidden>
+      <LabGuide
+        title="Quantum & blockchain impact"
+        context="Quantum computing would not automatically destroy every part of a blockchain. The main concern is that sufficiently powerful quantum computers could threaten some classical digital signature schemes, while hashes are affected differently."
+        howToPlay="Switch between blockchain components and attacker scenarios to see which parts are exposed and which mitigations are possible."
+        observe="Signatures, exposed public keys, validator keys, and migration strategy matter more than vague claims that quantum computers break all blockchain security."
+        nextStep="After this, revisit Wallets, keys & ownership and Cryptography playground to connect keys, signatures, hashes, and post-quantum migration."
+      />
+      <QuantumBlockchainLab />
+    </div>
+  </div>
+</section>
+
+<script>
+  function initBlockchainInteractiveLabs() {
+    const root = document.querySelector("#blockchain-interactive-labs");
+
+    if (!root || root.dataset.initialized === "true") {
+      return;
+    }
+
+    root.dataset.initialized = "true";
+
+    const cards = root.querySelectorAll("[data-lab-card]");
+    const panels = root.querySelectorAll("[data-lab-panel]");
+
+    function activateLab(labId) {
+      cards.forEach((card) => {
+        const isActive = card.getAttribute("data-lab-card") === labId;
+        card.classList.toggle("ring-2", isActive);
+        card.classList.toggle("ring-primary", isActive);
+        card.setAttribute("aria-expanded", isActive ? "true" : "false");
+      });
+
+      panels.forEach((panel) => {
+        panel.hidden = panel.getAttribute("data-lab-panel") !== labId;
+      });
+    }
+
+    cards.forEach((card) => {
+      card.addEventListener("click", () => {
+        activateLab(card.getAttribute("data-lab-card"));
+      });
+    });
+  }
+
+  initBlockchainInteractiveLabs();
+
+  if (!window.__blockchainInteractiveLabsPageLoadRegistered) {
+    window.__blockchainInteractiveLabsPageLoadRegistered = true;
+    document.addEventListener("astro:page-load", initBlockchainInteractiveLabs);
+  }
+</script>

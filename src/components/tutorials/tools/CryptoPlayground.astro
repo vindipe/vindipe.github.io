@@ -1,0 +1,151 @@
+<section id="crypto-playground" class="network-protected card bg-base-100 shadow-md">
+  <div class="card-body">
+    <div class="flex flex-wrap gap-2 items-center mb-2">
+      <h3 class="card-title">Cryptography playground</h3>
+      <span class="badge badge-secondary">Hashing</span>
+      <span class="badge badge-outline">Tamper detection</span>
+      <span class="badge badge-outline">Block links</span>
+    </div>
+
+    <p class="opacity-80 mb-4">
+      Change the transaction data and observe how the hash changes. Then mine a
+      tiny toy block and tamper with its content to see why linked hashes make
+      modifications visible.
+    </p>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div class="grid gap-3">
+        <label class="form-control">
+          <span class="label-text font-semibold">Transaction data</span>
+          <textarea
+            data-crypto-input
+            class="textarea textarea-bordered min-h-28"
+          >Alice sends 5 tokens to Bob</textarea>
+        </label>
+
+        <button class="btn btn-primary" data-crypto-action="hash">
+          Compute hash
+        </button>
+
+        <button class="btn btn-outline" data-crypto-action="mine">
+          Mine toy block
+        </button>
+
+        <button class="btn btn-outline" data-crypto-action="tamper">
+          Tamper with data
+        </button>
+      </div>
+
+      <div class="grid gap-3">
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">SHA-256 hash</p>
+          <p data-crypto-hash class="font-mono text-xs break-all opacity-80">
+            Click “Compute hash”.
+          </p>
+        </div>
+
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Toy block</p>
+          <p class="text-sm opacity-80">
+            Previous hash:
+            <span data-previous-hash class="font-mono break-all">
+              0000previousblock
+            </span>
+          </p>
+          <p class="text-sm opacity-80">
+            Nonce:
+            <span data-nonce class="font-mono">—</span>
+          </p>
+          <p class="text-sm opacity-80">
+            Block hash:
+            <span data-block-hash class="font-mono break-all">—</span>
+          </p>
+        </div>
+
+        <div class="rounded-xl bg-base-200 border border-base-300 p-4">
+          <p class="font-semibold mb-1">Lesson</p>
+          <p data-crypto-status class="text-sm opacity-80">
+            Hashes are deterministic fingerprints: the same input gives the same
+            output, but a tiny change creates a very different hash.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initCryptoPlayground() {
+    const root = document.querySelector("#crypto-playground");
+
+    if (!root || root.dataset.initialized === "true") {
+    return;
+    }
+
+    root.dataset.initialized = "true";
+
+    const input = root.querySelector("[data-crypto-input]");
+    const hashOutput = root.querySelector("[data-crypto-hash]");
+    const previousHash = root.querySelector("[data-previous-hash]");
+    const nonceOutput = root.querySelector("[data-nonce]");
+    const blockHashOutput = root.querySelector("[data-block-hash]");
+    const status = root.querySelector("[data-crypto-status]");
+
+    async function sha256(text) {
+      const encoded = new TextEncoder().encode(text);
+      const digest = await crypto.subtle.digest("SHA-256", encoded);
+      return Array.from(new Uint8Array(digest))
+        .map((byte) => byte.toString(16).padStart(2, "0"))
+        .join("");
+    }
+
+    async function computeHash() {
+      const hash = await sha256(input.value);
+      hashOutput.textContent = hash;
+      status.textContent =
+        "The transaction now has a cryptographic fingerprint. Change even one character and compute it again.";
+    }
+
+    async function mineToyBlock() {
+      status.textContent = "Mining a tiny toy block...";
+      const data = input.value;
+      const prev = previousHash.textContent.trim();
+
+      for (let nonce = 0; nonce < 200000; nonce += 1) {
+        const candidate = await sha256(`${prev}|${data}|${nonce}`);
+
+        if (candidate.startsWith("000")) {
+          nonceOutput.textContent = nonce;
+          blockHashOutput.textContent = candidate;
+          status.textContent =
+            "Toy block mined. This is not real mining difficulty, but it shows the idea of searching for a valid hash.";
+          return;
+        }
+      }
+
+      status.textContent =
+        "No valid toy block found in the search limit. Try again or change the data.";
+    }
+
+    async function tamperData() {
+      input.value = `${input.value} [tampered]`;
+      const newHash = await sha256(input.value);
+      hashOutput.textContent = newHash;
+      status.textContent =
+        "The data was modified. The hash changed, so the tampering becomes visible.";
+    }
+
+    root.querySelector('[data-crypto-action="hash"]').addEventListener("click", computeHash);
+    root.querySelector('[data-crypto-action="mine"]').addEventListener("click", mineToyBlock);
+    root.querySelector('[data-crypto-action="tamper"]').addEventListener("click", tamperData);
+
+    computeHash();
+  }
+
+  initCryptoPlayground();
+
+  if (!window.__cryptoPlaygroundPageLoadRegistered) {
+    window.__cryptoPlaygroundPageLoadRegistered = true;
+    document.addEventListener("astro:page-load", initCryptoPlayground);
+  }
+</script>

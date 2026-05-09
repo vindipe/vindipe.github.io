@@ -1,151 +1,117 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import BlockchainInteractiveLabs from "../components/tutorials/BlockchainInteractiveLabs.astro";
 ---
 
 <BaseLayout
-  title="Tutorials | Vincenzo Di Perna"
-  description="Short tutorials and technical notes on blockchain systems, benchmarking, digital assets, and reproducible experimentation."
+  title="Blockchain 101 | Fundamentals & Interactive Learning | Vincenzo Di Perna"
+  description="Interactive blockchain fundamentals: cryptography, peer-to-peer networks, consensus, smart contracts, public and permissioned blockchains, and Pills of Blockchain videos."
   sideBarActiveItemID="tutorials"
 >
   <section class="mb-10">
-    <h1 class="text-4xl font-bold mb-4">Tutorials</h1>
+    <div class="flex flex-wrap gap-2 mb-3">
+      <span class="badge badge-primary">Blockchain 101</span>
+      <span class="badge badge-outline">Fundamentals</span>
+      <span class="badge badge-outline">Interactive learning</span>
+    </div>
+
+    <h1 class="text-4xl font-bold mb-4">Blockchain 101</h1>
 
     <p class="text-lg leading-relaxed opacity-90">
-      Short technical tutorials and notes on blockchain systems, benchmarking,
-      digital assets, distributed infrastructures, and reproducible experimentation.
-      This section is designed to explain complex topics in a practical and accessible way.
+      A learning area for understanding blockchain systems through interactive
+      explanations, small simulations, visual examples, and practical mental
+      models. The goal is to make cryptography, peer-to-peer networks,
+      consensus, smart contracts, and blockchain infrastructure easier to
+      explore by playing with them.
     </p>
   </section>
 
+  <BlockchainInteractiveLabs />
+
   <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-5">Blockchain fundamentals</h2>
+    <div class="flex flex-wrap gap-2 items-center mb-2">
+      <h2 class="text-3xl font-bold">Pills of Blockchain</h2>
+      <span class="badge badge-secondary">Video series</span>
+      <span class="badge badge-outline">Italian audio</span>
+      <span class="badge badge-outline">English subtitles</span>
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <article class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">What is a blockchain?</h3>
-            <span class="badge badge-outline">Beginner</span>
-          </div>
-          <p>
-            A short explanation of blocks, transactions, validation, consensus,
-            and why distributed ledgers differ from traditional databases.
-          </p>
-        </div>
-      </article>
+    <p class="mb-5 opacity-80">
+      Pills of Blockchain is a short-form educational video series originally
+      created in Italian to explain blockchain concepts in a simple and
+      accessible way. The videos are intended for Italian-speaking audiences and
+      can be presented with English subtitles where available.
+    </p>
 
-      <article class="card bg-base-100 shadow-md">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
+      <div class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">Public vs permissioned blockchains</h3>
-            <span class="badge badge-outline">Beginner</span>
-          </div>
-          <p>
-            A practical comparison between open public networks and controlled
-            permissioned infrastructures, with examples of where each model fits.
-          </p>
-        </div>
-      </article>
+          <h3 class="card-title">Watch the series on YouTube</h3>
 
-      <article class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">Consensus in simple terms</h3>
-            <span class="badge badge-outline">Intermediate</span>
-          </div>
           <p>
-            A compact guide to how distributed participants agree on the state of
-            a ledger, and why consensus affects latency, throughput, and security.
+            The recommended setup is to embed selected videos or playlists from
+            YouTube instead of uploading the video files directly into this
+            GitHub Pages repository.
           </p>
-        </div>
-      </article>
 
-      <article class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">Transactions, finality, and latency</h3>
-            <span class="badge badge-outline">Intermediate</span>
+          <div class="card-actions justify-end mt-4">
+            <a
+              class="btn btn-primary"
+              href="https://www.youtube.com/@pillsofblockchain/featured"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open Pills of Blockchain
+            </a>
           </div>
-          <p>
-            A short tutorial on the difference between transaction submission,
-            confirmation, finality, and the latency metrics used in blockchain evaluation.
-          </p>
         </div>
-      </article>
+      </div>
+
+      <div class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <h3 class="card-title">Direct embed plan</h3>
+
+          <p>
+            Once the final video IDs or playlist ID are selected, this section
+            can show embedded videos directly on the page, with English
+            subtitles enabled by default when subtitles are available.
+          </p>
+
+          <div class="card-actions justify-end mt-4">
+            <span class="badge badge-outline">YouTube embed</span>
+            <span class="badge badge-outline">Subtitles</span>
+            <span class="badge badge-outline">Educational content</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-5">Benchmarking & evaluation</h2>
+    <h2 class="text-3xl font-bold mb-2">Suggest a topic</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <article class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">How to benchmark a blockchain</h3>
-            <span class="badge badge-secondary">Benchmarking</span>
-          </div>
-          <p>
-            A practical overview of workloads, clients, validators, throughput,
-            latency, repeated runs, and why experimental setup matters.
-          </p>
-        </div>
-      </article>
+    <p class="mb-5 opacity-80">
+      This learning area can grow around new blockchain, distributed systems,
+      digital assets, Web3, RWA, DeFi, CBDCs, quantum security, benchmarking,
+      governance, scalability, and real-world deployment topics.
+    </p>
 
-      <article class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">Why network topology matters</h3>
-            <span class="badge badge-secondary">Systems</span>
-          </div>
-          <p>
-            A short explanation of how latency, bandwidth, topology, and network
-            emulation can influence blockchain performance and predictability.
-          </p>
-        </div>
-      </article>
-
-      <article class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">Repeatability vs predictability</h3>
-            <span class="badge badge-secondary">Methodology</span>
-          </div>
-          <p>
-            A note on the difference between obtaining similar results under the
-            same setup and predicting behavior across controlled conditions.
-          </p>
-        </div>
-      </article>
-
-      <article class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">Energy efficiency in blockchain experiments</h3>
-            <span class="badge badge-secondary">Energy</span>
-          </div>
-          <p>
-            A brief introduction to measuring and interpreting energy usage in
-            blockchain experiments, including normalization and caveats.
-          </p>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="mb-12">
     <div class="card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title">More tutorials coming soon</h2>
+        <h3 class="card-title">What should be explained next?</h3>
+
         <p>
-          I will progressively expand this section with concise tutorials, practical
-          examples, diagrams, and short explainers connected to blockchain systems,
-          digital assets, benchmarking, and research engineering.
+          Suggest a concept, a practical problem, a tool, or a real-world use
+          case that would be useful to explain through a short visual lesson or
+          an interactive experiment.
         </p>
 
         <div class="card-actions justify-end mt-4">
-          <a class="btn btn-primary" href="/contact">
-            Suggest a topic
+          <a
+            class="btn btn-primary"
+            href="mailto:vincenzopaolo.diperna@outlook.com?subject=Suggest%20a%20topic%20for%20Blockchain%20101&body=Hi%20Vincenzo%2C%0A%0AI%20would%20like%20to%20suggest%20this%20topic%20for%20Blockchain%20101%3A%0A%0ATopic%3A%20%0AWhy%20it%20would%20be%20useful%3A%20%0A%0AThanks%21"
+          >
+            Suggest a topic by email
           </a>
         </div>
       </div>
