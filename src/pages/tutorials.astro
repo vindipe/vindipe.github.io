@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import BlockchainInteractiveLabs from "../components/tutorials/BlockchainInteractiveLabs.astro";
+import PillsOfBlockchainInstagram from "../components/tutorials/PillsOfBlockchainInstagram.astro";
 ---
 
 <BaseLayout
@@ -28,64 +29,7 @@ import BlockchainInteractiveLabs from "../components/tutorials/BlockchainInterac
 
   <BlockchainInteractiveLabs />
 
-  <section class="mb-12">
-    <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h2 class="text-3xl font-bold">Pills of Blockchain</h2>
-      <span class="badge badge-secondary">Video series</span>
-      <span class="badge badge-outline">Italian audio</span>
-      <span class="badge badge-outline">English subtitles</span>
-    </div>
-
-    <p class="mb-5 opacity-80">
-      Pills of Blockchain is a short-form educational video series originally
-      created in Italian to explain blockchain concepts in a simple and
-      accessible way. The videos are intended for Italian-speaking audiences and
-      can be presented with English subtitles where available.
-    </p>
-
-    <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <h3 class="card-title">Watch the series on YouTube</h3>
-
-          <p>
-            The recommended setup is to embed selected videos or playlists from
-            YouTube instead of uploading the video files directly into this
-            GitHub Pages repository.
-          </p>
-
-          <div class="card-actions justify-end mt-4">
-            <a
-              class="btn btn-primary"
-              href="https://www.youtube.com/@pillsofblockchain/featured"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open Pills of Blockchain
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <h3 class="card-title">Direct embed plan</h3>
-
-          <p>
-            Once the final video IDs or playlist ID are selected, this section
-            can show embedded videos directly on the page, with English
-            subtitles enabled by default when subtitles are available.
-          </p>
-
-          <div class="card-actions justify-end mt-4">
-            <span class="badge badge-outline">YouTube embed</span>
-            <span class="badge badge-outline">Subtitles</span>
-            <span class="badge badge-outline">Educational content</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <PillsOfBlockchainInstagram />
 
   <section class="mb-12">
     <h2 class="text-3xl font-bold mb-2">Suggest a topic</h2>
