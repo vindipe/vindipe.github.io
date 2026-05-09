@@ -1,0 +1,428 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const taxonomyPillars = [
+  {
+    title: "Activities",
+    code: "A",
+    desc: "Actions or processes performed in the DeFi ecosystem, such as lending, payment processing, staking, insuring, exchanges, tokenisation, and market making.",
+  },
+  {
+    title: "Actors",
+    code: "B",
+    desc: "Protocols, platforms, intermediaries, or service providers operating within DeFi, such as lenders, exchanges, bridges, oracles, yield farms, stablecoin issuers, and DeFi hubs.",
+  },
+  {
+    title: "Assets",
+    code: "C",
+    desc: "Financial instruments or products that have value and can be traded, including cryptoassets, stablecoins, options, futures, tokenised portfolios, RWAs, and synthetic assets.",
+  },
+  {
+    title: "Architecture",
+    code: "D",
+    desc: "The underlying blockchain infrastructure used to process DeFi transactions, classified across public, consortium, and private blockchain architectures.",
+  },
+];
+
+const methodologySteps = [
+  "Review existing DeFi taxonomy literature and identify previously proposed categories.",
+  "Extract conceptual meta-characteristics that can distinguish DeFi protocol types.",
+  "Analyse empirical protocol information, including web pages, documentation, governance, and third-party sources.",
+  "Use DeFiLlama data to prioritise relevant protocols, focusing on the top 200 Ethereum protocols by TVL.",
+  "Map categories, static attributes, and dynamic attributes into a structured taxonomy.",
+  "Develop semantic rules to classify protocols consistently.",
+];
+
+const contributions = [
+  "Bridges DeFi and TradFi by designing a taxonomy that is readable for financial and regulatory audiences.",
+  "Organises DeFi through four high-level perspectives: activities, actors, assets, and architecture.",
+  "Combines conceptual taxonomy work with empirical protocol-level analysis.",
+  "Introduces static and dynamic attributes to capture both general governance aspects and category-specific protocol features.",
+  "Connects the taxonomy to the Cambridge DeFi Navigator as an open-access mapping and exploration tool.",
+];
+
+const relatedPages = [
+  {
+    title: "CCAF research experience",
+    href: "/research/ccaf-experience",
+    desc: "Research internship context behind the Digital Asset Programme and the DeFi taxonomy work.",
+  },
+  {
+    title: "Entropy-based economic efficiency",
+    href: "/research/entropy-based-economic-efficiency",
+    desc: "Related cryptoasset research focused on economic indicators and data-driven evaluation.",
+  },
+];
+---
+
+<BaseLayout
+  title="Dynamic Taxonomy: A Bridge from DeFi to TradFi | Research | Vincenzo Di Perna"
+  description="CCAF working paper on a dynamic DeFi taxonomy bridging decentralised finance and traditional finance, connected to the Cambridge DeFi Navigator."
+  sideBarActiveItemID="research"
+>
+  <section class="mb-8">
+    <a href="/research" class="btn btn-sm btn-outline mb-6">
+      ← Back to Research
+    </a>
+
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-2 items-center mb-3">
+          <h1 class="text-4xl font-bold">
+            Dynamic Taxonomy: A Bridge from DeFi to TradFi
+          </h1>
+          <span class="badge badge-secondary">CCAF</span>
+          <span class="badge badge-outline">Working paper</span>
+        </div>
+
+        <p class="text-lg leading-relaxed opacity-90">
+          This work develops a dynamic taxonomy for decentralised finance,
+          designed to connect DeFi with traditional finance, regulatory
+          perspectives, and financial-market classification logic. The paper
+          focuses on how DeFi protocols can be described through activities,
+          actors, assets, and architecture, while also capturing protocol-level
+          attributes that make DeFi different from traditional financial
+          infrastructures.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mt-5">
+          <span class="badge badge-outline">DeFi</span>
+          <span class="badge badge-outline">TradFi</span>
+          <span class="badge badge-outline">Digital assets</span>
+          <span class="badge badge-outline">Taxonomy</span>
+          <span class="badge badge-outline">Cambridge DeFi Navigator</span>
+          <span class="badge badge-outline">Regulatory analysis</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">4</p>
+          <p class="opacity-80">taxonomy pillars</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">200</p>
+          <p class="opacity-80">Ethereum protocols analysed</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">47</p>
+          <p class="opacity-80">empirical characteristics</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">97.96%</p>
+          <p class="opacity-80">Ethereum TVL coverage</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <figure class="px-6 pt-6">
+        <img
+          src="/research/ccaf/tvl-top-blockchains.png"
+          alt="Top 10 blockchains by total value locked between 2020 and 2024."
+          class="rounded-xl border border-base-300 bg-base-200"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Why a DeFi taxonomy is needed</h2>
+
+        <p class="leading-relaxed opacity-90">
+          DeFi has evolved from blockchain-native financial experimentation into
+          a complex ecosystem of protocols that increasingly resemble services
+          known from traditional finance: lending, exchanges, index products,
+          collateralised loans, payment services, derivatives, and asset
+          management.
+        </p>
+
+        <p class="leading-relaxed opacity-90 mt-3">
+          This creates a classification problem. DeFi is not simply a technical
+          stack, but it is also not identical to TradFi. A useful taxonomy must
+          therefore capture both sides: the financial function of a protocol and
+          the blockchain-specific architecture through which that function is
+          implemented.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <figure class="px-6 pt-6">
+        <img
+          src="/research/ccaf/taxonomy-methodology.png"
+          alt="Methodology flowchart used to formulate the DeFi taxonomy."
+          class="rounded-xl border border-base-300 bg-base-200"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Methodology</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The taxonomy is built by combining literature review, conceptual
+          analysis, empirical protocol inspection, and rule-based classification.
+          The goal is not only to list DeFi categories, but to build a structure
+          that can evolve with the ecosystem and remain useful for researchers,
+          practitioners, and regulators.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+          {
+            methodologySteps.map((step, index) => (
+              <div class="card bg-base-200/50 border border-base-300">
+                <div class="card-body p-4">
+                  <div class="flex items-start gap-3">
+                    <span class="badge badge-secondary">{index + 1}</span>
+                    <p class="text-sm opacity-90">{step}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <figure class="px-6 pt-6">
+        <img
+          src="/research/ccaf/high-level-taxonomy.png"
+          alt="High-level DeFi taxonomy organised around Activities, Actors, Assets, and Architecture."
+          class="rounded-xl border border-base-300 bg-base-200"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="card-body">
+        <h2 class="card-title text-2xl">The 4A taxonomy layer</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The high-level taxonomy organises DeFi into four main perspectives:
+          Activities, Actors, Assets, and Architecture. This is the core bridge
+          between the DeFi ecosystem and a TradFi-oriented understanding of
+          financial services.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+          {
+            taxonomyPillars.map((pillar) => (
+              <div class="card bg-base-200/50 border border-base-300">
+                <div class="card-body">
+                  <div class="flex items-center gap-2">
+                    <span class="badge badge-secondary">{pillar.code}</span>
+                    <h3 class="font-bold">{pillar.title}</h3>
+                  </div>
+
+                  <p class="text-sm opacity-80">{pillar.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <figure class="px-6 pt-6">
+        <img
+          src="/research/ccaf/general-taxonomy-structure.png"
+          alt="General taxonomy structure showing activity, actor, asset, and architecture tags."
+          class="rounded-xl border border-base-300 bg-base-200"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="card-body">
+        <h2 class="card-title text-2xl">From categories to machine-readable structure</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The taxonomy is designed as a structured tagging system. Each protocol
+          can be described through activity, actor, asset, and architecture tags.
+          This makes the taxonomy more useful than a static list of categories:
+          it can support data exchange, protocol comparison, and integration
+          with financial-infrastructure concepts.
+        </p>
+
+        <div class="mockup-code mt-5 text-sm">
+          <pre><code>Activity      → A-category code</code></pre>
+          <pre><code>Actor         → B-category + static attributes + dynamic attributes</code></pre>
+          <pre><code>Asset         → C-category code</code></pre>
+          <pre><code>Architecture  → D-category code</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <figure class="px-6 pt-6">
+        <img
+          src="/research/ccaf/semantic-rule-flowchart.png"
+          alt="Semantic rule development flowchart for DeFi protocol classification."
+          class="rounded-xl border border-base-300 bg-base-200"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Semantic rules for protocol classification</h2>
+
+        <p class="leading-relaxed opacity-90">
+          A central part of the work is the development of semantic rules for
+          classifying protocols. The rules are based on protocol websites,
+          documentation, technical descriptions, governance information, and
+          external sources. This allows the taxonomy to move from conceptual
+          categories to reproducible protocol classification.
+        </p>
+
+        <p class="leading-relaxed opacity-90 mt-3">
+          For example, a lending protocol can be identified through language
+          related to liquidity provision, borrowing, supplying assets,
+          collateralisation, interest-rate models, and liquidation mechanisms.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Cambridge DeFi Navigator</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The taxonomy is connected to the Cambridge DeFi Navigator, an
+          open-access CCAF digital tool for exploring the DeFi ecosystem through
+          interactive visualisations. The Navigator provides a practical way to
+          inspect DeFi categories, protocols, and ecosystem relationships beyond
+          the static format of a paper.
+        </p>
+
+        <div class="mt-5 overflow-hidden rounded-xl border border-base-300 bg-base-200">
+          <iframe
+            src="https://ccaf.io/defi/ecosystem-map/visualisation/graph"
+            title="Cambridge DeFi Navigator ecosystem map"
+            class="h-[680px] w-full bg-base-100"
+            loading="lazy"
+          ></iframe>
+        </div>
+
+        <p class="text-sm opacity-70 mt-3">
+          If the embedded preview is blocked by the external website or by the
+          browser, use the direct link below.
+        </p>
+
+        <div class="card-actions mt-4">
+          <a
+            href="https://ccaf.io/defi/ecosystem-map/visualisation/graph"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-sm btn-primary"
+          >
+            Open Cambridge DeFi Navigator
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Main contribution</h2>
+
+        <ul class="list-disc pl-5 space-y-2 opacity-90">
+          {contributions.map((contribution) => <li>{contribution}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Relationship with my CCAF experience</h2>
+
+        <p class="leading-relaxed opacity-90">
+          This work is directly connected to my research experience at the
+          Cambridge Centre for Alternative Finance as Digital Asset Programme
+          Intern / Digital Asset Research Intern. The page below describes the
+          broader internship context, while this page focuses specifically on
+          the taxonomy paper and the DeFi Navigator connection.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+          {
+            relatedPages.map((page) => (
+              <a
+                href={page.href}
+                class="card bg-base-200/50 border border-base-300 transition hover:shadow-lg hover:scale-[101%]"
+              >
+                <div class="card-body">
+                  <h3 class="font-bold">{page.title}</h3>
+                  <p class="text-sm opacity-80">{page.desc}</p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Links</h2>
+
+        <div class="flex flex-wrap gap-3 mt-2">
+          <a
+            href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5034378"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary btn-sm"
+          >
+            Open SSRN paper
+          </a>
+
+          <a
+            href="https://ccaf.io/defi/ecosystem-map/visualisation/graph"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline btn-sm"
+          >
+            Open DeFi Navigator
+          </a>
+
+          <a
+            href="/research/ccaf-experience"
+            class="btn btn-outline btn-sm"
+          >
+            CCAF experience
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

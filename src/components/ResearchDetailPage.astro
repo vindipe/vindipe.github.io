@@ -1,0 +1,100 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const {
+  title,
+  subtitle = "",
+  description = "",
+  badge = "",
+  status = "",
+  tags = [],
+  externalLinks = [],
+  previewTitle = "Preview",
+  previewBody = "",
+  sections = [],
+} = Astro.props;
+---
+
+<BaseLayout
+  title={`${title} | Research | Vincenzo Di Perna`}
+  description={description || subtitle || title}
+  sideBarActiveItemID="research"
+>
+  <section class="mb-8">
+    <a href="/research" class="btn btn-sm btn-outline mb-6">
+      ← Back to Research
+    </a>
+
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-2 items-center mb-2">
+          <h1 class="text-4xl font-bold">{title}</h1>
+          {badge && <span class="badge badge-secondary">{badge}</span>}
+          {status && <span class="badge badge-warning">{status}</span>}
+        </div>
+
+        {subtitle && <p class="text-lg opacity-90">{subtitle}</p>}
+
+        {
+          tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mt-4">
+              {tags.map((tag) => (
+                <span class="badge badge-outline">{tag}</span>
+              ))}
+            </div>
+          )
+        }
+
+        {
+          externalLinks.length > 0 && (
+            <div class="flex flex-wrap gap-2 mt-5">
+              {externalLinks.map((link) => (
+                <a
+                  class="btn btn-sm btn-outline"
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">{previewTitle}</h2>
+        <p class="leading-relaxed opacity-90">{previewBody}</p>
+      </div>
+    </div>
+  </section>
+
+  {
+    sections.map((section) => (
+      <section class="mb-8">
+        <div class="network-protected card bg-base-100 shadow-md">
+          <div class="card-body">
+            <h2 class="card-title text-2xl">{section.title}</h2>
+
+            {section.body && (
+              <p class="leading-relaxed opacity-90">{section.body}</p>
+            )}
+
+            {section.items && section.items.length > 0 && (
+              <ul class="list-disc pl-5 space-y-2 opacity-90">
+                {section.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+</BaseLayout>

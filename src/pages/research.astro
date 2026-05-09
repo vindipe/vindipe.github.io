@@ -1,246 +1,255 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const publications = [
+  {
+    title: "Impact of Network Topologies on Blockchain Performance",
+    badge: "ACM DEBS '25",
+    href: "/research/topology-aware-blockchain-benchmarking",
+    desc: "Peer-reviewed research on how network topology affects blockchain performance under controlled, reproducible, and cloud-inspired experimental conditions.",
+    tags: [
+      "Blockchain benchmarking",
+      "Network topology",
+      "Lilith",
+      "Reproducibility",
+    ],
+  },
+  {
+    title:
+      "Blockchain Energy Consumption: Unveiling the Impact of Network Topologies",
+    badge: "IEEE ICBC '25",
+    href: "/research/performance-energy-economic-efficiency",
+    desc: "Peer-reviewed research on how network topology, workload type, and blockchain design affect energy consumption and energy per transaction.",
+    tags: [
+      "Blockchain energy",
+      "Network topology",
+      "RAPL",
+      "Energy per transaction",
+    ],
+  },
+  {
+    title:
+      "An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies",
+    badge: "DLT '25",
+    href: "/research/entropy-based-economic-efficiency",
+    desc: "Research introducing an entropy-based index to evaluate the economic efficiency of cryptocurrencies through on-chain attributes, user participation, supply dynamics, and transfer activity.",
+    tags: [
+      "Cryptocurrency efficiency",
+      "Shannon entropy",
+      "Economic index",
+      "Coin Metrics",
+    ],
+  },
+  {
+    title: "Dynamic Taxonomy: A Bridge from DeFi to TradFi",
+    badge: "CCAF / Working paper",
+    href: "/research/dynamic-taxonomy-defi-tradfi",
+    desc: "Research developed within the Cambridge Centre for Alternative Finance on a dynamic DeFi taxonomy designed to connect decentralised finance with traditional finance, regulatory perspectives, and the Cambridge DeFi Navigator.",
+    tags: ["DeFi", "TradFi", "Taxonomy", "Digital assets", "CCAF"],
+  },
+];
+
+const artifacts = [
+  {
+    title: "Lilith – A Topology-Aware Blockchain Benchmarking Framework",
+    badge: "Artifact",
+    href: "/research/lilith-benchmarking-framework",
+    desc: "Public research artifact supporting topology-aware blockchain benchmarking, workload execution, network emulation, and reproducible experimental analysis.",
+    tags: ["Framework", "Benchmarking", "Network emulation", "Reproducibility"],
+  },
+{
+  title: "Blockchain Repeatability Dataset for Topology-Aware Benchmarking",
+  badge: "Dataset",
+  status: "Coming soon",
+  disabled: true,
+  desc: "Dataset designed to quantify repeatability, variability, and performance predictability across blockchain platforms, workloads, and network topologies. This page will be enabled after the dataset is publicly released.",
+  tags: [
+    "Dataset",
+    "Repeatability",
+    "Performance predictability",
+    "Experimental analysis",
+  ],
+},
+];
 ---
 
 <BaseLayout
   title="Research | Vincenzo Di Perna"
-  description="Selected research, artifacts, and research outputs by Vincenzo Di Perna."
+  description="Research, publications, artifacts, datasets, thesis work, and research experience by Vincenzo Di Perna."
   sideBarActiveItemID="research"
 >
   <section class="mb-10">
     <h1 class="text-4xl font-bold mb-4">Research</h1>
 
     <p class="text-lg leading-relaxed opacity-90">
-      Selected research, research artifacts, datasets, and working papers on
-      blockchain systems, distributed infrastructures, benchmarking,
-      reproducible experimentation, energy analysis, and digital assets.
+      My research focuses on blockchain systems evaluation, distributed
+      infrastructures, digital assets, reproducible experimentation,
+      network-aware benchmarking, energy and efficiency analysis, and the study
+      of performance variability, repeatability, and predictability under
+      controlled experimental conditions.
     </p>
   </section>
 
   <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-5">Selected peer-reviewed research</h2>
+    <h2 class="text-3xl font-bold mb-5">Publications</h2>
 
     <div class="grid gap-5">
-      <article class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">Topology-aware blockchain benchmarking</h3>
-            <span class="badge badge-secondary">ACM DEBS '25</span>
-          </div>
-
-          <p>
-            Research on how network topology, workload design, and controlled
-            experimental conditions affect blockchain performance, energy usage,
-            and variability.
-          </p>
-
-          <div class="flex flex-wrap gap-2 mt-2">
-            <span class="badge badge-outline">Blockchain benchmarking</span>
-            <span class="badge badge-outline">Network topology</span>
-            <span class="badge badge-outline">Reproducibility</span>
-            <span class="badge badge-outline">Energy analysis</span>
-          </div>
-
-          <div class="card-actions justify-end mt-4">
-            <a
-              class="btn btn-sm btn-outline"
-              href="https://dl.acm.org/doi/10.1145/3701717.3730540"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              DOI / Paper
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">
-              Blockchain performance, energy, and economic efficiency
-            </h3>
-            <span class="badge badge-secondary">IEEE ICBC '25</span>
-          </div>
-
-          <p>
-            Work connecting performance, energy consumption, and
-            economic-efficiency dimensions in blockchain evaluation through
-            reproducible experiments and data-driven analysis.
-          </p>
-
-          <div class="flex flex-wrap gap-2 mt-2">
-            <span class="badge badge-outline">Performance</span>
-            <span class="badge badge-outline">Energy</span>
-            <span class="badge badge-outline">Economic efficiency</span>
-            <span class="badge badge-outline">Digital assets</span>
-          </div>
-
-          <div class="card-actions justify-end mt-4">
-            <a
-              class="btn btn-sm btn-outline"
-              href="https://ieeexplore.ieee.org/document/11114569"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              IEEE Xplore
-            </a>
-          </div>
-        </div>
-      </article>
-
-      <article class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div
-            class="flex flex-col md:flex-row md:items-start md:justify-between gap-2"
+      {
+        publications.map((item) => (
+          <a
+            href={item.href}
+            class="network-protected card bg-base-100 shadow-md transition ease-in-out hover:shadow-2xl hover:scale-[101%]"
           >
-            <h3 class="card-title">
-              Dynamic Taxonomy: A Bridge from DeFi to TradFi
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="badge badge-outline shrink-0">SSRN</span>
-              <span class="badge badge-outline shrink-0"
-                >CCAF collaboration</span
-              >
-            </div>
-          </div>
+            <article class="card-body">
+              <div class="flex flex-wrap gap-2 items-center">
+                <h3 class="card-title">{item.title}</h3>
+                <span class="badge badge-secondary">{item.badge}</span>
+              </div>
 
-          <p>
-            Iqbal Mabruri, Carles Cerqueda, Christopher Jack, Alexis Lui, Yue
-            Wu, Wenbin Wu, Vincenzo P. Di Perna, Keith Bear, and Bryan Zheng
-            Zhang.
-          </p>
+              <p>{item.desc}</p>
 
-          <p class="opacity-80">
-            SSRN working paper developed in collaboration with the Cambridge
-            Centre for Alternative Finance (CCAF), focused on digital assets,
-            decentralized finance, traditional finance, and taxonomy-oriented
-            analysis.
-          </p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                {item.tags.map((tag) => (
+                  <span class="badge badge-outline">{tag}</span>
+                ))}
+              </div>
 
-          <div class="card-actions justify-end mt-4">
-            <a
-              class="btn btn-sm btn-outline"
-              href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5034378"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              SSRN
-            </a>
-          </div>
-        </div>
-      </article>
+              <div class="card-actions justify-end mt-4">
+                <span class="btn btn-sm btn-outline">Open research page</span>
+              </div>
+            </article>
+          </a>
+        ))
+      }
     </div>
   </section>
 
   <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-5">Research artifacts & datasets</h2>
+    <h2 class="text-3xl font-bold mb-5">Artifacts &amp; Datasets</h2>
 
     <div class="grid gap-5">
-      <article class="card bg-base-100 shadow-md">
+{
+  artifacts.map((item) =>
+    item.disabled ? (
+      <article class="network-protected card bg-base-100 shadow-md opacity-80">
         <div class="card-body">
           <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">
-              Lilith — A Topology-Aware Blockchain Benchmarking Framework
-            </h3>
-            <span class="badge badge-secondary">Artifact</span>
+            <h3 class="card-title">{item.title}</h3>
+            <span class="badge badge-secondary">{item.badge}</span>
+            <span class="badge badge-warning">{item.status}</span>
           </div>
 
-          <p>
-            Public research artifact supporting topology-aware blockchain
-            benchmarking, workload execution, network emulation, and
-            reproducible experimental analysis.
-          </p>
+          <p>{item.desc}</p>
+
+          <div class="flex flex-wrap gap-2 mt-2">
+            {item.tags.map((tag) => (
+              <span class="badge badge-outline">{tag}</span>
+            ))}
+          </div>
 
           <div class="card-actions justify-end mt-4">
-            <a
-              class="btn btn-sm btn-outline"
-              href="https://doi.org/10.5281/zenodo.11409100"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Zenodo DOI
-            </a>
+            <span class="btn btn-sm btn-disabled">Page not available yet</span>
           </div>
         </div>
       </article>
-
-      <article class="card bg-base-100 shadow-md">
-        <div class="card-body">
+    ) : (
+      <a
+        href={item.href}
+        class="network-protected card bg-base-100 shadow-md transition ease-in-out hover:shadow-2xl hover:scale-[101%]"
+      >
+        <article class="card-body">
           <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">
-              Blockchain Repeatability Dataset for Topology-Aware Benchmarking
-            </h3>
-            <span class="badge badge-secondary">Dataset</span>
+            <h3 class="card-title">{item.title}</h3>
+            <span class="badge badge-secondary">{item.badge}</span>
           </div>
 
-          <p>
-            Dataset designed to quantify repeatability, variability, and
-            performance predictability across blockchain platforms, workloads,
-            and network topologies.
-          </p>
+          <p>{item.desc}</p>
+
+          <div class="flex flex-wrap gap-2 mt-2">
+            {item.tags.map((tag) => (
+              <span class="badge badge-outline">{tag}</span>
+            ))}
+          </div>
 
           <div class="card-actions justify-end mt-4">
-            <a
-              class="btn btn-sm btn-outline"
-              href="https://doi.org/10.5281/zenodo.15545963"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Zenodo DOI
-            </a>
+            <span class="btn btn-sm btn-outline">Open artifact page</span>
           </div>
-        </div>
-      </article>
+        </article>
+      </a>
+    )
+  )
+}
     </div>
   </section>
 
+<section class="mb-12">
+  <h2 class="text-3xl font-bold mb-5">Doctoral Thesis</h2>
+
+  <article class="network-protected card bg-base-100 shadow-md opacity-80">
+      <article class="card-body">
+        <div class="flex flex-wrap gap-2 items-center">
+          <h3 class="card-title">
+            Comparing Blockchains: Performance, Energy, and Economic
+            Efficiencies
+          </h3>
+          <span class="badge badge-warning">Coming soon</span>
+        </div>
+
+<p>
+  Doctoral thesis focused on blockchain benchmarking, network topology
+  effects, repeatability, performance predictability, energy analysis,
+  and economic-efficiency indicators. The dedicated thesis page will be
+  enabled after the thesis is publicly available.
+</p>
+
+        <div class="flex flex-wrap gap-2 mt-2">
+          <span class="badge badge-outline">PhD thesis</span>
+          <span class="badge badge-outline">Blockchain systems</span>
+          <span class="badge badge-outline">Benchmarking</span>
+          <span class="badge badge-outline">Efficiency</span>
+        </div>
+
+        <div class="card-actions justify-end mt-4">
+          <span class="btn btn-sm btn-disabled">Page not available yet</span>
+        </div>
+      </div>
+    </article>
+  </section>
+
   <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-5">Research themes</h2>
+    <h2 class="text-3xl font-bold mb-5">Research Experience</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <h3 class="card-title">Blockchain systems evaluation</h3>
-          <p>
-            Performance, latency, throughput, topology effects, workload
-            sensitivity, benchmarking methodology, and experimental reliability.
-          </p>
+    <a
+      href="/research/ccaf-experience"
+      class="network-protected card bg-base-100 shadow-md transition ease-in-out hover:shadow-2xl hover:scale-[101%]"
+    >
+      <article class="card-body">
+        <div class="flex flex-wrap gap-2 items-center">
+          <h3 class="card-title">
+            Digital Asset Programme Intern / Digital Asset Research Intern
+          </h3>
+          <span class="badge badge-secondary">CCAF</span>
         </div>
-      </div>
 
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <h3 class="card-title">Energy and efficiency</h3>
-          <p>
-            Energy-aware blockchain analysis, normalized efficiency indicators,
-            and trade-offs between performance, consumption, and protocol
-            behavior.
-          </p>
-        </div>
-      </div>
+        <p>
+          Research internship experience at the Cambridge Centre for Alternative
+          Finance, within the Digital Asset Programme, connected to digital
+          assets, DeFi taxonomy, TradFi integration, protocol classification,
+          and the Cambridge DeFi Navigator.
+        </p>
 
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <h3 class="card-title">Repeatability and predictability</h3>
-          <p>
-            Experimental repeatability, performance predictability, robust
-            dispersion metrics, and statistical analysis of blockchain
-            variability.
-          </p>
+        <div class="flex flex-wrap gap-2 mt-2">
+          <span class="badge badge-outline">Digital Asset Programme</span>
+          <span class="badge badge-outline">DeFi</span>
+          <span class="badge badge-outline">TradFi</span>
+          <span class="badge badge-outline">Taxonomy</span>
+          <span class="badge badge-outline">DeFi Navigator</span>
         </div>
-      </div>
 
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <h3 class="card-title">Digital assets and infrastructures</h3>
-          <p>
-            Digital-asset analytics, digital-asset and CBDC-related systems,
-            protocol data, and economic perspectives on decentralized
-            infrastructures.
-          </p>
+        <div class="card-actions justify-end mt-4">
+          <span class="btn btn-sm btn-outline">Open experience page</span>
         </div>
-      </div>
-    </div>
+      </article>
+    </a>
   </section>
 </BaseLayout>

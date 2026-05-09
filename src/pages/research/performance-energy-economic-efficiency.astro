@@ -1,0 +1,326 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const blockchainEnergyProfiles = [
+  {
+    name: "Algorand",
+    src: "/research/icbc25/energy-algorand-per-transaction.png",
+    desc: "Shows low energy per transaction across several topology and workload combinations, especially for transaction-processing workloads.",
+  },
+  {
+    name: "Diem",
+    src: "/research/icbc25/energy-diem-per-transaction.png",
+    desc: "Highlights the energy profile of a permissioned BFT-style blockchain under topology-controlled execution.",
+  },
+  {
+    name: "Ethereum Clique",
+    src: "/research/icbc25/energy-ethereum-per-transaction.png",
+    desc: "Shows higher energy per transaction compared with the other evaluated systems, regardless of topology.",
+  },
+  {
+    name: "Quorum IBFT",
+    src: "/research/icbc25/energy-quorum-per-transaction.png",
+    desc: "Captures how a permissioned Ethereum-based system reacts to workload intensity and topology changes.",
+  },
+  {
+    name: "Solana",
+    src: "/research/icbc25/energy-solana-per-transaction.png",
+    desc: "Shows competitive energy behaviour in smaller configurations, with scalability issues emerging in larger setups.",
+  },
+];
+
+const findings = [
+  "Fat-tree and full mesh generally provide the most energy-efficient network configurations across the evaluated blockchains.",
+  "Algorand and Diem achieve the lowest energy consumption per transaction in several configurations.",
+  "Ethereum Clique shows the highest energy per transaction among the evaluated systems.",
+  "Quorum IBFT becomes more expensive under demanding workloads and larger configurations.",
+  "Solana shows promising energy-per-transaction behaviour, but larger node configurations expose operational and scalability issues.",
+];
+---
+
+<BaseLayout
+  title="Blockchain Energy Consumption | Research | Vincenzo Di Perna"
+  description="IEEE ICBC '25 paper on blockchain energy consumption, network topologies, RAPL measurements, workloads, and energy per transaction."
+  sideBarActiveItemID="research"
+>
+  <section class="mb-8">
+    <a href="/research" class="btn btn-sm btn-outline mb-6">
+      ← Back to Research
+    </a>
+
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-2 items-center mb-3">
+          <h1 class="text-4xl font-bold">
+            Blockchain Energy Consumption: Unveiling the Impact of Network Topologies
+          </h1>
+          <span class="badge badge-secondary">IEEE ICBC '25</span>
+          <span class="badge badge-outline">Publication</span>
+        </div>
+
+        <p class="text-lg leading-relaxed opacity-90">
+          This work studies how network topology influences the energy
+          consumption of blockchain systems. The paper evaluates multiple
+          blockchain platforms under controlled topologies and realistic
+          workloads, measuring not only total energy usage but also energy per
+          transaction.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mt-5">
+          <span class="badge badge-outline">Blockchain energy</span>
+          <span class="badge badge-outline">Network topology</span>
+          <span class="badge badge-outline">RAPL</span>
+          <span class="badge badge-outline">Energy per transaction</span>
+          <span class="badge badge-outline">Benchmarking</span>
+          <span class="badge badge-outline">Reproducibility</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">5</p>
+          <p class="opacity-80">blockchain systems</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">5</p>
+          <p class="opacity-80">network topologies</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">3</p>
+          <p class="opacity-80">workload models</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">RAPL</p>
+          <p class="opacity-80">energy measurements</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Context</h2>
+
+        <p class="leading-relaxed opacity-90">
+          Blockchain energy consumption is often discussed in relation to
+          consensus mechanisms and hardware requirements. However, the network
+          layer also affects how validators communicate, how workloads are
+          distributed, and how efficiently transactions are processed.
+        </p>
+
+        <p class="leading-relaxed opacity-90 mt-3">
+          This paper investigates that overlooked dimension: whether the same
+          blockchain system consumes different amounts of energy when executed
+          over different network topologies.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <figure class="px-6 pt-6">
+        <img
+          src="/research/icbc25/topologies.png"
+          alt="Five network topologies evaluated in the IEEE ICBC 2025 blockchain energy paper: fat-tree, full mesh, hypercube, scale-free, and torus."
+          class="rounded-xl border border-base-300 bg-base-200"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Topology-aware energy evaluation</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The evaluation considers five controlled network topologies:
+          fat-tree, full mesh, hypercube, scale-free, and torus. Each topology
+          changes how blockchain nodes communicate, which can affect latency,
+          message propagation, committed transactions, and therefore energy per
+          transaction.
+        </p>
+
+        <p class="leading-relaxed opacity-90 mt-3">
+          The goal is not to claim that one topology represents every possible
+          blockchain deployment. Instead, these topologies provide controlled
+          communication structures for understanding how network shape impacts
+          energy efficiency.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Experimental setup</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The experiments evaluate Algorand, Diem, Ethereum Clique, Quorum
+          IBFT, and Solana. The workload set includes two transaction-processing
+          workloads inspired by PayPal and VISA, and one smart-contract workload
+          inspired by GAFAM-style stock-market interactions.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">PayPal</h3>
+              <p class="text-sm opacity-80">
+                Constant-rate transfer workload, modelled as a moderate payment
+                processing scenario.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">VISA</h3>
+              <p class="text-sm opacity-80">
+                Higher-throughput transfer workload, used to stress transaction
+                processing capacity.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">GAFAM</h3>
+              <p class="text-sm opacity-80">
+                Smart-contract workload modelling bursty stock purchase and
+                availability-check interactions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="leading-relaxed opacity-90 mt-5">
+          Energy consumption is measured through Intel RAPL counters, which
+          expose CPU package and memory-domain energy indicators. The paper then
+          converts these measurements into kilowatt-hours and relates energy
+          consumption to committed transactions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Energy per transaction</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The most important metric in the paper is not just total energy
+          consumption, but energy per committed transaction. This captures
+          whether a blockchain is merely consuming more energy, or whether that
+          energy is translated into useful committed work.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
+          {
+            blockchainEnergyProfiles.map((item) => (
+              <div class="card bg-base-200/50 border border-base-300">
+                <figure class="px-4 pt-4">
+                  <img
+                    src={item.src}
+                    alt={`${item.name} average energy per transaction in the IEEE ICBC 2025 blockchain energy paper.`}
+                    class="rounded-lg bg-base-100"
+                    loading="lazy"
+                  />
+                </figure>
+
+                <div class="card-body p-4">
+                  <h3 class="font-bold">{item.name}</h3>
+                  <p class="text-sm opacity-80">{item.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Main findings</h2>
+
+        <ul class="list-disc pl-5 space-y-2 opacity-90">
+          {findings.map((finding) => <li>{finding}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Relationship with the DEBS work</h2>
+
+        <p class="leading-relaxed opacity-90">
+          This paper is closely connected to the topology-aware benchmarking
+          line of work. While the DEBS paper focuses more broadly on blockchain
+          performance under network topologies and dynamics, this ICBC paper
+          isolates the energy dimension and studies how topology affects energy
+          consumption and energy per transaction.
+        </p>
+
+        <div class="card-actions mt-4">
+          <a
+            href="/research/topology-aware-blockchain-benchmarking"
+            class="btn btn-sm btn-outline"
+          >
+            Open DEBS research page
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Links</h2>
+
+        <div class="flex flex-wrap gap-3 mt-2">
+          <a
+            href="https://ieeexplore.ieee.org/document/11114569"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary btn-sm"
+          >
+            Open IEEE paper
+          </a>
+
+          <a
+            href="/research/topology-aware-blockchain-benchmarking"
+            class="btn btn-outline btn-sm"
+          >
+            Related DEBS paper
+          </a>
+
+          <a
+            href="/research/lilith-benchmarking-framework"
+            class="btn btn-outline btn-sm"
+          >
+            Related Lilith artifact
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

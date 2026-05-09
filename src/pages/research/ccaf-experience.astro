@@ -1,0 +1,272 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const experienceAreas = [
+  {
+    title: "Digital assets research",
+    desc: "Research activity within the Digital Asset Programme, focused on decentralised finance, digital-asset infrastructures, taxonomy design, and ecosystem analysis.",
+  },
+  {
+    title: "DeFi taxonomy work",
+    desc: "Contribution to taxonomy-oriented research connecting DeFi protocol functions, actors, assets, infrastructure, and traditional-finance classification perspectives.",
+  },
+  {
+    title: "Protocol classification",
+    desc: "Work connected to the structured analysis of DeFi protocols, their categories, governance properties, documentation, and protocol-level characteristics.",
+  },
+  {
+    title: "Research communication",
+    desc: "Support for translating a complex DeFi taxonomy into research outputs and digital-tool context, including the Cambridge DeFi Navigator.",
+  },
+];
+
+const outputs = [
+  {
+    title: "Dynamic Taxonomy: A Bridge from DeFi to TradFi",
+    href: "/research/dynamic-taxonomy-defi-tradfi",
+    desc: "Working paper on a dynamic taxonomy for connecting DeFi and TradFi through activities, actors, assets, architecture, and protocol-level attributes.",
+  },
+  {
+    title: "Cambridge DeFi Navigator",
+    href: "https://ccaf.io/defi/ecosystem-map/visualisation/graph",
+    desc: "Interactive CCAF digital tool for exploring the DeFi ecosystem through protocol categories and ecosystem visualisations.",
+    external: true,
+  },
+];
+
+const skills = [
+  "Digital assets research",
+  "DeFi ecosystem analysis",
+  "Taxonomy design",
+  "Protocol classification",
+  "Data-oriented research",
+  "Regulatory-facing analysis",
+  "Research writing",
+  "DeFi / TradFi mapping",
+];
+---
+
+<BaseLayout
+  title="CCAF Research Experience | Research | Vincenzo Di Perna"
+  description="Digital Asset Programme Intern / Digital Asset Research Intern experience at the Cambridge Centre for Alternative Finance."
+  sideBarActiveItemID="research"
+>
+  <section class="mb-8">
+    <a href="/research" class="btn btn-sm btn-outline mb-6">
+      ← Back to Research
+    </a>
+
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-2 items-center mb-3">
+          <h1 class="text-4xl font-bold">
+            Digital Asset Programme Intern
+          </h1>
+          <span class="badge badge-secondary">CCAF</span>
+          <span class="badge badge-outline">Research experience</span>
+        </div>
+
+        <p class="text-lg leading-relaxed opacity-90">
+          Research internship experience at the Cambridge Centre for Alternative
+          Finance, within the Digital Asset Programme, focused on digital
+          assets, decentralised finance, DeFi taxonomy, protocol
+          classification, and the relationship between DeFi and traditional
+          financial infrastructures.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mt-5">
+          <span class="badge badge-outline">Digital Asset Programme</span>
+          <span class="badge badge-outline">Digital assets</span>
+          <span class="badge badge-outline">DeFi</span>
+          <span class="badge badge-outline">TradFi</span>
+          <span class="badge badge-outline">Taxonomy</span>
+          <span class="badge badge-outline">Cambridge DeFi Navigator</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">CCAF</p>
+          <p class="opacity-80">research centre context</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">DAP</p>
+          <p class="opacity-80">Digital Asset Programme</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">DeFi</p>
+          <p class="opacity-80">taxonomy and ecosystem analysis</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">TradFi</p>
+          <p class="opacity-80">financial-infrastructure bridge</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Experience context</h2>
+
+        <p class="leading-relaxed opacity-90">
+          This experience sits at the intersection of digital-asset research,
+          decentralised finance, financial-market infrastructure, and regulatory
+          understanding. The work is connected to the need for clearer tools and
+          frameworks to describe DeFi protocols in a way that is understandable
+          both to blockchain-native stakeholders and to traditional-finance
+          audiences.
+        </p>
+
+        <p class="leading-relaxed opacity-90 mt-3">
+          The main research line connected to this experience is the development
+          of a dynamic DeFi taxonomy and its relationship with the Cambridge
+          DeFi Navigator, a digital tool designed to make the DeFi ecosystem more
+          accessible through interactive exploration.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Areas of work</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+          {
+            experienceAreas.map((area) => (
+              <div class="card bg-base-200/50 border border-base-300">
+                <div class="card-body">
+                  <h3 class="font-bold">{area.title}</h3>
+                  <p class="text-sm opacity-80">{area.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <figure class="px-6 pt-6">
+        <img
+          src="/research/ccaf/high-level-taxonomy.png"
+          alt="High-level DeFi taxonomy developed around Activities, Actors, Assets, and Architecture."
+          class="rounded-xl border border-base-300 bg-base-200"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Research focus: DeFi taxonomy</h2>
+
+        <p class="leading-relaxed opacity-90">
+          A central output connected to the experience is the taxonomy work
+          around DeFi and TradFi. The taxonomy organises decentralised finance
+          through high-level categories and protocol-level attributes, making it
+          easier to describe DeFi systems in a way that supports research,
+          ecosystem mapping, and regulatory-facing interpretation.
+        </p>
+
+        <div class="card-actions mt-4">
+          <a
+            href="/research/dynamic-taxonomy-defi-tradfi"
+            class="btn btn-sm btn-outline"
+          >
+            Open taxonomy paper page
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Related outputs</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+          {
+            outputs.map((output) => (
+              <a
+                href={output.href}
+                target={output.external ? "_blank" : undefined}
+                rel={output.external ? "noopener noreferrer" : undefined}
+                class="card bg-base-200/50 border border-base-300 transition hover:shadow-lg hover:scale-[101%]"
+              >
+                <div class="card-body">
+                  <h3 class="font-bold">{output.title}</h3>
+                  <p class="text-sm opacity-80">{output.desc}</p>
+                </div>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Skills and research capabilities</h2>
+
+        <div class="flex flex-wrap gap-2">
+          {skills.map((skill) => <span class="badge badge-outline">{skill}</span>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Links</h2>
+
+        <div class="flex flex-wrap gap-3 mt-2">
+          <a
+            href="/research/dynamic-taxonomy-defi-tradfi"
+            class="btn btn-primary btn-sm"
+          >
+            Open Dynamic Taxonomy page
+          </a>
+
+          <a
+            href="https://ccaf.io/defi/ecosystem-map/visualisation/graph"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline btn-sm"
+          >
+            Open DeFi Navigator
+          </a>
+
+          <a
+            href="https://www.jbs.cam.ac.uk/faculty-research/centres/alternative-finance/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline btn-sm"
+          >
+            Open CCAF website
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

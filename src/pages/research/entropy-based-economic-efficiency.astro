@@ -1,0 +1,440 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const entropyResults = [
+  {
+    title: "Unweighted EB-index — Set1",
+    src: "/research/dlt25/entropy-set1.png",
+    desc: "Set1 combines user activity with market-oriented indicators, showing how balance evolves across assets over time.",
+  },
+  {
+    title: "Weighted EB-index — Set1",
+    src: "/research/dlt25/weighted-entropy-set1.png",
+    desc: "The weighted version makes the index sensitive not only to balance, but also to the relative strength of the selected attributes.",
+  },
+  {
+    title: "Unweighted EB-index — Set2",
+    src: "/research/dlt25/entropy-set2.png",
+    desc: "Set2 focuses on dynamic qualities such as participation, transfer size, turnover, active supply, and wealth distribution.",
+  },
+  {
+    title: "Weighted EB-index — Set2",
+    src: "/research/dlt25/weighted-entropy-set2.png",
+    desc: "The weighted version changes the interpretation of the results by incorporating attribute magnitude into the entropy score.",
+  },
+];
+
+const probabilityDistributions = [
+  {
+    asset: "Bitcoin",
+    set: "Set1",
+    src: "/research/dlt25/prob-btc-set1.png",
+  },
+  {
+    asset: "Bitcoin",
+    set: "Set2",
+    src: "/research/dlt25/prob-btc-set2.png",
+  },
+  {
+    asset: "Ethereum",
+    set: "Set1",
+    src: "/research/dlt25/prob-eth-set1.png",
+  },
+  {
+    asset: "Ethereum",
+    set: "Set2",
+    src: "/research/dlt25/prob-eth-set2.png",
+  },
+  {
+    asset: "USD Coin",
+    set: "Set1",
+    src: "/research/dlt25/prob-usdc-set1.png",
+  },
+  {
+    asset: "USD Coin",
+    set: "Set2",
+    src: "/research/dlt25/prob-usdc-set2.png",
+  },
+  {
+    asset: "Ripple",
+    set: "Set1",
+    src: "/research/dlt25/prob-xrp-set1.png",
+  },
+  {
+    asset: "Ripple",
+    set: "Set2",
+    src: "/research/dlt25/prob-xrp-set2.png",
+  },
+];
+
+const qualitiesSet1 = [
+  "Participation",
+  "Mean transfers per active address",
+  "Mean transfer per market capitalization",
+  "Market capitalization",
+];
+
+const qualitiesSet2 = [
+  "Participation",
+  "Mean transfer size",
+  "Mean transfers per active address",
+  "Active supply turnover rate",
+  "Active supply ratio",
+  "Wealth distribution",
+];
+
+const findings = [
+  "The proposed EB-index is designed to capture balance across selected economic qualities rather than relying on a single metric such as price, capitalization, throughput, or energy.",
+  "The framework is customizable: researchers can select different attributes and weights depending on the economic behaviour they want to study.",
+  "Set1 captures a compact view of activity and market-related behaviour, while Set2 focuses more deeply on user participation, transfer dynamics, supply usage, and wealth distribution.",
+  "The weighted version of the index changes the interpretation by rewarding not only balance, but also stronger normalized attribute values.",
+  "The work should be read as a methodological framework, not as investment advice or as a final ranking of cryptocurrencies.",
+];
+---
+
+<BaseLayout
+  title="Entropy-Based Economic Efficiency of Cryptocurrencies | Research | Vincenzo Di Perna"
+  description="DLT 2025 paper introducing an Entropy Balance index for evaluating the economic efficiency of cryptocurrencies using Shannon entropy and on-chain data."
+  sideBarActiveItemID="research"
+>
+  <section class="mb-8">
+    <a href="/research" class="btn btn-sm btn-outline mb-6">
+      ← Back to Research
+    </a>
+
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-2 items-center mb-3">
+          <h1 class="text-4xl font-bold">
+            An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies
+          </h1>
+          <span class="badge badge-secondary">DLT '25</span>
+          <span class="badge badge-outline">Publication</span>
+        </div>
+
+        <p class="text-lg leading-relaxed opacity-90">
+          This work introduces an entropy-based framework for evaluating the
+          economic efficiency of cryptocurrencies. Instead of measuring only
+          price, market capitalization, throughput, or energy consumption, the
+          paper proposes a composite index that captures how well multiple
+          economic qualities are balanced inside a cryptoasset economy.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mt-5">
+          <span class="badge badge-outline">Cryptocurrency efficiency</span>
+          <span class="badge badge-outline">Entropy Balance index</span>
+          <span class="badge badge-outline">Shannon entropy</span>
+          <span class="badge badge-outline">Coin Metrics</span>
+          <span class="badge badge-outline">On-chain data</span>
+          <span class="badge badge-outline">Economic index</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">6</p>
+          <p class="opacity-80">cryptoassets</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">2</p>
+          <p class="opacity-80">attribute sets</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">2010–2025</p>
+          <p class="opacity-80">analysis period</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">EB</p>
+          <p class="opacity-80">Entropy Balance index</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Context</h2>
+
+        <p class="leading-relaxed opacity-90">
+          Blockchain efficiency is often discussed in terms of transactions per
+          second, latency, scalability, or energy consumption. Cryptocurrencies,
+          however, are also economic systems: they have supply dynamics, user
+          participation, transfer activity, wealth concentration, market value,
+          and different forms of asset usage.
+        </p>
+
+        <p class="leading-relaxed opacity-90 mt-3">
+          This paper focuses on that economic dimension. The central question is
+          how to build a coherent index that can aggregate multiple on-chain and
+          market-related attributes without reducing the analysis to one
+          isolated metric.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">The EB-index idea</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The proposed Entropy Balance index uses Shannon entropy to measure how
+          balanced a selected set of economic qualities is. Each quality is first
+          normalized, then transformed into a probability distribution. Entropy
+          is then used to quantify whether the selected qualities are
+          concentrated around one dominant dimension or more evenly balanced.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Normalize</h3>
+              <p class="text-sm opacity-80">
+                Economic qualities with different scales are mapped into a
+                comparable interval.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Convert to distribution</h3>
+              <p class="text-sm opacity-80">
+                The normalized qualities are converted into a probability
+                distribution over the selected attributes.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Measure balance</h3>
+              <p class="text-sm opacity-80">
+                Shannon entropy measures whether the qualities are balanced or
+                concentrated around a few dominant dimensions.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mockup-code mt-5 text-sm">
+          <pre><code>pᵢ = rᵢ / Σ rᵢ</code></pre>
+          <pre><code>H(P) = - Σ pᵢ log(pᵢ)</code></pre>
+          <pre><code>Weighted version: H(P; W) = - Σ wᵢ pᵢ log(pᵢ)</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Data and attribute sets</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The illustrative evaluation uses on-chain data from Coin Metrics and
+          compares six major cryptoassets: Bitcoin, Ethereum, Ripple, USD Coin,
+          Dogecoin, and Cardano. The paper defines two different sets of
+          attributes to show that the framework can be adapted to different
+          interpretations of economic efficiency.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Set1 — compact activity and market view</h3>
+
+              <ul class="list-disc pl-5 space-y-1 text-sm opacity-80">
+                {qualitiesSet1.map((quality) => <li>{quality}</li>)}
+              </ul>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Set2 — dynamic network behaviour</h3>
+
+              <ul class="list-disc pl-5 space-y-1 text-sm opacity-80">
+                {qualitiesSet2.map((quality) => <li>{quality}</li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p class="leading-relaxed opacity-90 mt-5">
+          This distinction is important: the EB-index does not impose a single
+          universal definition of economic efficiency. It provides a formal way
+          to combine the qualities selected by the researcher.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Entropy results</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The four plots below compare unweighted and weighted entropy for the
+          two attribute sets. The unweighted version highlights balance among
+          the selected qualities. The weighted version also accounts for the
+          relative strength of the normalized attributes, changing the
+          interpretation from pure balance to balance plus magnitude.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
+          {
+            entropyResults.map((item) => (
+              <div class="card bg-base-200/50 border border-base-300">
+                <figure class="px-4 pt-4">
+                  <img
+                    src={item.src}
+                    alt={`${item.title} for Bitcoin, Ethereum, Ripple, USD Coin, Dogecoin, and Cardano.`}
+                    class="rounded-lg bg-base-100"
+                    loading="lazy"
+                  />
+                </figure>
+
+                <div class="card-body p-4">
+                  <h3 class="font-bold">{item.title}</h3>
+                  <p class="text-sm opacity-80">{item.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Representative attribute distributions</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The probability-distribution plots show how the selected qualities
+          contribute to each asset's entropy score. They help explain why two
+          cryptoassets can obtain similar entropy values for different internal
+          reasons, or why the same asset can behave differently across Set1 and
+          Set2.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
+          {
+            probabilityDistributions.map((item) => (
+              <div class="card bg-base-200/50 border border-base-300">
+                <figure class="px-4 pt-4">
+                  <img
+                    src={item.src}
+                    alt={`${item.asset} probability distribution for ${item.set} in the DLT 2025 EB-index paper.`}
+                    class="rounded-lg bg-base-100"
+                    loading="lazy"
+                  />
+                </figure>
+
+                <div class="card-body p-4">
+                  <h3 class="font-bold">{item.asset}</h3>
+                  <p class="text-sm opacity-80">{item.set}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Main contribution</h2>
+
+        <ul class="list-disc pl-5 space-y-2 opacity-90">
+          {findings.map((finding) => <li>{finding}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Relationship with my broader research</h2>
+
+        <p class="leading-relaxed opacity-90">
+          This paper extends my blockchain evaluation work beyond protocol-level
+          performance and energy analysis. While the DEBS and ICBC works study
+          how blockchain systems behave under different network conditions, this
+          work moves to the economic layer and asks how the internal behaviour
+          of cryptoasset economies can be measured through a transparent,
+          customizable, and theoretically grounded index.
+        </p>
+
+        <div class="card-actions mt-4">
+          <a
+            href="/research/topology-aware-blockchain-benchmarking"
+            class="btn btn-sm btn-outline"
+          >
+            Related DEBS paper
+          </a>
+
+          <a
+            href="/research/performance-energy-economic-efficiency"
+            class="btn btn-sm btn-outline"
+          >
+            Related ICBC paper
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Links</h2>
+
+        <div class="flex flex-wrap gap-3 mt-2">
+          <a
+            href="https://ceur-ws.org/Vol-4105/paper09.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary btn-sm"
+          >
+            Open CEUR-WS paper
+          </a>
+
+          <a
+            href="https://doi.org/10.5281/zenodo.15221823"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline btn-sm"
+          >
+            Open dataset
+          </a>
+
+<span class="btn btn-disabled btn-sm">
+  Thesis page coming soon
+</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

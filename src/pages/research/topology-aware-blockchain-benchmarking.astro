@@ -1,0 +1,378 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const topologies = [
+  {
+    name: "Fat-tree",
+    src: "/research/debs/topology-fat-tree.png",
+    desc: "A layered topology often associated with data-center-like infrastructures.",
+  },
+  {
+    name: "Full mesh",
+    src: "/research/debs/topology-full-mesh.png",
+    desc: "A dense topology where gateways are directly interconnected.",
+  },
+  {
+    name: "Hypercube",
+    src: "/research/debs/topology-hypercube.png",
+    desc: "A structured topology inspired by parallel and distributed computing systems.",
+  },
+  {
+    name: "Scale-free",
+    src: "/research/debs/topology-scale-free.png",
+    desc: "A topology with highly connected hubs, resembling Internet-like networks.",
+  },
+  {
+    name: "Torus",
+    src: "/research/debs/topology-torus.png",
+    desc: "A wrap-around grid topology often used in high-performance computing contexts.",
+  },
+];
+
+const dynamics = [
+  {
+    title: "Packet drop",
+    src: "/research/debs/dynamic-packet-drop.png",
+    desc: "Stress scenario used to observe how blockchain systems react when packet loss increases.",
+  },
+  {
+    title: "Bandwidth congestion",
+    src: "/research/debs/dynamic-bandwidth-congestion.png",
+    desc: "Stress scenario used to study the impact of constrained network capacity.",
+  },
+  {
+    title: "Node crash",
+    src: "/research/debs/dynamic-node-crash.png",
+    desc: "Stress scenario used to evaluate behaviour when part of the network becomes unavailable.",
+  },
+];
+---
+
+<BaseLayout
+  title="Impact of Network Topologies on Blockchain Performance | Research | Vincenzo Di Perna"
+  description="ACM DEBS '25 paper on topology-aware blockchain benchmarking, Lilith, reproducible experiments, and network-controlled blockchain evaluation."
+  sideBarActiveItemID="research"
+>
+  <section class="mb-8">
+    <a href="/research" class="btn btn-sm btn-outline mb-6">
+      ← Back to Research
+    </a>
+
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-2 items-center mb-3">
+          <h1 class="text-4xl font-bold">
+            Impact of Network Topologies on Blockchain Performance
+          </h1>
+          <span class="badge badge-secondary">ACM DEBS '25</span>
+          <span class="badge badge-outline">Publication</span>
+        </div>
+
+        <p class="text-lg leading-relaxed opacity-90">
+          This work studies how the underlying network topology affects
+          blockchain performance. Instead of treating the network as a fixed or
+          opaque execution layer, the paper evaluates multiple blockchain
+          systems under controlled topologies, realistic workloads, and
+          reproducible experimental conditions.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mt-5">
+          <span class="badge badge-outline">Blockchain benchmarking</span>
+          <span class="badge badge-outline">Network topology</span>
+          <span class="badge badge-outline">Lilith</span>
+          <span class="badge badge-outline">Kollaps</span>
+          <span class="badge badge-outline">Diablo</span>
+          <span class="badge badge-outline">Reproducibility</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">5</p>
+          <p class="opacity-80">blockchain systems</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">5</p>
+          <p class="opacity-80">network topologies</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">6</p>
+          <p class="opacity-80">workload families</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">1</p>
+          <p class="opacity-80">benchmarking framework</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Context</h2>
+
+        <p class="leading-relaxed opacity-90">
+          Blockchain systems are usually evaluated through throughput, latency,
+          commit rate, and resource consumption. However, those measurements can
+          change significantly depending on the network conditions under which
+          the blockchain is executed. Public clouds are useful for realistic
+          deployments, but they also introduce cost, opacity, and time-dependent
+          variability. This paper addresses that problem by combining
+          reproducible cluster-based execution with programmable network
+          emulation.
+        </p>
+
+        <p class="leading-relaxed opacity-90 mt-3">
+          The central idea is simple: to compare blockchains meaningfully, the
+          evaluator must also control the shape and behaviour of the network in
+          which validators, clients, and gateways communicate.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <figure class="px-6 pt-6">
+        <img
+          src="/research/debs/aws-heatmap-comparison.png"
+          alt="AWS latency and throughput heatmap comparison used as motivation for controlled blockchain benchmarking."
+          class="rounded-xl border border-base-300 bg-base-200"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Why network control matters</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The paper starts from a practical benchmarking problem: cloud network
+          conditions vary across regions and over time. This makes blockchain
+          experiments difficult to reproduce if the network layer is not
+          explicitly modelled. The heatmap motivates the need for controlled
+          experiments that can reproduce cloud-inspired latency and throughput
+          conditions without depending entirely on live cloud variability.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <figure class="px-6 pt-6">
+        <img
+          src="/research/debs/lilith-arch-v2.png"
+          alt="Lilith architecture and execution flow integrating topology generation, Kollaps, Docker, monitoring, Diablo, and blockchain nodes."
+          class="rounded-xl border border-base-300 bg-base-200"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Lilith architecture</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The work introduces Lilith as a topology-aware benchmarking framework.
+          Lilith connects experiment parameters, topology generation, network
+          datasets, Docker-based execution, Kollaps network emulation, monitoring
+          and export modules, and Diablo-based blockchain workload execution.
+          This creates a repeatable pipeline for running blockchain experiments
+          under programmable network conditions.
+        </p>
+
+        <div class="card-actions mt-4">
+          <a
+            href="/research/lilith-benchmarking-framework"
+            class="btn btn-sm btn-outline"
+          >
+            Open Lilith artifact page
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Topologies evaluated</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The evaluation compares blockchain behaviour across five network
+          topologies. These topologies are not presented as perfect
+          representations of every real blockchain deployment. Instead, they are
+          controlled network shapes used to expose how different communication
+          structures influence performance and robustness.
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-5">
+          {
+            topologies.map((topology) => (
+              <div class="card bg-base-200/50 border border-base-300">
+                <figure class="px-4 pt-4">
+                  <img
+                    src={topology.src}
+                    alt={`${topology.name} topology used in the DEBS 2025 blockchain benchmarking paper.`}
+                    class="rounded-lg bg-base-100"
+                    loading="lazy"
+                  />
+                </figure>
+
+                <div class="card-body p-4">
+                  <h3 class="font-bold">{topology.name}</h3>
+                  <p class="text-sm opacity-80">{topology.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <figure class="px-6 pt-6">
+        <img
+          src="/research/debs/network-load-workloads.png"
+          alt="Network load during blockchain workload execution across workloads and topologies."
+          class="rounded-xl border border-base-300 bg-base-200"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="card-body">
+        <h2 class="card-title text-2xl">What the experiments show</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The experiments compare how blockchain systems behave under different
+          workloads and network topologies. The results show that topology is
+          not a secondary detail: the communication structure of the network can
+          change throughput, latency, commit behaviour, and network load. The
+          paper highlights that full mesh, hypercube, and torus-like structures
+          can improve performance under demanding workloads, while different
+          blockchain systems react differently to the same network conditions.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Network dynamics</h2>
+
+        <p class="leading-relaxed opacity-90">
+          Beyond static topologies, the paper also evaluates dynamic network
+          conditions such as packet drop, bandwidth congestion, and node crash.
+          This is important because real distributed systems do not operate in
+          perfectly stable networks. The goal is to understand which systems
+          remain robust and which systems are more sensitive when the network
+          degrades.
+        </p>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-5">
+          {
+            dynamics.map((item) => (
+              <div class="card bg-base-200/50 border border-base-300">
+                <figure class="px-4 pt-4">
+                  <img
+                    src={item.src}
+                    alt={`${item.title} experiment from the DEBS 2025 blockchain topology paper.`}
+                    class="rounded-lg bg-base-100"
+                    loading="lazy"
+                  />
+                </figure>
+
+                <div class="card-body p-4">
+                  <h3 class="font-bold">{item.title}</h3>
+                  <p class="text-sm opacity-80">{item.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Contribution</h2>
+
+        <ul class="list-disc pl-5 space-y-2 opacity-90">
+          <li>
+            Shows that blockchain benchmarking should explicitly account for
+            network topology and network variability.
+          </li>
+          <li>
+            Evaluates Algorand, Diem, Ethereum, Quorum, and Solana under
+            controlled topology-aware conditions.
+          </li>
+          <li>
+            Uses realistic workload families including transfer transactions
+            and smart-contract-oriented workloads.
+          </li>
+          <li>
+            Introduces Lilith as a reproducible framework integrating Diablo
+            workload execution with Kollaps network emulation.
+          </li>
+          <li>
+            Connects cloud-inspired network measurements with controlled
+            cluster-based experiments.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Links</h2>
+
+        <div class="flex flex-wrap gap-3 mt-2">
+          <a
+            href="https://dl.acm.org/doi/10.1145/3701717.3730540"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary btn-sm"
+          >
+            Open ACM paper
+          </a>
+
+          <a
+            href="https://doi.org/10.5281/zenodo.11409100"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline btn-sm"
+          >
+            Open Lilith artifact
+          </a>
+
+          <a
+            href="/research/lilith-benchmarking-framework"
+            class="btn btn-outline btn-sm"
+          >
+            Read artifact page
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
