@@ -11,7 +11,7 @@ export type RecentWork = {
 export const recentWorks: RecentWork[] = [
   {
     title: "Decentralized Accounting System",
-    desc: "Master's thesis project on a decentralized accounting and document-management system integrating blockchain transactions, Solid Pods, MetaMask, QR-code interaction, and eBill-inspired workflows.",
+    desc: "Master's thesis project on a decentralized accounting and document-management system integrating blockchain transactions, Solid Pods, MetaMask, QR-code interaction, and eBill-inspired workflows, now linked to a modernized local-demo repository.",
     url: "/research/decentralized-accounting-system",
     img: "/research/theses/master/infrastructure-components.png",
     badge: "Master's thesis",
