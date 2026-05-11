@@ -14,15 +14,16 @@ import HorizontalCard from "../components/HorizontalCard.astro";
     <p class="text-lg leading-relaxed opacity-90">
       A selection of research artifacts, software tools, datasets, analysis
       pipelines, and exploratory projects around blockchain systems, distributed
-      infrastructures, digital assets, benchmarking, reproducible experimentation,
-      real-world assets, and fairer value distribution.
+      infrastructures, digital assets, benchmarking, reproducible
+      experimentation, real-world assets, and fairer value distribution.
     </p>
   </section>
 
   <section class="mb-12">
     <div class="flex items-center gap-3 mb-2">
       <h2 class="text-3xl w-full font-bold">Countering Wealth Concentration</h2>
-      <span class="badge badge-warning whitespace-nowrap">Work in progress</span>
+      <span class="badge badge-warning whitespace-nowrap">Work in progress</span
+      >
     </div>
 
     <p class="mb-5 opacity-80">
@@ -80,7 +81,8 @@ import HorizontalCard from "../components/HorizontalCard.astro";
   <section class="mb-12">
     <div class="flex items-center gap-3 mb-2">
       <h2 class="text-3xl w-full font-bold">Real-World Assets — RWA</h2>
-      <span class="badge badge-warning whitespace-nowrap">Work in progress</span>
+      <span class="badge badge-warning whitespace-nowrap">Work in progress</span
+      >
     </div>
 
     <p class="mb-5 opacity-80">
@@ -138,7 +140,8 @@ import HorizontalCard from "../components/HorizontalCard.astro";
   <section class="mb-12">
     <div class="flex items-center gap-3 mb-2">
       <h2 class="text-3xl w-full font-bold">General Experiences</h2>
-      <span class="badge badge-warning whitespace-nowrap">Work in progress</span>
+      <span class="badge badge-warning whitespace-nowrap">Work in progress</span
+      >
     </div>
 
     <p class="mb-5 opacity-80">
@@ -148,66 +151,48 @@ import HorizontalCard from "../components/HorizontalCard.astro";
       technologies.
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="network-protected card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap items-center gap-2">
-            <h3 class="card-title">Restaurant Solid Blockchain Prototype</h3>
-<span class="badge badge-success">Available</span>
-          </div>
-
-          <p>
-  A legacy MSc thesis prototype modernized into a reproducible local demo,
-  combining a restaurant ordering workflow, Solid Pods concepts, mock blockchain
-  payment verification, PDF bill generation, and safe Solid rebuild tooling.
-</p>
-
-          <div class="card-actions justify-end mt-4">
-            <a
-  class="btn btn-sm btn-primary"
-  href="https://github.com/vindipe/restaurant-solid-blockchain-prototype"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  Open repository
-</a>
-
-<a
-  class="btn btn-sm btn-outline"
-  href="/research/decentralized-accounting-system"
->
-  Read thesis page
-</a>
-
-            <span class="badge badge-outline">Node.js</span>
-<span class="badge badge-outline">Solid Pods</span>
-<span class="badge badge-outline">Mock payment</span>
-          </div>
-        </div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  <div class="network-protected card bg-base-100 shadow-md">
+    <div class="card-body h-full">
+      <div class="flex flex-wrap items-center gap-2">
+        <h3 class="card-title">Restaurant Solid Blockchain Prototype</h3>
+        <span class="badge badge-success">Available</span>
       </div>
 
-      <div class="network-protected card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap items-center gap-2">
-            <h3 class="card-title">Experimental engineering labs</h3>
-            <span class="badge badge-warning">Coming soon</span>
-          </div>
+      <p>
+        A legacy MSc thesis prototype modernized into a reproducible local
+        demo, combining a restaurant ordering workflow, Solid Pods concepts,
+        mock blockchain payment verification, PDF bill generation, and safe
+        Solid rebuild tooling.
+      </p>
 
-          <p>
-            Space reserved for small projects, technical experiments, and
-            exploratory implementations across systems programming, backend
-            development, distributed systems, blockchain tools, data workflows,
-            and DevOps practices.
-          </p>
+      <div class="mt-auto pt-4 space-y-3">
+        <div class="flex flex-wrap gap-2">
+          <span class="badge badge-outline">Node.js</span>
+          <span class="badge badge-outline">Solid Pods</span>
+          <span class="badge badge-outline">Mock payment</span>
+          <span class="badge badge-outline">PDF bills</span>
+        </div>
 
-          <div class="card-actions justify-end mt-4">
-            <span class="badge badge-outline">Prototypes</span>
-            <span class="badge badge-outline">Engineering practice</span>
-            <span class="badge badge-outline">DevOps</span>
-          </div>
+        <div class="card-actions justify-end">
+          <a
+            class="btn btn-sm btn-outline"
+            href="/research/decentralized-accounting-system"
+          >
+            Read thesis page
+          </a>
+
+          <a
+            class="btn btn-sm btn-primary"
+            href="https://github.com/vindipe/restaurant-solid-blockchain-prototype"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open repository
+          </a>
         </div>
       </div>
     </div>
+  </div>
   </section>
-  
 </BaseLayout>
