@@ -24,3 +24,6 @@ pnpm-debug.log*
 # Windows / WSL / Dropbox metadata
 *:Zone.Identifier
 *:com.dropbox.attrs
+
+# Dropbox metadata
+*dropbox.attrs*
