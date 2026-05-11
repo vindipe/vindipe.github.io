@@ -10,6 +10,24 @@ export type RecentWork = {
 
 export const recentWorks: RecentWork[] = [
   {
+    title: "CryptoEntropy Explorer",
+    desc: "Interactive EB-index dashboard for exploring normalized and entropy-derived cryptocurrency datasets: toggle assets, choose attribute sets, assign custom utility weights, and recompute the index live.",
+    url: "/projects/cryptoentropy-explorer",
+    img: "/research/dlt25/weighted-entropy-set1.png",
+    badge: "Interactive tool",
+    date: "2026-05-11",
+    target: "_self",
+  },
+  {
+    title: "CryptoEntropy – Economic Efficiency Dataset",
+    desc: "Public GitHub repository containing normalized and entropy-derived cryptocurrency datasets for the DLT '25 EB-index study, plus reproducibility material for regenerating the main figures.",
+    url: "/research/entropy-based-economic-efficiency",
+    img: "/research/dlt25/entropy-set1.png",
+    badge: "Dataset / GitHub",
+    date: "2026-05-11",
+    target: "_self",
+  },
+  {
     title: "Decentralized Accounting System",
     desc: "Master's thesis project on a decentralized accounting and document-management system integrating blockchain transactions, Solid Pods, MetaMask, QR-code interaction, and eBill-inspired workflows, now linked to a modernized local-demo repository.",
     url: "/research/decentralized-accounting-system",

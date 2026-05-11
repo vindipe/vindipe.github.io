@@ -1,0 +1,1214 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="CryptoEntropy Explorer | Projects and Tools | Vincenzo Di Perna"
+  description="Interactive EB-index dashboard for exploring normalized and entropy-derived cryptocurrency datasets from the DLT 2025 CryptoEntropy study."
+  sideBarActiveItemID="projects"
+>
+  <section class="mb-8">
+    <a href="/projects" class="btn btn-sm btn-outline mb-6">
+      ← Back to Projects
+    </a>
+
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-2 items-center mb-3">
+          <h1 class="text-4xl font-bold">CryptoEntropy Explorer</h1>
+          <span class="badge badge-secondary">Interactive tool</span>
+          <span class="badge badge-outline">EB-index</span>
+        </div>
+
+        <p class="text-lg leading-relaxed opacity-90">
+          A small interactive dashboard for experimenting with the Entropy
+          Balance index introduced in the DLT '25 paper. Select cryptoassets,
+          choose one of the paper attribute sets or build a custom set,
+          switch attributes on or off, change utility weights, and see how the
+          EB-index changes over time.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mt-5">
+          <span class="badge badge-outline">Bitcoin</span>
+          <span class="badge badge-outline">Ethereum</span>
+          <span class="badge badge-outline">XRP</span>
+          <span class="badge badge-outline">USD Coin</span>
+          <span class="badge badge-outline">Dogecoin</span>
+          <span class="badge badge-outline">Cardano</span>
+          <span class="badge badge-outline">Coin Metrics-derived data</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">6</p>
+          <p class="opacity-80">supported cryptoassets</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">3 + custom</p>
+          <p class="opacity-80">paper presets and user-defined sets</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">2010–2025</p>
+          <p class="opacity-80">monthly dashboard series</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-3 items-start justify-between">
+          <div>
+            <h2 class="card-title text-2xl">Interactive EB-index playground</h2>
+            <p class="leading-relaxed opacity-90 mt-2 max-w-3xl">
+              The chart is recalculated in the browser from monthly normalized
+              attribute values. The custom weighted mode follows the weighted
+              entropy idea: selected attributes are converted into a probability
+              distribution, then user-defined utility weights control how much
+              each attribute contributes to the final score.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            <a
+              href="https://github.com/vindipe/cryptoentropy-economic-efficiency"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-sm btn-outline"
+            >
+              GitHub repo
+            </a>
+            <a
+              href="https://doi.org/10.5281/zenodo.15743397"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-sm btn-outline"
+            >
+              Zenodo dataset
+            </a>
+          </div>
+        </div>
+
+        <div
+          id="cryptoentropy-status"
+          class="alert alert-info mt-5 text-sm"
+          role="status"
+        >
+          Loading CryptoEntropy dashboard data…
+        </div>
+
+        <div id="cryptoentropy-app" class="hidden mt-5 space-y-5">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="card bg-base-200/50 border border-base-300 lg:col-span-1">
+              <div class="card-body">
+                <h3 class="font-bold text-lg">1. Choose a preset or custom set</h3>
+
+                <label class="form-control w-full mt-2">
+                  <div class="label">
+                    <span class="label-text">Preset / attribute set</span>
+                  </div>
+                  <select id="set-select" class="select select-bordered w-full">
+                    <option value="set1">Set1 — compact activity and market view</option>
+                    <option value="set2">Set2 — dynamic network behaviour</option>
+                    <option value="set3">Set3 — Set2 plus fee pressure</option>
+                    <option value="custom">Custom — choose your own attributes</option>
+                  </select>
+                </label>
+
+                <p id="set-description" class="text-sm opacity-80 mt-3"></p>
+
+                <div
+                  id="custom-set-tools"
+                  class="hidden mt-4 rounded-xl border border-base-300 bg-base-100 p-3"
+                >
+                  <p class="text-sm font-semibold">Custom set builder</p>
+                  <p class="text-xs opacity-70 mt-1">
+                    Start from a paper preset, select all available attributes,
+                    or start empty and build your own analytical question.
+                  </p>
+
+                  <div class="flex flex-wrap gap-2 mt-3">
+                    <button id="custom-empty" class="btn btn-xs btn-outline" type="button">
+                      Start empty
+                    </button>
+                    <button id="custom-from-set1" class="btn btn-xs btn-outline" type="button">
+                      Copy Set1
+                    </button>
+                    <button id="custom-from-set2" class="btn btn-xs btn-outline" type="button">
+                      Copy Set2
+                    </button>
+                    <button id="custom-from-set3" class="btn btn-xs btn-outline" type="button">
+                      Copy Set3
+                    </button>
+                    <button id="custom-all" class="btn btn-xs btn-outline" type="button">
+                      Select all
+                    </button>
+                  </div>
+
+                  <p id="custom-set-summary" class="text-xs opacity-80 mt-3"></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card bg-base-200/50 border border-base-300 lg:col-span-2">
+              <div class="card-body">
+                <h3 class="font-bold text-lg">2. Toggle cryptoassets</h3>
+                <div
+                  id="asset-controls"
+                  class="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2"
+                ></div>
+
+                <p id="asset-coverage-note" class="hidden text-xs opacity-70 mt-3"></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <div class="flex flex-wrap gap-3 items-center justify-between">
+                <div>
+                  <h3 class="font-bold text-lg">3. Select attributes and utility weights</h3>
+                  <p class="text-sm opacity-80 mt-1">
+                    For paper presets, you can still remove attributes or change
+                    weights. In custom mode, this becomes your own EB-index
+                    attribute set.
+                  </p>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                  <button id="equal-weights" class="btn btn-sm btn-outline" type="button">
+                    Equal utility
+                  </button>
+                  <button id="activity-preset" class="btn btn-sm btn-outline" type="button">
+                    Activity preset
+                  </button>
+                  <button id="market-preset" class="btn btn-sm btn-outline" type="button">
+                    Market preset
+                  </button>
+                </div>
+              </div>
+
+              <div
+                id="attribute-controls"
+                class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4"
+              ></div>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <div class="flex flex-wrap gap-3 items-start justify-between">
+                <div>
+                  <h3 class="font-bold text-lg">Current analytical question</h3>
+                  <p class="text-sm opacity-80 mt-1">
+                    This panel translates the selected assets, attributes, and
+                    weights into a readable EB-index question.
+                  </p>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                  <button id="copy-config-summary" class="btn btn-sm btn-outline" type="button">
+                    Copy summary
+                  </button>
+                  <button id="copy-share-link" class="btn btn-sm btn-outline" type="button">
+                    Copy share link
+                  </button>
+                  <button id="reset-dashboard" class="btn btn-sm btn-outline" type="button">
+                    Reset
+                  </button>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
+                <div class="rounded-xl border border-base-300 bg-base-100 p-3">
+                  <p class="text-xs uppercase tracking-wide opacity-60">Mode</p>
+                  <p id="summary-mode" class="font-semibold mt-1">—</p>
+                </div>
+
+                <div class="rounded-xl border border-base-300 bg-base-100 p-3">
+                  <p class="text-xs uppercase tracking-wide opacity-60">Assets</p>
+                  <p id="summary-assets" class="font-semibold mt-1">—</p>
+                </div>
+
+                <div class="rounded-xl border border-base-300 bg-base-100 p-3">
+                  <p class="text-xs uppercase tracking-wide opacity-60">Attributes</p>
+                  <p id="summary-attributes" class="font-semibold mt-1">—</p>
+                </div>
+
+                <div class="rounded-xl border border-base-300 bg-base-100 p-3">
+                  <p class="text-xs uppercase tracking-wide opacity-60">Top latest asset</p>
+                  <p id="summary-top-asset" class="font-semibold mt-1">—</p>
+                </div>
+              </div>
+
+              <div id="question-text" class="alert mt-4 text-sm"></div>
+
+              <div class="overflow-x-auto mt-4">
+                <table class="table table-sm">
+                  <thead>
+                    <tr>
+                      <th>Selected attribute</th>
+                      <th>Utility weight</th>
+                      <th>Source</th>
+                    </tr>
+                  </thead>
+                  <tbody id="selected-attributes-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <div class="flex flex-wrap gap-3 items-center justify-between">
+                <div>
+                  <h3 class="font-bold text-lg">Live EB-index lineplot</h3>
+                  <p class="text-sm opacity-80 mt-1">
+                    Scores are normalized between 0 and 1. Higher values mean
+                    that the selected economic qualities are more balanced under
+                    the chosen utility assumptions.
+                  </p>
+                </div>
+
+                <div class="join">
+                  <button id="show-all-dates" class="btn btn-sm join-item btn-active" type="button">
+                    All dates
+                  </button>
+                  <button id="show-recent-dates" class="btn btn-sm join-item" type="button">
+                    Since 2018
+                  </button>
+                </div>
+              </div>
+
+              <div class="overflow-x-auto mt-4 rounded-xl bg-base-100 border border-base-300 p-3">
+                <svg
+                  id="eb-chart"
+                  viewBox="0 0 840 420"
+                  role="img"
+                  aria-label="Interactive EB-index line chart"
+                  class="w-full min-w-[720px] h-auto"
+                ></svg>
+              </div>
+
+              <div id="chart-legend" class="flex flex-wrap gap-3 mt-3 text-sm"></div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="card bg-base-200/50 border border-base-300">
+              <div class="card-body">
+                <h3 class="font-bold text-lg">Latest custom ranking</h3>
+                <p id="latest-date" class="text-sm opacity-80"></p>
+
+                <div class="overflow-x-auto mt-3">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Asset</th>
+                        <th>EB-index</th>
+                      </tr>
+                    </thead>
+                    <tbody id="ranking-body"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div class="card bg-base-200/50 border border-base-300">
+              <div class="card-body">
+                <div class="flex flex-wrap gap-3 items-center justify-between">
+                  <div>
+                    <h3 class="font-bold text-lg">Attribute contribution snapshot</h3>
+                    <p class="text-sm opacity-80">
+                      Latest available month for the selected asset.
+                    </p>
+                  </div>
+
+                  <select id="snapshot-asset" class="select select-bordered select-sm"></select>
+                </div>
+
+                <div id="contribution-bars" class="space-y-3 mt-4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">How to read the tool</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-3">
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Not a price ranking</h3>
+              <p class="text-sm opacity-80">
+                The EB-index does not say which asset is a better investment. It
+                measures balance across the selected economic qualities.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Weights are assumptions</h3>
+              <p class="text-sm opacity-80">
+                Changing weights changes the analytical question. This is the
+                point of the framework: the definition of efficiency is explicit.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Custom sets are experiments</h3>
+              <p class="text-sm opacity-80">
+                A custom set lets users test their own notion of economic
+                balance while keeping the attribute choices visible.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Derived data only</h3>
+              <p class="text-sm opacity-80">
+                The dashboard uses normalized and entropy-derived datasets. Raw
+                Coin Metrics data are not redistributed here.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-sm opacity-70 mt-5">
+          Source note: underlying on-chain and market metrics are derived from
+          Coin Metrics and processed into normalized/entropy-based research
+          datasets for the DLT '25 study. Raw Coin Metrics data are not
+          redistributed. This page is an exploratory research prototype that
+          could be extended to a broader metric catalogue with direct data-provider
+          integration. It is not investment advice.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+  const DATA_URL = "/data/cryptoentropy/cryptoentropy-explorer.json";
+  const PAPER_SET_IDS = ["set1", "set2", "set3"];
+  const DEFAULT_CUSTOM_ATTRIBUTES = ["DQ1", "DQ3", "CapMrktCurUSD", "DQ7"];
+
+  const ASSET_COLORS = {
+    btc: "#f59e0b",
+    eth: "#6366f1",
+    xrp: "#0f766e",
+    usdc: "#2563eb",
+    doge: "#a16207",
+    ada: "#7c3aed",
+  };
+
+  const DEFAULT_STATE = {
+    set: "set1",
+    selectedAssets: ["btc", "eth", "xrp", "usdc", "doge", "ada"],
+    selectedAttributes: [],
+    customAttributes: [...DEFAULT_CUSTOM_ATTRIBUTES],
+    weights: {},
+    recentOnly: false,
+    snapshotAsset: "btc",
+  };
+
+  const state = structuredClone(DEFAULT_STATE);
+
+  let dashboardData = null;
+
+  const $ = (id) => document.getElementById(id);
+
+  function clamp(value, min, max) {
+    return Math.max(min, Math.min(max, value));
+  }
+
+  function formatScore(value) {
+    if (!Number.isFinite(value)) return "0.000";
+    return value.toFixed(3);
+  }
+
+  function isCustomSet() {
+    return state.set === "custom";
+  }
+
+  function getCurrentSet() {
+    return dashboardData.sets[state.set];
+  }
+
+  function getAttributeIds(setId) {
+    return dashboardData.sets[setId].attributes.map((attr) => attr.id);
+  }
+
+  function parseCsvParam(value) {
+    return (value || "")
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  function parseWeightParam(value) {
+    const entries = parseCsvParam(value);
+    return Object.fromEntries(
+      entries
+        .map((entry) => {
+          const [attrId, rawWeight] = entry.split(":");
+          const weight = Number(rawWeight);
+          if (!attrId || !Number.isFinite(weight)) return null;
+          return [attrId, clamp(weight, 0, 1)];
+        })
+        .filter(Boolean)
+    );
+  }
+
+  function getCurrentAttributeIds() {
+    return getCurrentSet().attributes.map((attr) => attr.id);
+  }
+
+  function applyStateFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    if (!params.toString()) return;
+
+    const setId = params.get("set") || params.get("s");
+    if (setId && dashboardData.sets[setId]) {
+      state.set = setId;
+    }
+
+    resetAttributesForSet();
+
+    const assetIds = new Set(dashboardData.assets.map((asset) => asset.id));
+    const urlAssets = parseCsvParam(params.get("assets") || params.get("a")).filter((assetId) => assetIds.has(assetId));
+    if (urlAssets.length) state.selectedAssets = urlAssets;
+
+    const currentAttrIds = new Set(getCurrentAttributeIds());
+    const urlAttributes = parseCsvParam(params.get("attrs") || params.get("m")).filter((attrId) => currentAttrIds.has(attrId));
+    if (urlAttributes.length) {
+      state.selectedAttributes = urlAttributes;
+      if (isCustomSet()) state.customAttributes = [...urlAttributes];
+    }
+
+    const urlWeights = parseWeightParam(params.get("weights") || params.get("w"));
+    for (const [attrId, weight] of Object.entries(urlWeights)) {
+      if (currentAttrIds.has(attrId)) state.weights[attrId] = weight;
+    }
+
+    state.recentOnly = params.get("range") === "recent" || params.get("r") === "1";
+
+    const snapshotAsset = params.get("snapshot") || params.get("snap");
+    if (snapshotAsset && assetIds.has(snapshotAsset)) {
+      state.snapshotAsset = snapshotAsset;
+    }
+
+    ensureWeightsForCurrentSet();
+  }
+
+  function buildShareUrl() {
+    const params = new URLSearchParams();
+    const assetIds = new Set(dashboardData.assets.map((asset) => asset.id));
+
+    params.set("set", state.set);
+
+    const selectedAssets = state.selectedAssets.filter((assetId) => assetIds.has(assetId));
+    if (selectedAssets.length) params.set("assets", selectedAssets.join(","));
+    if (state.selectedAttributes.length) params.set("attrs", state.selectedAttributes.join(","));
+
+    const weightPairs = state.selectedAttributes
+      .map((attrId) => [attrId, clamp(Number(state.weights[attrId] ?? 1), 0, 1)])
+      .filter(([, weight]) => Math.abs(weight - 1) > 0.001)
+      .map(([attrId, weight]) => `${attrId}:${weight.toFixed(2)}`);
+
+    if (weightPairs.length) params.set("weights", weightPairs.join(","));
+    if (state.recentOnly) params.set("range", "recent");
+    if (state.snapshotAsset) params.set("snapshot", state.snapshotAsset);
+
+    const url = new URL(window.location.href);
+    url.search = params.toString();
+    return url.toString();
+  }
+
+  function syncStateToUrl() {
+    if (!dashboardData || !window.history?.replaceState) return;
+    window.history.replaceState(null, "", buildShareUrl());
+  }
+
+  function renderDateModeControls() {
+    $("show-all-dates").classList.toggle("btn-active", !state.recentOnly);
+    $("show-recent-dates").classList.toggle("btn-active", state.recentOnly);
+  }
+
+  function assetHasAttribute(assetId, attrId) {
+    const rows = getCurrentSet().series[assetId] || [];
+    return rows.some((row) => Number.isFinite(Number(row.v?.[attrId])));
+  }
+
+  function getAvailableAssets() {
+    const setData = getCurrentSet();
+    let available = dashboardData.assets.filter((asset) => setData.assets.includes(asset.id));
+
+    if (isCustomSet() && state.selectedAttributes.length > 0) {
+      available = available.filter((asset) =>
+        state.selectedAttributes.every((attrId) => assetHasAttribute(asset.id, attrId))
+      );
+    }
+
+    return available;
+  }
+
+  function getEnabledAttributes() {
+    return getCurrentSet().attributes.map((attr) => ({
+      ...attr,
+      enabled: state.selectedAttributes.includes(attr.id),
+    }));
+  }
+
+  function getSelectedAttributes() {
+    return getCurrentSet().attributes.filter((attr) => state.selectedAttributes.includes(attr.id));
+  }
+
+  function getAttributeSourceLabel(attr) {
+    if (Array.isArray(attr.sourceSets) && attr.sourceSets.length) {
+      return attr.sourceSets.map((setId) => setId.toUpperCase()).join(" / ");
+    }
+    return state.set.toUpperCase();
+  }
+
+  function getSelectedAssetLabels() {
+    const availableIds = new Set(getAvailableAssets().map((asset) => asset.id));
+    return dashboardData.assets
+      .filter((asset) => state.selectedAssets.includes(asset.id) && availableIds.has(asset.id))
+      .map((asset) => asset.label);
+  }
+
+  function ensureWeightsForCurrentSet() {
+    for (const attr of getCurrentSet().attributes) {
+      if (state.weights[attr.id] === undefined) state.weights[attr.id] = 1;
+    }
+  }
+
+  function resetAttributesForSet() {
+    const setData = getCurrentSet();
+
+    if (isCustomSet()) {
+      const availableIds = new Set(getCurrentAttributeIds());
+      state.customAttributes = state.customAttributes.filter((attrId) => availableIds.has(attrId));
+      if (!state.customAttributes.length) {
+        state.customAttributes = DEFAULT_CUSTOM_ATTRIBUTES.filter((attrId) => availableIds.has(attrId));
+      }
+      state.selectedAttributes = [...state.customAttributes];
+    } else {
+      state.selectedAttributes = setData.attributes.map((attr) => attr.id);
+    }
+
+    ensureWeightsForCurrentSet();
+  }
+
+  function updateCustomSelection(attrIds) {
+    const availableIds = new Set(getCurrentAttributeIds());
+    state.customAttributes = Array.from(new Set(attrIds)).filter((attrId) => availableIds.has(attrId));
+    state.selectedAttributes = [...state.customAttributes];
+  }
+
+  function scoreFromValues(values, attributes, weights) {
+    const selected = attributes.filter((attr) => attr.enabled);
+    if (selected.length <= 1) return 0;
+
+    const rawValues = selected.map((attr) => Math.max(Number(values[attr.id]) || 0, 0));
+    const total = rawValues.reduce((sum, value) => sum + value, 0);
+    if (total <= 0) return 0;
+
+    const entropy = selected.reduce((sum, attr, index) => {
+      const probability = rawValues[index] / total;
+      if (probability <= 0) return sum;
+      const utilityWeight = clamp(Number(weights[attr.id]) || 0, 0, 1);
+      return sum - utilityWeight * probability * (Math.log(probability) / Math.log(selected.length));
+    }, 0);
+
+    return clamp(entropy, 0, 1);
+  }
+
+  function applyPreset(type) {
+    const setData = getCurrentSet();
+    const activity = new Set(["DQ1", "DQ2", "DQ3", "DQ4", "DQ5"]);
+    const market = new Set(["CapMrktCurUSD", "DQ6", "DQ7", "FeeMeanNtv"]);
+
+    for (const attr of setData.attributes) {
+      if (type === "equal") state.weights[attr.id] = 1;
+      if (type === "activity") state.weights[attr.id] = activity.has(attr.id) ? 1 : 0.35;
+      if (type === "market") state.weights[attr.id] = market.has(attr.id) ? 1 : 0.35;
+    }
+
+    renderAttributeControls();
+    renderAll();
+  }
+
+  function applyCustomTemplate(template) {
+    if (!isCustomSet()) return;
+
+    if (template === "empty") updateCustomSelection([]);
+    if (template === "all") updateCustomSelection(getCurrentAttributeIds());
+    if (PAPER_SET_IDS.includes(template)) updateCustomSelection(getAttributeIds(template));
+
+    renderAttributeControls();
+    renderAssetControls();
+    renderAll();
+  }
+
+  function computeSeries(assetId) {
+    const setData = getCurrentSet();
+    const series = setData.series[assetId] || [];
+    const attributes = getEnabledAttributes();
+
+    return series
+      .map((row) => ({
+        t: row.t,
+        score: scoreFromValues(row.v, attributes, state.weights),
+      }))
+      .filter((row) => !state.recentOnly || row.t >= "2018-01");
+  }
+
+  function latestScore(assetId) {
+    const rows = computeSeries(assetId);
+    if (!rows.length) return { t: "n/a", score: 0 };
+    return rows[rows.length - 1];
+  }
+
+  function renderSetDescription() {
+    const setData = getCurrentSet();
+    const extra = isCustomSet()
+      ? ` Selected attributes: ${state.selectedAttributes.length}. Pick at least two attributes to compute a meaningful entropy score.`
+      : "";
+    $("set-description").textContent = `${setData.description}${extra}`;
+  }
+
+  function renderCustomSetTools() {
+    const tools = $("custom-set-tools");
+    if (!tools) return;
+
+    tools.classList.toggle("hidden", !isCustomSet());
+
+    const selectedLabels = getCurrentSet().attributes
+      .filter((attr) => state.selectedAttributes.includes(attr.id))
+      .map((attr) => attr.label);
+
+    const summary = selectedLabels.length
+      ? `Your custom set currently includes: ${selectedLabels.join(", ")}.`
+      : "Your custom set is empty. Select at least two attributes below to compute an EB-index.";
+
+    $("custom-set-summary").textContent = summary;
+  }
+
+  function renderAssetControls() {
+    const container = $("asset-controls");
+    const available = getAvailableAssets();
+    const availableIds = new Set(available.map((asset) => asset.id));
+    state.selectedAssets = state.selectedAssets.filter((assetId) => availableIds.has(assetId));
+
+    if (!state.selectedAssets.length && available.length) {
+      state.selectedAssets = available.map((asset) => asset.id);
+    }
+
+    container.innerHTML = available
+      .map(
+        (asset) => `
+        <label class="label cursor-pointer justify-start gap-3 rounded-xl border border-base-300 bg-base-100 px-3 py-2">
+          <input
+            type="checkbox"
+            class="checkbox checkbox-sm asset-toggle"
+            value="${asset.id}"
+            ${state.selectedAssets.includes(asset.id) ? "checked" : ""}
+          />
+          <span class="label-text">${asset.label}</span>
+        </label>`
+      )
+      .join("");
+
+    container.querySelectorAll(".asset-toggle").forEach((input) => {
+      input.addEventListener("change", () => {
+        const id = input.value;
+        if (input.checked) {
+          state.selectedAssets = Array.from(new Set([...state.selectedAssets, id]));
+        } else {
+          state.selectedAssets = state.selectedAssets.filter((assetId) => assetId !== id);
+        }
+        if (state.selectedAssets.length && !state.selectedAssets.includes(state.snapshotAsset)) {
+          state.snapshotAsset = state.selectedAssets[0];
+        }
+        renderAll();
+      });
+    });
+
+    renderAssetCoverageNote(available);
+  }
+
+  function renderAssetCoverageNote(available) {
+    const note = $("asset-coverage-note");
+    if (!note) return;
+
+    if (!isCustomSet() || state.selectedAttributes.length === 0) {
+      note.classList.add("hidden");
+      note.textContent = "";
+      return;
+    }
+
+    const availableIds = new Set(available.map((asset) => asset.id));
+    const excluded = dashboardData.assets.filter((asset) => !availableIds.has(asset.id));
+
+    if (!excluded.length) {
+      note.classList.add("hidden");
+      note.textContent = "";
+      return;
+    }
+
+    note.classList.remove("hidden");
+    note.textContent = `${excluded.map((asset) => asset.label).join(", ")} ${excluded.length === 1 ? "is" : "are"} hidden because at least one selected attribute is unavailable for that asset.`;
+  }
+
+  function renderAttributeControls() {
+    const container = $("attribute-controls");
+    const setData = getCurrentSet();
+
+    container.innerHTML = setData.attributes
+      .map((attr) => {
+        const checked = state.selectedAttributes.includes(attr.id);
+        const weight = state.weights[attr.id] ?? 1;
+        const sourceBadges = isCustomSet() && Array.isArray(attr.sourceSets)
+          ? `<div class="flex flex-wrap gap-1 mt-2">${attr.sourceSets.map((setId) => `<span class="badge badge-xs badge-outline">${setId.toUpperCase()}</span>`).join("")}</div>`
+          : "";
+
+        return `
+          <div class="rounded-xl border border-base-300 bg-base-100 p-4">
+            <div class="flex items-start justify-between gap-3">
+              <label class="label cursor-pointer justify-start gap-3 p-0">
+                <input
+                  type="checkbox"
+                  class="checkbox checkbox-sm attribute-toggle"
+                  value="${attr.id}"
+                  ${checked ? "checked" : ""}
+                />
+                <span>
+                  <span class="font-semibold block">${attr.label}</span>
+                  <span class="text-xs opacity-70">${attr.id}</span>
+                  ${sourceBadges}
+                </span>
+              </label>
+              <span class="badge badge-outline weight-value" data-for="${attr.id}">${Number(weight).toFixed(2)}</span>
+            </div>
+
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.05"
+              value="${weight}"
+              class="range range-sm mt-4 weight-slider"
+              data-attr="${attr.id}"
+            />
+          </div>`;
+      })
+      .join("");
+
+    container.querySelectorAll(".attribute-toggle").forEach((input) => {
+      input.addEventListener("change", () => {
+        const id = input.value;
+        if (input.checked) {
+          state.selectedAttributes = Array.from(new Set([...state.selectedAttributes, id]));
+        } else {
+          state.selectedAttributes = state.selectedAttributes.filter((attrId) => attrId !== id);
+        }
+
+        if (isCustomSet()) {
+          state.customAttributes = [...state.selectedAttributes];
+        }
+
+        renderSetDescription();
+        renderCustomSetTools();
+        renderAssetControls();
+        renderAll();
+      });
+    });
+
+    container.querySelectorAll(".weight-slider").forEach((input) => {
+      input.addEventListener("input", () => {
+        const attr = input.dataset.attr;
+        state.weights[attr] = Number(input.value);
+        const badge = container.querySelector(`.weight-value[data-for="${attr}"]`);
+        if (badge) badge.textContent = Number(input.value).toFixed(2);
+        renderAll();
+      });
+    });
+  }
+
+  function renderSnapshotAssetSelect() {
+    const select = $("snapshot-asset");
+    const assets = getAvailableAssets().filter((asset) => state.selectedAssets.includes(asset.id));
+    if (!assets.some((asset) => asset.id === state.snapshotAsset) && assets.length) {
+      state.snapshotAsset = assets[0].id;
+    }
+
+    select.innerHTML = assets
+      .map(
+        (asset) => `<option value="${asset.id}" ${asset.id === state.snapshotAsset ? "selected" : ""}>${asset.label}</option>`
+      )
+      .join("");
+
+    select.onchange = () => {
+      state.snapshotAsset = select.value;
+      renderContributionBars();
+    };
+  }
+
+  function renderChart() {
+    const svg = $("eb-chart");
+    const selectedAssets = getAvailableAssets().filter((asset) => state.selectedAssets.includes(asset.id));
+    const width = 840;
+    const height = 420;
+    const margin = { top: 24, right: 28, bottom: 56, left: 56 };
+    const plotWidth = width - margin.left - margin.right;
+    const plotHeight = height - margin.top - margin.bottom;
+
+    if (state.selectedAttributes.length <= 1) {
+      svg.innerHTML = `
+        <rect x="0" y="0" width="${width}" height="${height}" fill="transparent"></rect>
+        <text x="${width / 2}" y="${height / 2}" text-anchor="middle" font-size="16" opacity="0.75">
+          Select at least two attributes to compute an entropy-based score.
+        </text>`;
+      $("chart-legend").innerHTML = "";
+      return;
+    }
+
+    const allSeries = selectedAssets.map((asset) => ({
+      asset,
+      rows: computeSeries(asset.id),
+    }));
+
+    const dates = Array.from(new Set(allSeries.flatMap((item) => item.rows.map((row) => row.t)))).sort();
+    const dateIndex = new Map(dates.map((date, index) => [date, index]));
+    const xForDate = (date) => {
+      const index = dateIndex.get(date) || 0;
+      if (dates.length <= 1) return margin.left;
+      return margin.left + (index / (dates.length - 1)) * plotWidth;
+    };
+    const yForScore = (score) => margin.top + (1 - score) * plotHeight;
+
+    const gridLines = [0, 0.25, 0.5, 0.75, 1]
+      .map((tick) => {
+        const y = yForScore(tick);
+        return `
+          <line x1="${margin.left}" y1="${y}" x2="${width - margin.right}" y2="${y}" stroke="currentColor" opacity="0.12" />
+          <text x="${margin.left - 10}" y="${y + 4}" text-anchor="end" font-size="12" opacity="0.65">${tick.toFixed(2)}</text>`;
+      })
+      .join("");
+
+    const xLabels = dates.length
+      ? [dates[0], dates[Math.floor(dates.length / 2)], dates[dates.length - 1]]
+          .map((date) => {
+            const x = xForDate(date);
+            return `<text x="${x}" y="${height - 22}" text-anchor="middle" font-size="12" opacity="0.65">${date}</text>`;
+          })
+          .join("")
+      : "";
+
+    const paths = allSeries
+      .map(({ asset, rows }) => {
+        if (!rows.length) return "";
+        const points = rows
+          .map((row) => `${xForDate(row.t).toFixed(2)},${yForScore(row.score).toFixed(2)}`)
+          .join(" ");
+        return `<polyline points="${points}" fill="none" stroke="${ASSET_COLORS[asset.id] || "currentColor"}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />`;
+      })
+      .join("");
+
+    svg.innerHTML = `
+      <rect x="0" y="0" width="${width}" height="${height}" fill="transparent"></rect>
+      ${gridLines}
+      <line x1="${margin.left}" y1="${height - margin.bottom}" x2="${width - margin.right}" y2="${height - margin.bottom}" stroke="currentColor" opacity="0.25" />
+      <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${height - margin.bottom}" stroke="currentColor" opacity="0.25" />
+      ${xLabels}
+      <text x="${margin.left}" y="18" font-size="13" opacity="0.7">Custom weighted EB-index</text>
+      ${paths}
+    `;
+
+    const legend = $("chart-legend");
+    legend.innerHTML = selectedAssets
+      .map(
+        (asset) => `
+          <span class="inline-flex items-center gap-2">
+            <span class="inline-block w-3 h-3 rounded-full" style="background:${ASSET_COLORS[asset.id] || "currentColor"}"></span>
+            ${asset.label}
+          </span>`
+      )
+      .join("");
+  }
+
+  function renderRanking() {
+    const assets = getAvailableAssets().filter((asset) => state.selectedAssets.includes(asset.id));
+    const ranking = assets
+      .map((asset) => ({ asset, ...latestScore(asset.id) }))
+      .sort((a, b) => b.score - a.score);
+
+    $("latest-date").textContent = ranking.length ? `Latest visible month: ${ranking[0].t}` : "No asset selected.";
+    $("ranking-body").innerHTML = ranking
+      .map(
+        (row, index) => `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${row.asset.label}</td>
+            <td><span class="font-mono">${formatScore(row.score)}</span></td>
+          </tr>`
+      )
+      .join("");
+  }
+
+  function renderContributionBars() {
+    const container = $("contribution-bars");
+    const setData = getCurrentSet();
+    const rows = setData.series[state.snapshotAsset] || [];
+    const latest = rows[rows.length - 1];
+    const attributes = getEnabledAttributes().filter((attr) => attr.enabled);
+
+    if (!latest || attributes.length <= 1) {
+      container.innerHTML = `<p class="text-sm opacity-80">Select one asset and at least two attributes.</p>`;
+      return;
+    }
+
+    const rawValues = attributes.map((attr) => Math.max(Number(latest.v[attr.id]) || 0, 0));
+    const total = rawValues.reduce((sum, value) => sum + value, 0);
+
+    const contributions = attributes.map((attr, index) => {
+      const probability = total > 0 ? rawValues[index] / total : 0;
+      const utilityWeight = clamp(Number(state.weights[attr.id]) || 0, 0, 1);
+      const entropyContribution = probability > 0
+        ? -utilityWeight * probability * (Math.log(probability) / Math.log(attributes.length))
+        : 0;
+      return { ...attr, raw: rawValues[index], probability, utilityWeight, entropyContribution };
+    });
+
+    const contributionTotal = contributions.reduce((sum, row) => sum + row.entropyContribution, 0);
+
+    container.innerHTML = contributions
+      .map((row) => {
+        const share = contributionTotal > 0 ? row.entropyContribution / contributionTotal : 0;
+        return `
+          <div>
+            <div class="flex justify-between gap-3 text-sm mb-1">
+              <span>${row.label}</span>
+              <span class="font-mono">${(share * 100).toFixed(1)}%</span>
+            </div>
+            <div class="w-full h-3 rounded-full bg-base-300 overflow-hidden">
+              <div class="h-3 rounded-full bg-primary" style="width:${(share * 100).toFixed(1)}%"></div>
+            </div>
+            <p class="text-xs opacity-60 mt-1">r=${row.raw.toFixed(4)}, p=${row.probability.toFixed(3)}, utility=${row.utilityWeight.toFixed(2)}</p>
+          </div>`;
+      })
+      .join("");
+  }
+
+  function getLatestRanking() {
+    return getAvailableAssets()
+      .filter((asset) => state.selectedAssets.includes(asset.id))
+      .map((asset) => ({ asset, ...latestScore(asset.id) }))
+      .sort((a, b) => b.score - a.score);
+  }
+
+  function buildConfigSummaryText() {
+    const setData = getCurrentSet();
+    const selectedAttributes = getSelectedAttributes();
+    const assetLabels = getSelectedAssetLabels();
+    const ranking = getLatestRanking();
+    const top = ranking[0];
+    const attributeText = selectedAttributes
+      .map((attr) => `${attr.label} (${attr.id}, weight ${(state.weights[attr.id] ?? 1).toFixed(2)})`)
+      .join("; ");
+
+    return [
+      "CryptoEntropy Explorer configuration",
+      `Mode: ${isCustomSet() ? "Custom attribute set" : state.set.toUpperCase()}`,
+      `Description: ${setData.description}`,
+      `Assets: ${assetLabels.length ? assetLabels.join(", ") : "none selected"}`,
+      `Attributes: ${attributeText || "none selected"}`,
+      top ? `Latest top asset: ${top.asset.label} (${formatScore(top.score)} in ${top.t})` : "Latest top asset: n/a",
+      "Source: normalized and entropy-derived CryptoEntropy datasets; raw Coin Metrics data are not redistributed.",
+    ].join("\n");
+  }
+
+  async function copyConfigSummary() {
+    const button = $("copy-config-summary");
+    const text = buildConfigSummaryText();
+
+    try {
+      await navigator.clipboard.writeText(text);
+      button.textContent = "Copied";
+    } catch {
+      button.textContent = "Copy failed";
+    }
+
+    setTimeout(() => {
+      button.textContent = "Copy summary";
+    }, 1600);
+  }
+
+  async function copyShareLink() {
+    const button = $("copy-share-link");
+    syncStateToUrl();
+
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      button.textContent = "Link copied";
+    } catch {
+      button.textContent = "Copy failed";
+    }
+
+    setTimeout(() => {
+      button.textContent = "Copy share link";
+    }, 1600);
+  }
+
+  function resetDashboard() {
+    Object.assign(state, structuredClone(DEFAULT_STATE));
+    resetAttributesForSet();
+    $("set-select").value = state.set;
+    renderDateModeControls();
+    renderSetDescription();
+    renderCustomSetTools();
+    renderAssetControls();
+    renderAttributeControls();
+    renderAll();
+  }
+
+  function renderAnalyticalSummary() {
+    const selectedAttributes = getSelectedAttributes();
+    const assetLabels = getSelectedAssetLabels();
+    const ranking = getLatestRanking();
+    const top = ranking[0];
+    const setLabel = isCustomSet() ? "Custom" : state.set.toUpperCase();
+    const averageWeight = selectedAttributes.length
+      ? selectedAttributes.reduce((sum, attr) => sum + Number(state.weights[attr.id] ?? 1), 0) / selectedAttributes.length
+      : 0;
+
+    $("summary-mode").textContent = setLabel;
+    $("summary-assets").textContent = `${assetLabels.length} selected`;
+    $("summary-attributes").textContent = `${selectedAttributes.length} selected · avg weight ${averageWeight.toFixed(2)}`;
+    $("summary-top-asset").textContent = top ? `${top.asset.label} · ${formatScore(top.score)}` : "n/a";
+
+    const questionBox = $("question-text");
+    if (!assetLabels.length) {
+      questionBox.className = "alert alert-warning mt-4 text-sm";
+      questionBox.textContent = "Select at least one cryptoasset to compare EB-index behaviour.";
+    } else if (selectedAttributes.length <= 1) {
+      questionBox.className = "alert alert-warning mt-4 text-sm";
+      questionBox.textContent = "Select at least two attributes. Entropy needs a distribution over multiple dimensions.";
+    } else {
+      questionBox.className = "alert alert-info mt-4 text-sm";
+      const modeText = isCustomSet()
+        ? "a custom user-defined attribute set"
+        : `the ${state.set.toUpperCase()} paper preset`;
+      const attributeText = selectedAttributes.map((attr) => attr.label).join(", ");
+      const topText = top ? ` In the latest visible month, ${top.asset.label} ranks first with EB-index ${formatScore(top.score)}.` : "";
+      questionBox.textContent = `You are asking how balanced ${assetLabels.join(", ")} look under ${modeText}, using ${attributeText}. Higher weights make selected attributes matter more in the weighted entropy calculation.${topText}`;
+    }
+
+    $("selected-attributes-body").innerHTML = selectedAttributes.length
+      ? selectedAttributes
+          .map((attr) => `
+            <tr>
+              <td>${attr.label} <span class="opacity-60">${attr.id}</span></td>
+              <td><span class="font-mono">${Number(state.weights[attr.id] ?? 1).toFixed(2)}</span></td>
+              <td>${getAttributeSourceLabel(attr)}</td>
+            </tr>`)
+          .join("")
+      : `<tr><td colspan="3" class="opacity-70">No attributes selected.</td></tr>`;
+  }
+
+  function renderAll() {
+    renderSetDescription();
+    renderCustomSetTools();
+    renderDateModeControls();
+    renderChart();
+    renderRanking();
+    renderSnapshotAssetSelect();
+    renderContributionBars();
+    renderAnalyticalSummary();
+    syncStateToUrl();
+  }
+
+  async function initCryptoEntropyExplorer() {
+    const status = $("cryptoentropy-status");
+    try {
+      const response = await fetch(DATA_URL);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      dashboardData = await response.json();
+
+      resetAttributesForSet();
+      applyStateFromUrl();
+      $("set-select").value = state.set;
+      renderSetDescription();
+      renderCustomSetTools();
+      renderAssetControls();
+      renderAttributeControls();
+      renderAll();
+
+      $("cryptoentropy-app").classList.remove("hidden");
+      status.className = "alert alert-success mt-5 text-sm";
+      status.textContent = "Dashboard loaded. Use the paper presets or create your own attribute set, then change assets and utility weights to recompute the EB-index live. The current configuration is kept in the page URL, so it can be shared or reopened later.";
+    } catch (error) {
+      status.className = "alert alert-error mt-5 text-sm";
+      status.textContent = `Unable to load CryptoEntropy dashboard data: ${error.message}`;
+    }
+  }
+
+  $("set-select").addEventListener("change", (event) => {
+    state.set = event.target.value;
+    resetAttributesForSet();
+    renderSetDescription();
+    renderCustomSetTools();
+    renderAssetControls();
+    renderAttributeControls();
+    renderAll();
+  });
+
+  $("custom-empty").addEventListener("click", () => applyCustomTemplate("empty"));
+  $("custom-from-set1").addEventListener("click", () => applyCustomTemplate("set1"));
+  $("custom-from-set2").addEventListener("click", () => applyCustomTemplate("set2"));
+  $("custom-from-set3").addEventListener("click", () => applyCustomTemplate("set3"));
+  $("custom-all").addEventListener("click", () => applyCustomTemplate("all"));
+
+  $("copy-config-summary").addEventListener("click", copyConfigSummary);
+  $("copy-share-link").addEventListener("click", copyShareLink);
+  $("reset-dashboard").addEventListener("click", resetDashboard);
+
+  $("equal-weights").addEventListener("click", () => applyPreset("equal"));
+  $("activity-preset").addEventListener("click", () => applyPreset("activity"));
+  $("market-preset").addEventListener("click", () => applyPreset("market"));
+
+  $("show-all-dates").addEventListener("click", () => {
+    state.recentOnly = false;
+    renderAll();
+  });
+
+  $("show-recent-dates").addEventListener("click", () => {
+    state.recentOnly = true;
+    renderAll();
+  });
+
+  initCryptoEntropyExplorer();
+</script>

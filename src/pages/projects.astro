@@ -21,6 +21,62 @@ import HorizontalCard from "../components/HorizontalCard.astro";
 
   <section class="mb-12">
     <div class="flex items-center gap-3 mb-2">
+      <h2 class="text-3xl w-full font-bold">Interactive Research Tools</h2>
+      <span class="badge badge-success whitespace-nowrap">Available</span>
+    </div>
+
+    <p class="mb-5 opacity-80">
+      Small web tools that turn my research artifacts into interactive demos,
+      making methods, datasets, and evaluation logic easier to explore directly
+      from the browser.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body h-full">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="card-title">CryptoEntropy Explorer</h3>
+            <span class="badge badge-success">Available</span>
+          </div>
+
+          <p>
+            An interactive EB-index playground for exploring normalized and
+            entropy-derived cryptocurrency datasets. Users can toggle assets,
+            choose attribute sets, assign custom utility weights, and recompute
+            the index live in the browser.
+          </p>
+
+          <div class="mt-auto pt-4 space-y-3">
+            <div class="flex flex-wrap gap-2">
+              <span class="badge badge-outline">EB-index</span>
+              <span class="badge badge-outline">Dashboard</span>
+              <span class="badge badge-outline">Coin Metrics-derived</span>
+              <span class="badge badge-outline">DLT '25</span>
+            </div>
+
+            <div class="card-actions justify-end">
+              <a
+                class="btn btn-sm btn-outline"
+                href="/research/entropy-based-economic-efficiency"
+              >
+                Read research page
+              </a>
+
+              <a
+                class="btn btn-sm btn-primary"
+                href="/projects/cryptoentropy-explorer"
+              >
+                Open dashboard
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <div class="flex items-center gap-3 mb-2">
       <h2 class="text-3xl w-full font-bold">Countering Wealth Concentration</h2>
       <span class="badge badge-warning whitespace-nowrap">Work in progress</span
       >
@@ -194,5 +250,6 @@ import HorizontalCard from "../components/HorizontalCard.astro";
       </div>
     </div>
   </div>
+</div>
   </section>
 </BaseLayout>

@@ -406,12 +406,77 @@ const findings = [
     </div>
   </section>
 
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-3 items-start justify-between">
+          <div class="max-w-3xl">
+            <h2 class="card-title text-2xl">Try the EB-index interactively</h2>
+
+            <p class="leading-relaxed opacity-90 mt-2">
+              The CryptoEntropy Explorer turns the paper into a small interactive
+              lab. Users can toggle cryptoassets, choose one of the paper
+              attribute sets, build their own custom set from the available
+              attributes, assign utility weights, and immediately see how the
+              EB-index changes over time.
+            </p>
+          </div>
+
+          <a
+            href="/projects/cryptoentropy-explorer"
+            class="btn btn-primary btn-sm mt-1"
+          >
+            Open CryptoEntropy Explorer
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Custom attribute sets</h3>
+              <p class="text-sm opacity-80">
+                Start from Set1, Set2, Set3, or create a new set by selecting
+                the economic attributes you want to evaluate.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">User-defined weights</h3>
+              <p class="text-sm opacity-80">
+                Make the assumptions explicit by giving more or less importance
+                to activity, market, wealth, supply, or fee-related dimensions.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Shareable experiments</h3>
+              <p class="text-sm opacity-80">
+                The current Explorer configuration is stored in the URL, so a
+                specific analytical question can be copied, reopened, or shared.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="mb-12">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Links</h2>
+        <h2 class="card-title text-2xl">Links and reproducibility material</h2>
 
-        <div class="flex flex-wrap gap-3 mt-2">
+        <p class="leading-relaxed opacity-90">
+          The paper is accompanied by a public GitHub repository containing the
+          normalized and entropy-derived datasets, documentation, citation
+          metadata, and a plotting script for reproducing the main figures.
+        </p>
+
+        <div class="flex flex-wrap gap-3 mt-4">
           <a
             href="https://ceur-ws.org/Vol-4105/paper09.pdf"
             target="_blank"
@@ -422,17 +487,29 @@ const findings = [
           </a>
 
           <a
-            href="https://doi.org/10.5281/zenodo.15221823"
+            href="https://github.com/vindipe/cryptoentropy-economic-efficiency"
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-outline btn-sm"
           >
-            Open dataset
+            Open GitHub repository
           </a>
 
-<span class="btn btn-disabled btn-sm">
-  Thesis page coming soon
-</span>
+          <a
+            href="https://doi.org/10.5281/zenodo.15743397"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline btn-sm"
+          >
+            Open Zenodo dataset
+          </a>
+
+          <a
+            href="/projects/cryptoentropy-explorer"
+            class="btn btn-outline btn-sm"
+          >
+            Explore dashboard
+          </a>
         </div>
       </div>
     </div>
