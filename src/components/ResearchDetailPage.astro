@@ -13,6 +13,34 @@ const {
   previewBody = "",
   sections = [],
 } = Astro.props;
+
+const site = Astro.site ?? new URL("https://vindipe.github.io/");
+const canonicalURL = new URL(Astro.url.pathname, site).toString();
+
+const researchStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  "name": title,
+  "headline": title,
+  "description": description || subtitle || previewBody || title,
+  "url": canonicalURL,
+  "inLanguage": "en",
+  "author": {
+    "@type": "Person",
+    "@id": new URL("/#person", site).toString(),
+    "name": "Vincenzo Di Perna",
+    "url": site.toString()
+  },
+  "creator": {
+    "@type": "Person",
+    "@id": new URL("/#person", site).toString(),
+    "name": "Vincenzo Di Perna",
+    "url": site.toString()
+  },
+  "keywords": tags.join(", "),
+  "about": tags,
+  "sameAs": externalLinks.map((link) => link.href)
+};
 ---
 
 <BaseLayout
@@ -20,6 +48,8 @@ const {
   description={description || subtitle || title}
   sideBarActiveItemID="research"
 >
+  <script type="application/ld+json" set:html={JSON.stringify(researchStructuredData)}></script>
+
   <section class="mb-8">
     <a href="/research" class="btn btn-sm btn-outline mb-6">
       ← Back to Research
