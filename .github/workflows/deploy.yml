@@ -18,11 +18,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      PUBLIC_POSTHOG_ENABLED: ${{ vars.PUBLIC_POSTHOG_ENABLED }}
-      PUBLIC_POSTHOG_KEY: ${{ vars.PUBLIC_POSTHOG_KEY }}
-      PUBLIC_POSTHOG_HOST: ${{ vars.PUBLIC_POSTHOG_HOST }}    
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4

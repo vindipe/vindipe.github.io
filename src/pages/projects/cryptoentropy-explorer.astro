@@ -439,18 +439,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
   const $ = (id) => document.getElementById(id);
 
-  function trackCryptoEntropy(eventName, properties = {}) {
-    if (typeof window.trackSiteEvent !== "function") return;
-
-    window.trackSiteEvent(`cryptoentropy_${eventName}`, {
-      current_set: state.set,
-      selected_assets_count: state.selectedAssets.length,
-      selected_attributes_count: state.selectedAttributes.length,
-      recent_only: state.recentOnly,
-      ...properties,
-    });
-  }
-
   function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
   }
@@ -669,8 +657,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       if (type === "market") state.weights[attr.id] = market.has(attr.id) ? 1 : 0.35;
     }
 
-    trackCryptoEntropy("weight_preset_apply", { preset_type: type });
-
     renderAttributeControls();
     renderAll();
   }
@@ -681,11 +667,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     if (template === "empty") updateCustomSelection([]);
     if (template === "all") updateCustomSelection(getCurrentAttributeIds());
     if (PAPER_SET_IDS.includes(template)) updateCustomSelection(getAttributeIds(template));
-
-    trackCryptoEntropy("custom_template_apply", {
-      template,
-      resulting_attributes_count: state.selectedAttributes.length,
-    });
 
     renderAttributeControls();
     renderAssetControls();
@@ -772,10 +753,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         if (state.selectedAssets.length && !state.selectedAssets.includes(state.snapshotAsset)) {
           state.snapshotAsset = state.selectedAssets[0];
         }
-        trackCryptoEntropy("asset_toggle", {
-          asset_id: id,
-          enabled: input.checked,
-        });
         renderAll();
       });
     });
@@ -863,12 +840,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           state.customAttributes = [...state.selectedAttributes];
         }
 
-        trackCryptoEntropy("attribute_toggle", {
-          attribute_id: id,
-          enabled: input.checked,
-          custom_mode: isCustomSet(),
-        });
-
         renderSetDescription();
         renderCustomSetTools();
         renderAssetControls();
@@ -883,13 +854,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         const badge = container.querySelector(`.weight-value[data-for="${attr}"]`);
         if (badge) badge.textContent = Number(input.value).toFixed(2);
         renderAll();
-      });
-
-      input.addEventListener("change", () => {
-        trackCryptoEntropy("weight_change", {
-          attribute_id: input.dataset.attr,
-          weight_value: Number(input.value),
-        });
       });
     });
   }
@@ -909,7 +873,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
     select.onchange = () => {
       state.snapshotAsset = select.value;
-      trackCryptoEntropy("snapshot_asset_change", { asset_id: state.snapshotAsset });
       renderContributionBars();
     };
   }
@@ -1095,10 +1058,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     try {
       await navigator.clipboard.writeText(text);
       button.textContent = "Copied";
-      trackCryptoEntropy("summary_copy", { success: true });
     } catch {
       button.textContent = "Copy failed";
-      trackCryptoEntropy("summary_copy", { success: false });
     }
 
     setTimeout(() => {
@@ -1113,10 +1074,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     try {
       await navigator.clipboard.writeText(window.location.href);
       button.textContent = "Link copied";
-      trackCryptoEntropy("share_link_copy", { success: true });
     } catch {
       button.textContent = "Copy failed";
-      trackCryptoEntropy("share_link_copy", { success: false });
     }
 
     setTimeout(() => {
@@ -1125,7 +1084,6 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   }
 
   function resetDashboard() {
-    trackCryptoEntropy("dashboard_reset");
     Object.assign(state, structuredClone(DEFAULT_STATE));
     resetAttributesForSet();
     $("set-select").value = state.set;
@@ -1210,26 +1168,16 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       renderAll();
 
       $("cryptoentropy-app").classList.remove("hidden");
-      trackCryptoEntropy("loaded", {
-        assets_count: dashboardData.assets?.length || 0,
-        sets_count: Object.keys(dashboardData.sets || {}).length,
-      });
       status.className = "alert alert-success mt-5 text-sm";
       status.textContent = "Dashboard loaded. Use the paper presets or create your own attribute set, then change assets and utility weights to recompute the EB-index live. The current configuration is kept in the page URL, so it can be shared or reopened later.";
     } catch (error) {
-      trackCryptoEntropy("load_error", { error_message: error.message });
       status.className = "alert alert-error mt-5 text-sm";
       status.textContent = `Unable to load CryptoEntropy dashboard data: ${error.message}`;
     }
   }
 
   $("set-select").addEventListener("change", (event) => {
-    const previousSet = state.set;
     state.set = event.target.value;
-    trackCryptoEntropy("set_change", {
-      previous_set: previousSet,
-      next_set: state.set,
-    });
     resetAttributesForSet();
     renderSetDescription();
     renderCustomSetTools();
@@ -1254,13 +1202,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
   $("show-all-dates").addEventListener("click", () => {
     state.recentOnly = false;
-    trackCryptoEntropy("date_range_change", { range: "all" });
     renderAll();
   });
 
   $("show-recent-dates").addEventListener("click", () => {
     state.recentOnly = true;
-    trackCryptoEntropy("date_range_change", { range: "recent" });
     renderAll();
   });
 
