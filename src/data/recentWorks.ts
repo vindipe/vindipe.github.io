@@ -10,6 +10,15 @@ export type RecentWork = {
 
 export const recentWorks: RecentWork[] = [
   {
+    title: "Lilith – A Topology-Aware Blockchain Benchmarking Framework",
+    desc: "Public GitHub release of the topology-aware blockchain benchmarking framework developed during my PhD, including validation mode, repository documentation, safe runtime-file handling, and Git LFS support for the cloud-ping dataset.",
+    url: "/research/lilith-benchmarking-framework",
+    img: "/research/debs/lilith-arch-v2.png",
+    badge: "Public artifact",
+    date: "2026-05-12",
+    target: "_self",
+  },
+  {
     title: "CryptoEntropy Explorer",
     desc: "Interactive EB-index dashboard for exploring normalized and entropy-derived cryptocurrency datasets: toggle assets, choose attribute sets, assign custom utility weights, and recompute the index live.",
     url: "/projects/cryptoentropy-explorer",
@@ -70,15 +79,6 @@ export const recentWorks: RecentWork[] = [
     img: "/research/debs/lilith-arch-v2.png",
     badge: "ACM DEBS '25",
     date: "2026-05-05",
-    target: "_self",
-  },
-  {
-    title: "Lilith – A Topology-Aware Blockchain Benchmarking Framework",
-    desc: "Research artifact integrating workload generation, network emulation, orchestration, monitoring, and data analysis for reproducible blockchain benchmarking.",
-    url: "/research/lilith-benchmarking-framework",
-    img: "/research/debs/lilith-arch-v2.png",
-    badge: "Research artifact",
-    date: "2026-05-04",
     target: "_self",
   },
 ];
