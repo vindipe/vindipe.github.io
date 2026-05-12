@@ -1,0 +1,153 @@
+---
+// Replace this placeholder with your Google Analytics 4 Measurement ID.
+// Example: const GA_MEASUREMENT_ID = "G-ABC123DE45";
+const GA_MEASUREMENT_ID = "G-GNDDLWXT9V";
+const isConfigured = GA_MEASUREMENT_ID.startsWith("G-") && GA_MEASUREMENT_ID !== "G-XXXXXXXXXX";
+---
+
+{isConfigured && (
+  <>
+    <div
+      id="analytics-consent-banner"
+      class="fixed inset-x-0 bottom-0 z-[10000] hidden border-t border-base-300 bg-base-100/95 px-4 py-4 shadow-2xl backdrop-blur md:px-6"
+      role="region"
+      aria-label="Analytics consent"
+    >
+      <div class="mx-auto flex max-w-5xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
+        <div class="text-sm leading-relaxed text-base-content">
+          <p class="font-semibold">Privacy-friendly analytics</p>
+          <p class="opacity-80">
+            I use Google Analytics to understand aggregate site usage, file downloads,
+            and outbound clicks. Analytics loads only if you accept.
+          </p>
+        </div>
+
+        <div class="flex shrink-0 gap-2">
+          <button id="analytics-consent-reject" class="btn btn-sm btn-outline" type="button">
+            Reject
+          </button>
+          <button id="analytics-consent-accept" class="btn btn-sm btn-primary" type="button">
+            Accept analytics
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script define:vars={{ GA_MEASUREMENT_ID }}>
+      (() => {
+        if (window.__vindipeGoogleAnalyticsInitialized) return;
+        window.__vindipeGoogleAnalyticsInitialized = true;
+
+        const measurementId = GA_MEASUREMENT_ID;
+        const consentKey = "vindipe_analytics_consent";
+        const acceptedValue = "accepted";
+        const rejectedValue = "rejected";
+        let analyticsLoaded = false;
+
+        const isLocalHost = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
+
+        function getConsent() {
+          try {
+            return window.localStorage.getItem(consentKey);
+          } catch {
+            return null;
+          }
+        }
+
+        function setConsent(value) {
+          try {
+            window.localStorage.setItem(consentKey, value);
+          } catch {
+            // If localStorage is unavailable, continue without persisting consent.
+          }
+        }
+
+        function hideBanner() {
+          document.getElementById("analytics-consent-banner")?.classList.add("hidden");
+        }
+
+        function showBanner() {
+          document.getElementById("analytics-consent-banner")?.classList.remove("hidden");
+        }
+
+        function trackPageView() {
+          if (typeof window.gtag !== "function") return;
+
+          window.gtag("event", "page_view", {
+            page_title: document.title,
+            page_location: window.location.href,
+            page_path: window.location.pathname + window.location.search,
+          });
+        }
+
+        function loadGoogleAnalytics() {
+          if (analyticsLoaded || isLocalHost) return;
+          analyticsLoaded = true;
+
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function gtag(){ window.dataLayer.push(arguments); };
+
+          window.gtag("consent", "default", {
+            analytics_storage: "granted",
+            ad_storage: "denied",
+            ad_user_data: "denied",
+            ad_personalization: "denied",
+            functionality_storage: "granted",
+            security_storage: "granted",
+          });
+
+          window.gtag("js", new Date());
+          window.gtag("config", measurementId, {
+            send_page_view: false,
+          });
+
+          const script = document.createElement("script");
+          script.async = true;
+          script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
+          script.onload = trackPageView;
+          document.head.appendChild(script);
+        }
+
+        function bindConsentButtons() {
+          document.getElementById("analytics-consent-accept")?.addEventListener("click", () => {
+            setConsent(acceptedValue);
+            hideBanner();
+            loadGoogleAnalytics();
+          });
+
+          document.getElementById("analytics-consent-reject")?.addEventListener("click", () => {
+            setConsent(rejectedValue);
+            hideBanner();
+          });
+        }
+
+        function initAnalyticsConsent() {
+          bindConsentButtons();
+
+          const consent = getConsent();
+          if (consent === acceptedValue) {
+            hideBanner();
+            loadGoogleAnalytics();
+            return;
+          }
+
+          if (consent === rejectedValue || isLocalHost) {
+            hideBanner();
+            return;
+          }
+
+          showBanner();
+        }
+
+        initAnalyticsConsent();
+
+        document.addEventListener("astro:page-load", () => {
+          if (getConsent() === acceptedValue) {
+            loadGoogleAnalytics();
+            trackPageView();
+          }
+        });
+      })();
+    </script>
+  </>
+)}
