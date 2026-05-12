@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SideBar from "../components/SideBar.astro";
 import NetworkBackground from "../components/NetworkBackground.astro";
+import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 import { ViewTransitions } from "astro:transitions";
 
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
@@ -49,5 +50,7 @@ const imageURL = new URL(image, site).toString();
 
       {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
     </div>
+
+    <GoogleAnalytics />
   </body>
 </html>

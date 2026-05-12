@@ -1,0 +1,248 @@
+diff --git a/src/components/Footer.astro b/src/components/Footer.astro
+index dc15831..b2c1cc2 100644
+--- a/src/components/Footer.astro
++++ b/src/components/Footer.astro
+@@ -7,5 +7,9 @@ const today = new Date();
+     <p>
+       &copy; {today.getFullYear()} Vincenzo Di Perna. All rights reserved.
+     </p>
++
++    <a class="link link-hover" href="/privacy">
++      Privacy & analytics
++    </a>
+   </div>
+ </footer>
+diff --git a/src/components/GoogleAnalytics.astro b/src/components/GoogleAnalytics.astro
+new file mode 100644
+index 0000000..12d8eca
+--- /dev/null
++++ b/src/components/GoogleAnalytics.astro
+@@ -0,0 +1,153 @@
++---
++// Replace this placeholder with your Google Analytics 4 Measurement ID.
++// Example: const GA_MEASUREMENT_ID = "G-ABC123DE45";
++const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
++const isConfigured = GA_MEASUREMENT_ID.startsWith("G-") && GA_MEASUREMENT_ID !== "G-XXXXXXXXXX";
++---
++
++{isConfigured && (
++  <>
++    <div
++      id="analytics-consent-banner"
++      class="fixed inset-x-0 bottom-0 z-[10000] hidden border-t border-base-300 bg-base-100/95 px-4 py-4 shadow-2xl backdrop-blur md:px-6"
++      role="region"
++      aria-label="Analytics consent"
++    >
++      <div class="mx-auto flex max-w-5xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
++        <div class="text-sm leading-relaxed text-base-content">
++          <p class="font-semibold">Privacy-friendly analytics</p>
++          <p class="opacity-80">
++            I use Google Analytics to understand aggregate site usage, file downloads,
++            and outbound clicks. Analytics loads only if you accept.
++          </p>
++        </div>
++
++        <div class="flex shrink-0 gap-2">
++          <button id="analytics-consent-reject" class="btn btn-sm btn-outline" type="button">
++            Reject
++          </button>
++          <button id="analytics-consent-accept" class="btn btn-sm btn-primary" type="button">
++            Accept analytics
++          </button>
++        </div>
++      </div>
++    </div>
++
++    <script define:vars={{ GA_MEASUREMENT_ID }}>
++      (() => {
++        if (window.__vindipeGoogleAnalyticsInitialized) return;
++        window.__vindipeGoogleAnalyticsInitialized = true;
++
++        const measurementId = GA_MEASUREMENT_ID;
++        const consentKey = "vindipe_analytics_consent";
++        const acceptedValue = "accepted";
++        const rejectedValue = "rejected";
++        let analyticsLoaded = false;
++
++        const isLocalHost = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname);
++
++        function getConsent() {
++          try {
++            return window.localStorage.getItem(consentKey);
++          } catch {
++            return null;
++          }
++        }
++
++        function setConsent(value) {
++          try {
++            window.localStorage.setItem(consentKey, value);
++          } catch {
++            // If localStorage is unavailable, continue without persisting consent.
++          }
++        }
++
++        function hideBanner() {
++          document.getElementById("analytics-consent-banner")?.classList.add("hidden");
++        }
++
++        function showBanner() {
++          document.getElementById("analytics-consent-banner")?.classList.remove("hidden");
++        }
++
++        function trackPageView() {
++          if (typeof window.gtag !== "function") return;
++
++          window.gtag("event", "page_view", {
++            page_title: document.title,
++            page_location: window.location.href,
++            page_path: window.location.pathname + window.location.search,
++          });
++        }
++
++        function loadGoogleAnalytics() {
++          if (analyticsLoaded || isLocalHost) return;
++          analyticsLoaded = true;
++
++          window.dataLayer = window.dataLayer || [];
++          window.gtag = function gtag(){ window.dataLayer.push(arguments); };
++
++          window.gtag("consent", "default", {
++            analytics_storage: "granted",
++            ad_storage: "denied",
++            ad_user_data: "denied",
++            ad_personalization: "denied",
++            functionality_storage: "granted",
++            security_storage: "granted",
++          });
++
++          window.gtag("js", new Date());
++          window.gtag("config", measurementId, {
++            send_page_view: false,
++          });
++
++          const script = document.createElement("script");
++          script.async = true;
++          script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
++          script.onload = trackPageView;
++          document.head.appendChild(script);
++        }
++
++        function bindConsentButtons() {
++          document.getElementById("analytics-consent-accept")?.addEventListener("click", () => {
++            setConsent(acceptedValue);
++            hideBanner();
++            loadGoogleAnalytics();
++          });
++
++          document.getElementById("analytics-consent-reject")?.addEventListener("click", () => {
++            setConsent(rejectedValue);
++            hideBanner();
++          });
++        }
++
++        function initAnalyticsConsent() {
++          bindConsentButtons();
++
++          const consent = getConsent();
++          if (consent === acceptedValue) {
++            hideBanner();
++            loadGoogleAnalytics();
++            return;
++          }
++
++          if (consent === rejectedValue || isLocalHost) {
++            hideBanner();
++            return;
++          }
++
++          showBanner();
++        }
++
++        initAnalyticsConsent();
++
++        document.addEventListener("astro:page-load", () => {
++          if (getConsent() === acceptedValue) {
++            loadGoogleAnalytics();
++            trackPageView();
++          }
++        });
++      })();
++    </script>
++  </>
++)}
+diff --git a/src/layouts/BaseLayout.astro b/src/layouts/BaseLayout.astro
+index f699ab2..5b3b80e 100644
+--- a/src/layouts/BaseLayout.astro
++++ b/src/layouts/BaseLayout.astro
+@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
+ import Footer from "../components/Footer.astro";
+ import SideBar from "../components/SideBar.astro";
+ import NetworkBackground from "../components/NetworkBackground.astro";
++import GoogleAnalytics from "../components/GoogleAnalytics.astro";
+ import { ViewTransitions } from "astro:transitions";
+ 
+ import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
+@@ -49,5 +50,7 @@ const imageURL = new URL(image, site).toString();
+ 
+       {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
+     </div>
++
++    <GoogleAnalytics />
+   </body>
+ </html>
+\ No newline at end of file
+diff --git a/src/pages/privacy.astro b/src/pages/privacy.astro
+new file mode 100644
+index 0000000..0f7fe95
+--- /dev/null
++++ b/src/pages/privacy.astro
+@@ -0,0 +1,48 @@
++---
++import BaseLayout from "../layouts/BaseLayout.astro";
++---
++
++<BaseLayout
++  title="Privacy & analytics | Vincenzo Di Perna"
++  description="Privacy and analytics information for the personal website of Vincenzo Di Perna."
++>
++  <section class="mb-10">
++    <h1 class="text-4xl font-bold mb-4">Privacy & analytics</h1>
++
++    <div class="prose max-w-none leading-relaxed">
++      <p>
++        This is the personal website of Vincenzo Di Perna. The site is hosted as
++        a static website and is designed to collect only the information needed
++        to understand whether the website is useful to visitors.
++      </p>
++
++      <h2>Analytics</h2>
++
++      <p>
++        This site may use Google Analytics 4 to collect aggregate usage statistics,
++        such as page views, file downloads, outbound link clicks, approximate
++        geography, device category, browser, and referral sources.
++      </p>
++
++      <p>
++        Analytics is loaded only after you accept the analytics banner. If you
++        reject analytics, the Google Analytics tag is not loaded by this site.
++      </p>
++
++      <h2>Downloads and outbound links</h2>
++
++      <p>
++        Analytics may record aggregate events such as opening the CV PDF, opening
++        thesis PDFs, or clicking external links to GitHub, Zenodo, DOI pages,
++        LinkedIn, or related research resources.
++      </p>
++
++      <h2>Contact</h2>
++
++      <p>
++        If you contact me by email, the information you send is processed only
++        for communication purposes.
++      </p>
++    </div>
++  </section>
++</BaseLayout>
