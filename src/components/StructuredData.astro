@@ -1,0 +1,52 @@
+---
+import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
+
+const site = Astro.site ?? new URL("https://vindipe.github.io/");
+const canonicalURL = new URL(Astro.url.pathname, site).toString();
+
+const personId = new URL("/#person", site).toString();
+const websiteId = new URL("/#website", site).toString();
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": personId,
+      "name": "Vincenzo Di Perna",
+      "url": site.toString(),
+      "image": new URL("/profile.webp", site).toString(),
+      "jobTitle": "Blockchain Systems & Digital Assets Engineer",
+      "description": SITE_DESCRIPTION,
+      "knowsAbout": [
+        "Blockchain benchmarking",
+        "Distributed systems",
+        "Digital assets",
+        "DLT",
+        "Reproducible experimentation",
+        "Network emulation",
+        "Protocol analytics",
+        "Energy-aware blockchain evaluation",
+        "Economic efficiency of cryptocurrencies"
+      ],
+      "sameAs": [
+        "https://github.com/vindipe"
+      ],
+      "mainEntityOfPage": canonicalURL
+    },
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      "name": SITE_TITLE,
+      "url": site.toString(),
+      "description": SITE_DESCRIPTION,
+      "publisher": {
+        "@id": personId
+      },
+      "inLanguage": "en"
+    }
+  ]
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
