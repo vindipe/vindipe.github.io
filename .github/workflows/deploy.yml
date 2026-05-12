@@ -24,6 +24,10 @@ jobs:
 
       - name: Build with Astro
         uses: withastro/action@v3
+        env:
+          PUBLIC_POSTHOG_ENABLED: ${{ vars.PUBLIC_POSTHOG_ENABLED }}
+          PUBLIC_POSTHOG_KEY: ${{ vars.PUBLIC_POSTHOG_KEY }}
+          PUBLIC_POSTHOG_HOST: ${{ vars.PUBLIC_POSTHOG_HOST }}
         with:
           package-manager: pnpm@10.33.4
 

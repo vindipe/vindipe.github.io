@@ -1,5 +1,6 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import Analytics from "../components/Analytics.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import SideBar from "../components/SideBar.astro";
@@ -26,6 +27,7 @@ const imageURL = new URL(image, site).toString();
 <html lang="en" data-theme="bumblebee">
   <head>
     <BaseHead title={title} description={description} image={image} ogType={ogType} />
+    <Analytics />
     {TRANSITION_API && <ViewTransitions />}
   </head>
 
