@@ -1,0 +1,360 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const thesisPdf = "/theses/phd-thesis-comparing-blockchains.pdf";
+const unicamRecord =
+  "https://pubblicazioni.unicam.it/handle/11581/502950?mode=complete";
+
+const evaluationDimensions = [
+  {
+    title: "Performance efficiency",
+    text: "Topology-aware measurements of throughput, commit ratio, and confirmation latency under controlled workloads and deployment conditions.",
+  },
+  {
+    title: "Energy efficiency",
+    text: "Node- and system-level energy measurements, including energy per committed transaction and the effect of network structure and workload intensity.",
+  },
+  {
+    title: "Repeatability and predictability",
+    text: "Multi-run analysis of dispersion, worst-case deviations, variance sources, and the stability of performance expectations across configurations.",
+  },
+  {
+    title: "Economic efficiency",
+    text: "An entropy-based approach that aggregates heterogeneous on-chain indicators into an interpretable measure of ecosystem balance.",
+  },
+];
+
+const contributions = [
+  "Lilith, a system-agnostic benchmarking framework that combines workload generation, deterministic orchestration, resource control, and network emulation.",
+  "A topology-controlled comparison of five blockchain systems under realistic transfer and smart-contract workloads.",
+  "An energy evaluation that relates network topology and workload conditions to total energy use and energy per committed transaction.",
+  "A network-controlled, multi-run methodology and public dataset for studying experimental repeatability and performance predictability.",
+  "The Entropy Balance index (EB-index), which combines heterogeneous on-chain indicators into a single economic-efficiency score.",
+];
+
+const relatedWorks = [
+  {
+    title: "Impact of Network Topologies on Blockchain Performance",
+    badge: "ACM DEBS '25",
+    href: "/research/topology-aware-blockchain-benchmarking",
+    text: "Topology-aware performance benchmarking and the Lilith experimental methodology.",
+  },
+  {
+    title: "Blockchain Energy Consumption: Unveiling the Impact of Network Topologies",
+    badge: "IEEE ICBC '25",
+    href: "/research/performance-energy-economic-efficiency",
+    text: "Energy consumption and energy per transaction under controlled network topologies.",
+  },
+  {
+    title: "An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies",
+    badge: "DLT '25",
+    href: "/research/entropy-based-economic-efficiency",
+    text: "The entropy-based economic-efficiency model developed into the EB-index.",
+  },
+  {
+    title: "Lilith – A Topology-Aware Blockchain Benchmarking Framework",
+    badge: "Artifact",
+    href: "/research/lilith-benchmarking-framework",
+    text: "The public framework and reproducibility material supporting the experimental work.",
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: "Comparing Blockchains: Performance, Energy, and Economic Efficiencies",
+  genre: "Doctoral dissertation",
+  inLanguage: "en",
+  datePublished: "2026-06-23",
+  author: {
+    "@type": "Person",
+    name: "Vincenzo P. Di Perna",
+    url: "https://vindipe.github.io/",
+  },
+  publisher: {
+    "@type": "CollegeOrUniversity",
+    name: "Università degli Studi di Camerino",
+  },
+  educationalLevel: "Doctoral degree",
+  url: "https://vindipe.github.io/research/comparing-blockchains",
+  sameAs: unicamRecord,
+  associatedMedia: {
+    "@type": "MediaObject",
+    contentUrl: `https://vindipe.github.io${thesisPdf}`,
+    encodingFormat: "application/pdf",
+  },
+  about: [
+    "Blockchain benchmarking",
+    "Network topology",
+    "Energy consumption",
+    "Experimental repeatability",
+    "Performance predictability",
+    "Cryptocurrency economic efficiency",
+  ],
+};
+---
+
+<BaseLayout
+  title="Comparing Blockchains: Performance, Energy, and Economic Efficiencies | PhD Thesis"
+  description="Doctoral dissertation by Vincenzo P. Di Perna on blockchain performance, energy consumption, experimental repeatability, performance predictability, and economic efficiency."
+  sideBarActiveItemID="research"
+  ogType="article"
+>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(structuredData)}
+  />
+
+  <section class="mb-8">
+    <a href="/research" class="btn btn-sm btn-outline mb-6">
+      ← Back to Research
+    </a>
+
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-2 items-center mb-3">
+          <span class="badge badge-secondary">PhD thesis</span>
+          <span class="badge badge-outline">XXXVIII cycle</span>
+          <span class="badge badge-outline">2026</span>
+        </div>
+
+        <h1 class="text-4xl font-bold leading-tight">
+          Comparing Blockchains: Performance, Energy, and Economic Efficiencies
+        </h1>
+
+        <p class="text-lg leading-relaxed opacity-90 mt-4">
+          This doctoral dissertation develops a multidimensional and context-aware
+          approach to comparing blockchain systems. It studies how protocol design,
+          network topology, workloads, deployment conditions, and economic structure
+          shape performance, energy use, experimental stability, and economic
+          efficiency.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body p-4">
+              <p class="text-sm uppercase tracking-wide opacity-70">Author</p>
+              <p class="font-bold">Vincenzo P. Di Perna</p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body p-4">
+              <p class="text-sm uppercase tracking-wide opacity-70">Institution</p>
+              <p class="font-bold">Università degli Studi di Camerino</p>
+              <p class="text-sm opacity-80">School of Advanced Studies</p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body p-4">
+              <p class="text-sm uppercase tracking-wide opacity-70">Doctoral course</p>
+              <p class="font-bold">Blockchain and Distributed Ledger Technology</p>
+              <p class="text-sm opacity-80">Curriculum: Economics and Finance</p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body p-4">
+              <p class="text-sm uppercase tracking-wide opacity-70">Public defense</p>
+              <p class="font-bold">23 June 2026</p>
+              <p class="text-sm opacity-80">Scientific field: INF/01</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3 mt-7">
+          <a
+            href={thesisPdf}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+          >
+            Open thesis PDF
+          </a>
+
+          <a href={thesisPdf} download class="btn btn-outline">
+            Download thesis
+          </a>
+
+          <a
+            href={unicamRecord}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline"
+          >
+            View in UNICAM Research Repository
+          </a>
+        </div>
+
+        <p class="text-sm opacity-70 mt-4">
+          The dissertation is also archived in the institutional research repository
+          of the University of Camerino.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body p-5">
+          <p class="text-4xl font-bold">5</p>
+          <p class="opacity-80">blockchain systems</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body p-5">
+          <p class="text-4xl font-bold">5</p>
+          <p class="opacity-80">network topologies</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body p-5">
+          <p class="text-4xl font-bold">6</p>
+          <p class="opacity-80">workload profiles</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body p-5">
+          <p class="text-4xl font-bold">4</p>
+          <p class="opacity-80">evaluation dimensions</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Research problem</h2>
+
+        <p class="leading-relaxed opacity-90">
+          Blockchain efficiency cannot be represented by a single headline metric.
+          Results depend on the interaction between protocol design, network
+          conditions, workload semantics, infrastructure, and the economic ecosystem.
+          Comparisons based only on average transactions per second can therefore hide
+          variability, deployment assumptions, energy trade-offs, and structural
+          differences between crypto-assets.
+        </p>
+
+        <p class="leading-relaxed opacity-90 mt-3">
+          The dissertation addresses this evidence gap through controlled benchmarking,
+          repeated measurements, energy instrumentation, openly documented artifacts,
+          and an entropy-based aggregation of economic indicators.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <h2 class="text-3xl font-bold mb-5">Four dimensions of efficiency</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {
+        evaluationDimensions.map((item) => (
+          <div class="network-protected card bg-base-100 shadow-md">
+            <div class="card-body">
+              <h3 class="card-title">{item.title}</h3>
+              <p class="opacity-90">{item.text}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Experimental scope</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The technical studies compare Algorand, Diem, Ethereum Clique, Quorum IBFT,
+          and Solana under five logical network topologies: fat-tree, full mesh,
+          hypercube, scale-free, and torus. The systems are exercised with transfer and
+          smart-contract workloads inspired by DDoS, FIFA, GAFAM, gaming, PayPal, and
+          VISA scenarios, using both 10-node and 40-node configurations.
+        </p>
+
+        <div class="flex flex-wrap gap-2 mt-5">
+          <span class="badge badge-outline">Algorand</span>
+          <span class="badge badge-outline">Diem</span>
+          <span class="badge badge-outline">Ethereum Clique</span>
+          <span class="badge badge-outline">Quorum IBFT</span>
+          <span class="badge badge-outline">Solana</span>
+          <span class="badge badge-outline">Network emulation</span>
+          <span class="badge badge-outline">Multi-run analysis</span>
+          <span class="badge badge-outline">Energy measurement</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Main contributions</h2>
+
+        <ol class="list-decimal pl-5 space-y-3 opacity-90">
+          {contributions.map((contribution) => <li>{contribution}</li>)}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Supervision</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+          <div>
+            <p class="text-sm uppercase tracking-wide opacity-70">Supervisor</p>
+            <p class="font-bold">Prof. Marco Bernardo</p>
+            <p class="text-sm opacity-80">University of Urbino</p>
+          </div>
+
+          <div>
+            <p class="text-sm uppercase tracking-wide opacity-70">Co-supervisors</p>
+            <p class="font-bold">Prof. Francesco Fabris</p>
+            <p class="text-sm opacity-80">University of Trieste</p>
+            <p class="font-bold mt-3">Prof. Valerio Schiavoni</p>
+            <p class="text-sm opacity-80">University of Neuchâtel</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="text-3xl font-bold mb-5">Related research and artifacts</h2>
+
+    <div class="grid gap-5">
+      {
+        relatedWorks.map((item) => (
+          <a
+            href={item.href}
+            class="network-protected card bg-base-100 shadow-md transition ease-in-out hover:shadow-2xl hover:scale-[101%]"
+          >
+            <article class="card-body">
+              <div class="flex flex-wrap gap-2 items-center">
+                <h3 class="card-title">{item.title}</h3>
+                <span class="badge badge-secondary">{item.badge}</span>
+              </div>
+
+              <p>{item.text}</p>
+
+              <div class="card-actions justify-end mt-3">
+                <span class="btn btn-sm btn-outline">Open research page</span>
+              </div>
+            </article>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

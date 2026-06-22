@@ -10,6 +10,15 @@ export type RecentWork = {
 
 export const recentWorks: RecentWork[] = [
   {
+    title: "Comparing Blockchains: Performance, Energy, and Economic Efficiencies",
+    desc: "PhD dissertation on topology-aware blockchain benchmarking, performance and energy efficiency, experimental repeatability, performance predictability, and an entropy-based approach to economic efficiency.",
+    url: "/research/comparing-blockchains",
+    img: "/research/debs/lilith-arch-v2.png",
+    badge: "PhD thesis",
+    date: "2026-06-23",
+    target: "_self",
+  },
+  {
     title: "Lilith – A Topology-Aware Blockchain Benchmarking Framework",
     desc: "Public GitHub release of the topology-aware blockchain benchmarking framework developed during my PhD, including validation mode, repository documentation, safe runtime-file handling, and Git LFS support for the cloud-ping dataset.",
     url: "/research/lilith-benchmarking-framework",

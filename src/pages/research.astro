@@ -76,32 +76,32 @@ const artifacts = [
       "Interactive dashboard",
     ],
   },
-{
-  title: "Blockchain Repeatability Dataset for Topology-Aware Benchmarking",
-  badge: "Dataset",
-  status: "Coming soon",
-  disabled: true,
-  desc: "Dataset designed to quantify repeatability, variability, and performance predictability across blockchain platforms, workloads, and network topologies. This page will be enabled after the dataset is publicly released.",
-  tags: [
-    "Dataset",
-    "Repeatability",
-    "Performance predictability",
-    "Experimental analysis",
-  ],
-},
+  {
+    title: "Blockchain Repeatability Dataset for Topology-Aware Benchmarking",
+    badge: "Dataset",
+    status: "Coming soon",
+    disabled: true,
+    desc: "Dataset designed to quantify repeatability, variability, and performance predictability across blockchain platforms, workloads, and network topologies. This page will be enabled after the dataset is publicly released.",
+    tags: [
+      "Dataset",
+      "Repeatability",
+      "Performance predictability",
+      "Experimental analysis",
+    ],
+  },
 ];
 
 const academicTheses = [
   {
     title: "Comparing Blockchains: Performance, Energy, and Economic Efficiencies",
     badge: "PhD thesis",
-    status: "Coming soon",
-    disabled: true,
-    desc: "Doctoral thesis focused on blockchain benchmarking, network topology effects, repeatability, performance predictability, energy analysis, and economic-efficiency indicators. The dedicated page will be enabled after the thesis is publicly available.",
+    href: "/research/comparing-blockchains",
+    desc: "Doctoral dissertation presenting a multidimensional comparison of blockchain systems across performance, energy consumption, experimental repeatability, performance predictability, and economic efficiency.",
     tags: [
       "PhD thesis",
       "Blockchain systems",
-      "Benchmarking",
+      "Network topology",
+      "Repeatability",
       "Energy",
       "Economic efficiency",
     ],
@@ -191,57 +191,57 @@ const academicTheses = [
     <h2 class="text-3xl font-bold mb-5">Artifacts &amp; Datasets</h2>
 
     <div class="grid gap-5">
-{
-  artifacts.map((item) =>
-    item.disabled ? (
-      <article class="network-protected card bg-base-100 shadow-md opacity-80">
-        <div class="card-body">
-          <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">{item.title}</h3>
-            <span class="badge badge-secondary">{item.badge}</span>
-            <span class="badge badge-warning">{item.status}</span>
-          </div>
+      {
+        artifacts.map((item) =>
+          item.disabled ? (
+            <article class="network-protected card bg-base-100 shadow-md opacity-80">
+              <div class="card-body">
+                <div class="flex flex-wrap gap-2 items-center">
+                  <h3 class="card-title">{item.title}</h3>
+                  <span class="badge badge-secondary">{item.badge}</span>
+                  <span class="badge badge-warning">{item.status}</span>
+                </div>
 
-          <p>{item.desc}</p>
+                <p>{item.desc}</p>
 
-          <div class="flex flex-wrap gap-2 mt-2">
-            {item.tags.map((tag) => (
-              <span class="badge badge-outline">{tag}</span>
-            ))}
-          </div>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  {item.tags.map((tag) => (
+                    <span class="badge badge-outline">{tag}</span>
+                  ))}
+                </div>
 
-          <div class="card-actions justify-end mt-4">
-            <span class="btn btn-sm btn-disabled">Page not available yet</span>
-          </div>
-        </div>
-      </article>
-    ) : (
-      <a
-        href={item.href}
-        class="network-protected card bg-base-100 shadow-md transition ease-in-out hover:shadow-2xl hover:scale-[101%]"
-      >
-        <article class="card-body">
-          <div class="flex flex-wrap gap-2 items-center">
-            <h3 class="card-title">{item.title}</h3>
-            <span class="badge badge-secondary">{item.badge}</span>
-          </div>
+                <div class="card-actions justify-end mt-4">
+                  <span class="btn btn-sm btn-disabled">Page not available yet</span>
+                </div>
+              </div>
+            </article>
+          ) : (
+            <a
+              href={item.href}
+              class="network-protected card bg-base-100 shadow-md transition ease-in-out hover:shadow-2xl hover:scale-[101%]"
+            >
+              <article class="card-body">
+                <div class="flex flex-wrap gap-2 items-center">
+                  <h3 class="card-title">{item.title}</h3>
+                  <span class="badge badge-secondary">{item.badge}</span>
+                </div>
 
-          <p>{item.desc}</p>
+                <p>{item.desc}</p>
 
-          <div class="flex flex-wrap gap-2 mt-2">
-            {item.tags.map((tag) => (
-              <span class="badge badge-outline">{tag}</span>
-            ))}
-          </div>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  {item.tags.map((tag) => (
+                    <span class="badge badge-outline">{tag}</span>
+                  ))}
+                </div>
 
-          <div class="card-actions justify-end mt-4">
-            <span class="btn btn-sm btn-outline">Open artifact page</span>
-          </div>
-        </article>
-      </a>
-    )
-  )
-}
+                <div class="card-actions justify-end mt-4">
+                  <span class="btn btn-sm btn-outline">Open artifact page</span>
+                </div>
+              </article>
+            </a>
+          )
+        )
+      }
     </div>
   </section>
 
