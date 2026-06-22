@@ -15,9 +15,10 @@ const variants = {
 };
 
 const color = variants[variant] ?? variants.primary;
+const isPhdThesis = title === "PhD in Blockchain & Distributed Ledger Technology";
 ---
 
-<div class="flex">
+<div class:list={["flex", isPhdThesis && "phd-thesis-timeline"]}>
   <div class="education__time">
     <span class:list={["w-4 h-4 block rounded-full mt-1", color.dot]}></span>
     <span
@@ -44,8 +45,45 @@ const color = variants[variant] ?? variants.primary;
       }
     </div>
 
-    <p class="my-2 text-justify">
+    <div class="my-2 text-justify">
       <slot />
-    </p>
+
+      {
+        isPhdThesis && (
+          <div class="flex flex-wrap gap-2 mt-3">
+            <a
+              href="/research/comparing-blockchains"
+              class="btn btn-xs btn-outline"
+            >
+              Open thesis page
+            </a>
+
+            <a
+              href="/theses/phd-thesis-comparing-blockchains.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-xs btn-outline"
+            >
+              Open thesis PDF
+            </a>
+
+            <a
+              href="https://pubblicazioni.unicam.it/handle/11581/502950?mode=complete"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-xs btn-outline"
+            >
+              UNICAM repository
+            </a>
+          </div>
+        )
+      }
+    </div>
   </div>
 </div>
+
+<style>
+  .phd-thesis-timeline :global(.btn-disabled) {
+    display: none;
+  }
+</style>
