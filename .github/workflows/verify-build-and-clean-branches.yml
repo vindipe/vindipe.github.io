@@ -1,0 +1,94 @@
+name: Verify build and clean branches
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify-build-and-clean-branches
+  cancel-in-progress: false
+
+jobs:
+  verify-and-clean:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Verify production build
+        id: build
+        shell: bash
+        run: |
+          set +e
+          pnpm install --frozen-lockfile > /tmp/site-build.log 2>&1
+          install_status=$?
+
+          if [ "$install_status" -eq 0 ]; then
+            pnpm build >> /tmp/site-build.log 2>&1
+            build_status=$?
+          else
+            build_status=$install_status
+          fi
+
+          if [ "$build_status" -eq 0 ]; then
+            result="SUCCESS"
+          else
+            result="FAILED"
+          fi
+
+          {
+            echo "# Website build diagnostic"
+            echo
+            echo "- Result: **${result}**"
+            echo "- Commit tested: \`${GITHUB_SHA}\`"
+            echo "- Workflow run: \`${GITHUB_RUN_ID}\`"
+            echo
+            echo "## Build log"
+            echo
+            echo '```text'
+            tail -n 220 /tmp/site-build.log
+            echo '```'
+          } > BUILD_DIAGNOSTIC.md
+
+          echo "status=${build_status}" >> "$GITHUB_OUTPUT"
+
+      - name: Delete every remote branch except main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*' --prune
+
+          git for-each-ref --format='%(refname:lstrip=3)' refs/remotes/origin \
+            | grep -vE '^(HEAD|main)$' \
+            | while IFS= read -r branch; do
+                [ -n "$branch" ] || continue
+                echo "Deleting remote branch: $branch"
+                git push origin --delete "$branch"
+              done
+
+      - name: Publish diagnostic result
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add BUILD_DIAGNOSTIC.md
+          git commit -m "chore: record website build diagnostic [skip ci]" || exit 0
+          git push origin HEAD:main
