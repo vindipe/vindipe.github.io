@@ -25,18 +25,22 @@ import ResearchDetailPage from "../../components/ResearchDetailPage.astro";
       href: "https://doi.org/10.5281/zenodo.11409100",
     },
     {
+      label: "ACM DLT journal article",
+      href: "https://dl.acm.org/doi/10.1145/3828757",
+    },
+    {
       label: "Related DEBS '25 paper",
       href: "https://doi.org/10.1145/3701717.3730540",
     },
   ]}
   previewTitle="Artifact overview"
-  previewBody="Lilith connects blockchain workload execution, programmable network emulation, deployment orchestration, monitoring, and analysis scripts into a research-oriented benchmarking workflow. It was designed to evaluate blockchain systems not only under ideal local conditions, but under controlled network topologies that expose latency, bandwidth, congestion, workload, and implementation effects."
+  previewBody="Lilith connects blockchain workload execution, programmable network emulation, deployment orchestration, monitoring, and analysis scripts into a research-oriented benchmarking workflow. It was designed to evaluate blockchain systems under controlled network topologies that expose latency, bandwidth, workload, and implementation effects."
   sections={[
     {
       title: "What Lilith does",
       items: [
         "Runs blockchain benchmarking experiments under configurable topology-aware network conditions.",
-        "Integrates workload generation, network emulation, orchestration scripts, runtime configuration, and analysis utilities.",
+        "Integrates workload generation, network emulation, orchestration scripts, configuration, and analysis utilities.",
         "Supports reproducible evaluation workflows for comparing performance, latency, energy usage, and run-to-run variability.",
         "Provides a practical bridge between research questions and executable experimental artifacts.",
       ],
@@ -48,11 +52,11 @@ import ResearchDetailPage from "../../components/ResearchDetailPage.astro";
     {
       title: "Repository highlights",
       items: [
-        "Safe public repository layout with generated runtime files, local machine inventories, logs, results, temporary files, and runtime keys excluded from version control.",
-        "Example machine template for local configuration without publishing private infrastructure details.",
-        "Local validation mode for checking the repository and experiment configuration without launching heavy deployment steps by default.",
+        "Public repository layout for a research artifact around topology-aware blockchain benchmarking.",
+        "Example machine template for local configuration.",
+        "Local validation mode for checking the repository and experiment configuration before heavier runs.",
         "Git LFS tracking for the large cloud-ping dataset used by the topology and latency workflow.",
-        "Documentation for execution modes, repository layout, quick validation, runtime files, and reproducibility-oriented usage.",
+        "Documentation for execution modes, repository layout, quick validation, and reproducibility-oriented usage.",
       ],
     },
     {
@@ -65,17 +69,8 @@ import ResearchDetailPage from "../../components/ResearchDetailPage.astro";
       ],
     },
     {
-      title: "How to start from the repository",
-      items: [
-        "Read the README for the high-level purpose, quick validation command, and repository structure.",
-        "Use the execution modes documentation to distinguish local validation from remote experiment execution.",
-        "Create a local machines.txt file from machines.example.txt instead of committing private infrastructure details.",
-        "Run validate-only mode first to check implementation, dataset, workload, runtime, and local configuration paths.",
-      ],
-    },
-    {
       title: "Connection to my PhD work",
-      body: "Lilith was developed as part of my doctoral research on comparing blockchains through performance, energy, repeatability, predictability, and economic-efficiency perspectives. The framework supports the topology-aware benchmarking line of work behind my DEBS '25 and ICBC '25 research outputs.",
+      body: "Lilith was developed as part of my doctoral research on comparing blockchains through performance, energy, repeatability, predictability, and economic-efficiency perspectives. The framework supports the topology-aware benchmarking line of work behind my ACM DLT journal article, DEBS '25, and ICBC '25 research outputs.",
     },
   ]}
 />
