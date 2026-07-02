@@ -1,0 +1,317 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const doiUrl = "https://dl.acm.org/doi/10.1145/3828757";
+const debsUrl = "https://dl.acm.org/doi/10.1145/3701717.3730540";
+const lilithUrl = "https://doi.org/10.5281/zenodo.11409100";
+
+const keyPoints = [
+  "Treats the network topology as a first-class experimental variable rather than as a hidden deployment detail.",
+  "Connects blockchain throughput, latency, commit behaviour, and workload sensitivity with controlled network structures.",
+  "Builds on the Lilith benchmarking pipeline to support reproducible, topology-aware blockchain evaluation.",
+  "Strengthens the research line developed during my PhD on performance, energy, repeatability, and realistic experimental conditions.",
+];
+
+const researchLinks = [
+  {
+    label: "Open ACM DOI",
+    href: doiUrl,
+    primary: true,
+  },
+  {
+    label: "Related DEBS paper",
+    href: debsUrl,
+  },
+  {
+    label: "Lilith artifact DOI",
+    href: lilithUrl,
+  },
+  {
+    label: "Lilith research page",
+    href: "/research/lilith-benchmarking-framework",
+    internal: true,
+  },
+  {
+    label: "PhD thesis page",
+    href: "/research/comparing-blockchains",
+    internal: true,
+  },
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  name: "Impact of Network Topologies on Blockchain Performance",
+  headline: "Impact of Network Topologies on Blockchain Performance",
+  author: [
+    { "@type": "Person", name: "Vincenzo P. Di Perna" },
+    { "@type": "Person", name: "Marco Bernardo" },
+    { "@type": "Person", name: "Francesco Fabris" },
+    { "@type": "Person", name: "Sebastião Amaro" },
+    { "@type": "Person", name: "Miguel Matos" },
+    { "@type": "Person", name: "Valerio Schiavoni" },
+  ],
+  publisher: {
+    "@type": "Organization",
+    name: "Association for Computing Machinery",
+  },
+  datePublished: "2026",
+  identifier: "https://doi.org/10.1145/3828757",
+  url: doiUrl,
+  sameAs: [doiUrl, debsUrl, lilithUrl],
+  about: [
+    "Blockchain benchmarking",
+    "Network topology",
+    "Distributed ledger technologies",
+    "Reproducible experimentation",
+    "Performance evaluation",
+  ],
+};
+---
+
+<BaseLayout
+  title="Impact of Network Topologies on Blockchain Performance | ACM DLT Journal Article"
+  description="ACM DLT journal article by Vincenzo P. Di Perna and co-authors on topology-aware blockchain benchmarking, network-controlled experiments, workload sensitivity, and reproducible performance evaluation."
+  sideBarActiveItemID="research"
+  ogType="article"
+>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(structuredData)}
+  />
+
+  <section class="mb-8">
+    <a href="/research" class="btn btn-sm btn-outline mb-6">
+      ← Back to Research
+    </a>
+
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <div class="flex flex-wrap gap-2 items-center mb-3">
+          <span class="badge badge-secondary">ACM DLT</span>
+          <span class="badge badge-outline">Journal article</span>
+          <span class="badge badge-outline">2026</span>
+        </div>
+
+        <h1 class="text-4xl font-bold leading-tight">
+          Impact of Network Topologies on Blockchain Performance
+        </h1>
+
+        <p class="text-lg leading-relaxed opacity-90 mt-4">
+          This ACM DLT journal publication presents the topology-aware blockchain
+          benchmarking line of work behind my PhD research. The article studies
+          how network structure, workload shape, and controlled experimental
+          assumptions influence blockchain performance, moving beyond evaluations
+          that treat the network as an opaque or secondary execution layer.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body p-4">
+              <p class="text-sm uppercase tracking-wide opacity-70">Authors</p>
+              <p class="font-bold">
+                Vincenzo P. Di Perna, Marco Bernardo, Francesco Fabris,
+                Sebastião Amaro, Miguel Matos, and Valerio Schiavoni
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body p-4">
+              <p class="text-sm uppercase tracking-wide opacity-70">Publication</p>
+              <p class="font-bold">ACM DLT journal article</p>
+              <p class="text-sm opacity-80">DOI: 10.1145/3828757</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-3 mt-7">
+          <a
+            href={doiUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+          >
+            Open ACM article
+          </a>
+
+          <a
+            href="/research/topology-aware-blockchain-benchmarking"
+            class="btn btn-outline"
+          >
+            Related DEBS page
+          </a>
+
+          <a
+            href="/research/lilith-benchmarking-framework"
+            class="btn btn-outline"
+          >
+            Related artifact
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">5</p>
+          <p class="opacity-80">blockchain systems</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">5</p>
+          <p class="opacity-80">network topologies</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">6</p>
+          <p class="opacity-80">workload families</p>
+        </div>
+      </div>
+
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p class="text-4xl font-bold">DOI</p>
+          <p class="opacity-80">10.1145/3828757</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <figure class="px-6 pt-6">
+        <img
+          src="/research/debs/lilith-arch-v2.png"
+          alt="Lilith topology-aware benchmarking architecture used for reproducible blockchain experiments."
+          class="rounded-xl border border-base-300 bg-base-200"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="card-body">
+        <h2 class="card-title text-2xl">What the journal article highlights</h2>
+
+        <p class="leading-relaxed opacity-90">
+          Blockchain performance is not only a property of the protocol or the
+          machines used during an experiment. It also depends on how nodes are
+          connected, how messages propagate, how workloads stress the system, and
+          how stable the experimental environment is. This publication makes that
+          dependency explicit by placing network topology at the centre of the
+          evaluation methodology.
+        </p>
+
+        <ul class="list-disc pl-5 space-y-2 opacity-90 mt-4">
+          {keyPoints.map((point) => <li>{point}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Experimental perspective</h2>
+
+        <p class="leading-relaxed opacity-90">
+          The research line compares blockchain systems under controlled
+          network topologies such as fat-tree, full mesh, hypercube, scale-free,
+          and torus. These topologies are used as experimental lenses: they make
+          it possible to observe how different communication structures affect
+          throughput, latency, commit ratio, network load, and robustness.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Performance</h3>
+              <p class="text-sm opacity-80">
+                Throughput, latency, commit behaviour, and workload sensitivity
+                are interpreted in relation to the network conditions under which
+                the system is executed.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Reproducibility</h3>
+              <p class="text-sm opacity-80">
+                The work uses controlled experimental assumptions to reduce
+                hidden variability and make blockchain comparisons easier to
+                repeat and interpret.
+              </p>
+            </div>
+          </div>
+
+          <div class="card bg-base-200/50 border border-base-300">
+            <div class="card-body">
+              <h3 class="font-bold">Network awareness</h3>
+              <p class="text-sm opacity-80">
+                The article reinforces the idea that blockchain benchmarking
+                should model the network explicitly instead of abstracting it
+                away as neutral infrastructure.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-8">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <figure class="px-6 pt-6">
+        <img
+          src="/research/debs/network-load-workloads.png"
+          alt="Network load during blockchain workload execution across workloads and topologies."
+          class="rounded-xl border border-base-300 bg-base-200"
+          loading="lazy"
+        />
+      </figure>
+
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Connection to my PhD work</h2>
+
+        <p class="leading-relaxed opacity-90">
+          This publication is directly connected to my doctoral dissertation,
+          which compares blockchain systems across performance, energy,
+          repeatability, predictability, and economic-efficiency dimensions. It
+          represents the journal-facing part of the broader topology-aware
+          benchmarking contribution, alongside the Lilith artifact and the
+          conference publications on performance and energy evaluation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <div class="network-protected card bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Links</h2>
+
+        <div class="flex flex-wrap gap-3 mt-2">
+          {
+            researchLinks.map((link) => (
+              <a
+                href={link.href}
+                target={link.internal ? undefined : "_blank"}
+                rel={link.internal ? undefined : "noopener noreferrer"}
+                class={link.primary ? "btn btn-primary btn-sm" : "btn btn-outline btn-sm"}
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
