@@ -49,8 +49,11 @@ src/
 
 public/
 ├── cv/
-├── images/
-└── profile assets
+├── data/
+├── og/
+├── research/
+├── theses/
+└── site assets
 ```
 
 Main public pages:
@@ -64,9 +67,9 @@ Main public pages:
 
 ## Deployment
 
-The site is designed to be deployed on GitHub Pages through GitHub Actions.
+The site is deployed to GitHub Pages through GitHub Actions.
 
-When deployment is enabled, pushing to the main branch triggers the GitHub Pages workflow.
+Every push to `main` runs the Astro build, uploads the generated `dist/` directory as a Pages artifact, and deploys it to the `github-pages` environment.
 
 ## Notes for development
 
