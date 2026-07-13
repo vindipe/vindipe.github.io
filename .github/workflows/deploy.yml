@@ -1,4 +1,4 @@
-name: Build personal site
+name: Deploy personal site
 
 on:
   push:
@@ -7,13 +7,18 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: site-build-${{ github.ref }}
+  group: site-deploy-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     steps:
@@ -36,3 +41,12 @@ jobs:
 
       - name: Build Astro site
         run: pnpm build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
