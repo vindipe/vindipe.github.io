@@ -14,7 +14,7 @@ export const recentWorks: RecentWork[] = [
       "The Impact of Network Topology on Performance Metrics and Energy Consumption for Blockchains: Towards Repeatable Benchmarking",
     desc: "ACM DLT journal article on topology-aware blockchain benchmarking, showing why network structure and dynamics should be treated as first-class variables in reproducible blockchain performance evaluation.",
     url: "/research/acm-dlt-network-topologies-blockchain-performance",
-    img: "/research/dlt26/table4-overall-blockchain-variability.png",
+    img: "/research/dlt26/table4-overall-blockchain-variability.webp",
     badge: "ACM DLT journal",
     date: "2026-07-02",
     target: "_self",
