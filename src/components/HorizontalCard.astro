@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-
 const { title, img, desc, url, badge, tags, target = "_blank" } = Astro.props;
 
 const hasUrl = typeof url === "string" && url.length > 0;
@@ -19,13 +17,13 @@ const rel = target === "_blank" ? "noopener noreferrer" : undefined;
         <div class="hero-content flex-col md:flex-row">
           {
             img && (
-              <Image
+              <img
                 src={img}
-                width={750}
-                height={422}
-                format="webp"
                 alt={title}
-                class="max-w-full md:max-w-[13rem] rounded-lg"
+                width="750"
+                height="422"
+                loading="lazy"
+                class="max-w-full md:max-w-[13rem] rounded-lg object-cover"
               />
             )
           }
@@ -53,13 +51,13 @@ const rel = target === "_blank" ? "noopener noreferrer" : undefined;
       <div class="hero-content flex-col md:flex-row">
         {
           img && (
-            <Image
+            <img
               src={img}
-              width={750}
-              height={422}
-              format="webp"
               alt={title}
-              class="max-w-full md:max-w-[13rem] rounded-lg"
+              width="750"
+              height="422"
+              loading="lazy"
+              class="max-w-full md:max-w-[13rem] rounded-lg object-cover"
             />
           )
         }
