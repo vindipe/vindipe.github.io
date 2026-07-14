@@ -10,7 +10,8 @@ export type RecentWork = {
 
 export const recentWorks: RecentWork[] = [
   {
-    title: "Impact of Network Topologies on Blockchain Performance",
+    title:
+      "The Impact of Network Topology on Performance Metrics and Energy Consumption for Blockchains: Towards Repeatable Benchmarking",
     desc: "ACM DLT journal article on topology-aware blockchain benchmarking, showing why network structure and dynamics should be treated as first-class variables in reproducible blockchain performance evaluation.",
     url: "/research/acm-dlt-network-topologies-blockchain-performance",
     img: "/research/debs/lilith-arch-v2.png",
