@@ -1,21 +1,131 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TimeLineElement from "../components/cv/TimeLine.astro";
+
+const publications = [
+  {
+    title:
+      "The Impact of Network Topology on Performance Metrics and Energy Consumption for Blockchains: Towards Repeatable Benchmarking",
+    badge: "ACM DLT journal",
+    authors:
+      "Vincenzo P. Di Perna, Valerio Schiavoni, Miguel Matos, Francesco Fabris, and Marco Bernardo.",
+    venue:
+      "ACM Distributed Ledger Technologies: Research and Practice journal, 2026.",
+    links: [
+      {
+        label: "Research page",
+        href: "/research/acm-dlt-network-topologies-blockchain-performance",
+        primary: true,
+      },
+      {
+        label: "DOI / Paper",
+        href: "https://dl.acm.org/doi/10.1145/3828757",
+        external: true,
+      },
+    ],
+  },
+  {
+    title: "Dynamic Taxonomy: A Bridge from DeFi to TradFi",
+    badge: "SSRN / CCAF",
+    authors:
+      "Iqbal Mabruri, Carles Cerqueda, Christopher Jack, Alexis Lui, Yue Wu, Wenbin Wu, Vincenzo P. Di Perna, Keith Bear, and Bryan Zheng Zhang.",
+    venue:
+      "SSRN working paper developed in collaboration with the Cambridge Centre for Alternative Finance (CCAF).",
+    links: [
+      {
+        label: "Research page",
+        href: "/research/dynamic-taxonomy-defi-tradfi",
+        primary: true,
+      },
+      {
+        label: "SSRN",
+        href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5034378",
+        external: true,
+      },
+      {
+        label: "CCAF experience",
+        href: "/research/ccaf-experience",
+      },
+    ],
+  },
+  {
+    title:
+      "An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies",
+    badge: "DLT '25",
+    authors:
+      "Vincenzo P. Di Perna, Michele Foderaro, Francesco Fabris, and Marco Bernardo.",
+    venue:
+      "Distributed Ledger Technology Workshop, CEUR Workshop Proceedings, Vol. 4105, 2025.",
+    links: [
+      {
+        label: "Research page",
+        href: "/research/entropy-based-economic-efficiency",
+        primary: true,
+      },
+      {
+        label: "CEUR paper",
+        href: "https://ceur-ws.org/Vol-4105/paper09.pdf",
+        external: true,
+      },
+    ],
+  },
+  {
+    title:
+      "Blockchain Energy Consumption: Unveiling the Impact of Network Topologies",
+    badge: "IEEE ICBC '25",
+    authors:
+      "Vincenzo P. Di Perna, Valerio Schiavoni, Francesco Fabris, and Marco Bernardo.",
+    venue:
+      "Proceedings of the 2025 IEEE International Conference on Blockchain and Cryptocurrency.",
+    links: [
+      {
+        label: "Research page",
+        href: "/research/performance-energy-economic-efficiency",
+        primary: true,
+      },
+      {
+        label: "IEEE Xplore",
+        href: "https://ieeexplore.ieee.org/document/11114569",
+        external: true,
+      },
+    ],
+  },
+  {
+    title: "Impact of Network Topologies on Blockchain Performance",
+    badge: "ACM DEBS '25",
+    authors:
+      "Vincenzo P. Di Perna, Marco Bernardo, Francesco Fabris, Sebastião Amaro, Miguel Matos, and Valerio Schiavoni.",
+    venue:
+      "Proceedings of the 19th ACM International Conference on Distributed and Event-Based Systems, 2025.",
+    links: [
+      {
+        label: "Research page",
+        href: "/research/topology-aware-blockchain-benchmarking",
+        primary: true,
+      },
+      {
+        label: "DOI / Paper",
+        href: "https://dl.acm.org/doi/10.1145/3701717.3730540",
+        external: true,
+      },
+    ],
+  },
+];
 ---
 
 <BaseLayout
-  title="CV | Blockchain Systems & Digital Assets Engineer | Vincenzo Di Perna"
-  description="Curriculum vitae of Vincenzo Di Perna: blockchain systems, digital assets, distributed systems, benchmarking, reproducible experimentation, and research engineering."
+  title="CV | Research Software Engineer | Vincenzo Di Perna"
+  description="Curriculum vitae of Vincenzo Di Perna: research software engineering, distributed systems, blockchain, DLT, scientific computing, benchmarking, and reproducible experimentation."
   sideBarActiveItemID="cv"
 >
   <section class="mb-10">
     <h1 class="text-4xl font-bold mb-4">CV</h1>
 
     <p class="text-lg leading-relaxed opacity-90">
-      I am a Blockchain Systems & Digital Assets Engineer with a PhD in
-      Blockchain & DLT, focused on distributed systems, blockchain benchmarking,
-      reproducible experimentation, protocol evaluation, data analysis, and
-      digital-asset infrastructures.
+      I am a Research Software Engineer with a PhD in Blockchain &amp; DLT,
+      focused on distributed systems, blockchain benchmarking, scientific
+      computing, reproducible experimentation, protocol evaluation, and data
+      analysis.
     </p>
 
     <div class="mt-6 flex flex-wrap gap-3">
@@ -44,6 +154,15 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
         rel="noopener noreferrer"
       >
         LinkedIn
+      </a>
+
+      <a
+        class="btn btn-outline"
+        href="https://orcid.org/0009-0003-8834-9900"
+        target="_blank"
+        rel="me noopener noreferrer"
+      >
+        ORCID
       </a>
     </div>
   </section>
@@ -74,106 +193,6 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
         blockchain/digital-asset expertise can support practical technical
         decisions.
       </p>
-    </div>
-  </section>
-
-  <section class="mb-10">
-    <h2 class="text-3xl w-full font-bold mb-5">Education</h2>
-
-    <div class="time-line-container grid gap-4">
-      <TimeLineElement
-        title="PhD in Blockchain & Distributed Ledger Technology"
-        subtitle="Università di Camerino, Italy"
-        date="2022–2025"
-      >
-        Dissertation focused on comparing blockchain systems across performance,
-        energy, repeatability, predictability, and economic-efficiency
-        dimensions. Research included topology-aware benchmarking, reproducible
-        experimentation, workload design, network emulation, and statistical
-        analysis of blockchain system behavior.
-
-        <br />
-
-        <a
-          href="/research/comparing-blockchains"
-          class="btn btn-xs btn-outline mt-3 mr-2"
-        >
-          Open thesis page
-        </a>
-
-        <a
-          href="/theses/phd-thesis-comparing-blockchains.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-xs btn-outline mt-3"
-        >
-          Open PDF
-        </a>
-      </TimeLineElement>
-
-      <TimeLineElement
-        title="MSc in ICT Solutions Architect"
-        subtitle="Università di Pisa, Italy"
-        date="2019–2022"
-      >
-        Graduate studies focused on ICT architectures, software systems,
-        networks, security, and technical design of digital infrastructures.
-
-        <br />
-
-        <a
-          href="/research/decentralized-accounting-system"
-          class="btn btn-xs btn-outline mt-3 mr-2"
-        >
-          Open thesis page
-        </a>
-
-        <a
-          href="/theses/master-thesis-decentralized-accounting-system.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-xs btn-outline mt-3"
-        >
-          Open PDF
-        </a>
-      </TimeLineElement>
-
-      <TimeLineElement
-        title="BSc in Computer Systems and Network Security"
-        subtitle="Università degli Studi di Milano, Italy"
-        date="2015–2019"
-      >
-        Foundation in computer systems, operating systems, networks,
-        cybersecurity, programming, and technical problem solving.
-
-        <br />
-
-        <a
-          href="/theses/bachelor-thesis-threat-modeling-process.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-xs btn-outline mt-3"
-        >
-          Open bachelor thesis PDF
-        </a>
-      </TimeLineElement>
-    </div>
-  </section>
-
-  <section class="mb-10">
-    <h2 class="text-3xl w-full font-bold mb-5">Certifications</h2>
-
-    <div class="time-line-container grid gap-4">
-      <TimeLineElement
-        title="Blockchain for Business Certificate"
-        subtitle="SUPSI / USI / Franklin University Switzerland / City of Lugano"
-        date="2023"
-        variant="warning"
-      >
-        Professional certificate focused on blockchain applications, business
-        use cases, digital-asset-related innovation, and the connection between
-        blockchain technologies, institutions, and real-world business contexts.
-      </TimeLineElement>
     </div>
   </section>
 
@@ -252,234 +271,6 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
   </section>
 
   <section class="mb-10">
-    <h2 class="text-3xl w-full font-bold mb-5">Publications</h2>
-
-    <div class="grid gap-4">
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div
-            class="flex flex-col md:flex-row md:items-start md:justify-between gap-2"
-          >
-            <h3 class="card-title">
-              The Impact of Network Topology on Performance Metrics and Energy
-              Consumption for Blockchains: Towards Repeatable Benchmarking
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="badge badge-secondary shrink-0">ACM DLT</span>
-              <span class="badge badge-outline shrink-0">Journal article</span>
-            </div>
-          </div>
-
-          <p>
-            Vincenzo P. Di Perna, Valerio Schiavoni, Miguel Matos, Francesco
-            Fabris, and Marco Bernardo.
-          </p>
-
-          <p class="opacity-80">
-            ACM DLT journal article, 2026. DOI: 10.1145/3828757.
-          </p>
-
-          <div class="card-actions justify-end">
-            <a
-              class="btn btn-sm btn-primary"
-              href="/research/acm-dlt-network-topologies-blockchain-performance"
-            >
-              Research page
-            </a>
-
-            <a
-              class="btn btn-sm btn-outline"
-              href="https://dl.acm.org/doi/10.1145/3828757"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              DOI / Paper
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div
-            class="flex flex-col md:flex-row md:items-start md:justify-between gap-2"
-          >
-            <h3 class="card-title">
-              Impact of Network Topologies on Blockchain Performance
-            </h3>
-            <span class="badge badge-secondary shrink-0">ACM DEBS '25</span>
-          </div>
-
-          <p>
-            Vincenzo P. Di Perna, Marco Bernardo, Francesco Fabris, Sebastião
-            Amaro, Miguel Matos, and Valerio Schiavoni.
-          </p>
-
-          <p class="opacity-80">
-            Proceedings of the 19th ACM International Conference on Distributed
-            and Event-Based Systems, 2025.
-          </p>
-
-          <div class="card-actions justify-end">
-            <a
-              class="btn btn-sm btn-primary"
-              href="/research/topology-aware-blockchain-benchmarking"
-            >
-              Research page
-            </a>
-
-            <a
-              class="btn btn-sm btn-outline"
-              href="https://dl.acm.org/doi/10.1145/3701717.3730540"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              DOI / Paper
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div
-            class="flex flex-col md:flex-row md:items-start md:justify-between gap-2"
-          >
-            <h3 class="card-title">
-              Blockchain Energy Consumption: Unveiling the Impact of Network
-              Topologies
-            </h3>
-            <span class="badge badge-secondary shrink-0">IEEE ICBC '25</span>
-          </div>
-
-          <p>
-            Vincenzo P. Di Perna, Valerio Schiavoni, Francesco Fabris, and Marco
-            Bernardo.
-          </p>
-
-          <p class="opacity-80">
-            Proceedings of the 2025 IEEE International Conference on Blockchain
-            and Cryptocurrency.
-          </p>
-
-          <div class="card-actions justify-end">
-            <a
-              class="btn btn-sm btn-primary"
-              href="/research/performance-energy-economic-efficiency"
-            >
-              Research page
-            </a>
-
-            <a
-              class="btn btn-sm btn-outline"
-              href="https://ieeexplore.ieee.org/document/11114569"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              IEEE Xplore
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div
-            class="flex flex-col md:flex-row md:items-start md:justify-between gap-2"
-          >
-            <h3 class="card-title">
-              An Entropy-Based Approach to Evaluating the Economic Efficiency of
-              Cryptocurrencies
-            </h3>
-            <span class="badge badge-secondary shrink-0">DLT '25</span>
-          </div>
-
-          <p>
-            Vincenzo P. Di Perna, Michele Foderaro, Francesco Fabris, and Marco
-            Bernardo.
-          </p>
-
-          <p class="opacity-80">
-            Distributed Ledger Technology Workshop, CEUR Workshop Proceedings,
-            Vol. 4105, 2025.
-          </p>
-
-          <div class="card-actions justify-end">
-            <a
-              class="btn btn-sm btn-primary"
-              href="/research/entropy-based-economic-efficiency"
-            >
-              Research page
-            </a>
-
-            <a
-              class="btn btn-sm btn-outline"
-              href="https://ceur-ws.org/Vol-4105/paper09.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              CEUR paper
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div
-            class="flex flex-col md:flex-row md:items-start md:justify-between gap-2"
-          >
-            <h3 class="card-title">
-              Dynamic Taxonomy: A Bridge from DeFi to TradFi
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              <span class="badge badge-secondary shrink-0">SSRN</span>
-              <span class="badge badge-outline shrink-0"
-                >CCAF collaboration</span
-              >
-            </div>
-          </div>
-
-          <p>
-            Iqbal Mabruri, Carles Cerqueda, Christopher Jack, Alexis Lui, Yue
-            Wu, Wenbin Wu, Vincenzo P. Di Perna, Keith Bear, and Bryan Zheng
-            Zhang.
-          </p>
-
-          <p class="opacity-80">
-            SSRN working paper developed in collaboration with the Cambridge
-            Centre for Alternative Finance (CCAF), focused on digital assets,
-            decentralized finance, traditional finance, and taxonomy-oriented
-            analysis.
-          </p>
-
-          <div class="card-actions justify-end">
-            <a
-              class="btn btn-sm btn-primary"
-              href="/research/dynamic-taxonomy-defi-tradfi"
-            >
-              Research page
-            </a>
-
-            <a
-              class="btn btn-sm btn-outline"
-              href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5034378"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              SSRN
-            </a>
-
-            <a class="btn btn-sm btn-outline" href="/research/ccaf-experience">
-              CCAF experience
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="mb-10">
     <h2 class="text-3xl w-full font-bold mb-5">Tools & Artifacts</h2>
 
     <div class="grid gap-4">
@@ -522,20 +313,178 @@ import TimeLineElement from "../components/cv/TimeLine.astro";
         <div class="card-body">
           <h3 class="card-title">Blockchain Repeatability Dataset</h3>
           <p>
-            Dataset and repeated experimental campaign for studying blockchain
-            performance variability, repeatability, and predictability.
+            Network-controlled dataset with 300 aggregate configurations for
+            studying blockchain benchmark variability, repeatability, and
+            performance predictability.
           </p>
           <div class="card-actions justify-end">
-            <span class="btn btn-sm btn-disabled">
-              Dataset page coming soon
-            </span>
+            <a
+              class="btn btn-sm btn-primary"
+              href="/research/blockchain-repeatability-dataset"
+            >
+              Dataset page
+            </a>
 
-            <span class="btn btn-sm btn-disabled">
-              Public release pending
-            </span>
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://doi.org/10.5281/zenodo.17681717"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Zenodo dataset
+            </a>
+
+            <a
+              class="btn btn-sm btn-outline"
+              href="https://github.com/vindipe/blockchain-repeatability-benchmarking"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub repository
+            </a>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-3xl w-full font-bold mb-5">Publications</h2>
+
+    <div class="grid gap-4">
+      {
+        publications.map((publication) => (
+          <div class="card bg-base-100 shadow-md">
+            <div class="card-body">
+              <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-2">
+                <h3 class="card-title">{publication.title}</h3>
+                <span class="badge badge-secondary shrink-0">
+                  {publication.badge}
+                </span>
+              </div>
+
+              <p>{publication.authors}</p>
+              <p class="opacity-80">{publication.venue}</p>
+
+              <div class="card-actions justify-end">
+                {publication.links.map((link) => (
+                  <a
+                    class:list={[
+                      "btn btn-sm",
+                      link.primary ? "btn-primary" : "btn-outline",
+                    ]}
+                    href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-3xl w-full font-bold mb-5">Education</h2>
+
+    <div class="time-line-container grid gap-4">
+      <TimeLineElement
+        title="PhD in Blockchain & Distributed Ledger Technology"
+        subtitle="University of Camerino, Italy"
+        date="2022–2025"
+      >
+        Dissertation focused on comparing blockchain systems across performance,
+        energy, repeatability, predictability, and economic-efficiency
+        dimensions. Research included topology-aware benchmarking, reproducible
+        experimentation, workload design, network emulation, and statistical
+        analysis of blockchain system behavior.
+
+        <br />
+
+        <a
+          href="/research/comparing-blockchains"
+          class="btn btn-xs btn-outline mt-3 mr-2"
+        >
+          Open thesis page
+        </a>
+
+        <a
+          href="/theses/phd-thesis-comparing-blockchains.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-xs btn-outline mt-3"
+        >
+          Open PDF
+        </a>
+      </TimeLineElement>
+
+      <TimeLineElement
+        title="MSc in ICT Solutions Architect"
+        subtitle="University of Pisa, Italy"
+        date="2019–2022"
+      >
+        Graduate studies focused on ICT architectures, software systems,
+        networks, security, and technical design of digital infrastructures.
+
+        <br />
+
+        <a
+          href="/research/decentralized-accounting-system"
+          class="btn btn-xs btn-outline mt-3 mr-2"
+        >
+          Open thesis page
+        </a>
+
+        <a
+          href="/theses/master-thesis-decentralized-accounting-system.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-xs btn-outline mt-3"
+        >
+          Open PDF
+        </a>
+      </TimeLineElement>
+
+      <TimeLineElement
+        title="BSc in Computer Systems and Network Security"
+        subtitle="University of Milan, Italy"
+        date="2015–2019"
+      >
+        Foundation in computer systems, operating systems, networks,
+        cybersecurity, programming, and technical problem solving.
+
+        <br />
+
+        <a
+          href="/theses/bachelor-thesis-threat-modeling-process.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-xs btn-outline mt-3"
+        >
+          Open bachelor thesis PDF
+        </a>
+      </TimeLineElement>
+    </div>
+  </section>
+
+  <section class="mb-10">
+    <h2 class="text-3xl w-full font-bold mb-5">Certifications</h2>
+
+    <div class="time-line-container grid gap-4">
+      <TimeLineElement
+        title="Blockchain for Business Certificate"
+        subtitle="SUPSI / USI / Franklin University Switzerland / City of Lugano"
+        date="2023"
+        variant="warning"
+      >
+        Professional certificate focused on blockchain applications, business
+        use cases, digital-asset-related innovation, and the connection between
+        blockchain technologies, institutions, and real-world business contexts.
+      </TimeLineElement>
     </div>
   </section>
 

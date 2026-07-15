@@ -3,6 +3,6 @@
 
 export const SITE_TITLE = "Vincenzo Di Perna";
 export const SITE_DESCRIPTION =
-  "Blockchain Systems & Digital Assets Engineer. PhD in Blockchain & DLT, focused on distributed systems, benchmarking, reproducible experimentation, protocol analytics and digital assets.";
+  "Research Software Engineer focused on distributed systems, blockchain, DLT, scientific computing, benchmarking, and reproducible experimentation.";
 export const GENERATE_SLUG_FROM_TITLE = true
 export const TRANSITION_API = true

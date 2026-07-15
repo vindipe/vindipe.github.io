@@ -16,15 +16,23 @@ const publications = [
     ],
   },
   {
-    title: "Impact of Network Topologies on Blockchain Performance",
-    badge: "ACM DEBS '25",
-    href: "/research/topology-aware-blockchain-benchmarking",
-    desc: "Peer-reviewed research on how network topology affects blockchain performance under controlled, reproducible, and cloud-inspired experimental conditions.",
+    title: "Dynamic Taxonomy: A Bridge from DeFi to TradFi",
+    badge: "CCAF / Working paper",
+    href: "/research/dynamic-taxonomy-defi-tradfi",
+    desc: "Research developed within the Cambridge Centre for Alternative Finance on a dynamic DeFi taxonomy designed to connect decentralised finance with traditional finance, regulatory perspectives, and the Cambridge DeFi Navigator.",
+    tags: ["DeFi", "TradFi", "Taxonomy", "Digital assets", "CCAF"],
+  },
+  {
+    title:
+      "An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies",
+    badge: "DLT '25",
+    href: "/research/entropy-based-economic-efficiency",
+    desc: "Research introducing an entropy-based index to evaluate the economic efficiency of cryptocurrencies through on-chain attributes, user participation, supply dynamics, and transfer activity.",
     tags: [
-      "Blockchain benchmarking",
-      "Network topology",
-      "Lilith",
-      "Reproducibility",
+      "Cryptocurrency efficiency",
+      "Shannon entropy",
+      "Economic index",
+      "Coin Metrics",
     ],
   },
   {
@@ -41,24 +49,16 @@ const publications = [
     ],
   },
   {
-    title:
-      "An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies",
-    badge: "DLT '25",
-    href: "/research/entropy-based-economic-efficiency",
-    desc: "Research introducing an entropy-based index to evaluate the economic efficiency of cryptocurrencies through on-chain attributes, user participation, supply dynamics, and transfer activity.",
+    title: "Impact of Network Topologies on Blockchain Performance",
+    badge: "ACM DEBS '25",
+    href: "/research/topology-aware-blockchain-benchmarking",
+    desc: "Peer-reviewed research on how network topology affects blockchain performance under controlled, reproducible, and cloud-inspired experimental conditions.",
     tags: [
-      "Cryptocurrency efficiency",
-      "Shannon entropy",
-      "Economic index",
-      "Coin Metrics",
+      "Blockchain benchmarking",
+      "Network topology",
+      "Lilith",
+      "Reproducibility",
     ],
-  },
-  {
-    title: "Dynamic Taxonomy: A Bridge from DeFi to TradFi",
-    badge: "CCAF / Working paper",
-    href: "/research/dynamic-taxonomy-defi-tradfi",
-    desc: "Research developed within the Cambridge Centre for Alternative Finance on a dynamic DeFi taxonomy designed to connect decentralised finance with traditional finance, regulatory perspectives, and the Cambridge DeFi Navigator.",
-    tags: ["DeFi", "TradFi", "Taxonomy", "Digital assets", "CCAF"],
   },
 ];
 
@@ -90,11 +90,11 @@ const artifacts = [
     ],
   },
   {
-    title: "Blockchain Repeatability Dataset for Topology-Aware Benchmarking",
+    title:
+      "Network-Controlled Dataset of Blockchain Benchmarks for Evaluating Repeatability and Performance Predictability",
     badge: "Dataset",
-    status: "Coming soon",
-    disabled: true,
-    desc: "Dataset designed to quantify repeatability, variability, and performance predictability across blockchain platforms, workloads, and network topologies. This page will be enabled after the dataset is publicly released.",
+    href: "/research/blockchain-repeatability-dataset",
+    desc: "Public dataset of 300 aggregate configurations for evaluating blockchain benchmark repeatability and performance predictability across five platforms, five network topologies, six workloads, and two network sizes.",
     tags: [
       "Dataset",
       "Repeatability",
@@ -120,7 +120,8 @@ const academicTheses = [
     ],
   },
   {
-    title: "Decentralized Accounting System",
+    title:
+      "Decentralized accounting system: Efficient document management system implemented on top of blockchain secure transactions environment",
     badge: "Master's thesis",
     href: "/research/decentralized-accounting-system",
     desc: "Master's thesis on an efficient document-management and accounting system implemented with blockchain transactions, Solid Pods, MetaMask, QR codes, and eBill-inspired workflows.",

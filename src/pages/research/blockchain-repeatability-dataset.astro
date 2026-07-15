@@ -1,0 +1,57 @@
+---
+import ResearchDetailPage from "../../components/ResearchDetailPage.astro";
+
+const title =
+  "Network-Controlled Dataset of Blockchain Benchmarks for Evaluating Repeatability and Performance Predictability";
+const zenodoUrl = "https://doi.org/10.5281/zenodo.17681717";
+const githubUrl =
+  "https://github.com/vindipe/blockchain-repeatability-benchmarking";
+
+const externalLinks = [
+  { label: "Open dataset on Zenodo", href: zenodoUrl },
+  { label: "Open GitHub repository", href: githubUrl },
+  {
+    label: "Associated ACM DLT article",
+    href: "https://doi.org/10.1145/3828757",
+  },
+];
+
+const sections = [
+  {
+    title: "Experimental matrix",
+    body: "The dataset contains 300 aggregate configuration rows and 50 columns. It covers five blockchain systems, five network topologies, six workloads, and deployments with 10 and 40 nodes.",
+    items: [
+      "Blockchains: Algorand, Diem, Ethereum, Quorum, and Solana.",
+      "Topologies: fat-tree, full mesh, hypercube, scale-free, and torus.",
+      "Workloads: DDoS, FIFA, GAFAM, Gaming, PayPal, and VISA.",
+      "Measurements: throughput, latency, energy, and committed transactions.",
+    ],
+  },
+  {
+    title: "Repeatability and predictability",
+    body: "Each row summarizes repeated benchmark executions through counts, means, extrema, quartiles, standard deviations, absolute ranges, and relative-dispersion measures. The resulting evidence supports analysis of variability, repeatability, and performance predictability under controlled network conditions.",
+  },
+  {
+    title: "Reproducibility resources",
+    body: "The GitHub repository provides the released CSV, a data dictionary, methodology and provenance notes, citation metadata, and the CC BY 4.0 license. The experiments were conducted with Lilith, the topology-aware blockchain benchmarking framework.",
+  },
+];
+---
+
+<ResearchDetailPage
+  {title}
+  subtitle="Public research dataset associated with the ACM Distributed Ledger Technologies: Research and Practice journal article on topology-aware blockchain benchmarking."
+  description="Public network-controlled blockchain benchmarking dataset for studying repeatability, variability, and performance predictability across platforms, workloads, topologies, and network sizes."
+  badge="Dataset"
+  tags={[
+    "Blockchain benchmarking",
+    "Repeatability",
+    "Performance predictability",
+    "Network topology",
+    "Reproducible research",
+  ]}
+  {externalLinks}
+  previewTitle="Dataset overview"
+  previewBody="This dataset preserves aggregate statistics from repeated blockchain benchmark executions under controlled network conditions. It is available through its archival Zenodo record and a documented public GitHub repository."
+  {sections}
+/>
