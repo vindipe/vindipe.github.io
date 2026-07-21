@@ -35,10 +35,10 @@ const imageURL = new URL(image, site).toString();
   <body>
     <NetworkBackground />
 
-    <div class="bg-base-100 drawer lg:drawer-open">
+    <div class="relative z-[1] drawer lg:drawer-open">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
-      <div class="drawer-content bg-base-100 min-h-screen flex flex-col">
+      <div class="drawer-content min-h-screen flex flex-col">
         <Header title={SITE_TITLE} />
 
         <div class="md:flex md:justify-center flex-1">

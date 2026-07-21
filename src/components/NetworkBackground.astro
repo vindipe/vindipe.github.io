@@ -6,15 +6,15 @@
     .network-background {
         position: fixed;
         inset: 0;
-        z-index: 9999;
+        z-index: 0;
         pointer-events: none;
         overflow: hidden;
-        opacity: 0.48;
+        opacity: 0.44;
     }
 
     @media (max-width: 767px) {
         .network-background {
-            opacity: 0.62;
+            opacity: 0.34;
         }
     }
 
@@ -68,7 +68,7 @@
         function createNodes() {
             nodes.length = 0;
 
-            const nodeCount = width < 768 ? 130 : 170;
+            const nodeCount = width < 768 ? 72 : 170;
 
             for (let i = 0; i < nodeCount; i++) {
                 nodes.push({
@@ -148,8 +148,8 @@
 
         function drawConnectedGraph() {
             const drawnEdges = new Set();
-            const nearestLinks = width < 768 ? 5 : 6;
-            const proximityDistance = width < 768 ? 155 : 190;
+            const nearestLinks = width < 768 ? 3 : 6;
+            const proximityDistance = width < 768 ? 125 : 190;
 
             // Backbone: ogni nodo viene collegato al nodo precedente più vicino.
             // Questo evita componenti completamente isolate.
@@ -248,74 +248,6 @@
             }
         }
 
-        function clearProtectedAreas() {
-        const isMobile = window.innerWidth < 768;
-
-        const desktopSelectors = [
-        ".network-protected",
-        "header",
-        "footer",
-        ".drawer-side aside",
-        "main h1",
-        "main h2",
-        "main h3",
-        "main p",
-        "main a",
-        "main button",
-        "main .btn",
-        "main .card",
-        "main .avatar",
-        "main img"
-        ];
-
-        const mobileSelectors = [
-        ".network-protected",
-        "header",
-        "footer",
-        "main h1",
-        "main h2",
-        "main h3",
-        "main p",
-        "main .avatar",
-        "main img",
-        "main .btn",
-        "main button",
-        "main .card"
-        ];
-
-        const protectedElements = document.querySelectorAll(
-            (isMobile ? mobileSelectors : desktopSelectors).join(", ")
-        );
-
-        ctx.save();
-        ctx.globalCompositeOperation = "destination-out";
-        ctx.fillStyle = "rgba(0, 0, 0, 1)";
-
-        protectedElements.forEach((element) => {
-            const rect = element.getBoundingClientRect();
-
-            if (
-            rect.bottom < 0 ||
-            rect.top > height ||
-            rect.right < 0 ||
-            rect.left > width
-            ) {
-            return;
-            }
-
-            const padding = isMobile ? 4 : 14;
-
-            ctx.fillRect(
-            rect.left - padding,
-            rect.top - padding,
-            rect.width + padding * 2,
-            rect.height + padding * 2
-            );
-        });
-
-        ctx.restore();
-        }
-
         function draw() {
             ctx.clearRect(0, 0, width, height);
 
@@ -323,8 +255,6 @@
             drawConnectedGraph();
             drawNodes();
             drawPulses();
-            clearProtectedAreas();
-
             animationFrameId = window.requestAnimationFrame(draw);
         }
 
