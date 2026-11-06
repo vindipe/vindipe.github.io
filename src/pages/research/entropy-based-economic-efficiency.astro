@@ -3,22 +3,22 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 const entropyResults = [
   {
-    title: "Unweighted EB-index — Set1",
+    title: "Unweighted EB-index – Set1",
     src: "/research/dlt25/entropy-set1.png",
     desc: "Set1 combines user activity with market-oriented indicators, showing how balance evolves across assets over time.",
   },
   {
-    title: "Weighted EB-index — Set1",
+    title: "Weighted EB-index – Set1",
     src: "/research/dlt25/weighted-entropy-set1.png",
     desc: "The weighted version makes the index sensitive not only to balance, but also to the relative strength of the selected attributes.",
   },
   {
-    title: "Unweighted EB-index — Set2",
+    title: "Unweighted EB-index – Set2",
     src: "/research/dlt25/entropy-set2.png",
     desc: "Set2 focuses on dynamic qualities such as participation, transfer size, turnover, active supply, and wealth distribution.",
   },
   {
-    title: "Weighted EB-index — Set2",
+    title: "Weighted EB-index – Set2",
     src: "/research/dlt25/weighted-entropy-set2.png",
     desc: "The weighted version changes the interpretation of the results by incorporating attribute magnitude into the entropy score.",
   },
@@ -257,7 +257,7 @@ const findings = [
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">Set1 — compact activity and market view</h3>
+              <h3 class="font-bold">Set1 – compact activity and market view</h3>
 
               <ul class="list-disc pl-5 space-y-1 text-sm opacity-80">
                 {qualitiesSet1.map((quality) => <li>{quality}</li>)}
@@ -267,7 +267,7 @@ const findings = [
 
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">Set2 — dynamic network behaviour</h3>
+              <h3 class="font-bold">Set2 – dynamic network behaviour</h3>
 
               <ul class="list-disc pl-5 space-y-1 text-sm opacity-80">
                 {qualitiesSet2.map((quality) => <li>{quality}</li>)}
