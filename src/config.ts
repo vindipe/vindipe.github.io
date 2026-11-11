@@ -3,6 +3,6 @@
 
 export const SITE_TITLE = "Vincenzo Di Perna";
 export const SITE_DESCRIPTION =
-  "Research Software Engineer focused on distributed systems, blockchain, DLT, scientific computing, benchmarking, and reproducible experimentation.";
+  "Research Software Engineer exploring distributed systems, blockchain benchmarking, reproducible experiments, and expiry-aware design through CIRCULA.";
 export const GENERATE_SLUG_FROM_TITLE = true
 export const TRANSITION_API = true
