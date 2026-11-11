@@ -10,6 +10,15 @@ export type RecentWork = {
 
 export const recentWorks: RecentWork[] = [
   {
+    title: "A new research line: time",
+    desc: "Discover CIRCULA, an SNSF-funded project exploring expiry and renewal in blockchain systems.",
+    url: "/research/circula",
+    img: "https://circula.unine.ch/assets/circula-cover-green-7508dead.jpg",
+    badge: "CIRCULA",
+    date: "2026-11-11",
+    target: "_self",
+  },
+  {
     title:
       "The Impact of Network Topology on Performance Metrics and Energy Consumption for Blockchains: Towards Repeatable Benchmarking",
     desc: "ACM DLT journal article on topology-aware blockchain benchmarking, showing why network structure and dynamics should be treated as first-class variables in reproducible blockchain performance evaluation.",

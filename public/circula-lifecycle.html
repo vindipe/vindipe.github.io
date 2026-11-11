@@ -1,0 +1,993 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Explore expiry and renewal | CIRCULA</title><style>*{box-sizing:border-box}body{margin:0;background:#121a17;color:#f1f5f1;font:16px/1.5 system-ui,sans-serif}.wrap{width:min(100% - 32px,1100px);margin:auto}.small{font-size:.9rem}button,input{font:inherit}button{cursor:pointer}svg{width:100%;fill:none;stroke:currentColor;stroke-width:3}.lifecycle-demo {
+  --demo-ink: #f6f3ec;
+  --demo-panel: #272923;
+  --demo-muted: #cecac0;
+  --demo-accent: #66cc33;
+  --demo-progress: #66cc33;
+  --demo-blue: #b5caff;
+  --demo-line: #777b71;
+  --demo-soft: #ffffff09;
+  --demo-warning: #ffc6a6;
+  color: var(--demo-ink);
+  background: #23251f;
+  padding-block: 40px;
+}
+.lifecycle-demo.project-demo {
+  --demo-ink: var(--ink);
+  --demo-panel: #faf8f4;
+  --demo-muted: #55594f;
+  --demo-accent: #357918;
+  --demo-progress: #357918;
+  --demo-blue: var(--unine-blue);
+  --demo-line: #8a8e82;
+  --demo-soft: #24242205;
+  --demo-warning: #91330b;
+  color: var(--demo-ink);
+  background: var(--paper);
+}
+.lifecycle-inner {
+  max-width: 1280px;
+  margin-inline: auto;
+}
+.lifecycle-heading {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  gap: 24px 48px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+.lifecycle-heading .eyebrow {
+  color: var(--demo-accent);
+  margin: 0 0 8px;
+}
+.lifecycle-demo .lifecycle-heading h2 {
+  font-size: clamp(27px, 3vw, 38px);
+  line-height: 1.15;
+  margin: 0;
+}
+.lifecycle-demo .lifecycle-heading > p {
+  color: var(--demo-muted);
+  margin: 0;
+  max-width: 68ch;
+}
+.lifecycle-lab {
+  background: var(--demo-panel);
+  border: 1px solid var(--demo-line);
+  border-radius: 12px;
+  padding: 28px;
+  overflow: hidden;
+}
+.demo-presets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.demo-presets > span {
+  font-size: 13px;
+  color: var(--demo-muted);
+  margin-right: auto;
+}
+.lifecycle-demo :is(.demo-action, .demo-presets button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 9px 14px;
+  border: 1px solid var(--demo-line);
+  border-radius: 5px;
+  background: var(--demo-soft);
+  color: var(--demo-ink);
+  font: 500 14px/1.3 var(--body);
+  cursor: pointer;
+}
+.lifecycle-demo :is(.demo-action, .demo-presets button):hover {
+  border-color: var(--demo-accent);
+}
+.demo-presets button[aria-pressed='true'] {
+  box-shadow: inset 0 -3px 0 var(--demo-accent);
+  border-color: var(--demo-accent);
+}
+.right-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.right-card {
+  padding: 20px 22px;
+  border: 1px solid var(--demo-line);
+  border-radius: 8px;
+  background: var(--demo-soft);
+}
+.right-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.lifecycle-demo .right-card h3 {
+  font: 600 18px/1.3 var(--body);
+  margin: 0;
+  color: var(--demo-ink);
+}
+.lifecycle-state {
+  padding: 4px 8px;
+  border: 1px solid var(--demo-blue);
+  border-radius: 3px;
+  color: var(--demo-blue);
+  font: 600 11px/1.4 var(--body);
+  letter-spacing: 0.04em;
+}
+.lifecycle-state.expired {
+  color: var(--demo-accent);
+  border-color: var(--demo-accent);
+}
+.right-card-body {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin: 15px 0 10px;
+}
+.right-token {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  flex: none;
+  color: var(--demo-blue);
+}
+.right-token svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.right-token-consumed {
+  position: absolute;
+  inset: 0;
+  color: var(--demo-accent);
+  clip-path: inset(var(--token-remaining, 0%) 0 0);
+}
+.right-count {
+  display: block;
+  font: 500 clamp(30px, 3vw, 44px)/1.05 var(--heading);
+  font-variant-numeric: tabular-nums;
+  color: var(--demo-ink);
+  min-width: 0;
+}
+.right-caption {
+  display: block;
+  font-size: 12px;
+  color: var(--demo-muted);
+}
+.lifecycle-demo :is(.right-deadline, .right-description, .renewal-receipt) {
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 4px 0 0;
+  color: var(--demo-muted);
+}
+.lifecycle-demo .right-deadline {
+  color: var(--demo-ink);
+  font-weight: 600;
+}
+.renewal-receipt[data-result='rejected'] {
+  color: var(--demo-warning);
+}
+.lifecycle-comparison {
+  margin-top: 26px;
+  display: grid;
+  gap: 8px;
+  --label-width: 155px;
+}
+.lifecycle-scale,
+.lifecycle-row {
+  display: grid;
+  grid-template-columns: var(--label-width) minmax(0, 1fr);
+  align-items: center;
+  gap: 20px;
+}
+.timeline-label {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--demo-muted);
+}
+.timeline-axis {
+  position: relative;
+  height: 24px;
+  margin-right: 1px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--demo-muted);
+}
+.timeline-axis > span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+.timeline-axis > span:first-child {
+  transform: none;
+}
+.timeline-axis > span:last-child {
+  transform: translateX(-100%);
+}
+.lifecycle-track {
+  position: relative;
+  height: 38px;
+  background: linear-gradient(var(--demo-line), var(--demo-line)) center/100% 1px no-repeat;
+}
+.validity-window,
+.elapsed-window,
+.renewal-extension {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  width: 100%;
+  height: 14px;
+  background: var(--demo-blue);
+  border-radius: 2px;
+  transform-origin: left center;
+}
+.elapsed-window {
+  background: var(--demo-accent);
+}
+.renewal-extension {
+  background: transparent;
+  border: 1px dashed var(--demo-blue);
+  box-sizing: border-box;
+}
+.renewal-extension[data-complete='true'] {
+  visibility: hidden;
+}
+.expiry-marker {
+  position: absolute;
+  top: 6px;
+  height: 26px;
+  border-left: 2px solid var(--demo-blue);
+}
+.expiry-marker[data-pending='true'] {
+  border-left-style: dashed;
+}
+.original-marker {
+  position: absolute;
+  top: 8px;
+  height: 22px;
+  border-left: 1px dotted var(--demo-muted);
+}
+.renewal-marker {
+  position: absolute;
+  top: 15px;
+  height: 8px;
+  width: 8px;
+  transform: translateX(-50%) rotate(45deg);
+  border: 1px solid var(--demo-ink);
+  background: var(--demo-panel);
+  z-index: 2;
+}
+.renewal-marker[data-complete='true'] {
+  background: var(--demo-accent);
+}
+.time-cursor {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+.time-cursor::before {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 2px;
+  background: var(--demo-ink);
+}
+.timeline-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px 22px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--demo-muted);
+}
+.timeline-legend > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.timeline-legend i {
+  display: inline-block;
+  width: 14px;
+  height: 6px;
+  border-radius: 1px;
+}
+.legend-elapsed {
+  background: var(--demo-accent);
+}
+.legend-remaining {
+  background: var(--demo-blue);
+}
+.legend-planned {
+  border: 1px dashed var(--demo-blue);
+}
+.lifecycle-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin: 22px 0 10px;
+}
+.lifecycle-playback {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.lifecycle-demo .demo-reset {
+  border-color: transparent;
+  color: var(--demo-muted);
+}
+.lifecycle-demo .demo-time {
+  flex-basis: auto;
+  font: 600 20px/1.2 var(--body);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--demo-ink);
+}
+.lifecycle-scrub {
+  display: grid;
+  grid-template-columns: 155px minmax(0, 1fr);
+  align-items: center;
+  gap: 0 20px;
+  font-size: 12px;
+  color: var(--demo-muted);
+}
+.lifecycle-demo input[type='range'] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: calc(100% + 16px);
+  min-width: 0;
+  margin: 0 -8px;
+  height: 44px;
+  background: transparent;
+  cursor: ew-resize;
+}
+.lifecycle-demo input[type='range']::-webkit-slider-runnable-track {
+  height: 3px;
+  background: var(--demo-line);
+}
+.lifecycle-demo input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -6.5px;
+  border-radius: 50%;
+  background: var(--demo-ink);
+  border: 0;
+}
+.lifecycle-demo input[type='range']::-moz-range-track {
+  height: 3px;
+  background: var(--demo-line);
+}
+.lifecycle-demo input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--demo-ink);
+  border: 0;
+}
+.lifecycle-scrub > span {
+  grid-column: 2;
+  text-align: right;
+  font-size: 11px;
+}
+.lifecycle-summary {
+  margin-top: 18px;
+  padding: 18px 20px;
+  border-left: 3px solid var(--demo-accent);
+  background: var(--demo-soft);
+  min-height: 120px;
+}
+.lifecycle-demo .lifecycle-summary h3 {
+  font: 600 19px/1.3 var(--body);
+  margin: 0 0 6px;
+  color: var(--demo-ink);
+}
+.lifecycle-demo .lifecycle-summary p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--demo-muted);
+  margin: 0;
+  max-width: 90ch;
+}
+.lifecycle-custom {
+  margin-top: 18px;
+  border-top: 1px solid var(--demo-line);
+  padding-top: 15px;
+}
+.lifecycle-custom summary {
+  width: fit-content;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--demo-ink);
+  min-height: 32px;
+}
+.lifecycle-custom > p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--demo-muted);
+  margin: 8px 0 15px;
+}
+.lifecycle-settings {
+  display: flex;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.lifecycle-settings label {
+  display: grid;
+  gap: 6px;
+  flex: 1 1 150px;
+  font-size: 12px;
+  color: var(--demo-muted);
+}
+.lifecycle-settings input {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border: 1px solid var(--demo-line);
+  border-radius: 4px;
+  color: var(--demo-ink);
+  background: var(--demo-panel);
+  font: 500 16px var(--body);
+  color-scheme: dark;
+}
+.project-demo .lifecycle-settings input {
+  color-scheme: light;
+}
+.lifecycle-settings input[aria-invalid='true'] {
+  border-color: var(--demo-warning);
+}
+.demo-settings-error {
+  flex-basis: 100%;
+  font-size: 13px !important;
+  color: var(--demo-warning);
+  margin: 0;
+}
+.lifecycle-footnote {
+  margin-top: 18px;
+}
+.lifecycle-demo .lifecycle-footnote p {
+  color: var(--demo-muted);
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 6px 0;
+  max-width: 100ch;
+}
+@media (max-width: 700px) {
+  .lifecycle-demo {
+    padding-block: 30px;
+  }
+  .lifecycle-heading {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .lifecycle-lab {
+    padding: 18px 14px;
+  }
+  .demo-presets > span {
+    flex-basis: 100%;
+  }
+  .demo-presets button {
+    flex: 1;
+  }
+  .right-comparison {
+    gap: 10px;
+  }
+  .right-card {
+    padding: 14px 10px;
+  }
+  .right-card-head {
+    align-items: start;
+    gap: 8px;
+  }
+  .lifecycle-demo .right-card h3 {
+    font-size: 14px;
+    min-height: 36px;
+  }
+  .right-card-body {
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .right-token {
+    width: 54px;
+    height: 54px;
+  }
+  .right-count {
+    font-size: 30px;
+  }
+  .lifecycle-state {
+    font-size: 10px;
+  }
+  .lifecycle-demo :is(.right-deadline, .right-description, .renewal-receipt) {
+    font-size: 11px;
+  }
+  .lifecycle-comparison {
+    --label-width: 88px;
+  }
+  .lifecycle-scale,
+  .lifecycle-row {
+    gap: 10px;
+  }
+  .timeline-label {
+    font-size: 11px;
+  }
+  .timeline-legend {
+    justify-content: flex-start;
+    gap: 8px 12px;
+  }
+  .lifecycle-controls {
+    align-items: start;
+  }
+  .lifecycle-playback {
+    gap: 6px;
+  }
+  .lifecycle-demo .demo-action {
+    padding-inline: 10px;
+    font-size: 12px;
+  }
+  .demo-time {
+    font-size: 17px;
+    padding-top: 12px;
+  }
+  .lifecycle-scrub {
+    grid-template-columns: 88px minmax(0, 1fr);
+    gap: 0 10px;
+  }
+
+  .lifecycle-summary {
+    padding: 14px;
+    min-height: 220px;
+  }
+  .lifecycle-demo .lifecycle-summary h3 {
+    font-size: 17px;
+  }
+  .lifecycle-demo .lifecycle-summary p {
+    font-size: 13px;
+  }
+}
+
+.lifecycle-demo .lifecycle-playback > button {
+  flex: initial;
+  overflow-wrap: normal;
+}
+.lifecycle-demo :is(.right-deadline, .right-description, .renewal-receipt) {
+  font-size: 13px !important;
+}
+.lifecycle-demo .lifecycle-summary p {
+  font-size: 14px !important;
+}
+.lifecycle-demo .lifecycle-footnote p {
+  font-size: 12px !important;
+}
+.lifecycle-demo .lifecycle-custom > p {
+  font-size: 13px !important;
+}
+@media (max-width: 700px) {
+  .lifecycle-demo .lifecycle-controls {
+    display: block;
+  }
+  .lifecycle-demo .lifecycle-playback {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .lifecycle-demo .lifecycle-playback > button:first-child {
+    grid-column: 1/-1;
+  }
+  .lifecycle-demo .demo-time {
+    display: block;
+    text-align: right;
+    margin-top: 12px;
+    padding: 0;
+    font-size: 18px;
+  }
+  .lifecycle-demo :is(.right-deadline, .right-description, .renewal-receipt) {
+    font-size: 12px !important;
+  }
+  .lifecycle-demo .lifecycle-summary p {
+    font-size: 13px !important;
+  }
+}
+@media (max-width: 700px) {
+  .lifecycle-demo .right-deadline {
+    min-height: 40px;
+  }
+  .lifecycle-demo :is(.right-description, .renewal-receipt) {
+    min-height: 60px;
+  }
+}
+</style></head><body><main id="content"><section class="experiment dark lifecycle-demo"><div class="wrap lifecycle-inner">
+      <header class="lifecycle-heading"><div><p class="eyebrow red">EXPLORE EXPIRY</p></div></header>
+      <div class="lifecycle-lab">
+        <div class="demo-presets" role="group" aria-label="Choose a renewal scenario">
+          <span>Try a scenario</span>
+          <button type="button" data-demo-preset="timely" aria-pressed="true">Renewal in time</button>
+          <button type="button" data-demo-preset="late" aria-pressed="false">Renewal too late</button>
+        </div>
+        <div class="right-comparison">
+          <article class="right-card" data-demo-scenario="expiry">
+            <div class="right-card-head"><h3>Without renewal</h3><span class="lifecycle-state" data-validity>VALID</span></div>
+            <div class="right-card-body"><div class="right-token" aria-hidden="true"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M22 18h29l12 12v32H22zM51 18v13h12M31 42h23M31 50h16"/><circle cx="22" cy="62" r="10"/><path d="M22 56v6l4 3"/></svg><span class="right-token-consumed" data-token-fill="expiry"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M22 18h29l12 12v32H22zM51 18v13h12M31 42h23M31 50h16"/><circle cx="22" cy="62" r="10"/><path d="M22 56v6l4 3"/></svg></span></div><div><span class="right-caption">Time remaining</span><strong class="right-count" data-remaining="expiry">0</strong><span class="right-caption">time units</span></div></div>
+            <p class="right-deadline" data-demo-initial-label></p>
+            <p class="right-description">The right keeps its original expiry.</p>
+          </article><article class="right-card" data-demo-scenario="renewal">
+            <div class="right-card-head"><h3>Renewal requested</h3><span class="lifecycle-state" data-renewed-validity>VALID</span></div>
+            <div class="right-card-body"><div class="right-token" aria-hidden="true"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M22 18h29l12 12v32H22zM51 18v13h12M31 42h23M31 50h16"/><circle cx="22" cy="62" r="10"/><path d="M22 56v6l4 3"/></svg><span class="right-token-consumed" data-token-fill="renewal"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M22 18h29l12 12v32H22zM51 18v13h12M31 42h23M31 50h16"/><circle cx="22" cy="62" r="10"/><path d="M22 56v6l4 3"/></svg></span></div><div><span class="right-caption">Time remaining</span><strong class="right-count" data-remaining="renewal">0</strong><span class="right-caption">time units</span></div></div>
+            <p class="right-deadline" data-demo-renewal-label></p>
+            <p class="renewal-receipt" data-renewal-receipt></p>
+          </article>
+        </div>
+        <div class="lifecycle-comparison" role="group" aria-label="Validity of the same digital right under two scenarios">
+          <div class="lifecycle-scale"><span class="timeline-label">Time</span><div class="timeline-axis" aria-hidden="true"><span style="left:0%">0</span><span style="left:25%">5</span><span style="left:50%">10</span><span style="left:75%">15</span><span style="left:100%">20</span></div></div>
+          <div class="lifecycle-row"><span class="timeline-label">Without renewal</span><div class="lifecycle-track" aria-hidden="true"><span class="validity-window" data-validity-fill></span><span class="elapsed-window" data-demo-progress="expiry"></span><span class="expiry-marker" data-initial-boundary></span><span class="time-cursor" data-cursor></span></div></div><div class="lifecycle-row"><span class="timeline-label">Renewal requested</span><div class="lifecycle-track" aria-hidden="true"><span class="validity-window" data-renewal-fill></span><span class="renewal-extension" data-renewal-extension></span><span class="renewal-marker" data-renewal-event></span><span class="original-marker" data-original-boundary></span><span class="elapsed-window" data-demo-progress="renewal"></span><span class="expiry-marker" data-renewal-boundary></span><span class="time-cursor" data-renewal-cursor></span></div></div>
+          <div class="timeline-legend"><span><i class="legend-elapsed"></i>Elapsed validity</span><span><i class="legend-remaining"></i>Remaining validity</span><span><i class="legend-planned"></i>Planned extension</span></div>
+        </div>
+        <div class="lifecycle-controls">
+          <div class="lifecycle-playback"><button type="button" class="demo-action" data-demo-play aria-label="Play lifetime example">Watch from the start</button><button type="button" class="demo-action" data-demo-next>Next event</button><button type="button" class="demo-action demo-reset" data-demo-reset aria-label="Reset example">Reset</button></div>
+          <output class="demo-time" data-demo-clock>t = 12</output>
+        </div>
+        <div class="lifecycle-scrub"><label for="personal-lifetime-time">Move time to compare</label><input id="personal-lifetime-time" type="range" min="0" max="20" step="0.1" value="12" data-demo-time aria-describedby="personal-lifetime-summary"><span data-demo-range aria-hidden="true">0–20</span></div>
+        <div id="personal-lifetime-summary" class="lifecycle-summary" data-demo-summary aria-live="polite" aria-atomic="true"><h3 data-demo-stage></h3><p data-demo-note></p></div>
+        <details class="lifecycle-custom"><summary>Try your own timings</summary><p>Choose the initial expiry, the request time and the proposed new expiry. Apply the values to update the comparison.</p>
+          <form class="lifecycle-settings" data-demo-settings novalidate aria-label="Set lifecycle times">
+            <label><span>Initial expiry</span><input type="number" name="expiry" value="10" min="1" max="9998" step="1" required aria-describedby="personal-lifetime-error"></label>
+            <label><span>Renewal requested at</span><input type="number" name="renewAt" value="8" min="0" max="9999" step="1" required aria-describedby="personal-lifetime-error"></label>
+            <label><span>Proposed new expiry</span><input type="number" name="renewedExpiry" value="16" min="2" max="9999" step="1" required aria-describedby="personal-lifetime-error"></label>
+            <button type="submit" class="demo-action">Apply values</button><p id="personal-lifetime-error" class="demo-settings-error" data-demo-error role="status" hidden></p>
+          </form>
+        </details>
+      </div>
+      <footer class="lifecycle-footnote"><p class="small" data-demo-config></p></footer>
+    </div></section></main><script>window.CIRCULA_I18N={locale:'en',t:(key,params={})=>key.replace(/\{(\w+)\}/g,(_,k)=>params[k]??'')};</script><script>(function () {
+  'use strict';
+  const content = document.getElementById('content');
+  const tr = (key, params) => window.CIRCULA_I18N.t(key, params);
+  let parameters = { expiry: 10, renewAt: 8, renewedExpiry: 16 };
+  let savedTime = 12;
+  const horizon = () =>
+    Math.max(20, Math.ceil((Math.max(parameters.renewedExpiry, parameters.renewAt) * 1.2) / 4) * 4);
+  function state(time, renewal) {
+    const t = Math.max(0, Math.min(horizon(), Number(time) || 0));
+    const accepted = parameters.renewAt < parameters.expiry;
+    const renewed = Boolean(renewal && accepted && t >= parameters.renewAt);
+    const expires = renewed ? parameters.renewedExpiry : parameters.expiry;
+    return { time: t, renewed, expires, valid: t < expires, remaining: Math.max(0, expires - t) };
+  }
+  function init(initialTime = savedTime) {
+    const demo = content.querySelector('.lifecycle-demo');
+    if (!demo) return null;
+    const elements = new Map();
+    const find = (q) => {
+      if (!elements.has(q)) elements.set(q, demo.querySelector(q));
+      return elements.get(q);
+    };
+    const numbers = new Intl.NumberFormat(window.CIRCULA_I18N.locale, { maximumFractionDigits: 1 });
+    const fmt = (value) => numbers.format(value);
+    const slider = find('[data-demo-time]');
+    const play = find('[data-demo-play]');
+    const form = find('[data-demo-settings]');
+    const abort = new AbortController();
+    const signal = abort.signal;
+    let time = state(initialTime, false).time;
+    let playing = false,
+      frame = 0,
+      previous = null;
+    const write = (node, text) => {
+      if (node.textContent !== text) node.textContent = text;
+    };
+    const set = (node, name, value) => {
+      if (node.getAttribute(name) !== value) node.setAttribute(name, value);
+    };
+    const pct = (x) => `${(x / horizon()) * 100}%`;
+    function playback() {
+      write(
+        play,
+        tr(
+          playing
+            ? 'Pause'
+            : time === 0
+              ? 'Watch from the start'
+              : time >= horizon()
+                ? 'Replay'
+                : 'Watch from the start',
+        ),
+      );
+      play.setAttribute(
+        'aria-label',
+        tr(playing ? 'Pause lifetime example' : 'Play lifetime example'),
+      );
+    }
+    function stop() {
+      playing = false;
+      previous = null;
+      cancelAnimationFrame(frame);
+      playback();
+    }
+    function geometry() {
+      const { expiry, renewAt, renewedExpiry } = parameters;
+      for (const [name, value] of Object.entries(parameters)) {
+        form.elements.namedItem(name).value = String(value);
+        form.elements.namedItem(name).setAttribute('aria-invalid', 'false');
+      }
+      slider.max = String(horizon());
+      find('[data-validity-fill]').style.width = pct(expiry);
+      find('[data-renewal-extension]').style.left = pct(expiry);
+      find('[data-renewal-extension]').style.width = pct(renewedExpiry - expiry);
+      for (const [q, x] of [
+        ['[data-initial-boundary]', expiry],
+        ['[data-original-boundary]', expiry],
+        ['[data-renewal-event]', renewAt],
+      ])
+        find(q).style.left = pct(x);
+      demo
+        .querySelectorAll('.timeline-axis > span')
+        .forEach((tick, i) => write(tick, fmt((i * horizon()) / 4)));
+      write(find('[data-demo-range]'), `0–${fmt(horizon())}`);
+      slider.setAttribute(
+        'aria-label',
+        tr('Illustrative time, from 0 to {end}', { end: fmt(horizon()) }),
+      );
+      slider.removeAttribute('data-i18n-aria-label');
+      write(
+        find('[data-demo-config]'),
+        tr(
+          'Rule used here: an authorised renewal succeeds when its request arrives before the current expiry. Time units are illustrative.',
+        ),
+      );
+    }
+    function update() {
+      const { expiry, renewAt, renewedExpiry } = parameters;
+      const a = state(time, false),
+        b = state(time, true);
+      time = a.time;
+      savedTime = time;
+      slider.value = String(time);
+      write(find('[data-demo-clock]'), `t = ${fmt(time)}`);
+      write(
+        find('[data-demo-initial-label]'),
+        tr('Expiry at t = {expiry}', { expiry: fmt(expiry) }),
+      );
+      write(
+        find('[data-demo-renewal-label]'),
+        tr('Current expiry: t = {expiry}', { expiry: fmt(b.expires) }),
+      );
+      for (const [name, s, tag] of [
+        ['expiry', a, '[data-validity]'],
+        ['renewal', b, '[data-renewed-validity]'],
+      ]) {
+        write(find(tag), tr(s.valid ? 'VALID' : 'EXPIRED'));
+        find(tag).classList.toggle('expired', !s.valid);
+        find(`[data-demo-scenario="${name}"]`).dataset.expired = String(!s.valid);
+        write(find(`[data-remaining="${name}"]`), fmt(s.remaining));
+        find(`[data-demo-progress="${name}"]`).style.transform =
+          `scaleX(${Math.min(time, s.expires) / horizon()})`;
+        find(`[data-token-fill="${name}"]`).style.setProperty(
+          '--token-remaining',
+          `${Math.max(0, 1 - time / s.expires) * 100}%`,
+        );
+      }
+      find('[data-renewal-fill]').style.width = pct(b.expires);
+      find('[data-renewal-boundary]').style.left = pct(b.renewed ? renewedExpiry : expiry);
+      find('[data-renewal-boundary]').dataset.pending = String(!b.renewed);
+      find('[data-renewal-extension]').dataset.complete = String(time >= renewAt);
+      find('[data-renewal-event]').dataset.complete = String(time >= renewAt);
+      for (const q of ['[data-cursor]', '[data-renewal-cursor]'])
+        find(q).style.transform = `translateX(${(time / horizon()) * 100}%)`;
+      const accepted = renewAt < expiry;
+      const receipt =
+        time < renewAt
+          ? 'Request scheduled at t = {renewAt}'
+          : accepted
+            ? 'Accepted at t = {renewAt} · new expiry t = {renewedExpiry}'
+            : 'Rejected at t = {renewAt} · expiry stays t = {expiry}';
+      write(
+        find('[data-renewal-receipt]'),
+        tr(receipt, {
+          renewAt: fmt(renewAt),
+          expiry: fmt(expiry),
+          renewedExpiry: fmt(renewedExpiry),
+        }),
+      );
+      find('[data-renewal-receipt]').dataset.result =
+        time < renewAt ? 'pending' : accepted ? 'accepted' : 'rejected';
+      let title, body;
+      if (!accepted && time >= renewAt) {
+        title = 'The renewal request is too late';
+        body =
+          'The request at t = {renewAt} reaches a right that expired at t = {expiry}. Under this rule, the right stays expired.';
+      } else if (time >= (accepted ? renewedExpiry : expiry)) {
+        title = 'Both rights have expired';
+        body = accepted
+          ? 'Their validity ended at t = {expiry} and t = {renewedExpiry}. Move time backwards to inspect each boundary.'
+          : 'Both rights reached their expiry at t = {expiry}. The scheduled renewal falls after this boundary.';
+      } else if (time >= expiry) {
+        title = 'The renewal makes the difference';
+        body =
+          'The original right expired at t = {expiry}. The renewed right remains usable until t = {renewedExpiry}.';
+      } else if (time >= renewAt && accepted) {
+        title = 'The renewal has been accepted';
+        body =
+          'The request at t = {renewAt} arrived before expiry at t = {expiry}. The right now has a new expiry at t = {renewedExpiry}.';
+      } else {
+        title = 'Both rights are still valid';
+        body =
+          'Both start with expiry at t = {expiry}. A renewal is requested for the right-hand copy at t = {renewAt}.';
+      }
+      write(find('[data-demo-stage]'), tr(title));
+      write(
+        find('[data-demo-note]'),
+        tr(body, { expiry: fmt(expiry), renewAt: fmt(renewAt), renewedExpiry: fmt(renewedExpiry) }),
+      );
+      set(
+        slider,
+        'aria-valuetext',
+        tr('Time {time}. Without renewal: {baseline}. Renewal requested: {renewed}.', {
+          time: fmt(time),
+          baseline: tr(a.valid ? 'VALID' : 'EXPIRED'),
+          renewed: tr(b.valid ? 'VALID' : 'EXPIRED'),
+        }),
+      );
+      for (const button of demo.querySelectorAll('[data-demo-preset]')) {
+        const isDefault =
+          expiry === 10 &&
+          renewedExpiry === 16 &&
+          renewAt === (button.dataset.demoPreset === 'late' ? 12 : 8);
+        button.setAttribute('aria-pressed', String(isDefault));
+      }
+    }
+    function tick(now) {
+      if (!playing) return;
+      if (previous !== null)
+        time = Math.min(
+          horizon(),
+          time + (Math.min(0.1, (now - previous) / 1000) * horizon()) / 14,
+        );
+      previous = now;
+      update();
+      if (time >= horizon()) stop();
+      else frame = requestAnimationFrame(tick);
+    }
+    play.addEventListener(
+      'click',
+      () => {
+        if (playing) return stop();
+        time = 0;
+        playing = true;
+        previous = null;
+        playback();
+        update();
+        frame = requestAnimationFrame(tick);
+      },
+      { signal },
+    );
+    slider.addEventListener(
+      'input',
+      () => {
+        stop();
+        time = Number(slider.value);
+        update();
+      },
+      { signal },
+    );
+    find('[data-demo-reset]').addEventListener(
+      'click',
+      () => {
+        stop();
+        time = 0;
+        update();
+      },
+      { signal },
+    );
+    find('[data-demo-next]').addEventListener(
+      'click',
+      () => {
+        stop();
+        const events = [
+          ...new Set([
+            0,
+            parameters.renewAt,
+            parameters.expiry,
+            ...(parameters.renewAt < parameters.expiry ? [parameters.renewedExpiry] : []),
+            horizon(),
+          ]),
+        ].sort((a, b) => a - b);
+        time = events.find((x) => x > time + 0.05) ?? 0;
+        update();
+      },
+      { signal },
+    );
+    for (const button of demo.querySelectorAll('[data-demo-preset]'))
+      button.addEventListener(
+        'click',
+        () => {
+          stop();
+          parameters = {
+            expiry: 10,
+            renewAt: button.dataset.demoPreset === 'late' ? 12 : 8,
+            renewedExpiry: 16,
+          };
+          time = 12;
+          find('[data-demo-error]').hidden = true;
+          geometry();
+          update();
+        },
+        { signal },
+      );
+    form.addEventListener(
+      'submit',
+      (event) => {
+        event.preventDefault();
+        stop();
+        const candidate = Object.fromEntries(
+          Object.keys(parameters).map((k) => [k, form.elements.namedItem(k).valueAsNumber]),
+        );
+        let valid = true;
+        for (const [k, v] of Object.entries(candidate)) {
+          const input = form.elements.namedItem(k);
+          const ok = Number.isInteger(v) && v >= Number(input.min) && v <= Number(input.max);
+          input.setAttribute('aria-invalid', String(!ok));
+          valid = valid && ok;
+        }
+        const message = !valid
+          ? 'Use whole numbers within the limits shown.'
+          : candidate.renewedExpiry <= candidate.expiry
+            ? 'The renewed expiry must be later than the initial expiry.'
+            : '';
+        const error = find('[data-demo-error]');
+        error.hidden = !message;
+        write(error, message ? tr(message) : '');
+        if (message) {
+          if (valid) form.elements.namedItem('renewedExpiry').setAttribute('aria-invalid', 'true');
+          form.querySelector('[aria-invalid="true"]')?.focus();
+          return;
+        }
+        parameters = candidate;
+        time = candidate.expiry;
+        geometry();
+        update();
+      },
+      { signal },
+    );
+    document.addEventListener(
+      'visibilitychange',
+      () => {
+        if (document.hidden) stop();
+      },
+      { signal },
+    );
+    const visible = window.IntersectionObserver
+      ? new IntersectionObserver((entries) => {
+          if (!entries[0].isIntersecting) stop();
+        })
+      : null;
+    visible?.observe(demo);
+    geometry();
+    playback();
+    update();
+    return () => {
+      stop();
+      abort.abort();
+      visible?.disconnect();
+    };
+  }
+  window.CIRCULA_LIFETIME = { init };
+})();
+</script><script>window.CIRCULA_LIFETIME.init();</script></body></html>
