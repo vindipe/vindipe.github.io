@@ -29,7 +29,7 @@ export const recentWorks: RecentWork[] = [
     target: "_self",
   },
   {
-    title: "Lilith – A Topology-Aware Blockchain Benchmarking Framework",
+    title: "Lilith - A Topology-Aware Blockchain Benchmarking Framework",
     desc: "Public GitHub release of the topology-aware blockchain benchmarking framework developed during my PhD, including validation mode, repository documentation, safe runtime-file handling, and Git LFS support for the cloud-ping dataset.",
     url: "/research/lilith-benchmarking-framework",
     img: "/research/debs/lilith-arch-v2.png",
@@ -47,7 +47,7 @@ export const recentWorks: RecentWork[] = [
     target: "_self",
   },
   {
-    title: "CryptoEntropy – Economic Efficiency Dataset",
+    title: "CryptoEntropy - Economic Efficiency Dataset",
     desc: "Public repository containing normalized and entropy-derived digital-asset datasets for the DLT '25 EB-index study, plus reproducibility material for regenerating the main figures.",
     url: "/research/entropy-based-economic-efficiency",
     img: "/research/dlt25/entropy-set1.png",
