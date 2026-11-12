@@ -5,7 +5,7 @@ import ResearchDetailPage from "../../components/ResearchDetailPage.astro";
 const t = translator(Astro.url.pathname);
 
 const title =
-  "Network-Controlled Dataset of Blockchain Benchmarks for Evaluating Repeatability and Performance Predictability";
+  t("Network-Controlled Dataset of Blockchain Benchmarks for Evaluating Repeatability and Performance Predictability", "Dataset per studiare la ripetibilità e la prevedibilità dei benchmark blockchain");
 const zenodoUrl = "https://doi.org/10.5281/zenodo.17681717";
 const githubUrl =
   "https://github.com/vindipe/blockchain-repeatability-benchmarking";
@@ -14,7 +14,7 @@ const externalLinks = [
   { label: t("Open dataset on Zenodo", "Apri il dataset su Zenodo"), href: zenodoUrl },
   { label: t("Open GitHub repository", "Apri il repository GitHub"), href: githubUrl },
   {
-    label: t("Associated ACM DLT article", "Articolo ACM DLT associato"),
+    label: t("Associated ACM DLT article", "Articolo di riferimento su ACM DLT"),
     href: "https://doi.org/10.1145/3828757",
   },
 ];
@@ -22,21 +22,21 @@ const externalLinks = [
 const sections = [
   {
     title: t("Experimental matrix", "Matrice sperimentale"),
-    body: t("The dataset contains 300 aggregate configuration rows and 50 columns. It covers five blockchain systems, five network topologies, six workloads, and deployments with 10 and 40 nodes.", "Il dataset ha 300 righe di configurazioni aggregate e 50 colonne. Copre cinque blockchain, cinque topologie di rete, sei carichi di lavoro e configurazioni da 10 e 40 nodi."),
+    body: t("The dataset contains 300 aggregate configuration rows and 50 columns. It covers five blockchain systems, five network topologies, six workloads, and deployments with 10 and 40 nodes.", "Il dataset ha 50 colonne e 300 righe, una per ogni configurazione sperimentale. Comprende cinque blockchain, cinque topologie di rete, sei carichi di lavoro e reti da 10 o 40 nodi."),
     items: [
       t("Blockchains: Algorand, Diem, Ethereum, Quorum, and Solana.", "Blockchain: Algorand, Diem, Ethereum, Quorum e Solana."),
-      t("Topologies: fat-tree, full mesh, hypercube, scale-free, and torus.", "Topologie: fat-tree, maglia completa, ipercubo, rete scale-free e toro."),
+      t("Topologies: fat-tree, full mesh, hypercube, scale-free, and torus.", "Topologie: fat-tree, maglia completa, ipercubo, rete a invarianza di scala e toro."),
       t("Workloads: DDoS, FIFA, GAFAM, Gaming, PayPal, and VISA.", "Carichi: DDoS, FIFA, GAFAM, gaming, PayPal e VISA."),
       t("Measurements: throughput, latency, energy, and committed transactions.", "Misure: throughput, latenza, energia e transazioni confermate."),
     ],
   },
   {
     title: t("Repeatability and predictability", "Ripetibilità e prevedibilità"),
-    body: t("Each row summarizes repeated benchmark executions through counts, means, extrema, quartiles, standard deviations, absolute ranges, and relative-dispersion measures. The resulting evidence supports analysis of variability, repeatability, and performance predictability under controlled network conditions.", "Ogni riga riassume più esecuzioni dello stesso benchmark con conteggi, medie, estremi, quartili, deviazioni standard, intervalli e misure di dispersione relativa. I dati permettono di analizzare variabilità, ripetibilità e prevedibilità in condizioni di rete controllate."),
+    body: t("Each row summarizes repeated benchmark executions through counts, means, extrema, quartiles, standard deviations, absolute ranges, and relative-dispersion measures. The resulting evidence supports analysis of variability, repeatability, and performance predictability under controlled network conditions.", "Ogni riga riassume più esecuzioni dello stesso benchmark. Include conteggi, medie, valori minimi e massimi, quartili, deviazioni standard, intervalli e misure di dispersione relativa. Si possono così confrontare variabilità, ripetibilità e prevedibilità in condizioni di rete controllate."),
   },
   {
     title: t("Reproducibility resources", "Risorse per la riproducibilità"),
-    body: t("The GitHub repository provides the released CSV, a data dictionary, methodology and provenance notes, citation metadata, and the CC BY 4.0 license. The experiments were conducted with Lilith, the topology-aware blockchain benchmarking framework.", "Il repository GitHub include il CSV, un dizionario dei dati, note su metodologia e provenienza, metadati per la citazione e licenza CC BY 4.0. Gli esperimenti sono stati eseguiti con Lilith, il framework di benchmarking con topologie controllate."),
+    body: t("The GitHub repository provides the released CSV, a data dictionary, methodology and provenance notes, citation metadata, and the CC BY 4.0 license. The experiments were conducted with Lilith, the topology-aware blockchain benchmarking framework.", "Su GitHub trovi il CSV, il significato delle colonne, le note su metodo e provenienza dei dati, le indicazioni per la citazione e la licenza CC BY 4.0. Per eseguire gli esperimenti abbiamo usato Lilith."),
   },
 ];
 ---
@@ -56,6 +56,6 @@ const sections = [
   ]}
   {externalLinks}
   previewTitle={t("Dataset overview", "Panoramica del dataset")}
-  previewBody={t("This dataset preserves aggregate statistics from repeated blockchain benchmark executions under controlled network conditions. It is available through its archival Zenodo record and a documented public GitHub repository.", "Il dataset conserva statistiche aggregate di benchmark blockchain eseguiti più volte in condizioni di rete controllate. I dati sono disponibili su Zenodo e in un repository GitHub pubblico e documentato.")}
+  previewBody={t("This dataset preserves aggregate statistics from repeated blockchain benchmark executions under controlled network conditions. It is available through its archival Zenodo record and a documented public GitHub repository.", "Il dataset raccoglie le statistiche di benchmark ripetuti in condizioni di rete controllate. Su Zenodo trovi la versione archiviata, su GitHub i dati e la documentazione.")}
   {sections}
 />

@@ -9,10 +9,10 @@ const localPath = (href: string) => inLanguage(href, locale);
 const publications = [
   {
     title:
-      "The Impact of Network Topology on Performance Metrics and Energy Consumption for Blockchains: Towards Repeatable Benchmarking",
+      t("The Impact of Network Topology on Performance Metrics and Energy Consumption for Blockchains: Towards Repeatable Benchmarking", "L’effetto della topologia di rete sulle prestazioni e sui consumi delle blockchain"),
     badge: t("ACM DLT journal", "Rivista ACM DLT"),
     href: "/research/acm-dlt-network-topologies-blockchain-performance",
-    desc: t("ACM DLT journal article on topology-aware blockchain benchmarking, network-controlled experiments, workload sensitivity, and reproducible evaluation of blockchain performance.", "Articolo sulla rivista ACM DLT dedicato al benchmarking delle blockchain con topologie controllate. Studia l’effetto dei carichi di lavoro e come ottenere valutazioni riproducibili delle prestazioni."),
+    desc: t("ACM DLT journal article on topology-aware blockchain benchmarking, network-controlled experiments, workload sensitivity, and reproducible evaluation of blockchain performance.", "L’articolo su ACM DLT studia come rete e carichi di lavoro cambiano le prestazioni delle blockchain e come controllarli per rendere riproducibili le misure."),
     tags: [
       "ACM DLT",
       t("Blockchain benchmarking", "Benchmarking delle blockchain"),
@@ -21,18 +21,18 @@ const publications = [
     ],
   },
   {
-    title: "Dynamic Taxonomy: A Bridge from DeFi to TradFi",
-    badge: "CCAF / Working paper",
+    title: t("Dynamic Taxonomy: A Bridge from DeFi to TradFi", "Una tassonomia per collegare DeFi e finanza tradizionale"),
+    badge: t("CCAF / Working paper", "CCAF / Documento di lavoro"),
     href: "/research/dynamic-taxonomy-defi-tradfi",
-    desc: t("Research developed within the Cambridge Centre for Alternative Finance on a dynamic DeFi taxonomy designed to connect decentralised finance with traditional finance, regulatory perspectives, and the Cambridge DeFi Navigator.", "Ricerca del Cambridge Centre for Alternative Finance su una tassonomia dinamica della DeFi, pensata per mettere in relazione finanza decentralizzata, finanza tradizionale, prospettive normative e Cambridge DeFi Navigator."),
+    desc: t("Research developed within the Cambridge Centre for Alternative Finance on a dynamic DeFi taxonomy designed to connect decentralised finance with traditional finance, regulatory perspectives, and the Cambridge DeFi Navigator.", "Il Cambridge Centre for Alternative Finance ha sviluppato una classificazione dei protocolli DeFi che aiuta a confrontarli con i servizi della finanza tradizionale e a esaminarli dal punto di vista normativo. È alla base del Cambridge DeFi Navigator."),
     tags: ["DeFi", "TradFi", t("Taxonomy", "Tassonomia"), t("Digital assets", "Asset digitali"), "CCAF"],
   },
   {
     title:
-      "An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies",
+      t("An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies", "Misurare l’efficienza economica delle criptovalute con l’entropia"),
     badge: "DLT '25",
     href: "/research/entropy-based-economic-efficiency",
-    desc: t("Research introducing an entropy-based index to evaluate the economic efficiency of cryptocurrencies through on-chain attributes, user participation, supply dynamics, and transfer activity.", "Lo studio propone un indice basato sull’entropia per valutare l’efficienza economica delle criptovalute a partire da attributi on-chain, partecipazione degli utenti, dinamiche dell’offerta e attività di trasferimento."),
+    desc: t("Research introducing an entropy-based index to evaluate the economic efficiency of cryptocurrencies through on-chain attributes, user participation, supply dynamics, and transfer activity.", "Un indice basato sull’entropia valuta l’efficienza economica delle criptovalute usando dati registrati sulla blockchain, tra cui partecipazione degli utenti, andamento dell’offerta e trasferimenti."),
     tags: [
       t("Cryptocurrency efficiency", "Efficienza delle criptovalute"),
       t("Shannon entropy", "Entropia di Shannon"),
@@ -42,10 +42,10 @@ const publications = [
   },
   {
     title:
-      "Blockchain Energy Consumption: Unveiling the Impact of Network Topologies",
+      t("Blockchain Energy Consumption: Unveiling the Impact of Network Topologies", "Come la topologia di rete incide sui consumi delle blockchain"),
     badge: "IEEE ICBC '25",
     href: "/research/performance-energy-economic-efficiency",
-    desc: t("Peer-reviewed research on how network topology, workload type, and blockchain design affect energy consumption and energy per transaction.", "Studio sottoposto a revisione paritaria su come topologia, carico di lavoro e progettazione delle blockchain incidono sui consumi totali e sull’energia per transazione."),
+    desc: t("Peer-reviewed research on how network topology, workload type, and blockchain design affect energy consumption and energy per transaction.", "Lo studio confronta i consumi complessivi e l’energia per transazione al variare della topologia, del carico e della piattaforma blockchain."),
     tags: [
       t("Blockchain energy", "Consumi energetici delle blockchain"),
       t("Network topology", "Topologia di rete"),
@@ -54,10 +54,10 @@ const publications = [
     ],
   },
   {
-    title: "Impact of Network Topologies on Blockchain Performance",
+    title: t("Impact of Network Topologies on Blockchain Performance", "L’effetto delle topologie di rete sulle prestazioni delle blockchain"),
     badge: "ACM DEBS '25",
     href: "/research/topology-aware-blockchain-benchmarking",
-    desc: t("Peer-reviewed research on how network topology affects blockchain performance under controlled, reproducible, and cloud-inspired experimental conditions.", "Studio sottoposto a revisione paritaria sugli effetti della topologia di rete sulle prestazioni delle blockchain, in condizioni controllate e riproducibili ispirate al cloud."),
+    desc: t("Peer-reviewed research on how network topology affects blockchain performance under controlled, reproducible, and cloud-inspired experimental conditions.", "Lo studio misura quanto la topologia incida sulle prestazioni delle blockchain riproducendo in laboratorio condizioni di rete tipiche del cloud."),
     tags: [
       t("Blockchain benchmarking", "Benchmarking delle blockchain"),
       t("Network topology", "Topologia di rete"),
@@ -69,10 +69,10 @@ const publications = [
 
 const artifacts = [
   {
-    title: t("Lilith - A Topology-Aware Blockchain Benchmarking Framework", "Lilith – Framework di benchmarking per blockchain con topologie controllate"),
+    title: t("Lilith - A Topology-Aware Blockchain Benchmarking Framework", "Lilith – Strumenti per confrontare blockchain in reti controllate"),
     badge: t("Artifact", "Materiali di ricerca"),
     href: "/research/lilith-benchmarking-framework",
-    desc: t("Public GitHub research artifact supporting topology-aware blockchain benchmarking, workload execution, network emulation, local validation, Git LFS-backed datasets, and reproducible experimental analysis.", "Strumento pubblico su GitHub per il benchmarking delle blockchain con topologie controllate. Supporta l’esecuzione dei carichi, l’emulazione di rete, la validazione locale, i dataset gestiti con Git LFS e l’analisi riproducibile."),
+    desc: t("Public GitHub research artifact supporting topology-aware blockchain benchmarking, workload execution, network emulation, local validation, Git LFS-backed datasets, and reproducible experimental analysis.", "Lilith automatizza gli esperimenti: genera ed esegue i carichi, emula la rete e aiuta a riprodurre le analisi. Su GitHub sono disponibili il codice, gli strumenti di verifica locale e i riferimenti ai dati gestiti con Git LFS."),
     tags: [
       "Framework",
       "GitHub",
@@ -85,7 +85,7 @@ const artifacts = [
     title: t("CryptoEntropy - Economic Efficiency Dataset", "CryptoEntropy – Dataset sull’efficienza economica"),
     badge: t("Dataset / Tool", "Dataset e strumento"),
     href: "/research/entropy-based-economic-efficiency",
-    desc: t("Public normalized and entropy-derived cryptocurrency datasets supporting the DLT '25 EB-index paper, with documentation, citation metadata, reproducible plotting material, and an interactive dashboard.", "Dataset pubblici sulle criptovalute, normalizzati e derivati dall’entropia, a supporto dell’articolo DLT ’25 sull’EB-index. Includono documentazione, dati bibliografici, materiali per ricreare i grafici e una dashboard."),
+    desc: t("Public normalized and entropy-derived cryptocurrency datasets supporting the DLT '25 EB-index paper, with documentation, citation metadata, reproducible plotting material, and an interactive dashboard.", "I dati elaborati per l’articolo DLT ’25 sono pubblici. Trovi anche la documentazione, le indicazioni per citare il dataset, il codice per riprodurre i grafici e uno strumento interattivo."),
     tags: [
       "Dataset",
       "EB-index",
@@ -96,10 +96,10 @@ const artifacts = [
   },
   {
     title:
-      "Network-Controlled Dataset of Blockchain Benchmarks for Evaluating Repeatability and Performance Predictability",
+      t("Network-Controlled Dataset of Blockchain Benchmarks for Evaluating Repeatability and Performance Predictability", "Dataset per studiare la ripetibilità e la prevedibilità dei benchmark blockchain"),
     badge: "Dataset",
     href: "/research/blockchain-repeatability-dataset",
-    desc: t("Public dataset of 300 aggregate configurations for evaluating blockchain benchmark repeatability and performance predictability across five platforms, five network topologies, six workloads, and two network sizes.", "Dataset pubblico di 300 configurazioni aggregate per valutare la ripetibilità dei benchmark e la prevedibilità delle prestazioni. Copre cinque piattaforme, cinque topologie, sei carichi di lavoro e due dimensioni di rete."),
+    desc: t("Public dataset of 300 aggregate configurations for evaluating blockchain benchmark repeatability and performance predictability across five platforms, five network topologies, six workloads, and two network sizes.", "Risultati aggregati di 300 configurazioni per studiare quanto siano ripetibili i benchmark e prevedibili le prestazioni. Il dataset comprende cinque piattaforme, cinque topologie, sei carichi di lavoro e reti di due dimensioni."),
     tags: [
       "Dataset",
       t("Repeatability", "Ripetibilità"),
@@ -111,10 +111,10 @@ const artifacts = [
 
 const academicTheses = [
   {
-    title: "Comparing Blockchains: Performance, Energy, and Economic Efficiencies",
+    title: t("Comparing Blockchains: Performance, Energy, and Economic Efficiencies", "Confrontare le blockchain: prestazioni, consumi ed efficienza economica"),
     badge: t("PhD thesis", "Tesi di dottorato"),
     href: "/research/comparing-blockchains",
-    desc: t("Doctoral dissertation presenting a multidimensional comparison of blockchain systems across performance, energy consumption, experimental repeatability, performance predictability, and economic efficiency.", "Tesi di dottorato che confronta sistemi blockchain in termini di prestazioni, consumi energetici, ripetibilità, prevedibilità ed efficienza economica."),
+    desc: t("Doctoral dissertation presenting a multidimensional comparison of blockchain systems across performance, energy consumption, experimental repeatability, performance predictability, and economic efficiency.", "La tesi confronta prestazioni, consumi ed efficienza economica delle blockchain e studia quanto siano ripetibili e prevedibili i risultati."),
     tags: [
       t("PhD thesis", "Tesi di dottorato"),
       t("Blockchain systems", "Sistemi blockchain"),
@@ -126,10 +126,10 @@ const academicTheses = [
   },
   {
     title:
-      "Decentralized accounting system: Efficient document management system implemented on top of blockchain secure transactions environment",
+      t("Decentralized accounting system: Efficient document management system implemented on top of blockchain secure transactions environment", "Contabilità decentralizzata e gestione dei documenti su blockchain"),
     badge: t("Master's thesis", "Tesi magistrale"),
     href: "/research/decentralized-accounting-system",
-    desc: t("Master's thesis on an efficient document-management and accounting system implemented with blockchain transactions, Solid Pods, MetaMask, QR codes, and eBill-inspired workflows.", "Tesi magistrale su un sistema di contabilità e gestione documentale che usa transazioni blockchain, Solid Pods, MetaMask, codici QR e procedure ispirate a eBill."),
+    desc: t("Master's thesis on an efficient document-management and accounting system implemented with blockchain transactions, Solid Pods, MetaMask, QR codes, and eBill-inspired workflows.", "Un prototipo di contabilità e gestione dei documenti che usa Solid Pods, MetaMask, codici QR e transazioni su blockchain. La fatturazione si ispira a eBill."),
     tags: [
       "Ethereum",
       "Solid Pods",
@@ -143,7 +143,7 @@ const academicTheses = [
     badge: t("Bachelor's thesis", "Tesi triennale"),
     href: "/theses/bachelor-thesis-threat-modeling-process.pdf",
     external: true,
-    desc: t("Bachelor's thesis on threat modeling, secure software development, threat intelligence, monitoring tools, log analysis, visualization, containerization, and security-oriented infrastructure.", "Tesi triennale su modellazione delle minacce, sviluppo sicuro, threat intelligence, monitoraggio, analisi dei log, visualizzazione, container e infrastrutture orientate alla sicurezza."),
+    desc: t("Bachelor's thesis on threat modeling, secure software development, threat intelligence, monitoring tools, log analysis, visualization, containerization, and security-oriented infrastructure.", "Tesi sulla modellazione delle minacce e sullo sviluppo sicuro, con approfondimenti su threat intelligence, monitoraggio, analisi dei log, visualizzazione e container."),
     tags: [
       t("Threat modeling", "Modellazione delle minacce"),
       t("Cybersecurity", "Sicurezza informatica"),
@@ -156,22 +156,22 @@ const academicTheses = [
 ---
 
 <BaseLayout
-  title={t("Blockchain Research and Publications | Vincenzo Di Perna", "Ricerca sulle blockchain e pubblicazioni | Vincenzo Di Perna")}
-  description={t("Explore research on blockchain benchmarking, network topologies, energy use, economic efficiency, DeFi and reproducible datasets.", "Pubblicazioni e dataset di Vincenzo Di Perna su benchmarking delle blockchain, topologie, consumi energetici, efficienza economica e DeFi.")}
+  title={t("Blockchain Research and Publications | Vincenzo Di Perna", "Ricerca e pubblicazioni sulle blockchain | Vincenzo Di Perna")}
+  description={t("Explore research on blockchain benchmarking, network topologies, energy use, economic efficiency, DeFi and reproducible datasets.", "Pubblicazioni e dati sulla valutazione delle blockchain, sulle topologie di rete, sui consumi energetici, sull’efficienza economica e sulla DeFi.")}
   sideBarActiveItemID="research"
 >
   <section class="mb-10">
     <h1 class="text-4xl font-bold mb-4">{t("Research", "Ricerca")}</h1>
 
     <p class="text-lg leading-relaxed opacity-90">
-      {t("My research focuses on blockchain systems evaluation, distributed infrastructures, digital assets, reproducible experimentation, network-aware benchmarking, energy and efficiency analysis, and the study of performance variability, repeatability, and predictability under controlled experimental conditions.", "Studio come si comportano le blockchain e le infrastrutture distribuite in condizioni sperimentali controllate. Il mio lavoro riguarda il benchmarking con topologie di rete realistiche, la riproducibilità degli esperimenti, i consumi e l’efficienza, con particolare attenzione a variabilità, ripetibilità e prevedibilità delle prestazioni.")}
+      {t("My research focuses on blockchain systems evaluation, distributed infrastructures, digital assets, reproducible experimentation, network-aware benchmarking, energy and efficiency analysis, and the study of performance variability, repeatability, and predictability under controlled experimental conditions.", "Studio come cambiano le prestazioni e i consumi delle blockchain al variare della rete e del carico di lavoro. Uso topologie realistiche in un ambiente controllato per capire quali risultati si ripetono, quanto variano da un esperimento all’altro e quanto sono prevedibili. Una parte del mio lavoro riguarda l’efficienza economica delle criptovalute.")}
     </p>
   </section>
 
   <section class="mb-12"><h2 class="text-3xl font-bold mb-5">{t("Research direction", "Nuovo filone di ricerca")}</h2>
     <article class="network-protected card bg-base-100 shadow-md"><div class="card-body">
-  <div class="flex flex-wrap items-center gap-2"><h3 class="card-title">{t("CIRCULA - Expiry-Aware System Design for Blockchains", "CIRCULA – Scadenza e rinnovo nella progettazione delle blockchain")}</h3><span class="badge badge-primary">{t("Expected start · 1 February 2027", "Avvio previsto · 1° febbraio 2027")}</span></div>
-  <p>{t("What if digital resources had an explicit lifetime? CIRCULA will investigate expiry and renewal in blockchain systems through formal semantics, prototypes and controlled evaluation. The project is funded by the SNSF and hosted at the University of Neuchâtel.", "Che cosa cambierebbe se le risorse digitali avessero una durata definita? CIRCULA studierà la scadenza e il rinnovo nelle blockchain attraverso una semantica formale, prototipi ed esperimenti controllati. L’Università di Neuchâtel ospita il progetto, finanziato dal Fondo nazionale svizzero.")}</p>
+  <div class="flex flex-wrap items-center gap-2"><h3 class="card-title">{t("CIRCULA - Expiry-Aware System Design for Blockchains", "CIRCULA – Scadenza e rinnovo delle risorse nelle blockchain")}</h3><span class="badge badge-primary">{t("Expected start · 1 February 2027", "Avvio previsto · 1° febbraio 2027")}</span></div>
+  <p>{t("What if digital resources had an explicit lifetime? CIRCULA will investigate expiry and renewal in blockchain systems through formal semantics, prototypes and controlled evaluation. The project is funded by the SNSF and hosted at the University of Neuchâtel.", "Che cosa succede quando una risorsa digitale ha una data di scadenza? CIRCULA studierà come rappresentare e verificare scadenza e rinnovo con modelli formali, prototipi ed esperimenti controllati. Il progetto è ospitato dall’Università di Neuchâtel e finanziato dal Fondo nazionale svizzero.")}</p>
   
   <div class="card-actions mt-3"><a class="btn btn-sm btn-primary" href={localPath("/research/circula")}>{t("Explore CIRCULA", "Scopri CIRCULA")}</a><a class="btn btn-sm btn-outline" href="https://circula.unine.ch/" target="_blank" rel="noopener noreferrer">{t("Project website", "Sito del progetto")}</a></div>
 </div></article>
@@ -320,7 +320,7 @@ const academicTheses = [
 
                 <div class="card-actions justify-end mt-4">
                   <span class="btn btn-sm btn-outline">
-                    {item.external ? "Open thesis PDF" : "Open thesis page"}
+                    {item.external ? t("Open thesis PDF", "Apri la tesi in PDF") : t("Open thesis page", "Vai alla tesi")}
                   </span>
                 </div>
               </article>
@@ -347,7 +347,7 @@ const academicTheses = [
         </div>
 
         <p>
-          {t("Research internship experience at the Cambridge Centre for Alternative Finance, within the Digital Asset Programme, connected to digital assets, DeFi taxonomy, TradFi integration, protocol classification, and the Cambridge DeFi Navigator.", "Tirocinio di ricerca presso il Cambridge Centre for Alternative Finance, nel Digital Asset Programme. Ho lavorato su asset digitali, tassonomia della DeFi, classificazione dei protocolli, rapporto con la finanza tradizionale e Cambridge DeFi Navigator.")}
+          {t("Research internship experience at the Cambridge Centre for Alternative Finance, within the Digital Asset Programme, connected to digital assets, DeFi taxonomy, TradFi integration, protocol classification, and the Cambridge DeFi Navigator.", "Durante il tirocinio al Cambridge Centre for Alternative Finance ho lavorato alla classificazione dei protocolli DeFi e al loro confronto con i servizi della finanza tradizionale, nell’ambito del Digital Asset Programme. Il lavoro è collegato al Cambridge DeFi Navigator.")}
         </p>
 
         <div class="flex flex-wrap gap-2 mt-2">
@@ -359,7 +359,7 @@ const academicTheses = [
         </div>
 
         <div class="card-actions justify-end mt-4">
-          <span class="btn btn-sm btn-outline">{t("Open experience page", "Scopri l’esperienza")}</span>
+          <span class="btn btn-sm btn-outline">{t("Open experience page", "Leggi dell’esperienza al CCAF")}</span>
         </div>
       </article>
     </a>

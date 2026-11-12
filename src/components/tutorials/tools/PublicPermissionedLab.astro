@@ -7,13 +7,13 @@ const t = translator(Astro.url.pathname);
 <section id="public-permissioned-lab" class="network-protected card bg-base-100 shadow-md">
   <div class="card-body">
     <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">{t("Public vs permissioned networks", "Reti pubbliche e ad accesso riservato")}</h3>
+      <h3 class="card-title">{t("Public vs permissioned networks", "Reti pubbliche e ad accesso autorizzato")}</h3>
       <span class="badge badge-secondary">{t("Access model", "Modello di accesso")}</span>
       <span class="badge badge-outline">Governance</span>
     </div>
 
     <p class="opacity-80 mb-4">
-      {t("Switch between public and permissioned modes to see how access, validation, reading, writing, and governance assumptions change.", "Passa da una rete pubblica a una ad accesso riservato per vedere come cambiano le regole per entrare, convalidare, leggere, scrivere e decidere.")}
+      {t("Switch between public and permissioned modes to see how access, validation, reading, writing, and governance assumptions change.", "Prova le stesse operazioni in una rete pubblica e in una ad accesso autorizzato. Osserva chi può unirsi alla rete, validare, leggere o scrivere dati e prendere decisioni.")}
     </p>
 
     <div class="flex flex-wrap gap-2 mb-4">
@@ -22,7 +22,7 @@ const t = translator(Astro.url.pathname);
       </button>
 
       <button class="btn btn-outline" data-network-mode="permissioned">
-        {t("Permissioned network", "Rete ad accesso riservato")}
+        {t("Permissioned network", "Rete ad accesso autorizzato")}
       </button>
     </div>
 
@@ -76,15 +76,15 @@ const t = translator(Astro.url.pathname);
     const features = {
       public: [
         [translate("Who can join?", "Chi può entrare?"), translate("Anyone can usually join without prior approval.", "Di solito chiunque può entrare senza approvazione preventiva.")],
-        [translate("Who can validate?", "Chi può convalidare?"), translate("Validation depends on protocol rules, stake, mining power, or node role.", "La convalida dipende dalle regole del protocollo, dallo stake, dalla potenza di mining o dal ruolo del nodo.")],
+        [translate("Who can validate?", "Chi può convalidare?"), translate("Validation depends on protocol rules, stake, mining power, or node role.", "Chi può validare dipende dal protocollo: possono contare lo stake, la potenza di mining o il ruolo del nodo.")],
         [translate("Who can read?", "Chi può leggere?"), translate("Ledger data is generally publicly visible.", "In genere i dati del registro sono pubblici.")],
         ["Governance", translate("Governance is often distributed, informal, token-based, or protocol-community driven.", "La governance è spesso distribuita, informale, basata sui token o affidata alla comunità del protocollo.")],
       ],
       permissioned: [
-        [translate("Who can join?", "Chi può entrare?"), translate("Participants are admitted by an organization, consortium, or governance process.", "Un’organizzazione, un consorzio o un processo di governance ammette i partecipanti.")],
+        [translate("Who can join?", "Chi può entrare?"), translate("Participants are admitted by an organization, consortium, or governance process.", "L’accesso viene autorizzato da un’organizzazione, da un consorzio o secondo le regole della rete.")],
         [translate("Who can validate?", "Chi può convalidare?"), translate("Only approved validators can participate in consensus.", "Solo i validatori approvati possono partecipare al consenso.")],
         [translate("Who can read?", "Chi può leggere?"), translate("Reading may be public, restricted, or role-based.", "La lettura può essere pubblica, limitata o riservata a determinati ruoli.")],
-        ["Governance", translate("Governance is usually formalized among known institutions or operators.", "La governance è di solito formalizzata tra istituzioni o operatori noti.")],
+        ["Governance", translate("Governance is usually formalized among known institutions or operators.", "Le decisioni seguono in genere regole concordate tra istituzioni o operatori identificati.")],
       ],
     };
 
@@ -123,7 +123,7 @@ const t = translator(Astro.url.pathname);
     modeButtons.forEach((button) => {
       button.addEventListener("click", () => {
         mode = button.getAttribute("data-network-mode");
-        status.textContent = (isItalian() ? `Modalità ${mode === "public" ? "pubblica" : "ad accesso riservato"}. Prova uno scenario.` : `Mode changed to ${mode}. Try a scenario.`);
+        status.textContent = (isItalian() ? `Modalità ${mode === "public" ? "pubblica" : "ad accesso autorizzato"}. Prova uno scenario.` : `Mode changed to ${mode}. Try a scenario.`);
         render();
       });
     });

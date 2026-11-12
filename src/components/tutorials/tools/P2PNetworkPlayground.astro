@@ -10,11 +10,11 @@ const t = translator(Astro.url.pathname);
       <h3 class="card-title">{t("P2P network simulator", "Simulatore di rete P2P")}</h3>
       <span class="badge badge-secondary">{t("Propagation", "Propagazione")}</span>
       <span class="badge badge-outline">{t("Faults", "Guasti")}</span>
-      <span class="badge badge-outline">{t("Partitions", "Partizioni")}</span>
+      <span class="badge badge-outline">{t("Partitions", "Suddivisione della rete")}</span>
     </div>
 
     <p class="opacity-80 mb-4">
-      {t("Select a node, remove peers, split the network, and broadcast a transaction to see how connectivity affects propagation in a peer-to-peer system.", "Seleziona un nodo, rimuovi altri nodi, dividi la rete e invia una transazione per vedere come la connettività influisce sulla propagazione in una rete peer-to-peer.")}
+      {t("Select a node, remove peers, split the network, and broadcast a transaction to see how connectivity affects propagation in a peer-to-peer system.", "Sposta o rimuovi un nodo e poi invia una transazione. Guarda come cambiano i nodi raggiunti quando la rete si divide.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[1.4fr_0.8fr] gap-4">
@@ -36,7 +36,7 @@ const t = translator(Astro.url.pathname);
           <p class="font-semibold mb-1">{t("Selected node", "Nodo selezionato")}</p>
           <p data-p2p-selected class="text-2xl font-bold">A</p>
           <p class="text-sm opacity-70">
-            {t("Click a node to select it. Drag nodes to move them.", "Fai clic su un nodo per selezionarlo. Trascinalo per spostarlo.")}
+            {t("Click a node to select it. Drag nodes to move them.", "Tocca o fai clic su un nodo per selezionarlo. Trascinalo per spostarlo.")}
           </p>
         </div>
 
@@ -50,7 +50,7 @@ const t = translator(Astro.url.pathname);
           </button>
 
           <button class="btn btn-outline" data-p2p-action="partition">
-            {t("Toggle partition", "Attiva o disattiva la partizione")}
+            {t("Toggle partition", "Dividi o ricongiungi la rete")}
           </button>
 
           <button class="btn btn-outline" data-p2p-action="reset">
@@ -288,8 +288,8 @@ const t = translator(Astro.url.pathname);
       partitioned = !partitioned;
       reached = new Set();
       status.textContent = partitioned
-        ? translate("Network partition enabled: some links are now unavailable.", "Partizione attiva: alcuni collegamenti non sono più disponibili.")
-        : translate("Network partition disabled: cross-group links are available again.", "Partizione disattivata: i collegamenti tra i gruppi sono di nuovo disponibili.");
+        ? translate("Network partition enabled: some links are now unavailable.", "Rete divisa: alcuni collegamenti sono interrotti.")
+        : translate("Network partition disabled: cross-group links are available again.", "Rete ricongiunta: i gruppi possono comunicare di nuovo.");
       render();
     }
 

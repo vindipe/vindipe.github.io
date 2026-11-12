@@ -14,7 +14,7 @@ const t = translator(Astro.url.pathname);
     </div>
 
     <p class="opacity-80 mb-4">
-      {t("Blockchains have limited capacity. When demand is higher than available blockspace, transactions compete for inclusion and fees become more important.", "Quando la domanda supera lo spazio nei blocchi, le transazioni competono per essere incluse e le commissioni acquistano importanza.")}
+      {t("Blockchains have limited capacity. When demand is higher than available blockspace, transactions compete for inclusion and fees become more important.", "Se arrivano più transazioni di quante ne entrino in un blocco, alcune restano in attesa. Le commissioni possono decidere quali passano per prime.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
@@ -50,7 +50,7 @@ const t = translator(Astro.url.pathname);
         </label>
 
         <label class="form-control">
-          <span class="label-text font-semibold">{t("Average fee willingness", "Commissione media accettata")}</span>
+          <span class="label-text font-semibold">{t("Average fee willingness", "Commissione media che gli utenti accettano di pagare")}</span>
           <input
             type="range"
             min="1"
@@ -72,12 +72,12 @@ const t = translator(Astro.url.pathname);
       <div class="grid gap-3">
         <div class="stats stats-vertical bg-base-100 shadow">
           <div class="stat">
-            <div class="stat-title">{t("Included now", "Incluse ora")}</div>
+            <div class="stat-title">{t("Included now", "Transazioni incluse")}</div>
             <div class="stat-value text-2xl" data-fees-included>-</div>
           </div>
 
           <div class="stat">
-            <div class="stat-title">{t("Pending queue", "In attesa")}</div>
+            <div class="stat-title">{t("Pending queue", "Transazioni in attesa")}</div>
             <div class="stat-value text-2xl" data-fees-pending>-</div>
           </div>
 
@@ -143,10 +143,10 @@ const t = translator(Astro.url.pathname);
 
       if (pending === 0) {
         status.textContent =
-          translate("Capacity is enough for current demand. Fees are less likely to become a bottleneck.", "La capacità è sufficiente per la domanda attuale. Le commissioni hanno meno probabilità di diventare un ostacolo.");
+          translate("Capacity is enough for current demand. Fees are less likely to become a bottleneck.", "Tutte le transazioni in arrivo possono entrare nel blocco. In queste condizioni la pressione sulle commissioni è minore.");
       } else if (feeWillingness < 40) {
         status.textContent =
-          translate("Demand exceeds capacity and users are not willing to pay much. Many transactions may remain pending.", "La domanda supera la capacità e gli utenti sono poco disposti a pagare. Molte transazioni possono restare in attesa.");
+          translate("Demand exceeds capacity and users are not willing to pay much. Many transactions may remain pending.", "Non c’è spazio per tutte le transazioni e gli utenti offrono commissioni basse. Molte operazioni possono restare in attesa.");
       } else if (feeWillingness < 75) {
         status.textContent =
           translate("Demand exceeds capacity. Some users may be included, while others wait or raise fees.", "La domanda supera la capacità. Alcune transazioni entrano nel blocco, mentre altre devono aspettare o offrire commissioni più alte.");

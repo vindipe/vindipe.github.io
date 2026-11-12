@@ -13,17 +13,17 @@ const publications = [
       "The Impact of Network Topology on Performance Metrics and Energy Consumption for Blockchains: Towards Repeatable Benchmarking",
     badge: t("ACM DLT journal", "Rivista ACM DLT"),
     authors:
-      "Vincenzo P. Di Perna, Valerio Schiavoni, Miguel Matos, Francesco Fabris, and Marco Bernardo.",
+      t("Vincenzo P. Di Perna, Valerio Schiavoni, Miguel Matos, Francesco Fabris, and Marco Bernardo.", "Vincenzo P. Di Perna, Valerio Schiavoni, Miguel Matos, Francesco Fabris e Marco Bernardo."),
     venue:
       t("ACM Distributed Ledger Technologies: Research and Practice journal, 2026.", "Rivista ACM Distributed Ledger Technologies: Research and Practice, 2026."),
     links: [
       {
-        label: t("Research page", "Scheda della ricerca"),
+        label: t("Research page", "Scheda dello studio"),
         href: "/research/acm-dlt-network-topologies-blockchain-performance",
         primary: true,
       },
       {
-        label: t("DOI / Paper", "DOI e articolo"),
+        label: t("DOI / Paper", "Leggi l’articolo (DOI)"),
         href: "https://dl.acm.org/doi/10.1145/3828757",
         external: true,
       },
@@ -33,12 +33,12 @@ const publications = [
     title: "Dynamic Taxonomy: A Bridge from DeFi to TradFi",
     badge: "SSRN / CCAF",
     authors:
-      "Iqbal Mabruri, Carles Cerqueda, Christopher Jack, Alexis Lui, Yue Wu, Wenbin Wu, Vincenzo P. Di Perna, Keith Bear, and Bryan Zheng Zhang.",
+      t("Iqbal Mabruri, Carles Cerqueda, Christopher Jack, Alexis Lui, Yue Wu, Wenbin Wu, Vincenzo P. Di Perna, Keith Bear, and Bryan Zheng Zhang.", "Iqbal Mabruri, Carles Cerqueda, Christopher Jack, Alexis Lui, Yue Wu, Wenbin Wu, Vincenzo P. Di Perna, Keith Bear e Bryan Zheng Zhang."),
     venue:
-      t("SSRN working paper developed in collaboration with the Cambridge Centre for Alternative Finance (CCAF).", "Working paper su SSRN, sviluppato con il Cambridge Centre for Alternative Finance (CCAF)."),
+      t("SSRN working paper developed in collaboration with the Cambridge Centre for Alternative Finance (CCAF).", "Documento di lavoro disponibile su SSRN, realizzato con il Cambridge Centre for Alternative Finance (CCAF)."),
     links: [
       {
-        label: t("Research page", "Scheda della ricerca"),
+        label: t("Research page", "Scheda dello studio"),
         href: "/research/dynamic-taxonomy-defi-tradfi",
         primary: true,
       },
@@ -58,12 +58,12 @@ const publications = [
       "An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies",
     badge: "DLT '25",
     authors:
-      "Vincenzo P. Di Perna, Michele Foderaro, Francesco Fabris, and Marco Bernardo.",
+      t("Vincenzo P. Di Perna, Michele Foderaro, Francesco Fabris, and Marco Bernardo.", "Vincenzo P. Di Perna, Michele Foderaro, Francesco Fabris e Marco Bernardo."),
     venue:
       "Distributed Ledger Technology Workshop, CEUR Workshop Proceedings, Vol. 4105, 2025.",
     links: [
       {
-        label: t("Research page", "Scheda della ricerca"),
+        label: t("Research page", "Scheda dello studio"),
         href: "/research/entropy-based-economic-efficiency",
         primary: true,
       },
@@ -79,12 +79,12 @@ const publications = [
       "Blockchain Energy Consumption: Unveiling the Impact of Network Topologies",
     badge: "IEEE ICBC '25",
     authors:
-      "Vincenzo P. Di Perna, Valerio Schiavoni, Francesco Fabris, and Marco Bernardo.",
+      t("Vincenzo P. Di Perna, Valerio Schiavoni, Francesco Fabris, and Marco Bernardo.", "Vincenzo P. Di Perna, Valerio Schiavoni, Francesco Fabris e Marco Bernardo."),
     venue:
       t("Proceedings of the 2025 IEEE International Conference on Blockchain and Cryptocurrency.", "Atti della IEEE International Conference on Blockchain and Cryptocurrency, 2025."),
     links: [
       {
-        label: t("Research page", "Scheda della ricerca"),
+        label: t("Research page", "Scheda dello studio"),
         href: "/research/performance-energy-economic-efficiency",
         primary: true,
       },
@@ -99,17 +99,17 @@ const publications = [
     title: "Impact of Network Topologies on Blockchain Performance",
     badge: "ACM DEBS '25",
     authors:
-      "Vincenzo P. Di Perna, Marco Bernardo, Francesco Fabris, Sebastião Amaro, Miguel Matos, and Valerio Schiavoni.",
+      t("Vincenzo P. Di Perna, Marco Bernardo, Francesco Fabris, Sebastião Amaro, Miguel Matos, and Valerio Schiavoni.", "Vincenzo P. Di Perna, Marco Bernardo, Francesco Fabris, Sebastião Amaro, Miguel Matos e Valerio Schiavoni."),
     venue:
       t("Proceedings of the 19th ACM International Conference on Distributed and Event-Based Systems, 2025.", "Atti della 19ª ACM International Conference on Distributed and Event-Based Systems, 2025."),
     links: [
       {
-        label: t("Research page", "Scheda della ricerca"),
+        label: t("Research page", "Scheda dello studio"),
         href: "/research/topology-aware-blockchain-benchmarking",
         primary: true,
       },
       {
-        label: t("DOI / Paper", "DOI e articolo"),
+        label: t("DOI / Paper", "Leggi l’articolo (DOI)"),
         href: "https://dl.acm.org/doi/10.1145/3701717.3730540",
         external: true,
       },
@@ -120,14 +120,14 @@ const publications = [
 
 <BaseLayout
   title={t("CV | Research Software Engineer | Vincenzo Di Perna", "Curriculum | Vincenzo Di Perna")}
-  description={t("Vincenzo Di Perna’s CV covers distributed systems, blockchain research, reproducible experiments, publications and software engineering.", "Curriculum di Vincenzo Di Perna, con esperienze, pubblicazioni e competenze in sistemi distribuiti, blockchain e sperimentazione riproducibile.")}
+  description={t("Vincenzo Di Perna’s CV covers distributed systems, blockchain research, reproducible experiments, publications and software engineering.", "Il curriculum di Vincenzo Di Perna: ricerca e ingegneria del software, sistemi distribuiti, blockchain e sperimentazione riproducibile.")}
   sideBarActiveItemID="cv"
 >
   <section class="mb-10">
     <h1 class="text-4xl font-bold mb-4">CV</h1>
 
     <p class="text-lg leading-relaxed opacity-90">
-      {t("I am a Research Software Engineer with a PhD in Blockchain & DLT, focused on distributed systems, blockchain benchmarking, scientific computing, reproducible experimentation, protocol evaluation, and data analysis.", "Mi occupo di sviluppo software per la ricerca e ho un dottorato su blockchain e DLT. Lavoro su sistemi distribuiti, benchmarking, calcolo scientifico, esperimenti riproducibili, valutazione dei protocolli e analisi dei dati.")}
+      {t("I am a Research Software Engineer with a PhD in Blockchain & DLT, focused on distributed systems, blockchain benchmarking, scientific computing, reproducible experimentation, protocol evaluation, and data analysis.", "Sono un ingegnere del software per la ricerca e ho un dottorato in blockchain e tecnologie a registro distribuito. Mi occupo di sistemi distribuiti, calcolo scientifico, valutazione sperimentale dei protocolli e analisi dei dati.")}
     </p>
 
     <div class="mt-6 flex flex-wrap gap-3">
@@ -174,39 +174,39 @@ const publications = [
 
     <div class="text-justify leading-relaxed">
       <p class="mb-4">
-        {t("My work combines distributed systems research, experimental methodology, blockchain infrastructure evaluation, and data-driven analysis. During my PhD, I designed and used reproducible benchmarking pipelines to study how blockchain systems behave under different workloads, network topologies, and operational conditions.", "Il mio lavoro unisce ricerca sui sistemi distribuiti, metodologia sperimentale, valutazione delle infrastrutture blockchain e analisi dei dati. Durante il dottorato ho progettato e usato procedure di benchmarking riproducibili per studiare il comportamento delle blockchain al variare di carichi di lavoro, topologie di rete e condizioni operative.")}
+        {t("My work combines distributed systems research, experimental methodology, blockchain infrastructure evaluation, and data-driven analysis. During my PhD, I designed and used reproducible benchmarking pipelines to study how blockchain systems behave under different workloads, network topologies, and operational conditions.", "Durante il dottorato ho progettato strumenti e procedure per ripetere gli esperimenti e confrontare le blockchain al variare del carico, della topologia di rete e delle condizioni operative. Nel mio lavoro la progettazione degli esperimenti va di pari passo con lo sviluppo del software e l’analisi dei dati.")}
       </p>
 
       <p class="mb-4">
-        {t("I am particularly interested in performance and latency evaluation, energy efficiency, repeatability, performance predictability, protocol analytics, digital-asset and CBDC-related infrastructures, and research engineering practices that make experimental results easier to reproduce and compare.", "Mi interessano la valutazione delle prestazioni e della latenza, l’efficienza energetica, la ripetibilità e la prevedibilità, l’analisi dei protocolli e le infrastrutture per asset digitali e CBDC. Sviluppo metodi e strumenti che rendono i risultati sperimentali più facili da riprodurre e confrontare.")}
+        {t("I am particularly interested in performance and latency evaluation, energy efficiency, repeatability, performance predictability, protocol analytics, digital-asset and CBDC-related infrastructures, and research engineering practices that make experimental results easier to reproduce and compare.", "Studio latenza, efficienza energetica e prevedibilità delle prestazioni. Mi interessano anche i protocolli e le infrastrutture per gli asset digitali e le valute digitali di banca centrale (CBDC). Sviluppo strumenti che facilitano il confronto e la riproduzione dei risultati.")}
       </p>
 
-      <p>{t("From 1 February 2027, I will join the University of Neuchâtel as a postdoctoral researcher and scientific coordinator of CIRCULA, an SNSF-funded research project about expiry-aware blockchain design.", "Dal 1° febbraio 2027 entrerò all’Università di Neuchâtel come ricercatore postdoc e coordinatore scientifico di CIRCULA, un progetto finanziato dal Fondo nazionale svizzero sulla scadenza e il rinnovo nelle blockchain.")}</p>
+      <p>{t("From 1 February 2027, I will join the University of Neuchâtel as a postdoctoral researcher and scientific coordinator of CIRCULA, an SNSF-funded research project about expiry-aware blockchain design.", "Dal 1° febbraio 2027 è previsto il mio ingresso all’Università di Neuchâtel come ricercatore post-dottorale e coordinatore scientifico di CIRCULA. Il progetto, finanziato dal Fondo nazionale svizzero, studia scadenza e rinnovo nelle blockchain.")}</p>
     </div>
   </section>
 
   <section class="mb-10">
     <h2 class="text-3xl w-full font-bold mb-5">
-      {t("Research & Engineering Experience", "Esperienza nella ricerca e nell’ingegneria")}
+      {t("Research & Engineering Experience", "Esperienze di ricerca e sviluppo")}
     </h2>
 
     <div class="time-line-container grid gap-4">
-      <TimeLineElement title={t("Incoming Postdoctoral Researcher and Scientific Coordinator - CIRCULA", "Ricercatore postdoc e coordinatore scientifico di CIRCULA (incarico previsto)")} subtitle={t("University of Neuchâtel · expected from 1 February 2027", "Università di Neuchâtel · avvio previsto il 1° febbraio 2027")}>
-        {t("CIRCULA is an SNSF-funded project on expiry and renewal in distributed ledgers. The planned role includes coordinating scientific work across formal semantics, prototyping and evaluation under Principal Investigator Valerio Schiavoni.", "CIRCULA è un progetto finanziato dal Fondo nazionale svizzero che studia scadenza e rinnovo nei registri distribuiti. Il ruolo prevede il coordinamento delle attività scientifiche sulla semantica formale, lo sviluppo di prototipi e la valutazione, sotto la responsabilità scientifica di Valerio Schiavoni.")}
+      <TimeLineElement title={t("Incoming Postdoctoral Researcher and Scientific Coordinator - CIRCULA", "Ricercatore post-dottorale e coordinatore scientifico di CIRCULA (incarico previsto)")} subtitle={t("University of Neuchâtel · expected from 1 February 2027", "Università di Neuchâtel · avvio previsto il 1° febbraio 2027")}>
+        {t("CIRCULA is an SNSF-funded project on expiry and renewal in distributed ledgers. The planned role includes coordinating scientific work across formal semantics, prototyping and evaluation under Principal Investigator Valerio Schiavoni.", "CIRCULA studia scadenza e rinnovo nei registri distribuiti con il sostegno del Fondo nazionale svizzero. Il mio ruolo prevede il coordinamento della ricerca sulla semantica formale, sui prototipi e sulla loro valutazione, sotto la responsabilità scientifica di Valerio Schiavoni.")}
         <br /><a href={localPath("/research/circula")} class="btn btn-xs btn-outline mt-3">{t("Explore CIRCULA", "Scopri CIRCULA")}</a>
       </TimeLineElement>
       <TimeLineElement
-        title={t("Blockchain Benchmarking & Distributed Systems Research", "Benchmarking delle blockchain e ricerca sui sistemi distribuiti")}
+        title={t("Blockchain Benchmarking & Distributed Systems Research", "Valutazione sperimentale delle blockchain e ricerca sui sistemi distribuiti")}
         subtitle={t("PhD research and related publications", "Ricerca di dottorato e pubblicazioni")}
       >
-        {t("Designed, executed, and analyzed reproducible blockchain experiments across multiple platforms, workloads, and network conditions. Evaluated throughput, latency, energy usage, variability, repeatability, and performance predictability under controlled experimental settings. Recent outputs include an ACM DLT journal article on topology-aware blockchain performance evaluation.", "Ho progettato, condotto e analizzato esperimenti blockchain riproducibili su più piattaforme, carichi di lavoro e condizioni di rete. Ho misurato throughput, latenza, consumi energetici, variabilità, ripetibilità e prevedibilità in condizioni controllate. Tra i risultati recenti c’è un articolo sulla rivista ACM DLT che valuta le prestazioni tenendo conto della topologia di rete.")}
+        {t("Designed, executed, and analyzed reproducible blockchain experiments across multiple platforms, workloads, and network conditions. Evaluated throughput, latency, energy usage, variability, repeatability, and performance predictability under controlled experimental settings. Recent outputs include an ACM DLT journal article on topology-aware blockchain performance evaluation.", "Ho progettato, condotto e analizzato esperimenti riproducibili con più piattaforme blockchain, carichi di lavoro e condizioni di rete. In ambiente controllato ho misurato throughput, latenza e consumi energetici e studiato la variabilità, la ripetibilità e la prevedibilità delle prestazioni. Un articolo sulla rivista ACM DLT approfondisce l’effetto della topologia di rete.")}
       </TimeLineElement>
 
       <TimeLineElement
-        title={t("Lilith - A Topology-Aware Blockchain Benchmarking Framework", "Lilith – Framework di benchmarking per blockchain con topologie controllate")}
-        subtitle={t("Research artifact and experimental toolchain", "Software di ricerca e strumenti sperimentali")}
+        title={t("Lilith - A Topology-Aware Blockchain Benchmarking Framework", "Lilith – Strumenti per confrontare blockchain in reti controllate")}
+        subtitle={t("Research artifact and experimental toolchain", "Software e strumenti per gli esperimenti")}
       >
-        {t("Built a benchmarking framework integrating blockchain workload generation, network emulation, orchestration, and data analysis. Used it to study how topology and workload interactions affect blockchain performance and energy behavior.", "Ho sviluppato un framework di benchmarking che integra generazione dei carichi, emulazione di rete, orchestrazione e analisi dei dati. L’ho usato per studiare come l’interazione tra topologia e carico incida sulle prestazioni e sui consumi delle blockchain.")}
+        {t("Built a benchmarking framework integrating blockchain workload generation, network emulation, orchestration, and data analysis. Used it to study how topology and workload interactions affect blockchain performance and energy behavior.", "Ho sviluppato un framework che genera i carichi di lavoro, emula la rete, coordina gli esperimenti e ne analizza i dati. L’ho usato per studiare l’effetto combinato di topologia e carico sulle prestazioni e sui consumi.")}
 
         <br />
 
@@ -222,14 +222,14 @@ const publications = [
         title={t("Digital Assets & CBDC-Oriented Data Workflows", "Asset digitali e analisi dei dati per le CBDC")}
         subtitle={t("Protocol analytics, dashboards, and structured data analysis", "Analisi dei protocolli, dashboard e dati strutturati")}
       >
-        {t("Worked on data-oriented analysis and dashboard concepts for digital assets, digital-asset and CBDC-related infrastructures, and blockchain ecosystem indicators, connecting technical protocol behavior with analytical and economic perspectives.", "Ho lavorato ad analisi dei dati e a proposte di dashboard per gli asset digitali, le infrastrutture per asset digitali e CBDC e gli indicatori degli ecosistemi blockchain, collegando il comportamento tecnico dei protocolli agli aspetti analitici ed economici.")}
+        {t("Worked on data-oriented analysis and dashboard concepts for digital assets, digital-asset and CBDC-related infrastructures, and blockchain ecosystem indicators, connecting technical protocol behavior with analytical and economic perspectives.", "Ho analizzato dati e progettato dashboard per studiare gli asset digitali, le infrastrutture per le CBDC e gli indicatori degli ecosistemi blockchain. Il lavoro mette in relazione il funzionamento dei protocolli con i fenomeni economici osservati.")}
       </TimeLineElement>
 
       <TimeLineElement
         title={t("Digital Asset Programme Intern", "Tirocinio nel Digital Asset Programme")}
         subtitle="Cambridge Centre for Alternative Finance"
       >
-        {t("Research internship experience within the Digital Asset Programme, focused on digital assets, DeFi taxonomy, protocol classification, DeFi/TradFi mapping, and the Cambridge DeFi Navigator.", "Tirocinio di ricerca su asset digitali, tassonomia della DeFi, classificazione dei protocolli, relazioni tra DeFi e finanza tradizionale e Cambridge DeFi Navigator.")}
+        {t("Research internship experience within the Digital Asset Programme, focused on digital assets, DeFi taxonomy, protocol classification, DeFi/TradFi mapping, and the Cambridge DeFi Navigator.", "Durante il tirocinio ho studiato come classificare i protocolli DeFi e descriverne i rapporti con la finanza tradizionale. Il lavoro è collegato al Cambridge DeFi Navigator.")}
 
         <br />
 
@@ -240,10 +240,10 @@ const publications = [
       </TimeLineElement>
 
       <TimeLineElement
-        title={t("Research Engineering & Reproducibility", "Sviluppo software per la ricerca e riproducibilità")}
+        title={t("Research Engineering & Reproducibility", "Ingegneria del software per la ricerca e riproducibilità")}
         subtitle={t("Software artifacts, datasets, pipelines, and experimental methodology", "Software, dataset, procedure e metodologia sperimentale")}
       >
-        {t("Developed scripts, datasets, reproducible workflows, statistical analyses, and documentation to support repeatable experiments and transparent evaluation of blockchain systems.", "Ho sviluppato script, dataset, procedure riproducibili, analisi statistiche e documentazione per condurre esperimenti ripetibili e valutare le blockchain in modo trasparente.")}
+        {t("Developed scripts, datasets, reproducible workflows, statistical analyses, and documentation to support repeatable experiments and transparent evaluation of blockchain systems.", "Ho preparato codice, dati, analisi statistiche e documentazione per ripetere gli esperimenti e rendere verificabile il confronto tra blockchain.")}
       </TimeLineElement>
     </div>
   </section>
@@ -256,7 +256,7 @@ const publications = [
         <div class="card-body">
           <h3 class="card-title">Lilith</h3>
           <p>
-            {t("Topology-aware blockchain benchmarking framework integrating workload generation, network emulation, orchestration, and experiment analysis.", "Framework di benchmarking che integra topologie di rete controllate, generazione dei carichi, emulazione, orchestrazione e analisi degli esperimenti.")}
+            {t("Topology-aware blockchain benchmarking framework integrating workload generation, network emulation, orchestration, and experiment analysis.", "Strumento per confrontare le blockchain che automatizza la generazione dei carichi, l’emulazione della rete, l’esecuzione e l’analisi degli esperimenti.")}
           </p>
           <div class="card-actions justify-end">
             <a
@@ -289,7 +289,7 @@ const publications = [
         <div class="card-body">
           <h3 class="card-title">{t("Blockchain Repeatability Dataset", "Dataset sulla ripetibilità dei benchmark blockchain")}</h3>
           <p>
-            {t("Network-controlled dataset with 300 aggregate configurations for studying blockchain benchmark variability, repeatability, and performance predictability.", "Dataset con 300 configurazioni aggregate in condizioni di rete controllate, per studiare variabilità, ripetibilità e prevedibilità delle prestazioni delle blockchain.")}
+            {t("Network-controlled dataset with 300 aggregate configurations for studying blockchain benchmark variability, repeatability, and performance predictability.", "Risultati aggregati per 300 configurazioni di rete, utili per studiare variabilità, ripetibilità e prevedibilità delle prestazioni.")}
           </p>
           <div class="card-actions justify-end">
             <a
@@ -371,7 +371,7 @@ const publications = [
         subtitle={t("University of Camerino, Italy", "Università di Camerino, Italia")}
         date="2022-2025"
       >
-        {t("Dissertation focused on comparing blockchain systems across performance, energy, repeatability, predictability, and economic-efficiency dimensions. Research included topology-aware benchmarking, reproducible experimentation, workload design, network emulation, and statistical analysis of blockchain system behavior.", "La tesi confronta i sistemi blockchain in termini di prestazioni, consumi energetici, ripetibilità, prevedibilità ed efficienza economica. La ricerca comprende benchmarking con topologie controllate, esperimenti riproducibili, progettazione dei carichi, emulazione di rete e analisi statistica.")}
+        {t("Dissertation focused on comparing blockchain systems across performance, energy, repeatability, predictability, and economic-efficiency dimensions. Research included topology-aware benchmarking, reproducible experimentation, workload design, network emulation, and statistical analysis of blockchain system behavior.", "La tesi confronta prestazioni, consumi ed efficienza economica delle blockchain e studia quanto siano ripetibili e prevedibili i risultati. Combina carichi di lavoro progettati per gli esperimenti, emulazione della rete e analisi statistica.")}
 
         <br />
 
@@ -397,7 +397,7 @@ const publications = [
         subtitle={t("University of Pisa, Italy", "Università di Pisa, Italia")}
         date="2019-2022"
       >
-        {t("Graduate studies focused on ICT architectures, software systems, networks, security, and technical design of digital infrastructures.", "Studi magistrali su architetture ICT, sistemi software, reti, sicurezza e progettazione di infrastrutture digitali.")}
+        {t("Graduate studies focused on ICT architectures, software systems, networks, security, and technical design of digital infrastructures.", "Formazione in architetture ICT, sistemi software, reti, sicurezza e progettazione di infrastrutture digitali.")}
 
         <br />
 
@@ -445,11 +445,11 @@ const publications = [
     <div class="time-line-container grid gap-4">
       <TimeLineElement
         title="Blockchain for Business Certificate"
-        subtitle="SUPSI / USI / Franklin University Switzerland / City of Lugano"
+        subtitle={t("SUPSI / USI / Franklin University Switzerland / City of Lugano", "SUPSI / USI / Franklin University Switzerland / Città di Lugano")}
         date="2023"
         variant="warning"
       >
-        {t("Professional certificate focused on blockchain applications, business use cases, digital-asset-related innovation, and the connection between blockchain technologies, institutions, and real-world business contexts.", "Certificazione professionale sulle applicazioni aziendali della blockchain e sull’innovazione legata agli asset digitali, con attenzione al rapporto tra tecnologie, istituzioni e imprese.")}
+        {t("Professional certificate focused on blockchain applications, business use cases, digital-asset-related innovation, and the connection between blockchain technologies, institutions, and real-world business contexts.", "Certificazione sulle applicazioni della blockchain e degli asset digitali nelle imprese e nelle istituzioni.")}
       </TimeLineElement>
     </div>
   </section>
@@ -464,22 +464,22 @@ const publications = [
 
           <ul class="list-disc mx-6 grid gap-1">
             <li>
-              {t("Python for orchestration, data processing, experiment automation, and analysis workflows", "Python per orchestrazione, elaborazione dati, automazione degli esperimenti e analisi")}
+              {t("Python for orchestration, data processing, experiment automation, and analysis workflows", "Python per automatizzare e coordinare gli esperimenti, elaborare i dati e analizzare i risultati")}
             </li>
             <li>
-              {t("Bash scripting for Linux automation, reproducible runs, and command-line pipelines", "Script Bash per l’automazione su Linux, le esecuzioni riproducibili e le procedure da riga di comando")}
+              {t("Bash scripting for Linux automation, reproducible runs, and command-line pipelines", "Bash per automatizzare le attività su Linux e ripetere gli esperimenti da riga di comando")}
             </li>
             <li>
-              {t("Rust familiarity for systems-oriented programming and low-level software concepts", "Familiarità con Rust per la programmazione di sistema e i concetti di basso livello")}
+              {t("Rust familiarity for systems-oriented programming and low-level software concepts", "Familiarità con Rust e con la programmazione di sistema")}
             </li>
             <li>
-              {t("JavaScript / TypeScript basics for web interfaces, personal-site tooling, and frontend integration", "Basi di JavaScript e TypeScript per interfacce web, strumenti del sito personale e integrazione frontend")}
+              {t("JavaScript / TypeScript basics for web interfaces, personal-site tooling, and frontend integration", "Nozioni di JavaScript e TypeScript per interfacce web e sviluppo frontend")}
             </li>
             <li>
-              {t("Familiarity with Go, C, and C++ from systems, networking, and academic contexts", "Familiarità con Go, C e C++ in ambito accademico e per applicazioni di rete e di sistema")}
+              {t("Familiarity with Go, C, and C++ from systems, networking, and academic contexts", "Familiarità con Go, C e C++ per la programmazione di rete e di sistema")}
             </li>
             <li>
-              {t("Git, GitHub, branching, pull requests, repository organization, and basic CI workflows", "Git, GitHub, gestione dei branch, pull request, organizzazione dei repository e procedure di integrazione continua di base")}
+              {t("Git, GitHub, branching, pull requests, repository organization, and basic CI workflows", "Git e GitHub: branch, pull request, gestione dei repository e basi di integrazione continua")}
             </li>
           </ul>
         </div>
@@ -491,10 +491,10 @@ const publications = [
 
           <ul class="list-disc mx-6 grid gap-1">
             <li>
-              {t("Structured analysis of benchmark outputs, logs, experimental traces, and performance datasets", "Analisi strutturata di benchmark, log, tracce sperimentali e dataset sulle prestazioni")}
+              {t("Structured analysis of benchmark outputs, logs, experimental traces, and performance datasets", "Analisi di benchmark, log, tracce sperimentali e dati sulle prestazioni")}
             </li>
             <li>
-              {t("Throughput, latency, energy, variability, repeatability, and predictability metrics", "Metriche di throughput, latenza, energia, variabilità, ripetibilità e prevedibilità")}
+              {t("Throughput, latency, energy, variability, repeatability, and predictability metrics", "Misure di throughput, latenza e consumo energetico. Analisi di variabilità, ripetibilità e prevedibilità")}
             </li>
             <li>
               {t("Statistical reasoning for experimental comparison, including ANOVA and ICC-style variance analysis", "Confronto statistico degli esperimenti, anche con ANOVA e analisi della varianza basate sull’ICC")}
@@ -503,7 +503,7 @@ const publications = [
               {t("Data cleaning, aggregation, transformation, and reproducible analysis pipelines", "Pulizia, aggregazione e trasformazione dei dati in procedure di analisi riproducibili")}
             </li>
             <li>
-              {t("Python-based analytics with notebooks, scripts, CSV/JSON processing, and publication-ready figures", "Analisi in Python con notebook, script, dati CSV e JSON e grafici per pubblicazioni")}
+              {t("Python-based analytics with notebooks, scripts, CSV/JSON processing, and publication-ready figures", "Analisi in Python con notebook e script, elaborazione di CSV e JSON, grafici per le pubblicazioni")}
             </li>
             <li>
               {t("Dashboard-style visual analytics for protocol, digital-asset, and infrastructure indicators", "Dashboard per visualizzare indicatori di protocolli, asset digitali e infrastrutture")}
@@ -518,10 +518,10 @@ const publications = [
 
           <ul class="list-disc mx-6 grid gap-1">
             <li>
-              {t("Linux-based development, debugging, scripting, and experimental execution environments", "Sviluppo, debugging, scripting e ambienti sperimentali su Linux")}
+              {t("Linux-based development, debugging, scripting, and experimental execution environments", "Sviluppo, debugging, scripting e sperimentazione su Linux")}
             </li>
             <li>
-              {t("Docker-based deployment, containerized experiments, and reproducible software environments", "Deployment con Docker, esperimenti in container e ambienti software riproducibili")}
+              {t("Docker-based deployment, containerized experiments, and reproducible software environments", "Distribuzione del software con Docker, esperimenti in container e ambienti riproducibili")}
             </li>
             <li>
               {t("Network emulation and controlled experimental topologies for distributed-system evaluation", "Emulazione di rete e topologie controllate per valutare sistemi distribuiti")}
@@ -533,7 +533,7 @@ const publications = [
               {t("Understanding of latency, bandwidth, topology effects, coordination, consensus, and system variability", "Latenza, banda, effetti della topologia, coordinamento, consenso e variabilità dei sistemi")}
             </li>
             <li>
-              {t("Experience designing experiments inspired by geo-distributed infrastructures and cloud regions", "Progettazione di esperimenti ispirati a infrastrutture geograficamente distribuite e regioni cloud")}
+              {t("Experience designing experiments inspired by geo-distributed infrastructures and cloud regions", "Progettazione di esperimenti ispirati a infrastrutture distribuite in più aree geografiche e regioni cloud")}
             </li>
           </ul>
         </div>
@@ -551,10 +551,10 @@ const publications = [
               {t("Performance and latency analysis across consensus protocols, workloads, and network conditions", "Analisi di prestazioni e latenza al variare dei protocolli di consenso, dei carichi e delle condizioni di rete")}
             </li>
             <li>
-              {t("Energy-efficiency evaluation and normalized energy-per-transaction analysis", "Valutazione dell’efficienza energetica e analisi normalizzata dell’energia per transazione")}
+              {t("Energy-efficiency evaluation and normalized energy-per-transaction analysis", "Misura dell’efficienza energetica, anche a partire dal consumo per transazione confermata")}
             </li>
             <li>
-              {t("Experience with EVM-style systems, permissioned BFT systems, public PoS platforms, and experimental blockchain stacks", "Esperienza con sistemi basati su EVM, sistemi BFT con accesso riservato, piattaforme pubbliche PoS e stack blockchain sperimentali")}
+              {t("Experience with EVM-style systems, permissioned BFT systems, public PoS platforms, and experimental blockchain stacks", "Esperienza con sistemi EVM, reti BFT ad accesso autorizzato, piattaforme pubbliche proof-of-stake e ambienti blockchain sperimentali")}
             </li>
             <li>
               {t("Digital-asset analytics, DeFi/CBDC-related research context, and protocol-level data interpretation", "Analisi degli asset digitali, ricerca su DeFi e CBDC e interpretazione dei dati a livello di protocollo")}
@@ -580,13 +580,13 @@ const publications = [
               {t("Integration of workload generation, network emulation, orchestration, monitoring, and analysis steps", "Integrazione di generazione dei carichi, emulazione di rete, orchestrazione, monitoraggio e analisi")}
             </li>
             <li>
-              {t("Use of repeated runs to study variability, worst-case deviations, repeatability, and predictability", "Uso di esecuzioni ripetute per studiare variabilità, scostamenti peggiori, ripetibilità e prevedibilità")}
+              {t("Use of repeated runs to study variability, worst-case deviations, repeatability, and predictability", "Esecuzioni ripetute per stimare la variabilità, gli scostamenti massimi, la ripetibilità e la prevedibilità")}
             </li>
             <li>
               {t("Experiment documentation, artifact preparation, datasets, scripts, and reproducibility-oriented workflows", "Documentazione degli esperimenti, preparazione di materiali, dataset, script e procedure per la riproducibilità")}
             </li>
             <li>
-              {t("Awareness of measurement limitations, confounding factors, environmental control, and methodological caveats", "Attenzione ai limiti delle misure, ai fattori confondenti, al controllo dell’ambiente e ai limiti metodologici")}
+              {t("Awareness of measurement limitations, confounding factors, environmental control, and methodological caveats", "Valutazione dei limiti delle misure e del metodo, controllo delle condizioni sperimentali e dei fattori confondenti")}
             </li>
           </ul>
         </div>
@@ -595,12 +595,12 @@ const publications = [
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
           <h3 class="card-title">
-            {t("Research engineering & technical communication", "Sviluppo per la ricerca e comunicazione tecnica")}
+            {t("Research engineering & technical communication", "Ingegneria del software per la ricerca e comunicazione tecnica")}
           </h3>
 
           <ul class="list-disc mx-6 grid gap-1">
             <li>
-              {t("Translation of research questions into executable experiments, metrics, datasets, and evaluation pipelines", "Traduzione di domande di ricerca in esperimenti eseguibili, metriche, dataset e procedure di valutazione")}
+              {t("Translation of research questions into executable experiments, metrics, datasets, and evaluation pipelines", "Progettazione di esperimenti, metriche, dataset e procedure di valutazione a partire da domande di ricerca")}
             </li>
             <li>
               {t("Technical writing for papers, reports, documentation, reproducibility packages, and research artifacts", "Scrittura tecnica di articoli, rapporti, documentazione e materiali per la riproducibilità")}

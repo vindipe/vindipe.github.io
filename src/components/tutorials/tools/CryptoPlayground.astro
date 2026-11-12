@@ -14,7 +14,7 @@ const t = translator(Astro.url.pathname);
     </div>
 
     <p class="opacity-80 mb-4">
-      {t("Change the transaction data and observe how the hash changes. Then mine a tiny toy block and tamper with its content to see why linked hashes make modifications visible.", "Modifica i dati della transazione e guarda come cambia l’hash. Mina poi un piccolo blocco dimostrativo e alterane il contenuto per vedere come gli hash rendono visibili le modifiche.")}
+      {t("Change the transaction data and observe how the hash changes. Then mine a tiny toy block and tamper with its content to see why linked hashes make modifications visible.", "Cambia il testo della transazione e confronta i due hash. Poi prova a minare un blocco e a modificarne il contenuto: l’hash ti aiuta a riconoscere l’alterazione.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -67,9 +67,9 @@ const t = translator(Astro.url.pathname);
         </div>
 
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">{t("Lesson", "Da osservare")}</p>
+          <p class="font-semibold mb-1">{t("Lesson", "Che cosa osservare")}</p>
           <p data-crypto-status class="text-sm opacity-80">
-            {t("Hashes are deterministic fingerprints: the same input gives the same output, but a tiny change creates a very different hash.", "Gli hash sono impronte deterministiche: a parità di dati il risultato è sempre lo stesso, ma basta una piccola modifica per ottenere un hash molto diverso.")}
+            {t("Hashes are deterministic fingerprints: the same input gives the same output, but a tiny change creates a very different hash.", "Gli stessi dati producono sempre lo stesso hash. Basta una piccola modifica per ottenere un’impronta molto diversa.")}
           </p>
         </div>
       </div>
@@ -124,13 +124,13 @@ const t = translator(Astro.url.pathname);
           nonceOutput.textContent = nonce;
           blockHashOutput.textContent = candidate;
           status.textContent =
-            translate("Toy block mined. This is not real mining difficulty, but it shows the idea of searching for a valid hash.", "Blocco dimostrativo minato. La difficoltà è semplificata per mostrare come si cerca un hash valido.");
+            translate("Toy block mined. This is not real mining difficulty, but it shows the idea of searching for a valid hash.", "Blocco di prova minato. La difficoltà è bassa per mostrare come funziona la ricerca di un hash valido.");
           return;
         }
       }
 
       status.textContent =
-        translate("No valid toy block found in the search limit. Try again or change the data.", "Nessun blocco valido entro il limite di ricerca. Riprova o modifica i dati.");
+        translate("No valid toy block found in the search limit. Try again or change the data.", "Nessun blocco valido trovato entro il numero di tentativi previsto. Riprova o cambia i dati.");
     }
 
     async function tamperData() {

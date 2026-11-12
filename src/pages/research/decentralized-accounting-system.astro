@@ -10,12 +10,12 @@ const conceptFigures = [
   {
     title: t("Solid architecture", "Architettura Solid"),
     src: "/research/theses/master/solid-architecture.png",
-    desc: t("The thesis uses Solid Pods as a privacy-preserving storage layer for business documents, invoices, orders, and data access control.", "La tesi usa Solid Pods per conservare documenti aziendali, fatture e ordini e gestirne l’accesso tutelando la riservatezza."),
+    desc: t("The thesis uses Solid Pods as a privacy-preserving storage layer for business documents, invoices, orders, and data access control.", "Il prototipo conserva documenti, fatture e ordini in Solid Pods, dove l’accesso è riservato agli utenti autorizzati."),
   },
   {
     title: t("ERP domain", "Ambito ERP"),
     src: "/research/theses/master/erp-domain.png",
-    desc: t("The work starts from the accounting and ERP context, where administrative processes can become costly, manual, and error-prone.", "Il lavoro parte dai sistemi contabili e gestionali, dove i processi amministrativi possono essere costosi, manuali e soggetti a errori."),
+    desc: t("The work starts from the accounting and ERP context, where administrative processes can become costly, manual, and error-prone.", "Nei sistemi contabili e gestionali, molte operazioni amministrative si fanno a mano. Questo aumenta i costi e il rischio di errori."),
   },
   {
     title: t("Invoice formats", "Formati delle fatture"),
@@ -25,7 +25,7 @@ const conceptFigures = [
   {
     title: t("eBill flow", "Flusso eBill"),
     src: "/research/theses/master/ebill-flow.png",
-    desc: t("The eBill process is used as a reference for designing a more digital and traceable billing workflow.", "Il processo eBill è il riferimento per progettare un flusso di fatturazione digitale e tracciabile."),
+    desc: t("The eBill process is used as a reference for designing a more digital and traceable billing workflow.", "Il prototipo prende spunto da eBill per digitalizzare la fatturazione e rendere tracciabili i passaggi."),
   },
 ];
 
@@ -33,7 +33,7 @@ const architectureFigures = [
   {
     title: t("Restaurant flow", "Flussi del ristorante"),
     src: "/research/theses/master/restaurant-flow.png",
-    desc: t("A model of incoming and outgoing restaurant flows, including customers, business actors, services, bills, and payments.", "Modello dei flussi in entrata e uscita, con clienti, soggetti economici, servizi, conti e pagamenti."),
+    desc: t("A model of incoming and outgoing restaurant flows, including customers, business actors, services, bills, and payments.", "Schema dei rapporti tra clienti, fornitori e ristorante, con il percorso di ordini, conti e pagamenti."),
   },
   {
     title: t("Restaurant timeline", "Percorso del cliente"),
@@ -43,17 +43,17 @@ const architectureFigures = [
   {
     title: t("Infrastructure components", "Componenti dell’infrastruttura"),
     src: "/research/theses/master/infrastructure-components.png",
-    desc: t("The implementation combines web technologies, Solid, Ethereum, MetaMask, QR codes, eBill concepts, and deployment tooling.", "L’implementazione integra tecnologie web, Solid, Ethereum, MetaMask, codici QR, concetti eBill e strumenti di deployment."),
+    desc: t("The implementation combines web technologies, Solid, Ethereum, MetaMask, QR codes, eBill concepts, and deployment tooling.", "Il prototipo usa Solid, Ethereum, MetaMask e codici QR. La fatturazione si ispira a eBill."),
   },
   {
     title: t("Infrastructure layers", "Livelli dell’infrastruttura"),
     src: "/research/theses/master/infrastructure-layers.png",
-    desc: t("The proposed architecture separates interface, API, Solid, Pods, menu, eBill, and hash/blockchain layers.", "L’architettura separa interfaccia, API, Solid, Pod, menu, eBill e livello hash e blockchain."),
+    desc: t("The proposed architecture separates interface, API, Solid, Pods, menu, eBill, and hash/blockchain layers.", "Lo schema distingue l’interfaccia e le API dalla gestione di menu, dati nei Pod, fatture e verifica su blockchain."),
   },
   {
     title: t("Wallet-blockchain structure", "Integrazione tra wallet e blockchain"),
     src: "/research/theses/master/wallet-blockchain-structure.png",
-    desc: t("The payment side connects Ethereum, MetaMask, Web3.js, and blockchain transactions.", "Il pagamento collega Ethereum, MetaMask e Web3.js alle transazioni blockchain."),
+    desc: t("The payment side connects Ethereum, MetaMask, Web3.js, and blockchain transactions.", "Il cliente autorizza il pagamento con MetaMask. Il prototipo interagisce con Ethereum tramite Web3.js."),
   },
   {
     title: t("Solid graph interactions", "Interazioni nel grafo Solid"),
@@ -71,7 +71,7 @@ const prototypeScreens = [
   {
     title: t("Product list", "Elenco dei prodotti"),
     src: "/research/theses/master/product-list.png",
-    desc: t("Products are loaded from the restaurant data layer and exposed through the web interface.", "L’interfaccia web mostra i prodotti caricati dal sistema dati del ristorante."),
+    desc: t("Products are loaded from the restaurant data layer and exposed through the web interface.", "L’interfaccia mostra i prodotti presenti nel sistema del ristorante."),
   },
   {
     title: t("Product description", "Descrizione del prodotto"),
@@ -91,7 +91,7 @@ const prototypeScreens = [
   {
     title: t("Billing phase", "Fase di fatturazione"),
     src: "/research/theses/master/billing-phase.png",
-    desc: t("The billing workflow produces a payable state before final settlement.", "Il flusso genera un conto pronto per il pagamento."),
+    desc: t("The billing workflow produces a payable state before final settlement.", "Il sistema prepara il conto e lo rende disponibile per il pagamento."),
   },
   {
     title: t("MetaMask experience", "Pagamento con MetaMask"),
@@ -101,7 +101,7 @@ const prototypeScreens = [
   {
     title: t("Table QR code", "Codice QR del tavolo"),
     src: "/research/theses/master/table-qr-code.png",
-    desc: t("QR codes are used to identify the table and connect the physical restaurant space with the digital workflow.", "Il codice QR identifica il tavolo e collega il ristorante fisico al flusso digitale."),
+    desc: t("QR codes are used to identify the table and connect the physical restaurant space with the digital workflow.", "Il cliente inquadra il codice QR sul tavolo per aprire il menu relativo a quel tavolo."),
   },
   {
     title: t("Digital bill QR code", "Codice QR del conto digitale"),
@@ -116,7 +116,7 @@ const prototypeScreens = [
 ];
 
 const contributions = [
-  t("Designed a decentralized document-management and accounting prototype for a restaurant/SME scenario.", "Progettazione di un prototipo decentralizzato di gestione documentale e contabilità per un ristorante, come caso d’uso per le PMI."),
+  t("Designed a decentralized document-management and accounting prototype for a restaurant/SME scenario.", "Prototipo di contabilità e gestione dei documenti per le piccole e medie imprese, sperimentato su un caso nella ristorazione."),
   t("Combined Ethereum blockchain transactions with Solid Pods to separate verifiable payment events from private business documents.", "Integrazione delle transazioni Ethereum con Solid Pods per separare gli eventi di pagamento verificabili dai documenti aziendali riservati."),
   t("Used QR codes to connect physical restaurant tables, bills, and digital interaction flows.", "Collegamento tra tavoli, conti e interazioni digitali tramite codici QR."),
   t("Integrated MetaMask and Web3-style payment interaction into the customer-facing workflow.", "Integrazione di MetaMask e dei pagamenti Web3 nel percorso del cliente."),
@@ -145,7 +145,7 @@ const contributions = [
         </div>
 
         <p class="text-lg leading-relaxed opacity-90">
-          {t("This thesis explored the design and implementation of a decentralized accounting and document-management system for a restaurant use case. The prototype combines blockchain-based transactions, Solid Pods for privacy-preserving document storage, MetaMask payments, QR-code-based interaction, and eBill-inspired billing workflows.", "La tesi progetta e realizza un sistema decentralizzato di contabilità e gestione documentale per un ristorante. Il prototipo combina transazioni su blockchain, Solid Pods per la conservazione riservata dei documenti, pagamenti con MetaMask, interazioni tramite codici QR e fatturazione ispirata a eBill.")}
+          {t("This thesis explored the design and implementation of a decentralized accounting and document-management system for a restaurant use case. The prototype combines blockchain-based transactions, Solid Pods for privacy-preserving document storage, MetaMask payments, QR-code-based interaction, and eBill-inspired billing workflows.", "Nella tesi ho sviluppato un prototipo per gestire ordini, conti e documenti di un ristorante. I documenti sono conservati in Solid Pods, i pagamenti passano da MetaMask e la fatturazione si ispira a eBill. I codici QR collegano tavoli e conti all’interfaccia web.")}
         </p>
 
         <div class="flex flex-wrap gap-2 mt-5">
@@ -199,11 +199,11 @@ const contributions = [
         <h2 class="card-title text-2xl">{t("Context", "Contesto")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          {t("The thesis starts from a practical problem: accounting and document management in small and medium-sized businesses can be costly, manual, error-prone, and difficult to verify. In a restaurant scenario, payments, invoices, orders, customer interactions, and supplier operations create a flow of documents that must remain consistent, auditable, and accessible to the right actors.", "Nelle piccole e medie imprese la contabilità e la gestione documentale possono essere costose, manuali, soggette a errori e difficili da verificare. In un ristorante, pagamenti, fatture, ordini e interazioni con clienti e fornitori generano documenti che devono rimanere coerenti, verificabili e accessibili alle persone autorizzate.")}
+          {t("The thesis starts from a practical problem: accounting and document management in small and medium-sized businesses can be costly, manual, error-prone, and difficult to verify. In a restaurant scenario, payments, invoices, orders, customer interactions, and supplier operations create a flow of documents that must remain consistent, auditable, and accessible to the right actors.", "In un ristorante, ordini, pagamenti e fatture di clienti e fornitori devono corrispondere e poter essere verificati. Per una piccola impresa, farlo con procedure manuali costa tempo e aumenta il rischio di errori.")}
         </p>
 
         <p class="leading-relaxed opacity-90 mt-3">
-          {t("The proposed solution uses blockchain as a transparent and tamper-aware transaction layer, while Solid Pods provide a separate privacy-preserving storage layer for documents and business data that should not be placed directly on-chain.", "La soluzione usa la blockchain come livello transazionale trasparente in cui le alterazioni sono rilevabili. I Solid Pods costituiscono un livello separato per documenti e dati aziendali riservati, da conservare fuori dalla blockchain.")}
+          {t("The proposed solution uses blockchain as a transparent and tamper-aware transaction layer, while Solid Pods provide a separate privacy-preserving storage layer for documents and business data that should not be placed directly on-chain.", "Il prototipo registra su blockchain le informazioni necessarie a verificare le transazioni. I documenti aziendali riservati restano fuori dal registro, in Solid Pods accessibili agli utenti autorizzati.")}
         </p>
       </div>
     </div>
@@ -249,7 +249,7 @@ const contributions = [
         <h2 class="card-title text-2xl">{t("Architecture and design", "Architettura e progettazione")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          {t("The prototype models the restaurant as an interaction between physical space, customer actions, digital ordering, document storage, and payment confirmation. QR codes connect tables and invoices to the web interface, Solid manages private resources, and the blockchain layer handles payment-related verification.", "Il prototipo mette in relazione lo spazio fisico del ristorante, le azioni del cliente, gli ordini digitali, l’archiviazione e la conferma del pagamento. I codici QR collegano tavoli e conti all’interfaccia web, Solid gestisce le risorse riservate e la blockchain verifica i pagamenti.")}
+          {t("The prototype models the restaurant as an interaction between physical space, customer actions, digital ordering, document storage, and payment confirmation. QR codes connect tables and invoices to the web interface, Solid manages private resources, and the blockchain layer handles payment-related verification.", "Il codice QR collega il tavolo all’interfaccia web. Solid conserva ordini e documenti riservati, mentre la blockchain permette di verificare il pagamento.")}
         </p>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">

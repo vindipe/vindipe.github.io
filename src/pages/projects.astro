@@ -9,21 +9,21 @@ const localPath = (href: string) => inLanguage(href, locale);
 
 <BaseLayout
   title={t("Blockchain Projects and Tools | Vincenzo Di Perna", "Progetti blockchain e strumenti di ricerca | Vincenzo Di Perna")}
-  description={t("Explore blockchain research software, reproducibility artifacts, experimental pipelines and interactive dashboards by Vincenzo Di Perna.", "Strumenti software, materiali per la riproducibilità e dashboard interattive per la ricerca sulle blockchain.")}
+  description={t("Explore blockchain research software, reproducibility artifacts, experimental pipelines and interactive dashboards by Vincenzo Di Perna.", "Software, dati e strumenti interattivi per studiare le blockchain e riprodurre gli esperimenti.")}
   sideBarActiveItemID="projects"
 >
   <section class="mb-10">
     <h1 class="text-4xl font-bold mb-4">{t("Projects and Tools", "Progetti e strumenti")}</h1>
 
     <p class="text-lg leading-relaxed opacity-90">
-      {t("A selection of research artifacts, software tools, datasets, analysis pipelines, and exploratory projects around blockchain systems, distributed infrastructures, digital assets, benchmarking, reproducible experimentation, real-world assets, and fairer value distribution.", "Una selezione di materiali di ricerca, software, dataset e progetti esplorativi su blockchain, infrastrutture distribuite e asset digitali. I temi includono il benchmarking, la riproducibilità degli esperimenti, gli asset del mondo reale e una distribuzione più equa del valore.")}
+      {t("A selection of research artifacts, software tools, datasets, analysis pipelines, and exploratory projects around blockchain systems, distributed infrastructures, digital assets, benchmarking, reproducible experimentation, real-world assets, and fairer value distribution.", "Qui trovi il software, i dati e gli strumenti nati dai miei esperimenti sulle blockchain, oltre ai temi che sto esplorando, come la tokenizzazione di beni reali e la distribuzione del valore.")}
     </p>
   </section>
 
   <section class="mb-12"><h2 class="text-3xl font-bold mb-5">{t("Research projects", "Progetti di ricerca")}</h2>
     <article class="network-protected card bg-base-100 shadow-md"><div class="card-body">
-  <div class="flex flex-wrap items-center gap-2"><h3 class="card-title">{t("CIRCULA - Expiry-Aware System Design for Blockchains", "CIRCULA – Scadenza e rinnovo nella progettazione delle blockchain")}</h3><span class="badge badge-primary">{t("Expected start · 1 February 2027", "Avvio previsto · 1° febbraio 2027")}</span></div>
-  <p>{t("What if digital resources had an explicit lifetime? CIRCULA will investigate expiry and renewal in blockchain systems through formal semantics, prototypes and controlled evaluation. The project is funded by the SNSF and hosted at the University of Neuchâtel.", "Che cosa cambierebbe se le risorse digitali avessero una durata definita? CIRCULA studierà la scadenza e il rinnovo nelle blockchain attraverso una semantica formale, prototipi ed esperimenti controllati. L’Università di Neuchâtel ospita il progetto, finanziato dal Fondo nazionale svizzero.")}</p>
+  <div class="flex flex-wrap items-center gap-2"><h3 class="card-title">{t("CIRCULA - Expiry-Aware System Design for Blockchains", "CIRCULA – Scadenza e rinnovo delle risorse nelle blockchain")}</h3><span class="badge badge-primary">{t("Expected start · 1 February 2027", "Avvio previsto · 1° febbraio 2027")}</span></div>
+  <p>{t("What if digital resources had an explicit lifetime? CIRCULA will investigate expiry and renewal in blockchain systems through formal semantics, prototypes and controlled evaluation. The project is funded by the SNSF and hosted at the University of Neuchâtel.", "Che cosa succede quando una risorsa digitale ha una data di scadenza? CIRCULA studierà come rappresentare e verificare scadenza e rinnovo con modelli formali, prototipi ed esperimenti controllati. Il progetto è ospitato dall’Università di Neuchâtel e finanziato dal Fondo nazionale svizzero.")}</p>
   
   <div class="card-actions mt-3"><a class="btn btn-sm btn-primary" href={localPath("/research/circula")}>{t("Explore CIRCULA", "Scopri CIRCULA")}</a><a class="btn btn-sm btn-outline" href="https://circula.unine.ch/" target="_blank" rel="noopener noreferrer">{t("Project website", "Sito del progetto")}</a></div>
 </div></article>
@@ -36,7 +36,7 @@ const localPath = (href: string) => inLanguage(href, locale);
     </div>
 
     <p class="mb-5 opacity-80">
-      {t("Public software and reproducibility artifacts developed from my PhD research on blockchain benchmarking, network topologies, experimental control, and data-driven protocol evaluation.", "Software e materiali pubblici per riprodurre gli esperimenti del mio dottorato sul benchmarking delle blockchain, sulle topologie di rete e sulla valutazione dei protocolli a partire dai dati.")}
+      {t("Public software and reproducibility artifacts developed from my PhD research on blockchain benchmarking, network topologies, experimental control, and data-driven protocol evaluation.", "Codice e dati per riprodurre gli esperimenti del mio dottorato e confrontare il comportamento dei protocolli blockchain in diverse condizioni di rete.")}
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -44,13 +44,13 @@ const localPath = (href: string) => inLanguage(href, locale);
         <div class="card-body h-full">
           <div class="flex flex-wrap items-center gap-2">
             <h3 class="card-title">
-              {t("Lilith - Topology-Aware Blockchain Benchmarking", "Lilith – Benchmarking delle blockchain con topologie di rete controllate")}
+              {t("Lilith - Topology-Aware Blockchain Benchmarking", "Lilith – Benchmark delle blockchain in condizioni di rete controllate")}
             </h3>
             <span class="badge badge-success">{t("Public GitHub repo", "Repository pubblico su GitHub")}</span>
           </div>
 
           <p>
-            {t("A research-oriented benchmarking framework for evaluating blockchain systems under controlled network topologies, realistic workloads, reproducible execution assumptions, and topology-aware experimental conditions.", "Un framework di ricerca per confrontare sistemi blockchain con topologie di rete controllate, carichi di lavoro realistici e condizioni sperimentali riproducibili.")}
+            {t("A research-oriented benchmarking framework for evaluating blockchain systems under controlled network topologies, realistic workloads, reproducible execution assumptions, and topology-aware experimental conditions.", "Lilith permette di confrontare diverse blockchain con topologie controllate e carichi di lavoro realistici, ripetendo gli esperimenti nelle stesse condizioni.")}
           </p>
 
           <div class="mt-auto pt-4 space-y-3">
@@ -91,7 +91,7 @@ const localPath = (href: string) => inLanguage(href, locale);
     </div>
 
     <p class="mb-5 opacity-80">
-      {t("Small web tools that turn my research artifacts into interactive demos, making methods, datasets, and evaluation logic easier to explore directly from the browser.", "Strumenti web per esplorare metodi, dataset e criteri di valutazione direttamente dal browser.")}
+      {t("Small web tools that turn my research artifacts into interactive demos, making methods, datasets, and evaluation logic easier to explore directly from the browser.", "Prova i metodi di valutazione e consulta i dati direttamente nel browser.")}
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -103,7 +103,7 @@ const localPath = (href: string) => inLanguage(href, locale);
           </div>
 
           <p>
-            {t("An interactive EB-index playground for exploring normalized and entropy-derived cryptocurrency datasets. Users can toggle assets, choose attribute sets, assign custom utility weights, and recompute the index live in the browser.", "Una dashboard per esplorare dataset sulle criptovalute, sia normalizzati sia derivati dall’entropia. Puoi selezionare gli asset, scegliere gli attributi, assegnare pesi personalizzati e ricalcolare subito l’EB-index.")}
+            {t("An interactive EB-index playground for exploring normalized and entropy-derived cryptocurrency datasets. Users can toggle assets, choose attribute sets, assign custom utility weights, and recompute the index live in the browser.", "CryptoEntropy Explorer permette di confrontare criptovalute con l’EB-index. Scegli le valute e gli indicatori economici, imposta i pesi e guarda come cambia il punteggio.")}
           </p>
 
           <div class="mt-auto pt-4 space-y-3">
@@ -126,7 +126,7 @@ const localPath = (href: string) => inLanguage(href, locale);
                 class="btn btn-sm btn-primary"
                 href={localPath("/projects/cryptoentropy-explorer")}
               >
-                {t("Open dashboard", "Apri la dashboard")}
+                {t("Open dashboard", "Apri lo strumento")}
               </a>
             </div>
           </div>
@@ -137,13 +137,13 @@ const localPath = (href: string) => inLanguage(href, locale);
 
   <section class="mb-12">
     <div class="flex flex-wrap items-center gap-2 mb-2">
-      <h2 class="text-3xl flex-1 min-w-[12rem] font-bold">{t("Practical Projects", "Progetti pratici")}</h2>
+      <h2 class="text-3xl flex-1 min-w-[12rem] font-bold">{t("Practical Projects", "Prototipi e altri progetti")}</h2>
       <span class="badge badge-warning shrink-0 whitespace-nowrap">{t("Projects", "Progetti")}</span
       >
     </div>
 
     <p class="mb-5 opacity-80">
-      {t("A growing collection of practical repositories, exercises, prototypes, and hands-on technical experiences developed to strengthen engineering skills, document learning paths, and demonstrate applied work across different technologies.", "Repository, esercizi e prototipi per sperimentare con tecnologie diverse, consolidare competenze ingegneristiche e documentare quello che ho imparato.")}
+      {t("A growing collection of practical repositories, exercises, prototypes, and hands-on technical experiences developed to strengthen engineering skills, document learning paths, and demonstrate applied work across different technologies.", "Prototipi, esercizi e codice nati per sperimentare con tecnologie diverse e documentare le soluzioni adottate.")}
     </p>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -155,7 +155,7 @@ const localPath = (href: string) => inLanguage(href, locale);
       </div>
 
       <p>
-        {t("A legacy MSc thesis prototype modernized into a reproducible local demo, combining a restaurant ordering workflow, Solid Pods concepts, mock blockchain payment verification, PDF bill generation, and safe Solid rebuild tooling.", "Il prototipo della mia tesi magistrale, aggiornato come demo locale riproducibile. Simula un ordine al ristorante, usa i concetti di Solid Pods, verifica un pagamento blockchain simulato e genera il conto in PDF. Include strumenti per ricreare l’ambiente Solid.")}
+        {t("A legacy MSc thesis prototype modernized into a reproducible local demo, combining a restaurant ordering workflow, Solid Pods concepts, mock blockchain payment verification, PDF bill generation, and safe Solid rebuild tooling.", "La demo della mia tesi magistrale riproduce un ordine al ristorante. Gestisce i dati con Solid Pods, simula la verifica di un pagamento su blockchain e genera il conto in PDF. Il repository spiega come ricreare l’ambiente in locale.")}
       </p>
 
       <div class="mt-auto pt-4 space-y-3">
@@ -189,7 +189,7 @@ const localPath = (href: string) => inLanguage(href, locale);
 </div>
   </section>
   <h2 class="text-3xl font-bold mb-5">{t("Research interests", "Interessi di ricerca")}</h2>
-  <p class="mb-5 opacity-80">{t("Areas I am interested in exploring alongside my projects and tools.", "Temi che mi interessa approfondire accanto ai progetti e agli strumenti già disponibili.")}</p>
+  <p class="mb-5 opacity-80">{t("Areas I am interested in exploring alongside my projects and tools.", "Altri temi che mi interessa studiare.")}</p>
 
   <section class="mb-12">
     <div class="flex flex-wrap items-center gap-2 mb-2">
@@ -199,7 +199,7 @@ const localPath = (href: string) => inLanguage(href, locale);
     </div>
 
     <p class="mb-5 opacity-80">
-      {t("Exploratory work on how blockchain systems, digital assets, incentive mechanisms, and decentralized infrastructures can be designed or evaluated to reduce excessive concentration of value, ownership, governance power, and access to economic opportunities.", "Studio come blockchain, asset digitali, incentivi e infrastrutture decentralizzate possano ridurre l’eccessiva concentrazione di valore, proprietà e potere decisionale, favorendo l’accesso alle opportunità economiche.")}
+      {t("Exploratory work on how blockchain systems, digital assets, incentive mechanisms, and decentralized infrastructures can be designed or evaluated to reduce excessive concentration of value, ownership, governance power, and access to economic opportunities.", "Vorrei capire se blockchain, asset digitali e incentivi possano distribuire più ampiamente proprietà, valore e potere decisionale, rendendo più accessibili le opportunità economiche.")}
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -207,11 +207,11 @@ const localPath = (href: string) => inLanguage(href, locale);
         <div class="card-body">
           <div class="flex flex-wrap items-center gap-2">
             <h3 class="card-title">{t("Wealth concentration analysis toolkit", "Strumenti per analizzare la concentrazione della ricchezza")}</h3>
-            <span class="badge badge-warning">{t("Interest", "In esplorazione")}</span>
+            <span class="badge badge-warning">{t("Interest", "Da approfondire")}</span>
           </div>
 
           <p>
-            {t("A planned set of data-analysis workflows for studying concentration patterns in token ownership, protocol governance, and digital-asset ecosystems.", "Procedure di analisi dati previste per studiare la concentrazione della proprietà dei token e del potere decisionale nei protocolli e negli ecosistemi di asset digitali.")}
+            {t("A planned set of data-analysis workflows for studying concentration patterns in token ownership, protocol governance, and digital-asset ecosystems.", "Strumenti di analisi per capire in quali mani si concentrano i token e il potere decisionale nei protocolli e negli ecosistemi di asset digitali.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
@@ -226,15 +226,15 @@ const localPath = (href: string) => inLanguage(href, locale);
         <div class="card-body">
           <div class="flex flex-wrap items-center gap-2">
             <h3 class="card-title">{t("Fair value distribution models", "Modelli per distribuire il valore in modo più equo")}</h3>
-            <span class="badge badge-warning">{t("Interest", "In esplorazione")}</span>
+            <span class="badge badge-warning">{t("Interest", "Da approfondire")}</span>
           </div>
 
           <p>
-            {t("Conceptual and experimental work on mechanisms that could support broader participation, fairer access, and less extractive forms of digital value creation.", "Studio teorico e sperimentale di meccanismi che favoriscano una partecipazione più ampia, un accesso più equo e forme di creazione del valore digitale meno estrattive.")}
+            {t("Conceptual and experimental work on mechanisms that could support broader participation, fairer access, and less extractive forms of digital value creation.", "Studio di meccanismi che allarghino la partecipazione e l’accesso e distribuiscano in modo più equo il valore generato.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
-            <span class="badge badge-outline">{t("Mechanism design", "Progettazione dei meccanismi")}</span>
+            <span class="badge badge-outline">{t("Mechanism design", "Progettazione degli incentivi")}</span>
             <span class="badge badge-outline">{t("Digital assets", "Asset digitali")}</span>
             <span class="badge badge-outline">{t("Economic fairness", "Equità economica")}</span>
           </div>
@@ -245,25 +245,25 @@ const localPath = (href: string) => inLanguage(href, locale);
 
   <section class="mb-12">
     <div class="flex flex-wrap items-center gap-2 mb-2">
-      <h3 class="text-2xl flex-1 min-w-[12rem] font-bold">{t("Real-World Assets - RWA", "Asset del mondo reale (RWA)")}</h3>
+      <h3 class="text-2xl flex-1 min-w-[12rem] font-bold">{t("Real-World Assets - RWA", "Beni e attività del mondo reale (RWA)")}</h3>
       <span class="badge badge-warning shrink-0 whitespace-nowrap">{t("Research interest", "Tema di ricerca")}</span
       >
     </div>
 
     <p class="mb-5 opacity-80">
-      {t("Early-stage work on the representation, evaluation, and possible tokenization of real-world assets within blockchain-based infrastructures, with attention to ownership, verification, governance, market structure, and practical deployment constraints.", "Ricerca preliminare su come rappresentare, valutare ed eventualmente tokenizzare gli asset del mondo reale su blockchain. Considera proprietà, verifica, governance, struttura del mercato e vincoli di adozione.")}
+      {t("Early-stage work on the representation, evaluation, and possible tokenization of real-world assets within blockchain-based infrastructures, with attention to ownership, verification, governance, market structure, and practical deployment constraints.", "Come si possono rappresentare, valutare e tokenizzare beni e attività del mondo reale su una blockchain? La ricerca riguarda proprietà, verifica, governance, struttura dei mercati e ostacoli all’adozione.")}
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <div class="flex flex-wrap items-center gap-2">
-            <h3 class="card-title">{t("RWA system design notes", "Progettazione dei sistemi per gli RWA")}</h3>
-            <span class="badge badge-warning">{t("Interest", "In esplorazione")}</span>
+            <h3 class="card-title">{t("RWA system design notes", "Progettazione di sistemi per gli RWA")}</h3>
+            <span class="badge badge-warning">{t("Interest", "Da approfondire")}</span>
           </div>
 
           <p>
-            {t("A developing research and engineering track focused on how physical or off-chain assets can be represented, verified, transferred, and governed through digital-asset infrastructures.", "Un filone di ricerca in sviluppo su come rappresentare, verificare, trasferire e governare beni fisici o esterni alla blockchain tramite infrastrutture per asset digitali.")}
+            {t("A developing research and engineering track focused on how physical or off-chain assets can be represented, verified, transferred, and governed through digital-asset infrastructures.", "Studio di come rappresentare, verificare e trasferire beni fisici o attività fuori dalla blockchain, e di come stabilire chi può gestirli.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
@@ -278,11 +278,11 @@ const localPath = (href: string) => inLanguage(href, locale);
         <div class="card-body">
           <div class="flex flex-wrap items-center gap-2">
             <h3 class="card-title">{t("RWA benchmarking perspective", "Benchmarking delle piattaforme RWA")}</h3>
-            <span class="badge badge-warning">{t("Interest", "In esplorazione")}</span>
+            <span class="badge badge-warning">{t("Interest", "Da approfondire")}</span>
           </div>
 
           <p>
-            {t("A planned evaluation angle connecting RWA platforms with system performance, operational assumptions, transaction costs, settlement behavior, and infrastructure reliability.", "Un possibile metodo di valutazione delle piattaforme RWA basato su prestazioni, ipotesi operative, costi delle transazioni, regolamento e affidabilità dell’infrastruttura.")}
+            {t("A planned evaluation angle connecting RWA platforms with system performance, operational assumptions, transaction costs, settlement behavior, and infrastructure reliability.", "Valutazione delle piattaforme RWA in base a prestazioni, condizioni operative, costi e regolamento delle transazioni e affidabilità dell’infrastruttura.")}
           </p>
 
           <div class="card-actions justify-end mt-4">

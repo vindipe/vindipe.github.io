@@ -7,14 +7,14 @@ const t = translator(Astro.url.pathname);
 <section id="consensus-game" class="network-protected card bg-base-100 shadow-md">
   <div class="card-body">
     <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">{t("Consensus game", "Gioco del consenso")}</h3>
+      <h3 class="card-title">{t("Consensus game", "Simulatore di consenso")}</h3>
       <span class="badge badge-secondary">{t("Validators", "Validatori")}</span>
       <span class="badge badge-outline">Quorum</span>
-      <span class="badge badge-outline">{t("Finality", "Finalità")}</span>
+      <span class="badge badge-outline">{t("Finality", "Conferma definitiva")}</span>
     </div>
 
     <p class="opacity-80 mb-4">
-      {t("Toggle validators online or faulty, propose a block, and see whether the network reaches enough votes to finalize it.", "Cambia lo stato dei validatori, proponi un blocco e verifica se la rete raccoglie abbastanza voti per renderlo definitivo.")}
+      {t("Toggle validators online or faulty, propose a block, and see whether the network reaches enough votes to finalize it.", "Metti alcuni validatori offline o simula un guasto. Proponi un blocco e verifica se ottiene abbastanza voti per diventare definitivo.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
@@ -41,7 +41,7 @@ const t = translator(Astro.url.pathname);
 
         <div class="stats stats-vertical w-full bg-base-100 mb-4">
           <div class="stat">
-            <div class="stat-title">{t("Online honest votes", "Voti validi online")}</div>
+            <div class="stat-title">{t("Online honest votes", "Voti validi")}</div>
             <div class="stat-value text-2xl" data-votes>0</div>
           </div>
 
@@ -52,7 +52,7 @@ const t = translator(Astro.url.pathname);
         </div>
 
         <p data-consensus-status class="text-sm opacity-80">
-          {t("Toggle validators and propose a block.", "Imposta i validatori e proponi un blocco.")}
+          {t("Toggle validators and propose a block.", "Scegli lo stato dei validatori e proponi un blocco.")}
         </p>
       </div>
     </div>

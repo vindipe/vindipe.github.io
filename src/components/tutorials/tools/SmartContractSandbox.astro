@@ -14,7 +14,7 @@ const t = translator(Astro.url.pathname);
     </div>
 
     <p class="opacity-80 mb-4">
-      {t("This toy contract manages balances. Try valid and invalid transfers to see how smart contracts update state only when predefined rules are satisfied.", "Questo contratto dimostrativo gestisce i saldi. Prova trasferimenti validi e non validi per vedere quando le regole consentono di aggiornare lo stato.")}
+      {t("This toy contract manages balances. Try valid and invalid transfers to see how smart contracts update state only when predefined rules are satisfied.", "Questo contratto di prova aggiorna i saldi quando un trasferimento rispetta le sue regole. Prova anche un importo troppo alto e confronta i risultati.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1fr] gap-4">
@@ -66,9 +66,9 @@ const t = translator(Astro.url.pathname);
         </div>
 
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">{t("Execution result", "Esito dell’esecuzione")}</p>
+          <p class="font-semibold mb-1">{t("Execution result", "Risultato")}</p>
           <p data-contract-status class="text-sm opacity-80">
-            {t("Submit a transfer to execute the contract rules.", "Invia un trasferimento per applicare le regole del contratto.")}
+            {t("Submit a transfer to execute the contract rules.", "Prova un trasferimento per vedere come reagisce il contratto.")}
           </p>
         </div>
 

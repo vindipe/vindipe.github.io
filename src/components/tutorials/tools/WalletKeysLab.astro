@@ -7,20 +7,20 @@ const t = translator(Astro.url.pathname);
 <section id="wallet-keys-lab" class="network-protected card bg-base-100 shadow-md">
   <div class="card-body">
     <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">{t("Wallets, keys & ownership", "Wallet, chiavi e proprietà")}</h3>
-      <span class="badge badge-secondary">{t("Toy signatures", "Firme dimostrative")}</span>
+      <h3 class="card-title">{t("Wallets, keys & ownership", "Wallet, chiavi e firme")}</h3>
+      <span class="badge badge-secondary">{t("Toy signatures", "Firme di prova")}</span>
       <span class="badge badge-outline">{t("Addresses", "Indirizzi")}</span>
       <span class="badge badge-outline">{t("Authorization", "Autorizzazione")}</span>
     </div>
 
     <p class="opacity-80 mb-4">
-      {t("This toy lab shows the relationship between identity, transaction messages, signatures, and verification. It is educational, not production cryptography.", "Questo laboratorio mostra il legame tra identità, messaggi di transazione, firme e verifica attraverso una simulazione didattica.")}
+      {t("This toy lab shows the relationship between identity, transaction messages, signatures, and verification. It is educational, not production cryptography.", "Crea un wallet, firma un messaggio e verifica la firma. Poi cambia una parte del messaggio e ripeti la verifica.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1fr] gap-4">
       <div class="grid gap-3">
         <button class="btn btn-primary" data-wallet-action="generate">
-          {t("Generate toy wallet", "Genera un wallet dimostrativo")}
+          {t("Generate toy wallet", "Crea un wallet di prova")}
         </button>
 
         <label class="form-control">
@@ -41,7 +41,7 @@ const t = translator(Astro.url.pathname);
           </button>
 
           <button class="btn btn-outline" data-wallet-action="tamper">
-            {t("Tamper message", "Altera il messaggio")}
+            {t("Tamper message", "Modifica il messaggio")}
           </button>
         </div>
       </div>
@@ -125,9 +125,9 @@ const t = translator(Astro.url.pathname);
 
       addressOutput.textContent = address;
       publicOutput.textContent = publicIdentity.slice(0, 32) + "...";
-      signatureOutput.textContent = translate("No signature yet.", "Nessuna firma disponibile.");
+      signatureOutput.textContent = translate("No signature yet.", "Nessuna firma generata.");
       status.textContent =
-        translate("Toy wallet generated. In real systems, the private key must remain secret.", "Wallet dimostrativo generato. Nei sistemi reali la chiave privata deve restare segreta.");
+        translate("Toy wallet generated. In real systems, the private key must remain secret.", "Wallet di prova creato. Quando usi un wallet reale, tieni segreta la chiave privata.");
     }
 
     async function signMessage() {
@@ -140,7 +140,7 @@ const t = translator(Astro.url.pathname);
 
       signatureOutput.textContent = signature;
       status.textContent =
-        translate("Transaction signed. The signature is bound to this exact message.", "Transazione firmata. La firma è legata esattamente a questo messaggio.");
+        translate("Transaction signed. The signature is bound to this exact message.", "Transazione firmata. La firma vale per il messaggio che hai appena firmato.");
     }
 
     async function verifySignature() {

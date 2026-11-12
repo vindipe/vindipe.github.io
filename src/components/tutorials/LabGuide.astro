@@ -14,12 +14,12 @@ const { title, context, howToPlay, observe, nextStep } = Astro.props;
 
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-3">
       <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-1">{t("1. Blockchain context", "1. Il ruolo nella blockchain")}</p>
+        <p class="font-semibold mb-1">{t("1. Blockchain context", "1. A che cosa serve")}</p>
         <p class="text-sm opacity-80">{context}</p>
       </div>
 
       <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-1">{t("2. How to play", "2. Come si usa")}</p>
+        <p class="font-semibold mb-1">{t("2. How to play", "2. Prova tu")}</p>
         <p class="text-sm opacity-80">{howToPlay}</p>
       </div>
 
@@ -29,7 +29,7 @@ const { title, context, howToPlay, observe, nextStep } = Astro.props;
       </div>
 
       <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-1">{t("4. Next step", "4. Come proseguire")}</p>
+        <p class="font-semibold mb-1">{t("4. Next step", "4. Che cosa provare dopo")}</p>
         <p class="text-sm opacity-80">{nextStep}</p>
       </div>
     </div>

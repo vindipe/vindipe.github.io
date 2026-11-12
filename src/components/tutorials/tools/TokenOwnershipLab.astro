@@ -14,7 +14,7 @@ const t = translator(Astro.url.pathname);
     </div>
 
     <p class="opacity-80 mb-4">
-      {t("Change token distribution events and observe how ownership concentration changes. This is a toy model, not a financial model.", "Prova diversi modi di distribuire i token e osserva come cambia la concentrazione della proprietà. Il modello è semplificato e ha finalità didattiche.")}
+      {t("Change token distribution events and observe how ownership concentration changes. This is a toy model, not a financial model.", "Cambia la distribuzione dei token e osserva in quali mani si concentra la proprietà. È un modello semplificato per fare pratica.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
@@ -23,11 +23,11 @@ const t = translator(Astro.url.pathname);
 
         <div class="flex flex-wrap gap-2">
           <button class="btn btn-primary" data-token-action="equal-airdrop">
-            {t("Equal airdrop", "Distribuzione uguale per tutti")}
+            {t("Equal airdrop", "Distribuisci la stessa quantità a tutti")}
           </button>
 
           <button class="btn btn-outline" data-token-action="whale-buy">
-            {t("Whale accumulation", "Accumulo di un grande detentore")}
+            {t("Whale accumulation", "Aumenta la quota del maggiore detentore")}
           </button>
 
           <button class="btn btn-outline" data-token-action="staking">
@@ -45,12 +45,12 @@ const t = translator(Astro.url.pathname);
 
         <div class="stats stats-vertical w-full bg-base-100 mb-4">
           <div class="stat">
-            <div class="stat-title">{t("Largest holder", "Maggiore detentore")}</div>
+            <div class="stat-title">{t("Largest holder", "Chi detiene più token")}</div>
             <div class="stat-value text-2xl" data-largest-holder>-</div>
           </div>
 
           <div class="stat">
-            <div class="stat-title">{t("HHI-style score", "Indice di tipo HHI")}</div>
+            <div class="stat-title">{t("HHI-style score", "Indice di concentrazione HHI")}</div>
             <div class="stat-value text-2xl" data-hhi-score>-</div>
           </div>
         </div>
@@ -88,6 +88,13 @@ const t = translator(Astro.url.pathname);
       Whale: 250,
     };
 
+    const italianHolders = {
+      Community: "Comunità",
+      Builders: "Sviluppatori",
+      Treasury: "Tesoreria",
+      Whale: "Grande detentore",
+    };
+    const holderLabel = (holder) => translate(holder, italianHolders[holder]);
     let balances = { ...initialBalances };
 
     function totalSupply() {
@@ -113,7 +120,7 @@ const t = translator(Astro.url.pathname);
           return `
             <div>
               <div class="flex justify-between text-sm mb-1">
-                <span>${holder}</span>
+                <span>${holderLabel(holder)}</span>
                 <span class="font-mono">${balance} TOK · ${percentage}%</span>
               </div>
               <progress class="progress progress-primary w-full" value="${percentage}" max="100"></progress>
@@ -123,7 +130,7 @@ const t = translator(Astro.url.pathname);
         .join("");
 
       const largest = Object.entries(balances).sort((a, b) => b[1] - a[1])[0];
-      largestHolderOutput.textContent = `${largest[0]} ${Math.round((largest[1] / total) * 100)}%`;
+      largestHolderOutput.textContent = `${holderLabel(largest[0])} ${Math.round((largest[1] / total) * 100)}%`;
       hhiOutput.textContent = concentrationScore().toFixed(3);
     }
 
@@ -133,7 +140,7 @@ const t = translator(Astro.url.pathname);
       });
 
       status.textContent =
-        translate("Equal airdrop: all groups receive the same amount, so relative concentration changes little.", "Distribuzione uguale: ogni gruppo riceve la stessa quantità e la concentrazione relativa cambia poco.");
+        translate("Equal airdrop: all groups receive the same amount, so relative concentration changes little.", "Tutti ricevono la stessa quantità di token. La concentrazione cambia di poco.");
       render();
     }
 
@@ -154,7 +161,7 @@ const t = translator(Astro.url.pathname);
       });
 
       status.textContent =
-        translate("Proportional staking rewards: larger holders receive larger absolute rewards, so concentration may persist.", "Ricompense proporzionali per lo staking: chi ha di più riceve più token in valore assoluto e la concentrazione può persistere.");
+        translate("Proportional staking rewards: larger holders receive larger absolute rewards, so concentration may persist.", "Chi parte da una quota più alta riceve più token in valore assoluto. Le ricompense proporzionali possono quindi lasciare invariata la concentrazione.");
       render();
     }
 

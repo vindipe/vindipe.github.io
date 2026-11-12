@@ -10,12 +10,12 @@ const entropyResults = [
   {
     title: t("Unweighted EB-index - Set1", "EB-index senza pesi – Set1"),
     src: "/research/dlt25/entropy-set1.png",
-    desc: t("Set1 combines user activity with market-oriented indicators, showing how balance evolves across assets over time.", "Set1 combina l’attività degli utenti con indicatori di mercato, mostrando come l’equilibrio dei diversi asset evolva nel tempo."),
+    desc: t("Set1 combines user activity with market-oriented indicators, showing how balance evolves across assets over time.", "Set1 combina indicatori di attività e di mercato per confrontare come cambia nel tempo l’equilibrio economico delle criptovalute."),
   },
   {
     title: t("Weighted EB-index - Set1", "EB-index ponderato – Set1"),
     src: "/research/dlt25/weighted-entropy-set1.png",
-    desc: t("The weighted version makes the index sensitive not only to balance, but also to the relative strength of the selected attributes.", "La versione ponderata tiene conto sia dell’equilibrio sia della forza relativa degli attributi selezionati."),
+    desc: t("The weighted version makes the index sensitive not only to balance, but also to the relative strength of the selected attributes.", "La versione ponderata considera l’equilibrio fra gli indicatori e il peso assegnato a ciascuno."),
   },
   {
     title: t("Unweighted EB-index - Set2", "EB-index senza pesi – Set2"),
@@ -25,7 +25,7 @@ const entropyResults = [
   {
     title: t("Weighted EB-index - Set2", "EB-index ponderato – Set2"),
     src: "/research/dlt25/weighted-entropy-set2.png",
-    desc: t("The weighted version changes the interpretation of the results by incorporating attribute magnitude into the entropy score.", "La versione ponderata include l’ampiezza degli attributi nel calcolo dell’entropia e cambia il modo di interpretare i risultati."),
+    desc: t("The weighted version changes the interpretation of the results by incorporating attribute magnitude into the entropy score.", "Nel calcolo ponderato, il contributo di ciascun indicatore all’entropia dipende anche dal peso assegnato."),
   },
 ];
 
@@ -73,23 +73,23 @@ const probabilityDistributions = [
 ];
 
 const qualitiesSet1 = [
-  "Participation",
+  t("Participation", "Partecipazione"),
   t("Mean transfers per active address", "Numero medio di trasferimenti per indirizzo attivo"),
   t("Mean transfer per market capitalization", "Importo medio trasferito in rapporto alla capitalizzazione di mercato"),
-  "Market capitalization",
+  t("Market capitalization", "Capitalizzazione di mercato"),
 ];
 
 const qualitiesSet2 = [
-  "Participation",
-  "Mean transfer size",
+  t("Participation", "Partecipazione"),
+  t("Mean transfer size", "Importo medio dei trasferimenti"),
   t("Mean transfers per active address", "Numero medio di trasferimenti per indirizzo attivo"),
-  "Active supply turnover rate",
-  "Active supply ratio",
-  "Wealth distribution",
+  t("Active supply turnover rate", "Tasso di rotazione dell’offerta attiva"),
+  t("Active supply ratio", "Quota di offerta attiva"),
+  t("Wealth distribution", "Distribuzione della ricchezza"),
 ];
 
 const findings = [
-  t("The proposed EB-index is designed to capture balance across selected economic qualities rather than relying on a single metric such as price, capitalization, throughput, or energy.", "L’EB-index misura l’equilibrio fra più caratteristiche economiche selezionate, includendo più dimensioni di singoli indicatori come prezzo, capitalizzazione, throughput o energia."),
+  t("The proposed EB-index is designed to capture balance across selected economic qualities rather than relying on a single metric such as price, capitalization, throughput, or energy.", "L’EB-index riunisce più indicatori per misurare quanto siano equilibrate le caratteristiche economiche di una criptovaluta."),
   t("The framework is customizable: researchers can select different attributes and weights depending on the economic behaviour they want to study.", "Chi conduce lo studio può scegliere attributi e pesi in base al comportamento economico che vuole analizzare."),
   t("Set1 captures a compact view of activity and market-related behaviour, while Set2 focuses more deeply on user participation, transfer dynamics, supply usage, and wealth distribution.", "Set1 sintetizza attività e dinamiche di mercato. Set2 approfondisce partecipazione, trasferimenti, uso dell’offerta e distribuzione della ricchezza."),
   t("The weighted version of the index changes the interpretation by rewarding not only balance, but also stronger normalized attribute values.", "La versione ponderata tiene conto anche dei valori normalizzati più alti, oltre all’equilibrio tra gli attributi."),
@@ -111,14 +111,14 @@ const findings = [
       <div class="card-body">
         <div class="flex flex-wrap gap-2 items-center mb-3">
           <h1 class="text-4xl font-bold">
-            An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies
+            {t("An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies", "Misurare l’efficienza economica delle criptovalute con l’entropia")}
           </h1>
           <span class="badge badge-secondary">DLT '25</span>
           <span class="badge badge-outline">{t("Publication", "Pubblicazione")}</span>
         </div>
 
         <p class="text-lg leading-relaxed opacity-90">
-          {t("This work introduces an entropy-based framework for evaluating the economic efficiency of cryptocurrencies. Instead of measuring only price, market capitalization, throughput, or energy consumption, the paper proposes a composite index that captures how well multiple economic qualities are balanced inside a cryptoasset economy.", "Lo studio introduce un metodo basato sull’entropia per valutare l’efficienza economica delle criptovalute. Propone un indice composito per misurare l’equilibrio fra più caratteristiche economiche di un cryptoasset, andando oltre singoli indicatori come prezzo, capitalizzazione, throughput o consumi.")}
+          {t("This work introduces an entropy-based framework for evaluating the economic efficiency of cryptocurrencies. Instead of measuring only price, market capitalization, throughput, or energy consumption, the paper proposes a composite index that captures how well multiple economic qualities are balanced inside a cryptoasset economy.", "Lo studio propone un indice che usa l’entropia per misurare l’equilibrio fra più caratteristiche economiche di una criptovaluta. Permette di osservare aspetti che una singola misura, come il prezzo o la capitalizzazione, lascerebbe fuori.")}
         </p>
 
         <div class="flex flex-wrap gap-2 mt-5">
@@ -171,11 +171,11 @@ const findings = [
         <h2 class="card-title text-2xl">{t("Context", "Contesto")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          {t("Blockchain efficiency is often discussed in terms of transactions per second, latency, scalability, or energy consumption. Cryptocurrencies, however, are also economic systems: they have supply dynamics, user participation, transfer activity, wealth concentration, market value, and different forms of asset usage.", "L’efficienza delle blockchain si misura spesso in transazioni al secondo, latenza, scalabilità e consumi energetici. Le criptovalute sono anche sistemi economici, con dinamiche dell’offerta, partecipazione degli utenti, trasferimenti, concentrazione della ricchezza, valore di mercato e forme d’uso diverse.")}
+          {t("Blockchain efficiency is often discussed in terms of transactions per second, latency, scalability, or energy consumption. Cryptocurrencies, however, are also economic systems: they have supply dynamics, user participation, transfer activity, wealth concentration, market value, and different forms of asset usage.", "Le misure tecniche di una blockchain includono transazioni al secondo, latenza, scalabilità e consumi. Per studiare le criptovalute come sistemi economici servono anche dati su offerta, partecipazione, trasferimenti, concentrazione della ricchezza e valore di mercato.")}
         </p>
 
         <p class="leading-relaxed opacity-90 mt-3">
-          {t("This paper focuses on that economic dimension. The central question is how to build a coherent index that can aggregate multiple on-chain and market-related attributes without reducing the analysis to one isolated metric.", "L’articolo si concentra sulla dimensione economica. La domanda è come costruire un indice coerente che riunisca più attributi on-chain e di mercato in un’unica misura senza perdere di vista le singole dimensioni.")}
+          {t("This paper focuses on that economic dimension. The central question is how to build a coherent index that can aggregate multiple on-chain and market-related attributes without reducing the analysis to one isolated metric.", "L’articolo studia come sintetizzare questi dati in una misura e continuare a vedere il contributo di ogni indicatore.")}
         </p>
       </div>
     </div>
@@ -187,7 +187,7 @@ const findings = [
         <h2 class="card-title text-2xl">{t("The EB-index idea", "Come funziona l’EB-index")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          {t("The proposed Entropy Balance index uses Shannon entropy to measure how balanced a selected set of economic qualities is. Each quality is first normalized, then transformed into a probability distribution. Entropy is then used to quantify whether the selected qualities are concentrated around one dominant dimension or more evenly balanced.", "L’Entropy Balance index usa l’entropia di Shannon per misurare l’equilibrio tra le caratteristiche economiche selezionate. Prima normalizza i valori, poi li converte in una distribuzione di probabilità. L’entropia indica se prevale una sola dimensione o se il contributo delle dimensioni è più uniforme.")}
+          {t("The proposed Entropy Balance index uses Shannon entropy to measure how balanced a selected set of economic qualities is. Each quality is first normalized, then transformed into a probability distribution. Entropy is then used to quantify whether the selected qualities are concentrated around one dominant dimension or more evenly balanced.", "L’EB-index usa l’entropia di Shannon per misurare quanto siano equilibrati gli indicatori scelti. Dopo la normalizzazione, ogni indicatore rappresenta una quota del totale. L’entropia indica se una quota prevale sulle altre o se i valori sono distribuiti in modo uniforme.")}
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
@@ -202,9 +202,9 @@ const findings = [
 
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">{t("Convert to distribution", "Conversione in distribuzione")}</h3>
+              <h3 class="font-bold">{t("Convert to distribution", "Come si ottiene la distribuzione di probabilità")}</h3>
               <p class="text-sm opacity-80">
-                {t("The normalized qualities are converted into a probability distribution over the selected attributes.", "I valori normalizzati diventano una distribuzione di probabilità sugli attributi selezionati.")}
+                {t("The normalized qualities are converted into a probability distribution over the selected attributes.", "Ogni valore normalizzato viene diviso per la somma dei valori selezionati, così da ottenere una distribuzione di probabilità.")}
               </p>
             </div>
           </div>
@@ -260,7 +260,7 @@ const findings = [
         </div>
 
         <p class="leading-relaxed opacity-90 mt-5">
-          {t("This distinction is important: the EB-index does not impose a single universal definition of economic efficiency. It provides a formal way to combine the qualities selected by the researcher.", "L’EB-index formalizza il modo di combinare le caratteristiche scelte da chi conduce lo studio. La definizione di efficienza economica dipende quindi dagli attributi selezionati.")}
+          {t("This distinction is important: the EB-index does not impose a single universal definition of economic efficiency. It provides a formal way to combine the qualities selected by the researcher.", "L’EB-index rende esplicita la scelta degli indicatori. Chi conduce l’analisi può quindi verificare come cambiano i risultati quando adotta una definizione diversa di efficienza economica.")}
         </p>
       </div>
     </div>
@@ -306,7 +306,7 @@ const findings = [
         <h2 class="card-title text-2xl">{t("Representative attribute distributions", "Distribuzioni rappresentative degli attributi")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          {t("The probability-distribution plots show how the selected qualities contribute to each asset's entropy score. They help explain why two cryptoassets can obtain similar entropy values for different internal reasons, or why the same asset can behave differently across Set1 and Set2.", "I grafici delle distribuzioni di probabilità mostrano come ogni attributo contribuisce all’entropia di un asset. Aiutano a capire perché due cryptoasset possano avere entropie simili per motivi diversi o perché uno stesso asset cambi tra Set1 e Set2.")}
+          {t("The probability-distribution plots show how the selected qualities contribute to each asset's entropy score. They help explain why two cryptoassets can obtain similar entropy values for different internal reasons, or why the same asset can behave differently across Set1 and Set2.", "I grafici mostrano il contributo di ogni indicatore al punteggio. Due criptovalute possono ottenere punteggi simili per ragioni diverse, e la stessa criptovaluta può cambiare posizione fra Set1 e Set2.")}
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
@@ -352,7 +352,7 @@ const findings = [
         <h2 class="card-title text-2xl">{t("Relationship with my broader research", "Come si collega alle mie altre ricerche")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          {t("This paper extends my blockchain evaluation work beyond protocol-level performance and energy analysis. While the DEBS and ICBC works study how blockchain systems behave under different network conditions, this work moves to the economic layer and asks how the internal behaviour of cryptoasset economies can be measured through a transparent, customizable, and theoretically grounded index.", "L’articolo estende la valutazione delle blockchain alla dimensione economica. Gli studi DEBS e ICBC analizzano prestazioni ed energia in diverse condizioni di rete. Qui studio come misurare il comportamento delle economie dei cryptoasset con un indice trasparente, configurabile e fondato sulla teoria dell’informazione.")}
+          {t("This paper extends my blockchain evaluation work beyond protocol-level performance and energy analysis. While the DEBS and ICBC works study how blockchain systems behave under different network conditions, this work moves to the economic layer and asks how the internal behaviour of cryptoasset economies can be measured through a transparent, customizable, and theoretically grounded index.", "Negli studi DEBS e ICBC ho esaminato prestazioni e consumi delle blockchain al variare della rete. Qui applico un’idea simile alla dimensione economica: rendo esplicito quali indicatori contano e come vengono combinati.")}
         </p>
 
         <div class="card-actions mt-4">
@@ -382,7 +382,7 @@ const findings = [
             <h2 class="card-title text-2xl">{t("Try the EB-index interactively", "Prova l’EB-index")}</h2>
 
             <p class="leading-relaxed opacity-90 mt-2">
-              {t("The CryptoEntropy Explorer turns the paper into a small interactive lab. Users can toggle cryptoassets, choose one of the paper attribute sets, build their own custom set from the available attributes, assign utility weights, and immediately see how the EB-index changes over time.", "CryptoEntropy Explorer permette di provare il metodo nel browser. Puoi scegliere i cryptoasset, usare un insieme dello studio o comporne uno, assegnare i pesi e vedere subito come cambia l’EB-index nel tempo.")}
+              {t("The CryptoEntropy Explorer turns the paper into a small interactive lab. Users can toggle cryptoassets, choose one of the paper attribute sets, build their own custom set from the available attributes, assign utility weights, and immediately see how the EB-index changes over time.", "Con CryptoEntropy Explorer puoi scegliere le criptovalute, usare gli indicatori dello studio o selezionarne altri, impostare i pesi e osservare l’andamento dell’indice.")}
             </p>
           </div>
 
@@ -417,7 +417,7 @@ const findings = [
             <div class="card-body">
               <h3 class="font-bold">{t("Shareable experiments", "Esperimenti condivisibili")}</h3>
               <p class="text-sm opacity-80">
-                {t("The current Explorer configuration is stored in the URL, so a specific analytical question can be copied, reopened, or shared.", "La configurazione della dashboard è salvata nell’URL, così puoi copiare, riaprire o condividere una specifica domanda di analisi.")}
+                {t("The current Explorer configuration is stored in the URL, so a specific analytical question can be copied, reopened, or shared.", "Il link conserva criptovalute, indicatori e pesi selezionati. Puoi usarlo per riaprire o condividere lo stesso confronto.")}
               </p>
             </div>
           </div>

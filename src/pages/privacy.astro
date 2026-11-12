@@ -6,37 +6,37 @@ const t = translator(Astro.url.pathname);
 ---
 
 <BaseLayout
-  title={t("Privacy & analytics | Vincenzo Di Perna", "Privacy e statistiche | Vincenzo Di Perna")}
-  description={t("Privacy and analytics information for the personal website of Vincenzo Di Perna.", "Informazioni sulla privacy e sulle statistiche di utilizzo del sito personale di Vincenzo Di Perna.")}
+  title={t("Privacy & analytics | Vincenzo Di Perna", "Privacy e dati di navigazione | Vincenzo Di Perna")}
+  description={t("Privacy and analytics information for the personal website of Vincenzo Di Perna.", "Come vengono usati i dati di navigazione e le informazioni inviate via email a Vincenzo Di Perna.")}
 >
   <section class="mb-10">
-    <h1 class="text-4xl font-bold mb-4">{t("Privacy & analytics", "Privacy e statistiche")}</h1>
+    <h1 class="text-4xl font-bold mb-4">{t("Privacy & analytics", "Privacy e dati di navigazione")}</h1>
 
     <div class="prose max-w-none leading-relaxed">
       <p>
-        {t("This is the personal website of Vincenzo Di Perna. The site is hosted as a static website and is designed to collect only the information needed to understand whether the website is useful to visitors.", "Questo è il sito personale di Vincenzo Di Perna. È un sito statico e raccoglie solo le informazioni necessarie per capire se i suoi contenuti sono utili a chi lo visita.")}
+        {t("This is the personal website of Vincenzo Di Perna. The site is hosted as a static website and is designed to collect only the information needed to understand whether the website is useful to visitors.", "Questo è il sito personale di Vincenzo Di Perna. Raccolgo soltanto le informazioni necessarie a capire come viene usato.")}
       </p>
 
-      <h2>{t("Analytics", "Statistiche di utilizzo")}</h2>
+      <h2>{t("Analytics", "Statistiche di navigazione")}</h2>
 
       <p>
-        {t("This site may use Google Analytics 4 to collect aggregate usage statistics, such as page views, file downloads, outbound link clicks, approximate geography, device category, browser, and referral sources.", "Il sito può usare Google Analytics 4 per raccogliere statistiche aggregate, come le visite alle pagine, i download, i clic sui link esterni, l’area geografica approssimativa, il tipo di dispositivo, il browser e la provenienza delle visite.")}
+        {t("This site may use Google Analytics 4 to collect aggregate usage statistics, such as page views, file downloads, outbound link clicks, approximate geography, device category, browser, and referral sources.", "Con il tuo consenso, Google Analytics 4 può raccogliere statistiche aggregate su pagine visitate, download e clic sui link esterni. Può registrare anche la provenienza geografica approssimativa, il tipo di dispositivo, il browser e il sito da cui sei arrivato.")}
       </p>
 
       <p>
-        {t("Analytics is loaded only after you accept the analytics banner. If you reject analytics, the Google Analytics tag is not loaded by this site.", "Google Analytics si attiva solo se dai il consenso nel banner. Se rifiuti, il sito non carica il relativo tag.")}
+        {t("Analytics is loaded only after you accept the analytics banner. If you reject analytics, the Google Analytics tag is not loaded by this site.", "Google Analytics si attiva solo se accetti dal banner. Se rifiuti, il sito non carica lo script di Analytics.")}
       </p>
 
       <h2>{t("Downloads and outbound links", "Download e link esterni")}</h2>
 
       <p>
-        {t("Analytics may record aggregate events such as opening the CV PDF, opening thesis PDFs, or clicking external links to GitHub, Zenodo, DOI pages, LinkedIn, or related research resources.", "Le statistiche possono includere eventi aggregati come l’apertura del CV o delle tesi in PDF e i clic verso GitHub, Zenodo, DOI, LinkedIn e altre risorse di ricerca.")}
+        {t("Analytics may record aggregate events such as opening the CV PDF, opening thesis PDFs, or clicking external links to GitHub, Zenodo, DOI pages, LinkedIn, or related research resources.", "Tra gli eventi registrati in forma aggregata possono esserci l’apertura del CV o di una tesi in PDF e i clic verso GitHub, Zenodo, LinkedIn, le pagine degli articoli e altre risorse.")}
       </p>
 
       <h2>{t("Contact", "Contatti")}</h2>
 
       <p>
-        {t("If you contact me by email, the information you send is processed only for communication purposes.", "Se mi contatti via email, uso le informazioni che mi invii solo per gestire la comunicazione.")}
+        {t("If you contact me by email, the information you send is processed only for communication purposes.", "Se mi scrivi, uso le informazioni che mi invii per gestire lo scambio di email.")}
       </p>
     </div>
   </section>

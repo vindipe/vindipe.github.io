@@ -8,7 +8,7 @@ const t = translator(Astro.url.pathname);
 const { title, description: pageDescription } = Astro.props;
 const home = inLanguage(Astro.url.pathname, "en") === "/";
 const canonicalURL = new URL(inLanguage(Astro.url.pathname, locale), site).toString();
-const description = t(SITE_DESCRIPTION, "Sviluppo software per la ricerca su sistemi distribuiti, benchmarking delle blockchain, sperimentazione riproducibile e scadenza nei registri distribuiti.");
+const description = t(SITE_DESCRIPTION, "Vincenzo Di Perna è un ingegnere del software per la ricerca. Sviluppa strumenti per valutare i sistemi distribuiti e studia la scadenza e il rinnovo nei registri distribuiti.");
 
 const personId = new URL("/#person", site).toString();
 const websiteId = new URL("/#website", site).toString();
@@ -24,7 +24,7 @@ const structuredData = {
       "name": "Vincenzo Di Perna",
       "url": site.toString(),
       "image": new URL("/profile.webp", site).toString(),
-      "jobTitle": t("Research Software Engineer", "Sviluppo software per la ricerca"),
+      "jobTitle": t("Research Software Engineer", "Ingegnere del software per la ricerca"),
       "description": description,
       "knowsAbout": [
         "Expiry-aware blockchain design",

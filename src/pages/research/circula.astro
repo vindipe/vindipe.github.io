@@ -10,8 +10,9 @@ const lifecycleUrl = locale === "it" ? "/circula-lifecycle.html?lang=it" : "/cir
 
 <BaseLayout
   title={t("CIRCULA | Expiry-Aware Blockchain Research | Vincenzo Di Perna", "CIRCULA | Scadenza e rinnovo nelle blockchain | Vincenzo Di Perna")}
-  description={t("CIRCULA is an SNSF-funded research project exploring expiry and renewal in blockchain systems, hosted at the University of Neuchâtel.", "CIRCULA è un progetto di ricerca dell’Università di Neuchâtel sulla scadenza e il rinnovo nelle blockchain, finanziato dal Fondo nazionale svizzero.")}
+  description={t("CIRCULA is an SNSF-funded research project exploring expiry and renewal in blockchain systems, hosted at the University of Neuchâtel.", "CIRCULA studia come gestire scadenza e rinnovo nelle blockchain. L’Università di Neuchâtel ospita il progetto, finanziato dal Fondo nazionale svizzero.")}
   sideBarActiveItemID="research"
+  enableTransitions={false}
 >
   <section class="mb-10">
     <div class="flex flex-wrap gap-2 mb-4"><span class="badge badge-primary">{t("Expected start · 1 February 2027", "Avvio previsto · 1° febbraio 2027")}</span><span class="badge badge-outline">{t("SNSF-funded · University of Neuchâtel", "Università di Neuchâtel · Finanziato dal Fondo nazionale svizzero")}</span></div>
@@ -19,20 +20,20 @@ const lifecycleUrl = locale === "it" ? "/circula-lifecycle.html?lang=it" : "/cir
       <span class="sr-only">{t("CIRCULA: expiry and renewal in blockchains", "CIRCULA: scadenza e rinnovo nelle blockchain")}</span>
       <img src="/research/circula/wordmark.webp" alt="" width="450" height="155" class="w-56 max-w-full rounded-lg" />
     </h1>
-    <p class="text-xl font-semibold mb-4">{t("Expiry-Aware System Design for Blockchains", "Progettare blockchain con risorse che possono scadere")}</p>
-    <p class="text-lg leading-relaxed max-w-3xl">{t("What if a digital resource had a lifetime designed into the system? CIRCULA will investigate how expiry and renewal can be represented and studied in programmable distributed ledgers.", "E se la durata di una risorsa digitale fosse una proprietà prevista dal sistema fin dall’inizio? CIRCULA studierà come rappresentare la scadenza e il rinnovo nei registri distribuiti programmabili e come valutarne gli effetti.")}</p>
+    <p class="text-xl font-semibold mb-4">{t("Expiry-Aware System Design for Blockchains", "Come progettare blockchain in cui le risorse possono scadere")}</p>
+    <p class="text-lg leading-relaxed max-w-3xl">{t("What if a digital resource had a lifetime designed into the system? CIRCULA will investigate how expiry and renewal can be represented and studied in programmable distributed ledgers.", "E se un registro distribuito potesse stabilire fino a quando una risorsa digitale è valida? CIRCULA studierà come definire scadenza e rinnovo nei registri programmabili e quali effetti hanno sul funzionamento del sistema.")}</p>
   </section>
   <section class="mb-10">
     <h2 class="text-3xl font-bold mb-4">{t("A new dimension: time", "Una nuova dimensione: il tempo")}</h2>
     <div class="space-y-4 leading-relaxed max-w-3xl">
-      <p>{t("During my PhD, I studied how network topology affects the behaviour and evaluation of blockchain systems. CIRCULA starts from another question: how might a system handle a resource whose validity is meant to end or be renewed?", "Durante il dottorato ho studiato come la topologia di rete incida sul comportamento delle blockchain e sul modo in cui le valutiamo. CIRCULA parte da un’altra domanda: come gestire una risorsa la cui validità può terminare o essere rinnovata?")}</p>
-      <p>{t("For example, a digital entitlement might be valid for a defined period and later require renewal. CIRCULA will study the rules and system implications of lifetimes such as these, including the assumptions and boundaries of different approaches.", "Un diritto digitale, per esempio, potrebbe essere valido per un periodo preciso e richiedere poi un rinnovo. CIRCULA studierà le regole che governano questi cicli di validità, i loro effetti sul sistema e le ipotesi e i limiti dei diversi approcci.")}</p>
-      <p>{t("The project will connect an evidence base with formal and executable semantics, prototypes, and controlled evaluation. These are research objectives: the project is expected to begin on 1 February 2027.", "La ricerca partirà dalle evidenze disponibili per sviluppare una semantica formale ed eseguibile, costruire prototipi e valutarli in condizioni controllate. L’avvio del progetto è previsto per il 1° febbraio 2027.")}</p>
+      <p>{t("During my PhD, I studied how network topology affects the behaviour and evaluation of blockchain systems. CIRCULA starts from another question: how might a system handle a resource whose validity is meant to end or be renewed?", "Nel dottorato ho studiato come la struttura della rete cambi il comportamento delle blockchain e le misure con cui le confrontiamo. Con CIRCULA entra in gioco un’altra variabile: il tempo. Come dovrebbe comportarsi il sistema quando una risorsa scade o viene rinnovata?")}</p>
+      <p>{t("For example, a digital entitlement might be valid for a defined period and later require renewal. CIRCULA will study the rules and system implications of lifetimes such as these, including the assumptions and boundaries of different approaches.", "Pensa a un diritto di accesso valido fino a una certa data. Che cosa accade se il titolare ne chiede il rinnovo? CIRCULA studierà quali regole può applicare il sistema, quali ipotesi richiedono e che cosa succede nei casi limite.")}</p>
+      <p>{t("The project will connect an evidence base with formal and executable semantics, prototypes, and controlled evaluation. These are research objectives: the project is expected to begin on 1 February 2027.", "Partiremo da ciò che sappiamo sui sistemi esistenti, formalizzeremo le regole e le metteremo alla prova con prototipi ed esperimenti controllati. L’avvio del progetto è previsto per il 1° febbraio 2027.")}</p>
     </div>
   </section>
   <section class="mb-10">
-    <h2 class="text-3xl font-bold mb-4">{t("Explore expiry and renewal", "Prova la scadenza e il rinnovo")}</h2>
-    <p class="mb-4">{t("Compare what happens to a digital right with and without renewal. This illustrative tool is adapted from the CIRCULA website.", "Confronta che cosa succede a un diritto digitale quando viene rinnovato e quando arriva a scadenza. La simulazione è tratta dal sito di CIRCULA.")}</p>
+    <h2 class="text-3xl font-bold mb-4">{t("Explore expiry and renewal", "Simula scadenza e rinnovo")}</h2>
+    <p class="mb-4">{t("Compare what happens to a digital right with and without renewal. This illustrative tool is adapted from the CIRCULA website.", "Nella simulazione puoi confrontare due scenari per lo stesso diritto digitale: la scadenza alla data iniziale e il rinnovo prima di quella data. Il simulatore proviene dal sito di CIRCULA.")}</p>
     <iframe src={lifecycleUrl} title={t("CIRCULA expiry and renewal interactive demonstration", "Simulazione interattiva di CIRCULA su scadenza e rinnovo")} id="lifecycle-frame" loading="lazy" style="display:block;width:100%;height:900px;border:0;border-radius:1rem;background:#121a17"></iframe>
     <p class="mt-2"><a class="link link-primary" href={lifecycleUrl}>{t("Open the interactive demonstration on its own", "Apri la simulazione in una pagina dedicata")}</a></p>
   </section>
@@ -41,34 +42,30 @@ const lifecycleUrl = locale === "it" ? "/circula-lifecycle.html?lang=it" : "/cir
     <p class="mb-5 leading-relaxed">{t("CIRCULA is funded by the Swiss National Science Foundation and hosted by the University of Neuchâtel.", "L’Università di Neuchâtel ospita CIRCULA, con il finanziamento del Fondo nazionale svizzero per la ricerca scientifica.")}</p>
     <div class="flex flex-wrap gap-3">
       <a class="btn btn-primary" href={locale === "it" ? "https://circula.unine.ch/it/" : "https://circula.unine.ch/"} target="_blank" rel="noopener noreferrer">{t("Official CIRCULA website", "Sito ufficiale di CIRCULA")}</a>
-      <a class="btn btn-outline" href="https://data.snf.ch/grants/grant/10010141" target="_blank" rel="noopener noreferrer">{t("SNSF grant", "Scheda del finanziamento SNSF")}</a>
-      <a class="btn btn-outline" href={localPath("/research")}>{t("More research", "Altre ricerche")}</a>
+      <a class="btn btn-outline" href="https://data.snf.ch/grants/grant/10010141" target="_blank" rel="noopener noreferrer">{t("SNSF grant", "Scheda del progetto sul sito del Fondo nazionale svizzero")}</a>
+      <a class="btn btn-outline" href={localPath("/research")}>{t("More research", "Torna a Ricerca")}</a>
     </div>
   </section>
 </BaseLayout>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const frame = document.querySelector<HTMLIFrameElement>("#lifecycle-frame");
-    if (!frame) return;
-
+  const frame = document.querySelector<HTMLIFrameElement>("#lifecycle-frame");
+  if (frame) {
     let observer: ResizeObserver | undefined;
-    const attach = () => {
+
+    function attach() {
       observer?.disconnect();
-      const content = frame.contentDocument?.getElementById("content");
-      if (!content) return;
+      const content = frame?.contentDocument?.getElementById("content");
+      if (!content || !frame) return;
       const resize = () => {
         frame.style.height = `${Math.ceil(content.getBoundingClientRect().height)}px`;
       };
       observer = new ResizeObserver(resize);
       observer.observe(content);
       resize();
-    };
-    attach();
+    }
+
     frame.addEventListener("load", attach);
-    document.addEventListener("astro:before-swap", () => {
-      observer?.disconnect();
-      frame.removeEventListener("load", attach);
-    }, { once: true });
-  });
+    attach();
+  }
 </script>

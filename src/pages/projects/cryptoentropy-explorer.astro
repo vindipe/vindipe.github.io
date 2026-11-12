@@ -9,7 +9,7 @@ const localPath = (href: string) => inLanguage(href, locale);
 
 <BaseLayout
   title={t("CryptoEntropy Explorer: Cryptocurrency Efficiency", "CryptoEntropy Explorer | Efficienza economica delle criptovalute")}
-  description={t("Explore the entropy-based EB-index and compare cryptocurrency datasets, asset attributes and custom weights in an interactive dashboard.", "Esplora l’EB-index, confronta gli attributi delle criptovalute e prova pesi personalizzati con i dataset dello studio DLT 2025.")}
+  description={t("Explore the entropy-based EB-index and compare cryptocurrency datasets, asset attributes and custom weights in an interactive dashboard.", "Confronta le criptovalute con l’EB-index: scegli gli indicatori economici e prova pesi diversi sui dati dello studio DLT 2025.")}
   sideBarActiveItemID="projects"
 >
   <section class="mb-8">
@@ -26,7 +26,7 @@ const localPath = (href: string) => inLanguage(href, locale);
         </div>
 
         <p class="text-lg leading-relaxed opacity-90">
-          {t("A small interactive dashboard for experimenting with the Entropy Balance index introduced in the DLT '25 paper. Select cryptoassets, choose one of the paper attribute sets or build a custom set, switch attributes on or off, change utility weights, and see how the EB-index changes over time.", "Una dashboard per sperimentare con l’Entropy Balance index, introdotto nell’articolo DLT ’25. Seleziona i cryptoasset, scegli uno degli insiemi di attributi dello studio o creane uno, attiva o disattiva gli attributi e modifica i pesi per vedere come varia l’EB-index nel tempo.")}
+          {t("A small interactive dashboard for experimenting with the Entropy Balance index introduced in the DLT '25 paper. Select cryptoassets, choose one of the paper attribute sets or build a custom set, switch attributes on or off, change utility weights, and see how the EB-index changes over time.", "CryptoEntropy Explorer applica l’EB-index, l’indice introdotto nell’articolo DLT ’25. Scegli quali criptovalute confrontare, quali indicatori usare e quanto farli pesare. Il grafico mostra come cambia il risultato nel tempo.")}
         </p>
 
         <div class="flex flex-wrap gap-2 mt-5">
@@ -47,14 +47,14 @@ const localPath = (href: string) => inLanguage(href, locale);
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">6</p>
-          <p class="opacity-80">{t("supported cryptoassets", "cryptoasset disponibili")}</p>
+          <p class="opacity-80">{t("supported cryptoassets", "criptovalute disponibili")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
-          <p class="text-4xl font-bold">{t("3 + custom", "3 + personalizzati")}</p>
-          <p class="opacity-80">{t("paper presets and user-defined sets", "insiemi dello studio e personalizzati")}</p>
+          <p class="text-4xl font-bold">{t("3 + custom", "3 + su misura")}</p>
+          <p class="opacity-80">{t("paper presets and user-defined sets", "gruppi di indicatori predefiniti e personalizzati")}</p>
         </div>
       </div>
 
@@ -72,9 +72,9 @@ const localPath = (href: string) => inLanguage(href, locale);
       <div class="card-body">
         <div class="flex flex-wrap gap-3 items-start justify-between">
           <div>
-            <h2 class="card-title text-2xl">{t("Interactive EB-index playground", "Calcola l’EB-index")}</h2>
+            <h2 class="card-title text-2xl">{t("Interactive EB-index playground", "Confronta le criptovalute con l’EB-index")}</h2>
             <p class="leading-relaxed opacity-90 mt-2 max-w-3xl">
-              {t("The chart is recalculated in the browser from monthly normalized attribute values. The custom weighted mode follows the weighted entropy idea: selected attributes are converted into a probability distribution, then user-defined utility weights control how much each attribute contributes to the final score.", "Il grafico viene ricalcolato nel browser a partire dai valori mensili normalizzati. Nella modalità personalizzata gli attributi selezionati formano una distribuzione di probabilità e i pesi che assegni determinano quanto ciascun attributo contribuisce al punteggio.")}
+              {t("The chart is recalculated in the browser from monthly normalized attribute values. The custom weighted mode follows the weighted entropy idea: selected attributes are converted into a probability distribution, then user-defined utility weights control how much each attribute contributes to the final score.", "Il calcolo parte dai valori mensili normalizzati. Questi valori diventano quote di una distribuzione di probabilità. Nella modalità personalizzata puoi decidere quanto contribuisce ogni indicatore al punteggio.")}
             </p>
           </div>
 
@@ -110,16 +110,16 @@ const localPath = (href: string) => inLanguage(href, locale);
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div class="card bg-base-200/50 border border-base-300 lg:col-span-1">
               <div class="card-body">
-                <h3 class="font-bold text-lg">{t("1. Choose a preset or custom set", "1. Scegli un insieme predefinito o personalizzato")}</h3>
+                <h3 class="font-bold text-lg">{t("1. Choose a preset or custom set", "1. Scegli gli indicatori di partenza")}</h3>
 
                 <label class="form-control w-full mt-2">
                   <div class="label">
-                    <span class="label-text">{t("Preset / attribute set", "Insieme di attributi")}</span>
+                    <span class="label-text">{t("Preset / attribute set", "Gruppo di indicatori")}</span>
                   </div>
                   <select id="set-select" class="select select-bordered w-full">
-                    <option value="set1">{t("Set1 - compact activity and market view", "Set1 – Attività e mercato, in sintesi")}</option>
-                    <option value="set2">{t("Set2 - dynamic network behaviour", "Set2 – Dinamiche della rete")}</option>
-                    <option value="set3">{t("Set3 - Set2 plus fee pressure", "Set3 – Set2 e pressione sulle commissioni")}</option>
+                    <option value="set1">{t("Set1 - compact activity and market view", "Set1 – Attività e mercato")}</option>
+                    <option value="set2">{t("Set2 - dynamic network behaviour", "Set2 – Dinamiche di rete")}</option>
+                    <option value="set3">{t("Set3 - Set2 plus fee pressure", "Set3 – Dinamiche di rete e commissioni")}</option>
                     <option value="custom">{t("Custom - choose your own attributes", "Personalizzato – Scegli gli attributi")}</option>
                   </select>
                 </label>
@@ -130,9 +130,9 @@ const localPath = (href: string) => inLanguage(href, locale);
                   id="custom-set-tools"
                   class="hidden mt-4 rounded-xl border border-base-300 bg-base-100 p-3"
                 >
-                  <p class="text-sm font-semibold">{t("Custom set builder", "Crea un insieme personalizzato")}</p>
+                  <p class="text-sm font-semibold">{t("Custom set builder", "Crea il tuo gruppo di indicatori")}</p>
                   <p class="text-xs opacity-70 mt-1">
-                    {t("Start from a paper preset, select all available attributes, or start empty and build your own analytical question.", "Parti da un insieme dello studio, seleziona tutti gli attributi disponibili o formula una domanda partendo da zero.")}
+                    {t("Start from a paper preset, select all available attributes, or start empty and build your own analytical question.", "Usa come base uno dei gruppi dello studio, seleziona tutti gli indicatori o parti da zero.")}
                   </p>
 
                   <div class="flex flex-wrap gap-2 mt-3">
@@ -160,7 +160,7 @@ const localPath = (href: string) => inLanguage(href, locale);
 
             <div class="card bg-base-200/50 border border-base-300 lg:col-span-2">
               <div class="card-body">
-                <h3 class="font-bold text-lg">{t("2. Toggle cryptoassets", "2. Seleziona i cryptoasset")}</h3>
+                <h3 class="font-bold text-lg">{t("2. Toggle cryptoassets", "2. Scegli le criptovalute")}</h3>
                 <div
                   id="asset-controls"
                   class="grid grid-cols-2 md:grid-cols-3 gap-2 mt-2"
@@ -175,9 +175,9 @@ const localPath = (href: string) => inLanguage(href, locale);
             <div class="card-body">
               <div class="flex flex-wrap gap-3 items-center justify-between">
                 <div>
-                  <h3 class="font-bold text-lg">{t("3. Select attributes and utility weights", "3. Scegli gli attributi e i pesi")}</h3>
+                  <h3 class="font-bold text-lg">{t("3. Select attributes and utility weights", "3. Seleziona gli indicatori e assegna i pesi")}</h3>
                   <p class="text-sm opacity-80 mt-1">
-                    {t("For paper presets, you can still remove attributes or change weights. In custom mode, this becomes your own EB-index attribute set.", "Puoi rimuovere attributi o modificare i pesi anche negli insiemi dello studio. In modalità personalizzata puoi definire un tuo insieme di attributi per l’EB-index.")}
+                    {t("For paper presets, you can still remove attributes or change weights. In custom mode, this becomes your own EB-index attribute set.", "Puoi togliere indicatori o cambiarne il peso anche nei gruppi predefiniti. In modalità personalizzata puoi scegliere l’intero gruppo da usare nel calcolo.")}
                   </p>
                 </div>
 
@@ -186,10 +186,10 @@ const localPath = (href: string) => inLanguage(href, locale);
                     {t("Equal utility", "Pesi uguali")}
                   </button>
                   <button id="activity-preset" class="btn btn-sm btn-outline" type="button">
-                    {t("Activity preset", "Pesi orientati all’attività")}
+                    {t("Activity preset", "Dai più peso all’attività")}
                   </button>
                   <button id="market-preset" class="btn btn-sm btn-outline" type="button">
-                    {t("Market preset", "Pesi orientati al mercato")}
+                    {t("Market preset", "Dai più peso al mercato")}
                   </button>
                 </div>
               </div>
@@ -207,7 +207,7 @@ const localPath = (href: string) => inLanguage(href, locale);
                 <div>
                   <h3 class="font-bold text-lg">{t("Current analytical question", "Che cosa stai confrontando?")}</h3>
                   <p class="text-sm opacity-80 mt-1">
-                    {t("This panel translates the selected assets, attributes, and weights into a readable EB-index question.", "Qui trovi la domanda a cui risponde l’EB-index con gli asset, gli attributi e i pesi che hai scelto.")}
+                    {t("This panel translates the selected assets, attributes, and weights into a readable EB-index question.", "Il riepilogo mostra quali criptovalute, indicatori e pesi entrano nel calcolo.")}
                   </p>
                 </div>
 
@@ -231,17 +231,17 @@ const localPath = (href: string) => inLanguage(href, locale);
                 </div>
 
                 <div class="rounded-xl border border-base-300 bg-base-100 p-3">
-                  <p class="text-xs uppercase tracking-wide opacity-60">{t("Assets", "Asset")}</p>
+                  <p class="text-xs uppercase tracking-wide opacity-60">{t("Assets", "Criptovalute")}</p>
                   <p id="summary-assets" class="font-semibold mt-1">-</p>
                 </div>
 
                 <div class="rounded-xl border border-base-300 bg-base-100 p-3">
-                  <p class="text-xs uppercase tracking-wide opacity-60">{t("Attributes", "Attributi")}</p>
+                  <p class="text-xs uppercase tracking-wide opacity-60">{t("Attributes", "Indicatori")}</p>
                   <p id="summary-attributes" class="font-semibold mt-1">-</p>
                 </div>
 
                 <div class="rounded-xl border border-base-300 bg-base-100 p-3">
-                  <p class="text-xs uppercase tracking-wide opacity-60">{t("Top latest asset", "Primo nell’ultimo mese")}</p>
+                  <p class="text-xs uppercase tracking-wide opacity-60">{t("Top latest asset", "In testa nell’ultimo mese")}</p>
                   <p id="summary-top-asset" class="font-semibold mt-1">-</p>
                 </div>
               </div>
@@ -252,7 +252,7 @@ const localPath = (href: string) => inLanguage(href, locale);
                 <table class="table table-sm">
                   <thead>
                     <tr>
-                      <th>{t("Selected attribute", "Attributo selezionato")}</th>
+                      <th>{t("Selected attribute", "Indicatore selezionato")}</th>
                       <th>{t("Utility weight", "Peso")}</th>
                       <th>{t("Source", "Fonte")}</th>
                     </tr>
@@ -269,13 +269,13 @@ const localPath = (href: string) => inLanguage(href, locale);
                 <div>
                   <h3 class="font-bold text-lg">{t("Live EB-index lineplot", "Andamento dell’EB-index")}</h3>
                   <p class="text-sm opacity-80 mt-1">
-                    {t("Scores are normalized between 0 and 1. Higher values mean that the selected economic qualities are more balanced under the chosen utility assumptions.", "I punteggi sono normalizzati tra 0 e 1. Un valore più alto indica che le caratteristiche economiche selezionate sono più equilibrate secondo i pesi scelti.")}
+                    {t("Scores are normalized between 0 and 1. Higher values mean that the selected economic qualities are more balanced under the chosen utility assumptions.", "I punteggi vanno da 0 a 1. Più alto è il valore, più equilibrati risultano gli indicatori economici selezionati, tenuto conto dei pesi assegnati.")}
                   </p>
                 </div>
 
                 <div class="join">
                   <button id="show-all-dates" class="btn btn-sm join-item btn-active" type="button">
-                    {t("All dates", "Tutte le date")}
+                    {t("All dates", "Intero periodo")}
                   </button>
                   <button id="show-recent-dates" class="btn btn-sm join-item" type="button">
                     {t("Since 2018", "Dal 2018")}
@@ -300,7 +300,7 @@ const localPath = (href: string) => inLanguage(href, locale);
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div class="card bg-base-200/50 border border-base-300">
               <div class="card-body">
-                <h3 class="font-bold text-lg">{t("Latest custom ranking", "Classifica per l’ultimo mese")}</h3>
+                <h3 class="font-bold text-lg">{t("Latest custom ranking", "Classifica dell’ultimo mese")}</h3>
                 <p id="latest-date" class="text-sm opacity-80"></p>
 
                 <div class="overflow-x-auto mt-3">
@@ -308,7 +308,7 @@ const localPath = (href: string) => inLanguage(href, locale);
                     <thead>
                       <tr>
                         <th>#</th>
-                        <th>Asset</th>
+                        <th>{t("Asset", "Criptovaluta")}</th>
                         <th>EB-index</th>
                       </tr>
                     </thead>
@@ -322,9 +322,9 @@ const localPath = (href: string) => inLanguage(href, locale);
               <div class="card-body">
                 <div class="flex flex-wrap gap-3 items-center justify-between">
                   <div>
-                    <h3 class="font-bold text-lg">{t("Attribute contribution snapshot", "Contributo dei singoli attributi")}</h3>
+                    <h3 class="font-bold text-lg">{t("Attribute contribution snapshot", "Quanto conta ogni indicatore")}</h3>
                     <p class="text-sm opacity-80">
-                      {t("Latest available month for the selected asset.", "Ultimo mese disponibile per l’asset selezionato.")}
+                      {t("Latest available month for the selected asset.", "Ultimo mese per cui sono disponibili dati sulla criptovaluta selezionata.")}
                     </p>
                   </div>
 
@@ -348,9 +348,9 @@ const localPath = (href: string) => inLanguage(href, locale);
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mt-3">
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">{t("Not a price ranking", "Equilibrio, non prezzi")}</h3>
+              <h3 class="font-bold">{t("Not a price ranking", "Che cosa misura l’indice")}</h3>
               <p class="text-sm opacity-80">
-                {t("The EB-index does not say which asset is a better investment. It measures balance across the selected economic qualities.", "L’EB-index misura l’equilibrio tra le caratteristiche economiche scelte. Non indica quale asset convenga acquistare.")}
+                {t("The EB-index does not say which asset is a better investment. It measures balance across the selected economic qualities.", "L’EB-index descrive l’equilibrio fra gli indicatori economici scelti. Per valutare un investimento servono altre informazioni.")}
               </p>
             </div>
           </div>
@@ -359,7 +359,7 @@ const localPath = (href: string) => inLanguage(href, locale);
             <div class="card-body">
               <h3 class="font-bold">{t("Weights are assumptions", "Il ruolo dei pesi")}</h3>
               <p class="text-sm opacity-80">
-                {t("Changing weights changes the analytical question. This is the point of the framework: the definition of efficiency is explicit.", "Quando cambi i pesi, cambia la domanda di analisi. Il metodo rende esplicito ciò che intendi per efficienza.")}
+                {t("Changing weights changes the analytical question. This is the point of the framework: the definition of efficiency is explicit.", "Dai più peso a un indicatore se vuoi che conti di più nel confronto.")}
               </p>
             </div>
           </div>
@@ -368,7 +368,7 @@ const localPath = (href: string) => inLanguage(href, locale);
             <div class="card-body">
               <h3 class="font-bold">{t("Custom sets are experiments", "Sperimenta con gli attributi")}</h3>
               <p class="text-sm opacity-80">
-                {t("A custom set lets users test their own notion of economic balance while keeping the attribute choices visible.", "Con un insieme personalizzato puoi mettere alla prova la tua idea di equilibrio economico e vedere quali attributi hai incluso.")}
+                {t("A custom set lets users test their own notion of economic balance while keeping the attribute choices visible.", "Scegli gli indicatori in base alla domanda che vuoi approfondire e verifica come cambiano i risultati.")}
               </p>
             </div>
           </div>
@@ -377,14 +377,14 @@ const localPath = (href: string) => inLanguage(href, locale);
             <div class="card-body">
               <h3 class="font-bold">{t("Derived data only", "Dati derivati")}</h3>
               <p class="text-sm opacity-80">
-                {t("The dashboard uses normalized and entropy-derived datasets. Raw Coin Metrics data are not redistributed here.", "La dashboard usa dataset normalizzati e derivati dall’entropia. I dati grezzi di Coin Metrics restano presso il fornitore.")}
+                {t("The dashboard uses normalized and entropy-derived datasets. Raw Coin Metrics data are not redistributed here.", "Lo strumento usa dati elaborati per lo studio. Coin Metrics fornisce i dati di partenza.")}
               </p>
             </div>
           </div>
         </div>
 
         <p class="text-sm opacity-70 mt-5">
-          {t("Source note: underlying on-chain and market metrics are derived from Coin Metrics and processed into normalized/entropy-based research datasets for the DLT '25 study. Raw Coin Metrics data are not redistributed. This page is an exploratory research prototype that could be extended to a broader metric catalogue with direct data-provider integration. It is not investment advice.", "Le metriche on-chain e di mercato provengono da Coin Metrics e sono state elaborate per ricavare i dataset normalizzati e basati sull’entropia dello studio DLT ’25. I dati grezzi non sono ridistribuiti. La dashboard è un prototipo di ricerca esplorativa, che potrebbe essere esteso ad altre metriche con un’integrazione diretta del fornitore. Non costituisce un consiglio di investimento.")}
+          {t("Source note: underlying on-chain and market metrics are derived from Coin Metrics and processed into normalized/entropy-based research datasets for the DLT '25 study. Raw Coin Metrics data are not redistributed. This page is an exploratory research prototype that could be extended to a broader metric catalogue with direct data-provider integration. It is not investment advice.", "Gli indicatori di mercato e quelli registrati su blockchain provengono da Coin Metrics. Per lo studio DLT ’25 li abbiamo normalizzati e usati per calcolare le misure basate sull’entropia. I dati grezzi restano presso il fornitore. Lo strumento è un prototipo di ricerca e non costituisce un consiglio di investimento.")}
         </p>
       </div>
     </div>
@@ -686,7 +686,7 @@ const localPath = (href: string) => inLanguage(href, locale);
   function renderSetDescription() {
     const setData = getCurrentSet();
     const extra = isCustomSet()
-      ? (isItalian() ? ` Attributi selezionati: ${state.selectedAttributes.length}. Scegline almeno due per calcolare un punteggio significativo.` : ` Selected attributes: ${state.selectedAttributes.length}. Pick at least two attributes to compute a meaningful entropy score.`)
+      ? (isItalian() ? ` Indicatori selezionati: ${state.selectedAttributes.length}. Scegline almeno due per calcolare l’indice.` : ` Selected attributes: ${state.selectedAttributes.length}. Pick at least two attributes to compute a meaningful entropy score.`)
       : "";
     $("set-description").textContent = `${setData.description}${extra}`;
   }
@@ -702,8 +702,8 @@ const localPath = (href: string) => inLanguage(href, locale);
       .map((attr) => attr.label);
 
     const summary = selectedLabels.length
-      ? (isItalian() ? `Il tuo insieme contiene: ${selectedLabels.join(", ")}.` : `Your custom set currently includes: ${selectedLabels.join(", ")}.`)
-      : translate("Your custom set is empty. Select at least two attributes below to compute an EB-index.", "Il tuo insieme è vuoto. Seleziona almeno due attributi per calcolare l’EB-index.");
+      ? (isItalian() ? `Stai usando questi indicatori: ${selectedLabels.join(", ")}.` : `Your custom set currently includes: ${selectedLabels.join(", ")}.`)
+      : translate("Your custom set is empty. Select at least two attributes below to compute an EB-index.", "Scegli almeno due indicatori per calcolare l’EB-index.");
 
     $("custom-set-summary").textContent = summary;
   }
@@ -773,7 +773,7 @@ const localPath = (href: string) => inLanguage(href, locale);
     note.classList.remove("hidden");
     const names = excluded.map((asset) => asset.label).join(", ");
     note.textContent = isItalian()
-      ? `Asset esclusi perché manca almeno un attributo selezionato: ${names}.`
+      ? `Per queste criptovalute manca almeno uno degli indicatori scelti: ${names}.`
       : `${names} ${excluded.length === 1 ? "is" : "are"} hidden because at least one selected attribute is unavailable for that asset.`;
   }
 
@@ -883,7 +883,7 @@ const localPath = (href: string) => inLanguage(href, locale);
       svg.innerHTML = `
         <rect x="0" y="0" width="${width}" height="${height}" fill="transparent"></rect>
         <text x="${width / 2}" y="${height / 2}" text-anchor="middle" font-size="16" opacity="0.75">
-          ${translate("Select at least two attributes to compute an entropy-based score.", "Seleziona almeno due attributi per calcolare l’EB-index.")}
+          ${translate("Select at least two attributes to compute an entropy-based score.", "Scegli almeno due indicatori per calcolare l’EB-index.")}
         </text>`;
       $("chart-legend").innerHTML = "";
       return;
@@ -932,7 +932,7 @@ const localPath = (href: string) => inLanguage(href, locale);
       <line x1="${margin.left}" y1="${height - margin.bottom}" x2="${width - margin.right}" y2="${height - margin.bottom}" stroke="currentColor" opacity="0.25" />
       <line x1="${margin.left}" y1="${margin.top}" x2="${margin.left}" y2="${height - margin.bottom}" stroke="currentColor" opacity="0.25" />
       ${xLabels}
-      <text x="${margin.left}" y="18" font-size="13" opacity="0.7">Custom weighted EB-index</text>
+      <text x="${margin.left}" y="18" font-size="13" opacity="0.7">${translate("Custom weighted EB-index", "EB-index con i pesi selezionati")}</text>
       ${paths}
     `;
 
@@ -950,7 +950,7 @@ const localPath = (href: string) => inLanguage(href, locale);
 
   function renderRanking(ranking) {
 
-    $("latest-date").textContent = ranking.length ? (isItalian() ? `Ultimo mese mostrato: ${ranking[0].t}` : `Latest visible month: ${ranking[0].t}`) : translate("No asset selected.", "Nessun asset selezionato.");
+    $("latest-date").textContent = ranking.length ? (isItalian() ? `Ultimo mese del grafico: ${ranking[0].t}` : `Latest visible month: ${ranking[0].t}`) : translate("No asset selected.", "Nessuna criptovaluta selezionata.");
     $("ranking-body").innerHTML = ranking
       .map(
         (row, index) => `
@@ -971,7 +971,7 @@ const localPath = (href: string) => inLanguage(href, locale);
     const attributes = getEnabledAttributes().filter((attr) => attr.enabled);
 
     if (!latest || attributes.length <= 1) {
-      container.innerHTML = `<p class="text-sm opacity-80">${translate("Select one asset and at least two attributes.", "Seleziona un asset e almeno due attributi.")}</p>`;
+      container.innerHTML = `<p class="text-sm opacity-80">${translate("Select one asset and at least two attributes.", "Scegli una criptovaluta e almeno due indicatori.")}</p>`;
       return;
     }
 
@@ -1020,17 +1020,17 @@ const localPath = (href: string) => inLanguage(href, locale);
     const ranking = getLatestRanking(getSelectedSeries());
     const top = ranking[0];
     const attributeText = selectedAttributes
-      .map((attr) => `${attr.label} (${attr.id}, weight ${(state.weights[attr.id] ?? 1).toFixed(2)})`)
+      .map((attr) => `${attr.label} (${attr.id}, ${translate("weight", "peso")} ${(state.weights[attr.id] ?? 1).toFixed(2)})`)
       .join("; ");
 
     return [
       translate("CryptoEntropy Explorer configuration", "Configurazione di CryptoEntropy Explorer"),
       (isItalian() ? `Modalità: ${isCustomSet() ? "Insieme personalizzato" : state.set.toUpperCase()}` : `Mode: ${isCustomSet() ? "Custom attribute set" : state.set.toUpperCase()}`),
       `${translate("Description", "Descrizione")}: ${setData.description}`,
-      (isItalian() ? `Asset: ${assetLabels.length ? assetLabels.join(", ") : "nessuno selezionato"}` : `Assets: ${assetLabels.length ? assetLabels.join(", ") : "none selected"}`),
-      (isItalian() ? `Attributi: ${attributeText || "nessuno selezionato"}` : `Attributes: ${attributeText || "none selected"}`),
-      top ? (isItalian() ? `Primo asset nell’ultimo mese: ${top.asset.label} (${formatScore(top.score)} nel mese ${top.t})` : `Latest top asset: ${top.asset.label} (${formatScore(top.score)} in ${top.t})`) : translate("Latest top asset: n/a", "Primo asset nell’ultimo mese: non disponibile"),
-      translate("Source: normalized and entropy-derived CryptoEntropy datasets; raw Coin Metrics data are not redistributed.", "Fonte: dataset CryptoEntropy normalizzati e derivati dall’entropia. I dati grezzi di Coin Metrics non sono ridistribuiti."),
+      (isItalian() ? `Criptovalute: ${assetLabels.length ? assetLabels.join(", ") : "nessuna selezionata"}` : `Assets: ${assetLabels.length ? assetLabels.join(", ") : "none selected"}`),
+      (isItalian() ? `Indicatori: ${attributeText || "nessuno selezionato"}` : `Attributes: ${attributeText || "none selected"}`),
+      top ? (isItalian() ? `In testa nell’ultimo mese: ${top.asset.label} (${formatScore(top.score)} nel mese ${top.t})` : `Latest top asset: ${top.asset.label} (${formatScore(top.score)} in ${top.t})`) : translate("Latest top asset: n/a", "In testa nell’ultimo mese: dato non disponibile"),
+      translate("Source: normalized and entropy-derived CryptoEntropy datasets; raw Coin Metrics data are not redistributed.", "Fonte: dati CryptoEntropy normalizzati ed elaborati a partire da Coin Metrics. I dati grezzi restano presso il fornitore."),
     ].join("\n");
   }
 
@@ -1095,18 +1095,18 @@ const localPath = (href: string) => inLanguage(href, locale);
     const questionBox = $("question-text");
     if (!assetLabels.length) {
       questionBox.className = "alert alert-warning mt-4 text-sm";
-      questionBox.textContent = translate("Select at least one cryptoasset to compare EB-index behaviour.", "Seleziona almeno un cryptoasset per confrontare l’andamento dell’EB-index.");
+      questionBox.textContent = translate("Select at least one cryptoasset to compare EB-index behaviour.", "Scegli almeno una criptovaluta per vedere come cambia l’EB-index nel tempo.");
     } else if (selectedAttributes.length <= 1) {
       questionBox.className = "alert alert-warning mt-4 text-sm";
-      questionBox.textContent = translate("Select at least two attributes. Entropy needs a distribution over multiple dimensions.", "Seleziona almeno due attributi: per calcolare l’entropia serve una distribuzione su più dimensioni.");
+      questionBox.textContent = translate("Select at least two attributes. Entropy needs a distribution over multiple dimensions.", "Scegli almeno due indicatori: il calcolo dell’entropia confronta più valori.");
     } else {
       questionBox.className = "alert alert-info mt-4 text-sm";
       const modeText = isCustomSet()
-        ? translate("a custom user-defined attribute set", "un insieme personalizzato")
-        : (isItalian() ? `l’insieme ${state.set.toUpperCase()} dello studio` : `the ${state.set.toUpperCase()} paper preset`);
+        ? translate("a custom user-defined attribute set", "un gruppo di indicatori personalizzato")
+        : (isItalian() ? `gli indicatori del gruppo ${state.set.toUpperCase()}` : `the ${state.set.toUpperCase()} paper preset`);
       const attributeText = selectedAttributes.map((attr) => attr.label).join(", ");
       const topText = top ? (isItalian() ? ` Nell’ultimo mese mostrato, ${top.asset.label} è al primo posto con un EB-index di ${formatScore(top.score)}.` : ` In the latest visible month, ${top.asset.label} ranks first with EB-index ${formatScore(top.score)}.`) : "";
-      questionBox.textContent = (isItalian() ? `Stai confrontando l’equilibrio di ${assetLabels.join(", ")} con ${modeText}, usando questi attributi: ${attributeText}. Un peso maggiore aumenta il contributo dell’attributo all’entropia ponderata.${topText}` : `You are asking how balanced ${assetLabels.join(", ")} look under ${modeText}, using ${attributeText}. Higher weights make selected attributes matter more in the weighted entropy calculation.${topText}`);
+      questionBox.textContent = (isItalian() ? `Confronti ${assetLabels.join(", ")} usando ${modeText}. Gli indicatori selezionati sono ${attributeText}. Quelli con un peso maggiore incidono di più sul calcolo.${topText}` : `You are asking how balanced ${assetLabels.join(", ")} look under ${modeText}, using ${attributeText}. Higher weights make selected attributes matter more in the weighted entropy calculation.${topText}`);
     }
 
     $("selected-attributes-body").innerHTML = selectedAttributes.length
@@ -1118,7 +1118,7 @@ const localPath = (href: string) => inLanguage(href, locale);
               <td>${getAttributeSourceLabel(attr)}</td>
             </tr>`)
           .join("")
-      : `<tr><td colspan="3" class="opacity-70">${translate("No attributes selected.", "Nessun attributo selezionato.")}</td></tr>`;
+      : `<tr><td colspan="3" class="opacity-70">${translate("No attributes selected.", "Nessun indicatore selezionato.")}</td></tr>`;
   }
 
   function renderAll() {
@@ -1159,10 +1159,10 @@ const localPath = (href: string) => inLanguage(href, locale);
           FeeMeanNtv: "Commissione media nella valuta nativa",
         };
         const sets = {
-          set1: "Sintesi dell’attività e del mercato nello studio DLT 2025.",
-          set2: "Dinamiche della rete: partecipazione, importo dei trasferimenti, rotazione, offerta attiva e distribuzione della ricchezza.",
-          set3: "Estensione sperimentale di Set2 con le commissioni. Il dataset pubblicato non include USDC per questo insieme.",
-          custom: "Crea il tuo insieme con gli attributi normalizzati disponibili. Puoi partire da zero, copiare un insieme dello studio o selezionare tutti gli attributi.",
+          set1: "Indicatori di attività e di mercato usati nello studio DLT 2025.",
+          set2: "Indicatori sulle dinamiche di rete: partecipazione, importo dei trasferimenti, rotazione dell’offerta attiva e distribuzione della ricchezza.",
+          set3: "Gli indicatori di Set2, più le commissioni. Per questo gruppo il dataset non contiene i dati di USDC.",
+          custom: "Scegli gli indicatori che vuoi confrontare. Puoi partire da zero, copiare un gruppo dello studio o selezionarli tutti.",
         };
         for (const [id, set] of Object.entries(dashboardData.sets)) {
           set.description = sets[id] ?? set.description;
@@ -1181,7 +1181,7 @@ const localPath = (href: string) => inLanguage(href, locale);
 
       $("cryptoentropy-app").classList.remove("hidden");
       status.className = "alert alert-success mt-5 text-sm";
-      status.textContent = translate("Dashboard loaded. Use the paper presets or create your own attribute set, then change assets and utility weights to recompute the EB-index live. The current configuration is kept in the page URL, so it can be shared or reopened later.", "Dashboard pronta. Scegli un insieme dello studio o creane uno, poi cambia gli asset e i pesi per ricalcolare l’EB-index. La configurazione resta nell’indirizzo della pagina e si può condividere o riaprire.");
+      status.textContent = translate("Dashboard loaded. Use the paper presets or create your own attribute set, then change assets and utility weights to recompute the EB-index live. The current configuration is kept in the page URL, so it can be shared or reopened later.", "Dati caricati. Scegli un gruppo di indicatori dello studio o creane uno, poi modifica le criptovalute e i pesi per vedere come cambia l’EB-index. Il link conserva le tue scelte.");
     } catch (error) {
       if (!root.isConnected) return;
       status.className = "alert alert-error mt-5 text-sm";

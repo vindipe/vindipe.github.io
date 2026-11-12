@@ -9,20 +9,20 @@ const t = translator(Astro.url.pathname);
 
 <BaseLayout
   title={t("Blockchain 101: Interactive Labs | Vincenzo Di Perna", "Blockchain 101 | Laboratori interattivi | Vincenzo Di Perna")}
-  description={t("Try interactive labs on blockchain fundamentals, including cryptography, wallets, peer-to-peer networks, consensus, smart contracts and scalability.", "Impara i fondamenti delle blockchain con laboratori su crittografia, wallet, reti peer-to-peer, consenso, smart contract e scalabilità.")}
+  description={t("Try interactive labs on blockchain fundamentals, including cryptography, wallets, peer-to-peer networks, consensus, smart contracts and scalability.", "Laboratori per capire come funzionano le blockchain, dalla crittografia e dai wallet al consenso, agli smart contract e alla scalabilità.")}
   sideBarActiveItemID="tutorials"
 >
   <section class="mb-10">
     <div class="flex flex-wrap gap-2 mb-3">
       <span class="badge badge-primary">Blockchain 101</span>
       <span class="badge badge-outline">{t("Fundamentals", "Fondamenti")}</span>
-      <span class="badge badge-outline">{t("Interactive learning", "Apprendimento interattivo")}</span>
+      <span class="badge badge-outline">{t("Interactive learning", "Laboratori interattivi")}</span>
     </div>
 
     <h1 class="text-4xl font-bold mb-4">Blockchain 101</h1>
 
     <p class="text-lg leading-relaxed opacity-90">
-      {t("A learning area for understanding blockchain systems through interactive explanations, small simulations, visual examples, and practical mental models. The goal is to make cryptography, peer-to-peer networks, consensus, smart contracts, and blockchain infrastructure easier to explore by playing with them.", "Impara come funziona una blockchain provando in prima persona. Brevi spiegazioni, simulazioni ed esempi visuali aiutano a capire crittografia, reti peer-to-peer, consenso, smart contract e infrastrutture blockchain.")}
+      {t("A learning area for understanding blockchain systems through interactive explanations, small simulations, visual examples, and practical mental models. The goal is to make cryptography, peer-to-peer networks, consensus, smart contracts, and blockchain infrastructure easier to explore by playing with them.", "Che cosa succede quando firmi una transazione? Come si mettono d’accordo i nodi? Le simulazioni ti permettono di provare in prima persona i meccanismi della crittografia, delle reti peer-to-peer, del consenso e degli smart contract.")}
     </p>
   </section>
 
@@ -34,7 +34,7 @@ const t = translator(Astro.url.pathname);
     <h2 class="text-3xl font-bold mb-2">{t("Suggest a topic", "Proponi un argomento")}</h2>
 
     <p class="mb-5 opacity-80">
-      {t("This learning area can grow around new blockchain, distributed systems, digital assets, Web3, RWA, DeFi, CBDCs, quantum security, benchmarking, governance, scalability, and real-world deployment topics.", "I prossimi approfondimenti possono riguardare blockchain, sistemi distribuiti, asset digitali, Web3, RWA, DeFi, CBDC, sicurezza post-quantistica, benchmarking, governance, scalabilità e applicazioni concrete.")}
+      {t("This learning area can grow around new blockchain, distributed systems, digital assets, Web3, RWA, DeFi, CBDCs, quantum security, benchmarking, governance, scalability, and real-world deployment topics.", "Puoi proporre argomenti legati a blockchain, sistemi distribuiti, finanza decentralizzata, valute digitali, sicurezza post-quantistica o applicazioni concrete.")}
     </p>
 
     <div class="card bg-base-100 shadow-md">
@@ -42,7 +42,7 @@ const t = translator(Astro.url.pathname);
         <h3 class="card-title">{t("What should be explained next?", "Che cosa vorresti approfondire?")}</h3>
 
         <p>
-          {t("Suggest a concept, a practical problem, a tool, or a real-world use case that would be useful to explain through a short visual lesson or an interactive experiment.", "Suggerisci un concetto, un problema concreto, uno strumento o un caso d’uso che si presti a una breve lezione visuale o a un esperimento interattivo.")}
+          {t("Suggest a concept, a practical problem, a tool, or a real-world use case that would be useful to explain through a short visual lesson or an interactive experiment.", "Hai un concetto, un problema pratico o un caso d’uso in mente? Suggeriscilo per una breve spiegazione illustrata o un nuovo laboratorio.")}
         </p>
 
         <div class="card-actions justify-end mt-4">
@@ -50,7 +50,7 @@ const t = translator(Astro.url.pathname);
             class="btn btn-primary"
             href="mailto:vincenzopaolo.diperna@outlook.com?subject=Suggest%20a%20topic%20for%20Blockchain%20101&body=Hi%20Vincenzo%2C%0A%0AI%20would%20like%20to%20suggest%20this%20topic%20for%20Blockchain%20101%3A%0A%0ATopic%3A%20%0AWhy%20it%20would%20be%20useful%3A%20%0A%0AThanks%21"
           >
-            {t("Suggest a topic by email", "Invia una proposta via email")}
+            {t("Suggest a topic by email", "Invia il tuo suggerimento via email")}
           </a>
         </div>
       </div>

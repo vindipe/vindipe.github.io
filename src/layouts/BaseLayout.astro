@@ -17,6 +17,7 @@ const {
   includeSidebar = true,
   sideBarActiveItemID,
   ogType = "website",
+  enableTransitions = true,
 } = Astro.props;
 
 const locale = getLocale(Astro.url.pathname);
@@ -28,7 +29,7 @@ const t = translator(Astro.url.pathname);
   <head>
     <BaseHead title={title} description={description} image={image} ogType={ogType} />
     <StructuredData {title} {description} />
-    {TRANSITION_API && <ViewTransitions />}
+    {TRANSITION_API && enableTransitions && <ViewTransitions />}
   </head>
 
   <body>

@@ -14,13 +14,13 @@ const isConfigured = GA_MEASUREMENT_ID.startsWith("G-") && GA_MEASUREMENT_ID !==
       id="analytics-consent-banner"
       class="fixed inset-x-0 bottom-0 z-[10000] hidden border-t border-base-300 bg-base-100/95 px-4 py-4 shadow-2xl backdrop-blur md:px-6"
       role="region"
-      aria-label={t("Analytics consent", "Consenso alle statistiche")}
+      aria-label={t("Analytics consent", "Consenso alla raccolta di statistiche")}
     >
       <div class="mx-auto flex max-w-5xl flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div class="text-sm leading-relaxed text-base-content">
-          <p class="font-semibold">{t("Privacy-friendly analytics", "Statistiche di utilizzo")}</p>
+          <p class="font-semibold">{t("Privacy-friendly analytics", "Statistiche di navigazione")}</p>
           <p class="opacity-80">
-            {t("I use Google Analytics to understand aggregate site usage, file downloads, and outbound clicks. Analytics loads only if you accept.", "Uso Google Analytics per raccogliere statistiche aggregate sulle visite, sui download e sui clic verso siti esterni. Si attiva solo con il tuo consenso.")}
+            {t("I use Google Analytics to understand aggregate site usage, file downloads, and outbound clicks. Analytics loads only if you accept.", "Con il tuo consenso, uso Google Analytics per raccogliere statistiche aggregate sulle visite, sui download e sui clic sui link esterni.")}
           </p>
         </div>
 
@@ -29,7 +29,7 @@ const isConfigured = GA_MEASUREMENT_ID.startsWith("G-") && GA_MEASUREMENT_ID !==
             {t("Reject", "Rifiuta")}
           </button>
           <button id="analytics-consent-accept" class="btn btn-sm btn-primary" type="button">
-            {t("Accept analytics", "Accetta le statistiche")}
+            {t("Accept analytics", "Accetta")}
           </button>
         </div>
       </div>

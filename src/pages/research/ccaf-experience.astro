@@ -9,27 +9,27 @@ const localPath = (href: string) => inLanguage(href, locale);
 const experienceAreas = [
   {
     title: t("Digital assets research", "Ricerca sugli asset digitali"),
-    desc: t("Research activity within the Digital Asset Programme, focused on decentralised finance, digital-asset infrastructures, taxonomy design, and ecosystem analysis.", "Attività nel Digital Asset Programme su finanza decentralizzata, infrastrutture per asset digitali, progettazione di tassonomie e analisi dell’ecosistema."),
+    desc: t("Research activity within the Digital Asset Programme, focused on decentralised finance, digital-asset infrastructures, taxonomy design, and ecosystem analysis.", "Nel Digital Asset Programme mi sono occupato di finanza decentralizzata, infrastrutture per gli asset digitali e classificazione dei protocolli."),
   },
   {
     title: t("DeFi taxonomy work", "Tassonomia della DeFi"),
-    desc: t("Contribution to taxonomy-oriented research connecting DeFi protocol functions, actors, assets, infrastructure, and traditional-finance classification perspectives.", "Contributo alla ricerca sulle relazioni tra funzioni dei protocolli DeFi, attori, asset, infrastrutture e criteri di classificazione della finanza tradizionale."),
+    desc: t("Contribution to taxonomy-oriented research connecting DeFi protocol functions, actors, assets, infrastructure, and traditional-finance classification perspectives.", "Ho contribuito a mettere in relazione i servizi offerti dai protocolli DeFi, i soggetti coinvolti, gli asset e l’infrastruttura con le categorie della finanza tradizionale."),
   },
   {
     title: t("Protocol classification", "Classificazione dei protocolli"),
-    desc: t("Work connected to the structured analysis of DeFi protocols, their categories, governance properties, documentation, and protocol-level characteristics.", "Analisi strutturata dei protocolli DeFi, delle loro categorie, della governance, della documentazione e delle caratteristiche a livello di protocollo."),
+    desc: t("Work connected to the structured analysis of DeFi protocols, their categories, governance properties, documentation, and protocol-level characteristics.", "Ho esaminato la documentazione dei protocolli, le loro caratteristiche tecniche e il modo in cui vengono governati."),
   },
   {
     title: t("Research communication", "Comunicazione della ricerca"),
-    desc: t("Support for translating a complex DeFi taxonomy into research outputs and digital-tool context, including the Cambridge DeFi Navigator.", "Contributo alla presentazione della tassonomia DeFi in pubblicazioni e strumenti digitali, tra cui il Cambridge DeFi Navigator."),
+    desc: t("Support for translating a complex DeFi taxonomy into research outputs and digital-tool context, including the Cambridge DeFi Navigator.", "Ho contribuito a presentare la tassonomia nelle pubblicazioni e a renderla consultabile tramite il Cambridge DeFi Navigator."),
   },
 ];
 
 const outputs = [
   {
-    title: "Dynamic Taxonomy: A Bridge from DeFi to TradFi",
+    title: t("Dynamic Taxonomy: A Bridge from DeFi to TradFi", "Una tassonomia per collegare DeFi e finanza tradizionale"),
     href: "/research/dynamic-taxonomy-defi-tradfi",
-    desc: t("Working paper on a dynamic taxonomy for connecting DeFi and TradFi through activities, actors, assets, architecture, and protocol-level attributes.", "Working paper su una tassonomia dinamica che mette in relazione DeFi e TradFi attraverso attività, attori, asset, architettura e attributi dei protocolli."),
+    desc: t("Working paper on a dynamic taxonomy for connecting DeFi and TradFi through activities, actors, assets, architecture, and protocol-level attributes.", "Documento di lavoro sulla classificazione dei protocolli DeFi per attività, soggetti coinvolti, asset, architettura e caratteristiche dei singoli protocolli."),
   },
   {
     title: "Cambridge DeFi Navigator",
@@ -40,14 +40,14 @@ const outputs = [
 ];
 
 const skills = [
-  "Digital assets research",
-  "DeFi ecosystem analysis",
-  "Taxonomy design",
-  "Protocol classification",
-  "Data-oriented research",
-  "Regulatory-facing analysis",
-  "Research writing",
-  "DeFi / TradFi mapping",
+  t("Digital assets research", "Ricerca sugli asset digitali"),
+  t("DeFi ecosystem analysis", "Analisi dell’ecosistema DeFi"),
+  t("Taxonomy design", "Progettazione di tassonomie"),
+  t("Protocol classification", "Classificazione dei protocolli"),
+  t("Data-oriented research", "Ricerca basata sui dati"),
+  t("Regulatory-facing analysis", "Analisi a fini normativi"),
+  t("Research writing", "Scrittura scientifica"),
+  t("DeFi / TradFi mapping", "Confronto tra DeFi e finanza tradizionale"),
 ];
 ---
 
@@ -72,7 +72,7 @@ const skills = [
         </div>
 
         <p class="text-lg leading-relaxed opacity-90">
-          {t("Research internship experience at the Cambridge Centre for Alternative Finance, within the Digital Asset Programme, focused on digital assets, decentralised finance, DeFi taxonomy, protocol classification, and the relationship between DeFi and traditional financial infrastructures.", "Tirocinio presso il Cambridge Centre for Alternative Finance, nel Digital Asset Programme. Ho lavorato su asset digitali, tassonomia della DeFi, classificazione dei protocolli e rapporto tra finanza decentralizzata e infrastrutture finanziarie tradizionali.")}
+          {t("Research internship experience at the Cambridge Centre for Alternative Finance, within the Digital Asset Programme, focused on digital assets, decentralised finance, DeFi taxonomy, protocol classification, and the relationship between DeFi and traditional financial infrastructures.", "Nel Digital Asset Programme del Cambridge Centre for Alternative Finance ho studiato come classificare i protocolli DeFi e come confrontarli con le infrastrutture della finanza tradizionale.")}
         </p>
 
         <div class="flex flex-wrap gap-2 mt-5">
@@ -106,7 +106,7 @@ const skills = [
         </div>
 
         <p class="text-sm opacity-70 mt-3">
-          {t("If the embedded preview is blocked by the external website or by the browser, use the direct link below.", "Se l’anteprima è bloccata dal sito esterno o dal browser, puoi aprire lo strumento dal link qui sotto.")}
+          {t("If the embedded preview is blocked by the external website or by the browser, use the direct link below.", "Se la mappa non si carica, aprila dal link qui sotto.")}
         </p>
 
         <a
@@ -156,14 +156,14 @@ const skills = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Experience context", "Contesto dell’esperienza")}</h2>
+        <h2 class="card-title text-2xl">{t("Experience context", "Il tirocinio")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          {t("This experience sits at the intersection of digital-asset research, decentralised finance, financial-market infrastructure, and regulatory understanding. The work is connected to the need for clearer tools and frameworks to describe DeFi protocols in a way that is understandable both to blockchain-native stakeholders and to traditional-finance audiences.", "Questa esperienza unisce ricerca sugli asset digitali, finanza decentralizzata, infrastrutture dei mercati finanziari e aspetti normativi. Il lavoro nasce dalla necessità di descrivere i protocolli DeFi con strumenti e criteri comprensibili sia a chi opera nel mondo blockchain sia a chi proviene dalla finanza tradizionale.")}
+          {t("This experience sits at the intersection of digital-asset research, decentralised finance, financial-market infrastructure, and regulatory understanding. The work is connected to the need for clearer tools and frameworks to describe DeFi protocols in a way that is understandable both to blockchain-native stakeholders and to traditional-finance audiences.", "Il lavoro è nato da un problema concreto: descrivere i protocolli DeFi in termini comprensibili sia a chi sviluppa sulla blockchain sia a chi opera nella finanza tradizionale o si occupa di regolamentazione.")}
         </p>
 
         <p class="leading-relaxed opacity-90 mt-3">
-          {t("The main research line connected to this experience is the development of a dynamic DeFi taxonomy and its relationship with the Cambridge DeFi Navigator, a digital tool designed to make the DeFi ecosystem more accessible through interactive exploration.", "Il filone principale è lo sviluppo di una tassonomia dinamica della DeFi e la sua applicazione al Cambridge DeFi Navigator, uno strumento digitale per esplorare l’ecosistema in modo interattivo.")}
+          {t("The main research line connected to this experience is the development of a dynamic DeFi taxonomy and its relationship with the Cambridge DeFi Navigator, a digital tool designed to make the DeFi ecosystem more accessible through interactive exploration.", "Il risultato è una tassonomia che si può aggiornare man mano che l’ecosistema cambia. Il Cambridge DeFi Navigator la rende esplorabile attraverso una mappa interattiva.")}
         </p>
       </div>
     </div>
@@ -205,7 +205,7 @@ const skills = [
         <h2 class="card-title text-2xl">{t("Research focus: DeFi taxonomy", "La tassonomia della DeFi")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          {t("A central output connected to the experience is the taxonomy work around DeFi and TradFi. The taxonomy organises decentralised finance through high-level categories and protocol-level attributes, making it easier to describe DeFi systems in a way that supports research, ecosystem mapping, and regulatory-facing interpretation.", "La tassonomia DeFi–TradFi è uno dei risultati centrali di questa esperienza. Organizza la finanza decentralizzata in categorie generali e attributi dei singoli protocolli per agevolare la ricerca, la mappatura dell’ecosistema e l’analisi normativa.")}
+          {t("A central output connected to the experience is the taxonomy work around DeFi and TradFi. The taxonomy organises decentralised finance through high-level categories and protocol-level attributes, making it easier to describe DeFi systems in a way that supports research, ecosystem mapping, and regulatory-facing interpretation.", "La tassonomia classifica la DeFi su due livelli: categorie comuni all’ecosistema e caratteristiche dei singoli protocolli. Serve a confrontare i servizi e le tecnologie e ad analizzarne gli aspetti normativi.")}
         </p>
 
         <div class="card-actions mt-4">

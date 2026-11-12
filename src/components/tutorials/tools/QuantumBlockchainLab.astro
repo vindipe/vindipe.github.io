@@ -14,7 +14,7 @@ const t = translator(Astro.url.pathname);
     </div>
 
     <p class="opacity-80 mb-4">
-      {t("This lab separates what quantum computing could threaten from what it does not automatically break. It is a conceptual simulator, not a cryptographic risk calculator.", "Questo simulatore illustra quali componenti possono essere esposti al calcolo quantistico. Gli scenari sono concettuali e servono a capire le differenze tra i componenti.")}
+      {t("This lab separates what quantum computing could threaten from what it does not automatically break. It is a conceptual simulator, not a cryptographic risk calculator.", "Confronta tre scenari per capire quali parti della blockchain possono diventare vulnerabili e come cambia il rischio con le firme post-quantistiche.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1fr] gap-4">
@@ -25,7 +25,7 @@ const t = translator(Astro.url.pathname);
             <option value="hashes">{t("Hashes and block fingerprints", "Hash e impronte dei blocchi")}</option>
             <option value="signatures">{t("User transaction signatures", "Firme delle transazioni degli utenti")}</option>
             <option value="validators">{t("Validator signatures and consensus keys", "Firme dei validatori e chiavi di consenso")}</option>
-            <option value="mempool">{t("Mempool and exposed pending transactions", "Mempool e transazioni in attesa esposte")}</option>
+            <option value="mempool">{t("Mempool and exposed pending transactions", "Mempool e dati visibili prima della conferma")}</option>
             <option value="migration">{t("Post-quantum migration strategy", "Strategia di migrazione post-quantistica")}</option>
           </select>
         </label>
@@ -33,9 +33,9 @@ const t = translator(Astro.url.pathname);
         <label class="form-control">
           <span class="label-text font-semibold">Scenario</span>
           <select class="select select-bordered" data-quantum-scenario>
-            <option value="today">{t("Today: no large fault-tolerant quantum attacker", "Oggi: nessun attaccante con un grande computer quantistico tollerante ai guasti")}</option>
-            <option value="future">{t("Future: powerful quantum attacker exists", "Futuro: un attaccante dispone di un computer quantistico potente")}</option>
-            <option value="pq">{t("Migration: post-quantum signatures deployed", "Migrazione: sono in uso firme post-quantistiche")}</option>
+            <option value="today">{t("Today: no large fault-tolerant quantum attacker", "Oggi: l’attaccante non dispone di un computer quantistico abbastanza potente e tollerante ai guasti")}</option>
+            <option value="future">{t("Future: powerful quantum attacker exists", "Scenario futuro: l’attaccante dispone di un computer quantistico abbastanza potente")}</option>
+            <option value="pq">{t("Migration: post-quantum signatures deployed", "Dopo la migrazione: la rete usa firme post-quantistiche")}</option>
           </select>
         </label>
 
@@ -58,9 +58,9 @@ const t = translator(Astro.url.pathname);
         </div>
 
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">{t("Mitigation idea", "Possibile mitigazione")}</p>
+          <p class="font-semibold mb-1">{t("Mitigation idea", "Come ridurre il rischio")}</p>
           <p class="text-sm opacity-80" data-quantum-mitigation>
-            {t("Post-quantum migration is about replacing vulnerable cryptographic assumptions before they become practically exploitable.", "La migrazione post-quantistica sostituisce gli schemi crittografici vulnerabili prima che gli attacchi diventino praticabili.")}
+            {t("Post-quantum migration is about replacing vulnerable cryptographic assumptions before they become practically exploitable.", "Passare a schemi post-quantistici per tempo consente di sostituire le firme vulnerabili prima che gli attacchi diventino praticabili.")}
           </p>
         </div>
       </div>
@@ -97,12 +97,12 @@ const t = translator(Astro.url.pathname);
         future: [
           "Medium",
           translate("A powerful quantum attacker may weaken the security margin of hash-based assumptions, but hashes are generally not the first catastrophic failure point compared with classical public-key signatures.", "Un attaccante con un computer quantistico potente può ridurre il margine di sicurezza degli hash. Le firme classiche a chiave pubblica sono in genere più esposte."),
-          translate("Prefer conservative hash parameters and protocols that can upgrade primitives.", "Preferisci parametri di hash prudenti e protocolli che permettono di aggiornare gli algoritmi.")
+          translate("Prefer conservative hash parameters and protocols that can upgrade primitives.", "Scegli parametri con un margine di sicurezza adeguato e protocolli che permettano di aggiornare gli algoritmi.")
         ],
         pq: [
           "Low",
           translate("Post-quantum migration mostly targets public-key cryptography, but robust hash choices remain important.", "La migrazione post-quantistica riguarda soprattutto la crittografia a chiave pubblica. La scelta di funzioni hash robuste resta importante."),
-          translate("Keep hash choices conservative and upgradeable.", "Scegli parametri di hash prudenti e aggiornabili.")
+          translate("Keep hash choices conservative and upgradeable.", "Scegli parametri con un buon margine di sicurezza e prevedi come aggiornarli.")
         ],
       },
       signatures: {
@@ -118,7 +118,7 @@ const t = translator(Astro.url.pathname);
         ],
         pq: [
           "Lower",
-          translate("Post-quantum signatures are designed to resist quantum attacks, but they may bring larger signatures, different verification costs, and migration complexity.", "Le firme post-quantistiche sono progettate per resistere agli attacchi quantistici. Possono essere più grandi, avere costi di verifica diversi e rendere la migrazione più complessa."),
+          translate("Post-quantum signatures are designed to resist quantum attacks, but they may bring larger signatures, different verification costs, and migration complexity.", "Le firme post-quantistiche sono progettate per resistere agli attacchi quantistici. Alcune occupano più spazio o richiedono più risorse per la verifica."),
           translate("Use standardized or well-reviewed post-quantum schemes and test operational costs.", "Usa schemi post-quantistici standardizzati o sottoposti a revisione approfondita e valuta i costi operativi.")
         ],
       },
@@ -136,7 +136,7 @@ const t = translator(Astro.url.pathname);
         pq: [
           "Lower",
           translate("Post-quantum validator signatures reduce the quantum risk but may affect bandwidth, block size, and verification costs.", "Le firme post-quantistiche dei validatori riducono il rischio quantistico, ma possono incidere su banda, dimensioni dei blocchi e costi di verifica."),
-          translate("Benchmark the performance impact before deployment.", "Misura l’impatto sulle prestazioni prima del deployment.")
+          translate("Benchmark the performance impact before deployment.", "Misura l’impatto sulle prestazioni prima di introdurre le nuove firme.")
         ],
       },
       mempool: {
@@ -159,7 +159,7 @@ const t = translator(Astro.url.pathname);
       migration: {
         today: [
           "Medium",
-          translate("The problem is not only cryptography; it is coordination. Blockchains need upgrade paths, wallet support, standards, and user migration.", "La migrazione richiede coordinamento oltre alla crittografia. Servono aggiornamenti del protocollo, supporto dei wallet, standard e migrazione degli utenti."),
+          translate("The problem is not only cryptography; it is coordination. Blockchains need upgrade paths, wallet support, standards, and user migration.", "Per cambiare le firme servono aggiornamenti del protocollo e dei wallet, standard condivisi e un modo per migrare gli utenti."),
           translate("Design cryptographic agility before an emergency.", "Progetta in anticipo la possibilità di cambiare algoritmi.")
         ],
         future: [
@@ -169,7 +169,7 @@ const t = translator(Astro.url.pathname);
         ],
         pq: [
           "Medium",
-          translate("Even after PQ deployment, old accounts, bridges, smart contracts, and legacy signatures may remain exposed.", "Anche dopo il deployment post-quantistico, account precedenti, bridge, smart contract e vecchie firme possono restare esposti."),
+          translate("Even after PQ deployment, old accounts, bridges, smart contracts, and legacy signatures may remain exposed.", "Anche dopo l’introduzione delle firme post-quantistiche, vecchi account, bridge, smart contract e firme precedenti possono restare esposti."),
           translate("Track legacy risk and provide migration incentives.", "Monitora i rischi dei sistemi precedenti e incentiva la migrazione.")
         ],
       },
