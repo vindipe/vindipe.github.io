@@ -1,72 +1,75 @@
+---
+import { translator } from "../../../i18n/locale";
+
+const t = translator(Astro.url.pathname);
+---
+
 <section id="crypto-playground" class="network-protected card bg-base-100 shadow-md">
   <div class="card-body">
     <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">Cryptography playground</h3>
-      <span class="badge badge-secondary">Hashing</span>
-      <span class="badge badge-outline">Tamper detection</span>
-      <span class="badge badge-outline">Block links</span>
+      <h3 class="card-title">{t("Cryptography playground", "Laboratorio di crittografia")}</h3>
+      <span class="badge badge-secondary">{t("Hashing", "Calcolo degli hash")}</span>
+      <span class="badge badge-outline">{t("Tamper detection", "Rilevamento delle alterazioni")}</span>
+      <span class="badge badge-outline">{t("Block links", "Collegamenti tra blocchi")}</span>
     </div>
 
     <p class="opacity-80 mb-4">
-      Change the transaction data and observe how the hash changes. Then mine a
-      tiny toy block and tamper with its content to see why linked hashes make
-      modifications visible.
+      {t("Change the transaction data and observe how the hash changes. Then mine a tiny toy block and tamper with its content to see why linked hashes make modifications visible.", "Modifica i dati della transazione e guarda come cambia l’hash. Mina poi un piccolo blocco dimostrativo e alterane il contenuto per vedere come gli hash rendono visibili le modifiche.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <div class="grid gap-3">
         <label class="form-control">
-          <span class="label-text font-semibold">Transaction data</span>
+          <span class="label-text font-semibold">{t("Transaction data", "Dati della transazione")}</span>
           <textarea
             data-crypto-input
             class="textarea textarea-bordered min-h-28"
-          >Alice sends 5 tokens to Bob</textarea>
+          >{t("Alice sends 5 tokens to Bob", "Alice invia 5 token a Bob")}</textarea>
         </label>
 
         <button class="btn btn-primary" data-crypto-action="hash">
-          Compute hash
+          {t("Compute hash", "Calcola l’hash")}
         </button>
 
         <button class="btn btn-outline" data-crypto-action="mine">
-          Mine toy block
+          {t("Mine toy block", "Mina un blocco")}
         </button>
 
         <button class="btn btn-outline" data-crypto-action="tamper">
-          Tamper with data
+          {t("Tamper with data", "Altera i dati")}
         </button>
       </div>
 
       <div class="grid gap-3">
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">SHA-256 hash</p>
+          <p class="font-semibold mb-1">{t("SHA-256 hash", "Hash SHA-256")}</p>
           <p data-crypto-hash class="font-mono text-xs break-all opacity-80">
-            Click “Compute hash”.
+            {t("Click “Compute hash”.", "Premi «Calcola l’hash».")}
           </p>
         </div>
 
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">Toy block</p>
+          <p class="font-semibold mb-1">{t("Toy block", "Blocco dimostrativo")}</p>
           <p class="text-sm opacity-80">
-            Previous hash:
+            {t("Previous hash:", "Hash precedente")}
             <span data-previous-hash class="font-mono break-all">
               0000previousblock
             </span>
           </p>
           <p class="text-sm opacity-80">
-            Nonce:
+            {t("Nonce:", "Nonce")}
             <span data-nonce class="font-mono">-</span>
           </p>
           <p class="text-sm opacity-80">
-            Block hash:
+            {t("Block hash:", "Hash del blocco")}
             <span data-block-hash class="font-mono break-all">-</span>
           </p>
         </div>
 
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">Lesson</p>
+          <p class="font-semibold mb-1">{t("Lesson", "Da osservare")}</p>
           <p data-crypto-status class="text-sm opacity-80">
-            Hashes are deterministic fingerprints: the same input gives the same
-            output, but a tiny change creates a very different hash.
+            {t("Hashes are deterministic fingerprints: the same input gives the same output, but a tiny change creates a very different hash.", "Gli hash sono impronte deterministiche: a parità di dati il risultato è sempre lo stesso, ma basta una piccola modifica per ottenere un hash molto diverso.")}
           </p>
         </div>
       </div>
@@ -75,6 +78,9 @@
 </section>
 
 <script>
+  const isItalian = () => document.documentElement.lang === "it";
+  const translate = (english, italian) => isItalian() ? italian : english;
+
   function initCryptoPlayground() {
     const root = document.querySelector("#crypto-playground");
 
@@ -103,11 +109,11 @@
       const hash = await sha256(input.value);
       hashOutput.textContent = hash;
       status.textContent =
-        "The transaction now has a cryptographic fingerprint. Change even one character and compute it again.";
+        translate("The transaction now has a cryptographic fingerprint. Change even one character and compute it again.", "La transazione ora ha un’impronta crittografica. Modifica anche solo un carattere e ricalcola l’hash.");
     }
 
     async function mineToyBlock() {
-      status.textContent = "Mining a tiny toy block...";
+      status.textContent = translate("Mining a tiny toy block...", "Ricerca di un blocco dimostrativo…");
       const data = input.value;
       const prev = previousHash.textContent.trim();
 
@@ -118,13 +124,13 @@
           nonceOutput.textContent = nonce;
           blockHashOutput.textContent = candidate;
           status.textContent =
-            "Toy block mined. This is not real mining difficulty, but it shows the idea of searching for a valid hash.";
+            translate("Toy block mined. This is not real mining difficulty, but it shows the idea of searching for a valid hash.", "Blocco dimostrativo minato. La difficoltà è semplificata per mostrare come si cerca un hash valido.");
           return;
         }
       }
 
       status.textContent =
-        "No valid toy block found in the search limit. Try again or change the data.";
+        translate("No valid toy block found in the search limit. Try again or change the data.", "Nessun blocco valido entro il limite di ricerca. Riprova o modifica i dati.");
     }
 
     async function tamperData() {
@@ -132,7 +138,7 @@
       const newHash = await sha256(input.value);
       hashOutput.textContent = newHash;
       status.textContent =
-        "The data was modified. The hash changed, so the tampering becomes visible.";
+        translate("The data was modified. The hash changed, so the tampering becomes visible.", "I dati sono cambiati. Il nuovo hash rende visibile la modifica.");
     }
 
     root.querySelector('[data-crypto-action="hash"]').addEventListener("click", computeHash);

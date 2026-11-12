@@ -1,68 +1,73 @@
 ---
+import { getLocale, inLanguage, translator } from "../../i18n/locale";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const t = translator(Astro.url.pathname);
+const locale = getLocale(Astro.url.pathname);
+const localPath = (href: string) => inLanguage(href, locale);
 
 const taxonomyPillars = [
   {
-    title: "Activities",
+    title: t("Activities", "Attività"),
     code: "A",
-    desc: "Actions or processes performed in the DeFi ecosystem, such as lending, payment processing, staking, insuring, exchanges, tokenisation, and market making.",
+    desc: t("Actions or processes performed in the DeFi ecosystem, such as lending, payment processing, staking, insuring, exchanges, tokenisation, and market making.", "Operazioni svolte nella DeFi, come prestiti, pagamenti, staking, assicurazioni, scambi, tokenizzazione e market making."),
   },
   {
-    title: "Actors",
+    title: t("Actors", "Attori"),
     code: "B",
-    desc: "Protocols, platforms, intermediaries, or service providers operating within DeFi, such as lenders, exchanges, bridges, oracles, yield farms, stablecoin issuers, and DeFi hubs.",
+    desc: t("Protocols, platforms, intermediaries, or service providers operating within DeFi, such as lenders, exchanges, bridges, oracles, yield farms, stablecoin issuers, and DeFi hubs.", "Protocolli, piattaforme, intermediari e fornitori di servizi nella DeFi, tra cui prestatori, exchange, bridge, oracoli, yield farm, emittenti di stablecoin e hub DeFi."),
   },
   {
-    title: "Assets",
+    title: t("Assets", "Asset"),
     code: "C",
-    desc: "Financial instruments or products that have value and can be traded, including cryptoassets, stablecoins, options, futures, tokenised portfolios, RWAs, and synthetic assets.",
+    desc: t("Financial instruments or products that have value and can be traded, including cryptoassets, stablecoins, options, futures, tokenised portfolios, RWAs, and synthetic assets.", "Strumenti o prodotti finanziari di valore negoziabili, tra cui cryptoasset, stablecoin, opzioni, future, portafogli tokenizzati, RWA e asset sintetici."),
   },
   {
-    title: "Architecture",
+    title: t("Architecture", "Architettura"),
     code: "D",
-    desc: "The underlying blockchain infrastructure used to process DeFi transactions, classified across public, consortium, and private blockchain architectures.",
+    desc: t("The underlying blockchain infrastructure used to process DeFi transactions, classified across public, consortium, and private blockchain architectures.", "L’infrastruttura blockchain che elabora le transazioni DeFi, classificata in architetture pubbliche, consortili e private."),
   },
 ];
 
 const methodologySteps = [
-  "Review existing DeFi taxonomy literature and identify previously proposed categories.",
-  "Extract conceptual meta-characteristics that can distinguish DeFi protocol types.",
-  "Analyse empirical protocol information, including web pages, documentation, governance, and third-party sources.",
-  "Use DeFiLlama data to prioritise relevant protocols, focusing on the top 200 Ethereum protocols by TVL.",
-  "Map categories, static attributes, and dynamic attributes into a structured taxonomy.",
-  "Develop semantic rules to classify protocols consistently.",
+  t("Review existing DeFi taxonomy literature and identify previously proposed categories.", "Esaminare la letteratura sulle tassonomie DeFi e individuare le categorie già proposte."),
+  t("Extract conceptual meta-characteristics that can distinguish DeFi protocol types.", "Ricavare le caratteristiche concettuali che distinguono i tipi di protocolli DeFi."),
+  t("Analyse empirical protocol information, including web pages, documentation, governance, and third-party sources.", "Analizzare informazioni sui protocolli da siti web, documentazione, governance e fonti indipendenti."),
+  t("Use DeFiLlama data to prioritise relevant protocols, focusing on the top 200 Ethereum protocols by TVL.", "Usare i dati di DeFiLlama per individuare i protocolli più rilevanti, concentrandosi sui primi 200 su Ethereum per TVL."),
+  t("Map categories, static attributes, and dynamic attributes into a structured taxonomy.", "Organizzare categorie, attributi statici e attributi dinamici in una tassonomia strutturata."),
+  t("Develop semantic rules to classify protocols consistently.", "Sviluppare regole semantiche per classificare i protocolli in modo coerente."),
 ];
 
 const contributions = [
-  "Bridges DeFi and TradFi by designing a taxonomy that is readable for financial and regulatory audiences.",
-  "Organises DeFi through four high-level perspectives: activities, actors, assets, and architecture.",
-  "Combines conceptual taxonomy work with empirical protocol-level analysis.",
-  "Introduces static and dynamic attributes to capture both general governance aspects and category-specific protocol features.",
-  "Connects the taxonomy to the Cambridge DeFi Navigator as an open-access mapping and exploration tool.",
+  t("Bridges DeFi and TradFi by designing a taxonomy that is readable for financial and regulatory audiences.", "Collega DeFi e finanza tradizionale con una tassonomia comprensibile agli operatori finanziari e alle autorità."),
+  t("Organises DeFi through four high-level perspectives: activities, actors, assets, and architecture.", "Organizza la DeFi in quattro prospettive: attività, attori, asset e architettura."),
+  t("Combines conceptual taxonomy work with empirical protocol-level analysis.", "Combina la progettazione della tassonomia con un’analisi empirica dei protocolli."),
+  t("Introduces static and dynamic attributes to capture both general governance aspects and category-specific protocol features.", "Introduce attributi statici e dinamici per descrivere sia la governance generale sia le proprietà specifiche di ciascuna categoria."),
+  t("Connects the taxonomy to the Cambridge DeFi Navigator as an open-access mapping and exploration tool.", "Integra la tassonomia nel Cambridge DeFi Navigator, uno strumento aperto per mappare ed esplorare l’ecosistema."),
 ];
 
 const relatedPages = [
   {
-    title: "CCAF research experience",
+    title: t("CCAF research experience", "Esperienza di ricerca al CCAF"),
     href: "/research/ccaf-experience",
-    desc: "Research internship context behind the Digital Asset Programme and the DeFi taxonomy work.",
+    desc: t("Research internship context behind the Digital Asset Programme and the DeFi taxonomy work.", "Il contesto del tirocinio nel Digital Asset Programme e del lavoro sulla tassonomia della DeFi."),
   },
   {
-    title: "Entropy-based economic efficiency",
+    title: t("Entropy-based economic efficiency", "Efficienza economica basata sull’entropia"),
     href: "/research/entropy-based-economic-efficiency",
-    desc: "Related cryptoasset research focused on economic indicators and data-driven evaluation.",
+    desc: t("Related cryptoasset research focused on economic indicators and data-driven evaluation.", "Ricerca correlata sugli indicatori economici dei cryptoasset e sulla loro valutazione a partire dai dati."),
   },
 ];
 ---
 
 <BaseLayout
-  title="Dynamic DeFi Taxonomy and TradFi Bridge | Research | Vincenzo Di Perna"
-  description="CCAF research on a dynamic DeFi taxonomy bridging decentralized finance and traditional finance, connected to the Cambridge DeFi Navigator and digital asset ecosystem mapping."
+  title={t("Dynamic Taxonomy for DeFi and TradFi | Vincenzo Di Perna", "Tassonomia dinamica della DeFi e della TradFi | Vincenzo Di Perna")}
+  description={t("Research from the Cambridge Centre for Alternative Finance on connecting DeFi and traditional finance through a dynamic taxonomy and the DeFi Navigator.", "Ricerca del CCAF su una tassonomia della finanza decentralizzata e tradizionale, collegata al Cambridge DeFi Navigator.")}
   sideBarActiveItemID="research"
 >
   <section class="mb-8">
-    <a href="/research" class="btn btn-sm btn-outline mb-6">
-      ← Back to Research
+    <a href={localPath("/research")} class="btn btn-sm btn-outline mb-6">
+      {t("← Back to Research", "← Torna alla ricerca")}
     </a>
 
     <div class="network-protected card bg-base-100 shadow-md">
@@ -76,22 +81,16 @@ const relatedPages = [
         </div>
 
         <p class="text-lg leading-relaxed opacity-90">
-          This work develops a dynamic taxonomy for decentralised finance,
-          designed to connect DeFi with traditional finance, regulatory
-          perspectives, and financial-market classification logic. The paper
-          focuses on how DeFi protocols can be described through activities,
-          actors, assets, and architecture, while also capturing protocol-level
-          attributes that make DeFi different from traditional financial
-          infrastructures.
+          {t("This work develops a dynamic taxonomy for decentralised finance, designed to connect DeFi with traditional finance, regulatory perspectives, and financial-market classification logic. The paper focuses on how DeFi protocols can be described through activities, actors, assets, and architecture, while also capturing protocol-level attributes that make DeFi different from traditional financial infrastructures.", "Lo studio sviluppa una tassonomia dinamica che mette la DeFi in relazione con la finanza tradizionale, le prospettive normative e i criteri di classificazione dei mercati finanziari. Descrive i protocolli tramite attività, attori, asset e architettura, includendo gli attributi che distinguono le infrastrutture DeFi da quelle tradizionali.")}
         </p>
 
         <div class="flex flex-wrap gap-2 mt-5">
           <span class="badge badge-outline">DeFi</span>
           <span class="badge badge-outline">TradFi</span>
-          <span class="badge badge-outline">Digital assets</span>
-          <span class="badge badge-outline">Taxonomy</span>
+          <span class="badge badge-outline">{t("Digital assets", "Asset digitali")}</span>
+          <span class="badge badge-outline">{t("Taxonomy", "Tassonomia")}</span>
           <span class="badge badge-outline">Cambridge DeFi Navigator</span>
-          <span class="badge badge-outline">Regulatory analysis</span>
+          <span class="badge badge-outline">{t("Regulatory analysis", "Analisi normativa")}</span>
         </div>
       </div>
     </div>
@@ -102,28 +101,28 @@ const relatedPages = [
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">4</p>
-          <p class="opacity-80">taxonomy pillars</p>
+          <p class="opacity-80">{t("taxonomy pillars", "pilastri della tassonomia")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">200</p>
-          <p class="opacity-80">Ethereum protocols analysed</p>
+          <p class="opacity-80">{t("Ethereum protocols analysed", "protocolli Ethereum analizzati")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">47</p>
-          <p class="opacity-80">empirical characteristics</p>
+          <p class="opacity-80">{t("empirical characteristics", "caratteristiche osservate")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">97.96%</p>
-          <p class="opacity-80">Ethereum TVL coverage</p>
+          <p class="opacity-80">{t("Ethereum TVL coverage", "copertura del TVL di Ethereum")}</p>
         </div>
       </div>
     </div>
@@ -134,29 +133,21 @@ const relatedPages = [
       <figure class="px-6 pt-6">
         <img
           src="/research/ccaf/tvl-top-blockchains.png"
-          alt="Top 10 blockchains by total value locked between 2020 and 2024."
+          alt={t("Top 10 blockchains by total value locked between 2020 and 2024.", "Le 10 blockchain con più valore totale bloccato tra il 2020 e il 2024.")}
           class="rounded-xl border border-base-300 bg-base-200"
           loading="lazy"
         />
       </figure>
 
       <div class="card-body">
-        <h2 class="card-title text-2xl">Why a DeFi taxonomy is needed</h2>
+        <h2 class="card-title text-2xl">{t("Why a DeFi taxonomy is needed", "Perché serve una tassonomia della DeFi")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          DeFi has evolved from blockchain-native financial experimentation into
-          a complex ecosystem of protocols that increasingly resemble services
-          known from traditional finance: lending, exchanges, index products,
-          collateralised loans, payment services, derivatives, and asset
-          management.
+          {t("DeFi has evolved from blockchain-native financial experimentation into a complex ecosystem of protocols that increasingly resemble services known from traditional finance: lending, exchanges, index products, collateralised loans, payment services, derivatives, and asset management.", "La DeFi è cresciuta da esperimenti finanziari nativi su blockchain a un ecosistema di protocolli che offre servizi simili a quelli della finanza tradizionale: prestiti, scambi, prodotti indicizzati, prestiti garantiti, pagamenti, derivati e gestione patrimoniale.")}
         </p>
 
         <p class="leading-relaxed opacity-90 mt-3">
-          This creates a classification problem. DeFi is not simply a technical
-          stack, but it is also not identical to TradFi. A useful taxonomy must
-          therefore capture both sides: the financial function of a protocol and
-          the blockchain-specific architecture through which that function is
-          implemented.
+          {t("This creates a classification problem. DeFi is not simply a technical stack, but it is also not identical to TradFi. A useful taxonomy must therefore capture both sides: the financial function of a protocol and the blockchain-specific architecture through which that function is implemented.", "Per classificare la DeFi servono due prospettive complementari: la funzione finanziaria del protocollo e l’architettura blockchain che la realizza.")}
         </p>
       </div>
     </div>
@@ -167,21 +158,17 @@ const relatedPages = [
       <figure class="px-6 pt-6">
         <img
           src="/research/ccaf/taxonomy-methodology.png"
-          alt="Methodology flowchart used to formulate the DeFi taxonomy."
+          alt={t("Methodology flowchart used to formulate the DeFi taxonomy.", "Diagramma del metodo usato per formulare la tassonomia della DeFi.")}
           class="rounded-xl border border-base-300 bg-base-200"
           loading="lazy"
         />
       </figure>
 
       <div class="card-body">
-        <h2 class="card-title text-2xl">Methodology</h2>
+        <h2 class="card-title text-2xl">{t("Methodology", "Metodologia")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The taxonomy is built by combining literature review, conceptual
-          analysis, empirical protocol inspection, and rule-based classification.
-          The goal is not only to list DeFi categories, but to build a structure
-          that can evolve with the ecosystem and remain useful for researchers,
-          practitioners, and regulators.
+          {t("The taxonomy is built by combining literature review, conceptual analysis, empirical protocol inspection, and rule-based classification. The goal is not only to list DeFi categories, but to build a structure that can evolve with the ecosystem and remain useful for researchers, practitioners, and regulators.", "La tassonomia combina revisione della letteratura, analisi concettuale, osservazione empirica dei protocolli e classificazione per regole. La struttura è pensata per evolvere con l’ecosistema e rimanere utile a ricercatori, operatori e autorità.")}
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
@@ -207,20 +194,17 @@ const relatedPages = [
       <figure class="px-6 pt-6">
         <img
           src="/research/ccaf/high-level-taxonomy.png"
-          alt="High-level DeFi taxonomy organised around Activities, Actors, Assets, and Architecture."
+          alt={t("High-level DeFi taxonomy organised around Activities, Actors, Assets, and Architecture.", "Tassonomia generale della DeFi articolata in attività, attori, asset e architettura.")}
           class="rounded-xl border border-base-300 bg-base-200"
           loading="lazy"
         />
       </figure>
 
       <div class="card-body">
-        <h2 class="card-title text-2xl">The 4A taxonomy layer</h2>
+        <h2 class="card-title text-2xl">{t("The 4A taxonomy layer", "Le quattro dimensioni della tassonomia")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The high-level taxonomy organises DeFi into four main perspectives:
-          Activities, Actors, Assets, and Architecture. This is the core bridge
-          between the DeFi ecosystem and a TradFi-oriented understanding of
-          financial services.
+          {t("The high-level taxonomy organises DeFi into four main perspectives: Activities, Actors, Assets, and Architecture. This is the core bridge between the DeFi ecosystem and a TradFi-oriented understanding of financial services.", "Attività, attori, asset e architettura sono le quattro prospettive attraverso cui la tassonomia mette in relazione la DeFi con i servizi della finanza tradizionale.")}
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
@@ -248,21 +232,17 @@ const relatedPages = [
       <figure class="px-6 pt-6">
         <img
           src="/research/ccaf/general-taxonomy-structure.png"
-          alt="General taxonomy structure showing activity, actor, asset, and architecture tags."
+          alt={t("General taxonomy structure showing activity, actor, asset, and architecture tags.", "Struttura generale con le etichette per attività, attori, asset e architettura.")}
           class="rounded-xl border border-base-300 bg-base-200"
           loading="lazy"
         />
       </figure>
 
       <div class="card-body">
-        <h2 class="card-title text-2xl">From categories to machine-readable structure</h2>
+        <h2 class="card-title text-2xl">{t("From categories to machine-readable structure", "Dalle categorie a una struttura leggibile dalle macchine")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The taxonomy is designed as a structured tagging system. Each protocol
-          can be described through activity, actor, asset, and architecture tags.
-          This makes the taxonomy more useful than a static list of categories:
-          it can support data exchange, protocol comparison, and integration
-          with financial-infrastructure concepts.
+          {t("The taxonomy is designed as a structured tagging system. Each protocol can be described through activity, actor, asset, and architecture tags. This makes the taxonomy more useful than a static list of categories: it can support data exchange, protocol comparison, and integration with financial-infrastructure concepts.", "La tassonomia assegna a ogni protocollo etichette per attività, attori, asset e architettura. La struttura facilita lo scambio di dati, il confronto tra protocolli e l’integrazione con i concetti delle infrastrutture finanziarie.")}
         </p>
 
         <div class="mockup-code mt-5 text-sm">
@@ -280,27 +260,21 @@ const relatedPages = [
       <figure class="px-6 pt-6">
         <img
           src="/research/ccaf/semantic-rule-flowchart.png"
-          alt="Semantic rule development flowchart for DeFi protocol classification."
+          alt={t("Semantic rule development flowchart for DeFi protocol classification.", "Diagramma di sviluppo delle regole semantiche per classificare i protocolli DeFi.")}
           class="rounded-xl border border-base-300 bg-base-200"
           loading="lazy"
         />
       </figure>
 
       <div class="card-body">
-        <h2 class="card-title text-2xl">Semantic rules for protocol classification</h2>
+        <h2 class="card-title text-2xl">{t("Semantic rules for protocol classification", "Regole semantiche per classificare i protocolli")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          A central part of the work is the development of semantic rules for
-          classifying protocols. The rules are based on protocol websites,
-          documentation, technical descriptions, governance information, and
-          external sources. This allows the taxonomy to move from conceptual
-          categories to reproducible protocol classification.
+          {t("A central part of the work is the development of semantic rules for classifying protocols. The rules are based on protocol websites, documentation, technical descriptions, governance information, and external sources. This allows the taxonomy to move from conceptual categories to reproducible protocol classification.", "Le regole semantiche si basano sui siti dei protocolli, sulla documentazione, sulle descrizioni tecniche, sulle informazioni di governance e su fonti esterne. Permettono di passare dalle categorie concettuali a una classificazione riproducibile.")}
         </p>
 
         <p class="leading-relaxed opacity-90 mt-3">
-          For example, a lending protocol can be identified through language
-          related to liquidity provision, borrowing, supplying assets,
-          collateralisation, interest-rate models, and liquidation mechanisms.
+          {t("For example, a lending protocol can be identified through language related to liquidity provision, borrowing, supplying assets, collateralisation, interest-rate models, and liquidation mechanisms.", "Per esempio, un protocollo di prestito si può identificare cercando concetti come fornitura di liquidità, prestiti, conferimento di asset, garanzie, modelli dei tassi di interesse e meccanismi di liquidazione.")}
         </p>
       </div>
     </div>
@@ -312,25 +286,20 @@ const relatedPages = [
         <h2 class="card-title text-2xl">Cambridge DeFi Navigator</h2>
 
         <p class="leading-relaxed opacity-90">
-          The taxonomy is connected to the Cambridge DeFi Navigator, an
-          open-access CCAF digital tool for exploring the DeFi ecosystem through
-          interactive visualisations. The Navigator provides a practical way to
-          inspect DeFi categories, protocols, and ecosystem relationships beyond
-          the static format of a paper.
+          {t("The taxonomy is connected to the Cambridge DeFi Navigator, an open-access CCAF digital tool for exploring the DeFi ecosystem through interactive visualisations. The Navigator provides a practical way to inspect DeFi categories, protocols, and ecosystem relationships beyond the static format of a paper.", "Il Cambridge DeFi Navigator applica la tassonomia in uno strumento del CCAF ad accesso libero. Le visualizzazioni interattive permettono di esplorare categorie, protocolli e relazioni nell’ecosistema DeFi.")}
         </p>
 
         <div class="mt-5 overflow-hidden rounded-xl border border-base-300 bg-base-200">
           <iframe
             src="https://ccaf.io/defi/ecosystem-map/visualisation/graph"
-            title="Cambridge DeFi Navigator ecosystem map"
+            title={t("Cambridge DeFi Navigator ecosystem map", "Mappa dell’ecosistema nel Cambridge DeFi Navigator")}
             class="h-[680px] w-full bg-base-100"
             loading="lazy"
           ></iframe>
         </div>
 
         <p class="text-sm opacity-70 mt-3">
-          If the embedded preview is blocked by the external website or by the
-          browser, use the direct link below.
+          {t("If the embedded preview is blocked by the external website or by the browser, use the direct link below.", "Se l’anteprima è bloccata dal sito esterno o dal browser, puoi aprire lo strumento dal link qui sotto.")}
         </p>
 
         <div class="card-actions mt-4">
@@ -340,7 +309,7 @@ const relatedPages = [
             rel="noopener noreferrer"
             class="btn btn-sm btn-primary"
           >
-            Open Cambridge DeFi Navigator
+            {t("Open Cambridge DeFi Navigator", "Apri Cambridge DeFi Navigator")}
           </a>
         </div>
       </div>
@@ -350,7 +319,7 @@ const relatedPages = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Main contribution</h2>
+        <h2 class="card-title text-2xl">{t("Main contribution", "Contributo principale")}</h2>
 
         <ul class="list-disc pl-5 space-y-2 opacity-90">
           {contributions.map((contribution) => <li>{contribution}</li>)}
@@ -362,21 +331,17 @@ const relatedPages = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Relationship with my CCAF experience</h2>
+        <h2 class="card-title text-2xl">{t("Relationship with my CCAF experience", "Il legame con la mia esperienza al CCAF")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          This work is directly connected to my research experience at the
-          Cambridge Centre for Alternative Finance as Digital Asset Programme
-          Intern / Digital Asset Research Intern. The page below describes the
-          broader internship context, while this page focuses specifically on
-          the taxonomy paper and the DeFi Navigator connection.
+          {t("This work is directly connected to my research experience at the Cambridge Centre for Alternative Finance as Digital Asset Programme Intern / Digital Asset Research Intern. The page below describes the broader internship context, while this page focuses specifically on the taxonomy paper and the DeFi Navigator connection.", "Questo lavoro nasce dalla mia esperienza di ricerca sugli asset digitali al Cambridge Centre for Alternative Finance. La pagina qui sotto descrive il tirocinio nel Digital Asset Programme, mentre questa pagina approfondisce l’articolo sulla tassonomia e il legame con il DeFi Navigator.")}
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
           {
             relatedPages.map((page) => (
               <a
-                href={page.href}
+                href={localPath(page.href)}
                 class="card bg-base-200/50 border border-base-300 transition hover:shadow-lg hover:scale-[101%]"
               >
                 <div class="card-body">
@@ -394,7 +359,7 @@ const relatedPages = [
   <section class="mb-12">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Links</h2>
+        <h2 class="card-title text-2xl">{t("Links", "Collegamenti")}</h2>
 
         <div class="flex flex-wrap gap-3 mt-2">
           <a
@@ -403,7 +368,7 @@ const relatedPages = [
             rel="noopener noreferrer"
             class="btn btn-primary btn-sm"
           >
-            Open SSRN paper
+            {t("Open SSRN paper", "Apri l’articolo su SSRN")}
           </a>
 
           <a
@@ -412,14 +377,14 @@ const relatedPages = [
             rel="noopener noreferrer"
             class="btn btn-outline btn-sm"
           >
-            Open DeFi Navigator
+            {t("Open DeFi Navigator", "Apri DeFi Navigator")}
           </a>
 
           <a
-            href="/research/ccaf-experience"
+            href={localPath("/research/ccaf-experience")}
             class="btn btn-outline btn-sm"
           >
-            CCAF experience
+            {t("CCAF experience", "Esperienza al CCAF")}
           </a>
         </div>
       </div>

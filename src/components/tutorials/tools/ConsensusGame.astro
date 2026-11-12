@@ -1,15 +1,20 @@
+---
+import { translator } from "../../../i18n/locale";
+
+const t = translator(Astro.url.pathname);
+---
+
 <section id="consensus-game" class="network-protected card bg-base-100 shadow-md">
   <div class="card-body">
     <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">Consensus game</h3>
-      <span class="badge badge-secondary">Validators</span>
+      <h3 class="card-title">{t("Consensus game", "Gioco del consenso")}</h3>
+      <span class="badge badge-secondary">{t("Validators", "Validatori")}</span>
       <span class="badge badge-outline">Quorum</span>
-      <span class="badge badge-outline">Finality</span>
+      <span class="badge badge-outline">{t("Finality", "Finalità")}</span>
     </div>
 
     <p class="opacity-80 mb-4">
-      Toggle validators online or faulty, propose a block, and see whether the
-      network reaches enough votes to finalize it.
+      {t("Toggle validators online or faulty, propose a block, and see whether the network reaches enough votes to finalize it.", "Cambia lo stato dei validatori, proponi un blocco e verifica se la rete raccoglie abbastanza voti per renderlo definitivo.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
@@ -18,36 +23,36 @@
 
         <div class="flex flex-wrap gap-2">
           <button class="btn btn-primary" data-consensus-action="propose">
-            Propose block
+            {t("Propose block", "Proponi un blocco")}
           </button>
 
           <button class="btn btn-outline" data-consensus-action="random-fault">
-            Random fault
+            {t("Random fault", "Simula un guasto casuale")}
           </button>
 
           <button class="btn btn-outline" data-consensus-action="reset">
-            Reset validators
+            {t("Reset validators", "Ripristina i validatori")}
           </button>
         </div>
       </div>
 
       <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-2">Consensus status</p>
+        <p class="font-semibold mb-2">{t("Consensus status", "Stato del consenso")}</p>
 
         <div class="stats stats-vertical w-full bg-base-100 mb-4">
           <div class="stat">
-            <div class="stat-title">Online honest votes</div>
+            <div class="stat-title">{t("Online honest votes", "Voti validi online")}</div>
             <div class="stat-value text-2xl" data-votes>0</div>
           </div>
 
           <div class="stat">
-            <div class="stat-title">Required quorum</div>
+            <div class="stat-title">{t("Required quorum", "Quorum richiesto")}</div>
             <div class="stat-value text-2xl" data-quorum>5</div>
           </div>
         </div>
 
         <p data-consensus-status class="text-sm opacity-80">
-          Toggle validators and propose a block.
+          {t("Toggle validators and propose a block.", "Imposta i validatori e proponi un blocco.")}
         </p>
       </div>
     </div>
@@ -55,6 +60,9 @@
 </section>
 
 <script>
+  const isItalian = () => document.documentElement.lang === "it";
+  const translate = (english, italian) => isItalian() ? italian : english;
+
   function initConsensusGame() {
     const root = document.querySelector("#consensus-game");
 
@@ -80,6 +88,7 @@
     ];
 
     const quorum = 5;
+    const labels = { honest: "corretto", offline: "offline", faulty: "guasto" };
 
     function stateBadge(state) {
       if (state === "honest") return "badge-success";
@@ -102,7 +111,7 @@
             >
               <div class="card-body p-4">
                 <p class="font-bold">${validator.id}</p>
-                <span class="badge ${stateBadge(validator.state)}">${validator.state}</span>
+                <span class="badge ${stateBadge(validator.state)}">${translate(validator.state, labels[validator.state])}</span>
               </div>
             </button>
           `,
@@ -125,7 +134,7 @@
             validator.state = "honest";
           }
 
-          status.textContent = `${id} changed state. Honest validators vote for the block; offline or faulty validators do not.`;
+          status.textContent = (isItalian() ? `${id} ha cambiato stato. I validatori corretti votano per il blocco. Quelli offline o guasti non contribuiscono.` : `${id} changed state. Honest validators vote for the block; offline or faulty validators do not.`);
           render();
         });
       });
@@ -135,9 +144,9 @@
       const votes = countVotes();
 
       if (votes >= quorum) {
-        status.textContent = `Block finalized: ${votes}/${validators.length} validators voted honestly, reaching the quorum of ${quorum}.`;
+        status.textContent = (isItalian() ? `Blocco definitivo: ${votes} validatori su ${validators.length} hanno votato correttamente. Quorum di ${quorum} raggiunto.` : `Block finalized: ${votes}/${validators.length} validators voted honestly, reaching the quorum of ${quorum}.`);
       } else {
-        status.textContent = `Block not finalized: only ${votes}/${validators.length} honest votes. The network did not reach quorum.`;
+        status.textContent = (isItalian() ? `Il blocco non è definitivo: solo ${votes} voti validi su ${validators.length}. Il quorum non è stato raggiunto.` : `Block not finalized: only ${votes}/${validators.length} honest votes. The network did not reach quorum.`);
       }
 
       render();
@@ -146,13 +155,13 @@
     function randomFault() {
       const index = Math.floor(Math.random() * validators.length);
       validators[index].state = validators[index].state === "faulty" ? "offline" : "faulty";
-      status.textContent = `${validators[index].id} experienced a random failure.`;
+      status.textContent = (isItalian() ? `Si è verificato un guasto casuale in ${validators[index].id}.` : `${validators[index].id} experienced a random failure.`);
       render();
     }
 
     function reset() {
       validators = validators.map((validator) => ({ ...validator, state: "honest" }));
-      status.textContent = "All validators are honest again.";
+      status.textContent = translate("All validators are honest again.", "Tutti i validatori funzionano di nuovo correttamente.");
       render();
     }
 

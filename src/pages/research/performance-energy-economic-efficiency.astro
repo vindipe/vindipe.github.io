@@ -1,51 +1,56 @@
 ---
+import { getLocale, inLanguage, translator } from "../../i18n/locale";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const t = translator(Astro.url.pathname);
+const locale = getLocale(Astro.url.pathname);
+const localPath = (href: string) => inLanguage(href, locale);
 
 const blockchainEnergyProfiles = [
   {
     name: "Algorand",
     src: "/research/icbc25/energy-algorand-per-transaction.png",
-    desc: "Shows low energy per transaction across several topology and workload combinations, especially for transaction-processing workloads.",
+    desc: t("Shows low energy per transaction across several topology and workload combinations, especially for transaction-processing workloads.", "Mostra un basso consumo per transazione con diverse topologie e carichi, soprattutto nei carichi di elaborazione delle transazioni."),
   },
   {
     name: "Diem",
     src: "/research/icbc25/energy-diem-per-transaction.png",
-    desc: "Highlights the energy profile of a permissioned BFT-style blockchain under topology-controlled execution.",
+    desc: t("Highlights the energy profile of a permissioned BFT-style blockchain under topology-controlled execution.", "Evidenzia il profilo energetico di una blockchain BFT ad accesso riservato in condizioni di rete controllate."),
   },
   {
     name: "Ethereum Clique",
     src: "/research/icbc25/energy-ethereum-per-transaction.png",
-    desc: "Shows higher energy per transaction compared with the other evaluated systems, regardless of topology.",
+    desc: t("Shows higher energy per transaction compared with the other evaluated systems, regardless of topology.", "Usa più energia per transazione rispetto agli altri sistemi valutati, a prescindere dalla topologia."),
   },
   {
     name: "Quorum IBFT",
     src: "/research/icbc25/energy-quorum-per-transaction.png",
-    desc: "Captures how a permissioned Ethereum-based system reacts to workload intensity and topology changes.",
+    desc: t("Captures how a permissioned Ethereum-based system reacts to workload intensity and topology changes.", "Mostra la risposta di un sistema Ethereum ad accesso riservato all’intensità del carico e ai cambi di topologia."),
   },
   {
     name: "Solana",
     src: "/research/icbc25/energy-solana-per-transaction.png",
-    desc: "Shows competitive energy behaviour in smaller configurations, with scalability issues emerging in larger setups.",
+    desc: t("Shows competitive energy behaviour in smaller configurations, with scalability issues emerging in larger setups.", "Ha consumi competitivi nelle configurazioni più piccole, ma incontra problemi di scalabilità in quelle più grandi."),
   },
 ];
 
 const findings = [
-  "Fat-tree and full mesh generally provide the most energy-efficient network configurations across the evaluated blockchains.",
-  "Algorand and Diem achieve the lowest energy consumption per transaction in several configurations.",
-  "Ethereum Clique shows the highest energy per transaction among the evaluated systems.",
-  "Quorum IBFT becomes more expensive under demanding workloads and larger configurations.",
-  "Solana shows promising energy-per-transaction behaviour, but larger node configurations expose operational and scalability issues.",
+  t("Fat-tree and full mesh generally provide the most energy-efficient network configurations across the evaluated blockchains.", "Fat-tree e maglia completa sono in genere le topologie più efficienti dal punto di vista energetico per le blockchain esaminate."),
+  t("Algorand and Diem achieve the lowest energy consumption per transaction in several configurations.", "In diverse configurazioni, Algorand e Diem registrano i consumi più bassi per transazione."),
+  t("Ethereum Clique shows the highest energy per transaction among the evaluated systems.", "Ethereum Clique registra il consumo più alto per transazione fra i sistemi valutati."),
+  t("Quorum IBFT becomes more expensive under demanding workloads and larger configurations.", "Quorum IBFT consuma di più con carichi impegnativi e configurazioni più grandi."),
+  t("Solana shows promising energy-per-transaction behaviour, but larger node configurations expose operational and scalability issues.", "Solana ottiene buoni risultati sull’energia per transazione, ma aumentando il numero di nodi emergono problemi operativi e di scalabilità."),
 ];
 ---
 
 <BaseLayout
-  title="Blockchain Performance, Energy & Economic Efficiency | Research | Vincenzo Di Perna"
-  description="IEEE ICBC 2025 research on blockchain performance, energy consumption, network topologies, RAPL measurements, workloads, energy per transaction, and economic efficiency."
+  title={t("Blockchain Energy Use and Network Topology | IEEE ICBC", "Prestazioni e consumi energetici delle blockchain | Vincenzo Di Perna")}
+  description={t("IEEE ICBC 2025 study on how network topology and workload affect blockchain energy use, using Intel RAPL to measure energy per committed transaction.", "Studio IEEE ICBC 2025 su topologie di rete, misure RAPL e consumi energetici per transazione nei sistemi blockchain.")}
   sideBarActiveItemID="research"
 >
   <section class="mb-8">
-    <a href="/research" class="btn btn-sm btn-outline mb-6">
-      ← Back to Research
+    <a href={localPath("/research")} class="btn btn-sm btn-outline mb-6">
+      {t("← Back to Research", "← Torna alla ricerca")}
     </a>
 
     <div class="network-protected card bg-base-100 shadow-md">
@@ -55,24 +60,20 @@ const findings = [
             Blockchain Energy Consumption: Unveiling the Impact of Network Topologies
           </h1>
           <span class="badge badge-secondary">IEEE ICBC '25</span>
-          <span class="badge badge-outline">Publication</span>
+          <span class="badge badge-outline">{t("Publication", "Pubblicazione")}</span>
         </div>
 
         <p class="text-lg leading-relaxed opacity-90">
-          This work studies how network topology influences the energy
-          consumption of blockchain systems. The paper evaluates multiple
-          blockchain platforms under controlled topologies and realistic
-          workloads, measuring not only total energy usage but also energy per
-          transaction.
+          {t("This work studies how network topology influences the energy consumption of blockchain systems. The paper evaluates multiple blockchain platforms under controlled topologies and realistic workloads, measuring not only total energy usage but also energy per transaction.", "Lo studio esamina come la topologia della rete influenzi i consumi energetici delle blockchain. Confronta più piattaforme con topologie controllate e carichi realistici, misurando sia l’energia totale sia quella per transazione.")}
         </p>
 
         <div class="flex flex-wrap gap-2 mt-5">
-          <span class="badge badge-outline">Blockchain energy</span>
-          <span class="badge badge-outline">Network topology</span>
+          <span class="badge badge-outline">{t("Blockchain energy", "Consumi energetici delle blockchain")}</span>
+          <span class="badge badge-outline">{t("Network topology", "Topologia di rete")}</span>
           <span class="badge badge-outline">RAPL</span>
-          <span class="badge badge-outline">Energy per transaction</span>
+          <span class="badge badge-outline">{t("Energy per transaction", "Energia per transazione")}</span>
           <span class="badge badge-outline">Benchmarking</span>
-          <span class="badge badge-outline">Reproducibility</span>
+          <span class="badge badge-outline">{t("Reproducibility", "Riproducibilità")}</span>
         </div>
       </div>
     </div>
@@ -83,28 +84,28 @@ const findings = [
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">5</p>
-          <p class="opacity-80">blockchain systems</p>
+          <p class="opacity-80">{t("blockchain systems", "sistemi blockchain")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">5</p>
-          <p class="opacity-80">network topologies</p>
+          <p class="opacity-80">{t("network topologies", "topologie di rete")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">3</p>
-          <p class="opacity-80">workload models</p>
+          <p class="opacity-80">{t("workload models", "modelli di carico")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">RAPL</p>
-          <p class="opacity-80">energy measurements</p>
+          <p class="opacity-80">{t("energy measurements", "misure energetiche")}</p>
         </div>
       </div>
     </div>
@@ -113,19 +114,14 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Context</h2>
+        <h2 class="card-title text-2xl">{t("Context", "Contesto")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          Blockchain energy consumption is often discussed in relation to
-          consensus mechanisms and hardware requirements. However, the network
-          layer also affects how validators communicate, how workloads are
-          distributed, and how efficiently transactions are processed.
+          {t("Blockchain energy consumption is often discussed in relation to consensus mechanisms and hardware requirements. However, the network layer also affects how validators communicate, how workloads are distributed, and how efficiently transactions are processed.", "I consumi delle blockchain si discutono spesso in relazione al consenso e all’hardware. Anche la rete influisce sul modo in cui i validatori comunicano, i carichi si distribuiscono e le transazioni vengono elaborate.")}
         </p>
 
         <p class="leading-relaxed opacity-90 mt-3">
-          This paper investigates that overlooked dimension: whether the same
-          blockchain system consumes different amounts of energy when executed
-          over different network topologies.
+          {t("This paper investigates that overlooked dimension: whether the same blockchain system consumes different amounts of energy when executed over different network topologies.", "Lo studio indaga questa dimensione: una stessa blockchain consuma quantità diverse di energia quando cambia la topologia di rete?")}
         </p>
       </div>
     </div>
@@ -136,28 +132,21 @@ const findings = [
       <figure class="px-6 pt-6">
         <img
           src="/research/icbc25/topologies.png"
-          alt="Five network topologies evaluated in the IEEE ICBC 2025 blockchain energy paper: fat-tree, full mesh, hypercube, scale-free, and torus."
+          alt={t("Five network topologies evaluated in the IEEE ICBC 2025 blockchain energy paper: fat-tree, full mesh, hypercube, scale-free, and torus.", "Le cinque topologie valutate nello studio IEEE ICBC 2025: fat-tree, maglia completa, ipercubo, rete scale-free e toro.")}
           class="rounded-xl border border-base-300 bg-base-200"
           loading="lazy"
         />
       </figure>
 
       <div class="card-body">
-        <h2 class="card-title text-2xl">Topology-aware energy evaluation</h2>
+        <h2 class="card-title text-2xl">{t("Topology-aware energy evaluation", "Valutazione energetica con topologie controllate")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The evaluation considers five controlled network topologies:
-          fat-tree, full mesh, hypercube, scale-free, and torus. Each topology
-          changes how blockchain nodes communicate, which can affect latency,
-          message propagation, committed transactions, and therefore energy per
-          transaction.
+          {t("The evaluation considers five controlled network topologies: fat-tree, full mesh, hypercube, scale-free, and torus. Each topology changes how blockchain nodes communicate, which can affect latency, message propagation, committed transactions, and therefore energy per transaction.", "La valutazione considera cinque topologie: fat-tree, maglia completa, ipercubo, rete scale-free e toro. La topologia cambia come comunicano i nodi e può incidere su latenza, propagazione dei messaggi, transazioni confermate ed energia per transazione.")}
         </p>
 
         <p class="leading-relaxed opacity-90 mt-3">
-          The goal is not to claim that one topology represents every possible
-          blockchain deployment. Instead, these topologies provide controlled
-          communication structures for understanding how network shape impacts
-          energy efficiency.
+          {t("The goal is not to claim that one topology represents every possible blockchain deployment. Instead, these topologies provide controlled communication structures for understanding how network shape impacts energy efficiency.", "Queste topologie rappresentano strutture di comunicazione controllate e consentono di studiare come la forma della rete incida sull’efficienza energetica.")}
         </p>
       </div>
     </div>
@@ -166,13 +155,10 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Experimental setup</h2>
+        <h2 class="card-title text-2xl">{t("Experimental setup", "Configurazione sperimentale")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The experiments evaluate Algorand, Diem, Ethereum Clique, Quorum
-          IBFT, and Solana. The workload set includes two transaction-processing
-          workloads inspired by PayPal and VISA, and one smart-contract workload
-          inspired by GAFAM-style stock-market interactions.
+          {t("The experiments evaluate Algorand, Diem, Ethereum Clique, Quorum IBFT, and Solana. The workload set includes two transaction-processing workloads inspired by PayPal and VISA, and one smart-contract workload inspired by GAFAM-style stock-market interactions.", "Gli esperimenti valutano Algorand, Diem, Ethereum Clique, Quorum IBFT e Solana. Due carichi di elaborazione delle transazioni si ispirano a PayPal e VISA, mentre un carico di smart contract riproduce interazioni di borsa in stile GAFAM.")}
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
@@ -180,8 +166,7 @@ const findings = [
             <div class="card-body">
               <h3 class="font-bold">PayPal</h3>
               <p class="text-sm opacity-80">
-                Constant-rate transfer workload, modelled as a moderate payment
-                processing scenario.
+                {t("Constant-rate transfer workload, modelled as a moderate payment processing scenario.", "Trasferimenti a frequenza costante, pensati per rappresentare un volume moderato di pagamenti.")}
               </p>
             </div>
           </div>
@@ -190,8 +175,7 @@ const findings = [
             <div class="card-body">
               <h3 class="font-bold">VISA</h3>
               <p class="text-sm opacity-80">
-                Higher-throughput transfer workload, used to stress transaction
-                processing capacity.
+                {t("Higher-throughput transfer workload, used to stress transaction processing capacity.", "Trasferimenti con throughput più alto, per mettere alla prova la capacità di elaborazione delle transazioni.")}
               </p>
             </div>
           </div>
@@ -200,18 +184,14 @@ const findings = [
             <div class="card-body">
               <h3 class="font-bold">GAFAM</h3>
               <p class="text-sm opacity-80">
-                Smart-contract workload modelling bursty stock purchase and
-                availability-check interactions.
+                {t("Smart-contract workload modelling bursty stock purchase and availability-check interactions.", "Carico di smart contract che simula picchi di acquisti di azioni e verifiche della disponibilità.")}
               </p>
             </div>
           </div>
         </div>
 
         <p class="leading-relaxed opacity-90 mt-5">
-          Energy consumption is measured through Intel RAPL counters, which
-          expose CPU package and memory-domain energy indicators. The paper then
-          converts these measurements into kilowatt-hours and relates energy
-          consumption to committed transactions.
+          {t("Energy consumption is measured through Intel RAPL counters, which expose CPU package and memory-domain energy indicators. The paper then converts these measurements into kilowatt-hours and relates energy consumption to committed transactions.", "I consumi sono misurati con i contatori Intel RAPL, che forniscono indicatori energetici per il processore e la memoria. Le misure vengono convertite in chilowattora e messe in rapporto con le transazioni confermate.")}
         </p>
       </div>
     </div>
@@ -220,13 +200,10 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Energy per transaction</h2>
+        <h2 class="card-title text-2xl">{t("Energy per transaction", "Energia per transazione")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The most important metric in the paper is not just total energy
-          consumption, but energy per committed transaction. This captures
-          whether a blockchain is merely consuming more energy, or whether that
-          energy is translated into useful committed work.
+          {t("The most important metric in the paper is not just total energy consumption, but energy per committed transaction. This captures whether a blockchain is merely consuming more energy, or whether that energy is translated into useful committed work.", "L’energia per transazione confermata è la metrica centrale. Permette di valutare quanta energia il sistema impiega per produrre lavoro utile, insieme al dato sui consumi complessivi.")}
         </p>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
@@ -257,7 +234,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Main findings</h2>
+        <h2 class="card-title text-2xl">{t("Main findings", "Risultati principali")}</h2>
 
         <ul class="list-disc pl-5 space-y-2 opacity-90">
           {findings.map((finding) => <li>{finding}</li>)}
@@ -269,22 +246,18 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Relationship with the DEBS work</h2>
+        <h2 class="card-title text-2xl">{t("Relationship with the DEBS work", "Il legame con lo studio DEBS")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          This paper is closely connected to the topology-aware benchmarking
-          line of work. While the DEBS paper focuses more broadly on blockchain
-          performance under network topologies and dynamics, this ICBC paper
-          isolates the energy dimension and studies how topology affects energy
-          consumption and energy per transaction.
+          {t("This paper is closely connected to the topology-aware benchmarking line of work. While the DEBS paper focuses more broadly on blockchain performance under network topologies and dynamics, this ICBC paper isolates the energy dimension and studies how topology affects energy consumption and energy per transaction.", "L’articolo fa parte del filone sul benchmarking con topologie controllate. Lo studio DEBS esamina le prestazioni con diverse topologie e dinamiche di rete. Lo studio ICBC isola la dimensione energetica e valuta come la topologia influenzi i consumi totali e per transazione.")}
         </p>
 
         <div class="card-actions mt-4">
           <a
-            href="/research/topology-aware-blockchain-benchmarking"
+            href={localPath("/research/topology-aware-blockchain-benchmarking")}
             class="btn btn-sm btn-outline"
           >
-            Open DEBS research page
+            {t("Open DEBS research page", "Vai alla pagina dello studio DEBS")}
           </a>
         </div>
       </div>
@@ -294,7 +267,7 @@ const findings = [
   <section class="mb-12">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Links</h2>
+        <h2 class="card-title text-2xl">{t("Links", "Collegamenti")}</h2>
 
         <div class="flex flex-wrap gap-3 mt-2">
           <a
@@ -303,21 +276,21 @@ const findings = [
             rel="noopener noreferrer"
             class="btn btn-primary btn-sm"
           >
-            Open IEEE paper
+            {t("Open IEEE paper", "Apri l’articolo IEEE")}
           </a>
 
           <a
-            href="/research/topology-aware-blockchain-benchmarking"
+            href={localPath("/research/topology-aware-blockchain-benchmarking")}
             class="btn btn-outline btn-sm"
           >
-            Related DEBS paper
+            {t("Related DEBS paper", "Articolo DEBS correlato")}
           </a>
 
           <a
-            href="/research/lilith-benchmarking-framework"
+            href={localPath("/research/lilith-benchmarking-framework")}
             class="btn btn-outline btn-sm"
           >
-            Related Lilith artifact
+            {t("Related Lilith artifact", "Materiali di Lilith")}
           </a>
         </div>
       </div>

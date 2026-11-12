@@ -1,4 +1,7 @@
 ---
+import { translator } from "../../i18n/locale";
+
+const t = translator(Astro.url.pathname);
 const { title, context, howToPlay, observe, nextStep } = Astro.props;
 ---
 
@@ -6,27 +9,27 @@ const { title, context, howToPlay, observe, nextStep } = Astro.props;
   <div class="card-body">
     <div class="flex flex-wrap gap-2 items-center mb-2">
       <h3 class="card-title">{title}</h3>
-      <span class="badge badge-primary">Guided lab</span>
+      <span class="badge badge-primary">{t("Guided lab", "Laboratorio guidato")}</span>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-3">
       <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-1">1. Blockchain context</p>
+        <p class="font-semibold mb-1">{t("1. Blockchain context", "1. Il ruolo nella blockchain")}</p>
         <p class="text-sm opacity-80">{context}</p>
       </div>
 
       <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-1">2. How to play</p>
+        <p class="font-semibold mb-1">{t("2. How to play", "2. Come si usa")}</p>
         <p class="text-sm opacity-80">{howToPlay}</p>
       </div>
 
       <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-1">3. What to observe</p>
+        <p class="font-semibold mb-1">{t("3. What to observe", "3. Che cosa osservare")}</p>
         <p class="text-sm opacity-80">{observe}</p>
       </div>
 
       <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-1">4. Next step</p>
+        <p class="font-semibold mb-1">{t("4. Next step", "4. Come proseguire")}</p>
         <p class="text-sm opacity-80">{nextStep}</p>
       </div>
     </div>

@@ -1,22 +1,26 @@
+---
+import { translator } from "../../../i18n/locale";
+
+const t = translator(Astro.url.pathname);
+---
+
 <section id="fees-scalability-lab" class="network-protected card bg-base-100 shadow-md">
   <div class="card-body">
     <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">Fees, blockspace & scalability</h3>
-      <span class="badge badge-secondary">Congestion</span>
+      <h3 class="card-title">{t("Fees, blockspace & scalability", "Commissioni, capacità dei blocchi e scalabilità")}</h3>
+      <span class="badge badge-secondary">{t("Congestion", "Congestione")}</span>
       <span class="badge badge-outline">Throughput</span>
-      <span class="badge badge-outline">User cost</span>
+      <span class="badge badge-outline">{t("User cost", "Costo per l’utente")}</span>
     </div>
 
     <p class="opacity-80 mb-4">
-      Blockchains have limited capacity. When demand is higher than available
-      blockspace, transactions compete for inclusion and fees become more
-      important.
+      {t("Blockchains have limited capacity. When demand is higher than available blockspace, transactions compete for inclusion and fees become more important.", "Quando la domanda supera lo spazio nei blocchi, le transazioni competono per essere incluse e le commissioni acquistano importanza.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
       <div class="grid gap-4">
         <label class="form-control">
-          <span class="label-text font-semibold">Incoming transactions</span>
+          <span class="label-text font-semibold">{t("Incoming transactions", "Transazioni in arrivo")}</span>
           <input
             type="range"
             min="10"
@@ -31,7 +35,7 @@
         </label>
 
         <label class="form-control">
-          <span class="label-text font-semibold">Block capacity</span>
+          <span class="label-text font-semibold">{t("Block capacity", "Capacità del blocco")}</span>
           <input
             type="range"
             min="10"
@@ -41,12 +45,12 @@
             data-fees-capacity
           />
           <span class="text-sm opacity-70">
-            <span data-fees-capacity-value>70</span> tx/block
+            <span data-fees-capacity-value>70</span> {t("tx/block", "tx/blocco")}
           </span>
         </label>
 
         <label class="form-control">
-          <span class="label-text font-semibold">Average fee willingness</span>
+          <span class="label-text font-semibold">{t("Average fee willingness", "Commissione media accettata")}</span>
           <input
             type="range"
             min="1"
@@ -61,32 +65,32 @@
         </label>
 
         <button class="btn btn-outline" data-fees-action="spike">
-          Simulate demand spike
+          {t("Simulate demand spike", "Simula un picco di domanda")}
         </button>
       </div>
 
       <div class="grid gap-3">
         <div class="stats stats-vertical bg-base-100 shadow">
           <div class="stat">
-            <div class="stat-title">Included now</div>
+            <div class="stat-title">{t("Included now", "Incluse ora")}</div>
             <div class="stat-value text-2xl" data-fees-included>-</div>
           </div>
 
           <div class="stat">
-            <div class="stat-title">Pending queue</div>
+            <div class="stat-title">{t("Pending queue", "In attesa")}</div>
             <div class="stat-value text-2xl" data-fees-pending>-</div>
           </div>
 
           <div class="stat">
-            <div class="stat-title">Congestion</div>
+            <div class="stat-title">{t("Congestion", "Congestione")}</div>
             <div class="stat-value text-2xl" data-fees-congestion>-</div>
           </div>
         </div>
 
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">Interpretation</p>
+          <p class="font-semibold mb-1">{t("Interpretation", "Come leggere il risultato")}</p>
           <p class="text-sm opacity-80" data-fees-status>
-            Move the sliders to simulate different demand and capacity conditions.
+            {t("Move the sliders to simulate different demand and capacity conditions.", "Muovi i cursori per simulare diverse condizioni di domanda e capacità.")}
           </p>
         </div>
       </div>
@@ -95,6 +99,9 @@
 </section>
 
 <script>
+  const isItalian = () => document.documentElement.lang === "it";
+  const translate = (english, italian) => isItalian() ? italian : english;
+
   function initFeesScalabilityLab() {
     const root = document.querySelector("#fees-scalability-lab");
 
@@ -136,16 +143,16 @@
 
       if (pending === 0) {
         status.textContent =
-          "Capacity is enough for current demand. Fees are less likely to become a bottleneck.";
+          translate("Capacity is enough for current demand. Fees are less likely to become a bottleneck.", "La capacità è sufficiente per la domanda attuale. Le commissioni hanno meno probabilità di diventare un ostacolo.");
       } else if (feeWillingness < 40) {
         status.textContent =
-          "Demand exceeds capacity and users are not willing to pay much. Many transactions may remain pending.";
+          translate("Demand exceeds capacity and users are not willing to pay much. Many transactions may remain pending.", "La domanda supera la capacità e gli utenti sono poco disposti a pagare. Molte transazioni possono restare in attesa.");
       } else if (feeWillingness < 75) {
         status.textContent =
-          "Demand exceeds capacity. Some users may be included, while others wait or raise fees.";
+          translate("Demand exceeds capacity. Some users may be included, while others wait or raise fees.", "La domanda supera la capacità. Alcune transazioni entrano nel blocco, mentre altre devono aspettare o offrire commissioni più alte.");
       } else {
         status.textContent =
-          "High fee willingness can prioritize transactions, but it can also make the system expensive for smaller users.";
+          translate("High fee willingness can prioritize transactions, but it can also make the system expensive for smaller users.", "Commissioni più alte possono dare priorità alle transazioni, ma rendono il sistema più caro per chi ha un budget ridotto.");
       }
     }
 

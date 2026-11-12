@@ -1,63 +1,66 @@
+---
+import { translator } from "../../../i18n/locale";
+
+const t = translator(Astro.url.pathname);
+---
+
 <section id="quantum-blockchain-lab" class="network-protected card bg-base-100 shadow-md">
   <div class="card-body">
     <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">Quantum & blockchain impact</h3>
-      <span class="badge badge-secondary">Quantum risk</span>
-      <span class="badge badge-outline">Signatures</span>
-      <span class="badge badge-outline">Post-quantum migration</span>
+      <h3 class="card-title">{t("Quantum & blockchain impact", "Calcolo quantistico e blockchain")}</h3>
+      <span class="badge badge-secondary">{t("Quantum risk", "Rischio quantistico")}</span>
+      <span class="badge badge-outline">{t("Signatures", "Firme")}</span>
+      <span class="badge badge-outline">{t("Post-quantum migration", "Migrazione post-quantistica")}</span>
     </div>
 
     <p class="opacity-80 mb-4">
-      This lab separates what quantum computing could threaten from what it does
-      not automatically break. It is a conceptual simulator, not a cryptographic
-      risk calculator.
+      {t("This lab separates what quantum computing could threaten from what it does not automatically break. It is a conceptual simulator, not a cryptographic risk calculator.", "Questo simulatore illustra quali componenti possono essere esposti al calcolo quantistico. Gli scenari sono concettuali e servono a capire le differenze tra i componenti.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1fr] gap-4">
       <div class="grid gap-3">
         <label class="form-control">
-          <span class="label-text font-semibold">Blockchain component</span>
+          <span class="label-text font-semibold">{t("Blockchain component", "Componente della blockchain")}</span>
           <select class="select select-bordered" data-quantum-component>
-            <option value="hashes">Hashes and block fingerprints</option>
-            <option value="signatures">User transaction signatures</option>
-            <option value="validators">Validator signatures and consensus keys</option>
-            <option value="mempool">Mempool and exposed pending transactions</option>
-            <option value="migration">Post-quantum migration strategy</option>
+            <option value="hashes">{t("Hashes and block fingerprints", "Hash e impronte dei blocchi")}</option>
+            <option value="signatures">{t("User transaction signatures", "Firme delle transazioni degli utenti")}</option>
+            <option value="validators">{t("Validator signatures and consensus keys", "Firme dei validatori e chiavi di consenso")}</option>
+            <option value="mempool">{t("Mempool and exposed pending transactions", "Mempool e transazioni in attesa esposte")}</option>
+            <option value="migration">{t("Post-quantum migration strategy", "Strategia di migrazione post-quantistica")}</option>
           </select>
         </label>
 
         <label class="form-control">
           <span class="label-text font-semibold">Scenario</span>
           <select class="select select-bordered" data-quantum-scenario>
-            <option value="today">Today: no large fault-tolerant quantum attacker</option>
-            <option value="future">Future: powerful quantum attacker exists</option>
-            <option value="pq">Migration: post-quantum signatures deployed</option>
+            <option value="today">{t("Today: no large fault-tolerant quantum attacker", "Oggi: nessun attaccante con un grande computer quantistico tollerante ai guasti")}</option>
+            <option value="future">{t("Future: powerful quantum attacker exists", "Futuro: un attaccante dispone di un computer quantistico potente")}</option>
+            <option value="pq">{t("Migration: post-quantum signatures deployed", "Migrazione: sono in uso firme post-quantistiche")}</option>
           </select>
         </label>
 
         <button class="btn btn-primary" data-quantum-action="evaluate">
-          Evaluate impact
+          {t("Evaluate impact", "Valuta l’impatto")}
         </button>
       </div>
 
       <div class="grid gap-3">
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">Impact level</p>
+          <p class="font-semibold mb-1">{t("Impact level", "Livello d’impatto")}</p>
           <p class="text-3xl font-bold" data-quantum-level>-</p>
         </div>
 
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">Explanation</p>
+          <p class="font-semibold mb-1">{t("Explanation", "Spiegazione")}</p>
           <p class="text-sm opacity-80" data-quantum-explanation>
-            Choose a component and evaluate the scenario.
+            {t("Choose a component and evaluate the scenario.", "Scegli un componente e valuta lo scenario.")}
           </p>
         </div>
 
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">Mitigation idea</p>
+          <p class="font-semibold mb-1">{t("Mitigation idea", "Possibile mitigazione")}</p>
           <p class="text-sm opacity-80" data-quantum-mitigation>
-            Post-quantum migration is about replacing vulnerable cryptographic
-            assumptions before they become practically exploitable.
+            {t("Post-quantum migration is about replacing vulnerable cryptographic assumptions before they become practically exploitable.", "La migrazione post-quantistica sostituisce gli schemi crittografici vulnerabili prima che gli attacchi diventino praticabili.")}
           </p>
         </div>
       </div>
@@ -66,6 +69,9 @@
 </section>
 
 <script>
+  const isItalian = () => document.documentElement.lang === "it";
+  const translate = (english, italian) => isItalian() ? italian : english;
+
   function initQuantumBlockchainLab() {
     const root = document.querySelector("#quantum-blockchain-lab");
 
@@ -85,86 +91,86 @@
       hashes: {
         today: [
           "Low",
-          "Hash functions remain a core security primitive. Quantum algorithms can reduce effective security margins, but this is different from directly recovering private keys.",
-          "Use adequate hash sizes and maintain cryptographic agility."
+          translate("Hash functions remain a core security primitive. Quantum algorithms can reduce effective security margins, but this is different from directly recovering private keys.", "Le funzioni hash rimangono fondamentali. Gli algoritmi quantistici possono ridurre il margine di sicurezza effettivo. Il recupero diretto delle chiavi private riguarda altri meccanismi."),
+          translate("Use adequate hash sizes and maintain cryptographic agility.", "Usa lunghezze di hash adeguate e mantieni la possibilità di aggiornare gli algoritmi.")
         ],
         future: [
           "Medium",
-          "A powerful quantum attacker may weaken the security margin of hash-based assumptions, but hashes are generally not the first catastrophic failure point compared with classical public-key signatures.",
-          "Prefer conservative hash parameters and protocols that can upgrade primitives."
+          translate("A powerful quantum attacker may weaken the security margin of hash-based assumptions, but hashes are generally not the first catastrophic failure point compared with classical public-key signatures.", "Un attaccante con un computer quantistico potente può ridurre il margine di sicurezza degli hash. Le firme classiche a chiave pubblica sono in genere più esposte."),
+          translate("Prefer conservative hash parameters and protocols that can upgrade primitives.", "Preferisci parametri di hash prudenti e protocolli che permettono di aggiornare gli algoritmi.")
         ],
         pq: [
           "Low",
-          "Post-quantum migration mostly targets public-key cryptography, but robust hash choices remain important.",
-          "Keep hash choices conservative and upgradeable."
+          translate("Post-quantum migration mostly targets public-key cryptography, but robust hash choices remain important.", "La migrazione post-quantistica riguarda soprattutto la crittografia a chiave pubblica. La scelta di funzioni hash robuste resta importante."),
+          translate("Keep hash choices conservative and upgradeable.", "Scegli parametri di hash prudenti e aggiornabili.")
         ],
       },
       signatures: {
         today: [
           "Medium",
-          "Current blockchains often rely on classical digital signatures. The practical risk depends on whether a capable quantum attacker exists and whether public keys are exposed.",
-          "Avoid unnecessary public-key exposure and prepare migration paths."
+          translate("Current blockchains often rely on classical digital signatures. The practical risk depends on whether a capable quantum attacker exists and whether public keys are exposed.", "Molte blockchain usano firme digitali classiche. Il rischio pratico dipende dalla disponibilità di un computer quantistico adeguato e dall’esposizione delle chiavi pubbliche."),
+          translate("Avoid unnecessary public-key exposure and prepare migration paths.", "Limita l’esposizione non necessaria delle chiavi pubbliche e prepara la migrazione.")
         ],
         future: [
           "High",
-          "If a sufficiently powerful quantum attacker can break the signature scheme, exposed public keys could become dangerous for transaction authorization.",
-          "Migrate accounts and protocols to post-quantum signature schemes."
+          translate("If a sufficiently powerful quantum attacker can break the signature scheme, exposed public keys could become dangerous for transaction authorization.", "Se un attaccante con risorse quantistiche sufficienti riesce a violare lo schema di firma, le chiavi pubbliche esposte possono compromettere l’autorizzazione delle transazioni."),
+          translate("Migrate accounts and protocols to post-quantum signature schemes.", "Migra account e protocolli a schemi di firma post-quantistici.")
         ],
         pq: [
           "Lower",
-          "Post-quantum signatures are designed to resist quantum attacks, but they may bring larger signatures, different verification costs, and migration complexity.",
-          "Use standardized or well-reviewed post-quantum schemes and test operational costs."
+          translate("Post-quantum signatures are designed to resist quantum attacks, but they may bring larger signatures, different verification costs, and migration complexity.", "Le firme post-quantistiche sono progettate per resistere agli attacchi quantistici. Possono essere più grandi, avere costi di verifica diversi e rendere la migrazione più complessa."),
+          translate("Use standardized or well-reviewed post-quantum schemes and test operational costs.", "Usa schemi post-quantistici standardizzati o sottoposti a revisione approfondita e valuta i costi operativi.")
         ],
       },
       validators: {
         today: [
           "Medium",
-          "Validator keys are critical because they authorize consensus messages. Their compromise can affect safety, liveness, or trust assumptions.",
-          "Use key rotation, monitoring, and migration planning."
+          translate("Validator keys are critical because they authorize consensus messages. Their compromise can affect safety, liveness, or trust assumptions.", "Le chiavi dei validatori autorizzano i messaggi di consenso. Una compromissione può incidere sulla sicurezza, sulla capacità della rete di progredire e sulle ipotesi di fiducia."),
+          translate("Use key rotation, monitoring, and migration planning.", "Prevedi rotazione delle chiavi, monitoraggio e piani di migrazione.")
         ],
         future: [
           "High",
-          "If validator signature schemes become quantum-vulnerable, consensus infrastructure may require coordinated upgrades.",
-          "Plan protocol-level post-quantum validator signatures."
+          translate("If validator signature schemes become quantum-vulnerable, consensus infrastructure may require coordinated upgrades.", "Se le firme dei validatori diventano vulnerabili, l’infrastruttura di consenso può richiedere aggiornamenti coordinati."),
+          translate("Plan protocol-level post-quantum validator signatures.", "Pianifica firme post-quantistiche per i validatori a livello di protocollo.")
         ],
         pq: [
           "Lower",
-          "Post-quantum validator signatures reduce the quantum risk but may affect bandwidth, block size, and verification costs.",
-          "Benchmark the performance impact before deployment."
+          translate("Post-quantum validator signatures reduce the quantum risk but may affect bandwidth, block size, and verification costs.", "Le firme post-quantistiche dei validatori riducono il rischio quantistico, ma possono incidere su banda, dimensioni dei blocchi e costi di verifica."),
+          translate("Benchmark the performance impact before deployment.", "Misura l’impatto sulle prestazioni prima del deployment.")
         ],
       },
       mempool: {
         today: [
           "Low",
-          "Pending transactions already reveal some information, but a large quantum attacker is not available in this simplified scenario.",
-          "Reduce unnecessary exposure and monitor wallet behavior."
+          translate("Pending transactions already reveal some information, but a large quantum attacker is not available in this simplified scenario.", "Le transazioni in attesa rendono già visibili alcune informazioni. In questo scenario semplificato l’attaccante non dispone di un grande computer quantistico."),
+          translate("Reduce unnecessary exposure and monitor wallet behavior.", "Riduci l’esposizione superflua e monitora il comportamento dei wallet.")
         ],
         future: [
           "Medium",
-          "If public keys or signature material are exposed before confirmation, timing and migration assumptions may matter more.",
-          "Use safer account designs and fast migration paths for exposed keys."
+          translate("If public keys or signature material are exposed before confirmation, timing and migration assumptions may matter more.", "Se chiavi pubbliche o dati di firma sono esposti prima della conferma, i tempi e le ipotesi di migrazione acquistano importanza."),
+          translate("Use safer account designs and fast migration paths for exposed keys.", "Usa modelli di account più sicuri e percorsi rapidi per migrare le chiavi esposte.")
         ],
         pq: [
           "Lower",
-          "Post-quantum authorization reduces the risk of signature-breaking attacks on pending transactions.",
-          "Combine PQ signatures with good transaction-handling practices."
+          translate("Post-quantum authorization reduces the risk of signature-breaking attacks on pending transactions.", "L’autorizzazione post-quantistica riduce il rischio di violazione delle firme nelle transazioni in attesa."),
+          translate("Combine PQ signatures with good transaction-handling practices.", "Combina firme post-quantistiche con una gestione corretta delle transazioni.")
         ],
       },
       migration: {
         today: [
           "Medium",
-          "The problem is not only cryptography; it is coordination. Blockchains need upgrade paths, wallet support, standards, and user migration.",
-          "Design cryptographic agility before an emergency."
+          translate("The problem is not only cryptography; it is coordination. Blockchains need upgrade paths, wallet support, standards, and user migration.", "La migrazione richiede coordinamento oltre alla crittografia. Servono aggiornamenti del protocollo, supporto dei wallet, standard e migrazione degli utenti."),
+          translate("Design cryptographic agility before an emergency.", "Progetta in anticipo la possibilità di cambiare algoritmi.")
         ],
         future: [
           "High",
-          "Late migration is risky because dormant accounts, exposed keys, and ecosystem coordination become harder under pressure.",
-          "Start with hybrid support, account migration tools, and clear governance processes."
+          translate("Late migration is risky because dormant accounts, exposed keys, and ecosystem coordination become harder under pressure.", "Una migrazione tardiva è rischiosa. Account inattivi, chiavi esposte e coordinamento dell’ecosistema diventano più difficili da gestire sotto pressione."),
+          translate("Start with hybrid support, account migration tools, and clear governance processes.", "Parti dal supporto ibrido, dagli strumenti di migrazione degli account e da procedure di governance chiare.")
         ],
         pq: [
           "Medium",
-          "Even after PQ deployment, old accounts, bridges, smart contracts, and legacy signatures may remain exposed.",
-          "Track legacy risk and provide migration incentives."
+          translate("Even after PQ deployment, old accounts, bridges, smart contracts, and legacy signatures may remain exposed.", "Anche dopo il deployment post-quantistico, account precedenti, bridge, smart contract e vecchie firme possono restare esposti."),
+          translate("Track legacy risk and provide migration incentives.", "Monitora i rischi dei sistemi precedenti e incentiva la migrazione.")
         ],
       },
     };
@@ -174,7 +180,8 @@
       const scenario = scenarioInput.value;
       const [level, explanation, mitigation] = matrix[component][scenario];
 
-      levelOutput.textContent = level;
+      const levels = { Low: "Basso", Medium: "Medio", High: "Alto", Lower: "Ridotto", "Medium-High": "Medio-alto" };
+      levelOutput.textContent = translate(level, levels[level] ?? level);
       explanationOutput.textContent = explanation;
       mitigationOutput.textContent = mitigation;
     }

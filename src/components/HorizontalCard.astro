@@ -1,4 +1,6 @@
 ---
+import { getLocale, inLanguage } from "../i18n/locale";
+
 const { title, img, desc, url, badge, tags, target = "_blank" } = Astro.props;
 
 const hasUrl = typeof url === "string" && url.length > 0;
@@ -13,26 +15,26 @@ const rel = target === "_blank" ? "noopener noreferrer" : undefined;
 >
   {
     hasUrl ? (
-      <a href={url} target={target} rel={rel} class="block">
+      <a href={inLanguage(url, getLocale(Astro.url.pathname))} target={target} rel={rel} class="block">
         <div class="hero-content flex-col md:flex-row">
           {
             img && (
               <img
                 src={img}
-                alt={title}
+                alt="" decoding="async"
                 width="750"
                 height="422"
                 loading="lazy"
-                class="max-w-full md:max-w-[13rem] rounded-lg object-cover"
+                class="w-full md:w-52 h-auto shrink-0 aspect-video rounded-lg object-cover"
               />
             )
           }
 
           <div class="grow w-full">
-            <h1 class="text-xl font-bold">
+            <h3 class="text-xl font-bold">
               {title}
-              {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
-            </h1>
+              {badge && <span class="badge badge-secondary mx-2">{badge}</span>}
+            </h3>
 
             <p class="py-1 text-1xl">{desc}</p>
 
@@ -53,20 +55,20 @@ const rel = target === "_blank" ? "noopener noreferrer" : undefined;
           img && (
             <img
               src={img}
-              alt={title}
+              alt="" decoding="async"
               width="750"
               height="422"
               loading="lazy"
-              class="max-w-full md:max-w-[13rem] rounded-lg object-cover"
+              class="w-full md:w-52 h-auto shrink-0 aspect-video rounded-lg object-cover"
             />
           )
         }
 
         <div class="grow w-full">
-          <h1 class="text-xl font-bold">
+          <h3 class="text-xl font-bold">
             {title}
-            {badge && <div class="badge badge-secondary mx-2">{badge}</div>}
-          </h1>
+            {badge && <span class="badge badge-secondary mx-2">{badge}</span>}
+          </h3>
 
           <p class="py-1 text-1xl">{desc}</p>
 

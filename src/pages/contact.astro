@@ -1,14 +1,17 @@
 ---
+import { translator } from "../i18n/locale";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const t = translator(Astro.url.pathname);
 ---
 
 <BaseLayout
-  title="Contact | Blockchain Systems & Digital Assets Engineer | Vincenzo Di Perna"
-  description="Contact Vincenzo Di Perna for blockchain systems research, digital assets, distributed systems engineering, benchmarking, reproducible experimentation, and collaboration opportunities."
+  title={t("Contact | Vincenzo Di Perna", "Contatti | Vincenzo Di Perna")}
+  description={t("Contact Vincenzo Di Perna about distributed systems, blockchain benchmarking, reproducible experiments and research collaborations.", "Contatta Vincenzo Di Perna per collaborazioni su sistemi distribuiti, blockchain, benchmarking e ricerca sperimentale.")}
   sideBarActiveItemID="contact"
 >
   <section class="mb-10">
-    <h1 class="text-4xl font-bold mb-4">Contact me</h1>
+    <h1 class="text-4xl font-bold mb-4">{t("Contact me", "Contatti")}</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="card bg-base-100 shadow-md">
@@ -30,8 +33,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </h3>
 
           <p>
-            For job opportunities, interviews, collaborations, institutional
-            projects, consulting requests, or research-related inquiries.
+            {t("For job opportunities, interviews, collaborations, institutional projects, consulting requests, or research-related inquiries.", "Scrivimi per opportunità di lavoro, colloqui, collaborazioni, progetti istituzionali, consulenze o richieste legate alla ricerca.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
@@ -39,7 +41,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               class="btn btn-primary"
               href="mailto:vincenzopaolo.diperna@outlook.com"
             >
-              Send email
+              {t("Send email", "Scrivimi via email")}
             </a>
           </div>
         </div>
@@ -64,8 +66,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </h3>
 
           <p>
-            Connect with me for professional updates, research outputs, career
-            opportunities, and collaboration discussions.
+            {t("Connect with me for professional updates, research outputs, career opportunities, and collaboration discussions.", "Seguimi per aggiornamenti professionali e sulla ricerca, oppure contattami per parlare di lavoro e collaborazioni.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
@@ -74,7 +75,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               href="https://www.linkedin.com/in/vincenzo-di-perna/"
               target="_blank" rel="noopener noreferrer"
             >
-              Open LinkedIn
+              {t("Open LinkedIn", "Apri LinkedIn")}
             </a>
           </div>
         </div>
@@ -99,8 +100,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </h3>
 
           <p>
-            Explore my repositories, research artifacts, datasets, and technical
-            projects.
+            {t("Explore my repositories, research artifacts, datasets, and technical projects.", "Consulta i miei repository, i materiali di ricerca, i dataset e i progetti software.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
@@ -109,7 +109,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               href="https://github.com/vindipe"
               target="_blank" rel="noopener noreferrer"
             >
-              Open GitHub
+              {t("Open GitHub", "Apri GitHub")}
             </a>
           </div>
         </div>

@@ -1,26 +1,31 @@
 ---
+import { getLocale, inLanguage, translator } from "../../i18n/locale";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const t = translator(Astro.url.pathname);
+const locale = getLocale(Astro.url.pathname);
+const localPath = (href: string) => inLanguage(href, locale);
 
 const entropyResults = [
   {
-    title: "Unweighted EB-index - Set1",
+    title: t("Unweighted EB-index - Set1", "EB-index senza pesi – Set1"),
     src: "/research/dlt25/entropy-set1.png",
-    desc: "Set1 combines user activity with market-oriented indicators, showing how balance evolves across assets over time.",
+    desc: t("Set1 combines user activity with market-oriented indicators, showing how balance evolves across assets over time.", "Set1 combina l’attività degli utenti con indicatori di mercato, mostrando come l’equilibrio dei diversi asset evolva nel tempo."),
   },
   {
-    title: "Weighted EB-index - Set1",
+    title: t("Weighted EB-index - Set1", "EB-index ponderato – Set1"),
     src: "/research/dlt25/weighted-entropy-set1.png",
-    desc: "The weighted version makes the index sensitive not only to balance, but also to the relative strength of the selected attributes.",
+    desc: t("The weighted version makes the index sensitive not only to balance, but also to the relative strength of the selected attributes.", "La versione ponderata tiene conto sia dell’equilibrio sia della forza relativa degli attributi selezionati."),
   },
   {
-    title: "Unweighted EB-index - Set2",
+    title: t("Unweighted EB-index - Set2", "EB-index senza pesi – Set2"),
     src: "/research/dlt25/entropy-set2.png",
-    desc: "Set2 focuses on dynamic qualities such as participation, transfer size, turnover, active supply, and wealth distribution.",
+    desc: t("Set2 focuses on dynamic qualities such as participation, transfer size, turnover, active supply, and wealth distribution.", "Set2 osserva caratteristiche dinamiche come partecipazione, importo dei trasferimenti, turnover, offerta attiva e distribuzione della ricchezza."),
   },
   {
-    title: "Weighted EB-index - Set2",
+    title: t("Weighted EB-index - Set2", "EB-index ponderato – Set2"),
     src: "/research/dlt25/weighted-entropy-set2.png",
-    desc: "The weighted version changes the interpretation of the results by incorporating attribute magnitude into the entropy score.",
+    desc: t("The weighted version changes the interpretation of the results by incorporating attribute magnitude into the entropy score.", "La versione ponderata include l’ampiezza degli attributi nel calcolo dell’entropia e cambia il modo di interpretare i risultati."),
   },
 ];
 
@@ -69,37 +74,37 @@ const probabilityDistributions = [
 
 const qualitiesSet1 = [
   "Participation",
-  "Mean transfers per active address",
-  "Mean transfer per market capitalization",
+  t("Mean transfers per active address", "Numero medio di trasferimenti per indirizzo attivo"),
+  t("Mean transfer per market capitalization", "Importo medio trasferito in rapporto alla capitalizzazione di mercato"),
   "Market capitalization",
 ];
 
 const qualitiesSet2 = [
   "Participation",
   "Mean transfer size",
-  "Mean transfers per active address",
+  t("Mean transfers per active address", "Numero medio di trasferimenti per indirizzo attivo"),
   "Active supply turnover rate",
   "Active supply ratio",
   "Wealth distribution",
 ];
 
 const findings = [
-  "The proposed EB-index is designed to capture balance across selected economic qualities rather than relying on a single metric such as price, capitalization, throughput, or energy.",
-  "The framework is customizable: researchers can select different attributes and weights depending on the economic behaviour they want to study.",
-  "Set1 captures a compact view of activity and market-related behaviour, while Set2 focuses more deeply on user participation, transfer dynamics, supply usage, and wealth distribution.",
-  "The weighted version of the index changes the interpretation by rewarding not only balance, but also stronger normalized attribute values.",
-  "The work should be read as a methodological framework, not as investment advice or as a final ranking of cryptocurrencies.",
+  t("The proposed EB-index is designed to capture balance across selected economic qualities rather than relying on a single metric such as price, capitalization, throughput, or energy.", "L’EB-index misura l’equilibrio fra più caratteristiche economiche selezionate, includendo più dimensioni di singoli indicatori come prezzo, capitalizzazione, throughput o energia."),
+  t("The framework is customizable: researchers can select different attributes and weights depending on the economic behaviour they want to study.", "Chi conduce lo studio può scegliere attributi e pesi in base al comportamento economico che vuole analizzare."),
+  t("Set1 captures a compact view of activity and market-related behaviour, while Set2 focuses more deeply on user participation, transfer dynamics, supply usage, and wealth distribution.", "Set1 sintetizza attività e dinamiche di mercato. Set2 approfondisce partecipazione, trasferimenti, uso dell’offerta e distribuzione della ricchezza."),
+  t("The weighted version of the index changes the interpretation by rewarding not only balance, but also stronger normalized attribute values.", "La versione ponderata tiene conto anche dei valori normalizzati più alti, oltre all’equilibrio tra gli attributi."),
+  t("The work should be read as a methodological framework, not as investment advice or as a final ranking of cryptocurrencies.", "Lo studio propone un metodo di analisi. Non offre consigli di investimento né una classifica definitiva delle criptovalute."),
 ];
 ---
 
 <BaseLayout
-  title="Entropy-Based Cryptocurrency Economic Efficiency | Research | Vincenzo Di Perna"
-  description="DLT 2025 research introducing an Entropy Balance index for evaluating cryptocurrency economic efficiency using Shannon entropy, on-chain data, normalized indicators, and EB-index scores."
+  title={t("Entropy and Cryptocurrency Efficiency | Vincenzo Di Perna", "Entropia ed efficienza economica delle criptovalute | Vincenzo Di Perna")}
+  description={t("DLT 2025 research on the Entropy Balance index for evaluating cryptocurrency economic efficiency with Shannon entropy and on-chain data.", "Ricerca DLT 2025 sull’Entropy Balance index, che valuta l’efficienza economica delle criptovalute con entropia di Shannon e dati on-chain.")}
   sideBarActiveItemID="research"
 >
   <section class="mb-8">
-    <a href="/research" class="btn btn-sm btn-outline mb-6">
-      ← Back to Research
+    <a href={localPath("/research")} class="btn btn-sm btn-outline mb-6">
+      {t("← Back to Research", "← Torna alla ricerca")}
     </a>
 
     <div class="network-protected card bg-base-100 shadow-md">
@@ -109,24 +114,20 @@ const findings = [
             An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies
           </h1>
           <span class="badge badge-secondary">DLT '25</span>
-          <span class="badge badge-outline">Publication</span>
+          <span class="badge badge-outline">{t("Publication", "Pubblicazione")}</span>
         </div>
 
         <p class="text-lg leading-relaxed opacity-90">
-          This work introduces an entropy-based framework for evaluating the
-          economic efficiency of cryptocurrencies. Instead of measuring only
-          price, market capitalization, throughput, or energy consumption, the
-          paper proposes a composite index that captures how well multiple
-          economic qualities are balanced inside a cryptoasset economy.
+          {t("This work introduces an entropy-based framework for evaluating the economic efficiency of cryptocurrencies. Instead of measuring only price, market capitalization, throughput, or energy consumption, the paper proposes a composite index that captures how well multiple economic qualities are balanced inside a cryptoasset economy.", "Lo studio introduce un metodo basato sull’entropia per valutare l’efficienza economica delle criptovalute. Propone un indice composito per misurare l’equilibrio fra più caratteristiche economiche di un cryptoasset, andando oltre singoli indicatori come prezzo, capitalizzazione, throughput o consumi.")}
         </p>
 
         <div class="flex flex-wrap gap-2 mt-5">
-          <span class="badge badge-outline">Cryptocurrency efficiency</span>
-          <span class="badge badge-outline">Entropy Balance index</span>
-          <span class="badge badge-outline">Shannon entropy</span>
+          <span class="badge badge-outline">{t("Cryptocurrency efficiency", "Efficienza delle criptovalute")}</span>
+          <span class="badge badge-outline">{t("Entropy Balance index", "Indice Entropy Balance")}</span>
+          <span class="badge badge-outline">{t("Shannon entropy", "Entropia di Shannon")}</span>
           <span class="badge badge-outline">Coin Metrics</span>
-          <span class="badge badge-outline">On-chain data</span>
-          <span class="badge badge-outline">Economic index</span>
+          <span class="badge badge-outline">{t("On-chain data", "Dati on-chain")}</span>
+          <span class="badge badge-outline">{t("Economic index", "Indice economico")}</span>
         </div>
       </div>
     </div>
@@ -144,21 +145,21 @@ const findings = [
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">2</p>
-          <p class="opacity-80">attribute sets</p>
+          <p class="opacity-80">{t("attribute sets", "insiemi di attributi")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">2010-2025</p>
-          <p class="opacity-80">analysis period</p>
+          <p class="opacity-80">{t("analysis period", "periodo di analisi")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">EB</p>
-          <p class="opacity-80">Entropy Balance index</p>
+          <p class="opacity-80">{t("Entropy Balance index", "Indice Entropy Balance")}</p>
         </div>
       </div>
     </div>
@@ -167,21 +168,14 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Context</h2>
+        <h2 class="card-title text-2xl">{t("Context", "Contesto")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          Blockchain efficiency is often discussed in terms of transactions per
-          second, latency, scalability, or energy consumption. Cryptocurrencies,
-          however, are also economic systems: they have supply dynamics, user
-          participation, transfer activity, wealth concentration, market value,
-          and different forms of asset usage.
+          {t("Blockchain efficiency is often discussed in terms of transactions per second, latency, scalability, or energy consumption. Cryptocurrencies, however, are also economic systems: they have supply dynamics, user participation, transfer activity, wealth concentration, market value, and different forms of asset usage.", "L’efficienza delle blockchain si misura spesso in transazioni al secondo, latenza, scalabilità e consumi energetici. Le criptovalute sono anche sistemi economici, con dinamiche dell’offerta, partecipazione degli utenti, trasferimenti, concentrazione della ricchezza, valore di mercato e forme d’uso diverse.")}
         </p>
 
         <p class="leading-relaxed opacity-90 mt-3">
-          This paper focuses on that economic dimension. The central question is
-          how to build a coherent index that can aggregate multiple on-chain and
-          market-related attributes without reducing the analysis to one
-          isolated metric.
+          {t("This paper focuses on that economic dimension. The central question is how to build a coherent index that can aggregate multiple on-chain and market-related attributes without reducing the analysis to one isolated metric.", "L’articolo si concentra sulla dimensione economica. La domanda è come costruire un indice coerente che riunisca più attributi on-chain e di mercato in un’unica misura senza perdere di vista le singole dimensioni.")}
         </p>
       </div>
     </div>
@@ -190,43 +184,36 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">The EB-index idea</h2>
+        <h2 class="card-title text-2xl">{t("The EB-index idea", "Come funziona l’EB-index")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The proposed Entropy Balance index uses Shannon entropy to measure how
-          balanced a selected set of economic qualities is. Each quality is first
-          normalized, then transformed into a probability distribution. Entropy
-          is then used to quantify whether the selected qualities are
-          concentrated around one dominant dimension or more evenly balanced.
+          {t("The proposed Entropy Balance index uses Shannon entropy to measure how balanced a selected set of economic qualities is. Each quality is first normalized, then transformed into a probability distribution. Entropy is then used to quantify whether the selected qualities are concentrated around one dominant dimension or more evenly balanced.", "L’Entropy Balance index usa l’entropia di Shannon per misurare l’equilibrio tra le caratteristiche economiche selezionate. Prima normalizza i valori, poi li converte in una distribuzione di probabilità. L’entropia indica se prevale una sola dimensione o se il contributo delle dimensioni è più uniforme.")}
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">Normalize</h3>
+              <h3 class="font-bold">{t("Normalize", "Normalizzazione")}</h3>
               <p class="text-sm opacity-80">
-                Economic qualities with different scales are mapped into a
-                comparable interval.
+                {t("Economic qualities with different scales are mapped into a comparable interval.", "Le caratteristiche economiche su scale diverse vengono riportate a un intervallo comune.")}
               </p>
             </div>
           </div>
 
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">Convert to distribution</h3>
+              <h3 class="font-bold">{t("Convert to distribution", "Conversione in distribuzione")}</h3>
               <p class="text-sm opacity-80">
-                The normalized qualities are converted into a probability
-                distribution over the selected attributes.
+                {t("The normalized qualities are converted into a probability distribution over the selected attributes.", "I valori normalizzati diventano una distribuzione di probabilità sugli attributi selezionati.")}
               </p>
             </div>
           </div>
 
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">Measure balance</h3>
+              <h3 class="font-bold">{t("Measure balance", "Misura dell’equilibrio")}</h3>
               <p class="text-sm opacity-80">
-                Shannon entropy measures whether the qualities are balanced or
-                concentrated around a few dominant dimensions.
+                {t("Shannon entropy measures whether the qualities are balanced or concentrated around a few dominant dimensions.", "L’entropia di Shannon misura se le caratteristiche sono bilanciate o se il peso si concentra su poche dimensioni.")}
               </p>
             </div>
           </div>
@@ -244,20 +231,16 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Data and attribute sets</h2>
+        <h2 class="card-title text-2xl">{t("Data and attribute sets", "Dati e insiemi di attributi")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The illustrative evaluation uses on-chain data from Coin Metrics and
-          compares six major cryptoassets: Bitcoin, Ethereum, Ripple, USD Coin,
-          Dogecoin, and Cardano. The paper defines two different sets of
-          attributes to show that the framework can be adapted to different
-          interpretations of economic efficiency.
+          {t("The illustrative evaluation uses on-chain data from Coin Metrics and compares six major cryptoassets: Bitcoin, Ethereum, Ripple, USD Coin, Dogecoin, and Cardano. The paper defines two different sets of attributes to show that the framework can be adapted to different interpretations of economic efficiency.", "L’esempio usa dati on-chain di Coin Metrics e confronta sei cryptoasset: Bitcoin, Ethereum, Ripple, USD Coin, Dogecoin e Cardano. Due insiemi di attributi mostrano come il metodo si possa adattare a interpretazioni diverse dell’efficienza economica.")}
         </p>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">Set1 - compact activity and market view</h3>
+              <h3 class="font-bold">{t("Set1 - compact activity and market view", "Set1 – Attività e mercato, in sintesi")}</h3>
 
               <ul class="list-disc pl-5 space-y-1 text-sm opacity-80">
                 {qualitiesSet1.map((quality) => <li>{quality}</li>)}
@@ -267,7 +250,7 @@ const findings = [
 
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">Set2 - dynamic network behaviour</h3>
+              <h3 class="font-bold">{t("Set2 - dynamic network behaviour", "Set2 – Dinamiche della rete")}</h3>
 
               <ul class="list-disc pl-5 space-y-1 text-sm opacity-80">
                 {qualitiesSet2.map((quality) => <li>{quality}</li>)}
@@ -277,9 +260,7 @@ const findings = [
         </div>
 
         <p class="leading-relaxed opacity-90 mt-5">
-          This distinction is important: the EB-index does not impose a single
-          universal definition of economic efficiency. It provides a formal way
-          to combine the qualities selected by the researcher.
+          {t("This distinction is important: the EB-index does not impose a single universal definition of economic efficiency. It provides a formal way to combine the qualities selected by the researcher.", "L’EB-index formalizza il modo di combinare le caratteristiche scelte da chi conduce lo studio. La definizione di efficienza economica dipende quindi dagli attributi selezionati.")}
         </p>
       </div>
     </div>
@@ -288,14 +269,10 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Entropy results</h2>
+        <h2 class="card-title text-2xl">{t("Entropy results", "Risultati dell’analisi dell’entropia")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The four plots below compare unweighted and weighted entropy for the
-          two attribute sets. The unweighted version highlights balance among
-          the selected qualities. The weighted version also accounts for the
-          relative strength of the normalized attributes, changing the
-          interpretation from pure balance to balance plus magnitude.
+          {t("The four plots below compare unweighted and weighted entropy for the two attribute sets. The unweighted version highlights balance among the selected qualities. The weighted version also accounts for the relative strength of the normalized attributes, changing the interpretation from pure balance to balance plus magnitude.", "I quattro grafici confrontano entropia semplice e ponderata per i due insiemi. La prima evidenzia l’equilibrio fra le caratteristiche selezionate. La seconda considera anche l’ampiezza relativa degli attributi normalizzati.")}
         </p>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
@@ -326,14 +303,10 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Representative attribute distributions</h2>
+        <h2 class="card-title text-2xl">{t("Representative attribute distributions", "Distribuzioni rappresentative degli attributi")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The probability-distribution plots show how the selected qualities
-          contribute to each asset's entropy score. They help explain why two
-          cryptoassets can obtain similar entropy values for different internal
-          reasons, or why the same asset can behave differently across Set1 and
-          Set2.
+          {t("The probability-distribution plots show how the selected qualities contribute to each asset's entropy score. They help explain why two cryptoassets can obtain similar entropy values for different internal reasons, or why the same asset can behave differently across Set1 and Set2.", "I grafici delle distribuzioni di probabilità mostrano come ogni attributo contribuisce all’entropia di un asset. Aiutano a capire perché due cryptoasset possano avere entropie simili per motivi diversi o perché uno stesso asset cambi tra Set1 e Set2.")}
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-5">
@@ -364,7 +337,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Main contribution</h2>
+        <h2 class="card-title text-2xl">{t("Main contribution", "Contributo principale")}</h2>
 
         <ul class="list-disc pl-5 space-y-2 opacity-90">
           {findings.map((finding) => <li>{finding}</li>)}
@@ -376,30 +349,25 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Relationship with my broader research</h2>
+        <h2 class="card-title text-2xl">{t("Relationship with my broader research", "Come si collega alle mie altre ricerche")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          This paper extends my blockchain evaluation work beyond protocol-level
-          performance and energy analysis. While the DEBS and ICBC works study
-          how blockchain systems behave under different network conditions, this
-          work moves to the economic layer and asks how the internal behaviour
-          of cryptoasset economies can be measured through a transparent,
-          customizable, and theoretically grounded index.
+          {t("This paper extends my blockchain evaluation work beyond protocol-level performance and energy analysis. While the DEBS and ICBC works study how blockchain systems behave under different network conditions, this work moves to the economic layer and asks how the internal behaviour of cryptoasset economies can be measured through a transparent, customizable, and theoretically grounded index.", "L’articolo estende la valutazione delle blockchain alla dimensione economica. Gli studi DEBS e ICBC analizzano prestazioni ed energia in diverse condizioni di rete. Qui studio come misurare il comportamento delle economie dei cryptoasset con un indice trasparente, configurabile e fondato sulla teoria dell’informazione.")}
         </p>
 
         <div class="card-actions mt-4">
           <a
-            href="/research/topology-aware-blockchain-benchmarking"
+            href={localPath("/research/topology-aware-blockchain-benchmarking")}
             class="btn btn-sm btn-outline"
           >
-            Related DEBS paper
+            {t("Related DEBS paper", "Articolo DEBS correlato")}
           </a>
 
           <a
-            href="/research/performance-energy-economic-efficiency"
+            href={localPath("/research/performance-energy-economic-efficiency")}
             class="btn btn-sm btn-outline"
           >
-            Related ICBC paper
+            {t("Related ICBC paper", "Articolo ICBC correlato")}
           </a>
         </div>
       </div>
@@ -411,52 +379,45 @@ const findings = [
       <div class="card-body">
         <div class="flex flex-wrap gap-3 items-start justify-between">
           <div class="max-w-3xl">
-            <h2 class="card-title text-2xl">Try the EB-index interactively</h2>
+            <h2 class="card-title text-2xl">{t("Try the EB-index interactively", "Prova l’EB-index")}</h2>
 
             <p class="leading-relaxed opacity-90 mt-2">
-              The CryptoEntropy Explorer turns the paper into a small interactive
-              lab. Users can toggle cryptoassets, choose one of the paper
-              attribute sets, build their own custom set from the available
-              attributes, assign utility weights, and immediately see how the
-              EB-index changes over time.
+              {t("The CryptoEntropy Explorer turns the paper into a small interactive lab. Users can toggle cryptoassets, choose one of the paper attribute sets, build their own custom set from the available attributes, assign utility weights, and immediately see how the EB-index changes over time.", "CryptoEntropy Explorer permette di provare il metodo nel browser. Puoi scegliere i cryptoasset, usare un insieme dello studio o comporne uno, assegnare i pesi e vedere subito come cambia l’EB-index nel tempo.")}
             </p>
           </div>
 
           <a
-            href="/projects/cryptoentropy-explorer"
+            href={localPath("/projects/cryptoentropy-explorer")}
             class="btn btn-primary btn-sm mt-1"
           >
-            Open CryptoEntropy Explorer
+            {t("Open CryptoEntropy Explorer", "Apri CryptoEntropy Explorer")}
           </a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">Custom attribute sets</h3>
+              <h3 class="font-bold">{t("Custom attribute sets", "Insiemi di attributi personalizzati")}</h3>
               <p class="text-sm opacity-80">
-                Start from Set1, Set2, Set3, or create a new set by selecting
-                the economic attributes you want to evaluate.
+                {t("Start from Set1, Set2, Set3, or create a new set by selecting the economic attributes you want to evaluate.", "Parti da Set1, Set2 o Set3, oppure crea un insieme scegliendo gli attributi economici da valutare.")}
               </p>
             </div>
           </div>
 
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">User-defined weights</h3>
+              <h3 class="font-bold">{t("User-defined weights", "Pesi personalizzati")}</h3>
               <p class="text-sm opacity-80">
-                Make the assumptions explicit by giving more or less importance
-                to activity, market, wealth, supply, or fee-related dimensions.
+                {t("Make the assumptions explicit by giving more or less importance to activity, market, wealth, supply, or fee-related dimensions.", "Rendi esplicite le tue ipotesi dando più o meno importanza ad attività, mercato, ricchezza, offerta o commissioni.")}
               </p>
             </div>
           </div>
 
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">Shareable experiments</h3>
+              <h3 class="font-bold">{t("Shareable experiments", "Esperimenti condivisibili")}</h3>
               <p class="text-sm opacity-80">
-                The current Explorer configuration is stored in the URL, so a
-                specific analytical question can be copied, reopened, or shared.
+                {t("The current Explorer configuration is stored in the URL, so a specific analytical question can be copied, reopened, or shared.", "La configurazione della dashboard è salvata nell’URL, così puoi copiare, riaprire o condividere una specifica domanda di analisi.")}
               </p>
             </div>
           </div>
@@ -468,12 +429,10 @@ const findings = [
   <section class="mb-12">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Links and reproducibility material</h2>
+        <h2 class="card-title text-2xl">{t("Links and reproducibility material", "Collegamenti e materiali per la riproducibilità")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The paper is accompanied by a public GitHub repository containing the
-          normalized and entropy-derived datasets, documentation, citation
-          metadata, and a plotting script for reproducing the main figures.
+          {t("The paper is accompanied by a public GitHub repository containing the normalized and entropy-derived datasets, documentation, citation metadata, and a plotting script for reproducing the main figures.", "Il repository pubblico su GitHub contiene i dataset normalizzati e derivati dall’entropia, la documentazione, i metadati per la citazione e lo script per riprodurre i grafici principali.")}
         </p>
 
         <div class="flex flex-wrap gap-3 mt-4">
@@ -483,7 +442,7 @@ const findings = [
             rel="noopener noreferrer"
             class="btn btn-primary btn-sm"
           >
-            Open CEUR-WS paper
+            {t("Open CEUR-WS paper", "Apri l’articolo su CEUR-WS")}
           </a>
 
           <a
@@ -492,7 +451,7 @@ const findings = [
             rel="noopener noreferrer"
             class="btn btn-outline btn-sm"
           >
-            Open GitHub repository
+            {t("Open GitHub repository", "Apri il repository GitHub")}
           </a>
 
           <a
@@ -501,14 +460,14 @@ const findings = [
             rel="noopener noreferrer"
             class="btn btn-outline btn-sm"
           >
-            Open Zenodo dataset
+            {t("Open Zenodo dataset", "Apri il dataset su Zenodo")}
           </a>
 
           <a
-            href="/projects/cryptoentropy-explorer"
+            href={localPath("/projects/cryptoentropy-explorer")}
             class="btn btn-outline btn-sm"
           >
-            Explore dashboard
+            {t("Explore dashboard", "Esplora la dashboard")}
           </a>
         </div>
       </div>

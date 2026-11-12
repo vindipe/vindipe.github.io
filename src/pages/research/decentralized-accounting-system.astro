@@ -1,150 +1,151 @@
 ---
+import { getLocale, inLanguage, translator } from "../../i18n/locale";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const t = translator(Astro.url.pathname);
+const locale = getLocale(Astro.url.pathname);
+const localPath = (href: string) => inLanguage(href, locale);
 
 const conceptFigures = [
   {
-    title: "Solid architecture",
+    title: t("Solid architecture", "Architettura Solid"),
     src: "/research/theses/master/solid-architecture.png",
-    desc: "The thesis uses Solid Pods as a privacy-preserving storage layer for business documents, invoices, orders, and data access control.",
+    desc: t("The thesis uses Solid Pods as a privacy-preserving storage layer for business documents, invoices, orders, and data access control.", "La tesi usa Solid Pods per conservare documenti aziendali, fatture e ordini e gestirne l’accesso tutelando la riservatezza."),
   },
   {
-    title: "ERP domain",
+    title: t("ERP domain", "Ambito ERP"),
     src: "/research/theses/master/erp-domain.png",
-    desc: "The work starts from the accounting and ERP context, where administrative processes can become costly, manual, and error-prone.",
+    desc: t("The work starts from the accounting and ERP context, where administrative processes can become costly, manual, and error-prone.", "Il lavoro parte dai sistemi contabili e gestionali, dove i processi amministrativi possono essere costosi, manuali e soggetti a errori."),
   },
   {
-    title: "Invoice formats",
+    title: t("Invoice formats", "Formati delle fatture"),
     src: "/research/theses/master/invoice-formats.png",
-    desc: "The thesis discusses the evolution from paper invoices to PDF/XML and electronic billing formats.",
+    desc: t("The thesis discusses the evolution from paper invoices to PDF/XML and electronic billing formats.", "La tesi ripercorre il passaggio dalle fatture cartacee a PDF, XML e formati per la fatturazione elettronica."),
   },
   {
-    title: "eBill flow",
+    title: t("eBill flow", "Flusso eBill"),
     src: "/research/theses/master/ebill-flow.png",
-    desc: "The eBill process is used as a reference for designing a more digital and traceable billing workflow.",
+    desc: t("The eBill process is used as a reference for designing a more digital and traceable billing workflow.", "Il processo eBill è il riferimento per progettare un flusso di fatturazione digitale e tracciabile."),
   },
 ];
 
 const architectureFigures = [
   {
-    title: "Restaurant flow",
+    title: t("Restaurant flow", "Flussi del ristorante"),
     src: "/research/theses/master/restaurant-flow.png",
-    desc: "A model of incoming and outgoing restaurant flows, including customers, business actors, services, bills, and payments.",
+    desc: t("A model of incoming and outgoing restaurant flows, including customers, business actors, services, bills, and payments.", "Modello dei flussi in entrata e uscita, con clienti, soggetti economici, servizi, conti e pagamenti."),
   },
   {
-    title: "Restaurant timeline",
+    title: t("Restaurant timeline", "Percorso del cliente"),
     src: "/research/theses/master/restaurant-timeline.png",
-    desc: "A timeline of the customer experience, from entry to menu selection, ordering, service, billing, and payment.",
+    desc: t("A timeline of the customer experience, from entry to menu selection, ordering, service, billing, and payment.", "Dall’ingresso nel ristorante alla scelta del menu, all’ordine, al servizio, al conto e al pagamento."),
   },
   {
-    title: "Infrastructure components",
+    title: t("Infrastructure components", "Componenti dell’infrastruttura"),
     src: "/research/theses/master/infrastructure-components.png",
-    desc: "The implementation combines web technologies, Solid, Ethereum, MetaMask, QR codes, eBill concepts, and deployment tooling.",
+    desc: t("The implementation combines web technologies, Solid, Ethereum, MetaMask, QR codes, eBill concepts, and deployment tooling.", "L’implementazione integra tecnologie web, Solid, Ethereum, MetaMask, codici QR, concetti eBill e strumenti di deployment."),
   },
   {
-    title: "Infrastructure layers",
+    title: t("Infrastructure layers", "Livelli dell’infrastruttura"),
     src: "/research/theses/master/infrastructure-layers.png",
-    desc: "The proposed architecture separates interface, API, Solid, Pods, menu, eBill, and hash/blockchain layers.",
+    desc: t("The proposed architecture separates interface, API, Solid, Pods, menu, eBill, and hash/blockchain layers.", "L’architettura separa interfaccia, API, Solid, Pod, menu, eBill e livello hash e blockchain."),
   },
   {
-    title: "Wallet-blockchain structure",
+    title: t("Wallet-blockchain structure", "Integrazione tra wallet e blockchain"),
     src: "/research/theses/master/wallet-blockchain-structure.png",
-    desc: "The payment side connects Ethereum, MetaMask, Web3.js, and blockchain transactions.",
+    desc: t("The payment side connects Ethereum, MetaMask, Web3.js, and blockchain transactions.", "Il pagamento collega Ethereum, MetaMask e Web3.js alle transazioni blockchain."),
   },
   {
-    title: "Solid graph interactions",
+    title: t("Solid graph interactions", "Interazioni nel grafo Solid"),
     src: "/research/theses/master/solid-graph-interactions.png",
-    desc: "The Solid-based data flow models how orders, bills, storage, and access-controlled resources interact.",
+    desc: t("The Solid-based data flow models how orders, bills, storage, and access-controlled resources interact.", "Il flusso dati di Solid descrive le relazioni tra ordini, conti, archiviazione e risorse ad accesso controllato."),
   },
 ];
 
 const prototypeScreens = [
   {
-    title: "Menu and cart",
+    title: t("Menu and cart", "Menu e carrello"),
     src: "/research/theses/master/menu-cart-switches.png",
-    desc: "The user interface separates menu browsing from cart management.",
+    desc: t("The user interface separates menu browsing from cart management.", "L’interfaccia distingue la consultazione del menu dalla gestione del carrello."),
   },
   {
-    title: "Product list",
+    title: t("Product list", "Elenco dei prodotti"),
     src: "/research/theses/master/product-list.png",
-    desc: "Products are loaded from the restaurant data layer and exposed through the web interface.",
+    desc: t("Products are loaded from the restaurant data layer and exposed through the web interface.", "L’interfaccia web mostra i prodotti caricati dal sistema dati del ristorante."),
   },
   {
-    title: "Product description",
+    title: t("Product description", "Descrizione del prodotto"),
     src: "/research/theses/master/product-description.png",
-    desc: "The prototype includes product details and purchase actions.",
+    desc: t("The prototype includes product details and purchase actions.", "Il prototipo mostra i dettagli dei prodotti e permette di acquistarli."),
   },
   {
-    title: "Quantity update",
+    title: t("Quantity update", "Modifica delle quantità"),
     src: "/research/theses/master/quantity-update.png",
-    desc: "The cart supports quantity changes before order confirmation.",
+    desc: t("The cart supports quantity changes before order confirmation.", "Prima di confermare l’ordine si possono modificare le quantità nel carrello."),
   },
   {
-    title: "Get bill phase",
+    title: t("Get bill phase", "Richiesta del conto"),
     src: "/research/theses/master/get-bill.png",
-    desc: "The customer can move from ordering to bill generation.",
+    desc: t("The customer can move from ordering to bill generation.", "Dopo aver ordinato, il cliente può generare il conto."),
   },
   {
-    title: "Billing phase",
+    title: t("Billing phase", "Fase di fatturazione"),
     src: "/research/theses/master/billing-phase.png",
-    desc: "The billing workflow produces a payable state before final settlement.",
+    desc: t("The billing workflow produces a payable state before final settlement.", "Il flusso genera un conto pronto per il pagamento."),
   },
   {
-    title: "MetaMask experience",
+    title: t("MetaMask experience", "Pagamento con MetaMask"),
     src: "/research/theses/master/metamask-experience.png",
-    desc: "MetaMask is used to confirm the blockchain payment transaction.",
+    desc: t("MetaMask is used to confirm the blockchain payment transaction.", "MetaMask conferma la transazione blockchain."),
   },
   {
-    title: "Table QR code",
+    title: t("Table QR code", "Codice QR del tavolo"),
     src: "/research/theses/master/table-qr-code.png",
-    desc: "QR codes are used to identify the table and connect the physical restaurant space with the digital workflow.",
+    desc: t("QR codes are used to identify the table and connect the physical restaurant space with the digital workflow.", "Il codice QR identifica il tavolo e collega il ristorante fisico al flusso digitale."),
   },
   {
-    title: "Digital bill QR code",
+    title: t("Digital bill QR code", "Codice QR del conto digitale"),
     src: "/research/theses/master/digital-bill-qr-code.png",
-    desc: "The invoice flow includes QR-based identification for payment and document retrieval.",
+    desc: t("The invoice flow includes QR-based identification for payment and document retrieval.", "Il codice QR permette di identificare il conto per pagarlo e recuperare il documento."),
   },
   {
-    title: "Pre-invoice",
+    title: t("Pre-invoice", "Prefattura"),
     src: "/research/theses/master/pre-invoice.png",
-    desc: "The prototype generates a pre-invoice containing order, payment, and blockchain-related information.",
+    desc: t("The prototype generates a pre-invoice containing order, payment, and blockchain-related information.", "Il prototipo genera una prefattura con i dati dell’ordine, del pagamento e della transazione blockchain."),
   },
 ];
 
 const contributions = [
-  "Designed a decentralized document-management and accounting prototype for a restaurant/SME scenario.",
-  "Combined Ethereum blockchain transactions with Solid Pods to separate verifiable payment events from private business documents.",
-  "Used QR codes to connect physical restaurant tables, bills, and digital interaction flows.",
-  "Integrated MetaMask and Web3-style payment interaction into the customer-facing workflow.",
-  "Explored how accounting, ERP, eBill, and blockchain concepts can be connected in a practical software prototype.",
+  t("Designed a decentralized document-management and accounting prototype for a restaurant/SME scenario.", "Progettazione di un prototipo decentralizzato di gestione documentale e contabilità per un ristorante, come caso d’uso per le PMI."),
+  t("Combined Ethereum blockchain transactions with Solid Pods to separate verifiable payment events from private business documents.", "Integrazione delle transazioni Ethereum con Solid Pods per separare gli eventi di pagamento verificabili dai documenti aziendali riservati."),
+  t("Used QR codes to connect physical restaurant tables, bills, and digital interaction flows.", "Collegamento tra tavoli, conti e interazioni digitali tramite codici QR."),
+  t("Integrated MetaMask and Web3-style payment interaction into the customer-facing workflow.", "Integrazione di MetaMask e dei pagamenti Web3 nel percorso del cliente."),
+  t("Explored how accounting, ERP, eBill, and blockchain concepts can be connected in a practical software prototype.", "Esplorazione di come collegare contabilità, sistemi ERP, eBill e blockchain in un prototipo software."),
 ];
 ---
 
 <BaseLayout
-  title="Decentralized Accounting System with Blockchain and Solid Pods | Research | Vincenzo Di Perna"
-  description="Master thesis research on a decentralized accounting and document-management prototype using blockchain transactions, Solid Pods, MetaMask, QR codes, and eBill-inspired workflows."
+  title={t("Decentralized Accounting with Blockchain and Solid", "Contabilità decentralizzata con blockchain e Solid Pods | Vincenzo Di Perna")}
+  description={t("Master’s thesis on a restaurant accounting and document-management prototype using blockchain, Solid Pods, MetaMask and QR codes.", "Tesi magistrale su un prototipo di contabilità e gestione documentale con blockchain, Solid Pods, MetaMask, codici QR e procedure ispirate a eBill.")}
   sideBarActiveItemID="research"
 >
   <section class="mb-8">
-    <a href="/research" class="btn btn-sm btn-outline mb-6">
-      ← Back to Research
+    <a href={localPath("/research")} class="btn btn-sm btn-outline mb-6">
+      {t("← Back to Research", "← Torna alla ricerca")}
     </a>
 
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
         <div class="flex flex-wrap gap-2 items-center mb-3">
           <h1 class="text-4xl font-bold">
-            Decentralized Accounting System
+            {t("Decentralized Accounting System", "Sistema di contabilità decentralizzata")}
           </h1>
-          <span class="badge badge-secondary">Master's thesis</span>
-          <span class="badge badge-outline">University of Pisa</span>
+          <span class="badge badge-secondary">{t("Master's thesis", "Tesi magistrale")}</span>
+          <span class="badge badge-outline">{t("University of Pisa", "Università di Pisa")}</span>
         </div>
 
         <p class="text-lg leading-relaxed opacity-90">
-          This thesis explored the design and implementation of a decentralized
-          accounting and document-management system for a restaurant use case.
-          The prototype combines blockchain-based transactions, Solid Pods for
-          privacy-preserving document storage, MetaMask payments, QR-code-based
-          interaction, and eBill-inspired billing workflows.
+          {t("This thesis explored the design and implementation of a decentralized accounting and document-management system for a restaurant use case. The prototype combines blockchain-based transactions, Solid Pods for privacy-preserving document storage, MetaMask payments, QR-code-based interaction, and eBill-inspired billing workflows.", "La tesi progetta e realizza un sistema decentralizzato di contabilità e gestione documentale per un ristorante. Il prototipo combina transazioni su blockchain, Solid Pods per la conservazione riservata dei documenti, pagamenti con MetaMask, interazioni tramite codici QR e fatturazione ispirata a eBill.")}
         </p>
 
         <div class="flex flex-wrap gap-2 mt-5">
@@ -152,9 +153,9 @@ const contributions = [
           <span class="badge badge-outline">Ethereum</span>
           <span class="badge badge-outline">Solid Pods</span>
           <span class="badge badge-outline">MetaMask</span>
-          <span class="badge badge-outline">QR codes</span>
+          <span class="badge badge-outline">{t("QR codes", "Codici QR")}</span>
           <span class="badge badge-outline">eBill</span>
-          <span class="badge badge-outline">SME accounting</span>
+          <span class="badge badge-outline">{t("SME accounting", "Contabilità per PMI")}</span>
         </div>
       </div>
     </div>
@@ -165,28 +166,28 @@ const contributions = [
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">2021/22</p>
-          <p class="opacity-80">academic year</p>
+          <p class="opacity-80">{t("academic year", "anno accademico")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">SME</p>
-          <p class="opacity-80">restaurant use case</p>
+          <p class="opacity-80">{t("restaurant use case", "caso d’uso nella ristorazione")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">Solid</p>
-          <p class="opacity-80">private document storage</p>
+          <p class="opacity-80">{t("private document storage", "archiviazione riservata dei documenti")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <p class="text-4xl font-bold">ETH</p>
-          <p class="opacity-80">blockchain transaction layer</p>
+          <p class="opacity-80">{t("blockchain transaction layer", "livello transazionale su blockchain")}</p>
         </div>
       </div>
     </div>
@@ -195,22 +196,14 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Context</h2>
+        <h2 class="card-title text-2xl">{t("Context", "Contesto")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The thesis starts from a practical problem: accounting and document
-          management in small and medium-sized businesses can be costly, manual,
-          error-prone, and difficult to verify. In a restaurant scenario, payments,
-          invoices, orders, customer interactions, and supplier operations create
-          a flow of documents that must remain consistent, auditable, and
-          accessible to the right actors.
+          {t("The thesis starts from a practical problem: accounting and document management in small and medium-sized businesses can be costly, manual, error-prone, and difficult to verify. In a restaurant scenario, payments, invoices, orders, customer interactions, and supplier operations create a flow of documents that must remain consistent, auditable, and accessible to the right actors.", "Nelle piccole e medie imprese la contabilità e la gestione documentale possono essere costose, manuali, soggette a errori e difficili da verificare. In un ristorante, pagamenti, fatture, ordini e interazioni con clienti e fornitori generano documenti che devono rimanere coerenti, verificabili e accessibili alle persone autorizzate.")}
         </p>
 
         <p class="leading-relaxed opacity-90 mt-3">
-          The proposed solution uses blockchain as a transparent and tamper-aware
-          transaction layer, while Solid Pods provide a separate privacy-preserving
-          storage layer for documents and business data that should not be placed
-          directly on-chain.
+          {t("The proposed solution uses blockchain as a transparent and tamper-aware transaction layer, while Solid Pods provide a separate privacy-preserving storage layer for documents and business data that should not be placed directly on-chain.", "La soluzione usa la blockchain come livello transazionale trasparente in cui le alterazioni sono rilevabili. I Solid Pods costituiscono un livello separato per documenti e dati aziendali riservati, da conservare fuori dalla blockchain.")}
         </p>
       </div>
     </div>
@@ -219,15 +212,10 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Conceptual background</h2>
+        <h2 class="card-title text-2xl">{t("Conceptual background", "Concetti di base")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The work connects multiple concepts: ERP systems, electronic billing,
-          Ethereum, smart contracts, Web3, Solid Pods, QR codes, and digital
-          wallets. The key design idea is to avoid treating blockchain as a
-          general-purpose database: verifiable payment events can be anchored
-          on-chain, while sensitive documents remain stored in controlled,
-          access-managed Pods.
+          {t("The work connects multiple concepts: ERP systems, electronic billing, Ethereum, smart contracts, Web3, Solid Pods, QR codes, and digital wallets. The key design idea is to avoid treating blockchain as a general-purpose database: verifiable payment events can be anchored on-chain, while sensitive documents remain stored in controlled, access-managed Pods.", "Il lavoro collega sistemi ERP, fatturazione elettronica, Ethereum, smart contract, Web3, Solid Pods, codici QR e wallet. La blockchain registra gli eventi di pagamento verificabili, mentre i documenti sensibili rimangono in Pod con accesso controllato.")}
         </p>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
@@ -258,14 +246,10 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Architecture and design</h2>
+        <h2 class="card-title text-2xl">{t("Architecture and design", "Architettura e progettazione")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The prototype models the restaurant as an interaction between physical
-          space, customer actions, digital ordering, document storage, and payment
-          confirmation. QR codes connect tables and invoices to the web
-          interface, Solid manages private resources, and the blockchain layer
-          handles payment-related verification.
+          {t("The prototype models the restaurant as an interaction between physical space, customer actions, digital ordering, document storage, and payment confirmation. QR codes connect tables and invoices to the web interface, Solid manages private resources, and the blockchain layer handles payment-related verification.", "Il prototipo mette in relazione lo spazio fisico del ristorante, le azioni del cliente, gli ordini digitali, l’archiviazione e la conferma del pagamento. I codici QR collegano tavoli e conti all’interfaccia web, Solid gestisce le risorse riservate e la blockchain verifica i pagamenti.")}
         </p>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
@@ -296,13 +280,10 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Prototype workflow</h2>
+        <h2 class="card-title text-2xl">{t("Prototype workflow", "Come funziona il prototipo")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The implemented prototype follows the customer journey: access the
-          table-specific interface, browse the menu, manage the cart, generate
-          the bill, confirm payment, and obtain a digital document that can be
-          connected to the accounting workflow.
+          {t("The implemented prototype follows the customer journey: access the table-specific interface, browse the menu, manage the cart, generate the bill, confirm payment, and obtain a digital document that can be connected to the accounting workflow.", "Il cliente apre l’interfaccia del tavolo, consulta il menu, gestisce il carrello, genera il conto, conferma il pagamento e ottiene un documento digitale collegabile alla contabilità.")}
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
@@ -333,32 +314,32 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Implementation stack</h2>
+        <h2 class="card-title text-2xl">{t("Implementation stack", "Tecnologie utilizzate")}</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">Backend and web interface</h3>
+              <h3 class="font-bold">{t("Backend and web interface", "Backend e interfaccia web")}</h3>
               <p class="text-sm opacity-80">
-                Node.js, Express, EJS, JavaScript, static assets, and Heroku-oriented deployment.
+                {t("Node.js, Express, EJS, JavaScript, static assets, and Heroku-oriented deployment.", "Node.js, Express, EJS, JavaScript, risorse statiche e deployment pensato per Heroku.")}
               </p>
             </div>
           </div>
 
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">Decentralized data</h3>
+              <h3 class="font-bold">{t("Decentralized data", "Dati decentralizzati")}</h3>
               <p class="text-sm opacity-80">
-                Solid Pods, Inrupt APIs, WebID, access-control policies, containers, and document resources.
+                {t("Solid Pods, Inrupt APIs, WebID, access-control policies, containers, and document resources.", "Solid Pods, API Inrupt, WebID, criteri di controllo degli accessi, container e risorse documentali.")}
               </p>
             </div>
           </div>
 
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body">
-              <h3 class="font-bold">Payment and verification</h3>
+              <h3 class="font-bold">{t("Payment and verification", "Pagamento e verifica")}</h3>
               <p class="text-sm opacity-80">
-                Ethereum, MetaMask, Web3 interaction, QR codes, billing states, and transaction references.
+                {t("Ethereum, MetaMask, Web3 interaction, QR codes, billing states, and transaction references.", "Ethereum, MetaMask, Web3, codici QR, stati di fatturazione e riferimenti alle transazioni.")}
               </p>
             </div>
           </div>
@@ -370,7 +351,7 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Main contribution</h2>
+        <h2 class="card-title text-2xl">{t("Main contribution", "Contributo principale")}</h2>
 
         <ul class="list-disc pl-5 space-y-2 opacity-90">
           {contributions.map((item) => <li>{item}</li>)}
@@ -382,28 +363,25 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Relationship with later research</h2>
+        <h2 class="card-title text-2xl">{t("Relationship with later research", "Legame con le ricerche successive")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          This thesis anticipates several directions that later became central in
-          my research profile: blockchain systems, experimental prototypes,
-          digital assets, privacy-aware data management, and the connection
-          between technical infrastructure and real organisational workflows.
+          {t("This thesis anticipates several directions that later became central in my research profile: blockchain systems, experimental prototypes, digital assets, privacy-aware data management, and the connection between technical infrastructure and real organisational workflows.", "La tesi anticipa temi che sono poi diventati centrali nel mio lavoro: blockchain, prototipi sperimentali, asset digitali, riservatezza dei dati e integrazione delle infrastrutture tecniche nei processi organizzativi.")}
         </p>
 
         <div class="card-actions mt-4">
           <a
-            href="/research/dynamic-taxonomy-defi-tradfi"
+            href={localPath("/research/dynamic-taxonomy-defi-tradfi")}
             class="btn btn-sm btn-outline"
           >
-            Related DeFi / digital assets work
+            {t("Related DeFi / digital assets work", "Lavori su DeFi e asset digitali")}
           </a>
 
           <a
-            href="/research/topology-aware-blockchain-benchmarking"
+            href={localPath("/research/topology-aware-blockchain-benchmarking")}
             class="btn btn-sm btn-outline"
           >
-            Related blockchain systems work
+            {t("Related blockchain systems work", "Lavori sui sistemi blockchain")}
           </a>
         </div>
       </div>
@@ -413,7 +391,7 @@ const contributions = [
   <section class="mb-12">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Links</h2>
+        <h2 class="card-title text-2xl">{t("Links", "Collegamenti")}</h2>
 
         <div class="flex flex-wrap gap-3 mt-2">
           <a
@@ -422,7 +400,7 @@ const contributions = [
             rel="noopener noreferrer"
             class="btn btn-primary btn-sm"
           >
-            Open master's thesis PDF
+            {t("Open master's thesis PDF", "Apri il PDF della tesi magistrale")}
           </a>
 
 <a
@@ -431,14 +409,14 @@ const contributions = [
   rel="noopener noreferrer"
   class="btn btn-outline btn-sm"
 >
-  Open GitHub repository
+  {t("Open GitHub repository", "Apri il repository GitHub")}
 </a>          
 
           <a
-            href="/research"
+            href={localPath("/research")}
             class="btn btn-outline btn-sm"
           >
-            Back to research
+            {t("Back to research", "Torna alla ricerca")}
           </a>
         </div>
       </div>

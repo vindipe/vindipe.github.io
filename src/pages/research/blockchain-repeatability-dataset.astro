@@ -1,5 +1,8 @@
 ---
+import { translator } from "../../i18n/locale";
 import ResearchDetailPage from "../../components/ResearchDetailPage.astro";
+
+const t = translator(Astro.url.pathname);
 
 const title =
   "Network-Controlled Dataset of Blockchain Benchmarks for Evaluating Repeatability and Performance Predictability";
@@ -8,50 +11,51 @@ const githubUrl =
   "https://github.com/vindipe/blockchain-repeatability-benchmarking";
 
 const externalLinks = [
-  { label: "Open dataset on Zenodo", href: zenodoUrl },
-  { label: "Open GitHub repository", href: githubUrl },
+  { label: t("Open dataset on Zenodo", "Apri il dataset su Zenodo"), href: zenodoUrl },
+  { label: t("Open GitHub repository", "Apri il repository GitHub"), href: githubUrl },
   {
-    label: "Associated ACM DLT article",
+    label: t("Associated ACM DLT article", "Articolo ACM DLT associato"),
     href: "https://doi.org/10.1145/3828757",
   },
 ];
 
 const sections = [
   {
-    title: "Experimental matrix",
-    body: "The dataset contains 300 aggregate configuration rows and 50 columns. It covers five blockchain systems, five network topologies, six workloads, and deployments with 10 and 40 nodes.",
+    title: t("Experimental matrix", "Matrice sperimentale"),
+    body: t("The dataset contains 300 aggregate configuration rows and 50 columns. It covers five blockchain systems, five network topologies, six workloads, and deployments with 10 and 40 nodes.", "Il dataset ha 300 righe di configurazioni aggregate e 50 colonne. Copre cinque blockchain, cinque topologie di rete, sei carichi di lavoro e configurazioni da 10 e 40 nodi."),
     items: [
-      "Blockchains: Algorand, Diem, Ethereum, Quorum, and Solana.",
-      "Topologies: fat-tree, full mesh, hypercube, scale-free, and torus.",
-      "Workloads: DDoS, FIFA, GAFAM, Gaming, PayPal, and VISA.",
-      "Measurements: throughput, latency, energy, and committed transactions.",
+      t("Blockchains: Algorand, Diem, Ethereum, Quorum, and Solana.", "Blockchain: Algorand, Diem, Ethereum, Quorum e Solana."),
+      t("Topologies: fat-tree, full mesh, hypercube, scale-free, and torus.", "Topologie: fat-tree, maglia completa, ipercubo, rete scale-free e toro."),
+      t("Workloads: DDoS, FIFA, GAFAM, Gaming, PayPal, and VISA.", "Carichi: DDoS, FIFA, GAFAM, gaming, PayPal e VISA."),
+      t("Measurements: throughput, latency, energy, and committed transactions.", "Misure: throughput, latenza, energia e transazioni confermate."),
     ],
   },
   {
-    title: "Repeatability and predictability",
-    body: "Each row summarizes repeated benchmark executions through counts, means, extrema, quartiles, standard deviations, absolute ranges, and relative-dispersion measures. The resulting evidence supports analysis of variability, repeatability, and performance predictability under controlled network conditions.",
+    title: t("Repeatability and predictability", "Ripetibilità e prevedibilità"),
+    body: t("Each row summarizes repeated benchmark executions through counts, means, extrema, quartiles, standard deviations, absolute ranges, and relative-dispersion measures. The resulting evidence supports analysis of variability, repeatability, and performance predictability under controlled network conditions.", "Ogni riga riassume più esecuzioni dello stesso benchmark con conteggi, medie, estremi, quartili, deviazioni standard, intervalli e misure di dispersione relativa. I dati permettono di analizzare variabilità, ripetibilità e prevedibilità in condizioni di rete controllate."),
   },
   {
-    title: "Reproducibility resources",
-    body: "The GitHub repository provides the released CSV, a data dictionary, methodology and provenance notes, citation metadata, and the CC BY 4.0 license. The experiments were conducted with Lilith, the topology-aware blockchain benchmarking framework.",
+    title: t("Reproducibility resources", "Risorse per la riproducibilità"),
+    body: t("The GitHub repository provides the released CSV, a data dictionary, methodology and provenance notes, citation metadata, and the CC BY 4.0 license. The experiments were conducted with Lilith, the topology-aware blockchain benchmarking framework.", "Il repository GitHub include il CSV, un dizionario dei dati, note su metodologia e provenienza, metadati per la citazione e licenza CC BY 4.0. Gli esperimenti sono stati eseguiti con Lilith, il framework di benchmarking con topologie controllate."),
   },
 ];
 ---
 
 <ResearchDetailPage
+  pageTitle={t("Blockchain Benchmark Repeatability Dataset", "Dataset sulla ripetibilità dei benchmark blockchain")}
   {title}
-  subtitle="Public research dataset associated with the ACM Distributed Ledger Technologies: Research and Practice journal article on topology-aware blockchain benchmarking."
-  description="Public network-controlled blockchain benchmarking dataset for studying repeatability, variability, and performance predictability across platforms, workloads, topologies, and network sizes."
+  subtitle={t("Public research dataset associated with the ACM Distributed Ledger Technologies: Research and Practice journal article on topology-aware blockchain benchmarking.", "Dataset pubblico associato all’articolo su ACM Distributed Ledger Technologies: Research and Practice dedicato al benchmarking delle blockchain con topologie controllate.")}
+  description={t("Download a public dataset for comparing blockchain benchmark repeatability and performance predictability across controlled network conditions.", "Dataset pubblico per confrontare ripetibilità e prevedibilità dei benchmark blockchain al variare di piattaforme, carichi e condizioni di rete.")}
   badge="Dataset"
   tags={[
-    "Blockchain benchmarking",
-    "Repeatability",
-    "Performance predictability",
-    "Network topology",
-    "Reproducible research",
+    t("Blockchain benchmarking", "Benchmarking delle blockchain"),
+    t("Repeatability", "Ripetibilità"),
+    t("Performance predictability", "Prevedibilità delle prestazioni"),
+    t("Network topology", "Topologia di rete"),
+    t("Reproducible research", "Ricerca riproducibile"),
   ]}
   {externalLinks}
-  previewTitle="Dataset overview"
-  previewBody="This dataset preserves aggregate statistics from repeated blockchain benchmark executions under controlled network conditions. It is available through its archival Zenodo record and a documented public GitHub repository."
+  previewTitle={t("Dataset overview", "Panoramica del dataset")}
+  previewBody={t("This dataset preserves aggregate statistics from repeated blockchain benchmark executions under controlled network conditions. It is available through its archival Zenodo record and a documented public GitHub repository.", "Il dataset conserva statistiche aggregate di benchmark blockchain eseguiti più volte in condizioni di rete controllate. I dati sono disponibili su Zenodo e in un repository GitHub pubblico e documentato.")}
   {sections}
 />

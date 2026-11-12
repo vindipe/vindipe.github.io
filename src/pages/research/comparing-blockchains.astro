@@ -1,5 +1,10 @@
 ---
+import { getLocale, inLanguage, translator } from "../../i18n/locale";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const t = translator(Astro.url.pathname);
+const locale = getLocale(Astro.url.pathname);
+const localPath = (href: string) => inLanguage(href, locale);
 
 const thesisPdf = "/theses/phd-thesis-comparing-blockchains.pdf";
 const unicamRecord =
@@ -7,62 +12,62 @@ const unicamRecord =
 
 const evaluationDimensions = [
   {
-    title: "Performance efficiency",
-    text: "Topology-aware measurements of throughput, commit ratio, and confirmation latency under controlled workloads and deployment conditions.",
+    title: t("Performance efficiency", "Efficienza delle prestazioni"),
+    text: t("Topology-aware measurements of throughput, commit ratio, and confirmation latency under controlled workloads and deployment conditions.", "Misure di throughput, tasso di conferma e latenza di conferma con topologie di rete, carichi di lavoro e configurazioni di deployment controllati."),
   },
   {
-    title: "Energy efficiency",
-    text: "Node- and system-level energy measurements, including energy per committed transaction and the effect of network structure and workload intensity.",
+    title: t("Energy efficiency", "Efficienza energetica"),
+    text: t("Node- and system-level energy measurements, including energy per committed transaction and the effect of network structure and workload intensity.", "Misure energetiche per nodo e per sistema, con energia per transazione confermata ed effetti della struttura di rete e dell’intensità del carico."),
   },
   {
-    title: "Repeatability and predictability",
-    text: "Multi-run analysis of dispersion, worst-case deviations, variance sources, and the stability of performance expectations across configurations.",
+    title: t("Repeatability and predictability", "Ripetibilità e prevedibilità"),
+    text: t("Multi-run analysis of dispersion, worst-case deviations, variance sources, and the stability of performance expectations across configurations.", "Analisi su più esecuzioni della dispersione, degli scostamenti peggiori, delle fonti di varianza e della stabilità delle prestazioni attese nelle diverse configurazioni."),
   },
   {
-    title: "Economic efficiency",
-    text: "An entropy-based approach that aggregates heterogeneous on-chain indicators into an interpretable measure of ecosystem balance.",
+    title: t("Economic efficiency", "Efficienza economica"),
+    text: t("An entropy-based approach that aggregates heterogeneous on-chain indicators into an interpretable measure of ecosystem balance.", "Un metodo basato sull’entropia che aggrega indicatori on-chain eterogenei in una misura interpretabile dell’equilibrio dell’ecosistema."),
   },
 ];
 
 const contributions = [
-  "Lilith, a system-agnostic benchmarking framework that combines workload generation, deterministic orchestration, resource control, and network emulation.",
-  "A topology-controlled comparison of five blockchain systems under realistic transfer and smart-contract workloads.",
-  "An energy evaluation that relates network topology and workload conditions to total energy use and energy per committed transaction.",
-  "A network-controlled, multi-run methodology and public dataset for studying experimental repeatability and performance predictability.",
-  "The Entropy Balance index (EB-index), which combines heterogeneous on-chain indicators into a single economic-efficiency score.",
+  t("Lilith, a system-agnostic benchmarking framework that combines workload generation, deterministic orchestration, resource control, and network emulation.", "Lilith, un framework di benchmarking indipendente dalla piattaforma, con generazione dei carichi, orchestrazione deterministica, controllo delle risorse ed emulazione di rete."),
+  t("A topology-controlled comparison of five blockchain systems under realistic transfer and smart-contract workloads.", "Confronto tra cinque blockchain con topologie controllate e carichi realistici di trasferimenti e smart contract."),
+  t("An energy evaluation that relates network topology and workload conditions to total energy use and energy per committed transaction.", "Valutazione energetica che collega topologia e carico al consumo complessivo e all’energia per transazione confermata."),
+  t("A network-controlled, multi-run methodology and public dataset for studying experimental repeatability and performance predictability.", "Metodologia con esecuzioni ripetute e rete controllata, con un dataset pubblico per studiare ripetibilità e prevedibilità delle prestazioni."),
+  t("The Entropy Balance index (EB-index), which combines heterogeneous on-chain indicators into a single economic-efficiency score.", "L’Entropy Balance index (EB-index), che riunisce indicatori on-chain eterogenei in una misura dell’efficienza economica."),
 ];
 
 const relatedWorks = [
   {
     title:
       "The Impact of Network Topology on Performance Metrics and Energy Consumption for Blockchains: Towards Repeatable Benchmarking",
-    badge: "ACM DLT journal",
+    badge: t("ACM DLT journal", "Rivista ACM DLT"),
     href: "/research/acm-dlt-network-topologies-blockchain-performance",
-    text: "Journal article extending the topology-aware benchmarking line of work.",
+    text: t("Journal article extending the topology-aware benchmarking line of work.", "Articolo che estende il lavoro sul benchmarking con topologie di rete controllate."),
   },
   {
     title: "Impact of Network Topologies on Blockchain Performance",
     badge: "ACM DEBS '25",
     href: "/research/topology-aware-blockchain-benchmarking",
-    text: "Topology-aware performance benchmarking and the Lilith experimental methodology.",
+    text: t("Topology-aware performance benchmarking and the Lilith experimental methodology.", "Benchmarking delle prestazioni con topologie di rete controllate e metodologia sperimentale di Lilith."),
   },
   {
     title: "Blockchain Energy Consumption: Unveiling the Impact of Network Topologies",
     badge: "IEEE ICBC '25",
     href: "/research/performance-energy-economic-efficiency",
-    text: "Energy consumption and energy per transaction under controlled network topologies.",
+    text: t("Energy consumption and energy per transaction under controlled network topologies.", "Consumi ed energia per transazione in topologie di rete controllate."),
   },
   {
     title: "An Entropy-Based Approach to Evaluating the Economic Efficiency of Cryptocurrencies",
     badge: "DLT '25",
     href: "/research/entropy-based-economic-efficiency",
-    text: "The entropy-based economic-efficiency model developed into the EB-index.",
+    text: t("The entropy-based economic-efficiency model developed into the EB-index.", "Il modello di efficienza economica basato sull’entropia da cui nasce l’EB-index."),
   },
   {
-    title: "Lilith - A Topology-Aware Blockchain Benchmarking Framework",
-    badge: "Artifact",
+    title: t("Lilith - A Topology-Aware Blockchain Benchmarking Framework", "Lilith – Framework di benchmarking per blockchain con topologie controllate"),
+    badge: t("Artifact", "Materiali di ricerca"),
     href: "/research/lilith-benchmarking-framework",
-    text: "The public framework and reproducibility material supporting the experimental work.",
+    text: t("The public framework and reproducibility material supporting the experimental work.", "Il framework pubblico e i materiali per riprodurre gli esperimenti."),
   },
 ];
 
@@ -91,19 +96,19 @@ const structuredData = {
     encodingFormat: "application/pdf",
   },
   about: [
-    "Blockchain benchmarking",
-    "Network topology",
+    t("Blockchain benchmarking", "Benchmarking delle blockchain"),
+    t("Network topology", "Topologia di rete"),
     "Energy consumption",
     "Experimental repeatability",
-    "Performance predictability",
+    t("Performance predictability", "Prevedibilità delle prestazioni"),
     "Cryptocurrency economic efficiency",
   ],
 };
 ---
 
 <BaseLayout
-  title="Comparing Blockchains: Performance, Energy, and Economic Efficiencies | PhD Thesis"
-  description="Doctoral dissertation by Vincenzo P. Di Perna on blockchain performance, energy consumption, experimental repeatability, performance predictability, and economic efficiency."
+  title={t("Comparing Blockchains: PhD Thesis | Vincenzo Di Perna", "Confrontare le blockchain | Tesi di dottorato di Vincenzo Di Perna")}
+  description={t("Doctoral research comparing blockchains by performance, energy use, repeatability, predictability and economic efficiency.", "Tesi di dottorato di Vincenzo P. Di Perna su prestazioni, energia, ripetibilità, prevedibilità ed efficienza economica delle blockchain.")}
   sideBarActiveItemID="research"
   ogType="article"
 >
@@ -113,15 +118,15 @@ const structuredData = {
   />
 
   <section class="mb-8">
-    <a href="/research" class="btn btn-sm btn-outline mb-6">
-      ← Back to Research
+    <a href={localPath("/research")} class="btn btn-sm btn-outline mb-6">
+      {t("← Back to Research", "← Torna alla ricerca")}
     </a>
 
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
         <div class="flex flex-wrap gap-2 items-center mb-3">
-          <span class="badge badge-secondary">PhD thesis</span>
-          <span class="badge badge-outline">XXXVIII cycle</span>
+          <span class="badge badge-secondary">{t("PhD thesis", "Tesi di dottorato")}</span>
+          <span class="badge badge-outline">{t("XXXVIII cycle", "XXXVIII ciclo")}</span>
           <span class="badge badge-outline">2026</span>
         </div>
 
@@ -130,24 +135,20 @@ const structuredData = {
         </h1>
 
         <p class="text-lg leading-relaxed opacity-90 mt-4">
-          This doctoral dissertation develops a multidimensional and context-aware
-          approach to comparing blockchain systems. It studies how protocol design,
-          network topology, workloads, deployment conditions, and economic structure
-          shape performance, energy use, experimental stability, and economic
-          efficiency.
+          {t("This doctoral dissertation develops a multidimensional and context-aware approach to comparing blockchain systems. It studies how protocol design, network topology, workloads, deployment conditions, and economic structure shape performance, energy use, experimental stability, and economic efficiency.", "La tesi propone un confronto tra sistemi blockchain che considera più dimensioni e tiene conto delle condizioni in cui operano. Studia come protocollo, topologia di rete, carichi, deployment e struttura economica incidano su prestazioni, energia, stabilità sperimentale ed efficienza economica.")}
         </p>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body p-4">
-              <p class="text-sm uppercase tracking-wide opacity-70">Author</p>
+              <p class="text-sm uppercase tracking-wide opacity-70">{t("Author", "Autore")}</p>
               <p class="font-bold">Vincenzo P. Di Perna</p>
             </div>
           </div>
 
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body p-4">
-              <p class="text-sm uppercase tracking-wide opacity-70">Institution</p>
+              <p class="text-sm uppercase tracking-wide opacity-70">{t("Institution", "Ateneo")}</p>
               <p class="font-bold">Università degli Studi di Camerino</p>
               <p class="text-sm opacity-80">School of Advanced Studies</p>
             </div>
@@ -155,17 +156,17 @@ const structuredData = {
 
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body p-4">
-              <p class="text-sm uppercase tracking-wide opacity-70">Doctoral course</p>
+              <p class="text-sm uppercase tracking-wide opacity-70">{t("Doctoral course", "Corso di dottorato")}</p>
               <p class="font-bold">Blockchain and Distributed Ledger Technology</p>
-              <p class="text-sm opacity-80">Curriculum: Economics and Finance</p>
+              <p class="text-sm opacity-80">{t("Curriculum: Economics and Finance", "Curriculum: Economia e finanza")}</p>
             </div>
           </div>
 
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body p-4">
-              <p class="text-sm uppercase tracking-wide opacity-70">Public defense</p>
-              <p class="font-bold">23 June 2026</p>
-              <p class="text-sm opacity-80">Scientific field: INF/01</p>
+              <p class="text-sm uppercase tracking-wide opacity-70">{t("Public defense", "Discussione pubblica")}</p>
+              <p class="font-bold">{t("23 June 2026", "23 giugno 2026")}</p>
+              <p class="text-sm opacity-80">{t("Scientific field: INF/01", "Settore scientifico: INF/01")}</p>
             </div>
           </div>
         </div>
@@ -177,7 +178,7 @@ const structuredData = {
             rel="noopener noreferrer"
             class="btn btn-primary"
           >
-            Open thesis PDF
+            {t("Open thesis PDF", "Apri il PDF della tesi")}
           </a>
 
           <a
@@ -186,13 +187,12 @@ const structuredData = {
             rel="noopener noreferrer"
             class="btn btn-outline"
           >
-            View in UNICAM Research Repository
+            {t("View in UNICAM Research Repository", "Consulta il repository di ricerca UNICAM")}
           </a>
         </div>
 
         <p class="text-sm opacity-70 mt-4">
-          The dissertation is also archived in the institutional research repository
-          of the University of Camerino.
+          {t("The dissertation is also archived in the institutional research repository of the University of Camerino.", "La tesi è archiviata anche nel repository istituzionale dell’Università di Camerino.")}
         </p>
       </div>
     </div>
@@ -203,28 +203,28 @@ const structuredData = {
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body p-5">
           <p class="text-4xl font-bold">5</p>
-          <p class="opacity-80">blockchain systems</p>
+          <p class="opacity-80">{t("blockchain systems", "sistemi blockchain")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body p-5">
           <p class="text-4xl font-bold">5</p>
-          <p class="opacity-80">network topologies</p>
+          <p class="opacity-80">{t("network topologies", "topologie di rete")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body p-5">
           <p class="text-4xl font-bold">6</p>
-          <p class="opacity-80">workload profiles</p>
+          <p class="opacity-80">{t("workload profiles", "profili di carico")}</p>
         </div>
       </div>
 
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body p-5">
           <p class="text-4xl font-bold">4</p>
-          <p class="opacity-80">evaluation dimensions</p>
+          <p class="opacity-80">{t("evaluation dimensions", "dimensioni di valutazione")}</p>
         </div>
       </div>
     </div>
@@ -233,28 +233,21 @@ const structuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Research problem</h2>
+        <h2 class="card-title text-2xl">{t("Research problem", "Domanda di ricerca")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          Blockchain efficiency cannot be represented by a single headline metric.
-          Results depend on the interaction between protocol design, network
-          conditions, workload semantics, infrastructure, and the economic ecosystem.
-          Comparisons based only on average transactions per second can therefore hide
-          variability, deployment assumptions, energy trade-offs, and structural
-          differences between crypto-assets.
+          {t("Blockchain efficiency cannot be represented by a single headline metric. Results depend on the interaction between protocol design, network conditions, workload semantics, infrastructure, and the economic ecosystem. Comparisons based only on average transactions per second can therefore hide variability, deployment assumptions, energy trade-offs, and structural differences between crypto-assets.", "L’efficienza di una blockchain dipende dall’interazione fra protocollo, rete, carichi, infrastruttura ed ecosistema economico. Un confronto fondato solo sulla media delle transazioni al secondo può nascondere variabilità, ipotesi di deployment, compromessi energetici e differenze strutturali fra cryptoasset.")}
         </p>
 
         <p class="leading-relaxed opacity-90 mt-3">
-          The dissertation addresses this evidence gap through controlled benchmarking,
-          repeated measurements, energy instrumentation, openly documented artifacts,
-          and an entropy-based aggregation of economic indicators.
+          {t("The dissertation addresses this evidence gap through controlled benchmarking, repeated measurements, energy instrumentation, openly documented artifacts, and an entropy-based aggregation of economic indicators.", "La tesi affronta questo problema con benchmark controllati, misure ripetute, strumentazione energetica, materiali pubblici documentati e un metodo per aggregare gli indicatori economici attraverso l’entropia.")}
         </p>
       </div>
     </div>
   </section>
 
   <section class="mb-8">
-    <h2 class="text-3xl font-bold mb-5">Four dimensions of efficiency</h2>
+    <h2 class="text-3xl font-bold mb-5">{t("Four dimensions of efficiency", "Quattro dimensioni dell’efficienza")}</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       {
@@ -273,14 +266,10 @@ const structuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Experimental scope</h2>
+        <h2 class="card-title text-2xl">{t("Experimental scope", "Ambito degli esperimenti")}</h2>
 
         <p class="leading-relaxed opacity-90">
-          The technical studies compare Algorand, Diem, Ethereum Clique, Quorum IBFT,
-          and Solana under five logical network topologies: fat-tree, full mesh,
-          hypercube, scale-free, and torus. The systems are exercised with transfer and
-          smart-contract workloads inspired by DDoS, FIFA, GAFAM, gaming, PayPal, and
-          VISA scenarios, using both 10-node and 40-node configurations.
+          {t("The technical studies compare Algorand, Diem, Ethereum Clique, Quorum IBFT, and Solana under five logical network topologies: fat-tree, full mesh, hypercube, scale-free, and torus. The systems are exercised with transfer and smart-contract workloads inspired by DDoS, FIFA, GAFAM, gaming, PayPal, and VISA scenarios, using both 10-node and 40-node configurations.", "Gli esperimenti confrontano Algorand, Diem, Ethereum Clique, Quorum IBFT e Solana con cinque topologie logiche: fat-tree, maglia completa, ipercubo, rete scale-free e toro. I sistemi eseguono trasferimenti e smart contract con carichi ispirati a DDoS, FIFA, GAFAM, gaming, PayPal e VISA, su reti da 10 e 40 nodi.")}
         </p>
 
         <div class="flex flex-wrap gap-2 mt-5">
@@ -289,9 +278,9 @@ const structuredData = {
           <span class="badge badge-outline">Ethereum Clique</span>
           <span class="badge badge-outline">Quorum IBFT</span>
           <span class="badge badge-outline">Solana</span>
-          <span class="badge badge-outline">Network emulation</span>
-          <span class="badge badge-outline">Multi-run analysis</span>
-          <span class="badge badge-outline">Energy measurement</span>
+          <span class="badge badge-outline">{t("Network emulation", "Emulazione di rete")}</span>
+          <span class="badge badge-outline">{t("Multi-run analysis", "Analisi su più esecuzioni")}</span>
+          <span class="badge badge-outline">{t("Energy measurement", "Misura dell’energia")}</span>
         </div>
       </div>
     </div>
@@ -300,7 +289,7 @@ const structuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Main contributions</h2>
+        <h2 class="card-title text-2xl">{t("Main contributions", "Contributi principali")}</h2>
 
         <ol class="list-decimal pl-5 space-y-3 opacity-90">
           {contributions.map((contribution) => <li>{contribution}</li>)}
@@ -312,21 +301,21 @@ const structuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Supervision</h2>
+        <h2 class="card-title text-2xl">{t("Supervision", "Supervisione")}</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
           <div>
-            <p class="text-sm uppercase tracking-wide opacity-70">Supervisor</p>
+            <p class="text-sm uppercase tracking-wide opacity-70">{t("Supervisor", "Relatore")}</p>
             <p class="font-bold">Prof. Marco Bernardo</p>
-            <p class="text-sm opacity-80">University of Urbino</p>
+            <p class="text-sm opacity-80">{t("University of Urbino", "Università di Urbino")}</p>
           </div>
 
           <div>
-            <p class="text-sm uppercase tracking-wide opacity-70">Co-supervisors</p>
+            <p class="text-sm uppercase tracking-wide opacity-70">{t("Co-supervisors", "Correlatori")}</p>
             <p class="font-bold">Prof. Francesco Fabris</p>
-            <p class="text-sm opacity-80">University of Trieste</p>
+            <p class="text-sm opacity-80">{t("University of Trieste", "Università di Trieste")}</p>
             <p class="font-bold mt-3">Prof. Valerio Schiavoni</p>
-            <p class="text-sm opacity-80">University of Neuchâtel</p>
+            <p class="text-sm opacity-80">{t("University of Neuchâtel", "Università di Neuchâtel")}</p>
           </div>
         </div>
       </div>
@@ -334,13 +323,13 @@ const structuredData = {
   </section>
 
   <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-5">Related research and artifacts</h2>
+    <h2 class="text-3xl font-bold mb-5">{t("Related research and artifacts", "Studi e materiali correlati")}</h2>
 
     <div class="grid gap-5">
       {
         relatedWorks.map((item) => (
           <a
-            href={item.href}
+            href={localPath(item.href)}
             class="network-protected card bg-base-100 shadow-md transition ease-in-out hover:shadow-2xl hover:scale-[101%]"
           >
             <article class="card-body">
@@ -352,7 +341,7 @@ const structuredData = {
               <p>{item.text}</p>
 
               <div class="card-actions justify-end mt-3">
-                <span class="btn btn-sm btn-outline">Open research page</span>
+                <span class="btn btn-sm btn-outline">{t("Open research page", "Approfondisci lo studio")}</span>
               </div>
             </article>
           </a>

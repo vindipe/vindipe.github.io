@@ -1,118 +1,118 @@
 ---
+import { translator } from "../../i18n/locale";
+
+const t = translator(Astro.url.pathname);
 const reels = [
   {
     title: "Pills of Blockchain #01",
-    desc: "Pill #1 - Who knows Blockchain? #blockchain #bitcoin #ethereum #nft #phd #blockchainnews",
+    desc: t("Pill #1 - Who knows Blockchain? #blockchain #bitcoin #ethereum #nft #phd #blockchainnews", "Chi conosce la blockchain?"),
     url: "https://www.instagram.com/reel/CnLx5cuOf91/",
   },
   {
     title: "Pills of Blockchain #02",
-    desc: "Pill #2 - Intermediaries #blockchain #bitcoin #ethereum #nft #phd #blockchainnews #bank",
+    desc: t("Pill #2 - Intermediaries #blockchain #bitcoin #ethereum #nft #phd #blockchainnews #bank", "Gli intermediari"),
     url: "https://www.instagram.com/reel/CnM789prwGH/",
   },
   {
     title: "Pills of Blockchain #03",
-    desc: "Pill n.3 - Decentralization #blockchain #decentralization #decentralized #bitcoin #bank #instagram #world #italy #phd #phdlife #university",
+    desc: t("Pill n.3 - Decentralization #blockchain #decentralization #decentralized #bitcoin #bank #instagram #world #italy #phd #phdlife #university", "La decentralizzazione"),
     url: "https://www.instagram.com/reel/CnWDiWuPuzt/",
   },
   {
     title: "Pills of Blockchain #04",
-    desc: "Pill n.4 - The Bitcoin use case #blockchain #blockchainnews #world #instagram #italy #phd #phdlife #pricecap #bitcoin #bitcoins #bitcoinnews #usa #university #università #ethereum #money #crypto #cryptocurrency",
+    desc: t("Pill n.4 - The Bitcoin use case #blockchain #blockchainnews #world #instagram #italy #phd #phdlife #pricecap #bitcoin #bitcoins #bitcoinnews #usa #university #università #ethereum #money #crypto #cryptocurrency", "Il caso Bitcoin"),
     url: "https://www.instagram.com/reel/CnXPB96pH62/",
   },
   {
     title: "Pills of Blockchain #05",
-    desc: "Pill n.5 - Consensus #cryptomarket #cryptomoney #blockchaintechnology #phdvoice #world #blockchain #blockchainnews #italy #university #università",
+    desc: t("Pill n.5 - Consensus #cryptomarket #cryptomoney #blockchaintechnology #phdvoice #world #blockchain #blockchainnews #italy #university #università", "Il consenso"),
     url: "https://www.instagram.com/reel/Cnd4ErJOtX2/",
   },
   {
     title: "Pills of Blockchain #06",
-    desc: "Pill n.6 - Miners #phd #bitcoin #blockchain #ethereum #nft #blockchaintechnology #binance #blockchainnews #miners #hashrate #coinbase",
+    desc: t("Pill n.6 - Miners #phd #bitcoin #blockchain #ethereum #nft #blockchaintechnology #binance #blockchainnews #miners #hashrate #coinbase", "I miner"),
     url: "https://www.instagram.com/reel/CnoLQYgMI9D/",
   },
   {
     title: "Pills of Blockchain #07",
-    desc: "Pill n.7 - Cryptocurrencies #blockchain #blockchaintechnology #crypto #cryptocurrency #cryptocurrencies #investment #digital #world #instagram #bitcoin #ethereum #italy",
+    desc: t("Pill n.7 - Cryptocurrencies #blockchain #blockchaintechnology #crypto #cryptocurrency #cryptocurrencies #investment #digital #world #instagram #bitcoin #ethereum #italy", "Le criptovalute"),
     url: "https://www.instagram.com/reel/Cnw7W-NL4Pd/",
   },
   {
     title: "Pills of Blockchain #08",
-    desc: "Pill n.8 - Security #blockchain #phd #nft #clean #security #attack #51attack #robustness #world #strenght #immutable #immutability",
+    desc: t("Pill n.8 - Security #blockchain #phd #nft #clean #security #attack #51attack #robustness #world #strenght #immutable #immutability", "La sicurezza"),
     url: "https://www.instagram.com/reel/Cn6ILrJvnt-/",
   },
   {
     title: "Pills of Blockchain #09",
-    desc: "Pill n.9 - Use Case Ethereum #blockchain #phd #bitcoin #ethereum #nft #token #world #smartcontracts #pos #proofofstake #instagram #italy #university",
+    desc: t("Pill n.9 - Use Case Ethereum #blockchain #phd #bitcoin #ethereum #nft #token #world #smartcontracts #pos #proofofstake #instagram #italy #university", "Il caso Ethereum"),
     url: "https://www.instagram.com/reel/CoDTRTSLovQ/",
   },
   {
     title: "Pills of Blockchain #10",
-    desc: "Pill n.10 - Smart Contract #blockchain #blockchaintechnology #smartcontract #reliability #versatile #automation #phd #bitcoin #ethereum #defi",
+    desc: t("Pill n.10 - Smart Contract #blockchain #blockchaintechnology #smartcontract #reliability #versatile #automation #phd #bitcoin #ethereum #defi", "Gli smart contract"),
     url: "https://www.instagram.com/reel/CoMPZ2Gr6rL/",
   },
   {
     title: "Pills of Blockchain #11",
-    desc: "Pill n.11 - NFT #blockchain #blockchaintechnology #smartcontract #nft #ethereum #crypto #asset #trading",
+    desc: t("Pill n.11 - NFT #blockchain #blockchaintechnology #smartcontract #nft #ethereum #crypto #asset #trading", "Gli NFT"),
     url: "https://www.instagram.com/reel/CoT5aqeuPDQ/",
   },
   {
     title: "Pills of Blockchain #12",
-    desc: "Pill n.12 - Recap #first #blockchaintechnology #blockchain #initiative #begin #phd #new #season",
+    desc: t("Pill n.12 - Recap #first #blockchaintechnology #blockchain #initiative #begin #phd #new #season", "Riepilogo"),
     url: "https://www.instagram.com/reel/CoWty2jvVtA/",
   },
   {
     title: "Pills of Blockchain #13",
-    desc: "Pill n.13 - Carpino use case @carpinonelmondo #newseason #blockchain #blockchaintechnology #phd #initiatives #carpino #new #world #gargano #italy #solutions #futuro #share",
+    desc: t("Pill n.13 - Carpino use case @carpinonelmondo #newseason #blockchain #blockchaintechnology #phd #initiatives #carpino #new #world #gargano #italy #solutions #futuro #share", "Il caso di Carpino"),
     url: "https://www.instagram.com/reel/Ct85KZbvU_H/",
   },
   {
     title: "Pills of Blockchain #14",
-    desc: "Pill n.14 - Supply Chain BuondiOli @buondioli @prolococarpino_official @carpinonelmondo #supplychain #olive #oliobiologico #agricoltura #carpino #blockchain #blockchaintechnology #phd #innovations #future",
+    desc: t("Pill n.14 - Supply Chain BuondiOli @buondioli @prolococarpino_official @carpinonelmondo #supplychain #olive #oliobiologico #agricoltura #carpino #blockchain #blockchaintechnology #phd #innovations #future", "La filiera di BuondiOli"),
     url: "https://www.instagram.com/reel/Ct-4zQEOTGG/",
   },
   {
     title: "Pills of Blockchain #15",
-    desc: "Pills n.15 - Insurance Gelata 2018 #carpino #gargano #italy #blockchain #blockchaintechnology #blockchainnews #assicurazioni #fondi #sostegno #tempistiche #calamità #interventi #phd #innovation",
+    desc: t("Pills n.15 - Insurance Gelata 2018 #carpino #gargano #italy #blockchain #blockchaintechnology #blockchainnews #assicurazioni #fondi #sostegno #tempistiche #calamità #interventi #phd #innovation", "Assicurazione e gelata del 2018"),
     url: "https://www.instagram.com/reel/CuGwe4JJtyg/",
   },
   {
     title: "Pills of Blockchain #16",
-    desc: "Pill n.16 - Personalized Experience Palio @palio.di.san.rocco @carpinonelmondo @creodraws #palio #carpino #tradizione #innovation #gargano #italy #blockchain #custom #phd #horses #cavalli",
+    desc: t("Pill n.16 - Personalized Experience Palio @palio.di.san.rocco @carpinonelmondo @creodraws #palio #carpino #tradizione #innovation #gargano #italy #blockchain #custom #phd #horses #cavalli", "Un’esperienza personalizzata al Palio"),
     url: "https://www.instagram.com/reel/CuOdhy3RvQj/",
   },
   {
     title: "Pills of Blockchain #17",
-    desc: "Pill n.17 - DAO Festival Folk #festival #carpino #innovation #phd #blockchain #folk #community #collaboration #tradition #world",
+    desc: t("Pill n.17 - DAO Festival Folk #festival #carpino #innovation #phd #blockchain #folk #community #collaboration #tradition #world", "Una DAO per il Festival Folk"),
     url: "https://www.instagram.com/reel/Cu3rPJgx0TW/",
   },
   {
     title: "Pills of Blockchain #18",
-    desc: "Pill n.18 - Investment and NFT Terra #land #digitalization #blockchain #nft #investment #tokenization #innovations #carpino #gargano #world #phd",
+    desc: t("Pill n.18 - Investment and NFT Terra #land #digitalization #blockchain #nft #investment #tokenization #innovations #carpino #gargano #world #phd", "Investimenti e NFT per la terra"),
     url: "https://www.instagram.com/reel/Cu_ck7AtAwV/",
   },
   {
     title: "Pills of Blockchain #19",
-    desc: "Pill n.19 - Financing Banana Coin #blockchain #financing #startup #phd #research #innovation #opportunity",
+    desc: t("Pill n.19 - Financing Banana Coin #blockchain #financing #startup #phd #research #innovation #opportunity", "Finanziamento con Banana Coin"),
     url: "https://www.instagram.com/reel/CwCtry5sVpD/",
   },
 ];
 ---
 
-<section class="mb-12">
+<section id="blockchain-reels" class="mb-12">
   <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between mb-5">
     <div>
       <div class="flex flex-wrap gap-2 items-center mb-2">
         <h2 class="text-3xl font-bold">Pills of Blockchain</h2>
-        <span class="badge badge-secondary">Video series</span>
+        <span class="badge badge-secondary">{t("Video series", "Serie di video")}</span>
         <span class="badge badge-outline">Instagram Reels</span>
-        <span class="badge badge-outline">Italian audio</span>
+        <span class="badge badge-outline">{t("Italian audio", "Audio in italiano")}</span>
       </div>
 
       <p class="opacity-80 max-w-3xl">
-        Short educational videos created to explain blockchain concepts in a
-        simple and accessible way. The videos are embedded from the original
-        public Instagram archive, keeping this website lightweight while still
-        allowing in-page playback.
+        {t("Short educational videos created to explain blockchain concepts in a simple and accessible way. The videos are embedded from the original public Instagram archive, keeping this website lightweight while still allowing in-page playback.", "Brevi video per avvicinarsi ai concetti della blockchain. I reel provengono dall’archivio pubblico originale di Instagram e si possono riprodurre direttamente da questa pagina.")}
       </p>
     </div>
 
@@ -122,18 +122,18 @@ const reels = [
       rel="noopener noreferrer"
       class="btn btn-primary btn-sm shrink-0"
     >
-      Open @pillsofblockchain
+      {t("Open @pillsofblockchain", "Apri @pillsofblockchain")}
     </a>
   </div>
 
   <div class="relative">
     <div
       class="flex gap-5 overflow-x-auto pb-5 snap-x snap-mandatory scroll-smooth"
-      aria-label="Scrollable Pills of Blockchain video carousel"
+      aria-label={t("Scrollable Pills of Blockchain video carousel", "Carosello dei video di Pills of Blockchain")}
     >
       {
         reels.map((reel) => (
-          <article class="network-protected card bg-base-100 shadow-md min-w-[340px] max-w-[340px] md:min-w-[420px] md:max-w-[420px] snap-start">
+          <article class="network-protected card bg-base-100 shadow-md min-w-[min(340px,100%)] max-w-[340px] md:min-w-[420px] md:max-w-[420px] snap-start">
             <div class="card-body">
               <div class="flex flex-wrap gap-2 items-center">
                 <h3 class="card-title">{reel.title}</h3>
@@ -149,10 +149,10 @@ const reels = [
     class="instagram-media"
     data-instgrm-permalink={reel.url}
     data-instgrm-version="14"
-    style="background:#FFF; border:0; margin:0 auto; max-width:540px; min-width:280px; padding:0; width:100%;"
+    style="background:#FFF; border:0; margin:0 auto; max-width:540px; padding:0; width:100%;"
   >
     <a href={reel.url} target="_blank" rel="noopener noreferrer">
-      View this Reel on Instagram
+      {t("View this Reel on Instagram", "Guarda questo reel su Instagram")}
     </a>
   </blockquote>
 </div>
@@ -163,7 +163,7 @@ const reels = [
     </div>
 
     <p class="text-sm opacity-60 mt-1">
-      Scroll horizontally to browse the full video archive.
+      {t("Scroll horizontally to browse the full video archive.", "Scorri in orizzontale per vedere tutti i video.")}
     </p>
   </div>
 
@@ -187,7 +187,23 @@ const reels = [
     }
   }
 
-  document.addEventListener("DOMContentLoaded", loadInstagramEmbeds);
-  document.addEventListener("astro:page-load", loadInstagramEmbeds);
+  function watchInstagramReels() {
+    const reels = document.getElementById("blockchain-reels");
+    if (!reels || reels.dataset.watched) return;
+    reels.dataset.watched = "true";
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      loadInstagramEmbeds();
+    }, { rootMargin: "240px" });
+    observer.observe(reels);
+    document.addEventListener("astro:before-swap", () => observer.disconnect(), { once: true });
+  }
+
+  if (!window.__vindipeReelsInitialized) {
+    window.__vindipeReelsInitialized = true;
+    document.addEventListener("astro:page-load", watchInstagramReels);
+  }
+  watchInstagramReels();
 </script>
 </section>

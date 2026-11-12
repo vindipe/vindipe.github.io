@@ -1,23 +1,27 @@
 ---
+import { translator } from "../../i18n/locale";
 import ResearchDetailPage from "../../components/ResearchDetailPage.astro";
+
+const t = translator(Astro.url.pathname);
 ---
 
 <ResearchDetailPage
-  title="Lilith - A Topology-Aware Blockchain Benchmarking Framework"
-  subtitle="Public research artifact for reproducible blockchain benchmarking under controlled network topologies, realistic workloads, and repeatable experimental conditions."
-  description="Lilith is a topology-aware blockchain benchmarking framework developed during Vincenzo Di Perna's PhD to study how network topology, workloads, and blockchain implementations affect performance, energy consumption, repeatability, and predictability."
-  badge="Public artifact"
+  pageTitle={t("Lilith: Blockchain Benchmarking Framework", "Lilith: framework di benchmarking per blockchain")}
+  title={t("Lilith - A Topology-Aware Blockchain Benchmarking Framework", "Lilith – Framework di benchmarking per blockchain con topologie controllate")}
+  subtitle={t("Public research artifact for reproducible blockchain benchmarking under controlled network topologies, realistic workloads, and repeatable experimental conditions.", "Software di ricerca pubblico per il benchmarking riproducibile delle blockchain con topologie controllate, carichi realistici e condizioni sperimentali ripetibili.")}
+  description={t("Benchmark blockchains with Lilith under controlled network topologies, realistic workloads and reproducible experimental conditions.", "Confronta prestazioni, consumi e ripetibilità delle blockchain con Lilith, topologie di rete controllate e carichi realistici.")}
+  badge={t("Public artifact", "Materiali pubblici")}
   tags={[
-    "Blockchain benchmarking",
-    "Topology-aware evaluation",
-    "Network emulation",
-    "Reproducibility",
-    "Performance analysis",
-    "Energy analysis",
+    t("Blockchain benchmarking", "Benchmarking delle blockchain"),
+    t("Topology-aware evaluation", "Valutazione con topologie controllate"),
+    t("Network emulation", "Emulazione di rete"),
+    t("Reproducibility", "Riproducibilità"),
+    t("Performance analysis", "Analisi delle prestazioni"),
+    t("Energy analysis", "Analisi dei consumi"),
   ]}
   externalLinks={[
     {
-      label: "Open GitHub repository",
+      label: t("Open GitHub repository", "Apri il repository GitHub"),
       href: "https://github.com/vindipe/lilith",
     },
     {
@@ -25,52 +29,52 @@ import ResearchDetailPage from "../../components/ResearchDetailPage.astro";
       href: "https://doi.org/10.5281/zenodo.11409100",
     },
     {
-      label: "ACM DLT journal article",
+      label: t("ACM DLT journal article", "Articolo sulla rivista ACM DLT"),
       href: "https://dl.acm.org/doi/10.1145/3828757",
     },
     {
-      label: "Related DEBS '25 paper",
+      label: t("Related DEBS '25 paper", "Articolo DEBS ’25 correlato"),
       href: "https://doi.org/10.1145/3701717.3730540",
     },
   ]}
-  previewTitle="Artifact overview"
-  previewBody="Lilith connects blockchain workload execution, programmable network emulation, deployment orchestration, monitoring, and analysis scripts into a research-oriented benchmarking workflow. It was designed to evaluate blockchain systems under controlled network topologies that expose latency, bandwidth, workload, and implementation effects."
+  previewTitle={t("Artifact overview", "Panoramica del framework")}
+  previewBody={t("Lilith connects blockchain workload execution, programmable network emulation, deployment orchestration, monitoring, and analysis scripts into a research-oriented benchmarking workflow. It was designed to evaluate blockchain systems under controlled network topologies that expose latency, bandwidth, workload, and implementation effects.", "Lilith integra esecuzione dei carichi blockchain, emulazione di rete programmabile, orchestrazione, monitoraggio e script di analisi. Le topologie controllate aiutano a distinguere gli effetti di latenza, banda, carico e implementazione.")}
   sections={[
     {
-      title: "What Lilith does",
+      title: t("What Lilith does", "Che cosa fa Lilith"),
       items: [
-        "Runs blockchain benchmarking experiments under configurable topology-aware network conditions.",
-        "Integrates workload generation, network emulation, orchestration scripts, configuration, and analysis utilities.",
-        "Supports reproducible evaluation workflows for comparing performance, latency, energy usage, and run-to-run variability.",
-        "Provides a practical bridge between research questions and executable experimental artifacts.",
+        t("Runs blockchain benchmarking experiments under configurable topology-aware network conditions.", "Esegue benchmark su blockchain con topologie di rete configurabili."),
+        t("Integrates workload generation, network emulation, orchestration scripts, configuration, and analysis utilities.", "Integra generazione dei carichi, emulazione di rete, script di orchestrazione, configurazione e strumenti di analisi."),
+        t("Supports reproducible evaluation workflows for comparing performance, latency, energy usage, and run-to-run variability.", "Supporta confronti riproducibili di prestazioni, latenza, consumi e variabilità tra esecuzioni."),
+        t("Provides a practical bridge between research questions and executable experimental artifacts.", "Aiuta a trasformare le domande di ricerca in esperimenti eseguibili."),
       ],
     },
     {
-      title: "Why topology-aware benchmarking matters",
-      body: "Blockchain systems are distributed by design, so their behaviour depends on more than protocol logic or raw machine speed. Network structure, latency, bandwidth, workload shape, validator placement, and deployment assumptions can all affect throughput, latency, energy consumption, and experimental repeatability. Lilith makes these factors explicit and controllable.",
+      title: t("Why topology-aware benchmarking matters", "Perché la topologia conta nel benchmarking"),
+      body: t("Blockchain systems are distributed by design, so their behaviour depends on more than protocol logic or raw machine speed. Network structure, latency, bandwidth, workload shape, validator placement, and deployment assumptions can all affect throughput, latency, energy consumption, and experimental repeatability. Lilith makes these factors explicit and controllable.", "I sistemi blockchain sono distribuiti. Struttura della rete, latenza, banda, carico, collocazione dei validatori e ipotesi di deployment possono incidere su throughput, latenza, consumi e ripetibilità. Lilith rende questi fattori espliciti e controllabili."),
     },
     {
-      title: "Repository highlights",
+      title: t("Repository highlights", "Che cosa trovi nel repository"),
       items: [
-        "Public repository layout for a research artifact around topology-aware blockchain benchmarking.",
-        "Example machine template for local configuration.",
-        "Local validation mode for checking the repository and experiment configuration before heavier runs.",
-        "Git LFS tracking for the large cloud-ping dataset used by the topology and latency workflow.",
-        "Documentation for execution modes, repository layout, quick validation, and reproducibility-oriented usage.",
+        t("Public repository layout for a research artifact around topology-aware blockchain benchmarking.", "Repository pubblico con il codice per il benchmarking delle blockchain con topologie controllate."),
+        t("Example machine template for local configuration.", "Modello di esempio per configurare una macchina locale."),
+        t("Local validation mode for checking the repository and experiment configuration before heavier runs.", "Modalità di validazione locale per verificare il repository e la configurazione prima delle esecuzioni più impegnative."),
+        t("Git LFS tracking for the large cloud-ping dataset used by the topology and latency workflow.", "Gestione con Git LFS del dataset cloud-ping usato per modellare topologie e latenze."),
+        t("Documentation for execution modes, repository layout, quick validation, and reproducibility-oriented usage.", "Documentazione su esecuzione, struttura del repository, validazione rapida e riproducibilità."),
       ],
     },
     {
-      title: "Main research use cases",
+      title: t("Main research use cases", "Principali applicazioni nella ricerca"),
       items: [
-        "Evaluate blockchain performance across different network topologies and workloads.",
-        "Study topology effects on throughput, latency, energy consumption, and commit behaviour.",
-        "Compare blockchain implementations under controlled and repeatable experimental assumptions.",
-        "Support artifact-based reproducibility for peer-reviewed blockchain systems research.",
+        t("Evaluate blockchain performance across different network topologies and workloads.", "Valutare le prestazioni delle blockchain con più topologie e carichi."),
+        t("Study topology effects on throughput, latency, energy consumption, and commit behaviour.", "Studiare gli effetti della topologia su throughput, latenza, consumi e conferma delle transazioni."),
+        t("Compare blockchain implementations under controlled and repeatable experimental assumptions.", "Confrontare implementazioni blockchain in condizioni controllate e ripetibili."),
+        t("Support artifact-based reproducibility for peer-reviewed blockchain systems research.", "Fornire materiali per riprodurre esperimenti pubblicati in studi sottoposti a revisione paritaria."),
       ],
     },
     {
-      title: "Connection to my PhD work",
-      body: "Lilith was developed as part of my doctoral research on comparing blockchains through performance, energy, repeatability, predictability, and economic-efficiency perspectives. The framework supports the topology-aware benchmarking line of work behind my ACM DLT journal article, DEBS '25, and ICBC '25 research outputs.",
+      title: t("Connection to my PhD work", "Il legame con il dottorato"),
+      body: t("Lilith was developed as part of my doctoral research on comparing blockchains through performance, energy, repeatability, predictability, and economic-efficiency perspectives. The framework supports the topology-aware benchmarking line of work behind my ACM DLT journal article, DEBS '25, and ICBC '25 research outputs.", "Ho sviluppato Lilith durante il dottorato per confrontare le blockchain in termini di prestazioni, energia, ripetibilità, prevedibilità ed efficienza economica. Il framework è alla base del lavoro sperimentale pubblicato su ACM DLT, a DEBS ’25 e a ICBC ’25."),
     },
   ]}
 />

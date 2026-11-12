@@ -1,23 +1,28 @@
 ---
+import { getLocale, inLanguage, translator } from "../../i18n/locale";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const t = translator(Astro.url.pathname);
+const locale = getLocale(Astro.url.pathname);
+const localPath = (href: string) => inLanguage(href, locale);
 
 const doiUrl = "https://dl.acm.org/doi/10.1145/3828757";
 const debsUrl = "https://dl.acm.org/doi/10.1145/3701717.3730540";
 const lilithUrl = "https://doi.org/10.5281/zenodo.11409100";
 
 const keyPoints = [
-  "Treats the network topology as a first-class experimental variable rather than as a hidden deployment detail.",
-  "Connects blockchain throughput, latency, commit behaviour, and workload sensitivity with controlled network structures.",
-  "Builds on the Lilith benchmarking pipeline to support reproducible, topology-aware blockchain evaluation.",
-  "Strengthens the research line developed during my PhD on performance, energy, repeatability, and realistic experimental conditions.",
+  t("Treats the network topology as a first-class experimental variable rather than as a hidden deployment detail.", "Tratta la topologia di rete come una variabile sperimentale da controllare."),
+  t("Connects blockchain throughput, latency, commit behaviour, and workload sensitivity with controlled network structures.", "Mette in relazione throughput, latenza, conferma delle transazioni e sensibilità al carico con strutture di rete controllate."),
+  t("Builds on the Lilith benchmarking pipeline to support reproducible, topology-aware blockchain evaluation.", "Usa la procedura di benchmarking di Lilith per valutare le blockchain in condizioni di rete riproducibili."),
+  t("Strengthens the research line developed during my PhD on performance, energy, repeatability, and realistic experimental conditions.", "Estende il lavoro di dottorato su prestazioni, consumi, ripetibilità e condizioni sperimentali realistiche."),
 ];
 
 const researchLinks = [
-  { label: "Open ACM DOI", href: doiUrl, primary: true },
-  { label: "Related DEBS paper", href: debsUrl },
-  { label: "Lilith artifact DOI", href: lilithUrl },
-  { label: "Lilith research page", href: "/research/lilith-benchmarking-framework", internal: true },
-  { label: "PhD thesis page", href: "/research/comparing-blockchains", internal: true },
+  { label: t("Open ACM DOI", "Apri il DOI su ACM"), href: doiUrl, primary: true },
+  { label: t("Related DEBS paper", "Articolo DEBS correlato"), href: debsUrl },
+  { label: t("Lilith artifact DOI", "DOI del framework Lilith"), href: lilithUrl },
+  { label: t("Lilith research page", "Scheda di Lilith"), href: "/research/lilith-benchmarking-framework", internal: true },
+  { label: t("PhD thesis page", "Tesi di dottorato"), href: "/research/comparing-blockchains", internal: true },
 ];
 
 const structuredData = {
@@ -38,8 +43,8 @@ const structuredData = {
   url: doiUrl,
   sameAs: [doiUrl, debsUrl, lilithUrl],
   about: [
-    "Blockchain benchmarking",
-    "Network topology",
+    t("Blockchain benchmarking", "Benchmarking delle blockchain"),
+    t("Network topology", "Topologia di rete"),
     "Distributed ledger technologies",
     "Reproducible experimentation",
     "Performance evaluation",
@@ -48,20 +53,20 @@ const structuredData = {
 ---
 
 <BaseLayout
-  title="The Impact of Network Topology on Performance Metrics and Energy Consumption for Blockchains: Towards Repeatable Benchmarking | ACM DLT Journal Article"
-  description="ACM DLT journal article by Vincenzo P. Di Perna and co-authors on topology-aware blockchain benchmarking, network-controlled experiments, workload sensitivity, and reproducible performance evaluation."
+  title={t("Blockchain Network Topology and Performance | ACM DLT", "Topologia di rete e prestazioni delle blockchain | ACM DLT")}
+  description={t("ACM DLT study on how network topology and workloads affect blockchain performance and energy use in reproducible experiments.", "Articolo di Vincenzo P. Di Perna e coautori su benchmarking delle blockchain, topologie di rete controllate e valutazione riproducibile delle prestazioni.")}
   sideBarActiveItemID="research"
   ogType="article"
 >
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
   <section class="mb-8">
-    <a href="/research" class="btn btn-sm btn-outline mb-6">← Back to Research</a>
+    <a href={localPath("/research")} class="btn btn-sm btn-outline mb-6">{t("← Back to Research", "← Torna alla ricerca")}</a>
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
         <div class="flex flex-wrap gap-2 items-center mb-3">
           <span class="badge badge-secondary">ACM DLT</span>
-          <span class="badge badge-outline">Journal article</span>
+          <span class="badge badge-outline">{t("Journal article", "Articolo scientifico")}</span>
           <span class="badge badge-outline">2026</span>
         </div>
         <h1 class="text-4xl font-bold leading-tight">
@@ -69,16 +74,12 @@ const structuredData = {
           Consumption for Blockchains: Towards Repeatable Benchmarking
         </h1>
         <p class="text-lg leading-relaxed opacity-90 mt-4">
-          This ACM DLT journal publication presents the topology-aware blockchain
-          benchmarking line of work behind my PhD research. The article studies
-          how network structure, workload shape, and controlled experimental
-          assumptions influence blockchain performance, moving beyond evaluations
-          that treat the network as an opaque or secondary execution layer.
+          {t("This ACM DLT journal publication presents the topology-aware blockchain benchmarking line of work behind my PhD research. The article studies how network structure, workload shape, and controlled experimental assumptions influence blockchain performance, moving beyond evaluations that treat the network as an opaque or secondary execution layer.", "L’articolo pubblicato su ACM DLT presenta il filone di benchmarking con topologie controllate che ho sviluppato durante il dottorato. Studia come la struttura della rete, il carico di lavoro e le ipotesi sperimentali influenzino le prestazioni delle blockchain, trattando la rete come parte integrante dell’esperimento.")}
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body p-4">
-              <p class="text-sm uppercase tracking-wide opacity-70">Authors</p>
+              <p class="text-sm uppercase tracking-wide opacity-70">{t("Authors", "Autori")}</p>
               <p class="font-bold">
                 Vincenzo P. Di Perna, Valerio Schiavoni, Miguel Matos,
                 Francesco Fabris, and Marco Bernardo
@@ -87,16 +88,16 @@ const structuredData = {
           </div>
           <div class="card bg-base-200/50 border border-base-300">
             <div class="card-body p-4">
-              <p class="text-sm uppercase tracking-wide opacity-70">Publication</p>
-              <p class="font-bold">ACM DLT journal article</p>
+              <p class="text-sm uppercase tracking-wide opacity-70">{t("Publication", "Pubblicazione")}</p>
+              <p class="font-bold">{t("ACM DLT journal article", "Articolo sulla rivista ACM DLT")}</p>
               <p class="text-sm opacity-80">DOI: 10.1145/3828757</p>
             </div>
           </div>
         </div>
         <div class="flex flex-wrap gap-3 mt-7">
-          <a href={doiUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open ACM article</a>
-          <a href="/research/topology-aware-blockchain-benchmarking" class="btn btn-outline">Related DEBS page</a>
-          <a href="/research/lilith-benchmarking-framework" class="btn btn-outline">Related artifact</a>
+          <a href={doiUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">{t("Open ACM article", "Apri l’articolo su ACM")}</a>
+          <a href={localPath("/research/topology-aware-blockchain-benchmarking")} class="btn btn-outline">{t("Related DEBS page", "Studio DEBS correlato")}</a>
+          <a href={localPath("/research/lilith-benchmarking-framework")} class="btn btn-outline">{t("Related artifact", "Materiali correlati")}</a>
         </div>
       </div>
     </div>
@@ -104,9 +105,9 @@ const structuredData = {
 
   <section class="mb-8">
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-      <div class="network-protected card bg-base-100 shadow-md"><div class="card-body"><p class="text-4xl font-bold">5</p><p class="opacity-80">blockchain systems</p></div></div>
-      <div class="network-protected card bg-base-100 shadow-md"><div class="card-body"><p class="text-4xl font-bold">5</p><p class="opacity-80">network topologies</p></div></div>
-      <div class="network-protected card bg-base-100 shadow-md"><div class="card-body"><p class="text-4xl font-bold">6</p><p class="opacity-80">workload families</p></div></div>
+      <div class="network-protected card bg-base-100 shadow-md"><div class="card-body"><p class="text-4xl font-bold">5</p><p class="opacity-80">{t("blockchain systems", "sistemi blockchain")}</p></div></div>
+      <div class="network-protected card bg-base-100 shadow-md"><div class="card-body"><p class="text-4xl font-bold">5</p><p class="opacity-80">{t("network topologies", "topologie di rete")}</p></div></div>
+      <div class="network-protected card bg-base-100 shadow-md"><div class="card-body"><p class="text-4xl font-bold">6</p><p class="opacity-80">{t("workload families", "famiglie di carichi")}</p></div></div>
       <div class="network-protected card bg-base-100 shadow-md"><div class="card-body"><p class="text-4xl font-bold">DOI</p><p class="opacity-80">10.1145/3828757</p></div></div>
     </div>
   </section>
@@ -114,17 +115,12 @@ const structuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <figure class="px-6 pt-6">
-        <img src="/research/dlt26/table4-overall-blockchain-variability-v2.webp" alt="Table 4 from the ACM DLT journal article, reporting overall blockchain-level variability for throughput, latency, and energy consumption." class="rounded-xl border border-base-300 bg-base-200" loading="lazy" />
+        <img src="/research/dlt26/table4-overall-blockchain-variability-v2.webp" alt={t("Table 4 from the ACM DLT journal article, reporting overall blockchain-level variability for throughput, latency, and energy consumption.", "La tabella 4 dell’articolo ACM DLT mostra la variabilità complessiva di throughput, latenza e consumi energetici per ogni blockchain.")} class="rounded-xl border border-base-300 bg-base-200" loading="lazy" />
       </figure>
       <div class="card-body">
-        <h2 class="card-title text-2xl">What the journal article highlights</h2>
+        <h2 class="card-title text-2xl">{t("What the journal article highlights", "Che cosa mostra l’articolo")}</h2>
         <p class="leading-relaxed opacity-90">
-          Blockchain performance is not only a property of the protocol or the
-          machines used during an experiment. It also depends on how nodes are
-          connected, how messages propagate, how workloads stress the system, and
-          how stable the experimental environment is. This publication makes that
-          dependency explicit by placing network topology at the centre of the
-          evaluation methodology.
+          {t("Blockchain performance is not only a property of the protocol or the machines used during an experiment. It also depends on how nodes are connected, how messages propagate, how workloads stress the system, and how stable the experimental environment is. This publication makes that dependency explicit by placing network topology at the centre of the evaluation methodology.", "Le prestazioni dipendono dal protocollo e dalle macchine usate, ma anche da come sono collegati i nodi, da come si propagano i messaggi, dal carico e dalla stabilità dell’ambiente. Per rendere esplicite queste relazioni, la metodologia mette al centro la topologia della rete.")}
         </p>
         <ul class="list-disc pl-5 space-y-2 opacity-90 mt-4">
           {keyPoints.map((point) => <li>{point}</li>)}
@@ -136,18 +132,14 @@ const structuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Experimental perspective</h2>
+        <h2 class="card-title text-2xl">{t("Experimental perspective", "Prospettiva sperimentale")}</h2>
         <p class="leading-relaxed opacity-90">
-          The research line compares blockchain systems under controlled
-          network topologies such as fat-tree, full mesh, hypercube, scale-free,
-          and torus. These topologies are used as experimental lenses: they make
-          it possible to observe how different communication structures affect
-          throughput, latency, commit ratio, network load, and robustness.
+          {t("The research line compares blockchain systems under controlled network topologies such as fat-tree, full mesh, hypercube, scale-free, and torus. These topologies are used as experimental lenses: they make it possible to observe how different communication structures affect throughput, latency, commit ratio, network load, and robustness.", "Lo studio confronta le blockchain con topologie di rete controllate: fat-tree, maglia completa, ipercubo, rete scale-free e toro. Le diverse strutture di comunicazione permettono di osservare gli effetti su throughput, latenza, percentuale di conferma, traffico di rete e robustezza.")}
         </p>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
-          <div class="card bg-base-200/50 border border-base-300"><div class="card-body"><h3 class="font-bold">Performance</h3><p class="text-sm opacity-80">Throughput, latency, commit behaviour, and workload sensitivity are interpreted in relation to the network conditions under which the system is executed.</p></div></div>
-          <div class="card bg-base-200/50 border border-base-300"><div class="card-body"><h3 class="font-bold">Reproducibility</h3><p class="text-sm opacity-80">The work uses controlled experimental assumptions to reduce hidden variability and make blockchain comparisons easier to repeat and interpret.</p></div></div>
-          <div class="card bg-base-200/50 border border-base-300"><div class="card-body"><h3 class="font-bold">Network awareness</h3><p class="text-sm opacity-80">The article reinforces the idea that blockchain benchmarking should model the network explicitly instead of abstracting it away as neutral infrastructure.</p></div></div>
+          <div class="card bg-base-200/50 border border-base-300"><div class="card-body"><h3 class="font-bold">{t("Performance", "Prestazioni")}</h3><p class="text-sm opacity-80">{t("Throughput, latency, commit behaviour, and workload sensitivity are interpreted in relation to the network conditions under which the system is executed.", "Throughput, latenza, conferma delle transazioni e sensibilità al carico si interpretano alla luce delle condizioni di rete in cui opera il sistema.")}</p></div></div>
+          <div class="card bg-base-200/50 border border-base-300"><div class="card-body"><h3 class="font-bold">{t("Reproducibility", "Riproducibilità")}</h3><p class="text-sm opacity-80">{t("The work uses controlled experimental assumptions to reduce hidden variability and make blockchain comparisons easier to repeat and interpret.", "Il controllo delle condizioni sperimentali riduce la variabilità nascosta e facilita la ripetizione e l’interpretazione dei confronti.")}</p></div></div>
+          <div class="card bg-base-200/50 border border-base-300"><div class="card-body"><h3 class="font-bold">{t("Network awareness", "Ruolo della rete")}</h3><p class="text-sm opacity-80">{t("The article reinforces the idea that blockchain benchmarking should model the network explicitly instead of abstracting it away as neutral infrastructure.", "L’articolo mostra perché il benchmarking delle blockchain dovrebbe modellare esplicitamente la rete come parte del sistema.")}</p></div></div>
         </div>
       </div>
     </div>
@@ -156,17 +148,12 @@ const structuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <figure class="px-6 pt-6">
-        <img src="/research/debs/network-load-workloads.png" alt="Network load during blockchain workload execution across workloads and topologies." class="rounded-xl border border-base-300 bg-base-200" loading="lazy" />
+        <img src="/research/debs/network-load-workloads.png" alt={t("Network load during blockchain workload execution across workloads and topologies.", "Traffico di rete durante l’esecuzione dei benchmark, per diversi carichi e topologie.")} class="rounded-xl border border-base-300 bg-base-200" loading="lazy" />
       </figure>
       <div class="card-body">
-        <h2 class="card-title text-2xl">Connection to my PhD work</h2>
+        <h2 class="card-title text-2xl">{t("Connection to my PhD work", "Il legame con il dottorato")}</h2>
         <p class="leading-relaxed opacity-90">
-          This publication is directly connected to my doctoral dissertation,
-          which compares blockchain systems across performance, energy,
-          repeatability, predictability, and economic-efficiency dimensions. It
-          represents the journal-facing part of the broader topology-aware
-          benchmarking contribution, alongside the Lilith artifact and the
-          conference publications on performance and energy evaluation.
+          {t("This publication is directly connected to my doctoral dissertation, which compares blockchain systems across performance, energy, repeatability, predictability, and economic-efficiency dimensions. It represents the journal-facing part of the broader topology-aware benchmarking contribution, alongside the Lilith artifact and the conference publications on performance and energy evaluation.", "La pubblicazione fa parte della mia tesi di dottorato, che confronta sistemi blockchain per prestazioni, energia, ripetibilità, prevedibilità ed efficienza economica. Completa il lavoro sul benchmarking con topologie controllate insieme al framework Lilith e agli articoli di conferenza su prestazioni e consumi.")}
         </p>
       </div>
     </div>
@@ -175,11 +162,11 @@ const structuredData = {
   <section class="mb-12">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">Links</h2>
+        <h2 class="card-title text-2xl">{t("Links", "Collegamenti")}</h2>
         <div class="flex flex-wrap gap-3 mt-2">
           {
             researchLinks.map((link) => (
-              <a href={link.href} target={link.internal ? undefined : "_blank"} rel={link.internal ? undefined : "noopener noreferrer"} class={link.primary ? "btn btn-primary btn-sm" : "btn btn-outline btn-sm"}>
+              <a href={localPath(link.href)} target={link.internal ? undefined : "_blank"} rel={link.internal ? undefined : "noopener noreferrer"} class={link.primary ? "btn btn-primary btn-sm" : "btn btn-outline btn-sm"}>
                 {link.label}
               </a>
             ))

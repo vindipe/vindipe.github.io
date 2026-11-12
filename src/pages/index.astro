@@ -1,50 +1,49 @@
 ---
+import { getLocale, inLanguage, translator } from "../i18n/locale";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
-import { recentWorks } from "../data/recentWorks";
+import { getRecentWorks } from "../data/recentWorks";
 
-const latestWorks = [...recentWorks]
+const t = translator(Astro.url.pathname);
+const locale = getLocale(Astro.url.pathname);
+const localPath = (href: string) => inLanguage(href, locale);
+
+const latestWorks = getRecentWorks(Astro.url.pathname)
   .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
   .slice(0, 3);
 ---
 
 <BaseLayout
-  title="Vincenzo Di Perna | Research Software Engineer"
-  description="Personal website of Vincenzo Di Perna: research software engineering, distributed systems, blockchain, DLT, scientific computing, reproducible experimentation, publications, and technical projects."
+  title={t("Vincenzo Di Perna | Research Software Engineer", "Vincenzo Di Perna | Sviluppo software per la ricerca")}
+  description={t("Vincenzo Di Perna works on distributed systems, blockchain benchmarking and reproducible experiments. Explore publications, tools and research projects.", "Ricerca e sviluppo software di Vincenzo Di Perna su sistemi distribuiti, blockchain, benchmarking e sperimentazione riproducibile.")}
   sideBarActiveItemID="home"
   ogImage="/og/vincenzo-di-perna-og.png"
 >
   <section class="pb-12 mt-5">
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-8 items-center">
       <div class="order-2 lg:order-1">
-        <h1 class="text-5xl font-bold leading-tight">Vincenzo Di Perna</h1>
-
-        <h2 class="text-3xl py-3 font-bold">
-          Research Software Engineer<br />
-          Distributed Systems, Blockchain &amp; DLT
-        </h2>
+        <h1>
+          <span class="block text-5xl font-bold leading-tight">Vincenzo Di Perna</span>
+          <span class="block text-3xl py-3 font-bold">
+            {t("Research Software Engineer", "Sviluppo software per la ricerca")}<br />
+            {t("Distributed Systems, Blockchain & DLT", "Sistemi distribuiti, blockchain e DLT")}
+          </span>
+        </h1>
 
         <p class="py-2 text-lg leading-relaxed max-w-3xl">
-          I hold a PhD in Blockchain & DLT, working at the intersection of
-          distributed systems, blockchain benchmarking, reproducible
-          experimentation, protocol evaluation, and digital-asset analytics.<br
+          {t("I hold a PhD in Blockchain & DLT, working at the intersection of distributed systems, blockchain benchmarking, reproducible experimentation, protocol evaluation, and digital-asset analytics.", "Ho conseguito un dottorato sulle blockchain e sulle tecnologie a registro distribuito. Mi occupo di sistemi distribuiti, benchmarking, esperimenti riproducibili, valutazione dei protocolli e analisi degli asset digitali.")}<br
           />
-          My work focuses on understanding how blockchain technology can reshape today’s
-          traditional and digital infrastructures, and how these systems behave under
-          realistic evaluation conditions involving networks, workloads, protocols,
-          performance, energy use, repeatability, predictability, and economic efficiency.<br
+          {t("My work focuses on understanding how blockchain technology can reshape today’s traditional and digital infrastructures, and how these systems behave under realistic evaluation conditions involving networks, workloads, protocols, performance, energy use, repeatability, predictability, and economic efficiency.", "Studio come le blockchain possano cambiare le infrastrutture esistenti e come si comportino in condizioni realistiche. Valuto l’effetto di reti, carichi di lavoro e protocolli su prestazioni, consumi energetici, ripetibilità, prevedibilità ed efficienza economica.")}<br
           />
-          From 1 February 2027, I will join the University of Neuchâtel as a
-          postdoctoral researcher and scientific coordinator of CIRCULA, a new
-          SNSF-funded project studying expiry and renewal in blockchain systems.
+          {t("From 1 February 2027, I will join the University of Neuchâtel as a postdoctoral researcher and scientific coordinator of CIRCULA, a new SNSF-funded project studying expiry and renewal in blockchain systems.", "Dal 1° febbraio 2027 entrerò all’Università di Neuchâtel come ricercatore postdoc e coordinatore scientifico di CIRCULA, un nuovo progetto finanziato dal Fondo nazionale svizzero che studia la scadenza e il rinnovo nei sistemi blockchain.")}
         </p>
 
         <div class="mt-8 flex flex-wrap gap-3">
-          <a class="btn btn-primary" href="/projects">
-            View Projects and Tools
+          <a class="btn btn-primary" href={localPath("/projects")}>
+            {t("View Projects and Tools", "Esplora progetti e strumenti")}
           </a>
 
-          <a class="btn btn-outline" href="/cv"> View CV </a>
+          <a class="btn btn-outline" href={localPath("/cv")}> {t("View CV", "Consulta il CV")} </a>
 
           <a
             class="btn btn-outline"
@@ -80,10 +79,10 @@ const latestWorks = [...recentWorks]
           <div
             class="w-56 rounded-2xl ring ring-primary ring-offset-base-100 ring-offset-4 shadow-xl"
           >
-            <img src="/profile.webp" alt="Portrait of Vincenzo Di Perna" />
+            <img src="/profile-small.webp" width="280" height="320" fetchpriority="high" decoding="async" alt={t("Portrait of Vincenzo Di Perna", "Ritratto di Vincenzo Di Perna")} />
           </div>
         </div>
-        <a href="/research/circula" aria-label="Explore CIRCULA"><img src="https://circula.unine.ch/assets/circula-wordmark-dark-proportional-422af9e2.png" alt="CIRCULA" class="w-40 rounded-lg" loading="lazy" /></a>
+        <a href={localPath("/research/circula")} aria-label={t("Explore CIRCULA", "Scopri CIRCULA")}><img src="/research/circula/wordmark.webp" alt="CIRCULA" width="450" height="155" class="w-40 h-auto rounded-lg" loading="lazy" /></a>
       </div>
     </div>
   </section>
@@ -93,11 +92,10 @@ const latestWorks = [...recentWorks]
       class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-5"
     >
       <div>
-        <h2 class="text-3xl w-full font-bold">Recent uploads</h2>
+        <h2 class="text-3xl w-full font-bold">{t("Recent uploads", "Ultimi aggiornamenti")}</h2>
 
         <p class="mt-2 opacity-80">
-          Latest research pages, publications, thesis work, artifacts, and technical
-outputs added to the site.
+          {t("Latest research pages, publications, thesis work, artifacts, and technical outputs added to the site.", "Le ultime pubblicazioni, pagine di ricerca, tesi e risorse tecniche aggiunte al sito.")}
         </p>
       </div>
     </div>
@@ -120,22 +118,20 @@ outputs added to the site.
   </section>
 
   <section class="mb-12">
-    <h2 class="text-3xl w-full font-bold mb-5">More about me</h2>
+    <h2 class="text-3xl w-full font-bold mb-5">{t("More about me", "Scopri di più")}</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <h3 class="card-title">Projects and Tools</h3>
+          <h3 class="card-title">{t("Projects and Tools", "Progetti e strumenti")}</h3>
 
           <p>
-            Explore selected research artifacts, datasets, software tools, and
-            experimental pipelines related to blockchain systems and digital
-            assets.
+            {t("Explore selected research artifacts, datasets, software tools, and experimental pipelines related to blockchain systems and digital assets.", "Una selezione di dataset, strumenti software, materiali di ricerca e procedure sperimentali per lo studio delle blockchain e degli asset digitali.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
-            <a class="btn btn-sm btn-outline" href="/projects">
-              View projects and tools
+            <a class="btn btn-sm btn-outline" href={localPath("/projects")}>
+              {t("View projects and tools", "Tutti i progetti")}
             </a>
           </div>
         </div>
@@ -143,17 +139,15 @@ outputs added to the site.
 
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <h3 class="card-title">Research & publications</h3>
+          <h3 class="card-title">{t("Research & publications", "Ricerca e pubblicazioni")}</h3>
 
           <p>
-            Read more about my publications, research themes, artifacts, and
-            work on blockchain benchmarking, performance, energy, and economic
-            efficiency.
+            {t("Read more about my publications, research themes, artifacts, and work on blockchain benchmarking, performance, energy, and economic efficiency.", "Pubblicazioni, temi di ricerca e materiali per approfondire benchmarking, prestazioni, consumi energetici ed efficienza economica delle blockchain.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
-            <a class="btn btn-sm btn-outline" href="/research">
-              View research
+            <a class="btn btn-sm btn-outline" href={localPath("/research")}>
+              {t("View research", "Esplora la ricerca")}
             </a>
           </div>
         </div>
@@ -164,14 +158,12 @@ outputs added to the site.
           <h3 class="card-title">Blockchain 101</h3>
 
           <p>
-            Interactive blockchain fundamentals, visual explainers, and small
-            playable labs on cryptography, peer-to-peer networks, consensus,
-            smart contracts, tokens, and distributed infrastructures.
+            {t("Interactive blockchain fundamentals, visual explainers, and small playable labs on cryptography, peer-to-peer networks, consensus, smart contracts, tokens, and distributed infrastructures.", "I fondamenti della blockchain attraverso spiegazioni visuali e piccoli laboratori su crittografia, reti peer-to-peer, consenso, smart contract, token e infrastrutture distribuite.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
-            <a class="btn btn-sm btn-outline" href="/tutorials">
-              Start learning
+            <a class="btn btn-sm btn-outline" href={localPath("/tutorials")}>
+              {t("Start learning", "Vai ai laboratori")}
             </a>
           </div>
         </div>
@@ -182,12 +174,11 @@ outputs added to the site.
           <h3 class="card-title">CV</h3>
 
           <p>
-            See a compact overview of my background, experience, publications,
-            technical skills, and research engineering profile.
+            {t("See a compact overview of my background, experience, publications, technical skills, and research engineering profile.", "Una sintesi della mia formazione, delle esperienze, delle pubblicazioni e delle competenze tecniche.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
-            <a class="btn btn-sm btn-outline" href="/cv"> View CV </a>
+            <a class="btn btn-sm btn-outline" href={localPath("/cv")}> {t("View CV", "Consulta il CV")} </a>
           </div>
         </div>
       </div>
@@ -195,8 +186,8 @@ outputs added to the site.
   </section>
 
   <section class="mb-12 text-center">
-    <h2 class="text-3xl font-bold mb-4">Let's connect</h2>
+    <h2 class="text-3xl font-bold mb-4">{t("Let's connect", "Parliamone")}</h2>
 
-    <a class="btn btn-primary" href="/contact"> Contact me </a>
+    <a class="btn btn-primary" href={localPath("/contact")}> {t("Contact me", "Contattami")} </a>
   </section>
 </BaseLayout>

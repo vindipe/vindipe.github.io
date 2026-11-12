@@ -1,7 +1,9 @@
 ---
+import '../styles/global.css';
+import { getLocale, inLanguage, translator } from '../i18n/locale';
+
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import '../styles/global.css';
 
 export interface Props {
 	title: string;
@@ -17,7 +19,12 @@ const {
   ogType = 'website',
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+const locale = getLocale(Astro.url.pathname);
+const t = translator(Astro.url.pathname);
+const site = Astro.site ?? Astro.url;
+const canonicalURL = new URL(inLanguage(Astro.url.pathname, locale), site).toString();
+const hasAlternates = Astro.url.pathname === "/" || Astro.url.pathname === "/it/" ||
+  inLanguage(Astro.url.pathname, locale === "it" ? "en" : "it") !== Astro.url.pathname;
 const imageURL = new URL(image, Astro.site ?? Astro.url).toString();
 ---
 
@@ -25,6 +32,7 @@ const imageURL = new URL(image, Astro.site ?? Astro.url).toString();
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <meta name="generator" content={Astro.generator} />
 <meta name="google-site-verification" content="iVnoLzm8FR9h5ZJ2baEdQicKupuVMng0c6Jk3hPQKV8" />
 
@@ -33,7 +41,18 @@ const imageURL = new URL(image, Astro.site ?? Astro.url).toString();
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 
+{hasAlternates && (
+  <>
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="en" href={new URL(inLanguage(Astro.url.pathname, "en"), site)} />
+    <link rel="alternate" hreflang="it" href={new URL(inLanguage(Astro.url.pathname, "it"), site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(inLanguage(Astro.url.pathname, "en"), site)} />
+  </>
+)}
+
 <!-- Open Graph / Facebook -->
+<meta property="og:locale" content={locale === "it" ? "it_IT" : "en_US"} />
+{hasAlternates && <meta property="og:locale:alternate" content={locale === "it" ? "en_US" : "it_IT"} />}
 <meta property="og:type" content={ogType} />
 <meta property="og:site_name" content="Vincenzo Di Perna" />
 <meta property="og:url" content={canonicalURL} />
@@ -46,7 +65,7 @@ const imageURL = new URL(image, Astro.site ?? Astro.url).toString();
 <meta property="og:image:height" content="630" />
 <meta
   property="og:image:alt"
-  content="Preview of Vincenzo Di Perna personal website"
+  content={t("Preview of the Vincenzo Di Perna website", "Anteprima del sito di Vincenzo Di Perna")}
 />
 
 <!-- Twitter -->

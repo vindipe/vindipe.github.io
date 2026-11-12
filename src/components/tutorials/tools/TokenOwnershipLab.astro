@@ -1,15 +1,20 @@
+---
+import { translator } from "../../../i18n/locale";
+
+const t = translator(Astro.url.pathname);
+---
+
 <section id="token-ownership-lab" class="network-protected card bg-base-100 shadow-md">
   <div class="card-body">
     <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">Tokens, incentives & ownership</h3>
+      <h3 class="card-title">{t("Tokens, incentives & ownership", "Token, incentivi e proprietà")}</h3>
       <span class="badge badge-secondary">Tokenomics</span>
-      <span class="badge badge-outline">Distribution</span>
-      <span class="badge badge-outline">Concentration</span>
+      <span class="badge badge-outline">{t("Distribution", "Distribuzione")}</span>
+      <span class="badge badge-outline">{t("Concentration", "Concentrazione")}</span>
     </div>
 
     <p class="opacity-80 mb-4">
-      Change token distribution events and observe how ownership concentration
-      changes. This is a toy model, not a financial model.
+      {t("Change token distribution events and observe how ownership concentration changes. This is a toy model, not a financial model.", "Prova diversi modi di distribuire i token e osserva come cambia la concentrazione della proprietà. Il modello è semplificato e ha finalità didattiche.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
@@ -18,40 +23,40 @@
 
         <div class="flex flex-wrap gap-2">
           <button class="btn btn-primary" data-token-action="equal-airdrop">
-            Equal airdrop
+            {t("Equal airdrop", "Distribuzione uguale per tutti")}
           </button>
 
           <button class="btn btn-outline" data-token-action="whale-buy">
-            Whale accumulation
+            {t("Whale accumulation", "Accumulo di un grande detentore")}
           </button>
 
           <button class="btn btn-outline" data-token-action="staking">
-            Staking rewards
+            {t("Staking rewards", "Ricompense per lo staking")}
           </button>
 
           <button class="btn btn-outline" data-token-action="reset">
-            Reset
+            {t("Reset", "Ripristina")}
           </button>
         </div>
       </div>
 
       <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-2">Concentration meter</p>
+        <p class="font-semibold mb-2">{t("Concentration meter", "Misura della concentrazione")}</p>
 
         <div class="stats stats-vertical w-full bg-base-100 mb-4">
           <div class="stat">
-            <div class="stat-title">Largest holder</div>
+            <div class="stat-title">{t("Largest holder", "Maggiore detentore")}</div>
             <div class="stat-value text-2xl" data-largest-holder>-</div>
           </div>
 
           <div class="stat">
-            <div class="stat-title">HHI-style score</div>
+            <div class="stat-title">{t("HHI-style score", "Indice di tipo HHI")}</div>
             <div class="stat-value text-2xl" data-hhi-score>-</div>
           </div>
         </div>
 
         <p data-token-status class="text-sm opacity-80">
-          Try different distribution events.
+          {t("Try different distribution events.", "Prova diversi tipi di distribuzione.")}
         </p>
       </div>
     </div>
@@ -59,6 +64,9 @@
 </section>
 
 <script>
+  const isItalian = () => document.documentElement.lang === "it";
+  const translate = (english, italian) => isItalian() ? italian : english;
+
   function initTokenOwnershipLab() {
     const root = document.querySelector("#token-ownership-lab");
 
@@ -125,7 +133,7 @@
       });
 
       status.textContent =
-        "Equal airdrop: all groups receive the same amount, so relative concentration changes little.";
+        translate("Equal airdrop: all groups receive the same amount, so relative concentration changes little.", "Distribuzione uguale: ogni gruppo riceve la stessa quantità e la concentrazione relativa cambia poco.");
       render();
     }
 
@@ -136,7 +144,7 @@
       balances.Treasury = Math.max(0, balances.Treasury - 70);
 
       status.textContent =
-        "Whale accumulation: one actor gains a larger share, increasing ownership concentration.";
+        translate("Whale accumulation: one actor gains a larger share, increasing ownership concentration.", "Accumulo: un soggetto ottiene una quota più grande e la proprietà diventa più concentrata.");
       render();
     }
 
@@ -146,13 +154,13 @@
       });
 
       status.textContent =
-        "Proportional staking rewards: larger holders receive larger absolute rewards, so concentration may persist.";
+        translate("Proportional staking rewards: larger holders receive larger absolute rewards, so concentration may persist.", "Ricompense proporzionali per lo staking: chi ha di più riceve più token in valore assoluto e la concentrazione può persistere.");
       render();
     }
 
     function reset() {
       balances = { ...initialBalances };
-      status.textContent = "Distribution reset to equal ownership.";
+      status.textContent = translate("Distribution reset to equal ownership.", "Distribuzione riportata a quote uguali.");
       render();
     }
 

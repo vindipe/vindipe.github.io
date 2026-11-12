@@ -1,8 +1,12 @@
 ---
 import { SITE_DESCRIPTION, SITE_TITLE } from "../config";
+import { getLocale, inLanguage, translator } from "../i18n/locale";
 
 const site = Astro.site ?? new URL("https://vindipe.github.io/");
-const canonicalURL = new URL(Astro.url.pathname, site).toString();
+const locale = getLocale(Astro.url.pathname);
+const t = translator(Astro.url.pathname);
+const canonicalURL = new URL(inLanguage(Astro.url.pathname, locale), site).toString();
+const description = t(SITE_DESCRIPTION, "Sviluppo software per la ricerca su sistemi distribuiti, benchmarking delle blockchain, sperimentazione riproducibile e scadenza nei registri distribuiti.");
 
 const personId = new URL("/#person", site).toString();
 const websiteId = new URL("/#website", site).toString();
@@ -16,8 +20,8 @@ const structuredData = {
       "name": "Vincenzo Di Perna",
       "url": site.toString(),
       "image": new URL("/profile.webp", site).toString(),
-      "jobTitle": "Research Software Engineer",
-      "description": SITE_DESCRIPTION,
+      "jobTitle": t("Research Software Engineer", "Sviluppo software per la ricerca"),
+      "description": description,
       "knowsAbout": [
         "Expiry-aware blockchain design",
         "Blockchain benchmarking",
@@ -42,11 +46,11 @@ const structuredData = {
       "@id": websiteId,
       "name": SITE_TITLE,
       "url": site.toString(),
-      "description": SITE_DESCRIPTION,
+      "description": description,
       "publisher": {
         "@id": personId
       },
-      "inLanguage": "en"
+      "inLanguage": ["en", "it"]
     }
   ]
 };

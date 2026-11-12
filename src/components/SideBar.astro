@@ -1,7 +1,11 @@
 ---
 import SideBarFooter from "./SideBarFooter.astro";
-import { Image } from "astro:assets";
 import SideBarMenu from "./SideBarMenu.astro";
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import { getLocale, inLanguage, translator } from "../i18n/locale";
+
+const locale = getLocale(Astro.url.pathname);
+const t = translator(Astro.url.pathname);
 
 const { sideBarActiveItemID } = Astro.props;
 ---
@@ -11,34 +15,34 @@ const { sideBarActiveItemID } = Astro.props;
 
   <aside class="network-protected px-2 pt-2 h-auto min-h-full w-[19rem] bg-primary text-primary-content flex flex-col">
     <div class="w-full mx-auto mt-6 mb-6 text-center">
-      <a href="/" class="block w-fit mx-auto">
+      <a href={inLanguage("/", locale)} class="block w-fit mx-auto">
         <div class="avatar transition ease-in-out hover:scale-[102%] block m-auto">
           <div class="w-[8.5rem]">
-            <Image
-              class="mask mask-circle"
-              format="webp"
-              width={300}
-              height={300}
-              src="/profile.webp"
-              alt="Vincenzo Di Perna profile image"
+            <img
+              class="mask mask-circle aspect-square object-cover"
+              width="280"
+              height="320"
+              src="/profile-small.webp" decoding="async"
+              alt={t("Vincenzo Di Perna profile image", "Foto di Vincenzo Di Perna")}
             />
           </div>
         </div>
       </a>
 
       <div class="mt-4 px-4">
-        <h1 class="text-xl font-bold leading-tight">
+        <p class="text-xl font-bold leading-tight">
           Vincenzo Di Perna
-        </h1>
+        </p>
 
         <p class="text-sm opacity-75 mt-1 leading-snug">
-          Research Software Engineer<br />
-          Distributed Systems, Blockchain &amp; DLT
+          {t("Research Software Engineer", "Sviluppo software per la ricerca")}<br />
+          {t("Distributed Systems, Blockchain & DLT", "Sistemi distribuiti, blockchain e DLT")}
         </p>
       </div>
     </div>
 
     <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
+    <div class="hidden justify-center pt-2 lg:flex"><LanguageSwitcher /></div>
     <SideBarFooter />
   </aside>
 </div>

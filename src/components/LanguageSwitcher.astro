@@ -1,0 +1,36 @@
+---
+import { getLocale, inLanguage, translator } from "../i18n/locale";
+
+const { pathname } = Astro.url;
+const locale = getLocale(pathname);
+const t = translator(pathname);
+---
+
+{pathname !== "/404" && pathname !== "/404.html" && (
+  <nav class="inline-flex gap-1 text-sm font-semibold" aria-label={t("Language", "Lingua")}>
+    {(["en", "it"] as const).map((language) => (
+      <a
+        class:list={["rounded px-2 py-1 hover:underline", language === locale && "bg-current/10 underline"]}
+        href={inLanguage(pathname, language)}
+        lang={language}
+        hreflang={language}
+        aria-current={language === locale ? "page" : undefined}
+        aria-label={language === "it" ? "Italiano" : "English"}
+        data-language-link
+      >{language.toUpperCase()}</a>
+    ))}
+  </nav>
+)}
+
+<script>
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
+    const link = event.target.closest<HTMLAnchorElement>("[data-language-link]");
+    if (!link) return;
+
+    const next = new URL(link.href);
+    next.search = location.search;
+    next.hash = location.hash;
+    link.href = next.href;
+  }, { capture: true });
+</script>

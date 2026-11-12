@@ -6,5 +6,5 @@ import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
   site: "https://vindipe.github.io",
-  integrations: [sitemap(), tailwind()],
+  integrations: [sitemap({ i18n: { defaultLocale: "en", locales: { en: "en", it: "it" } } }), tailwind()],
 });

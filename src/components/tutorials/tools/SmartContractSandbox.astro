@@ -1,21 +1,26 @@
+---
+import { translator } from "../../../i18n/locale";
+
+const t = translator(Astro.url.pathname);
+---
+
 <section id="smart-contract-sandbox" class="network-protected card bg-base-100 shadow-md">
   <div class="card-body">
     <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">Smart contract sandbox</h3>
-      <span class="badge badge-secondary">State machine</span>
-      <span class="badge badge-outline">Balances</span>
-      <span class="badge badge-outline">Rules</span>
+      <h3 class="card-title">{t("Smart contract sandbox", "Laboratorio di smart contract")}</h3>
+      <span class="badge badge-secondary">{t("State machine", "Macchina a stati")}</span>
+      <span class="badge badge-outline">{t("Balances", "Saldi")}</span>
+      <span class="badge badge-outline">{t("Rules", "Regole")}</span>
     </div>
 
     <p class="opacity-80 mb-4">
-      This toy contract manages balances. Try valid and invalid transfers to see
-      how smart contracts update state only when predefined rules are satisfied.
+      {t("This toy contract manages balances. Try valid and invalid transfers to see how smart contracts update state only when predefined rules are satisfied.", "Questo contratto dimostrativo gestisce i saldi. Prova trasferimenti validi e non validi per vedere quando le regole consentono di aggiornare lo stato.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1fr] gap-4">
       <div class="rounded-xl bg-base-200 border border-base-300 p-4">
         <label class="form-control mb-3">
-          <span class="label-text font-semibold">From</span>
+          <span class="label-text font-semibold">{t("From", "Mittente")}</span>
           <select class="select select-bordered" data-contract-from>
             <option>Alice</option>
             <option>Bob</option>
@@ -24,7 +29,7 @@
         </label>
 
         <label class="form-control mb-3">
-          <span class="label-text font-semibold">To</span>
+          <span class="label-text font-semibold">{t("To", "Destinatario")}</span>
           <select class="select select-bordered" data-contract-to>
             <option>Bob</option>
             <option>Alice</option>
@@ -33,7 +38,7 @@
         </label>
 
         <label class="form-control mb-4">
-          <span class="label-text font-semibold">Amount</span>
+          <span class="label-text font-semibold">{t("Amount", "Importo")}</span>
           <input
             class="input input-bordered"
             type="number"
@@ -45,33 +50,32 @@
 
         <div class="flex flex-wrap gap-2">
           <button class="btn btn-primary" data-contract-action="transfer">
-            Execute transfer
+            {t("Execute transfer", "Esegui il trasferimento")}
           </button>
 
           <button class="btn btn-outline" data-contract-action="reset">
-            Reset state
+            {t("Reset state", "Ripristina lo stato")}
           </button>
         </div>
       </div>
 
       <div class="grid gap-3">
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-2">Contract state</p>
+          <p class="font-semibold mb-2">{t("Contract state", "Stato del contratto")}</p>
           <div data-contract-balances class="grid gap-2"></div>
         </div>
 
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">Execution result</p>
+          <p class="font-semibold mb-1">{t("Execution result", "Esito dell’esecuzione")}</p>
           <p data-contract-status class="text-sm opacity-80">
-            Submit a transfer to execute the contract rules.
+            {t("Submit a transfer to execute the contract rules.", "Invia un trasferimento per applicare le regole del contratto.")}
           </p>
         </div>
 
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">Rule</p>
+          <p class="font-semibold mb-1">{t("Rule", "Regola")}</p>
           <p class="text-sm opacity-80">
-            A transfer succeeds only if sender and receiver are different, the
-            amount is positive, and the sender has enough balance.
+            {t("A transfer succeeds only if sender and receiver are different, the amount is positive, and the sender has enough balance.", "Il trasferimento riesce se mittente e destinatario sono diversi, l’importo è positivo e il mittente ha un saldo sufficiente.")}
           </p>
         </div>
       </div>
@@ -80,6 +84,9 @@
 </section>
 
 <script>
+  const isItalian = () => document.documentElement.lang === "it";
+  const translate = (english, italian) => isItalian() ? italian : english;
+
   function initSmartContractSandbox() {
     const root = document.querySelector("#smart-contract-sandbox");
 
@@ -125,30 +132,30 @@
       const amount = Number(amountInput.value);
 
       if (from === to) {
-        status.textContent = "Transaction rejected: sender and receiver cannot be the same account.";
+        status.textContent = translate("Transaction rejected: sender and receiver cannot be the same account.", "Transazione rifiutata: mittente e destinatario devono essere diversi.");
         return;
       }
 
       if (!Number.isFinite(amount) || amount <= 0) {
-        status.textContent = "Transaction rejected: amount must be positive.";
+        status.textContent = translate("Transaction rejected: amount must be positive.", "Transazione rifiutata: l’importo deve essere positivo.");
         return;
       }
 
       if (balances[from] < amount) {
-        status.textContent = `Transaction rejected: ${from} has only ${balances[from]} TOK.`;
+        status.textContent = (isItalian() ? `Transazione rifiutata: ${from} ha soltanto ${balances[from]} TOK.` : `Transaction rejected: ${from} has only ${balances[from]} TOK.`);
         return;
       }
 
       balances[from] -= amount;
       balances[to] += amount;
 
-      status.textContent = `Transaction executed: ${from} sent ${amount} TOK to ${to}. The contract state changed deterministically.`;
+      status.textContent = (isItalian() ? `Transazione eseguita: ${from} ha inviato ${amount} TOK a ${to}. Lo stato del contratto è cambiato in modo deterministico.` : `Transaction executed: ${from} sent ${amount} TOK to ${to}. The contract state changed deterministically.`);
       render();
     }
 
     function reset() {
       balances = { ...initialBalances };
-      status.textContent = "Contract state restored.";
+      status.textContent = translate("Contract state restored.", "Stato del contratto ripristinato.");
       render();
     }
 

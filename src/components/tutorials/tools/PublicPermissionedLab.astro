@@ -1,23 +1,28 @@
+---
+import { translator } from "../../../i18n/locale";
+
+const t = translator(Astro.url.pathname);
+---
+
 <section id="public-permissioned-lab" class="network-protected card bg-base-100 shadow-md">
   <div class="card-body">
     <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">Public vs permissioned networks</h3>
-      <span class="badge badge-secondary">Access model</span>
+      <h3 class="card-title">{t("Public vs permissioned networks", "Reti pubbliche e ad accesso riservato")}</h3>
+      <span class="badge badge-secondary">{t("Access model", "Modello di accesso")}</span>
       <span class="badge badge-outline">Governance</span>
     </div>
 
     <p class="opacity-80 mb-4">
-      Switch between public and permissioned modes to see how access, validation,
-      reading, writing, and governance assumptions change.
+      {t("Switch between public and permissioned modes to see how access, validation, reading, writing, and governance assumptions change.", "Passa da una rete pubblica a una ad accesso riservato per vedere come cambiano le regole per entrare, convalidare, leggere, scrivere e decidere.")}
     </p>
 
     <div class="flex flex-wrap gap-2 mb-4">
       <button class="btn btn-primary" data-network-mode="public">
-        Public network
+        {t("Public network", "Rete pubblica")}
       </button>
 
       <button class="btn btn-outline" data-network-mode="permissioned">
-        Permissioned network
+        {t("Permissioned network", "Rete ad accesso riservato")}
       </button>
     </div>
 
@@ -29,20 +34,20 @@
 
         <div class="grid gap-2 mb-4">
           <button class="btn btn-sm btn-outline" data-network-action="join">
-            New node tries to join
+            {t("New node tries to join", "Un nuovo nodo prova a entrare")}
           </button>
 
           <button class="btn btn-sm btn-outline" data-network-action="validate">
-            Node tries to validate a block
+            {t("Node tries to validate a block", "Un nodo prova a convalidare un blocco")}
           </button>
 
           <button class="btn btn-sm btn-outline" data-network-action="read">
-            User tries to read ledger data
+            {t("User tries to read ledger data", "Un utente prova a leggere il registro")}
           </button>
         </div>
 
         <p data-network-status class="text-sm opacity-80">
-          Choose a scenario to compare network models.
+          {t("Choose a scenario to compare network models.", "Scegli uno scenario per confrontare i due modelli.")}
         </p>
       </div>
     </div>
@@ -50,6 +55,9 @@
 </section>
 
 <script>
+  const isItalian = () => document.documentElement.lang === "it";
+  const translate = (english, italian) => isItalian() ? italian : english;
+
   function initPublicPermissionedLab() {
     const root = document.querySelector("#public-permissioned-lab");
 
@@ -67,29 +75,29 @@
 
     const features = {
       public: [
-        ["Who can join?", "Anyone can usually join without prior approval."],
-        ["Who can validate?", "Validation depends on protocol rules, stake, mining power, or node role."],
-        ["Who can read?", "Ledger data is generally publicly visible."],
-        ["Governance", "Governance is often distributed, informal, token-based, or protocol-community driven."],
+        [translate("Who can join?", "Chi può entrare?"), translate("Anyone can usually join without prior approval.", "Di solito chiunque può entrare senza approvazione preventiva.")],
+        [translate("Who can validate?", "Chi può convalidare?"), translate("Validation depends on protocol rules, stake, mining power, or node role.", "La convalida dipende dalle regole del protocollo, dallo stake, dalla potenza di mining o dal ruolo del nodo.")],
+        [translate("Who can read?", "Chi può leggere?"), translate("Ledger data is generally publicly visible.", "In genere i dati del registro sono pubblici.")],
+        ["Governance", translate("Governance is often distributed, informal, token-based, or protocol-community driven.", "La governance è spesso distribuita, informale, basata sui token o affidata alla comunità del protocollo.")],
       ],
       permissioned: [
-        ["Who can join?", "Participants are admitted by an organization, consortium, or governance process."],
-        ["Who can validate?", "Only approved validators can participate in consensus."],
-        ["Who can read?", "Reading may be public, restricted, or role-based."],
-        ["Governance", "Governance is usually formalized among known institutions or operators."],
+        [translate("Who can join?", "Chi può entrare?"), translate("Participants are admitted by an organization, consortium, or governance process.", "Un’organizzazione, un consorzio o un processo di governance ammette i partecipanti.")],
+        [translate("Who can validate?", "Chi può convalidare?"), translate("Only approved validators can participate in consensus.", "Solo i validatori approvati possono partecipare al consenso.")],
+        [translate("Who can read?", "Chi può leggere?"), translate("Reading may be public, restricted, or role-based.", "La lettura può essere pubblica, limitata o riservata a determinati ruoli.")],
+        ["Governance", translate("Governance is usually formalized among known institutions or operators.", "La governance è di solito formalizzata tra istituzioni o operatori noti.")],
       ],
     };
 
     const scenarios = {
       public: {
-        join: "The new node can usually join the network, download data, and connect to peers.",
-        validate: "The node can validate only if it satisfies protocol-specific requirements.",
-        read: "The user can generally inspect public ledger data.",
+        join: translate("The new node can usually join the network, download data, and connect to peers.", "In genere il nuovo nodo può entrare, scaricare i dati e connettersi agli altri nodi."),
+        validate: translate("The node can validate only if it satisfies protocol-specific requirements.", "Il nodo può convalidare solo se soddisfa i requisiti del protocollo."),
+        read: translate("The user can generally inspect public ledger data.", "In genere l’utente può consultare i dati pubblici del registro."),
       },
       permissioned: {
-        join: "The new node must be approved before joining the network.",
-        validate: "The node cannot validate unless it is part of the approved validator set.",
-        read: "The user may need permission, credentials, or a specific role to read data.",
+        join: translate("The new node must be approved before joining the network.", "Il nuovo nodo deve essere approvato prima di entrare."),
+        validate: translate("The node cannot validate unless it is part of the approved validator set.", "Il nodo può convalidare solo se fa parte dell’insieme dei validatori approvati."),
+        read: translate("The user may need permission, credentials, or a specific role to read data.", "Per leggere i dati, all’utente può servire un permesso, una credenziale o un ruolo specifico."),
       },
     };
 
@@ -115,7 +123,7 @@
     modeButtons.forEach((button) => {
       button.addEventListener("click", () => {
         mode = button.getAttribute("data-network-mode");
-        status.textContent = `Mode changed to ${mode}. Try a scenario.`;
+        status.textContent = (isItalian() ? `Modalità ${mode === "public" ? "pubblica" : "ad accesso riservato"}. Prova uno scenario.` : `Mode changed to ${mode}. Try a scenario.`);
         render();
       });
     });

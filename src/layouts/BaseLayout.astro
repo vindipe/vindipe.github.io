@@ -7,7 +7,7 @@ import NetworkBackground from "../components/NetworkBackground.astro";
 import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 import StructuredData from "../components/StructuredData.astro";
 import { ViewTransitions } from "astro:transitions";
-
+import { getLocale, translator } from "../i18n/locale";
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
 
 const { 
@@ -19,13 +19,12 @@ const {
   ogType = "website",
 } = Astro.props;
 
-const site = Astro.site ?? new URL("https://vindipe.github.io/");
-const canonicalURL = new URL(Astro.url.pathname, site).toString();
-const imageURL = new URL(image, site).toString();
+const locale = getLocale(Astro.url.pathname);
+const t = translator(Astro.url.pathname);
 ---
 
 <!doctype html>
-<html lang="en" data-theme="bumblebee">
+<html lang={locale} data-theme="bumblebee">
   <head>
     <BaseHead title={title} description={description} image={image} ogType={ogType} />
     <StructuredData />
@@ -33,6 +32,7 @@ const imageURL = new URL(image, site).toString();
   </head>
 
   <body>
+    <a class="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:bg-base-100 focus:p-3" href="#main-content">{t("Skip to content", "Vai al contenuto")}</a>
     <NetworkBackground />
 
     <div class="relative z-[1] drawer lg:drawer-open">
@@ -42,7 +42,7 @@ const imageURL = new URL(image, site).toString();
         <Header title={SITE_TITLE} />
 
         <div class="md:flex md:justify-center flex-1">
-          <main class="p-6 pt-10 lg:max-w-[900px] max-w-[100vw]">
+          <main id="main-content" class="p-6 pt-10 lg:max-w-[900px] max-w-[100vw]">
             <slot />
           </main>
         </div>

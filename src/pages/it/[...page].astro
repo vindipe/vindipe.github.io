@@ -1,0 +1,18 @@
+---
+import type { AstroComponentFactory } from "astro/runtime/server/index.js";
+
+export function getStaticPaths() {
+  const pages = import.meta.glob<{ default: AstroComponentFactory }>(
+    ["../*.astro", "../research/*.astro", "../projects/*.astro", "!../404.astro"],
+    { eager: true },
+  );
+
+  return Object.entries(pages).map(([path, module]) => ({
+    params: { page: path === "../index.astro" ? undefined : path.slice(3, -6) },
+    props: { Page: module.default },
+  }));
+}
+
+const { Page } = Astro.props;
+---
+<Page />

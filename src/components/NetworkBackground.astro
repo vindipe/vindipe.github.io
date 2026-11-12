@@ -27,12 +27,10 @@
 
 <script is:inline>
     function startNetworkBackground() {
-        if (typeof window.__networkBackgroundCleanup === "function") {
-            window.__networkBackgroundCleanup();
-        }
-
         const canvas = document.getElementById("network-background-canvas");
-        if (!canvas) return;
+        if (!canvas || window.__networkBackgroundCanvas === canvas) return;
+        window.__networkBackgroundCleanup?.();
+        window.__networkBackgroundCanvas = canvas;
 
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
@@ -46,13 +44,16 @@
 
         const nodes = [];
         const pulses = [];
+        const edges = [];
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let lastGraphUpdate = -Infinity;
 
         function random(min, max) {
             return Math.random() * (max - min) + min;
         }
 
         function resizeCanvas() {
-            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1.25 : 1.5);
 
             width = window.innerWidth;
             height = window.innerHeight;
@@ -67,6 +68,7 @@
 
         function createNodes() {
             nodes.length = 0;
+            lastGraphUpdate = -Infinity;
 
             const nodeCount = width < 768 ? 72 : 170;
 
@@ -88,7 +90,7 @@
         }
 
         function edgeKey(i, j) {
-            return i < j ? i + "-" + j : j + "-" + i;
+            return Math.min(i, j) * nodes.length + Math.max(i, j);
         }
 
         function updateNodes() {
@@ -119,24 +121,12 @@
             }
         }
 
-        function drawEdge(i, j, forced, drawnEdges) {
-            const key = edgeKey(i, j);
-            if (drawnEdges.has(key)) return;
-
-            drawnEdges.add(key);
-
+        function drawEdge(i, j, forced) {
             const a = nodes[i];
             const b = nodes[j];
-            const d = distance(a, b);
-
             const maxDistance = width < 768 ? 145 : 210;
-
-            const opacity = forced
-                ? 0.22
-                : Math.max(
-                      0.055,
-                      (1 - Math.min(d, maxDistance) / maxDistance) * 0.44,
-                  );
+            const opacity = forced ? 0.22 :
+                Math.max(0.055, (1 - distance(a, b) / maxDistance) * 0.44);
 
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -146,8 +136,15 @@
             ctx.stroke();
         }
 
-        function drawConnectedGraph() {
-            const drawnEdges = new Set();
+        function updateGraph() {
+            edges.length = 0;
+            const seen = new Set();
+            const addEdge = (i, j, forced) => {
+                const key = edgeKey(i, j);
+                if (seen.has(key)) return;
+                seen.add(key);
+                edges.push({ i, j, forced });
+            };
             const nearestLinks = width < 768 ? 3 : 6;
             const proximityDistance = width < 768 ? 125 : 190;
 
@@ -166,7 +163,7 @@
                     }
                 }
 
-                drawEdge(i, nearestIndex, true, drawnEdges);
+                addEdge(i, nearestIndex, true);
             }
 
             // Link extra verso i vicini.
@@ -187,7 +184,7 @@
                 for (let k = 0; k < nearestLinks; k++) {
                     const neighbour = neighbours[k];
                     if (neighbour)
-                        drawEdge(i, neighbour.index, false, drawnEdges);
+                        addEdge(i, neighbour.index, false);
                 }
             }
 
@@ -197,7 +194,7 @@
                     const d = distance(nodes[i], nodes[j]);
 
                     if (d < proximityDistance) {
-                        drawEdge(i, j, false, drawnEdges);
+                        addEdge(i, j, false);
                     }
                 }
             }
@@ -248,19 +245,35 @@
             }
         }
 
-        function draw() {
+        function draw(now) {
+            animationFrameId = null;
             ctx.clearRect(0, 0, width, height);
+            if (!reducedMotion.matches) updateNodes();
 
-            updateNodes();
-            drawConnectedGraph();
+            // Nodes move a few pixels between graph updates. Redraw their positions
+            // every frame and recompute the nearest neighbours less frequently.
+            if (now - lastGraphUpdate >= 140) {
+                updateGraph();
+                lastGraphUpdate = now;
+            }
+            for (const { i, j, forced } of edges) drawEdge(i, j, forced);
             drawNodes();
-            drawPulses();
-            animationFrameId = window.requestAnimationFrame(draw);
+            if (!reducedMotion.matches) {
+                drawPulses();
+                animationFrameId = window.requestAnimationFrame(draw);
+            }
+        }
+
+        function refresh() {
+            if (animationFrameId !== null) window.cancelAnimationFrame(animationFrameId);
+            lastGraphUpdate = -Infinity;
+            draw(performance.now());
         }
 
         const handleResize = () => {
             resizeCanvas();
             createNodes();
+            if (reducedMotion.matches) refresh();
         };
 
         const handleMouseMove = (event) => {
@@ -280,7 +293,7 @@
         const handleTouchStart = (event) => {
             const touch = event.touches[0];
 
-            if (!touch) {
+            if (!touch || reducedMotion.matches) {
                 return;
             }
 
@@ -292,6 +305,7 @@
             });
         };
 
+        reducedMotion.addEventListener("change", refresh);
         window.addEventListener("resize", handleResize);
         window.addEventListener("mousemove", handleMouseMove);
         window.addEventListener("mouseleave", handleMouseLeave);
@@ -303,6 +317,7 @@
                 window.cancelAnimationFrame(animationFrameId);
             }
 
+            reducedMotion.removeEventListener("change", refresh);
             window.removeEventListener("resize", handleResize);
             window.removeEventListener("mousemove", handleMouseMove);
             window.removeEventListener("mouseleave", handleMouseLeave);
@@ -312,7 +327,7 @@
 
         resizeCanvas();
         createNodes();
-        draw();
+        refresh();
     }
 
     startNetworkBackground();

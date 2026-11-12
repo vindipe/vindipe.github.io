@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Explore expiry and renewal | CIRCULA</title><style>*{box-sizing:border-box}body{margin:0;background:#121a17;color:#f1f5f1;font:16px/1.5 system-ui,sans-serif}.wrap{width:min(100% - 32px,1100px);margin:auto}.small{font-size:.9rem}button,input{font:inherit}button{cursor:pointer}svg{width:100%;fill:none;stroke:currentColor;stroke-width:3}.lifecycle-demo {
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Explore expiry and renewal | CIRCULA</title><style>*{box-sizing:border-box}body{margin:0;background:#121a17;color:#f1f5f1;font:16px/1.5 system-ui,sans-serif}.wrap{width:min(100% - 32px,1100px);margin:auto}.small{font-size:.9rem}button,input{font:inherit}button{cursor:pointer}svg{width:100%;fill:none;stroke:currentColor;stroke-width:3}.lifecycle-demo {
   --demo-ink: #f6f3ec;
   --demo-panel: #272923;
   --demo-muted: #cecac0;
@@ -656,7 +656,85 @@
         </details>
       </div>
       <footer class="lifecycle-footnote"><p class="small" data-demo-config></p></footer>
-    </div></section></main><script>window.CIRCULA_I18N={locale:'en',t:(key,params={})=>key.replace(/\{(\w+)\}/g,(_,k)=>params[k]??'')};</script><script>(function () {
+    </div></section></main><script>
+  (() => {
+    const locale = new URLSearchParams(location.search).get("lang") === "it" ? "it" : "en";
+    const italian = {
+      "EXPLORE EXPIRY": "PROVA COSA SUCCEDE ALLA SCADENZA",
+      "Choose a renewal scenario": "Scegli uno scenario di rinnovo",
+      "Try a scenario": "Prova uno scenario",
+      "Renewal in time": "Richiesta in tempo",
+      "Renewal too late": "Richiesta tardiva",
+      "Without renewal": "Senza rinnovo",
+      "VALID": "VALIDO",
+      "Time remaining": "Tempo rimanente",
+      "time units": "unità di tempo",
+      "The right keeps its original expiry.": "Il diritto mantiene la scadenza iniziale.",
+      "Renewal requested": "Con richiesta di rinnovo",
+      "Validity of the same digital right under two scenarios": "Validità dello stesso diritto digitale in due scenari",
+      "Time": "Tempo",
+      "Elapsed validity": "Periodo di validità trascorso",
+      "Remaining validity": "Periodo di validità rimanente",
+      "Planned extension": "Proroga proposta",
+      "Play lifetime example": "Avvia la simulazione",
+      "Watch from the start": "Guarda dall’inizio",
+      "Next event": "Evento successivo",
+      "Reset example": "Reimposta l’esempio",
+      "Reset": "Reimposta",
+      "Move time to compare": "Sposta il cursore per confrontare gli scenari",
+      "Try your own timings": "Imposta i tuoi tempi",
+      "Choose the initial expiry, the request time and the proposed new expiry. Apply the values to update the comparison.": "Imposta la scadenza iniziale, il momento della richiesta di rinnovo e la nuova scadenza proposta. Conferma per aggiornare il confronto.",
+      "Set lifecycle times": "Imposta i tempi della simulazione",
+      "Initial expiry": "Scadenza iniziale",
+      "Renewal requested at": "Momento della richiesta di rinnovo",
+      "Proposed new expiry": "Nuova scadenza proposta",
+      "Apply values": "Applica i valori",
+      "Pause": "Pausa",
+      "Replay": "Rivedi",
+      "Pause lifetime example": "Metti in pausa la simulazione",
+      "Illustrative time, from 0 to {end}": "Scala temporale dell’esempio, da 0 a {end}",
+      "Rule used here: an authorised renewal succeeds when its request arrives before the current expiry. Time units are illustrative.": "In questo esempio il sistema accetta una richiesta di rinnovo autorizzata se arriva prima della scadenza. Le unità di tempo servono a illustrare il meccanismo.",
+      "Expiry at t = {expiry}": "Scadenza a t = {expiry}",
+      "Current expiry: t = {expiry}": "Scadenza attuale: t = {expiry}",
+      "EXPIRED": "SCADUTO",
+      "Request scheduled at t = {renewAt}": "Richiesta prevista a t = {renewAt}",
+      "Accepted at t = {renewAt} · new expiry t = {renewedExpiry}": "Accettata a t = {renewAt} · nuova scadenza a t = {renewedExpiry}",
+      "Rejected at t = {renewAt} · expiry stays t = {expiry}": "Respinta a t = {renewAt} · scadenza confermata a t = {expiry}",
+      "The renewal request is too late": "La richiesta di rinnovo arriva troppo tardi",
+      "The request at t = {renewAt} reaches a right that expired at t = {expiry}. Under this rule, the right stays expired.": "La richiesta arriva a t = {renewAt}, quando il diritto è già scaduto a t = {expiry}. La regola dell’esempio non consente di riattivarlo.",
+      "Both rights have expired": "Entrambi i diritti sono scaduti",
+      "Their validity ended at t = {expiry} and t = {renewedExpiry}. Move time backwards to inspect each boundary.": "Le scadenze sono a t = {expiry} e a t = {renewedExpiry}. Sposta indietro il cursore per osservare i due passaggi.",
+      "Both rights reached their expiry at t = {expiry}. The scheduled renewal falls after this boundary.": "Entrambe le versioni del diritto scadono a t = {expiry}. A quel punto la richiesta prevista è tardiva.",
+      "The renewal makes the difference": "Il rinnovo prolunga la validità",
+      "The original right expired at t = {expiry}. The renewed right remains usable until t = {renewedExpiry}.": "Il diritto originale è scaduto a t = {expiry}. Il diritto rinnovato resta utilizzabile fino a t = {renewedExpiry}.",
+      "The renewal has been accepted": "Il rinnovo è stato accettato",
+      "The request at t = {renewAt} arrived before expiry at t = {expiry}. The right now has a new expiry at t = {renewedExpiry}.": "La richiesta arriva a t = {renewAt}, prima della scadenza a t = {expiry}. La nuova scadenza è a t = {renewedExpiry}.",
+      "Both rights are still valid": "Entrambi i diritti sono ancora validi",
+      "Both start with expiry at t = {expiry}. A renewal is requested for the right-hand copy at t = {renewAt}.": "In entrambi gli scenari la scadenza iniziale è a t = {expiry}. Nello scenario di destra il rinnovo viene richiesto a t = {renewAt}.",
+      "Time {time}. Without renewal: {baseline}. Renewal requested: {renewed}.": "Tempo {time}. Senza rinnovo: {baseline}. Con richiesta di rinnovo: {renewed}.",
+      "Use whole numbers within the limits shown.": "Usa numeri interi entro i limiti indicati.",
+      "The renewed expiry must be later than the initial expiry.": "La nuova scadenza deve essere successiva a quella iniziale.",
+      "Explore expiry and renewal | CIRCULA": "Scadenza e rinnovo | CIRCULA",
+    };
+    const t = (key, params = {}) =>
+      ((locale === "it" && italian[key]) || key).replace(/\{(\w+)\}/g, (_, k) => params[k] ?? "");
+    window.CIRCULA_I18N = { locale, t };
+
+    if (locale !== "it") return;
+    document.documentElement.lang = locale;
+    document.title = t(document.title);
+    const content = document.getElementById("content");
+    const texts = document.createTreeWalker(content, NodeFilter.SHOW_TEXT);
+    while (texts.nextNode()) {
+      const node = texts.currentNode;
+      const key = node.nodeValue.trim();
+      if (italian[key]) node.nodeValue = node.nodeValue.replace(key, t(key));
+    }
+    for (const element of content.querySelectorAll("[aria-label]")) {
+      element.setAttribute("aria-label", t(element.getAttribute("aria-label")));
+    }
+  })();
+</script><script>(function () {
   'use strict';
   const content = document.getElementById('content');
   const tr = (key, params) => window.CIRCULA_I18N.t(key, params);

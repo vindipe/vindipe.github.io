@@ -1,42 +1,42 @@
 ---
+import { getLocale, inLanguage, translator } from "../i18n/locale";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const t = translator(Astro.url.pathname);
+const locale = getLocale(Astro.url.pathname);
+const localPath = (href: string) => inLanguage(href, locale);
 ---
 
 <BaseLayout
-  title="Blockchain Projects, Research Tools & Interactive Dashboards | Vincenzo Di Perna"
-  description="Blockchain research artifacts, software tools, experimental pipelines, interactive dashboards, and reproducible systems projects by Vincenzo Di Perna."
+  title={t("Blockchain Projects and Tools | Vincenzo Di Perna", "Progetti blockchain e strumenti di ricerca | Vincenzo Di Perna")}
+  description={t("Explore blockchain research software, reproducibility artifacts, experimental pipelines and interactive dashboards by Vincenzo Di Perna.", "Strumenti software, materiali per la riproducibilità e dashboard interattive per la ricerca sulle blockchain.")}
   sideBarActiveItemID="projects"
 >
   <section class="mb-10">
-    <h1 class="text-4xl font-bold mb-4">Projects and Tools</h1>
+    <h1 class="text-4xl font-bold mb-4">{t("Projects and Tools", "Progetti e strumenti")}</h1>
 
     <p class="text-lg leading-relaxed opacity-90">
-      A selection of research artifacts, software tools, datasets, analysis
-      pipelines, and exploratory projects around blockchain systems, distributed
-      infrastructures, digital assets, benchmarking, reproducible
-      experimentation, real-world assets, and fairer value distribution.
+      {t("A selection of research artifacts, software tools, datasets, analysis pipelines, and exploratory projects around blockchain systems, distributed infrastructures, digital assets, benchmarking, reproducible experimentation, real-world assets, and fairer value distribution.", "Una selezione di materiali di ricerca, software, dataset e progetti esplorativi su blockchain, infrastrutture distribuite e asset digitali. I temi includono il benchmarking, la riproducibilità degli esperimenti, gli asset del mondo reale e una distribuzione più equa del valore.")}
     </p>
   </section>
 
-  <section class="mb-12"><h2 class="text-3xl font-bold mb-5">Research projects</h2>
+  <section class="mb-12"><h2 class="text-3xl font-bold mb-5">{t("Research projects", "Progetti di ricerca")}</h2>
     <article class="network-protected card bg-base-100 shadow-md"><div class="card-body">
-  <div class="flex flex-wrap items-center gap-2"><h3 class="card-title">CIRCULA - Expiry-Aware System Design for Blockchains</h3><span class="badge badge-primary">Expected start · 1 February 2027</span></div>
-  <p>What if digital resources had an explicit lifetime? CIRCULA will investigate expiry and renewal in blockchain systems through formal semantics, prototypes and controlled evaluation. The project is funded by the SNSF and hosted at the University of Neuchâtel.</p>
+  <div class="flex flex-wrap items-center gap-2"><h3 class="card-title">{t("CIRCULA - Expiry-Aware System Design for Blockchains", "CIRCULA – Scadenza e rinnovo nella progettazione delle blockchain")}</h3><span class="badge badge-primary">{t("Expected start · 1 February 2027", "Avvio previsto · 1° febbraio 2027")}</span></div>
+  <p>{t("What if digital resources had an explicit lifetime? CIRCULA will investigate expiry and renewal in blockchain systems through formal semantics, prototypes and controlled evaluation. The project is funded by the SNSF and hosted at the University of Neuchâtel.", "Che cosa cambierebbe se le risorse digitali avessero una durata definita? CIRCULA studierà la scadenza e il rinnovo nelle blockchain attraverso una semantica formale, prototipi ed esperimenti controllati. L’Università di Neuchâtel ospita il progetto, finanziato dal Fondo nazionale svizzero.")}</p>
   
-  <div class="card-actions mt-3"><a class="btn btn-sm btn-primary" href="/research/circula">Explore CIRCULA</a><a class="btn btn-sm btn-outline" href="https://circula.unine.ch/" target="_blank" rel="noopener noreferrer">Project website</a></div>
+  <div class="card-actions mt-3"><a class="btn btn-sm btn-primary" href={localPath("/research/circula")}>{t("Explore CIRCULA", "Scopri CIRCULA")}</a><a class="btn btn-sm btn-outline" href="https://circula.unine.ch/" target="_blank" rel="noopener noreferrer">{t("Project website", "Sito del progetto")}</a></div>
 </div></article>
   </section>
 
   <section class="mb-12">
     <div class="flex flex-wrap items-center gap-2 mb-2">
-      <h2 class="text-3xl flex-1 min-w-[12rem] font-bold">Research Tools and Artifacts</h2>
-      <span class="badge badge-success shrink-0 whitespace-nowrap">Available</span>
+      <h2 class="text-3xl flex-1 min-w-[12rem] font-bold">{t("Research Tools and Artifacts", "Strumenti e materiali di ricerca")}</h2>
+      <span class="badge badge-success shrink-0 whitespace-nowrap">{t("Available", "Disponibile")}</span>
     </div>
 
     <p class="mb-5 opacity-80">
-      Public software and reproducibility artifacts developed from my PhD
-      research on blockchain benchmarking, network topologies, experimental
-      control, and data-driven protocol evaluation.
+      {t("Public software and reproducibility artifacts developed from my PhD research on blockchain benchmarking, network topologies, experimental control, and data-driven protocol evaluation.", "Software e materiali pubblici per riprodurre gli esperimenti del mio dottorato sul benchmarking delle blockchain, sulle topologie di rete e sulla valutazione dei protocolli a partire dai dati.")}
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -44,32 +44,29 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="card-body h-full">
           <div class="flex flex-wrap items-center gap-2">
             <h3 class="card-title">
-              Lilith - Topology-Aware Blockchain Benchmarking
+              {t("Lilith - Topology-Aware Blockchain Benchmarking", "Lilith – Benchmarking delle blockchain con topologie di rete controllate")}
             </h3>
-            <span class="badge badge-success">Public GitHub repo</span>
+            <span class="badge badge-success">{t("Public GitHub repo", "Repository pubblico su GitHub")}</span>
           </div>
 
           <p>
-            A research-oriented benchmarking framework for evaluating blockchain
-            systems under controlled network topologies, realistic workloads,
-            reproducible execution assumptions, and topology-aware experimental
-            conditions.
+            {t("A research-oriented benchmarking framework for evaluating blockchain systems under controlled network topologies, realistic workloads, reproducible execution assumptions, and topology-aware experimental conditions.", "Un framework di ricerca per confrontare sistemi blockchain con topologie di rete controllate, carichi di lavoro realistici e condizioni sperimentali riproducibili.")}
           </p>
 
           <div class="mt-auto pt-4 space-y-3">
             <div class="flex flex-wrap gap-2">
               <span class="badge badge-outline">Benchmarking</span>
-              <span class="badge badge-outline">Network emulation</span>
-              <span class="badge badge-outline">Reproducibility</span>
+              <span class="badge badge-outline">{t("Network emulation", "Emulazione di rete")}</span>
+              <span class="badge badge-outline">{t("Reproducibility", "Riproducibilità")}</span>
               <span class="badge badge-outline">Git LFS</span>
             </div>
 
             <div class="card-actions justify-end">
               <a
                 class="btn btn-sm btn-outline"
-                href="/research/lilith-benchmarking-framework"
+                href={localPath("/research/lilith-benchmarking-framework")}
               >
-                Read artifact page
+                {t("Read artifact page", "Scheda dello strumento")}
               </a>
 
               <a
@@ -78,7 +75,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Open repository
+                {t("Open repository", "Apri il repository")}
               </a>
             </div>
           </div>
@@ -89,14 +86,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section class="mb-12">
     <div class="flex flex-wrap items-center gap-2 mb-2">
-      <h2 class="text-3xl flex-1 min-w-[12rem] font-bold">Interactive Research Tools</h2>
-      <span class="badge badge-success shrink-0 whitespace-nowrap">Available</span>
+      <h2 class="text-3xl flex-1 min-w-[12rem] font-bold">{t("Interactive Research Tools", "Strumenti di ricerca interattivi")}</h2>
+      <span class="badge badge-success shrink-0 whitespace-nowrap">{t("Available", "Disponibile")}</span>
     </div>
 
     <p class="mb-5 opacity-80">
-      Small web tools that turn my research artifacts into interactive demos,
-      making methods, datasets, and evaluation logic easier to explore directly
-      from the browser.
+      {t("Small web tools that turn my research artifacts into interactive demos, making methods, datasets, and evaluation logic easier to explore directly from the browser.", "Strumenti web per esplorare metodi, dataset e criteri di valutazione direttamente dal browser.")}
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -104,37 +99,34 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="card-body h-full">
           <div class="flex flex-wrap items-center gap-2">
             <h3 class="card-title">CryptoEntropy Explorer</h3>
-            <span class="badge badge-success">Available</span>
+            <span class="badge badge-success">{t("Available", "Disponibile")}</span>
           </div>
 
           <p>
-            An interactive EB-index playground for exploring normalized and
-            entropy-derived cryptocurrency datasets. Users can toggle assets,
-            choose attribute sets, assign custom utility weights, and recompute
-            the index live in the browser.
+            {t("An interactive EB-index playground for exploring normalized and entropy-derived cryptocurrency datasets. Users can toggle assets, choose attribute sets, assign custom utility weights, and recompute the index live in the browser.", "Una dashboard per esplorare dataset sulle criptovalute, sia normalizzati sia derivati dall’entropia. Puoi selezionare gli asset, scegliere gli attributi, assegnare pesi personalizzati e ricalcolare subito l’EB-index.")}
           </p>
 
           <div class="mt-auto pt-4 space-y-3">
             <div class="flex flex-wrap gap-2">
               <span class="badge badge-outline">EB-index</span>
               <span class="badge badge-outline">Dashboard</span>
-              <span class="badge badge-outline">Coin Metrics-derived</span>
+              <span class="badge badge-outline">{t("Coin Metrics-derived", "Dati Coin Metrics")}</span>
               <span class="badge badge-outline">DLT '25</span>
             </div>
 
             <div class="card-actions justify-end">
               <a
                 class="btn btn-sm btn-outline"
-                href="/research/entropy-based-economic-efficiency"
+                href={localPath("/research/entropy-based-economic-efficiency")}
               >
-                Read research page
+                {t("Read research page", "Approfondisci la ricerca")}
               </a>
 
               <a
                 class="btn btn-sm btn-primary"
-                href="/projects/cryptoentropy-explorer"
+                href={localPath("/projects/cryptoentropy-explorer")}
               >
-                Open dashboard
+                {t("Open dashboard", "Apri la dashboard")}
               </a>
             </div>
           </div>
@@ -145,47 +137,41 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section class="mb-12">
     <div class="flex flex-wrap items-center gap-2 mb-2">
-      <h2 class="text-3xl flex-1 min-w-[12rem] font-bold">Practical Projects</h2>
-      <span class="badge badge-warning shrink-0 whitespace-nowrap">Projects</span
+      <h2 class="text-3xl flex-1 min-w-[12rem] font-bold">{t("Practical Projects", "Progetti pratici")}</h2>
+      <span class="badge badge-warning shrink-0 whitespace-nowrap">{t("Projects", "Progetti")}</span
       >
     </div>
 
     <p class="mb-5 opacity-80">
-      A growing collection of practical repositories, exercises, prototypes, and
-      hands-on technical experiences developed to strengthen engineering skills,
-      document learning paths, and demonstrate applied work across different
-      technologies.
+      {t("A growing collection of practical repositories, exercises, prototypes, and hands-on technical experiences developed to strengthen engineering skills, document learning paths, and demonstrate applied work across different technologies.", "Repository, esercizi e prototipi per sperimentare con tecnologie diverse, consolidare competenze ingegneristiche e documentare quello che ho imparato.")}
     </p>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
   <div class="network-protected card bg-base-100 shadow-md">
     <div class="card-body h-full">
       <div class="flex flex-wrap items-center gap-2">
-        <h3 class="card-title">Restaurant Solid Blockchain Prototype</h3>
-        <span class="badge badge-success">Available</span>
+        <h3 class="card-title">{t("Restaurant Solid Blockchain Prototype", "Prototipo per la ristorazione con Solid e blockchain")}</h3>
+        <span class="badge badge-success">{t("Available", "Disponibile")}</span>
       </div>
 
       <p>
-        A legacy MSc thesis prototype modernized into a reproducible local
-        demo, combining a restaurant ordering workflow, Solid Pods concepts,
-        mock blockchain payment verification, PDF bill generation, and safe
-        Solid rebuild tooling.
+        {t("A legacy MSc thesis prototype modernized into a reproducible local demo, combining a restaurant ordering workflow, Solid Pods concepts, mock blockchain payment verification, PDF bill generation, and safe Solid rebuild tooling.", "Il prototipo della mia tesi magistrale, aggiornato come demo locale riproducibile. Simula un ordine al ristorante, usa i concetti di Solid Pods, verifica un pagamento blockchain simulato e genera il conto in PDF. Include strumenti per ricreare l’ambiente Solid.")}
       </p>
 
       <div class="mt-auto pt-4 space-y-3">
         <div class="flex flex-wrap gap-2">
           <span class="badge badge-outline">Node.js</span>
           <span class="badge badge-outline">Solid Pods</span>
-          <span class="badge badge-outline">Mock payment</span>
-          <span class="badge badge-outline">PDF bills</span>
+          <span class="badge badge-outline">{t("Mock payment", "Pagamento simulato")}</span>
+          <span class="badge badge-outline">{t("PDF bills", "Conti in PDF")}</span>
         </div>
 
         <div class="card-actions justify-end">
           <a
             class="btn btn-sm btn-outline"
-            href="/research/decentralized-accounting-system"
+            href={localPath("/research/decentralized-accounting-system")}
           >
-            Read thesis page
+            {t("Read thesis page", "Vai alla tesi")}
           </a>
 
           <a
@@ -194,7 +180,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             target="_blank"
             rel="noopener noreferrer"
           >
-            Open repository
+            {t("Open repository", "Apri il repository")}
           </a>
         </div>
       </div>
@@ -202,41 +188,36 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </div>
 </div>
   </section>
-  <h2 class="text-3xl font-bold mb-5">Research interests</h2>
-  <p class="mb-5 opacity-80">Areas I am interested in exploring alongside my projects and tools.</p>
+  <h2 class="text-3xl font-bold mb-5">{t("Research interests", "Interessi di ricerca")}</h2>
+  <p class="mb-5 opacity-80">{t("Areas I am interested in exploring alongside my projects and tools.", "Temi che mi interessa approfondire accanto ai progetti e agli strumenti già disponibili.")}</p>
 
   <section class="mb-12">
     <div class="flex flex-wrap items-center gap-2 mb-2">
-      <h3 class="text-2xl flex-1 min-w-[12rem] font-bold">Countering Wealth Concentration</h3>
-      <span class="badge badge-warning shrink-0 whitespace-nowrap">Research interest</span
+      <h3 class="text-2xl flex-1 min-w-[12rem] font-bold">{t("Countering Wealth Concentration", "Ridurre la concentrazione della ricchezza")}</h3>
+      <span class="badge badge-warning shrink-0 whitespace-nowrap">{t("Research interest", "Tema di ricerca")}</span
       >
     </div>
 
     <p class="mb-5 opacity-80">
-      Exploratory work on how blockchain systems, digital assets, incentive
-      mechanisms, and decentralized infrastructures can be designed or evaluated
-      to reduce excessive concentration of value, ownership, governance power,
-      and access to economic opportunities.
+      {t("Exploratory work on how blockchain systems, digital assets, incentive mechanisms, and decentralized infrastructures can be designed or evaluated to reduce excessive concentration of value, ownership, governance power, and access to economic opportunities.", "Studio come blockchain, asset digitali, incentivi e infrastrutture decentralizzate possano ridurre l’eccessiva concentrazione di valore, proprietà e potere decisionale, favorendo l’accesso alle opportunità economiche.")}
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <div class="flex flex-wrap items-center gap-2">
-            <h3 class="card-title">Wealth concentration analysis toolkit</h3>
-            <span class="badge badge-warning">Interest</span>
+            <h3 class="card-title">{t("Wealth concentration analysis toolkit", "Strumenti per analizzare la concentrazione della ricchezza")}</h3>
+            <span class="badge badge-warning">{t("Interest", "In esplorazione")}</span>
           </div>
 
           <p>
-            A planned set of data-analysis workflows for studying concentration
-            patterns in token ownership, protocol governance, and digital-asset
-            ecosystems.
+            {t("A planned set of data-analysis workflows for studying concentration patterns in token ownership, protocol governance, and digital-asset ecosystems.", "Procedure di analisi dati previste per studiare la concentrazione della proprietà dei token e del potere decisionale nei protocolli e negli ecosistemi di asset digitali.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
-            <span class="badge badge-outline">Token distribution</span>
+            <span class="badge badge-outline">{t("Token distribution", "Distribuzione dei token")}</span>
             <span class="badge badge-outline">Governance</span>
-            <span class="badge badge-outline">Analytics</span>
+            <span class="badge badge-outline">{t("Analytics", "Analisi dei dati")}</span>
           </div>
         </div>
       </div>
@@ -244,20 +225,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <div class="flex flex-wrap items-center gap-2">
-            <h3 class="card-title">Fair value distribution models</h3>
-            <span class="badge badge-warning">Interest</span>
+            <h3 class="card-title">{t("Fair value distribution models", "Modelli per distribuire il valore in modo più equo")}</h3>
+            <span class="badge badge-warning">{t("Interest", "In esplorazione")}</span>
           </div>
 
           <p>
-            Conceptual and experimental work on mechanisms that could support
-            broader participation, fairer access, and less extractive forms of
-            digital value creation.
+            {t("Conceptual and experimental work on mechanisms that could support broader participation, fairer access, and less extractive forms of digital value creation.", "Studio teorico e sperimentale di meccanismi che favoriscano una partecipazione più ampia, un accesso più equo e forme di creazione del valore digitale meno estrattive.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
-            <span class="badge badge-outline">Mechanism design</span>
-            <span class="badge badge-outline">Digital assets</span>
-            <span class="badge badge-outline">Economic fairness</span>
+            <span class="badge badge-outline">{t("Mechanism design", "Progettazione dei meccanismi")}</span>
+            <span class="badge badge-outline">{t("Digital assets", "Asset digitali")}</span>
+            <span class="badge badge-outline">{t("Economic fairness", "Equità economica")}</span>
           </div>
         </div>
       </div>
@@ -266,35 +245,30 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   <section class="mb-12">
     <div class="flex flex-wrap items-center gap-2 mb-2">
-      <h3 class="text-2xl flex-1 min-w-[12rem] font-bold">Real-World Assets - RWA</h3>
-      <span class="badge badge-warning shrink-0 whitespace-nowrap">Research interest</span
+      <h3 class="text-2xl flex-1 min-w-[12rem] font-bold">{t("Real-World Assets - RWA", "Asset del mondo reale (RWA)")}</h3>
+      <span class="badge badge-warning shrink-0 whitespace-nowrap">{t("Research interest", "Tema di ricerca")}</span
       >
     </div>
 
     <p class="mb-5 opacity-80">
-      Early-stage work on the representation, evaluation, and possible
-      tokenization of real-world assets within blockchain-based infrastructures,
-      with attention to ownership, verification, governance, market structure,
-      and practical deployment constraints.
+      {t("Early-stage work on the representation, evaluation, and possible tokenization of real-world assets within blockchain-based infrastructures, with attention to ownership, verification, governance, market structure, and practical deployment constraints.", "Ricerca preliminare su come rappresentare, valutare ed eventualmente tokenizzare gli asset del mondo reale su blockchain. Considera proprietà, verifica, governance, struttura del mercato e vincoli di adozione.")}
     </p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <div class="flex flex-wrap items-center gap-2">
-            <h3 class="card-title">RWA system design notes</h3>
-            <span class="badge badge-warning">Interest</span>
+            <h3 class="card-title">{t("RWA system design notes", "Progettazione dei sistemi per gli RWA")}</h3>
+            <span class="badge badge-warning">{t("Interest", "In esplorazione")}</span>
           </div>
 
           <p>
-            A developing research and engineering track focused on how physical
-            or off-chain assets can be represented, verified, transferred, and
-            governed through digital-asset infrastructures.
+            {t("A developing research and engineering track focused on how physical or off-chain assets can be represented, verified, transferred, and governed through digital-asset infrastructures.", "Un filone di ricerca in sviluppo su come rappresentare, verificare, trasferire e governare beni fisici o esterni alla blockchain tramite infrastrutture per asset digitali.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
-            <span class="badge badge-outline">Asset tokenization</span>
-            <span class="badge badge-outline">Verification</span>
+            <span class="badge badge-outline">{t("Asset tokenization", "Tokenizzazione degli asset")}</span>
+            <span class="badge badge-outline">{t("Verification", "Verifica")}</span>
             <span class="badge badge-outline">Governance</span>
           </div>
         </div>
@@ -303,20 +277,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <div class="network-protected card bg-base-100 shadow-md">
         <div class="card-body">
           <div class="flex flex-wrap items-center gap-2">
-            <h3 class="card-title">RWA benchmarking perspective</h3>
-            <span class="badge badge-warning">Interest</span>
+            <h3 class="card-title">{t("RWA benchmarking perspective", "Benchmarking delle piattaforme RWA")}</h3>
+            <span class="badge badge-warning">{t("Interest", "In esplorazione")}</span>
           </div>
 
           <p>
-            A planned evaluation angle connecting RWA platforms with system
-            performance, operational assumptions, transaction costs, settlement
-            behavior, and infrastructure reliability.
+            {t("A planned evaluation angle connecting RWA platforms with system performance, operational assumptions, transaction costs, settlement behavior, and infrastructure reliability.", "Un possibile metodo di valutazione delle piattaforme RWA basato su prestazioni, ipotesi operative, costi delle transazioni, regolamento e affidabilità dell’infrastruttura.")}
           </p>
 
           <div class="card-actions justify-end mt-4">
             <span class="badge badge-outline">Benchmarking</span>
-            <span class="badge badge-outline">Settlement</span>
-            <span class="badge badge-outline">Infrastructure</span>
+            <span class="badge badge-outline">{t("Settlement", "Regolamento")}</span>
+            <span class="badge badge-outline">{t("Infrastructure", "Infrastrutture")}</span>
           </div>
         </div>
       </div>

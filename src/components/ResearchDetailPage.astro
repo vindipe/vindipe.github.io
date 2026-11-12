@@ -1,8 +1,14 @@
 ---
+import { getLocale, inLanguage, translator } from "../i18n/locale";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const t = translator(Astro.url.pathname);
+const locale = getLocale(Astro.url.pathname);
+const localPath = (href: string) => inLanguage(href, locale);
 
 const {
   title,
+  pageTitle,
   subtitle = "",
   description = "",
   badge = "",
@@ -15,7 +21,7 @@ const {
 } = Astro.props;
 
 const site = Astro.site ?? new URL("https://vindipe.github.io/");
-const canonicalURL = new URL(Astro.url.pathname, site).toString();
+const canonicalURL = new URL(localPath(Astro.url.pathname), site).toString();
 
 const researchStructuredData = {
   "@context": "https://schema.org",
@@ -24,7 +30,7 @@ const researchStructuredData = {
   "headline": title,
   "description": description || subtitle || previewBody || title,
   "url": canonicalURL,
-  "inLanguage": "en",
+  "inLanguage": locale,
   "author": {
     "@type": "Person",
     "@id": new URL("/#person", site).toString(),
@@ -44,15 +50,15 @@ const researchStructuredData = {
 ---
 
 <BaseLayout
-  title={`${title} | Research | Vincenzo Di Perna`}
+  title={pageTitle ?? `${title} | ${t("Research", "Ricerca")} | Vincenzo Di Perna`}
   description={description || subtitle || title}
   sideBarActiveItemID="research"
 >
   <script type="application/ld+json" set:html={JSON.stringify(researchStructuredData)}></script>
 
   <section class="mb-8">
-    <a href="/research" class="btn btn-sm btn-outline mb-6">
-      ← Back to Research
+    <a href={localPath("/research")} class="btn btn-sm btn-outline mb-6">
+      {t("← Back to Research", "← Torna alla ricerca")}
     </a>
 
     <div class="network-protected card bg-base-100 shadow-md">
@@ -81,7 +87,7 @@ const researchStructuredData = {
               {externalLinks.map((link) => (
                 <a
                   class="btn btn-sm btn-outline"
-                  href={link.href}
+                  href={localPath(link.href)}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

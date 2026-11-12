@@ -1,70 +1,75 @@
+---
+import { translator } from "../../../i18n/locale";
+
+const t = translator(Astro.url.pathname);
+---
+
 <section id="wallet-keys-lab" class="network-protected card bg-base-100 shadow-md">
   <div class="card-body">
     <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">Wallets, keys & ownership</h3>
-      <span class="badge badge-secondary">Toy signatures</span>
-      <span class="badge badge-outline">Addresses</span>
-      <span class="badge badge-outline">Authorization</span>
+      <h3 class="card-title">{t("Wallets, keys & ownership", "Wallet, chiavi e proprietà")}</h3>
+      <span class="badge badge-secondary">{t("Toy signatures", "Firme dimostrative")}</span>
+      <span class="badge badge-outline">{t("Addresses", "Indirizzi")}</span>
+      <span class="badge badge-outline">{t("Authorization", "Autorizzazione")}</span>
     </div>
 
     <p class="opacity-80 mb-4">
-      This toy lab shows the relationship between identity, transaction messages,
-      signatures, and verification. It is educational, not production cryptography.
+      {t("This toy lab shows the relationship between identity, transaction messages, signatures, and verification. It is educational, not production cryptography.", "Questo laboratorio mostra il legame tra identità, messaggi di transazione, firme e verifica attraverso una simulazione didattica.")}
     </p>
 
     <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1fr] gap-4">
       <div class="grid gap-3">
         <button class="btn btn-primary" data-wallet-action="generate">
-          Generate toy wallet
+          {t("Generate toy wallet", "Genera un wallet dimostrativo")}
         </button>
 
         <label class="form-control">
-          <span class="label-text font-semibold">Transaction message</span>
+          <span class="label-text font-semibold">{t("Transaction message", "Messaggio della transazione")}</span>
           <textarea
             class="textarea textarea-bordered min-h-24"
             data-wallet-message
-          >Send 10 TOK from Alice to Bob</textarea>
+          >{t("Send 10 TOK from Alice to Bob", "Invia 10 TOK da Alice a Bob")}</textarea>
         </label>
 
         <div class="flex flex-wrap gap-2">
           <button class="btn btn-outline" data-wallet-action="sign">
-            Sign transaction
+            {t("Sign transaction", "Firma la transazione")}
           </button>
 
           <button class="btn btn-outline" data-wallet-action="verify">
-            Verify signature
+            {t("Verify signature", "Verifica la firma")}
           </button>
 
           <button class="btn btn-outline" data-wallet-action="tamper">
-            Tamper message
+            {t("Tamper message", "Altera il messaggio")}
           </button>
         </div>
       </div>
 
       <div class="grid gap-3">
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">Wallet identity</p>
+          <p class="font-semibold mb-1">{t("Wallet identity", "Identità del wallet")}</p>
           <p class="text-sm opacity-80">
-            Address:
+            {t("Address:", "Indirizzo")}
             <span class="font-mono break-all" data-wallet-address>-</span>
           </p>
           <p class="text-sm opacity-80">
-            Public identity:
+            {t("Public identity:", "Identità pubblica")}
             <span class="font-mono break-all" data-wallet-public>-</span>
           </p>
         </div>
 
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">Signature</p>
+          <p class="font-semibold mb-1">{t("Signature", "Firma")}</p>
           <p class="font-mono text-xs break-all opacity-80" data-wallet-signature>
-            Generate a wallet and sign a transaction.
+            {t("Generate a wallet and sign a transaction.", "Genera un wallet e firma una transazione.")}
           </p>
         </div>
 
         <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-          <p class="font-semibold mb-1">Status</p>
+          <p class="font-semibold mb-1">{t("Status", "Stato")}</p>
           <p class="text-sm opacity-80" data-wallet-status>
-            A wallet authorizes actions by signing messages.
+            {t("A wallet authorizes actions by signing messages.", "Un wallet autorizza le operazioni firmando messaggi.")}
           </p>
         </div>
       </div>
@@ -73,6 +78,9 @@
 </section>
 
 <script>
+  const isItalian = () => document.documentElement.lang === "it";
+  const translate = (english, italian) => isItalian() ? italian : english;
+
   function initWalletKeysLab() {
     const root = document.querySelector("#wallet-keys-lab");
 
@@ -117,9 +125,9 @@
 
       addressOutput.textContent = address;
       publicOutput.textContent = publicIdentity.slice(0, 32) + "...";
-      signatureOutput.textContent = "No signature yet.";
+      signatureOutput.textContent = translate("No signature yet.", "Nessuna firma disponibile.");
       status.textContent =
-        "Toy wallet generated. In real systems, the private key must remain secret.";
+        translate("Toy wallet generated. In real systems, the private key must remain secret.", "Wallet dimostrativo generato. Nei sistemi reali la chiave privata deve restare segreta.");
     }
 
     async function signMessage() {
@@ -132,12 +140,12 @@
 
       signatureOutput.textContent = signature;
       status.textContent =
-        "Transaction signed. The signature is bound to this exact message.";
+        translate("Transaction signed. The signature is bound to this exact message.", "Transazione firmata. La firma è legata esattamente a questo messaggio.");
     }
 
     async function verifySignature() {
       if (!wallet || !signature || !signedMessage) {
-        status.textContent = "Nothing to verify yet. Generate a wallet and sign a transaction first.";
+        status.textContent = translate("Nothing to verify yet. Generate a wallet and sign a transaction first.", "Genera un wallet e firma una transazione prima di verificarla.");
         return;
       }
 
@@ -145,17 +153,17 @@
 
       if (expected === signature) {
         status.textContent =
-          "Signature verified: the message matches the signed transaction.";
+          translate("Signature verified: the message matches the signed transaction.", "Firma valida: il messaggio corrisponde alla transazione firmata.");
       } else {
         status.textContent =
-          "Verification failed: the message changed after signing.";
+          translate("Verification failed: the message changed after signing.", "Verifica fallita: il messaggio è cambiato dopo la firma.");
       }
     }
 
     function tamperMessage() {
       messageInput.value = `${messageInput.value} [tampered]`;
       status.textContent =
-        "Message changed. Try verifying the old signature again.";
+        translate("Message changed. Try verifying the old signature again.", "Messaggio modificato. Prova a verificare di nuovo la firma precedente.");
     }
 
     root

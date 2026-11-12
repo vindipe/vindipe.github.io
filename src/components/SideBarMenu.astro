@@ -1,18 +1,29 @@
 ---
+import { getLocale, inLanguage, translator } from "../i18n/locale";
+
 const { sideBarActiveItemID } = Astro.props;
-const activeClass = "bg-primary-content/20";
+const locale = getLocale(Astro.url.pathname);
+const t = translator(Astro.url.pathname);
+const items = [
+  { id: "home", path: "/", label: "Home" },
+  { id: "projects", path: "/projects/", label: t("Projects and Tools", "Progetti e strumenti") },
+  { id: "research", path: "/research/", label: t("Research", "Ricerca") },
+  { id: "tutorials", path: "/tutorials/", label: "Blockchain 101" },
+  { id: "cv", path: "/cv/", label: "CV" },
+  { id: "contact", path: "/contact/", label: t("Contact me", "Contatti") },
+];
 ---
 
-<ul class="menu grow shrink menu-md overflow-y-auto">
-  <li><a class="py-3 text-base font-medium" id="home" href="/">Home</a></li>
-  <li><a class="py-3 text-base font-medium" id="projects" href="/projects">Projects and Tools</a></li>
-  <li><a class="py-3 text-base font-medium" id="research" href="/research">Research</a></li>
-  <li><a class="py-3 text-base font-medium" id="tutorials" href="/tutorials">Blockchain 101</a></li>
-  <li><a class="py-3 text-base font-medium" id="cv" href="/cv">CV</a></li>
-  <li><a class="py-3 text-base font-medium" id="contact" href="/contact">Contact me</a></li>
-</ul>
-
-<script define:vars={{ sideBarActiveItemID: sideBarActiveItemID, activeClass: activeClass }}>
-  const activeItemElem = document.getElementById(sideBarActiveItemID);
-  activeItemElem && activeItemElem.classList.add(activeClass);
-</script>
+<nav aria-label={t("Main navigation", "Navigazione principale")} class="grow shrink overflow-y-auto">
+  <ul class="menu menu-md">
+    {items.map(({ id, path, label }) => (
+      <li>
+        <a
+          class:list={["py-3 text-base font-medium", id === sideBarActiveItemID && "bg-primary-content/20"]}
+          href={inLanguage(path, locale)}
+          aria-current={Astro.url.pathname === inLanguage(path, locale) ? "page" : undefined}
+        >{label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
