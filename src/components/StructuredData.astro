@@ -5,11 +5,15 @@ import { getLocale, inLanguage, translator } from "../i18n/locale";
 const site = Astro.site ?? new URL("https://vindipe.github.io/");
 const locale = getLocale(Astro.url.pathname);
 const t = translator(Astro.url.pathname);
+const { title, description: pageDescription } = Astro.props;
+const home = inLanguage(Astro.url.pathname, "en") === "/";
 const canonicalURL = new URL(inLanguage(Astro.url.pathname, locale), site).toString();
 const description = t(SITE_DESCRIPTION, "Sviluppo software per la ricerca su sistemi distribuiti, benchmarking delle blockchain, sperimentazione riproducibile e scadenza nei registri distribuiti.");
 
 const personId = new URL("/#person", site).toString();
 const websiteId = new URL("/#website", site).toString();
+
+const pageId = canonicalURL + "#page";
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -39,7 +43,7 @@ const structuredData = {
         "https://www.linkedin.com/in/vincenzo-di-perna/",
         "https://orcid.org/0009-0003-8834-9900"
       ],
-      "mainEntityOfPage": canonicalURL
+      "mainEntityOfPage": new URL("/#page", site).toString()
     },
     {
       "@type": "WebSite",
@@ -51,6 +55,16 @@ const structuredData = {
         "@id": personId
       },
       "inLanguage": ["en", "it"]
+    },
+    {
+      "@type": home ? "ProfilePage" : "WebPage",
+      "@id": pageId,
+      "url": canonicalURL,
+      "name": title,
+      "description": pageDescription,
+      "inLanguage": locale,
+      "isPartOf": { "@id": websiteId },
+      ...(home ? { "mainEntity": { "@id": personId } } : {})
     }
   ]
 };

@@ -106,6 +106,7 @@ const latestWorks = getRecentWorks(Astro.url.pathname)
           <HorizontalCard
             title={work.title}
             img={work.img}
+            imgAlt={work.imgAlt}
             desc={work.desc}
             url={work.url}
             badge={work.badge}
@@ -131,7 +132,7 @@ const latestWorks = getRecentWorks(Astro.url.pathname)
 
           <div class="card-actions justify-end mt-4">
             <a class="btn btn-sm btn-outline" href={localPath("/projects")}>
-              {t("View projects and tools", "Tutti i progetti")}
+              {t("Browse software and datasets", "Esplora software e dataset")}
             </a>
           </div>
         </div>

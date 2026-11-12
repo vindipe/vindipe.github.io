@@ -9,27 +9,27 @@ const localPath = (href: string) => inLanguage(href, locale);
 const blockchainEnergyProfiles = [
   {
     name: "Algorand",
-    src: "/research/icbc25/energy-algorand-per-transaction.png",
+    src: "/research/icbc25/energy-algorand-per-transaction.webp",
     desc: t("Shows low energy per transaction across several topology and workload combinations, especially for transaction-processing workloads.", "Mostra un basso consumo per transazione con diverse topologie e carichi, soprattutto nei carichi di elaborazione delle transazioni."),
   },
   {
     name: "Diem",
-    src: "/research/icbc25/energy-diem-per-transaction.png",
+    src: "/research/icbc25/energy-diem-per-transaction.webp",
     desc: t("Highlights the energy profile of a permissioned BFT-style blockchain under topology-controlled execution.", "Evidenzia il profilo energetico di una blockchain BFT ad accesso riservato in condizioni di rete controllate."),
   },
   {
     name: "Ethereum Clique",
-    src: "/research/icbc25/energy-ethereum-per-transaction.png",
+    src: "/research/icbc25/energy-ethereum-per-transaction.webp",
     desc: t("Shows higher energy per transaction compared with the other evaluated systems, regardless of topology.", "Usa più energia per transazione rispetto agli altri sistemi valutati, a prescindere dalla topologia."),
   },
   {
     name: "Quorum IBFT",
-    src: "/research/icbc25/energy-quorum-per-transaction.png",
+    src: "/research/icbc25/energy-quorum-per-transaction.webp",
     desc: t("Captures how a permissioned Ethereum-based system reacts to workload intensity and topology changes.", "Mostra la risposta di un sistema Ethereum ad accesso riservato all’intensità del carico e ai cambi di topologia."),
   },
   {
     name: "Solana",
-    src: "/research/icbc25/energy-solana-per-transaction.png",
+    src: "/research/icbc25/energy-solana-per-transaction.webp",
     desc: t("Shows competitive energy behaviour in smaller configurations, with scalability issues emerging in larger setups.", "Ha consumi competitivi nelle configurazioni più piccole, ma incontra problemi di scalabilità in quelle più grandi."),
   },
 ];
@@ -131,7 +131,7 @@ const findings = [
     <div class="network-protected card bg-base-100 shadow-md">
       <figure class="px-6 pt-6">
         <img
-          src="/research/icbc25/topologies.png"
+          src="/research/icbc25/topologies.png" width="2615" height="470" decoding="async"
           alt={t("Five network topologies evaluated in the IEEE ICBC 2025 blockchain energy paper: fat-tree, full mesh, hypercube, scale-free, and torus.", "Le cinque topologie valutate nello studio IEEE ICBC 2025: fat-tree, maglia completa, ipercubo, rete scale-free e toro.")}
           class="rounded-xl border border-base-300 bg-base-200"
           loading="lazy"
@@ -213,6 +213,9 @@ const findings = [
                 <figure class="px-4 pt-4">
                   <img
                     src={item.src}
+                    width="3156"
+                    height="3841"
+                    decoding="async"
                     alt={`${item.name} average energy per transaction in the IEEE ICBC 2025 blockchain energy paper.`}
                     class="rounded-lg bg-base-100"
                     loading="lazy"

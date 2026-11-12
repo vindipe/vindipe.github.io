@@ -1,5 +1,9 @@
+---
+const { animated = false } = Astro.props;
+---
+
 <div class="network-background" aria-hidden="true">
-    <canvas id="network-background-canvas"></canvas>
+    <canvas id="network-background-canvas" data-animated={String(animated)}></canvas>
 </div>
 
 <style>
@@ -19,8 +23,9 @@
     }
 
     #network-background-canvas {
-        width: 100vw;
+        width: 100%;
         height: 100vh;
+        height: 100lvh;
         display: block;
     }
 </style>
@@ -35,8 +40,9 @@
         const ctx = canvas.getContext("2d");
         if (!ctx) return;
 
-        let width = window.innerWidth;
-        let height = window.innerHeight;
+        let width = 0;
+        let height = 0;
+        let pixelRatio = 0;
         let mouseX = null;
         let mouseY = null;
         let scrollY = window.scrollY || 0;
@@ -46,6 +52,8 @@
         const pulses = [];
         const edges = [];
         const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const animated = canvas.dataset.animated === "true";
+        const shouldAnimate = () => animated && !reducedMotion.matches && !document.hidden;
         let lastGraphUpdate = -Infinity;
 
         function random(min, max) {
@@ -53,24 +61,25 @@
         }
 
         function resizeCanvas() {
-            const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1.25 : 1.5);
+            const nextWidth = canvas.clientWidth;
+            const nextHeight = canvas.clientHeight;
+            const dpr = Math.min(window.devicePixelRatio || 1, nextWidth < 768 ? 1.25 : 1.5);
+            if (nextWidth === width && nextHeight === height && dpr === pixelRatio) return false;
 
-            width = window.innerWidth;
-            height = window.innerHeight;
-
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
-            canvas.style.width = width + "px";
-            canvas.style.height = height + "px";
-
+            width = nextWidth;
+            height = nextHeight;
+            pixelRatio = dpr;
+            canvas.width = Math.round(width * dpr);
+            canvas.height = Math.round(height * dpr);
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            return true;
         }
 
         function createNodes() {
             nodes.length = 0;
             lastGraphUpdate = -Infinity;
 
-            const nodeCount = width < 768 ? 72 : 170;
+            const nodeCount = width < 768 ? 52 : 170;
 
             for (let i = 0; i < nodeCount; i++) {
                 nodes.push({
@@ -201,12 +210,13 @@
         }
 
         function drawNodes() {
+            ctx.beginPath();
             for (const node of nodes) {
-                ctx.beginPath();
+                ctx.moveTo(node.x + node.r, node.y);
                 ctx.arc(node.x, node.y, node.r, 0, Math.PI * 2);
-                ctx.fillStyle = "rgba(15, 23, 42, 0.72)";
-                ctx.fill();
             }
+            ctx.fillStyle = "rgba(15, 23, 42, 0.72)";
+            ctx.fill();
         }
 
         function drawPulses() {
@@ -248,7 +258,8 @@
         function draw(now) {
             animationFrameId = null;
             ctx.clearRect(0, 0, width, height);
-            if (!reducedMotion.matches) updateNodes();
+            const moving = shouldAnimate();
+            if (moving) updateNodes();
 
             // Nodes move a few pixels between graph updates. Redraw their positions
             // every frame and recompute the nearest neighbours less frequently.
@@ -258,7 +269,7 @@
             }
             for (const { i, j, forced } of edges) drawEdge(i, j, forced);
             drawNodes();
-            if (!reducedMotion.matches) {
+            if (moving) {
                 drawPulses();
                 animationFrameId = window.requestAnimationFrame(draw);
             }
@@ -271,9 +282,9 @@
         }
 
         const handleResize = () => {
-            resizeCanvas();
+            if (!resizeCanvas()) return;
             createNodes();
-            if (reducedMotion.matches) refresh();
+            refresh();
         };
 
         const handleMouseMove = (event) => {
@@ -293,7 +304,7 @@
         const handleTouchStart = (event) => {
             const touch = event.touches[0];
 
-            if (!touch || reducedMotion.matches) {
+            if (!touch || !shouldAnimate()) {
                 return;
             }
 
@@ -305,24 +316,22 @@
             });
         };
 
-        reducedMotion.addEventListener("change", refresh);
-        window.addEventListener("resize", handleResize);
-        window.addEventListener("mousemove", handleMouseMove);
-        window.addEventListener("mouseleave", handleMouseLeave);
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        window.addEventListener("touchstart", handleTouchStart, { passive: true });
+        const listeners = new AbortController();
+        const { signal } = listeners;
+        window.addEventListener("resize", handleResize, { signal });
+        if (animated) {
+            reducedMotion.addEventListener("change", refresh, { signal });
+            document.addEventListener("visibilitychange", refresh, { signal });
+            window.addEventListener("mousemove", handleMouseMove, { passive: true, signal });
+            window.addEventListener("mouseleave", handleMouseLeave, { signal });
+            window.addEventListener("scroll", handleScroll, { passive: true, signal });
+            window.addEventListener("touchstart", handleTouchStart, { passive: true, signal });
+        }
 
         window.__networkBackgroundCleanup = () => {
-            if (animationFrameId !== null) {
-                window.cancelAnimationFrame(animationFrameId);
-            }
-
-            reducedMotion.removeEventListener("change", refresh);
-            window.removeEventListener("resize", handleResize);
-            window.removeEventListener("mousemove", handleMouseMove);
-            window.removeEventListener("mouseleave", handleMouseLeave);
-            window.removeEventListener("scroll", handleScroll);
-            window.removeEventListener("touchstart", handleTouchStart);
+            if (animationFrameId !== null) window.cancelAnimationFrame(animationFrameId);
+            listeners.abort();
+            window.__networkBackgroundCanvas = null;
         };
 
         resizeCanvas();
@@ -335,5 +344,6 @@
     if (!window.__networkBackgroundPageLoadRegistered) {
         window.__networkBackgroundPageLoadRegistered = true;
         document.addEventListener("astro:page-load", startNetworkBackground);
+        document.addEventListener("astro:before-swap", () => window.__networkBackgroundCleanup?.());
     }
 </script>

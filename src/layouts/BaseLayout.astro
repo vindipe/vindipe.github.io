@@ -7,7 +7,7 @@ import NetworkBackground from "../components/NetworkBackground.astro";
 import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 import StructuredData from "../components/StructuredData.astro";
 import { ViewTransitions } from "astro:transitions";
-import { getLocale, translator } from "../i18n/locale";
+import { getLocale, inLanguage, translator } from "../i18n/locale";
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
 
 const { 
@@ -27,13 +27,13 @@ const t = translator(Astro.url.pathname);
 <html lang={locale} data-theme="bumblebee">
   <head>
     <BaseHead title={title} description={description} image={image} ogType={ogType} />
-    <StructuredData />
+    <StructuredData {title} {description} />
     {TRANSITION_API && <ViewTransitions />}
   </head>
 
   <body>
     <a class="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:bg-base-100 focus:p-3" href="#main-content">{t("Skip to content", "Vai al contenuto")}</a>
-    <NetworkBackground />
+    <NetworkBackground animated={inLanguage(Astro.url.pathname, "en") === "/"} />
 
     <div class="relative z-[1] drawer lg:drawer-open">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />

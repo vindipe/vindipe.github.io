@@ -663,23 +663,24 @@ const localPath = (href: string) => inLanguage(href, locale);
     renderAll();
   }
 
-  function computeSeries(assetId) {
+  let renderFrame = null;
+
+  function computeSeries(assetId, attributes) {
     const setData = getCurrentSet();
     const series = setData.series[assetId] || [];
-    const attributes = getEnabledAttributes();
-
     return series
+      .filter((row) => !state.recentOnly || row.t >= "2018-01")
       .map((row) => ({
         t: row.t,
         score: scoreFromValues(row.v, attributes, state.weights),
-      }))
-      .filter((row) => !state.recentOnly || row.t >= "2018-01");
+      }));
   }
 
-  function latestScore(assetId) {
-    const rows = computeSeries(assetId);
-    if (!rows.length) return { t: "n/a", score: 0 };
-    return rows[rows.length - 1];
+  function getSelectedSeries() {
+    const attributes = getEnabledAttributes();
+    return getAvailableAssets()
+      .filter((asset) => state.selectedAssets.includes(asset.id))
+      .map((asset) => ({ asset, rows: computeSeries(asset.id, attributes) }));
   }
 
   function renderSetDescription() {
@@ -846,7 +847,7 @@ const localPath = (href: string) => inLanguage(href, locale);
         state.weights[attr] = Number(input.value);
         const badge = container.querySelector(`.weight-value[data-for="${attr}"]`);
         if (badge) badge.textContent = Number(input.value).toFixed(2);
-        renderAll();
+        if (renderFrame === null) renderFrame = requestAnimationFrame(renderAll);
       });
     });
   }
@@ -870,9 +871,8 @@ const localPath = (href: string) => inLanguage(href, locale);
     };
   }
 
-  function renderChart() {
+  function renderChart(allSeries) {
     const svg = $("eb-chart");
-    const selectedAssets = getAvailableAssets().filter((asset) => state.selectedAssets.includes(asset.id));
     const width = 840;
     const height = 420;
     const margin = { top: 24, right: 28, bottom: 56, left: 56 };
@@ -888,11 +888,6 @@ const localPath = (href: string) => inLanguage(href, locale);
       $("chart-legend").innerHTML = "";
       return;
     }
-
-    const allSeries = selectedAssets.map((asset) => ({
-      asset,
-      rows: computeSeries(asset.id),
-    }));
 
     const dates = Array.from(new Set(allSeries.flatMap((item) => item.rows.map((row) => row.t)))).sort();
     const dateIndex = new Map(dates.map((date, index) => [date, index]));
@@ -942,9 +937,9 @@ const localPath = (href: string) => inLanguage(href, locale);
     `;
 
     const legend = $("chart-legend");
-    legend.innerHTML = selectedAssets
+    legend.innerHTML = allSeries
       .map(
-        (asset) => `
+        ({ asset }) => `
           <span class="inline-flex items-center gap-2">
             <span class="inline-block w-3 h-3 rounded-full" style="background:${ASSET_COLORS[asset.id] || "currentColor"}"></span>
             ${asset.label}
@@ -953,11 +948,7 @@ const localPath = (href: string) => inLanguage(href, locale);
       .join("");
   }
 
-  function renderRanking() {
-    const assets = getAvailableAssets().filter((asset) => state.selectedAssets.includes(asset.id));
-    const ranking = assets
-      .map((asset) => ({ asset, ...latestScore(asset.id) }))
-      .sort((a, b) => b.score - a.score);
+  function renderRanking(ranking) {
 
     $("latest-date").textContent = ranking.length ? (isItalian() ? `Ultimo mese mostrato: ${ranking[0].t}` : `Latest visible month: ${ranking[0].t}`) : translate("No asset selected.", "Nessun asset selezionato.");
     $("ranking-body").innerHTML = ranking
@@ -1016,10 +1007,9 @@ const localPath = (href: string) => inLanguage(href, locale);
       .join("");
   }
 
-  function getLatestRanking() {
-    return getAvailableAssets()
-      .filter((asset) => state.selectedAssets.includes(asset.id))
-      .map((asset) => ({ asset, ...latestScore(asset.id) }))
+  function getLatestRanking(series) {
+    return series
+      .map(({ asset, rows }) => ({ asset, ...(rows.at(-1) ?? { t: "n/a", score: 0 }) }))
       .sort((a, b) => b.score - a.score);
   }
 
@@ -1027,7 +1017,7 @@ const localPath = (href: string) => inLanguage(href, locale);
     const setData = getCurrentSet();
     const selectedAttributes = getSelectedAttributes();
     const assetLabels = getSelectedAssetLabels();
-    const ranking = getLatestRanking();
+    const ranking = getLatestRanking(getSelectedSeries());
     const top = ranking[0];
     const attributeText = selectedAttributes
       .map((attr) => `${attr.label} (${attr.id}, weight ${(state.weights[attr.id] ?? 1).toFixed(2)})`)
@@ -1088,10 +1078,9 @@ const localPath = (href: string) => inLanguage(href, locale);
     renderAll();
   }
 
-  function renderAnalyticalSummary() {
+  function renderAnalyticalSummary(ranking) {
     const selectedAttributes = getSelectedAttributes();
     const assetLabels = getSelectedAssetLabels();
-    const ranking = getLatestRanking();
     const top = ranking[0];
     const setLabel = isCustomSet() ? translate("Custom", "Personalizzato") : state.set.toUpperCase();
     const averageWeight = selectedAttributes.length
@@ -1133,14 +1122,19 @@ const localPath = (href: string) => inLanguage(href, locale);
   }
 
   function renderAll() {
+    if (renderFrame !== null) cancelAnimationFrame(renderFrame);
+    renderFrame = null;
+
+    const series = getSelectedSeries();
+    const ranking = getLatestRanking(series);
     renderSetDescription();
     renderCustomSetTools();
     renderDateModeControls();
-    renderChart();
-    renderRanking();
+    renderChart(series);
+    renderRanking(ranking);
     renderSnapshotAssetSelect();
     renderContributionBars();
-    renderAnalyticalSummary();
+    renderAnalyticalSummary(ranking);
     syncStateToUrl();
   }
 
@@ -1235,6 +1229,9 @@ const localPath = (href: string) => inLanguage(href, locale);
     initCryptoEntropyExplorer();
   });
   observer.observe(root);
-  document.addEventListener("astro:before-swap", () => observer.disconnect(), { once: true });
+  document.addEventListener("astro:before-swap", () => {
+    observer.disconnect();
+    if (renderFrame !== null) cancelAnimationFrame(renderFrame);
+  }, { once: true });
 })();
 </script>

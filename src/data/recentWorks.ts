@@ -5,6 +5,7 @@ export type RecentWork = {
   desc: string;
   url: string;
   img: string;
+  imgAlt?: string;
   badge: string;
   date: string;
   target?: "_blank" | "_self";
@@ -19,6 +20,7 @@ export function getRecentWorks(pathname: string): RecentWork[] {
     desc: t("Discover CIRCULA, an SNSF-funded project exploring expiry and renewal in blockchain systems.", "Scopri CIRCULA, il progetto finanziato dal Fondo nazionale svizzero che studia la scadenza e il rinnovo nelle blockchain."),
     url: "/research/circula",
     img: "/research/circula/cover.webp",
+    imgAlt: t("CIRCULA research project cover", "Copertina del progetto di ricerca CIRCULA"),
     badge: "CIRCULA",
     date: "2026-11-11",
     target: "_self",
@@ -29,6 +31,7 @@ export function getRecentWorks(pathname: string): RecentWork[] {
     desc: t("ACM DLT journal article on topology-aware blockchain benchmarking, showing why network structure and dynamics should be treated as first-class variables in reproducible blockchain performance evaluation.", "L’articolo su ACM DLT mostra perché struttura e dinamiche della rete siano variabili centrali per valutare le prestazioni delle blockchain in modo riproducibile."),
     url: "/research/acm-dlt-network-topologies-blockchain-performance",
     img: "/research/dlt26/table4-overall-blockchain-variability-v2.webp",
+    imgAlt: t("Table comparing variability in blockchain benchmarks", "Tabella di confronto della variabilità nei benchmark blockchain"),
     badge: t("ACM DLT journal", "Rivista ACM DLT"),
     date: "2026-07-02",
     target: "_self",
@@ -38,6 +41,7 @@ export function getRecentWorks(pathname: string): RecentWork[] {
     desc: t("PhD dissertation on topology-aware blockchain benchmarking, performance and energy efficiency, experimental repeatability, performance predictability, and an entropy-based approach to economic efficiency.", "Tesi sul confronto fra blockchain per prestazioni, efficienza energetica, ripetibilità, prevedibilità ed efficienza economica, con benchmarking a topologie controllate e un indice basato sull’entropia."),
     url: "/research/comparing-blockchains",
     img: "/research/theses/phd-thesis-preview.svg",
+    imgAlt: t("Cover of the doctoral dissertation", "Copertina della tesi di dottorato"),
     badge: t("PhD thesis", "Tesi di dottorato"),
     date: "2026-06-23",
     target: "_self",
