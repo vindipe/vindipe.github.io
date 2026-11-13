@@ -126,9 +126,14 @@ const items = [
 
   .menu [data-page-menu]:has(> .page-sections) {
     position: relative;
+    --page-menu-row: 3.25rem;
   }
 
   .menu [data-page-menu]:has(> .page-sections) > a {
+    display: flex;
+    align-items: center;
+    min-height: var(--page-menu-row);
+    padding-block: 0;
     padding-inline-end: 3.5rem;
   }
 
@@ -142,6 +147,8 @@ const items = [
     cursor: pointer;
   }
 
+  .menu .page-sections > summary::-webkit-details-marker { display: none; }
+
   .menu .page-sections > summary::after {
     display: none;
   }
@@ -153,7 +160,9 @@ const items = [
     display: grid;
     place-items: center;
     width: 3.15rem;
-    height: 3rem;
+    height: var(--page-menu-row);
+    padding: 0;
+    list-style: none;
   }
 
   .menu .page-sections[open] > summary svg {

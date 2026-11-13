@@ -3,6 +3,13 @@ import { translator } from "../i18n/locale";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const t = translator(Astro.url.pathname);
+const appointmentUrl = import.meta.env.PUBLIC_APPOINTMENT_URL;
+const requestSubject = t("30-minute appointment request", "Richiesta di appuntamento di 30 minuti");
+const requestBody = t(
+  "Hello Vincenzo, I’d like to arrange a 30-minute appointment.\n\nTopic:\nPreferred dates and times:\nTime zone:",
+  "Ciao Vincenzo, vorrei fissare un appuntamento di 30 minuti.\n\nArgomento:\nDate e orari preferiti:\nFuso orario:"
+);
+const requestUrl = `mailto:vincenzopaolo.diperna@outlook.com?subject=${encodeURIComponent(requestSubject)}&body=${encodeURIComponent(requestBody)}`;
 ---
 
 <BaseLayout
@@ -14,6 +21,26 @@ const t = translator(Astro.url.pathname);
     <h1 class="text-4xl font-bold mb-4">{t("Contact me", "Contatti")}</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <h3 class="card-title flex items-center gap-2">
+            <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="16" rx="2" />
+              <path d="M7 3v4m10-4v4M3 10h18m-9 3v3h3" />
+            </svg>
+            {t("Book an appointment", "Prenota un appuntamento")}
+          </h3>
+          <p>{appointmentUrl
+            ? t("Choose an available time for a 30-minute appointment.", "Scegli un orario disponibile per un appuntamento di 30 minuti.")
+            : t("Suggest a time for a 30-minute appointment. I’ll confirm availability by email.", "Proponi un orario per un appuntamento di 30 minuti. Ti confermerò la disponibilità via email.")}</p>
+          <div class="card-actions justify-end mt-4">
+            <a class="btn btn-primary" href={appointmentUrl || requestUrl}>
+              {appointmentUrl ? t("Choose a time", "Scegli un orario") : t("Request a time", "Proponi un orario")}
+            </a>
+          </div>
+        </div>
+      </div>
+
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
           <h3 class="card-title flex items-center gap-2">
