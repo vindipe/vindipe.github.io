@@ -3,6 +3,6 @@
 
 export const SITE_TITLE = "Vincenzo Di Perna";
 export const SITE_DESCRIPTION =
-  "Research Software Engineer exploring distributed systems, blockchain benchmarking, reproducible experiments, and expiry-aware design through CIRCULA.";
+  "Research Software Engineer with a PhD in blockchain, previous work in distributed systems benchmarking, and a new research direction on expiry and renewal through CIRCULA.";
 export const GENERATE_SLUG_FROM_TITLE = true
 export const TRANSITION_API = true

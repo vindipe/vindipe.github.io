@@ -2,36 +2,26 @@
 import { translator } from "../../i18n/locale";
 
 const t = translator(Astro.url.pathname);
-const { title, context, howToPlay, observe, nextStep } = Astro.props;
+const { context, howToPlay, observe, nextStep } = Astro.props;
+const steps = [
+  [t("Where it appears", "A che cosa serve"), context],
+  [t("How to use it", "Come fare la prova"), howToPlay],
+  [t("What to observe", "Che cosa osservare"), observe],
+  [t("What to try next", "Che cosa provare dopo"), nextStep],
+];
 ---
 
-<div class="card bg-base-100 shadow-md mb-4">
-  <div class="card-body">
-    <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">{title}</h3>
-      <span class="badge badge-primary">{t("Guided lab", "Laboratorio guidato")}</span>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-4 gap-3">
-      <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-1">{t("1. Blockchain context", "1. A che cosa serve")}</p>
-        <p class="text-sm opacity-80">{context}</p>
+<details class="tutorial-disclosure mx-3 mb-3 rounded-lg border border-base-300 bg-base-200 sm:mx-4 sm:mb-4">
+  <summary class="flex min-h-11 items-center justify-between gap-2 rounded-lg px-3 text-sm font-semibold hover:bg-base-300">
+    {t("Lab guide", "Guida al laboratorio")}
+    <span class="tutorial-disclosure-icon" aria-hidden="true"></span>
+  </summary>
+  <dl class="tutorial-disclosure-content grid gap-3 px-3 pb-3 text-sm leading-relaxed sm:grid-cols-2">
+    {steps.map(([label, text]) => (
+      <div>
+        <dt class="font-semibold">{label}</dt>
+        <dd>{text}</dd>
       </div>
-
-      <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-1">{t("2. How to play", "2. Prova tu")}</p>
-        <p class="text-sm opacity-80">{howToPlay}</p>
-      </div>
-
-      <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-1">{t("3. What to observe", "3. Che cosa osservare")}</p>
-        <p class="text-sm opacity-80">{observe}</p>
-      </div>
-
-      <div class="rounded-xl bg-base-200 border border-base-300 p-4">
-        <p class="font-semibold mb-1">{t("4. Next step", "4. Che cosa provare dopo")}</p>
-        <p class="text-sm opacity-80">{nextStep}</p>
-      </div>
-    </div>
-  </div>
-</div>
+    ))}
+  </dl>
+</details>

@@ -127,17 +127,17 @@ const publications = [
     <h1 class="text-4xl font-bold mb-4">CV</h1>
 
     <p class="text-lg leading-relaxed opacity-90">
-      {t("I am a Research Software Engineer with a PhD in Blockchain & DLT, focused on distributed systems, blockchain benchmarking, scientific computing, reproducible experimentation, protocol evaluation, and data analysis.", "Sono un ingegnere del software per la ricerca e ho un dottorato in blockchain e tecnologie a registro distribuito. Mi occupo di sistemi distribuiti, calcolo scientifico, valutazione sperimentale dei protocolli e analisi dei dati.")}
+      {t("I am a Research Software Engineer with a PhD in blockchain. I have worked on distributed systems, experimental evaluation of blockchain protocols and digital asset data analysis.", "Sono un ingegnere del software con un dottorato (PhD) in blockchain. Ho lavorato su sistemi distribuiti, valutazione sperimentale dei protocolli blockchain e analisi dei dati sugli asset digitali.")}
     </p>
 
     <div class="mt-6 flex flex-wrap gap-3">
       <a
         class="btn btn-primary"
-        href="/cv/Vincenzo_Di_Perna_CV_2026.pdf?v=20260901"
+        href={t("/cv/Vincenzo_Di_Perna_CV_2026.pdf?v=20260901", "/cv/Vincenzo_Di_Perna_CV_IT.pdf")}
         target="_blank"
         rel="noopener noreferrer"
       >
-        {t("Download CV (September 2026)", "Scarica il CV (PDF in inglese, settembre 2026)")}
+        {t("Download CV", "Scarica il CV")}
       </a>
 
       <a
@@ -174,14 +174,14 @@ const publications = [
 
     <div class="text-justify leading-relaxed">
       <p class="mb-4">
-        {t("My work combines distributed systems research, experimental methodology, blockchain infrastructure evaluation, and data-driven analysis. During my PhD, I designed and used reproducible benchmarking pipelines to study how blockchain systems behave under different workloads, network topologies, and operational conditions.", "Durante il dottorato ho progettato strumenti e procedure per ripetere gli esperimenti e confrontare le blockchain al variare del carico, della topologia di rete e delle condizioni operative. Nel mio lavoro la progettazione degli esperimenti va di pari passo con lo sviluppo del software e l’analisi dei dati.")}
+        {t("During my PhD, I designed benchmarking tools and procedures to compare blockchains across workloads, network topologies and operating conditions. I used them to study latency, energy use and the repeatability and predictability of performance measurements.", "Durante il dottorato ho progettato strumenti e procedure per ripetere gli esperimenti e confrontare le blockchain al variare del carico, della topologia di rete e delle condizioni operative. Li ho usati per studiare la latenza, i consumi e la ripetibilità e prevedibilità delle misure di prestazione.")}
       </p>
 
       <p class="mb-4">
-        {t("I am particularly interested in performance and latency evaluation, energy efficiency, repeatability, performance predictability, protocol analytics, digital-asset and CBDC-related infrastructures, and research engineering practices that make experimental results easier to reproduce and compare.", "Studio latenza, efficienza energetica e prevedibilità delle prestazioni. Mi interessano anche i protocolli e le infrastrutture per gli asset digitali e le valute digitali di banca centrale (CBDC). Sviluppo strumenti che facilitano il confronto e la riproduzione dei risultati.")}
+        {t("I also worked on data and protocols for digital assets, decentralized finance and central bank digital currencies (CBDCs).", "Ho lavorato anche su dati e protocolli per gli asset digitali, la finanza decentralizzata e le valute digitali di banca centrale (CBDC).")}
       </p>
 
-      <p>{t("From 1 February 2027, I will join the University of Neuchâtel as a postdoctoral researcher and scientific coordinator of CIRCULA, an SNSF-funded research project about expiry-aware blockchain design.", "Dal 1° febbraio 2027 è previsto il mio ingresso all’Università di Neuchâtel come ricercatore post-dottorale e coordinatore scientifico di CIRCULA. Il progetto, finanziato dal Fondo nazionale svizzero, studia scadenza e rinnovo nelle blockchain.")}</p>
+      <p>{t("I expect to join the University of Neuchâtel on 1 February 2027 as a postdoctoral researcher and scientific coordinator of CIRCULA. The SNSF-funded project will study expiry and renewal in blockchains.", "Dal 1° febbraio 2027 è previsto il mio ingresso all’Università di Neuchâtel come ricercatore post-dottorale e coordinatore scientifico di CIRCULA. Il progetto, finanziato dal Fondo nazionale svizzero (FNS), studierà la scadenza e il rinnovo nelle blockchain.")}</p>
     </div>
   </section>
 
@@ -192,7 +192,7 @@ const publications = [
 
     <div class="time-line-container grid gap-4">
       <TimeLineElement title={t("Incoming Postdoctoral Researcher and Scientific Coordinator - CIRCULA", "Ricercatore post-dottorale e coordinatore scientifico di CIRCULA (incarico previsto)")} subtitle={t("University of Neuchâtel · expected from 1 February 2027", "Università di Neuchâtel · avvio previsto il 1° febbraio 2027")}>
-        {t("CIRCULA is an SNSF-funded project on expiry and renewal in distributed ledgers. The planned role includes coordinating scientific work across formal semantics, prototyping and evaluation under Principal Investigator Valerio Schiavoni.", "CIRCULA studia scadenza e rinnovo nei registri distribuiti con il sostegno del Fondo nazionale svizzero. Il mio ruolo prevede il coordinamento della ricerca sulla semantica formale, sui prototipi e sulla loro valutazione, sotto la responsabilità scientifica di Valerio Schiavoni.")}
+        {t("CIRCULA will study expiry and renewal in distributed ledgers with funding from the SNSF. I will coordinate scientific work on formal semantics, prototyping and evaluation.", "CIRCULA studierà la scadenza e il rinnovo nei registri distribuiti con il sostegno del Fondo nazionale svizzero (FNS). Il mio ruolo prevede il coordinamento della ricerca sulla semantica formale, sullo sviluppo dei prototipi e sulla loro valutazione.")}
         <br /><a href={localPath("/research/circula")} class="btn btn-xs btn-outline mt-3">{t("Explore CIRCULA", "Scopri CIRCULA")}</a>
       </TimeLineElement>
       <TimeLineElement
@@ -206,7 +206,7 @@ const publications = [
         title={t("Lilith - A Topology-Aware Blockchain Benchmarking Framework", "Lilith – Strumenti per confrontare blockchain in reti controllate")}
         subtitle={t("Research artifact and experimental toolchain", "Software e strumenti per gli esperimenti")}
       >
-        {t("Built a benchmarking framework integrating blockchain workload generation, network emulation, orchestration, and data analysis. Used it to study how topology and workload interactions affect blockchain performance and energy behavior.", "Ho sviluppato un framework che genera i carichi di lavoro, emula la rete, coordina gli esperimenti e ne analizza i dati. L’ho usato per studiare l’effetto combinato di topologia e carico sulle prestazioni e sui consumi.")}
+        {t("I developed Lilith, a framework for testing blockchains that generates workloads, emulates networks, orchestrates experiments and analyzes their data. I used it to study the combined effect of network topology and workload on performance and energy consumption.", "Ho sviluppato un framework per testare le blockchain (Lilith) che genera i carichi di lavoro, emula la rete, coordina gli esperimenti e ne analizza i dati. L’ho usato per studiare l’effetto combinato di topologia e carico sulle prestazioni e sui consumi.")}
 
         <br />
 
@@ -240,7 +240,7 @@ const publications = [
       </TimeLineElement>
 
       <TimeLineElement
-        title={t("Research Engineering & Reproducibility", "Ingegneria del software per la ricerca e riproducibilità")}
+        title={t("Research Engineering & Reproducibility", "Ingegneria del software e riproducibilità")}
         subtitle={t("Software artifacts, datasets, pipelines, and experimental methodology", "Software, dataset, procedure e metodologia sperimentale")}
       >
         {t("Developed scripts, datasets, reproducible workflows, statistical analyses, and documentation to support repeatable experiments and transparent evaluation of blockchain systems.", "Ho preparato codice, dati, analisi statistiche e documentazione per ripetere gli esperimenti e rendere verificabile il confronto tra blockchain.")}
@@ -369,7 +369,7 @@ const publications = [
       <TimeLineElement
         title={t("PhD in Blockchain & Distributed Ledger Technology", "Dottorato in blockchain e tecnologie a registro distribuito")}
         subtitle={t("University of Camerino, Italy", "Università di Camerino, Italia")}
-        date="2022-2025"
+        date="2022-2026"
       >
         {t("Dissertation focused on comparing blockchain systems across performance, energy, repeatability, predictability, and economic-efficiency dimensions. Research included topology-aware benchmarking, reproducible experimentation, workload design, network emulation, and statistical analysis of blockchain system behavior.", "La tesi confronta prestazioni, consumi ed efficienza economica delle blockchain e studia quanto siano ripetibili e prevedibili i risultati. Combina carichi di lavoro progettati per gli esperimenti, emulazione della rete e analisi statistica.")}
 
@@ -595,7 +595,7 @@ const publications = [
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
           <h3 class="card-title">
-            {t("Research engineering & technical communication", "Ingegneria del software per la ricerca e comunicazione tecnica")}
+            {t("Research engineering & technical communication", "Ingegneria del software e comunicazione tecnica")}
           </h3>
 
           <ul class="list-disc mx-6 grid gap-1">

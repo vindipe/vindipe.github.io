@@ -43,7 +43,7 @@ const t = translator(Astro.url.pathname);
         <Header title={SITE_TITLE} />
 
         <div class="md:flex md:justify-center flex-1">
-          <main id="main-content" class="p-6 pt-10 lg:max-w-[900px] max-w-[100vw]">
+          <main id="main-content" class="min-w-0 px-4 pt-8 pb-6 sm:px-6 sm:pt-10 lg:max-w-[900px] max-w-[100vw]">
             <slot />
           </main>
         </div>

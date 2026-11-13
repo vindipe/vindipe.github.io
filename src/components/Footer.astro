@@ -2,15 +2,10 @@
 import { getLocale, inLanguage, translator } from "../i18n/locale";
 const locale = getLocale(Astro.url.pathname);
 const t = translator(Astro.url.pathname);
-const today = new Date();
 ---
 
-<footer class="footer footer-center p-6 bg-primary text-primary-content text-sm">
+<footer class="footer footer-center p-4 bg-primary text-primary-content text-sm">
   <div>
-    <p>
-      &copy; {today.getFullYear()} Vincenzo Di Perna. {t("All rights reserved.", "Tutti i diritti riservati.")}
-    </p>
-
     <a class="link link-hover" href={inLanguage("/privacy", locale)}>
       {t("Privacy & analytics", "Privacy e dati di navigazione")}
     </a>

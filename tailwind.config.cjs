@@ -2,7 +2,13 @@
 module.exports = {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
-		extend: {},
+		extend: {
+			fontSize: {
+				"3xl": ["1.75rem", { lineHeight: "1.2" }],
+				"4xl": ["2rem", { lineHeight: "1.15" }],
+				"5xl": ["2.5rem", { lineHeight: "1.1" }],
+			},
+		},
 	},
 	plugins: [require("@tailwindcss/typography"),require("daisyui")],
 	daisyui: {

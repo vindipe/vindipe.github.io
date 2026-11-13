@@ -157,15 +157,16 @@ const academicTheses = [
 
 <BaseLayout
   title={t("Blockchain Research and Publications | Vincenzo Di Perna", "Ricerca e pubblicazioni sulle blockchain | Vincenzo Di Perna")}
-  description={t("Explore research on blockchain benchmarking, network topologies, energy use, economic efficiency, DeFi and reproducible datasets.", "Pubblicazioni e dati sulla valutazione delle blockchain, sulle topologie di rete, sui consumi energetici, sull’efficienza economica e sulla DeFi.")}
+  description={t("Explore CIRCULA’s research on blockchain expiry and renewal, plus previous publications and datasets on network topology, energy use, economic efficiency and DeFi.", "CIRCULA e la ricerca sulla scadenza e sul rinnovo nelle blockchain. Pubblicazioni e dati su topologie di rete, consumi energetici, efficienza economica e DeFi.")}
   sideBarActiveItemID="research"
 >
   <section class="mb-10">
     <h1 class="text-4xl font-bold mb-4">{t("Research", "Ricerca")}</h1>
 
-    <p class="text-lg leading-relaxed opacity-90">
-      {t("My research focuses on blockchain systems evaluation, distributed infrastructures, digital assets, reproducible experimentation, network-aware benchmarking, energy and efficiency analysis, and the study of performance variability, repeatability, and predictability under controlled experimental conditions.", "Studio come cambiano le prestazioni e i consumi delle blockchain al variare della rete e del carico di lavoro. Uso topologie realistiche in un ambiente controllato per capire quali risultati si ripetono, quanto variano da un esperimento all’altro e quanto sono prevedibili. Una parte del mio lavoro riguarda l’efficienza economica delle criptovalute.")}
-    </p>
+    <div class="space-y-3 text-lg leading-relaxed opacity-90">
+      <p>{t("During my PhD, I studied how network topology and workload affected blockchain performance and energy use. I used realistic network topologies in a controlled environment to measure how results varied across runs and how repeatable and predictable they were. I also studied the economic efficiency of cryptocurrencies.", "Durante il dottorato ho studiato come topologia di rete e carico di lavoro incidessero sulle prestazioni e sui consumi delle blockchain. Ho usato topologie realistiche in un ambiente controllato per capire quanto variassero i risultati da una prova all’altra e quanto fossero ripetibili e prevedibili. Mi sono occupato anche dell’efficienza economica delle criptovalute.")}</p>
+      <p>{t("My next line of research is CIRCULA. We will study how blockchains can represent and enforce expiry and renewal for digital resources.", "Con CIRCULA apro un nuovo filone di ricerca. Studieremo come definire e applicare regole di scadenza e rinnovo per le risorse digitali nelle blockchain.")}</p>
+    </div>
   </section>
 
   <section class="mb-12"><h2 class="text-3xl font-bold mb-5">{t("Research direction", "Nuovo filone di ricerca")}</h2>

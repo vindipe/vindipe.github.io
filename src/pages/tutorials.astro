@@ -1,31 +1,79 @@
 ---
 import { translator } from "../i18n/locale";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import BlockchainKeyConcepts from "../components/tutorials/BlockchainKeyConcepts.astro";
 import BlockchainInteractiveLabs from "../components/tutorials/BlockchainInteractiveLabs.astro";
 import PillsOfBlockchainInstagram from "../components/tutorials/PillsOfBlockchainInstagram.astro";
+import "../styles/tutorials.css";
 
 const t = translator(Astro.url.pathname);
+const perspectives = [
+  {
+    title: t("Technology", "Tecnologia"),
+    description: t(
+      "A database can also replicate its data. In a blockchain, nodes can independently verify updates under shared rules. The history becomes independently verifiable, with extra work to coordinate nodes and agree on updates.",
+      "Anche un database può avere più copie. In una blockchain i nodi possono verificare ciascuno gli aggiornamenti secondo regole comuni. La cronologia è verificabile in autonomia, al costo di coordinare più nodi per concordare gli aggiornamenti."
+    ),
+  },
+  {
+    title: t("Trust and governance", "Fiducia e governance"),
+    description: t(
+      "Participants can check the ledger without asking its operator. Trust shifts towards the protocol and the people who run and change it. Who can participate, validate or change the rules depends on the network.",
+      "I partecipanti possono verificare il registro senza chiedere conferma a chi lo gestisce. La fiducia si sposta sulle regole del protocollo e su chi le applica o le può cambiare. I poteri dipendono da come è organizzata la rete."
+    ),
+  },
+  {
+    title: t("Economics", "Economia"),
+    description: t(
+      "A shared ledger can reduce the work of reconciling records between organisations. It introduces costs for running the network, and some systems charge transaction fees or reward validators. These choices affect who can afford to participate.",
+      "Un registro comune può ridurre il lavoro necessario per riconciliare i conti di organizzazioni diverse. Gestire la rete ha un costo e alcune blockchain prevedono commissioni o ricompense per chi valida. Queste scelte incidono su chi può permettersi di partecipare."
+    ),
+  },
+];
 ---
 
 <BaseLayout
-  title={t("Blockchain 101: Interactive Labs | Vincenzo Di Perna", "Blockchain 101 | Laboratori interattivi | Vincenzo Di Perna")}
-  description={t("Try interactive labs on blockchain fundamentals, including cryptography, wallets, peer-to-peer networks, consensus, smart contracts and scalability.", "Laboratori per capire come funzionano le blockchain, dalla crittografia e dai wallet al consenso, agli smart contract e alla scalabilità.")}
+  title={t("Blockchain 101 | Key Concepts and Interactive Labs | Vincenzo Di Perna", "Blockchain 101 | Concetti chiave e laboratori interattivi | Vincenzo Di Perna")}
+  description={t("Learn what a blockchain is, when it is useful and how it differs from a database. Explore key concepts and try nine interactive labs.", "Scopri cos’è una blockchain, quando serve e che cosa cambia rispetto a un database. Esplora i concetti chiave e prova nove laboratori interattivi.")}
   sideBarActiveItemID="tutorials"
 >
-  <section class="mb-10">
-    <div class="flex flex-wrap gap-2 mb-3">
-      <span class="badge badge-primary">Blockchain 101</span>
-      <span class="badge badge-outline">{t("Fundamentals", "Fondamenti")}</span>
-      <span class="badge badge-outline">{t("Interactive learning", "Laboratori interattivi")}</span>
+  <section class="mb-10" aria-labelledby="blockchain-intro">
+    <h1 class="text-4xl font-bold mb-4" id="blockchain-intro">Blockchain 101</h1>
+    <h2 class="text-2xl font-bold mb-2">{t("What is a blockchain and when is it useful?", "Che cos’è una blockchain e quando serve?")}</h2>
+
+    <div class="max-w-prose space-y-3 leading-relaxed">
+      <p>
+        {t("A blockchain is a shared ledger maintained by a network of computers. Transactions are grouped into blocks. Each block refers to the one before it through a cryptographic fingerprint, so changes to the history are detectable. The network uses a consensus protocol to agree on which history to follow.", "Una blockchain è un registro condiviso e mantenuto da una rete di computer. Le transazioni sono raccolte in blocchi, ciascuno legato al precedente da un’impronta crittografica. Questo legame rende rilevabili le modifiche alla cronologia. Un protocollo di consenso permette alla rete di concordare quale versione del registro seguire.")}
+      </p>
+      <p>
+        {t("Think of several organisations that need to record transfers and verify the same history, with no one organisation in charge of the ledger. A blockchain can give them shared rules for accepting updates. When everyone already trusts one administrator, a database with an audit log is usually simpler, faster and easier to correct.", "Pensa a più organizzazioni che devono registrare trasferimenti e poter verificare la stessa cronologia, senza affidare il registro a una sola di loro. Una blockchain permette di condividere le regole con cui si accettano gli aggiornamenti. Quando tutti si fidano già di un unico gestore, un database con un registro delle modifiche è in genere più semplice, più veloce e più facile da correggere.")}
+      </p>
     </div>
 
-    <h1 class="text-4xl font-bold mb-4">Blockchain 101</h1>
+    <div class="mt-4 grid gap-2 sm:grid-cols-3">
+      {perspectives.map(({ title, description }) => (
+        <div class="rounded-xl border border-base-300 border-t-2 border-t-primary bg-base-100 p-3">
+          <h3 class="mb-1 font-semibold">{title}</h3>
+          <p class="text-sm leading-relaxed opacity-90">{description}</p>
+        </div>
+      ))}
+    </div>
 
-    <p class="text-lg leading-relaxed opacity-90">
-      {t("A learning area for understanding blockchain systems through interactive explanations, small simulations, visual examples, and practical mental models. The goal is to make cryptography, peer-to-peer networks, consensus, smart contracts, and blockchain infrastructure easier to explore by playing with them.", "Che cosa succede quando firmi una transazione? Come si mettono d’accordo i nodi? Le simulazioni ti permettono di provare in prima persona i meccanismi della crittografia, delle reti peer-to-peer, del consenso e degli smart contract.")}
+    <p class="mt-3 text-sm">
+      {t("Further reading", "Per approfondire")}
+      <span aria-hidden="true"> · </span>
+      <a class="link" href="https://csrc.nist.gov/pubs/ir/8202/final">NIST IR 8202</a>
+      <span aria-hidden="true"> · </span>
+      <a class="link" href="https://www.research-collection.ethz.ch/entities/publication/5d4f315f-68a9-4a5a-a345-316df0eb2655">Do you need a blockchain?</a>
     </p>
+
+    <nav class="mt-4 flex flex-wrap gap-2" aria-label={t("On this page", "In questa pagina")}>
+      <a class="btn btn-sm btn-outline" href="#blockchain-concepts">{t("Key concepts", "Concetti chiave")}</a>
+      <a class="btn btn-sm btn-outline" href="#blockchain-interactive-labs">{t("Interactive labs", "Laboratori interattivi")}</a>
+    </nav>
   </section>
 
+  <BlockchainKeyConcepts />
   <BlockchainInteractiveLabs />
 
   <PillsOfBlockchainInstagram />

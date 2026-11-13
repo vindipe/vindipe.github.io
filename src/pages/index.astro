@@ -14,8 +14,8 @@ const latestWorks = getRecentWorks(Astro.url.pathname)
 ---
 
 <BaseLayout
-  title={t("Vincenzo Di Perna | Research Software Engineer", "Vincenzo Di Perna | Ingegnere del software per la ricerca")}
-  description={t("Vincenzo Di Perna works on distributed systems, blockchain benchmarking and reproducible experiments. Explore publications, tools and research projects.", "Vincenzo Di Perna, ingegnere del software per la ricerca. Sviluppo strumenti per studiare le blockchain e i sistemi distribuiti con esperimenti riproducibili.")}
+  title={t("Vincenzo Di Perna | Research Software Engineer", "Vincenzo Di Perna | Ingegnere del software")}
+  description={t("Vincenzo Di Perna, research software engineer. Previous work on blockchain benchmarking and reproducible experiments, with a new research direction on expiry and renewal through CIRCULA.", "Vincenzo Di Perna, ingegnere del software. Dalla valutazione sperimentale delle blockchain alla ricerca su scadenza e rinnovo con CIRCULA.")}
   sideBarActiveItemID="home"
   ogImage="/og/vincenzo-di-perna-og.png"
 >
@@ -25,18 +25,16 @@ const latestWorks = getRecentWorks(Astro.url.pathname)
         <h1>
           <span class="block text-5xl font-bold leading-tight">Vincenzo Di Perna</span>
           <span class="block text-3xl py-3 font-bold">
-            {t("Research Software Engineer", "Ingegnere del software per la ricerca")}<br />
-            {t("Distributed Systems, Blockchain & DLT", "Sistemi distribuiti, blockchain e registri distribuiti (DLT)")}
+            {t("Research Software Engineer", "Ingegnere del software")}<br />
+            {t("Distributed Systems, Blockchain & DLT", "Sistemi distribuiti, blockchain e DLT")}
           </span>
         </h1>
 
-        <p class="py-2 text-lg leading-relaxed max-w-3xl">
-          {t("I hold a PhD in Blockchain & DLT, working at the intersection of distributed systems, blockchain benchmarking, reproducible experimentation, protocol evaluation, and digital-asset analytics.", "Ho un dottorato in blockchain e tecnologie a registro distribuito. Sviluppo strumenti per mettere alla prova i protocolli, ripetere gli esperimenti e analizzare i dati degli asset digitali.")}<br
-          />
-          {t("My work focuses on understanding how blockchain technology can reshape today’s traditional and digital infrastructures, and how these systems behave under realistic evaluation conditions involving networks, workloads, protocols, performance, energy use, repeatability, predictability, and economic efficiency.", "Mi interessa capire come le blockchain possano cambiare le infrastrutture esistenti e come si comportino fuori dalle condizioni ideali. Per questo confronto reti, carichi di lavoro e protocolli diversi e ne misuro gli effetti sulle prestazioni, sui consumi e sull’efficienza economica. Studio anche quanto siano ripetibili e prevedibili i risultati.")}<br
-          />
-          {t("From 1 February 2027, I will join the University of Neuchâtel as a postdoctoral researcher and scientific coordinator of CIRCULA, a new SNSF-funded project studying expiry and renewal in blockchain systems.", "Dal 1° febbraio 2027 è previsto il mio ingresso all’Università di Neuchâtel come ricercatore post-dottorale e coordinatore scientifico di CIRCULA. Il progetto, finanziato dal Fondo nazionale svizzero, studierà come gestire la scadenza e il rinnovo delle risorse digitali nelle blockchain.")}
-        </p>
+        <div class="space-y-3 py-2 text-lg leading-relaxed max-w-3xl">
+          <p>{t("I hold a PhD in blockchain. I worked on tools for testing blockchain protocols, on experimental repeatability and predictability, and on digital asset data analysis.", "Ho un dottorato (PhD) in blockchain. Ho lavorato allo sviluppo di strumenti per testare i protocolli blockchain, alla ripetibilità degli esperimenti e alla prevedibilità dei risultati, e all'analisi di dati riguardanti gli asset digitali.")}</p>
+          <p>{t("I’m interested in how blockchains can reshape existing infrastructure and how they behave outside ideal conditions. In my doctoral research, I compared networks, workloads and protocols and measured their effects on performance, energy consumption and economic efficiency.", "Mi interessa capire come le blockchain possano cambiare le infrastrutture esistenti e come si comportino fuori dalle condizioni ideali. Per questo confronto reti, carichi di lavoro e protocolli diversi e ne misuro gli effetti sulle prestazioni, sui consumi e sull’efficienza economica.")}</p>
+          <p>{t("I expect to join the University of Neuchâtel on 1 February 2027 as a postdoctoral researcher and scientific coordinator of CIRCULA. Funded by the Swiss National Science Foundation (SNSF), the project will study how digital resources expire and can be renewed in blockchain systems.", "Dal 1° febbraio 2027 è previsto il mio ingresso all’Università di Neuchâtel come ricercatore post-dottorale e coordinatore scientifico di CIRCULA. Il progetto, finanziato dal Fondo nazionale svizzero (FNS), studierà come gestire la scadenza e il rinnovo delle risorse digitali nelle blockchain.")}</p>
+        </div>
 
         <div class="mt-8 flex flex-wrap gap-3">
           <a class="btn btn-primary" href={localPath("/projects")}>
@@ -88,17 +86,7 @@ const latestWorks = getRecentWorks(Astro.url.pathname)
   </section>
 
   <section class="mb-12">
-    <div
-      class="flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-5"
-    >
-      <div>
-        <h2 class="text-3xl w-full font-bold">{t("Recent uploads", "Ultimi aggiornamenti")}</h2>
-
-        <p class="mt-2 opacity-80">
-          {t("Latest research pages, publications, thesis work, artifacts, and technical outputs added to the site.", "Le novità del sito, dalle pubblicazioni e dalle tesi ai progetti e agli strumenti di ricerca.")}
-        </p>
-      </div>
-    </div>
+    <h2 class="text-3xl font-bold mb-5">{t("Recent uploads", "Ultimi aggiornamenti")}</h2>
 
     <div class="space-y-4">
       {

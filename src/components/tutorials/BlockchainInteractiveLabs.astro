@@ -13,251 +13,170 @@ import FeesScalabilityLab from "./tools/FeesScalabilityLab.astro";
 
 const t = translator(Astro.url.pathname);
 
-
 const labs = [
   {
     id: "crypto",
     title: t("Cryptography playground", "Laboratorio di crittografia"),
-    status: t("Playable", "Interattivo"),
-    desc: t("Understand hashing, tamper detection, and why blocks can be linked through cryptographic fingerprints.", "Prova a cambiare i dati di una transazione e osserva come l’hash rivela la modifica. Scopri come gli hash collegano i blocchi."),
-    tags: [t("Hashing", "Calcolo degli hash"), t("Tamper detection", "Rilevamento delle alterazioni"), t("Block links", "Collegamenti tra blocchi")],
+    description: t("Understand hashing, tamper detection, and why blocks can be linked through cryptographic fingerprints.", "Prova a cambiare i dati di una transazione e osserva come l’hash rivela la modifica. Scopri come gli hash collegano i blocchi."),
+    Tool: CryptoPlayground,
+    guide: {
+      context: t("Blockchains use cryptographic hashes to fingerprint data and digital signatures to prove that an action was authorized by the holder of a private key.", "Le blockchain usano gli hash come impronte crittografiche dei dati e le firme digitali per dimostrare che il titolare di una chiave privata ha autorizzato un’azione."),
+      howToPlay: t("Edit the transaction text, compute its hash, mine a toy block, and then tamper with the data.", "Cambia il testo della transazione, calcola l’hash, prova a minare un blocco e poi modificane i dati."),
+      observe: t("A tiny input change produces a completely different hash. This is why tampering becomes visible when blocks and transactions are fingerprinted.", "Basta cambiare un carattere per ottenere un hash completamente diverso. È così che ci si accorge se i dati di un blocco o di una transazione sono stati modificati."),
+      nextStep: t("After hashes, open Wallets, keys & ownership to understand how users authorize transactions.", "Nel laboratorio Wallet, chiavi e firme puoi provare ad autorizzare una transazione."),
+    },
   },
   {
     id: "wallets",
     title: t("Wallets, keys & ownership", "Wallet, chiavi e firme"),
-    status: t("Playable", "Interattivo"),
-    desc: t("See how private keys, public keys, addresses, and signatures connect users to blockchain assets.", "Scopri come si usano chiavi, indirizzi e firme digitali per autorizzare le transazioni."),
-    tags: [t("Wallets", "Wallet"), t("Keys", "Chiavi"), t("Signatures", "Firme")],
+    description: t("See how private keys, public keys, addresses, and signatures connect users to blockchain assets.", "Scopri come si usano chiavi, indirizzi e firme digitali per autorizzare le transazioni."),
+    Tool: WalletKeysLab,
+    guide: {
+      context: t("A wallet does not literally store coins. It manages keys. The private key authorizes actions, the public key helps verify signatures, and the address identifies an account or destination.", "La chiave privata serve a firmare le operazioni. Con quella pubblica puoi verificare la firma. L’indirizzo identifica il conto o la destinazione di una transazione."),
+      howToPlay: t("Generate a toy identity, sign a transaction, then try to verify it or tamper with the message.", "Crea un wallet di prova e firma una transazione. Modifica poi il messaggio e prova a verificare di nuovo la firma."),
+      observe: t("The same signature only works for the original message and the matching public identity. If the message changes, verification fails.", "La firma è valida solo per il messaggio originale e l’identità pubblica corrispondente. Se modifichi il messaggio, la verifica fallisce."),
+      nextStep: t("After signatures, open Quantum & blockchain impact to see why future quantum computers matter for some signature schemes.", "Nel laboratorio Calcolo quantistico e blockchain scopri quali schemi di firma sono più esposti."),
+    },
   },
   {
     id: "p2p",
     title: t("P2P network simulator", "Simulatore di rete P2P"),
-    status: t("Playable", "Interattivo"),
-    desc: t("Move nodes, remove peers, split the network, and broadcast a transaction across a distributed network.", "Sposta o scollega i nodi e guarda fin dove arriva una transazione quando la rete si divide."),
-    tags: [t("Nodes", "Nodi"), t("Links", "Collegamenti"), t("Propagation", "Propagazione")],
+    description: t("Move nodes, remove peers, split the network, and broadcast a transaction across a distributed network.", "Sposta o scollega i nodi e guarda fin dove arriva una transazione quando la rete si divide."),
+    Tool: P2PNetworkPlayground,
+    guide: {
+      context: t("A blockchain network is a peer-to-peer system: transactions and blocks must propagate across many nodes before the network can converge on a shared view.", "Transazioni e blocchi passano da un nodo all’altro. I nodi usano le informazioni ricevute per arrivare a una versione condivisa del registro."),
+      howToPlay: t("Select a node, drag nodes around, remove a node, create a partition, and broadcast a transaction.", "Trascina i nodi per spostarli, rimuovine uno o dividi la rete. Poi invia una transazione."),
+      observe: t("Connectivity affects propagation. If nodes are offline or the network splits, some peers may not receive the transaction.", "Se alcuni nodi sono offline o la rete si divide, la transazione può raggiungere solo una parte dei nodi."),
+      nextStep: t("After propagation, open Consensus game to see how validators agree on blocks.", "Nel Simulatore di consenso puoi vedere come i validatori si mettono d’accordo su un blocco."),
+    },
   },
   {
     id: "consensus",
     title: t("Consensus game", "Simulatore di consenso"),
-    status: t("Playable", "Interattivo"),
-    desc: t("Simulate validators voting on blocks and see why failures, delays, and quorum thresholds matter.", "Fai votare i validatori e osserva che cosa cambia quando alcuni nodi sono in ritardo o smettono di rispondere."),
-    tags: [t("Validators", "Validatori"), t("Votes", "Voti"), t("Finality", "Conferma definitiva")],
+    description: t("Simulate validators voting on blocks and see why failures, delays, and quorum thresholds matter.", "Fai votare i validatori e osserva che cosa cambia quando alcuni nodi sono in ritardo o smettono di rispondere."),
+    Tool: ConsensusGame,
+    guide: {
+      context: t("Consensus protocols let distributed validators agree on which block becomes part of the chain, even when some validators are offline, delayed, or faulty.", "I protocolli di consenso permettono ai validatori di concordare quale blocco aggiungere alla catena anche quando alcuni sono offline, in ritardo o si comportano in modo anomalo."),
+      howToPlay: t("Toggle validators between honest, offline, and faulty states, then propose a block.", "Metti alcuni validatori offline o simula un guasto, poi proponi un blocco."),
+      observe: t("Finality requires enough valid votes. If too many validators fail, the block cannot be finalized.", "Il blocco diventa definitivo quando raggiunge il numero minimo di voti validi. Se troppi validatori smettono di votare correttamente, il blocco resta in sospeso."),
+      nextStep: t("After consensus, open Public vs permissioned networks to compare different validator-access models.", "Passa a Reti pubbliche e ad accesso autorizzato per confrontare chi può validare nei due modelli."),
+    },
   },
   {
     id: "smart-contract",
     title: t("Smart contract sandbox", "Laboratorio di smart contract"),
-    status: t("Playable", "Interattivo"),
-    desc: t("Interact with a tiny contract state machine to understand balances, rules, and deterministic execution.", "Prova a trasferire dei token. Le regole del contratto stabiliscono se aggiornare i saldi."),
-    tags: [t("State", "Stato"), t("Rules", "Regole"), t("Execution", "Esecuzione")],
+    description: t("Interact with a tiny contract state machine to understand balances, rules, and deterministic execution.", "Prova a trasferire dei token. Le regole del contratto stabiliscono se aggiornare i saldi."),
+    Tool: SmartContractSandbox,
+    guide: {
+      context: t("A smart contract is code that updates blockchain state according to predefined rules. Every node must be able to reproduce the same result.", "Uno smart contract aggiorna lo stato della blockchain secondo regole predefinite. Ogni nodo deve poter ottenere lo stesso risultato."),
+      howToPlay: t("Choose sender, receiver, and amount. Execute valid and invalid transfers.", "Scegli mittente, destinatario e importo. Prova anche a inviare più token di quanti ne abbia il mittente."),
+      observe: t("The contract changes state only when its rules are satisfied. Invalid transactions are rejected.", "Il contratto aggiorna i saldi solo quando il trasferimento rispetta le sue regole."),
+      nextStep: t("After contract execution, open Fees, blockspace & scalability to understand why execution capacity is limited.", "Passa a Commissioni, capacità dei blocchi e scalabilità per capire perché la capacità di esecuzione è limitata."),
+    },
   },
   {
     id: "permissioned",
     title: t("Public vs permissioned networks", "Reti pubbliche e ad accesso autorizzato"),
-    status: t("Playable", "Interattivo"),
-    desc: t("Compare open and controlled blockchain networks by changing who can join, validate, read, and govern.", "Confronta i due modelli di rete: chi può partecipare, validare le transazioni, leggere i dati o prendere decisioni?"),
-    tags: [t("Access", "Accesso"), "Governance", t("Validation", "Convalida")],
+    description: t("Compare open and controlled blockchain networks by changing who can join, validate, read, and govern.", "Confronta i due modelli di rete: chi può partecipare, validare le transazioni, leggere i dati o prendere decisioni?"),
+    Tool: PublicPermissionedLab,
+    guide: {
+      context: t("Not all blockchains are open in the same way. Public systems prioritize open participation, while permissioned systems restrict who can join, validate, or read.", "Nelle reti pubbliche la partecipazione è aperta. In quelle ad accesso autorizzato possono servire permessi per entrare, convalidare o leggere."),
+      howToPlay: t("Switch between public and permissioned modes, then test joining, validating, and reading.", "Prova le stesse operazioni nei due tipi di rete e osserva quali richiedono un’autorizzazione."),
+      observe: t("The trust model changes depending on who controls access and validation.", "Chiediti di chi bisogna fidarsi nei due casi e chi può concedere i permessi."),
+      nextStep: t("After access models, open Tokens, incentives & ownership to see how economic power can concentrate.", "Passa a Token, incentivi e proprietà per vedere come si concentra il potere economico."),
+    },
   },
   {
     id: "tokens",
     title: t("Tokens, incentives & ownership", "Token, incentivi e proprietà"),
-    status: t("Playable", "Interattivo"),
-    desc: t("Explore token distribution, rewards, concentration, and how incentives can affect ownership structures.", "Distribuisci i token in modi diversi e osserva come cambiano le quote dei partecipanti."),
-    tags: ["Tokenomics", t("Incentives", "Incentivi"), t("Concentration", "Concentrazione")],
+    description: t("Explore token distribution, rewards, concentration, and how incentives can affect ownership structures.", "Distribuisci i token in modi diversi e osserva come cambiano le quote dei partecipanti."),
+    Tool: TokenOwnershipLab,
+    guide: {
+      context: t("Tokens can represent value, governance power, access rights, rewards, or ownership claims. Their distribution affects decentralization and economic power.", "I token possono rappresentare valore, potere decisionale, diritti di accesso, ricompense o proprietà. La loro distribuzione incide sulla decentralizzazione e sul potere economico."),
+      howToPlay: t("Trigger an equal airdrop, whale accumulation, or staking rewards.", "Distribuisci la stessa quantità di token a tutti, aumenta la quota di un grande detentore o simula le ricompense per lo staking."),
+      observe: t("Some mechanisms preserve concentration, while others can spread or concentrate ownership.", "Confronta le quote prima e dopo ogni operazione per capire quando la proprietà si concentra."),
+      nextStep: t("After ownership, open Fees, blockspace & scalability to see how demand and fees affect users.", "Passa a Commissioni, capacità dei blocchi e scalabilità per vedere come domanda e commissioni incidono sugli utenti."),
+    },
   },
   {
     id: "fees",
     title: t("Fees, blockspace & scalability", "Commissioni, capacità dei blocchi e scalabilità"),
-    status: t("Playable", "Interattivo"),
-    desc: t("Experiment with transaction demand, block capacity, fees, congestion, and throughput limits.", "Cambia il numero di transazioni e lo spazio disponibile nei blocchi. Osserva quali operazioni entrano e quali restano in attesa."),
-    tags: [t("Fees", "Commissioni"), t("Blockspace", "Spazio nei blocchi"), t("Scalability", "Scalabilità")],
+    description: t("Experiment with transaction demand, block capacity, fees, congestion, and throughput limits.", "Cambia il numero di transazioni e lo spazio disponibile nei blocchi. Osserva quali operazioni entrano e quali restano in attesa."),
+    Tool: FeesScalabilityLab,
+    guide: {
+      context: t("Blockchains have limited capacity. When transaction demand exceeds available blockspace, users compete through fees and some transactions are delayed.", "Quando le transazioni richieste superano lo spazio disponibile nei blocchi, gli utenti competono tramite le commissioni e alcune operazioni subiscono ritardi."),
+      howToPlay: t("Change transaction demand, block capacity, and average fee willingness.", "Cambia il numero di transazioni, lo spazio nei blocchi e la commissione media che gli utenti accettano di pagare."),
+      observe: t("Congestion increases when demand exceeds capacity. Higher fee pressure can prioritize some transactions while pricing out others.", "Quando la domanda supera la capacità, la congestione cresce. Le commissioni più alte possono dare priorità ad alcune operazioni ed escluderne altre."),
+      nextStep: t("After fees, explore smart contracts or consensus again to connect execution, capacity, and finality.", "Torna ai laboratori sugli smart contract o sul consenso per vedere come si passa dall’esecuzione alla conferma."),
+    },
   },
   {
     id: "quantum",
     title: t("Quantum & blockchain impact", "Calcolo quantistico e blockchain"),
-    status: t("Playable", "Interattivo"),
-    desc: t("Understand what quantum computing could affect, what it would not magically break, and why post-quantum migration matters.", "Scopri quali firme potrebbero diventare vulnerabili con computer quantistici abbastanza potenti e che cosa comporterebbe sostituirle."),
-    tags: [t("Quantum", "Calcolo quantistico"), t("Signatures", "Firme"), "PQC"],
+    description: t("Understand what quantum computing could affect, what it would not magically break, and why post-quantum migration matters.", "Scopri quali firme potrebbero diventare vulnerabili con computer quantistici abbastanza potenti e che cosa comporterebbe sostituirle."),
+    Tool: QuantumBlockchainLab,
+    guide: {
+      context: t("Quantum computing would not automatically destroy every part of a blockchain. The main concern is that sufficiently powerful quantum computers could threaten some classical digital signature schemes, while hashes are affected differently.", "Un computer quantistico abbastanza potente potrebbe mettere a rischio alcuni schemi di firma digitale. Per gli hash le conseguenze sono diverse."),
+      howToPlay: t("Switch between blockchain components and attacker scenarios to see which parts are exposed and which mitigations are possible.", "Scegli un componente e uno scenario, poi osserva il livello di rischio e le possibili contromisure."),
+      observe: t("Signatures, exposed public keys, validator keys, and migration strategy matter more than vague claims that quantum computers break all blockchain security.", "Osserva firme, chiavi pubbliche esposte, chiavi dei validatori e strategie di migrazione per capire quali rischi riguardano ciascun componente."),
+      nextStep: t("After this, revisit Wallets, keys & ownership and Cryptography playground to connect keys, signatures, hashes, and post-quantum migration.", "Nei laboratori Wallet, chiavi e firme e Laboratorio di crittografia puoi rivedere il ruolo di chiavi, firme e hash."),
+    },
   },
 ];
 ---
 
-<section id="blockchain-interactive-labs" class="mb-12">
-  <h2 class="text-3xl font-bold mb-2">{t("Blockchain fundamentals - interactive labs", "Laboratori interattivi sulle blockchain")}</h2>
+<section id="blockchain-interactive-labs" class="tutorial-section mb-12" aria-labelledby="blockchain-labs-title">
+  <h2 class="text-3xl font-bold mb-4" id="blockchain-labs-title">{t("Interactive labs", "Laboratori interattivi")}</h2>
 
-  <p class="mb-5 opacity-80">
-    {t("Select a topic to open its guided interactive tool below. Each lab explains where the concept appears inside a blockchain, how to use the simulator, what to observe, and what to explore next.", "Scegli un argomento e prova il simulatore. La guida ti spiega che cosa cambiare, che cosa osservare e come continuare.")}
-  </p>
-
-  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
-    {
-      labs.map((lab, index) => (
-        <button
-          type="button"
-          class:list={[
-            "network-protected card bg-base-100 shadow-md text-left transition hover:shadow-2xl hover:scale-[101%]",
-            index === 0 ? "ring-2 ring-primary" : "",
-          ]}
-          data-lab-card={lab.id}
-          aria-expanded={index === 0 ? "true" : "false"}
-        >
-          <div class="card-body">
-            <div class="flex flex-wrap gap-2 items-center">
-              <h3 class="card-title">{lab.title}</h3>
-              <span class="badge badge-secondary">{lab.status}</span>
-            </div>
-
-            <p>{lab.desc}</p>
-
-            <div class="card-actions justify-end mt-2">
-              {lab.tags.map((tag) => (
-                <span class="badge badge-outline">{tag}</span>
-              ))}
-            </div>
-          </div>
-        </button>
-      ))
-    }
-  </div>
-
-  <div class="rounded-2xl border border-base-300 bg-base-200 p-3 md:p-5">
-    <div data-lab-panel="crypto">
-      <LabGuide
-        title={t("Cryptography playground", "Laboratorio di crittografia")}
-        context={t("Blockchains use cryptographic hashes to fingerprint data and digital signatures to prove that an action was authorized by the holder of a private key.", "Le blockchain usano gli hash come impronte crittografiche dei dati e le firme digitali per dimostrare che il titolare di una chiave privata ha autorizzato un’azione.")}
-        howToPlay={t("Edit the transaction text, compute its hash, mine a toy block, and then tamper with the data.", "Cambia il testo della transazione, calcola l’hash, prova a minare un blocco e poi modificane i dati.")}
-        observe={t("A tiny input change produces a completely different hash. This is why tampering becomes visible when blocks and transactions are fingerprinted.", "Basta cambiare un carattere per ottenere un hash completamente diverso. È così che ci si accorge se i dati di un blocco o di una transazione sono stati modificati.")}
-        nextStep={t("After hashes, open Wallets, keys & ownership to understand how users authorize transactions.", "Nel laboratorio Wallet, chiavi e firme puoi provare ad autorizzare una transazione.")}
-      />
-      <CryptoPlayground />
-    </div>
-
-    <div data-lab-panel="wallets" hidden>
-      <LabGuide
-        title={t("Wallets, keys & ownership", "Wallet, chiavi e firme")}
-        context={t("A wallet does not literally store coins. It manages keys. The private key authorizes actions, the public key helps verify signatures, and the address identifies an account or destination.", "La chiave privata serve a firmare le operazioni. Con quella pubblica puoi verificare la firma. L’indirizzo identifica il conto o la destinazione di una transazione.")}
-        howToPlay={t("Generate a toy identity, sign a transaction, then try to verify it or tamper with the message.", "Crea un wallet di prova e firma una transazione. Modifica poi il messaggio e prova a verificare di nuovo la firma.")}
-        observe={t("The same signature only works for the original message and the matching public identity. If the message changes, verification fails.", "La firma è valida solo per il messaggio originale e l’identità pubblica corrispondente. Se modifichi il messaggio, la verifica fallisce.")}
-        nextStep={t("After signatures, open Quantum & blockchain impact to see why future quantum computers matter for some signature schemes.", "Nel laboratorio Calcolo quantistico e blockchain scopri quali schemi di firma sono più esposti.")}
-      />
-      <WalletKeysLab />
-    </div>
-
-    <div data-lab-panel="p2p" hidden>
-      <LabGuide
-        title={t("P2P network simulator", "Simulatore di rete P2P")}
-        context={t("A blockchain network is a peer-to-peer system: transactions and blocks must propagate across many nodes before the network can converge on a shared view.", "Transazioni e blocchi passano da un nodo all’altro. I nodi usano le informazioni ricevute per arrivare a una versione condivisa del registro.")}
-        howToPlay={t("Select a node, drag nodes around, remove a node, create a partition, and broadcast a transaction.", "Trascina i nodi per spostarli, rimuovine uno o dividi la rete. Poi invia una transazione.")}
-        observe={t("Connectivity affects propagation. If nodes are offline or the network splits, some peers may not receive the transaction.", "Se alcuni nodi sono offline o la rete si divide, la transazione può raggiungere solo una parte dei nodi.")}
-        nextStep={t("After propagation, open Consensus game to see how validators agree on blocks.", "Nel Simulatore di consenso puoi vedere come i validatori si mettono d’accordo su un blocco.")}
-      />
-      <P2PNetworkPlayground />
-    </div>
-
-    <div data-lab-panel="consensus" hidden>
-      <LabGuide
-        title={t("Consensus game", "Simulatore di consenso")}
-        context={t("Consensus protocols let distributed validators agree on which block becomes part of the chain, even when some validators are offline, delayed, or faulty.", "I protocolli di consenso permettono ai validatori di concordare quale blocco aggiungere alla catena anche quando alcuni sono offline, in ritardo o si comportano in modo anomalo.")}
-        howToPlay={t("Toggle validators between honest, offline, and faulty states, then propose a block.", "Metti alcuni validatori offline o simula un guasto, poi proponi un blocco.")}
-        observe={t("Finality requires enough valid votes. If too many validators fail, the block cannot be finalized.", "Il blocco diventa definitivo quando raggiunge il numero minimo di voti validi. Se troppi validatori smettono di votare correttamente, il blocco resta in sospeso.")}
-        nextStep={t("After consensus, open Public vs permissioned networks to compare different validator-access models.", "Passa a Reti pubbliche e ad accesso autorizzato per confrontare chi può validare nei due modelli.")}
-      />
-      <ConsensusGame />
-    </div>
-
-    <div data-lab-panel="smart-contract" hidden>
-      <LabGuide
-        title={t("Smart contract sandbox", "Laboratorio di smart contract")}
-        context={t("A smart contract is code that updates blockchain state according to predefined rules. Every node must be able to reproduce the same result.", "Uno smart contract aggiorna lo stato della blockchain secondo regole predefinite. Ogni nodo deve poter ottenere lo stesso risultato.")}
-        howToPlay={t("Choose sender, receiver, and amount. Execute valid and invalid transfers.", "Scegli mittente, destinatario e importo. Prova anche a inviare più token di quanti ne abbia il mittente.")}
-        observe={t("The contract changes state only when its rules are satisfied. Invalid transactions are rejected.", "Il contratto aggiorna i saldi solo quando il trasferimento rispetta le sue regole.")}
-        nextStep={t("After contract execution, open Fees, blockspace & scalability to understand why execution capacity is limited.", "Passa a Commissioni, capacità dei blocchi e scalabilità per capire perché la capacità di esecuzione è limitata.")}
-      />
-      <SmartContractSandbox />
-    </div>
-
-    <div data-lab-panel="permissioned" hidden>
-      <LabGuide
-        title={t("Public vs permissioned networks", "Reti pubbliche e ad accesso autorizzato")}
-        context={t("Not all blockchains are open in the same way. Public systems prioritize open participation, while permissioned systems restrict who can join, validate, or read.", "Nelle reti pubbliche la partecipazione è aperta. In quelle ad accesso autorizzato possono servire permessi per entrare, convalidare o leggere.")}
-        howToPlay={t("Switch between public and permissioned modes, then test joining, validating, and reading.", "Prova le stesse operazioni nei due tipi di rete e osserva quali richiedono un’autorizzazione.")}
-        observe={t("The trust model changes depending on who controls access and validation.", "Chiediti di chi bisogna fidarsi nei due casi e chi può concedere i permessi.")}
-        nextStep={t("After access models, open Tokens, incentives & ownership to see how economic power can concentrate.", "Passa a Token, incentivi e proprietà per vedere come si concentra il potere economico.")}
-      />
-      <PublicPermissionedLab />
-    </div>
-
-    <div data-lab-panel="tokens" hidden>
-      <LabGuide
-        title={t("Tokens, incentives & ownership", "Token, incentivi e proprietà")}
-        context={t("Tokens can represent value, governance power, access rights, rewards, or ownership claims. Their distribution affects decentralization and economic power.", "I token possono rappresentare valore, potere decisionale, diritti di accesso, ricompense o proprietà. La loro distribuzione incide sulla decentralizzazione e sul potere economico.")}
-        howToPlay={t("Trigger an equal airdrop, whale accumulation, or staking rewards.", "Distribuisci la stessa quantità di token a tutti, aumenta la quota di un grande detentore o simula le ricompense per lo staking.")}
-        observe={t("Some mechanisms preserve concentration, while others can spread or concentrate ownership.", "Confronta le quote prima e dopo ogni operazione per capire quando la proprietà si concentra.")}
-        nextStep={t("After ownership, open Fees, blockspace & scalability to see how demand and fees affect users.", "Passa a Commissioni, capacità dei blocchi e scalabilità per vedere come domanda e commissioni incidono sugli utenti.")}
-      />
-      <TokenOwnershipLab />
-    </div>
-
-    <div data-lab-panel="fees" hidden>
-      <LabGuide
-        title={t("Fees, blockspace & scalability", "Commissioni, capacità dei blocchi e scalabilità")}
-        context={t("Blockchains have limited capacity. When transaction demand exceeds available blockspace, users compete through fees and some transactions are delayed.", "Quando le transazioni richieste superano lo spazio disponibile nei blocchi, gli utenti competono tramite le commissioni e alcune operazioni subiscono ritardi.")}
-        howToPlay={t("Change transaction demand, block capacity, and average fee willingness.", "Cambia il numero di transazioni, lo spazio nei blocchi e la commissione media che gli utenti accettano di pagare.")}
-        observe={t("Congestion increases when demand exceeds capacity. Higher fee pressure can prioritize some transactions while pricing out others.", "Quando la domanda supera la capacità, la congestione cresce. Le commissioni più alte possono dare priorità ad alcune operazioni ed escluderne altre.")}
-        nextStep={t("After fees, explore smart contracts or consensus again to connect execution, capacity, and finality.", "Torna ai laboratori sugli smart contract o sul consenso per vedere come si passa dall’esecuzione alla conferma.")}
-      />
-      <FeesScalabilityLab />
-    </div>
-
-    <div data-lab-panel="quantum" hidden>
-      <LabGuide
-        title={t("Quantum & blockchain impact", "Calcolo quantistico e blockchain")}
-        context={t("Quantum computing would not automatically destroy every part of a blockchain. The main concern is that sufficiently powerful quantum computers could threaten some classical digital signature schemes, while hashes are affected differently.", "Un computer quantistico abbastanza potente potrebbe mettere a rischio alcuni schemi di firma digitale. Per gli hash le conseguenze sono diverse.")}
-        howToPlay={t("Switch between blockchain components and attacker scenarios to see which parts are exposed and which mitigations are possible.", "Scegli un componente e uno scenario, poi osserva il livello di rischio e le possibili contromisure.")}
-        observe={t("Signatures, exposed public keys, validator keys, and migration strategy matter more than vague claims that quantum computers break all blockchain security.", "Osserva firme, chiavi pubbliche esposte, chiavi dei validatori e strategie di migrazione per capire quali rischi riguardano ciascun componente.")}
-        nextStep={t("After this, revisit Wallets, keys & ownership and Cryptography playground to connect keys, signatures, hashes, and post-quantum migration.", "Nei laboratori Wallet, chiavi e firme e Laboratorio di crittografia puoi rivedere il ruolo di chiavi, firme e hash.")}
-      />
-      <QuantumBlockchainLab />
-    </div>
+  <div class="grid gap-2">
+    {labs.map(({ id, title, description, Tool, guide }) => (
+      <details id={`lab-${id}`} name="blockchain-lab" class="tutorial-disclosure lab-disclosure tutorial-section group/lab network-protected rounded-xl border border-base-300 bg-base-100 open:border-primary">
+        <summary class="flex min-h-12 items-center justify-between gap-3 rounded-xl p-3 transition-colors hover:bg-base-200 group-open/lab:bg-primary group-open/lab:text-primary-content">
+          <span class="min-w-0">
+            <span class="block font-semibold" id={`lab-title-${id}`}>{title}</span>
+            <span class="mt-0.5 block text-sm leading-snug">{description}</span>
+          </span>
+          <span class="tutorial-disclosure-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="tutorial-disclosure-content">
+          <Tool labelledBy={`lab-title-${id}`} />
+          <LabGuide {...guide} />
+        </div>
+      </details>
+    ))}
   </div>
 </section>
 
 <script>
-  function initBlockchainInteractiveLabs() {
-    const root = document.querySelector("#blockchain-interactive-labs");
+  function openLinkedLab(hash: string) {
+    const lab = document.getElementById(hash.slice(1));
+    if (!(lab instanceof HTMLDetailsElement) || !lab.matches(".lab-disclosure")) return;
 
-    if (!root || root.dataset.initialized === "true") {
-      return;
-    }
+    lab.open = true;
+    requestAnimationFrame(() => lab.scrollIntoView({ block: "start" }));
+  }
 
-    root.dataset.initialized = "true";
+  document.addEventListener("astro:page-load", () => openLinkedLab(window.location.hash));
+  window.addEventListener("hashchange", () => openLinkedLab(window.location.hash));
 
-    const cards = root.querySelectorAll("[data-lab-card]");
-    const panels = root.querySelectorAll("[data-lab-panel]");
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element)) return;
 
-    function activateLab(labId) {
-      cards.forEach((card) => {
-        const isActive = card.getAttribute("data-lab-card") === labId;
-        card.classList.toggle("ring-2", isActive);
-        card.classList.toggle("ring-primary", isActive);
-        card.setAttribute("aria-expanded", isActive ? "true" : "false");
-      });
+    const link = event.target.closest<HTMLAnchorElement>('a[href^="#lab-"]');
+    if (link?.hash === window.location.hash) openLinkedLab(link.hash);
 
-      panels.forEach((panel) => {
-        panel.hidden = panel.getAttribute("data-lab-panel") !== labId;
-      });
-    }
+    const summary = event.target.closest(".lab-disclosure > summary");
+    const lab = summary?.parentElement;
+    if (!(lab instanceof HTMLDetailsElement) || lab.open) return;
 
-    cards.forEach((card) => {
-      card.addEventListener("click", () => {
-        activateLab(card.getAttribute("data-lab-card"));
-      });
+    requestAnimationFrame(() => {
+      if (!lab.open) return;
+      const bounds = lab.getBoundingClientRect();
+      const top = Number.parseFloat(getComputedStyle(lab).scrollMarginTop);
+      if (bounds.top < top || bounds.top > window.innerHeight - 200) {
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        lab.scrollIntoView({ block: "start", behavior: reduceMotion ? "instant" : "smooth" });
+      }
     });
-  }
-
-  initBlockchainInteractiveLabs();
-
-  if (!window.__blockchainInteractiveLabsPageLoadRegistered) {
-    window.__blockchainInteractiveLabsPageLoadRegistered = true;
-    document.addEventListener("astro:page-load", initBlockchainInteractiveLabs);
-  }
+  });
 </script>

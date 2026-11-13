@@ -2,21 +2,11 @@
 import { translator } from "../../../i18n/locale";
 
 const t = translator(Astro.url.pathname);
+const { labelledBy } = Astro.props;
 ---
 
-<section id="token-ownership-lab" class="network-protected card bg-base-100 shadow-md">
-  <div class="card-body">
-    <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">{t("Tokens, incentives & ownership", "Token, incentivi e proprietà")}</h3>
-      <span class="badge badge-secondary">Tokenomics</span>
-      <span class="badge badge-outline">{t("Distribution", "Distribuzione")}</span>
-      <span class="badge badge-outline">{t("Concentration", "Concentrazione")}</span>
-    </div>
-
-    <p class="opacity-80 mb-4">
-      {t("Change token distribution events and observe how ownership concentration changes. This is a toy model, not a financial model.", "Cambia la distribuzione dei token e osserva in quali mani si concentra la proprietà. È un modello semplificato per fare pratica.")}
-    </p>
-
+<section id="token-ownership-lab" aria-labelledby={labelledBy} class="card">
+  <div class="card-body p-3 sm:p-4">
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-4">
       <div class="grid gap-3">
         <div data-token-bars class="grid gap-3"></div>

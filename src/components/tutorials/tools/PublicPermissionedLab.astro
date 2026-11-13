@@ -2,20 +2,11 @@
 import { translator } from "../../../i18n/locale";
 
 const t = translator(Astro.url.pathname);
+const { labelledBy } = Astro.props;
 ---
 
-<section id="public-permissioned-lab" class="network-protected card bg-base-100 shadow-md">
-  <div class="card-body">
-    <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">{t("Public vs permissioned networks", "Reti pubbliche e ad accesso autorizzato")}</h3>
-      <span class="badge badge-secondary">{t("Access model", "Modello di accesso")}</span>
-      <span class="badge badge-outline">Governance</span>
-    </div>
-
-    <p class="opacity-80 mb-4">
-      {t("Switch between public and permissioned modes to see how access, validation, reading, writing, and governance assumptions change.", "Prova le stesse operazioni in una rete pubblica e in una ad accesso autorizzato. Osserva chi può unirsi alla rete, validare, leggere o scrivere dati e prendere decisioni.")}
-    </p>
-
+<section id="public-permissioned-lab" aria-labelledby={labelledBy} class="card">
+  <div class="card-body p-3 sm:p-4">
     <div class="flex flex-wrap gap-2 mb-4">
       <button class="btn btn-primary" data-network-mode="public">
         {t("Public network", "Rete pubblica")}

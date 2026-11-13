@@ -2,21 +2,11 @@
 import { translator } from "../../../i18n/locale";
 
 const t = translator(Astro.url.pathname);
+const { labelledBy } = Astro.props;
 ---
 
-<section id="crypto-playground" class="network-protected card bg-base-100 shadow-md">
-  <div class="card-body">
-    <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">{t("Cryptography playground", "Laboratorio di crittografia")}</h3>
-      <span class="badge badge-secondary">{t("Hashing", "Calcolo degli hash")}</span>
-      <span class="badge badge-outline">{t("Tamper detection", "Rilevamento delle alterazioni")}</span>
-      <span class="badge badge-outline">{t("Block links", "Collegamenti tra blocchi")}</span>
-    </div>
-
-    <p class="opacity-80 mb-4">
-      {t("Change the transaction data and observe how the hash changes. Then mine a tiny toy block and tamper with its content to see why linked hashes make modifications visible.", "Cambia il testo della transazione e confronta i due hash. Poi prova a minare un blocco e a modificarne il contenuto: l’hash ti aiuta a riconoscere l’alterazione.")}
-    </p>
-
+<section id="crypto-playground" aria-labelledby={labelledBy} class="card">
+  <div class="card-body p-3 sm:p-4">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <div class="grid gap-3">
         <label class="form-control">

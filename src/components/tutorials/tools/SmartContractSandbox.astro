@@ -2,21 +2,11 @@
 import { translator } from "../../../i18n/locale";
 
 const t = translator(Astro.url.pathname);
+const { labelledBy } = Astro.props;
 ---
 
-<section id="smart-contract-sandbox" class="network-protected card bg-base-100 shadow-md">
-  <div class="card-body">
-    <div class="flex flex-wrap gap-2 items-center mb-2">
-      <h3 class="card-title">{t("Smart contract sandbox", "Laboratorio di smart contract")}</h3>
-      <span class="badge badge-secondary">{t("State machine", "Macchina a stati")}</span>
-      <span class="badge badge-outline">{t("Balances", "Saldi")}</span>
-      <span class="badge badge-outline">{t("Rules", "Regole")}</span>
-    </div>
-
-    <p class="opacity-80 mb-4">
-      {t("This toy contract manages balances. Try valid and invalid transfers to see how smart contracts update state only when predefined rules are satisfied.", "Questo contratto di prova aggiorna i saldi quando un trasferimento rispetta le sue regole. Prova anche un importo troppo alto e confronta i risultati.")}
-    </p>
-
+<section id="smart-contract-sandbox" aria-labelledby={labelledBy} class="card">
+  <div class="card-body p-3 sm:p-4">
     <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1fr] gap-4">
       <div class="rounded-xl bg-base-200 border border-base-300 p-4">
         <label class="form-control mb-3">

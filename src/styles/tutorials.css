@@ -1,0 +1,91 @@
+.tutorial-section {
+    scroll-margin-top: 5rem;
+}
+
+.tutorial-disclosure > summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+.tutorial-disclosure > summary::-webkit-details-marker {
+    display: none;
+}
+
+.tutorial-disclosure > summary::marker {
+    content: "";
+}
+
+.tutorial-disclosure > summary:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -3px;
+}
+
+.lab-disclosure .card-body > .grid > * {
+    min-width: 0;
+}
+
+.tutorial-disclosure-icon {
+    display: inline-grid;
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    place-items: center;
+    transition: transform 200ms ease;
+}
+
+.tutorial-disclosure-icon::before,
+.tutorial-disclosure-icon::after {
+    content: "";
+    grid-area: 1 / 1;
+    width: 0.65rem;
+    height: 1px;
+    background-color: currentColor;
+}
+
+.tutorial-disclosure-icon::after {
+    transform: rotate(90deg);
+    transition: opacity 160ms ease;
+}
+
+.tutorial-disclosure[open] > summary .tutorial-disclosure-icon {
+    transform: rotate(180deg);
+}
+
+.tutorial-disclosure[open] > summary .tutorial-disclosure-icon::after {
+    opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    @supports selector(::details-content) and (interpolate-size: allow-keywords) {
+        .tutorial-disclosure::details-content {
+            block-size: 0;
+            overflow: clip;
+            interpolate-size: allow-keywords;
+            opacity: 0;
+            transition: block-size 230ms ease, opacity 170ms ease, content-visibility 230ms allow-discrete;
+        }
+
+        .tutorial-disclosure[open]::details-content {
+            block-size: auto;
+            opacity: 1;
+        }
+    }
+
+    @supports not ((selector(::details-content)) and (interpolate-size: allow-keywords)) {
+        .tutorial-disclosure[open] > .tutorial-disclosure-content {
+            animation: tutorial-disclosure-in 200ms ease-out both;
+        }
+
+        @keyframes tutorial-disclosure-in {
+            from { opacity: 0; transform: translateY(-0.25rem); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tutorial-disclosure-icon,
+    .tutorial-disclosure-icon::after {
+        transition: none;
+    }
+}

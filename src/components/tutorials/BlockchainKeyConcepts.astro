@@ -1,0 +1,33 @@
+---
+import { getBlockchainConcepts } from "../../data/blockchainConcepts";
+import { translator } from "../../i18n/locale";
+
+const t = translator(Astro.url.pathname);
+const groups = getBlockchainConcepts(Astro.url.pathname);
+---
+
+<section class="tutorial-section mb-10" id="blockchain-concepts" aria-labelledby="blockchain-concepts-title">
+  <h2 class="text-3xl font-bold mb-4" id="blockchain-concepts-title">{t("Key concepts", "Concetti chiave")}</h2>
+
+  <div class="grid items-start gap-3 xl:grid-cols-2">
+    {groups.map((group) => (
+      <div class="rounded-xl border border-base-300 bg-base-100 p-2.5">
+        <h3 class="px-1 pb-2 text-sm font-semibold">{group.title}</h3>
+        <div class="grid grid-cols-2 items-start gap-1.5">
+          {group.concepts.map(({ title, description, lab }) => (
+            <details class="tutorial-disclosure group/concept min-w-0 rounded-lg border border-base-300 bg-base-200" name={`concept-${group.id}`}>
+              <summary class="flex min-h-11 items-center justify-between gap-1 rounded-lg px-2 py-1.5 text-sm font-medium leading-tight break-words transition-colors hover:bg-base-300 group-open/concept:bg-primary group-open/concept:text-primary-content">
+                <span class="min-w-0">{title}</span>
+                <span class="tutorial-disclosure-icon" aria-hidden="true"></span>
+              </summary>
+              <div class="tutorial-disclosure-content px-2.5 py-2 text-sm leading-relaxed">
+                <p>{description}</p>
+                {lab && <a class="link mt-2 inline-block font-medium" href={`#lab-${lab}`}>{t("Try the lab", "Prova il laboratorio")}</a>}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
