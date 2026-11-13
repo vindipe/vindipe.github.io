@@ -6,6 +6,7 @@ import SideBar from "../components/SideBar.astro";
 import NetworkBackground from "../components/NetworkBackground.astro";
 import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 import StructuredData from "../components/StructuredData.astro";
+import ScrollControls from "../components/ScrollControls.astro";
 import { ViewTransitions } from "astro:transitions";
 import { getLocale, inLanguage, translator } from "../i18n/locale";
 import { SITE_TITLE, SITE_DESCRIPTION, TRANSITION_API } from "../config";
@@ -52,6 +53,7 @@ const t = translator(Astro.url.pathname);
       </div>
 
       {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
+      <ScrollControls />
     </div>
 
     <GoogleAnalytics />

@@ -1,0 +1,141 @@
+---
+import { translator } from "../i18n/locale";
+
+const t = translator(Astro.url.pathname);
+const sectionLabel = t("Back to start of this section", "Torna all’inizio della sezione");
+const pageLabel = t("Back to top", "Torna in cima alla pagina");
+---
+
+<site-scroll-controls class="scroll-controls">
+  <button type="button" data-scroll-section aria-label={sectionLabel} title={sectionLabel} hidden>
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 5h16M7 14l5-5 5 5m-5-5v11" />
+    </svg>
+  </button>
+  <button type="button" data-scroll-page aria-label={pageLabel} title={pageLabel} hidden>
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m6 11 6-6 6 6m-6-6v14" />
+    </svg>
+  </button>
+</site-scroll-controls>
+
+<script>
+  class SiteScrollControls extends HTMLElement {
+    private listeners?: AbortController;
+    private frame = 0;
+
+    connectedCallback() {
+      const pageButton = this.querySelector<HTMLButtonElement>("[data-scroll-page]");
+      const sectionButton = this.querySelector<HTMLButtonElement>("[data-scroll-section]");
+      const main = document.getElementById("main-content");
+      if (!pageButton || !sectionButton || !main || this.listeners) return;
+
+      const sections = [...main.querySelectorAll<HTMLElement>("h2[id]")].map((heading) =>
+        (heading.dataset.sectionTarget && document.getElementById(heading.dataset.sectionTarget)) || heading
+      );
+      let currentSection: HTMLElement | undefined;
+      this.listeners = new AbortController();
+      const { signal } = this.listeners;
+      const behavior = (): ScrollBehavior =>
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
+
+      const update = () => {
+        this.frame = 0;
+        const visible = window.scrollY > 240;
+        currentSection = undefined;
+        if (visible) {
+          for (const section of sections) {
+            const offset = parseFloat(getComputedStyle(section).scrollMarginTop) || 0;
+            if (section.getBoundingClientRect().top > offset + 16) break;
+            currentSection = section;
+          }
+        }
+        pageButton.hidden = !visible;
+        sectionButton.hidden = !currentSection;
+      };
+
+      const schedule = () => {
+        if (!this.frame) this.frame = requestAnimationFrame(update);
+      };
+
+      function focus(target: HTMLElement) {
+        target.tabIndex = -1;
+        target.focus({ preventScroll: true });
+      }
+
+      pageButton.addEventListener("click", () => {
+        focus(main.querySelector("h1") ?? main);
+        window.scrollTo({ top: 0, behavior: behavior() });
+      }, { signal });
+
+      sectionButton.addEventListener("click", () => {
+        if (!currentSection) return;
+        focus(currentSection);
+        currentSection.scrollIntoView({ block: "start", behavior: behavior() });
+      }, { signal });
+
+      window.addEventListener("scroll", schedule, { passive: true, signal });
+      window.addEventListener("resize", schedule, { signal });
+      document.addEventListener("astro:page-load", schedule, { signal });
+      schedule();
+    }
+
+    disconnectedCallback() {
+      this.listeners?.abort();
+      this.listeners = undefined;
+      cancelAnimationFrame(this.frame);
+      this.frame = 0;
+    }
+  }
+
+  if (!customElements.get("site-scroll-controls")) {
+    customElements.define("site-scroll-controls", SiteScrollControls);
+  }
+</script>
+
+<style>
+  .scroll-controls {
+    position: fixed;
+    inset-inline-end: max(0.75rem, env(safe-area-inset-right));
+    inset-block-end: max(0.75rem, env(safe-area-inset-bottom));
+    z-index: 25;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  button {
+    display: grid;
+    place-items: center;
+    width: max(44px, 2.9rem);
+    height: max(44px, 2.9rem);
+    border: 1px solid oklch(var(--bc) / 0.22);
+    border-radius: 50%;
+    background: oklch(var(--p));
+    color: oklch(var(--pc));
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.16);
+  }
+
+  button[data-scroll-section] {
+    background: oklch(var(--b1));
+    color: oklch(var(--bc));
+  }
+
+  button:hover {
+    background: color-mix(in oklch, oklch(var(--p)), oklch(var(--pc)) 10%);
+    color: oklch(var(--pc));
+  }
+
+  button:focus-visible {
+    outline: 2px solid oklch(var(--bc));
+    outline-offset: 2px;
+  }
+
+  button[hidden] {
+    display: none;
+  }
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+</style>

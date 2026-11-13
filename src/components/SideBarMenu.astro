@@ -29,7 +29,11 @@ const items = [
   </ul>
   <template id="page-sections-template">
     <details class="page-sections" open>
-      <summary>{t("On this page", "In questa pagina")}</summary>
+      <summary aria-label={t("Page sections", "Sezioni della pagina")}>
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </summary>
       <ul></ul>
     </details>
   </template>
@@ -56,6 +60,10 @@ const items = [
       list.append(item);
     }
 
+    if (!menu.querySelector(":scope > a")) {
+      const title = document.querySelector("#main-content h1")?.textContent?.trim();
+      if (title) sections.querySelector("summary")?.prepend(title);
+    }
     menu.append(sections);
     menu.hidden = false;
   }
@@ -85,11 +93,40 @@ const items = [
     padding: 0 0.25rem 0.3rem;
   }
 
+  .menu [data-page-menu]:has(> .page-sections) {
+    position: relative;
+  }
+
+  .menu [data-page-menu]:has(> .page-sections) > a {
+    padding-inline-end: 3.5rem;
+  }
+
   .menu .page-sections > summary {
-    padding: 0.45rem 0.6rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.55rem 0.75rem;
     font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
+  }
+
+  .menu .page-sections > summary::after {
+    display: none;
+  }
+
+  .menu [data-page-menu] > a + .page-sections > summary {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-end: 0;
+    display: grid;
+    place-items: center;
+    width: 3.15rem;
+    height: 3rem;
+  }
+
+  .menu .page-sections[open] > summary svg {
+    transform: rotate(180deg);
   }
 
   .menu .page-sections li > a {

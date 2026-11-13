@@ -26,7 +26,7 @@ body {
     scroll-margin-top: 5rem;
 }
 
-.intro-copy {
+:where(main p:not(.font-mono), main dd, main li:not(:has(> a:only-child))) {
     text-align: justify;
     hyphens: auto;
 }
