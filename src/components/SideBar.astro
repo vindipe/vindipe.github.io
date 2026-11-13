@@ -2,6 +2,7 @@
 import SideBarFooter from "./SideBarFooter.astro";
 import SideBarMenu from "./SideBarMenu.astro";
 import LanguageSwitcher from "./LanguageSwitcher.astro";
+import SearchTrigger from "./SearchTrigger.astro";
 import { getLocale, inLanguage, translator } from "../i18n/locale";
 
 const locale = getLocale(Astro.url.pathname);
@@ -41,6 +42,7 @@ const { sideBarActiveItemID } = Astro.props;
       </div>
     </div>
 
+    <SearchTrigger />
     <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
     <div class="hidden justify-center pt-2 lg:flex"><LanguageSwitcher /></div>
     <SideBarFooter />

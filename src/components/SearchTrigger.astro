@@ -1,0 +1,14 @@
+---
+import { translator } from "../i18n/locale";
+const t = translator(Astro.url.pathname);
+const label = t("Search the site", "Cerca nel sito");
+const { compact = false } = Astro.props;
+---
+
+<button type="button" data-open-site-search aria-haspopup="dialog" aria-controls="site-search-dialog" aria-label={label} title={label}
+  class:list={["btn btn-ghost normal-case gap-2", compact ? "btn-square btn-sm" : "hidden lg:inline-flex mx-2 mb-2 h-auto min-h-11 justify-start border border-current/20"]}>
+  <svg aria-hidden="true" class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+    <circle cx="10.8" cy="10.8" r="6.3" /><path d="m16 16 4.2 4.2" />
+  </svg>
+  {!compact && <span>{label}</span>}
+</button>

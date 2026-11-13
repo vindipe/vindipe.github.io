@@ -17,7 +17,7 @@ const items = [
 <nav aria-label={t("Main navigation", "Navigazione principale")} class="grow shrink overflow-y-auto">
   <ul class="menu menu-md">
     {items.map(({ id, path, label }) => (
-      <li data-page-menu={id === sideBarActiveItemID ? "" : undefined}>
+      <li data-page-menu={inLanguage(path, locale)}>
         <a
           class:list={["py-3 text-base font-medium", id === sideBarActiveItemID && "bg-primary-content/20"]}
           href={inLanguage(path, locale)}
@@ -25,10 +25,10 @@ const items = [
         >{label}</a>
       </li>
     ))}
-    {!sideBarActiveItemID && <li data-page-menu hidden></li>}
+    <li data-current-sections hidden></li>
   </ul>
   <template id="page-sections-template">
-    <details class="page-sections" open>
+    <details class="page-sections">
       <summary aria-label={t("Page sections", "Sezioni della pagina")}>
         <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="m6 9 6 6 6-6" />
@@ -40,32 +40,62 @@ const items = [
 </nav>
 
 <script>
-  function showPageSections() {
-    const menu = document.querySelector<HTMLElement>("[data-page-menu]");
+  type Section = { id: string; label: string };
+  let navigation: Promise<Record<string, Section[]>> | undefined;
+
+  function addSections(menu: HTMLElement, entries: Section[], path: string, current: boolean) {
     const template = document.querySelector<HTMLTemplateElement>("#page-sections-template");
-    const headings = document.querySelectorAll<HTMLElement>("#main-content h2[id]");
-    if (!menu || !template || headings.length < 2 || menu.querySelector(".page-sections")) return;
+    if (!template || entries.length < 2 || menu.querySelector(".page-sections")) return;
+    const fragment = template.content.cloneNode(true) as DocumentFragment;
+    const details = fragment.querySelector("details")!;
+    const summary = details.querySelector("summary")!;
+    const list = details.querySelector("ul")!;
+    const title = menu.querySelector(":scope > a")?.textContent?.trim();
 
-    const sections = template.content.cloneNode(true) as DocumentFragment;
-    const list = sections.querySelector("ul")!;
+    if (title) summary.setAttribute("aria-label", `${summary.getAttribute("aria-label")} · ${title}`);
+    else summary.prepend(document.querySelector("#main-content h1")?.textContent?.trim() ?? "");
+    details.open = current;
 
-    for (const heading of headings) {
+    for (const { id, label } of entries) {
       const item = document.createElement("li");
       const link = document.createElement("a");
-      link.href = "#" + (heading.dataset.sectionTarget ?? heading.id);
-      link.textContent = heading.textContent?.trim() ?? "";
+      link.href = `${current ? "" : path}#${id}`;
+      link.textContent = label;
       link.dataset.sectionLink = "";
-      link.dataset.astroReload = "";
+      if (current) link.dataset.astroReload = "";
       item.append(link);
       list.append(item);
     }
 
-    if (!menu.querySelector(":scope > a")) {
-      const title = document.querySelector("#main-content h1")?.textContent?.trim();
-      if (title) sections.querySelector("summary")?.prepend(title);
-    }
-    menu.append(sections);
+    menu.append(fragment);
     menu.hidden = false;
+  }
+
+  async function showPageSections() {
+    const path = location.pathname.replace(/\/?$/, "/");
+    const menus = [...document.querySelectorAll<HTMLElement>("[data-page-menu]")];
+    const current = menus.find((menu) => menu.dataset.pageMenu === path) ??
+      document.querySelector<HTMLElement>("[data-current-sections]");
+    const sections = [...document.querySelectorAll<HTMLElement>("#main-content h2[id]")].map((heading) => ({
+      id: heading.dataset.sectionTarget ?? heading.id,
+      label: heading.textContent?.trim() ?? "",
+    }));
+    if (current) addSections(current, sections, path, true);
+    if (!menus.length) return;
+
+    navigation ??= fetch("/site-index/navigation.json").then((response) => {
+      if (!response.ok) throw new Error("Section index unavailable");
+      return response.json();
+    });
+    try {
+      const index = await navigation;
+      for (const menu of menus) {
+        const url = menu.dataset.pageMenu!;
+        if (menu.isConnected && url !== path && index[url]) addSections(menu, index[url], url, false);
+      }
+    } catch {
+      navigation = undefined;
+    }
   }
 
   showPageSections();
@@ -79,6 +109,7 @@ const items = [
 
     const drawer = document.querySelector<HTMLInputElement>("#my-drawer");
     if (drawer?.checked) drawer.checked = false;
+    if (link.pathname !== location.pathname) return;
     const section = document.getElementById(link.hash.slice(1));
     if (section) {
       section.tabIndex = -1;

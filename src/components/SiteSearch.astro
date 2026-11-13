@@ -1,0 +1,171 @@
+---
+import { getLocale, translator } from "../i18n/locale";
+const locale = getLocale(Astro.url.pathname);
+const t = translator(Astro.url.pathname);
+const label = t("Search the site", "Cerca nel sito");
+---
+
+<site-search data-index={`/site-index/search-${locale}.json`}
+  data-loading={t("Loading search…", "Caricamento della ricerca…")}
+  data-empty={t("No results. Try a different term.", "Nessun risultato. Prova un altro termine.")}
+  data-error={t("Search is temporarily unavailable. Edit the query to retry.", "Ricerca momentaneamente non disponibile. Modifica la ricerca per riprovare.")}
+  data-count={t("{shown} of {total} results", "{shown} di {total} risultati")}>
+  <dialog id="site-search-dialog" aria-labelledby="site-search-title" class="site-search-dialog rounded-2xl border border-base-300 bg-base-100 text-base-content shadow-2xl">
+    <div class="search-inner">
+      <div class="flex items-center justify-between gap-3">
+        <h2 id="site-search-title" class="text-xl font-bold">{label}</h2>
+        <form method="dialog">
+          <button type="submit" class="btn btn-ghost btn-square btn-sm" aria-label={t("Close search", "Chiudi ricerca")}>
+            <svg aria-hidden="true" viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18" /></svg>
+          </button>
+        </form>
+      </div>
+      <input type="search" autofocus autocomplete="off" class="input input-bordered w-full" aria-label={label}
+        placeholder={t("Search pages, publications and concepts…", "Cerca pagine, pubblicazioni e concetti…")} />
+      <p class="text-sm opacity-75" role="status"></p>
+      <ul class="search-results" aria-label={t("Search results", "Risultati della ricerca")}></ul>
+    </div>
+  </dialog>
+</site-search>
+
+<script>
+  type RecordEntry = { url: string; title: string; heading: string; body: string };
+  const indexes = new Map<string, Promise<RecordEntry[]>>();
+  const normalize = (value: string) => value.toLowerCase().normalize("NFD").replace(/\p{M}/gu, "");
+
+  function getIndex(url: string) {
+    let request = indexes.get(url);
+    if (!request) {
+      request = fetch(url).then((response) => {
+        if (!response.ok) throw new Error("Search index unavailable");
+        return response.json() as Promise<RecordEntry[]>;
+      }).catch((error) => {
+        indexes.delete(url);
+        throw error;
+      });
+      indexes.set(url, request);
+    }
+    return request;
+  }
+
+  class SiteSearch extends HTMLElement {
+    connectedCallback() {
+      if (this.dataset.ready) return;
+      this.dataset.ready = "true";
+      const dialog = this.querySelector("dialog")!;
+      const input = this.querySelector("input")!;
+      const status = this.querySelector<HTMLElement>('[role="status"]')!;
+      const list = this.querySelector("ul")!;
+      let revision = 0;
+
+      async function render(this: SiteSearch) {
+        const version = ++revision;
+        const terms = [...new Set(normalize(input.value).match(/[\p{L}\p{N}]+/gu) ?? [])];
+        list.replaceChildren();
+        status.textContent = "";
+        if (!terms.length) return;
+        status.textContent = this.dataset.loading ?? "";
+        try {
+          const records = await getIndex(this.dataset.index!);
+          if (version !== revision) return;
+          const matches = records.map((record) => {
+            const heading = normalize(record.heading);
+            const title = normalize(record.title);
+            const body = normalize(record.body);
+            const score = terms.reduce((total, term) => {
+              if (total < 0) return total;
+              if (heading.includes(term)) return total + 12;
+              if (title.includes(term)) return total + (record.heading ? 4 : 10);
+              return body.includes(term) ? total + 2 : -1;
+            }, 0);
+            return { record, body, score };
+          }).filter(({ score }) => score > 0).sort((a, b) => b.score - a.score);
+
+          const results = matches.slice(0, 12);
+          status.textContent = results.length ? this.dataset.count!
+            .replace("{shown}", String(results.length)).replace("{total}", String(matches.length)) : this.dataset.empty ?? "";
+
+          for (const { record, body } of results) {
+            const item = document.createElement("li");
+            const link = document.createElement("a");
+            const title = document.createElement("strong");
+            title.textContent = record.heading || record.title;
+            link.href = record.url;
+            if (link.pathname === location.pathname && link.hash) link.dataset.astroReload = "";
+            link.append(title);
+            if (record.heading) {
+              const context = document.createElement("span");
+              context.textContent = record.title;
+              link.append(context);
+            }
+            if (record.body) {
+              const excerpt = document.createElement("span");
+              const match = terms.map((term) => body.indexOf(term)).find((position) => position >= 0) ?? 0;
+              const start = Math.max(0, match - 35);
+              const end = start + 155;
+              excerpt.textContent = (start ? "…" : "") + record.body.slice(start, end).trim() + (end < record.body.length ? "…" : "");
+              link.append(excerpt);
+            }
+            item.append(link);
+            list.append(item);
+          }
+        } catch {
+          if (version === revision) status.textContent = this.dataset.error ?? "";
+        }
+      }
+
+      input.addEventListener("input", render.bind(this));
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog || (event.target instanceof Element && event.target.closest(".search-results a"))) {
+          dialog.close();
+        }
+      });
+      dialog.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+        const links = [...list.querySelectorAll("a")];
+        const active = document.activeElement;
+        const index = links.findIndex((link) => link === active);
+        if (active !== input && index < 0) return;
+        const next = event.key === "ArrowDown" ? links[index + 1] : index === 0 ? input : links[index - 1];
+        if (!next) return;
+        event.preventDefault();
+        next.focus();
+      });
+    }
+  }
+
+  if (!customElements.get("site-search")) customElements.define("site-search", SiteSearch);
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element) || !event.target.closest("[data-open-site-search]")) return;
+    const dialog = document.querySelector<HTMLDialogElement>("#site-search-dialog");
+    if (dialog && !dialog.open) dialog.showModal();
+  });
+</script>
+
+<style is:global>
+  .site-search-dialog {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    padding: 0;
+    width: min(38rem, calc(100% - 1.5rem));
+    max-height: min(42rem, calc(100dvh - 2rem));
+  }
+  .site-search-dialog::backdrop { background: rgb(18 18 18 / 0.52); }
+  .search-inner { display: grid; gap: 0.75rem; padding: 1rem; }
+  .search-inner input { font-size: max(16px, 1rem); }
+  .search-inner [role="status"]:empty, .search-results:empty { display: none; }
+  .search-results { display: grid; gap: 0.4rem; }
+  .search-results a {
+    display: grid;
+    gap: 0.2rem;
+    overflow-wrap: anywhere;
+    padding: 0.65rem 0.8rem;
+    border-radius: 0.65rem;
+    background: oklch(var(--b2));
+  }
+  .search-results a:hover, .search-results a:focus-visible { background: oklch(var(--p) / 0.32); }
+  .search-results a:focus-visible { outline: 2px solid currentColor; }
+  .search-results span { font-size: 0.875rem; }
+</style>
