@@ -4,7 +4,7 @@ export function getLocale(pathname: string): Locale {
   return pathname === "/it" || pathname.startsWith("/it/") ? "it" : "en";
 }
 
-const pagePath = /^\/(?:$|(?:projects|research|tutorials|cv|services|contact|privacy)(?:\/[a-z0-9-]+)?\/?$)/;
+const pagePath = /^\/(?:$|(?:projects|research|tutorials|cv|contact|privacy)(?:\/[a-z0-9-]+)?\/?$)/;
 
 export function inLanguage(href: string, locale: Locale): string {
   const [pathname] = href.split(/[?#]/, 1);
