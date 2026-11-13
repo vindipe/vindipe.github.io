@@ -8,18 +8,12 @@ const language = locale === "it" ? "it-IT" : "en-US";
 
 const services = [
   {
-    name: t("Digital consulting and strategy", "Consulenza e strategia digitale"),
-    detail: t(
-      "I help you define what your project needs, compare tools and choose where to start.",
-      "Ti aiuto a capire cosa serve al tuo progetto, confrontare gli strumenti disponibili e decidere da dove partire."
-    ),
+    name: t("Consulting and digital strategy planning", "Consulenza e pianificazione strategia digitale"),
+    detail: t("Review your tools, explore options and define practical next steps.", "Analisi degli strumenti, valutazione delle opzioni e definizione dei prossimi passi."),
   },
   {
-    name: t("Web development and infrastructure", "Sviluppo web e infrastruttura"),
-    detail: t(
-      "I can build a website or a prototype, set up the environment for an application and automate its deployment.",
-      "Posso realizzare un sito o un prototipo, configurare l’ambiente per un’applicazione e automatizzarne la pubblicazione."
-    ),
+    name: t("Implement digital infrastructure", "Implementare infrastruttura digitale"),
+    detail: t("Configure and deploy an application with Docker and an automated publishing workflow.", "Configurazione e pubblicazione di un’applicazione con Docker e una procedura di rilascio automatizzata."),
     example: {
       name: t("This website", "Questo sito"),
       detail: t(
@@ -30,18 +24,12 @@ const services = [
     },
   },
   {
-    name: t("Technical support", "Supporto digitale"),
-    detail: t(
-      "I can help remotely with software, accounts or online tools, including setting up a tool you want to start using.",
-      "Ti aiuto da remoto a risolvere problemi con software, account e strumenti online, oppure a configurare uno strumento che vuoi iniziare a usare."
-    ),
+    name: t("Digital support", "Supporto digitale"),
+    detail: t("Get remote help with a specific issue on your computer.", "Assistenza da remoto per un problema al PC."),
   },
   {
-    name: t("Training and tutoring", "Formazione e tutoring"),
-    detail: t(
-      "One-to-one sessions to learn programming, get more comfortable with digital tools or get feedback on your code.",
-      "Sessioni individuali per imparare a programmare, usare meglio gli strumenti digitali o ricevere un riscontro sul codice di un tuo progetto."
-    ),
+    name: t("Mentoring and tutoring", "Mentoring e tutoring"),
+    detail: t("Individual sessions on programming, digital tools or your own project.", "Sessioni individuali su programmazione, strumenti digitali o un tuo progetto."),
   },
 ];
 
@@ -58,8 +46,8 @@ const email = "vincenzopaolo.diperna@outlook.com";
 <BaseLayout
   title={t("Digital Services | Vincenzo Di Perna", "Servizi digitali | Vincenzo Di Perna")}
   description={t(
-    "Digital consulting, web development, remote technical support and one-to-one tutoring from Vincenzo Di Perna.",
-    "Consulenza digitale, sviluppo web, supporto tecnico da remoto e formazione individuale con Vincenzo Di Perna."
+    "Digital strategy, infrastructure implementation, remote support, mentoring and tutoring from Vincenzo Di Perna.",
+    "Consulenza per la strategia digitale, implementazione di infrastrutture, supporto da remoto, mentoring e tutoring con Vincenzo Di Perna."
   )}
   sideBarActiveItemID="services"
 >
@@ -67,8 +55,8 @@ const email = "vincenzopaolo.diperna@outlook.com";
     <header class="mb-7">
       <h1 class="text-4xl font-bold mb-4">{t("Digital Services", "Servizi digitali")}</h1>
       <p class="text-lg leading-relaxed opacity-90">{t(
-        "I can help you build a website, deploy an application, fix a technical problem or learn to use a digital tool.",
-        "Se hai bisogno di realizzare un sito, mettere online un’applicazione, risolvere un problema tecnico o imparare a usare uno strumento digitale, posso aiutarti."
+        "Alongside my research, I work in software development, digital infrastructure and training. I can help you get a digital project off the ground, put an application online, solve a technical problem or build your skills in a one-to-one session.",
+        "Oltre alla ricerca, mi occupo di sviluppo software, infrastrutture digitali e formazione. Metto questa esperienza a disposizione di chi vuole avviare un progetto digitale, mettere online un’applicazione, risolvere un problema tecnico o imparare a usare nuovi strumenti con un affiancamento individuale."
       )}</p>
     </header>
 
