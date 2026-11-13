@@ -6,129 +6,45 @@ const locale = getLocale(Astro.url.pathname);
 const t = translator(Astro.url.pathname);
 const language = locale === "it" ? "it-IT" : "en-US";
 
-const skills = [
-  {
-    glyph: "M4 5h16v14H4zM4 9h16M8 13l2 2-2 2m5 0h3",
-    name: t("Web and interfaces", "Web e interfacce"),
-    tools: [
-      { label: "HTML", icon: "html5", color: "#bd3c17" },
-      { label: "CSS", icon: "css", color: "#663399" },
-      { label: "JavaScript", icon: "javascript", color: "#715c00" },
-      { label: "TypeScript", icon: "typescript", color: "#245c9d" },
-      { label: "Astro" },
-      { label: "Tailwind CSS" },
-      { label: t("Responsive interfaces", "Interfacce responsive") },
-    ],
-  },
-  {
-    glyph: "M4 4h16v6H4zM4 14h16v6H4zM7 7h1m-1 10h1m4-10h5m-5 10h5",
-    name: t("Infrastructure and deployment", "Infrastruttura e pubblicazione"),
-    tools: [
-      { label: "Linux", icon: "linux" },
-      { label: "Docker", icon: "docker", color: "#1768b3" },
-      { label: "Kubernetes", icon: "kubernetes", color: "#2855b8" },
-      { label: "Git", icon: "git", color: "#ba3820" },
-      { label: "Git LFS" },
-      { label: "GitHub Pages" },
-      { label: "GitHub Actions", icon: "githubactions", color: "#245c9d" },
-      { label: t("Networking and cloud", "Reti e cloud") },
-      { label: "Terraform" },
-      { label: "Nginx" },
-      { label: "Cloudflare Workers" },
-      { label: "Kollaps" },
-    ],
-  },
-  {
-    glyph: "M4 4v16h16M8 16v-4m4 4V8m4 8v-6m4 6V5",
-    name: t("Automation, data and testing", "Automazione, dati e test"),
-    tools: [
-      { label: "Python", icon: "python", color: "#27608d" },
-      { label: "Bash" },
-      { label: t("Familiarity with Go and Rust", "Familiarità con Go e Rust") },
-      { label: "CSV / JSON" },
-      { label: "ANOVA / ICC" },
-      { label: "Jupyter", icon: "jupyter", color: "#a8491c" },
-      { label: t("Dashboards", "Dashboard") },
-      { label: "Benchmarking" },
-      { label: t("Reproducible experiments", "Esperimenti riproducibili") },
-    ],
-  },
-  {
-    glyph: "M5 5h14v10H9l-4 4zM8 9h8m-8 3h5",
-    name: t("Consulting, training and support", "Consulenza, formazione e supporto"),
-    tools: [
-      { label: t("Digital strategy", "Strategia digitale") },
-      { label: t("Technical training", "Formazione tecnica") },
-      { label: t("Remote assistance", "Assistenza da remoto") },
-      { label: "Code review" },
-      { label: t("Digital problem solving", "Problem solving digitale") },
-      { label: t("AI tool training", "Formazione sugli strumenti di IA") },
-    ],
-  },
-  {
-    glyph: "m12 3 8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9",
-    name: t("Distributed systems and blockchain", "Sistemi distribuiti e blockchain"),
-    tools: [
-      { label: "Blockchain / DLT" },
-      { label: t("Blockchain nodes", "Nodi blockchain") },
-      { label: t("Protocol evaluation", "Valutazione di protocolli") },
-      { label: "Ethereum / EVM", icon: "ethereum", color: "#485374" },
-      { label: t("Consensus and permissioned networks", "Consenso e reti ad accesso autorizzato") },
-      { label: t("Network emulation and topologies", "Emulazione e topologie di rete") },
-      { label: t("Throughput and latency", "Throughput e latenza") },
-      { label: t("Energy per transaction", "Consumo energetico per transazione") },
-    ],
-    href: "/research/lilith-benchmarking-framework/",
-    reference: "Lilith",
-  },
-  {
-    glyph: "M5 4h11l3 3v13H5zM15 4v4h4M8 12h8m-8 4h6",
-    name: t("Research methods and artifacts", "Metodi di ricerca e artefatti"),
-    tools: [
-      { label: t("Workload design", "Progettazione dei carichi di lavoro") },
-      { label: t("Experiment orchestration", "Orchestrazione degli esperimenti") },
-      { label: t("Repeatability and predictability", "Ripetibilità e prevedibilità") },
-      { label: t("Dataset preparation and release", "Preparazione e pubblicazione di dataset") },
-      { label: t("Scientific figures and reporting", "Grafici e documentazione scientifica") },
-      { label: t("Digital asset data analysis", "Analisi dei dati sugli asset digitali") },
-    ],
-    href: "/research/blockchain-repeatability-dataset/",
-    reference: t("Benchmark dataset", "Dataset dei benchmark"),
-  },
-];
-
 const services = [
   {
-
-    name: t("Consulting and digital strategy planning", "Consulenza e pianificazione strategia digitale"),
-    detail: t("Review your tools, explore options and define practical next steps.", "Analisi degli strumenti, valutazione delle opzioni e definizione dei prossimi passi."),
-    hourly: { EUR: 20, USD: 22, CHF: 18 },
+    name: t("Digital consulting and strategy", "Consulenza e strategia digitale"),
+    detail: t(
+      "I help you define what your project needs, compare tools and choose where to start.",
+      "Ti aiuto a capire cosa serve al tuo progetto, confrontare gli strumenti disponibili e decidere da dove partire."
+    ),
   },
   {
-
-    name: t("Implement digital infrastructure", "Implementare infrastruttura digitale"),
-    detail: t("Configure and deploy an application with Docker and an automated publishing workflow.", "Configurazione e pubblicazione di un’applicazione con Docker e una procedura di rilascio automatizzata."),
-    hourly: { EUR: 60, USD: 70, CHF: 60 },
+    name: t("Web development and infrastructure", "Sviluppo web e infrastruttura"),
+    detail: t(
+      "I can build a website or a prototype, set up the environment for an application and automate its deployment.",
+      "Posso realizzare un sito o un prototipo, configurare l’ambiente per un’applicazione e automatizzarne la pubblicazione."
+    ),
+    example: {
+      name: t("This website", "Questo sito"),
+      detail: t(
+        "I built this bilingual site with Astro and automated deployments to GitHub Pages.",
+        "Ho realizzato questo sito bilingue con Astro e ne ho automatizzato la pubblicazione su GitHub Pages."
+      ),
+      href: inLanguage("/", locale),
+    },
   },
   {
-
-    name: t("Digital support", "Supporto digitale"),
-    detail: t("Get remote help with a specific issue on your computer.", "Assistenza da remoto per un problema al PC."),
-    hourly: { EUR: 35, USD: 40, CHF: 35 },
+    name: t("Technical support", "Supporto digitale"),
+    detail: t(
+      "I can help remotely with software, accounts or online tools, including setting up a tool you want to start using.",
+      "Ti aiuto da remoto a risolvere problemi con software, account e strumenti online, oppure a configurare uno strumento che vuoi iniziare a usare."
+    ),
   },
   {
-
-    name: t("Mentoring and tutoring", "Mentoring e tutoring"),
-    detail: t("Individual sessions on programming, digital tools or your own project.", "Sessioni individuali su programmazione, strumenti digitali o un tuo progetto."),
-    hourly: { EUR: 20, USD: 22, CHF: 18 },
+    name: t("Training and tutoring", "Formazione e tutoring"),
+    detail: t(
+      "One-to-one sessions to learn programming, get more comfortable with digital tools or get feedback on your code.",
+      "Sessioni individuali per imparare a programmare, usare meglio gli strumenti digitali o ricevere un riscontro sul codice di un tuo progetto."
+    ),
   },
 ];
 
-const currencies = ["EUR", "USD", "CHF"] as const;
-const formatRate = new Intl.NumberFormat(language, {
-  style: "currency", currency: "EUR", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0,
-});
-const hourLabel = t("/hour", "/ora");
 const appointmentHours = [[9, 12], [14, 17]];
 const slots = appointmentHours.map(([start, end]) => (
   Array.from({ length: (end - start) * 2 }, (_, index) => {
@@ -137,116 +53,55 @@ const slots = appointmentHours.map(([start, end]) => (
   })
 ));
 const email = "vincenzopaolo.diperna@outlook.com";
-const generalTopic = t("Discuss a project", "Parlare di un progetto");
 ---
 
 <BaseLayout
-  title={t("Freelancing | Independent services | Vincenzo Di Perna", "Freelancing | Servizi indipendenti | Vincenzo Di Perna")}
+  title={t("Digital Services | Vincenzo Di Perna", "Servizi digitali | Vincenzo Di Perna")}
   description={t(
-    "Independent consulting, tutoring, digital strategy, infrastructure and support. Explore hourly rates and request a free 30-minute call.",
-    "Consulenza, mentoring, tutoring, strategia digitale, infrastruttura e supporto. Consulta le tariffe orarie e richiedi un colloquio gratuito di 30 minuti."
+    "Digital consulting, web development, remote technical support and one-to-one tutoring from Vincenzo Di Perna.",
+    "Consulenza digitale, sviluppo web, supporto tecnico da remoto e formazione individuale con Vincenzo Di Perna."
   )}
   sideBarActiveItemID="services"
 >
-  <freelancing-page class="studio" data-language={language} data-email={email}>
+  <digital-services class="studio" data-language={language} data-email={email}>
     <header class="mb-7">
-      <h1 class="text-4xl font-bold mb-4">Freelancing</h1>
+      <h1 class="text-4xl font-bold mb-4">{t("Digital Services", "Servizi digitali")}</h1>
       <p class="text-lg leading-relaxed opacity-90">{t(
-        "I’ve developed a range of digital skills, from software and infrastructure to training and technical support. I offer them as a freelancer to people who need specialist help. With a fixed-price quote, the total is agreed up front. I charge for the time I spend on the work, so when AI helps me finish a development task faster, you pay for fewer hours.",
-        "Ho sviluppato competenze in diversi ambiti del digitale, dal software e dalle infrastrutture alla formazione e al supporto tecnico. Come freelance le metto a disposizione di chi cerca un aiuto specialistico. Con un preventivo a progetto, il prezzo si stabilisce in anticipo. Io fatturo il tempo effettivo: se l’IA mi aiuta a completare più in fretta un’attività di sviluppo, paghi meno ore."
-      )}<sup><a class="underline" href="#engagement-note" data-astro-reload aria-label={t("Note on assignments", "Nota sugli incarichi")}>*</a></sup></p>
+        "I can help you build a website, deploy an application, fix a technical problem or learn to use a digital tool.",
+        "Se hai bisogno di realizzare un sito, mettere online un’applicazione, risolvere un problema tecnico o imparare a usare uno strumento digitale, posso aiutarti."
+      )}</p>
     </header>
 
-    <section class="mb-10" aria-labelledby="rates">
-      <div class="rate-heading">
-        <h2 id="rates" class="text-3xl font-bold">{t("Services and prices", "Servizi e prezzi")}</h2>
-        <fieldset class="currency-switch">
-          <legend class="sr-only">{t("Currency", "Valuta")}</legend>
-          {currencies.map((currency) => (
-            <label>
-              <input class="sr-only" type="radio" name="studio-currency" value={currency} checked={currency === "EUR"} />
-              <span>{currency}</span>
-            </label>
-          ))}
-        </fieldset>
-      </div>
-      <div class="card bg-base-100 shadow-md service-prices" aria-live="polite">
-        <table class="service-table" role="table">
-          <caption class="sr-only">{t("Hourly rates", "Tariffe orarie")}</caption>
-          <thead role="rowgroup">
-            <tr role="row">
-              <th scope="col" role="columnheader">{t("Service", "Servizio")}</th>
-              <th scope="col" role="columnheader">{t("My hourly rate", "La mia tariffa oraria")}</th>
-            </tr>
-          </thead>
-          <tbody role="rowgroup">
-            {services.map((service) => (
-              <tr role="row">
-                <th scope="row" role="rowheader">
-                  <strong>{service.name}</strong>
-                  <span class="service-detail">{service.detail}</span>
-                </th>
-                <td role="cell">
-                  <span class="mobile-price-label" aria-hidden="true">{t("My hourly rate", "La mia tariffa oraria")}</span>
-                  <strong class="hourly-price" data-rate data-eur={service.hourly.EUR} data-usd={service.hourly.USD} data-chf={service.hourly.CHF}>{formatRate.format(service.hourly.EUR)}</strong><span class="rate-unit"> {hourLabel}</span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </section>
+    <ul class="mb-9 divide-y divide-base-300">
+      {services.map(({ name, detail, example }) => (
+        <li class="py-5 first:pt-0 last:pb-0">
+          <h2 class="text-xl font-bold mb-1">{name}</h2>
+          <p>{detail}</p>
+          {example && (
+            <p class="mt-2 text-sm">
+              <a class="link" href={example.href}>{example.name}</a>
+              {". "}{example.detail}
+            </p>
+          )}
+        </li>
+      ))}
+    </ul>
 
     <section class="card bg-base-100 shadow-md mb-6" aria-labelledby="appointment">
       <div class="card-body studio-booking">
         <div>
-          <h2 id="appointment" class="text-3xl font-bold mb-2">{t("A free 30-minute call", "Un colloquio gratuito di 30 minuti")}</h2>
+          <h2 id="appointment" class="text-3xl font-bold mb-2">{t("A free 30-minute call", "Un primo colloquio gratuito")}</h2>
           <p>{t(
-            "Tell me what you have in mind. We’ll discuss the work and how to price it.",
-            "Raccontami cosa ti serve. Vediamo insieme cosa c’è da fare e come stimare il costo."
+            "Tell me what you want to do or where you’re stuck. We can see how I can help.",
+            "Raccontami cosa vuoi fare o dove ti sei bloccato. Possiamo sentirci per 30 minuti e capire come posso aiutarti."
           )}</p>
         </div>
         <button class="btn btn-primary studio-cta" type="button" data-open-booking aria-haspopup="dialog" hidden>
-          {t("Book an appointment", "Prenota un appuntamento")}
+          {t("Request an appointment", "Richiedi un appuntamento")}
         </button>
         <noscript><a href={inLanguage("/contact/", locale)}>{t("Request an appointment by email", "Richiedi un appuntamento via email")}</a></noscript>
       </div>
     </section>
-
-    <section class="mb-10" aria-labelledby="skills">
-      <h2 id="skills" class="text-3xl font-bold mb-4">{t("Skills", "Competenze")}</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {skills.map(({ name, tools, glyph, href, reference }) => (
-          <div class="card bg-base-100 shadow-md">
-            <div class="card-body skill-card">
-              <h3 class="card-title">{name}</h3>
-              <ul class="skill-list">
-                {tools.map((tool) => (
-                  <li>
-                    {"icon" in tool ? (
-                      <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" style={`color: ${tool.color ?? "currentColor"}`}>
-                        <use href={`/icons/freelancing-skills.svg#${tool.icon}`} />
-                      </svg>
-                    ) : (
-                      <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24">
-                        <path d={glyph} fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    )}
-                    {tool.label}
-                  </li>
-                ))}
-              </ul>
-              {href && <a class="text-sm underline" href={inLanguage(href, locale)}>{reference}</a>}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <p id="engagement-note" class="engagement-note" tabindex="-1"><small>* {t(
-      "I take on assignments in a personal capacity, subject to my professional and confidentiality commitments.",
-      "Gli incarichi sono svolti a titolo personale, compatibilmente con gli impegni professionali e gli obblighi di riservatezza."
-    )}</small></p>
 
     <dialog class="booking-dialog" aria-labelledby="booking-title" aria-describedby="booking-note">
       <div class="booking-header">
@@ -255,13 +110,12 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
           <button class="btn btn-ghost btn-circle btn-sm" aria-label={t("Close", "Chiudi")}>×</button>
         </form>
       </div>
-      <p class="booking-summary" data-booking-summary>{generalTopic}</p>
       <p id="booking-note">{t(
         "Choose a time for your free 30-minute call. I’ll confirm the appointment by email.",
         "Scegli un orario per il colloquio gratuito di 30 minuti. Ti confermerò l’appuntamento via email."
       )}</p>
 
-      <form class="booking-form" data-booking-form data-subject={t("Freelancing · Free appointment request", "Freelancing · Richiesta appuntamento gratuito")}>
+      <form class="booking-form" data-booking-form data-subject={t("Digital services · Appointment request", "Servizi digitali · Richiesta appuntamento")}>
         <label class="booking-date">
           {t("Preferred date", "Data preferita")}
           <input class="input input-bordered" type="date" name="date" required />
@@ -290,7 +144,7 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
         <button class="btn btn-primary" type="submit">{t("Open email", "Apri email")}</button>
       </form>
     </dialog>
-  </freelancing-page>
+  </digital-services>
 </BaseLayout>
 
 <script>
@@ -300,7 +154,7 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
     hour: "2-digit", minute: "2-digit", hourCycle: "h23",
   });
 
-  class FreelancingPage extends HTMLElement {
+  class DigitalServices extends HTMLElement {
     #initialized = false;
 
     connectedCallback() {
@@ -308,7 +162,6 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
       this.#initialized = true;
 
       const dialog = this.querySelector("dialog")!;
-      const summary = dialog.querySelector<HTMLElement>("[data-booking-summary]")!;
       const form = dialog.querySelector<HTMLFormElement>("[data-booking-form]")!;
       const date = form.querySelector<HTMLInputElement>('[name="date"]')!;
       const timeGroup = form.querySelector<HTMLFieldSetElement>(".booking-times")!;
@@ -316,16 +169,6 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
       const noTimes = form.querySelector<HTMLElement>("[data-no-times]")!;
       const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
       const italian = this.dataset.language === "it-IT";
-
-      const currencyInputs = this.querySelectorAll<HTMLInputElement>('.currency-switch input');
-      const updateRates = (currency: string) => {
-        const format = new Intl.NumberFormat(this.dataset.language, {
-          style: "currency", currency, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0,
-        });
-        for (const price of this.querySelectorAll<HTMLElement>("[data-rate]")) {
-          price.textContent = format.format(Number(price.dataset[currency.toLowerCase()]));
-        }
-      };
 
       const updateTimes = () => {
         const parts = Object.fromEntries(romeClock.formatToParts(new Date()).map(({ type, value }) => [type, value]));
@@ -343,15 +186,9 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
         submitButton.disabled = timeGroup.disabled || noneAvailable;
       };
 
-      for (const input of currencyInputs) {
-        input.addEventListener("change", () => updateRates(input.value));
-      }
-      updateRates(this.querySelector<HTMLInputElement>('[name="studio-currency"]:checked')!.value);
-
       const bookingButton = this.querySelector<HTMLButtonElement>("[data-open-booking]")!;
       bookingButton.hidden = false;
       bookingButton.addEventListener("click", () => {
-
         updateTimes();
         dialog.showModal();
       });
@@ -364,14 +201,14 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
         if (!form.reportValidity() || !time) return;
 
         const body = italian
-          ? `Ciao Vincenzo,\n\nvorrei richiedere un colloquio gratuito di 30 minuti.\nArgomento: ${summary.textContent}.\nData e ora preferite: ${date.value}, ${time.value} (Europe/Rome).\n\nIl mio progetto:\n\nGrazie!`
-          : `Hi Vincenzo,\n\nI’d like to request a free 30-minute call.\nTopic: ${summary.textContent}.\nPreferred date and time: ${date.value}, ${time.value} (Europe/Rome).\n\nAbout my project:\n\nThank you!`;
+          ? `Ciao Vincenzo,\n\nvorrei richiedere un colloquio gratuito di 30 minuti.\nData e ora preferite: ${date.value}, ${time.value} (Europe/Rome).\n\nDi cosa ho bisogno:\n\nGrazie!`
+          : `Hi Vincenzo,\n\nI’d like to request a free 30-minute call.\nPreferred date and time: ${date.value}, ${time.value} (Europe/Rome).\n\nWhat I need help with:\n\nThank you!`;
         location.href = `mailto:${this.dataset.email}?subject=${encodeURIComponent(form.dataset.subject!)}&body=${encodeURIComponent(body)}`;
       });
     }
   }
 
-  customElements.define("freelancing-page", FreelancingPage);
+  customElements.define("digital-services", DigitalServices);
 </script>
 
 <style>
@@ -381,20 +218,9 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
     margin-inline: auto;
   }
 
-  .engagement-note small { font-size: 0.66rem; color: #575757; }
   .studio-note { margin-top: 0.75rem; font-size: 0.88rem; opacity: 0.8; }
 
-  .rate-heading {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.55rem 1rem;
-    margin-bottom: 0.8rem;
-  }
-
-  .currency-switch { display: inline-flex; gap: 0.2rem; }
-  .currency-switch span, .slot span {
+  .slot span {
     display: block;
     padding: 0.4rem 0.55rem;
     border-radius: 0.3rem;
@@ -403,44 +229,14 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
     font-weight: 650;
     cursor: pointer;
   }
-  .currency-switch input:checked + span, .slot input:checked + span {
+  .slot input:checked + span {
     background: oklch(var(--p));
     color: oklch(var(--pc));
   }
-  .currency-switch input:focus-visible + span, .slot input:focus-visible + span {
+  .slot input:focus-visible + span {
     outline: 2px solid currentColor;
     outline-offset: 2px;
   }
-
-  .service-prices { border: 1px solid oklch(var(--b3)); }
-  .service-table { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
-  .service-table :is(th, td) { padding: 0.65rem 0.85rem; vertical-align: top; text-align: start; }
-  .service-table thead { background: oklch(var(--b2)); }
-  .service-table thead th:first-child { border-start-start-radius: 0.9rem; }
-  .service-table thead th:last-child { border-start-end-radius: 0.9rem; }
-  .service-table thead th { font-size: 0.83rem; }
-  .service-table tr + tr, .service-table tbody { border-top: 1px solid oklch(var(--b3)); }
-  .service-table td { width: 18%; font-variant-numeric: tabular-nums; }
-  .service-detail { display: block; font-weight: 400; opacity: 0.78; }
-  .hourly-price { font-size: 1.03rem; }
-  .rate-unit { font-size: 0.83rem; opacity: 0.77; }
-  .mobile-price-label { display: none; }
-
-  .skill-card { padding: 0.95rem 1rem; }
-  .skill-card h3 { font-size: 1rem; }
-  .skill-list { display: flex; flex-wrap: wrap; gap: 0.38rem; }
-  .skill-list li {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.25rem 0.45rem;
-    border: 1px solid oklch(var(--b3));
-    border-radius: 0.35rem;
-    font-size: 0.82rem;
-    line-height: 1.25;
-    text-align: start;
-  }
-  .skill-list svg { flex: none; fill: currentColor; }
 
   .studio-booking {
     display: flex;
@@ -466,7 +262,7 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
   .booking-header { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
   .booking-header h3 { font-size: 1.3rem; line-height: 1.25; font-weight: 700; }
   .booking-header button { font-size: 1.3rem; }
-  .booking-summary { margin: 0.35rem 0 0.4rem; font-weight: 650; }
+  #booking-note { margin-top: 0.35rem; }
   .booking-form { display: grid; gap: 0.75rem; margin-top: 0.9rem; }
   .booking-date { display: grid; gap: 0.3rem; font-weight: 650; }
   .booking-date input { width: min(100%, 13rem); min-width: 0; font-weight: 400; }
@@ -478,21 +274,4 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
   .slot span { padding-inline: 0.25rem; border: 1px solid #d5d0c3; }
   .slot input:disabled + span, .booking-times:disabled .slot span { opacity: 0.45; cursor: default; }
   .booking-form > button { justify-self: start; }
-
-  @media (max-width: 36rem) {
-    .service-table thead {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      overflow: hidden;
-      clip-path: inset(50%);
-      white-space: nowrap;
-    }
-    .service-table tbody { display: block; border-top: 0; }
-    .service-table tr { display: grid; grid-template-columns: 1fr; }
-    .service-table :is(th, td) { padding: 0.52rem 0.5rem; }
-    .service-table tbody th { grid-column: 1 / -1; padding-bottom: 0.15rem; }
-    .service-table td { width: auto; }
-    .mobile-price-label { display: block; font-size: 0.77rem; opacity: 0.8; }
-  }
 </style>
