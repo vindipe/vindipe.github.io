@@ -6,49 +6,56 @@ const locale = getLocale(Astro.url.pathname);
 const t = translator(Astro.url.pathname);
 const language = locale === "it" ? "it-IT" : "en-US";
 
+const skills = [
+  {
+    name: t("Web development", "Sviluppo web"),
+    detail: t("Interfaces, responsive layouts and deployment.", "Interfacce, layout per mobile e desktop, messa online."),
+  },
+  {
+    name: t("Programming and automation", "Programmazione e automazione"),
+    detail: t("Scripts, integrations and AI tools.", "Script, integrazione tra strumenti e uso dell’IA."),
+  },
+  {
+    name: t("Experiments and data analysis", "Sperimentazione e analisi dei dati"),
+    detail: t("Test design, measurement and interpretation.", "Progettazione dei test, misurazione e lettura dei risultati."),
+  },
+  {
+    name: t("Teaching and mentoring", "Formazione e affiancamento"),
+    detail: t("Technical explanations, hands-on exercises and code review.", "Spiegazioni tecniche, esercizi pratici e revisione del codice."),
+  },
+];
+
 const services = [
   {
-    id: "poster",
-    name: t("Design a poster", "Creare una locandina"),
-    description: t("Layout and graphics for an event or announcement, ready for print and social media.", "Impaginazione e grafica per un evento o un annuncio, pronte per la stampa e i social."),
-    rates: { EUR: 20, USD: 25 },
-    icon: "M4 3h16v18H4zM7 16l3-4 3 3 2-2 2 3M8 8h4",
-  },
-  {
-    id: "website",
-    name: t("Build a website", "Realizzare un sito vetrina"),
-    description: t("A responsive website to present your work, business or project.", "Un sito adatto anche a smartphone per presentare la tua attività o il tuo progetto."),
-    rates: { EUR: 40, USD: 45 },
-    icon: "M3 4h18v16H3zM3 9h18M6 6.5h.01M9 6.5h.01M7 13h5m-5 3h9",
-  },
-  {
-    id: "paper",
-    name: t("Prepare a research paper", "Preparare un articolo scientifico"),
-    description: t("Support with the structure, figures, editing and LaTeX typesetting of your manuscript.", "Supporto per la struttura del manoscritto, le figure, la revisione del testo e l’impaginazione in LaTeX."),
+    id: "consulting",
+    name: t("Technical consulting", "Consulenza tecnica"),
+    detail: t("Evaluate a technology choice or work through a specific problem.", "Valutare una scelta tecnica o affrontare un problema concreto."),
     rates: { EUR: 55, USD: 65 },
-    icon: "M6 3h8l4 4v14H6zM14 3v5h4M9 12h6m-6 4h6",
   },
   {
     id: "mentoring",
-    name: t("Book a tutoring session", "Fare una sessione di tutoraggio"),
-    description: t("One-to-one mentoring in programming, AI tools or blockchain, with practical exercises.", "Una sessione individuale di mentoring su programmazione, strumenti di IA o blockchain, con esercizi pratici."),
-    rates: { EUR: 35, USD: 40 },
-    icon: "m2 9 10-5 10 5-10 5zM6 11v5c3 3 9 3 12 0v-5m4-2v6",
+    name: "Mentoring",
+    detail: t("Plan your next steps and get feedback as you build your own project.", "Impostare i prossimi passi e ricevere un riscontro mentre lavori al tuo progetto."),
+    rates: { EUR: 45, USD: 50 },
   },
   {
-    id: "automation",
-    name: t("Automate a workflow", "Automatizzare un’attività"),
-    description: t("Connect tools and automate repetitive steps, such as file processing or reporting.", "Collegamento tra strumenti e automazione di passaggi ripetitivi, come l’elaborazione di file o la creazione di report."),
+    id: "tutoring",
+    name: t("Tutoring", "Tutoraggio"),
+    detail: t("One-to-one lessons in programming, AI tools or blockchain.", "Lezioni individuali su programmazione, strumenti di IA o blockchain."),
+    rates: { EUR: 35, USD: 40 },
+  },
+  {
+    id: "website",
+    name: t("Website development", "Realizzazione di siti web"),
+    detail: t("Build a website, add a page or improve an existing site.", "Creare un sito, aggiungere una pagina o migliorare un sito esistente."),
     rates: { EUR: 50, USD: 60 },
-    icon: "M3 3h6v6H3zM15 15h6v6h-6zM15 3h6v6h-6zM9 6h6m3 3v6",
   },
 ];
 
 const currencies = ["EUR", "USD"] as const;
-const initial = services[0];
-const initialRate = new Intl.NumberFormat(language, {
+const formatRate = new Intl.NumberFormat(language, {
   style: "currency", currency: "EUR", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0,
-}).format(initial.rates.EUR);
+});
 const appointmentHours = [[9, 12], [14, 17]];
 const slots = appointmentHours.map(([start, end]) => (
   Array.from({ length: (end - start) * 2 }, (_, index) => {
@@ -57,128 +64,153 @@ const slots = appointmentHours.map(([start, end]) => (
   })
 ));
 const email = "vincenzopaolo.diperna@outlook.com";
+const generalTopic = t("Discuss a project", "Parlare di un progetto");
 ---
 
 <BaseLayout
-  title={t("Digital Studio | Services and hourly rates | Vincenzo Di Perna", "Digital Studio | Servizi e tariffe orarie | Vincenzo Di Perna")}
+  title={t("Digital Studio | Independent services | Vincenzo Di Perna", "Digital Studio | Servizi indipendenti | Vincenzo Di Perna")}
   description={t(
-    "Explore hourly rates for website design, posters, research paper support, one-to-one tutoring and automation.",
-    "Consulta le tariffe orarie per siti vetrina, locandine, supporto alla scrittura scientifica, tutoraggio e automazioni."
+    "Independent technical consulting, mentoring, tutoring and web development. Explore hourly rates and request a free 30-minute call.",
+    "Consulenza tecnica, mentoring, tutoraggio e sviluppo web come attività indipendente. Consulta le tariffe orarie e richiedi un colloquio gratuito di 30 minuti."
   )}
   sideBarActiveItemID="services"
 >
-  <digital-studio class="studio" data-language={language} data-email={email}>
+  <digital-studio class="studio" data-language={language} data-email={email} data-general-topic={generalTopic}>
     <header class="studio-header">
-      <h1>Digital Studio<span aria-hidden="true">.</span></h1>
-      <p>{t(
-        "Websites, design, research support and one-to-one sessions. Pick an activity to see its hourly rate.",
-        "Siti web, grafica, supporto alla ricerca e sessioni individuali. Scegli un’attività per vedere la tariffa oraria."
+      <h1>Digital Studio</h1>
+      <p class="studio-lead">{t(
+        "I offer technical consulting, mentoring, tutoring and web development independently of my job and academic research.",
+        "Offro consulenza tecnica, mentoring, tutoraggio e sviluppo web come attività indipendente dal mio lavoro e dalla mia ricerca accademica."
+      )}</p>
+      <p class="studio-note">{t(
+        "Before taking on a project, I check that it is compatible with my professional commitments, including confidentiality and any potential conflicts of interest.",
+        "Prima di accettare un incarico, verifico che sia compatibile con i miei impegni professionali e con gli obblighi di riservatezza, e valuto eventuali conflitti di interesse."
       )}</p>
     </header>
 
-    <section class="studio-rates" aria-labelledby="rates">
-      <h2 id="rates" class="studio-heading">{t("Services and rates", "Servizi e tariffe")}</h2>
-      <div class="studio-grid">
-        <fieldset class="service-list">
-          <legend class="sr-only">{t("Choose a service", "Scegli un servizio")}</legend>
-          {services.map((service) => (
-            <label class="service-option">
-              <input
-                type="radio"
-                name="studio-service"
-                value={service.id}
-                checked={service === initial}
-                data-name={service.name}
-                data-description={service.description}
-                data-eur={service.rates.EUR}
-                data-usd={service.rates.USD}
-              />
-              <svg class="service-icon" aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round"><path d={service.icon} /></svg>
-              <span>{service.name}</span>
+    <section class="studio-section" aria-labelledby="skills">
+      <h2 id="skills">{t("What I can help with", "Le competenze che metto a disposizione")}</h2>
+      <dl class="skill-list">
+        {skills.map(({ name, detail }) => (
+          <div>
+            <dt>{name}</dt>
+            <dd>{detail}</dd>
+          </div>
+        ))}
+      </dl>
+      <p>{t(
+        "You can hire me for a single skill or combine several for a specific outcome. A website brings together design, development and deployment. An experiment can bring together test design, automation and data analysis.",
+        "Puoi richiedere una singola competenza oppure combinarne più di una per ottenere un risultato. Un sito mette insieme progettazione, sviluppo e pubblicazione. Un esperimento può richiedere la definizione dei test, la loro automazione e l’analisi dei risultati."
+      )}</p>
+    </section>
+
+    <section class="studio-section" aria-labelledby="rates">
+      <h2 id="rates">{t("Services and hourly rates", "Servizi e tariffe orarie")}</h2>
+      <p>{t(
+        "Rates vary by activity. Select a service to include it in your appointment request.",
+        "La tariffa varia a seconda dell’attività. Seleziona un servizio per indicarlo nella richiesta di appuntamento."
+      )}</p>
+      <div class="rate-heading">
+        <span>{t("Indicative hourly rates", "Tariffe orarie indicative")}</span>
+        <fieldset class="currency-switch">
+          <legend class="sr-only">{t("Currency", "Valuta")}</legend>
+          {currencies.map((currency) => (
+            <label>
+              <input class="sr-only" type="radio" name="studio-currency" value={currency} checked={currency === "EUR"} />
+              <span>{currency}</span>
             </label>
           ))}
         </fieldset>
-
-        <div class="rate-panel">
-          <div class="rate-top">
-            <span>{t("Hourly rate", "Tariffa oraria")}</span>
-            <fieldset class="currency-switch">
-              <legend class="sr-only">{t("Currency", "Valuta")}</legend>
-              {currencies.map((currency) => (
-                <label>
-                  <input class="sr-only" type="radio" name="studio-currency" value={currency} checked={currency === "EUR"} />
-                  <span>{currency}</span>
-                </label>
-              ))}
-            </fieldset>
-          </div>
-
-          <output class="rate-output">
-            <strong data-rate>{initialRate}</strong>
-            <span>{t("/ hour", "/ ora")}</span>
-          </output>
-
-          <div class="rate-detail">
-            <h3 data-service-name>{initial.name}</h3>
-            <p data-service-description>{initial.description}</p>
-          </div>
-
-          <p class="rate-note">{t(
-            "Indicative rate. We’ll agree on the hours and total before work starts.",
-            "Tariffa indicativa. Concordiamo le ore e il costo totale prima di iniziare."
-          )}</p>
-        </div>
       </div>
+      <fieldset class="service-list">
+        <legend class="sr-only">{t("Choose a service", "Scegli un servizio")}</legend>
+        {services.map((service) => (
+          <label class="service-row">
+            <input type="radio" name="studio-service" value={service.id} data-name={service.name} />
+            <span class="service-text">
+              <strong>{service.name}</strong>
+              <span>{service.detail}</span>
+            </span>
+            <span class="rate-cell">
+              <strong data-rate data-eur={service.rates.EUR} data-usd={service.rates.USD}>{formatRate.format(service.rates.EUR)}</strong>
+              <span>{t("/ hour", "/ ora")}</span>
+            </span>
+          </label>
+        ))}
+      </fieldset>
     </section>
 
-    <section class="studio-booking" aria-labelledby="appointment">
+    <section class="studio-section pricing" aria-labelledby="pricing">
+      <h2 id="pricing">{t("By the hour or by the project?", "A ore o a progetto?")}</h2>
+      <p>{t(
+        "With hourly billing, we agree on the rate, estimated hours and spending limit up front. You pay for the time actually spent. If the scope changes, we discuss any additional work before I go ahead.",
+        "Con la tariffa oraria concordiamo prima la tariffa, una stima delle ore e il limite di spesa. Paghi il tempo effettivamente impiegato. Se il lavoro cambia, concordiamo le attività aggiuntive prima di procedere."
+      )}</p>
+      <div class="pricing-example">
+        <h3>{t("Example: a simple website", "Esempio: un sito web semplice")}</h3>
+        <p>{t(
+          "Say you receive a fixed quote of €500. If I can deliver the same scope in one hour at €50/hour, you pay €50, or 90% less in this example. The final cost depends on the hours the work actually takes.",
+          "Supponiamo che tu riceva un preventivo fisso di 500 €. Se posso fare lo stesso lavoro in un’ora a 50 €/ora, paghi 50 €, cioè il 90% in meno in questo esempio. Il costo finale dipende dal tempo che il lavoro richiede."
+        )}</p>
+      </div>
+      <p>{t(
+        "For work with clearly defined deliverables, I can also quote a fixed total for the agreed scope. We can compare that total with the estimated hourly cost before choosing.",
+        "Per un lavoro con risultati ben definiti posso anche proporti un prezzo fisso per le attività concordate. Prima di scegliere, possiamo confrontarlo con il costo orario stimato."
+      )}</p>
+    </section>
+
+    <section class="studio-section studio-booking" aria-labelledby="appointment">
       <div>
-        <h2 id="appointment" class="studio-heading">{t("Let’s talk about your project", "Parliamo del tuo progetto")}</h2>
-        <p>{t("A 30-minute introductory call", "Un primo colloquio di 30 minuti")}</p>
+        <h2 id="appointment">{t("A free 30-minute call", "Un colloquio gratuito di 30 minuti")}</h2>
+        <p>{t(
+          "Tell me what you have in mind. We’ll discuss the work and how to price it.",
+          "Raccontami cosa ti serve. Vediamo insieme cosa c’è da fare e come stimare il costo."
+        )}</p>
       </div>
       <button class="btn btn-primary studio-cta" type="button" data-open-booking aria-haspopup="dialog" hidden>
         {t("Book an appointment", "Prenota un appuntamento")}
-        <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16v14H4zM4 10h16M8 4v4m8-4v4" /></svg>
       </button>
       <noscript><a href={inLanguage("/contact/", locale)}>{t("Request an appointment by email", "Richiedi un appuntamento via email")}</a></noscript>
     </section>
 
     <dialog class="booking-dialog" aria-labelledby="booking-title" aria-describedby="booking-note">
       <div class="booking-header">
-        <h3 id="booking-title">{t("Request an appointment", "Richiedi un appuntamento")}</h3>
+        <h3 id="booking-title">{t("Request a free appointment", "Richiedi un appuntamento gratuito")}</h3>
         <form method="dialog">
-          <button class="btn btn-ghost btn-circle btn-sm" aria-label={t("Close", "Chiudi")}>
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18" /></svg>
-          </button>
+          <button class="btn btn-ghost btn-circle btn-sm" aria-label={t("Close", "Chiudi")}>×</button>
         </form>
       </div>
-      <p class="booking-summary" data-booking-summary>{initial.name}</p>
+      <p class="booking-summary" data-booking-summary>{generalTopic}</p>
       <p id="booking-note">{t(
-        "Choose a preferred time for a 30-minute call. Send your request by email and I’ll confirm the time.",
-        "Scegli un orario per il colloquio di 30 minuti. Invia la richiesta via email e ti confermerò l’orario."
+        "Choose a time for your free 30-minute call. I’ll confirm the appointment by email.",
+        "Scegli un orario per il colloquio gratuito di 30 minuti. Ti confermerò l’appuntamento via email."
       )}</p>
 
-      <form class="booking-form" data-booking-form data-subject={t("Digital Studio · Appointment request", "Digital Studio · Richiesta appuntamento")}>
-        <div class="booking-fields">
-          <label>
-            {t("Preferred date", "Data preferita")}
-            <input class="input input-bordered" type="date" name="date" required />
-          </label>
-          <label>
-            {t("Start time", "Ora di inizio")}
-            <select class="select select-bordered" name="time" aria-describedby="booking-timezone" required>
-              <option value="">{t("Select a time", "Scegli un orario")}</option>
-              {slots.map((times, index) => (
-                <optgroup label={index === 0 ? t("Morning", "Mattina") : t("Afternoon", "Pomeriggio")}>
-                  {times.map((time) => <option value={time}>{time}</option>)}
-                </optgroup>
+      <form class="booking-form" data-booking-form data-subject={t("Digital Studio · Free appointment request", "Digital Studio · Richiesta appuntamento gratuito")}>
+        <label class="booking-date">
+          {t("Preferred date", "Data preferita")}
+          <input class="input input-bordered" type="date" name="date" required />
+        </label>
+        <fieldset class="booking-times" aria-describedby="booking-timezone" disabled>
+          <legend>{t("Start time", "Ora di inizio")}</legend>
+          <p id="booking-timezone">{t(
+            "Italy time (Europe/Rome) · 09:00–12:00 and 14:00–17:00",
+            "Ora italiana (Europe/Rome) · 09:00–12:00 e 14:00–17:00"
+          )}</p>
+          {slots.map((times, index) => (
+            <div class="slot-group" role="group" aria-label={index === 0 ? t("Morning", "Mattina") : t("Afternoon", "Pomeriggio")}>
+              {times.map((time) => (
+                <label class="slot">
+                  <input type="radio" class="sr-only" name="time" value={time} required />
+                  <span>{time}</span>
+                </label>
               ))}
-            </select>
-          </label>
-        </div>
-        <p id="booking-timezone">{t(
-          "Italy time (Europe/Rome) · 09:00–12:00 and 14:00–17:00",
-          "Ora italiana (Europe/Rome) · 09:00–12:00 e 14:00–17:00"
+            </div>
+          ))}
+        </fieldset>
+        <p class="studio-note" data-no-times hidden>{t(
+          "Choose another date to see more times.",
+          "Scegli un’altra data per vedere altri orari."
         )}</p>
         <button class="btn btn-primary" type="submit">{t("Open email", "Apri email")}</button>
       </form>
@@ -199,26 +231,25 @@ const email = "vincenzopaolo.diperna@outlook.com";
     connectedCallback() {
       if (this.#initialized) return;
       this.#initialized = true;
-      const rate = this.querySelector<HTMLElement>("[data-rate]")!;
-      const name = this.querySelector<HTMLElement>("[data-service-name]")!;
-      const description = this.querySelector<HTMLElement>("[data-service-description]")!;
-      const summary = this.querySelector<HTMLElement>("[data-booking-summary]")!;
+
       const dialog = this.querySelector("dialog")!;
-      const form = this.querySelector<HTMLFormElement>("[data-booking-form]")!;
+      const summary = dialog.querySelector<HTMLElement>("[data-booking-summary]")!;
+      const form = dialog.querySelector<HTMLFormElement>("[data-booking-form]")!;
       const date = form.querySelector<HTMLInputElement>('[name="date"]')!;
-      const time = form.querySelector<HTMLSelectElement>('[name="time"]')!;
+      const timeGroup = form.querySelector<HTMLFieldSetElement>(".booking-times")!;
+      const times = [...timeGroup.querySelectorAll<HTMLInputElement>('[name="time"]')];
+      const noTimes = form.querySelector<HTMLElement>("[data-no-times]")!;
+      const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
       const italian = this.dataset.language === "it-IT";
 
-      const updateRate = () => {
-        const service = this.querySelector<HTMLInputElement>('[name="studio-service"]:checked')!;
+      const updateRates = () => {
         const currency = this.querySelector<HTMLInputElement>('[name="studio-currency"]:checked')!.value;
-        const amount = Number(service.dataset[currency.toLowerCase()]);
-
-        name.textContent = summary.textContent = service.dataset.name!;
-        description.textContent = service.dataset.description!;
-        rate.textContent = new Intl.NumberFormat(this.dataset.language, {
+        const format = new Intl.NumberFormat(this.dataset.language, {
           style: "currency", currency, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0,
-        }).format(amount);
+        });
+        for (const price of this.querySelectorAll<HTMLElement>("[data-rate]")) {
+          price.textContent = format.format(Number(price.dataset[currency.toLowerCase()]));
+        }
       };
 
       const updateTimes = () => {
@@ -227,32 +258,40 @@ const email = "vincenzopaolo.diperna@outlook.com";
         const now = `${parts.hour}:${parts.minute}`;
 
         date.min = today;
-        for (const option of time.options) {
-          option.disabled = Boolean(option.value && date.value === today && option.value <= now);
+        timeGroup.disabled = !date.value || !date.validity.valid;
+        for (const time of times) {
+          time.disabled = date.value === today && time.value <= now;
+          if (time.disabled) time.checked = false;
         }
-        if (time.selectedOptions[0]?.disabled) time.value = "";
+        const noneAvailable = times.every((time) => time.disabled);
+        noTimes.hidden = !noneAvailable;
+        submitButton.disabled = timeGroup.disabled || noneAvailable;
       };
 
-      for (const input of this.querySelectorAll('input[type="radio"]')) {
-        input.addEventListener("change", updateRate);
+      for (const input of this.querySelectorAll('[name="studio-currency"]')) {
+        input.addEventListener("change", updateRates);
       }
-      updateRate();
+      updateRates();
 
       const bookingButton = this.querySelector<HTMLButtonElement>("[data-open-booking]")!;
       bookingButton.hidden = false;
       bookingButton.addEventListener("click", () => {
+        const service = this.querySelector<HTMLInputElement>('[name="studio-service"]:checked');
+        summary.textContent = service?.dataset.name ?? this.dataset.generalTopic!;
         updateTimes();
         dialog.showModal();
       });
+
       date.addEventListener("change", updateTimes);
       form.addEventListener("submit", (event) => {
         event.preventDefault();
         updateTimes();
-        if (!form.reportValidity()) return;
+        const time = times.find((slot) => slot.checked && !slot.disabled);
+        if (!form.reportValidity() || !time) return;
 
         const body = italian
-          ? `Ciao Vincenzo,\n\nvorrei richiedere un colloquio di 30 minuti per questa attività: ${name.textContent}.\nData e ora preferite: ${date.value}, ${time.value} (Europe/Rome).\n\nIl mio progetto:\n\nGrazie!`
-          : `Hi Vincenzo,\n\nI’d like to request a 30-minute call about this service: ${name.textContent}.\nPreferred date and time: ${date.value}, ${time.value} (Europe/Rome).\n\nAbout my project:\n\nThank you!`;
+          ? `Ciao Vincenzo,\n\nvorrei richiedere un colloquio gratuito di 30 minuti.\nArgomento: ${summary.textContent}.\nData e ora preferite: ${date.value}, ${time.value} (Europe/Rome).\n\nIl mio progetto:\n\nGrazie!`
+          : `Hi Vincenzo,\n\nI’d like to request a free 30-minute call.\nTopic: ${summary.textContent}.\nPreferred date and time: ${date.value}, ${time.value} (Europe/Rome).\n\nAbout my project:\n\nThank you!`;
         location.href = `mailto:${this.dataset.email}?subject=${encodeURIComponent(form.dataset.subject!)}&body=${encodeURIComponent(body)}`;
       });
     }
@@ -264,102 +303,109 @@ const email = "vincenzopaolo.diperna@outlook.com";
 <style>
   .studio {
     display: block;
-    width: 100%;
-    max-width: 52rem;
+    width: min(48rem, 100%);
     margin-inline: auto;
-    color: #202431;
-  }
-
-  .studio-header { margin-bottom: clamp(1.75rem, 5vw, 3rem); }
-  .studio-header h1 {
-    font-size: clamp(2.65rem, 6.8vw, 4.45rem);
-    line-height: 1.03;
-    font-weight: 750;
-    letter-spacing: -0.065em;
-  }
-  .studio-header h1 span { color: #a85d08; }
-  .studio-header p { margin-top: 0.85rem; max-width: 39rem; font-size: 1.12rem; color: #4e5360; }
-
-  .studio-heading { font-size: 1.3rem; font-weight: 750; letter-spacing: -0.025em; }
-  .studio-rates > h2 { margin-bottom: 0.85rem; }
-  .studio-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    gap: 1rem;
-  }
-  .service-list {
-    display: grid;
-    align-content: stretch;
-    gap: 0.45rem;
-    min-width: 0;
-  }
-  .service-option {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    min-height: 3.5rem;
-    padding: 0.55rem 0.8rem;
-    border: 1px solid #dddfe4;
-    border-radius: 0.8rem;
+    padding: clamp(1.1rem, 3.5vw, 2.5rem);
+    border: 1px solid #e4e2d9;
+    border-radius: 0.375rem;
     background: #fff;
-    cursor: pointer;
-    font-weight: 650;
-    line-height: 1.25;
+    color: #282723;
   }
-  .service-option:hover { border-color: #aa7b36; }
-  .service-option:has(input:checked) {
-    background: #fff4d7;
-    border-color: #a97528;
-  }
-  .service-option input { flex: none; accent-color: #805000; width: 1rem; height: 1rem; }
-  .service-icon { flex: none; color: #615849; }
 
-  .rate-panel {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-    min-width: 0;
-    padding: clamp(1.05rem, 3.5vw, 1.7rem);
-    border-radius: 1rem;
-    color: #f7f7fa;
-    background: radial-gradient(ellipse at 100% 0%, #33394d, #222635 68%);
-    box-shadow: 0 0.55rem 1.5rem #1c22331f;
-  }
-  .rate-top { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-  .rate-top > span { font-size: 0.91rem; font-weight: 650; }
-  .currency-switch {
-    display: inline-flex;
-    gap: 0.15rem;
-    padding: 0.18rem;
-    border: 1px solid #676d7e;
-    border-radius: 0.55rem;
-    background: #202433;
-  }
-  .currency-switch span {
-    display: block;
-    min-width: 2.7rem;
-    padding: 0.36rem 0.46rem;
-    border-radius: 0.35rem;
-    text-align: center;
-    font-size: 0.78rem;
+  .studio-header h1 {
+    margin-bottom: 0.75rem;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    line-height: 1.12;
+    letter-spacing: -0.045em;
     font-weight: 750;
+  }
+
+  .studio p, .studio dd { text-align: start; }
+  .studio-lead { max-width: 40rem; font-size: 1.12rem; line-height: 1.6; }
+  .studio-note { margin-top: 0.6rem; font-size: 0.92rem; color: #5c5850; }
+
+  .studio-section {
+    margin-top: clamp(1.55rem, 4vw, 2.4rem);
+    padding-top: clamp(1.15rem, 3vw, 1.65rem);
+    border-top: 1px solid #e2ded4;
+  }
+
+  .studio-section h2 {
+    margin-bottom: 0.45rem;
+    font-size: 1.35rem;
+    line-height: 1.25;
+    font-weight: 700;
+    letter-spacing: -0.024em;
+  }
+
+  .skill-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 1.25rem;
+    margin: 0.85rem 0 1rem;
+  }
+
+  .skill-list dt { font-weight: 700; }
+  .skill-list dd { color: #5c5850; font-size: 0.94rem; }
+
+  .rate-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    padding-bottom: 0.55rem;
+    border-bottom: 1px solid #d5d0c3;
+    font-weight: 650;
+  }
+
+  .currency-switch { display: inline-flex; gap: 0.15rem; }
+  .currency-switch span, .slot span {
+    display: block;
+    padding: 0.4rem 0.55rem;
+    border-radius: 0.25rem;
+    text-align: center;
+    font-size: 0.87rem;
+    font-weight: 650;
     cursor: pointer;
   }
-  .currency-switch input:checked + span { background: #ffda79; color: #26202b; }
-  .currency-switch input:focus-visible + span { outline: 2px solid #fff; outline-offset: 2px; }
-  .rate-output { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.1rem 0.5rem; }
-  .rate-output strong {
-    font-size: clamp(2.75rem, 6.5vw, 4rem);
-    line-height: 1.02;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.065em;
-    color: #ffda79;
+
+  .currency-switch input:checked + span, .slot input:checked + span {
+    background: #fff0b5;
+    color: #3d2d07;
   }
-  .rate-output span, .rate-detail p, .rate-note { color: #d4d8e4; }
-  .rate-detail { border-top: 1px solid #ffffff38; padding-top: 0.8rem; }
-  .rate-detail h3 { font-size: 1rem; font-weight: 700; }
-  .rate-detail p { margin-top: 0.25rem; font-size: 0.95rem; }
-  .rate-note { margin-top: auto; font-size: 0.82rem; }
+
+  .currency-switch input:focus-visible + span, .slot input:focus-visible + span {
+    outline: 2px solid #805000;
+    outline-offset: 2px;
+  }
+
+  .service-list { min-width: 0; }
+  .service-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 0.65rem;
+    padding: 0.72rem 0.4rem;
+    border-bottom: 1px solid #e2ded4;
+    cursor: pointer;
+  }
+
+  .service-row:hover, .service-row:has(input:checked) { background: #fbf8ed; }
+  .service-row input { width: 1rem; height: 1rem; margin-top: 0.22rem; accent-color: #805000; }
+  .service-text > span { display: block; color: #5c5850; font-size: 0.94rem; }
+  .rate-cell { text-align: end; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .rate-cell > span { font-size: 0.85rem; color: #5c5850; }
+
+  .pricing-example {
+    margin: 0.9rem 0;
+    padding: 0.75rem 0.9rem;
+    border-inline-start: 3px solid #b18028;
+    background: #faf7ef;
+  }
+
+  .pricing-example h3 { margin-bottom: 0.25rem; font-weight: 700; }
 
   .studio-booking {
     display: flex;
@@ -367,47 +413,40 @@ const email = "vincenzopaolo.diperna@outlook.com";
     align-items: center;
     gap: 0.8rem 1rem;
     flex-wrap: wrap;
-    margin-top: 1.4rem;
-    padding: 1rem 1.1rem;
-    border: 1px solid #dedfe5;
-    border-radius: 0.8rem;
-    background: #fff;
   }
-  .studio-booking p { margin-top: 0.2rem; color: #4e5360; }
-  .studio-cta { gap: 0.55rem; }
+
   .studio-cta[hidden] { display: none; }
 
   .booking-dialog {
     width: min(33rem, calc(100% - 2rem));
     max-height: calc(100dvh - 2rem);
     padding: clamp(1rem, 4vw, 1.65rem);
-    border: 1px solid #dedfe5;
-    border-radius: 1rem;
+    border: 1px solid #e2ded4;
+    border-radius: 0.5rem;
     background: #fff;
-    color: #202431;
-    box-shadow: 0 1.5rem 4rem #171a3454;
+    color: #282723;
   }
-  .booking-dialog::backdrop { background: #1a1d30a6; }
+
+  .booking-dialog::backdrop { background: #22221ea3; }
   .booking-header { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
-  .booking-header h3 { font-size: 1.35rem; font-weight: 750; }
-  .booking-summary { margin: 0.35rem 0 0.5rem; font-weight: 700; }
-  .booking-form { margin-top: 1.1rem; }
-  .booking-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
-  .booking-fields label { display: grid; gap: 0.35rem; min-width: 0; font-weight: 650; }
-  .booking-fields :is(input, select) { width: 100%; min-width: 0; font-weight: 400; }
-  #booking-timezone { margin: 0.6rem 0 1rem; font-size: 0.85rem; color: #4e5360; text-align: start; }
+  .booking-header h3 { font-size: 1.3rem; line-height: 1.25; font-weight: 700; }
+  .booking-header button { font-size: 1.3rem; }
+  .booking-summary { margin: 0.35rem 0 0.4rem; font-weight: 650; }
+  .booking-form { display: grid; gap: 0.75rem; margin-top: 0.9rem; }
+  .booking-date { display: grid; gap: 0.3rem; font-weight: 650; }
+  .booking-date input { width: min(100%, 13rem); min-width: 0; font-weight: 400; }
+  .booking-times { min-width: 0; }
+  .booking-times legend { font-weight: 650; }
+  #booking-timezone { margin: 0.2rem 0 0.55rem; font-size: 0.85rem; color: #5c5850; }
+  .slot-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(3.65rem, 1fr)); gap: 0.35rem; }
+  .slot-group + .slot-group { margin-top: 0.35rem; }
+  .slot span { padding-inline: 0.25rem; border: 1px solid #d5d0c3; }
+  .slot input:disabled + span, .booking-times:disabled .slot span { opacity: 0.45; cursor: default; }
+  .booking-form > button { justify-self: start; }
 
-  @media (max-width: 42rem) {
-    .studio-grid { grid-template-columns: minmax(0, 1fr); }
-    .service-option { min-height: 2.95rem; }
-  }
-
-  @media (max-width: 27rem) {
-    .booking-fields { grid-template-columns: minmax(0, 1fr); }
-    .studio-cta { width: 100%; }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .service-option, .currency-switch span { transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease; }
+  @media (max-width: 34rem) {
+    .skill-list { grid-template-columns: 1fr; }
+    .service-row { gap: 0.5rem; }
+    .rate-cell > span { display: block; }
   }
 </style>

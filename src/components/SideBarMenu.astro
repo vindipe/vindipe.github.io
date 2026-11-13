@@ -10,15 +10,15 @@ const items = [
   { id: "research", path: "/research/", label: t("Research", "Ricerca") },
   { id: "tutorials", path: "/tutorials/", label: "Blockchain 101" },
   { id: "cv", path: "/cv/", label: "CV" },
-  { id: "services", path: "/services/", label: "Digital Studio" },
+  { id: "services", path: "/services/", label: "Digital Studio", sectionMenu: false },
   { id: "contact", path: "/contact/", label: t("Contact me", "Contatti") },
 ];
 ---
 
 <nav aria-label={t("Main navigation", "Navigazione principale")} class="grow shrink overflow-y-auto">
   <ul class="menu menu-md">
-    {items.map(({ id, path, label }) => (
-      <li data-page-menu={inLanguage(path, locale)}>
+    {items.map(({ id, path, label, sectionMenu }) => (
+      <li data-page-menu={inLanguage(path, locale)} data-section-menu={sectionMenu === false ? "off" : undefined}>
         <a
           class:list={["py-3 text-base font-medium", id === sideBarActiveItemID && "bg-primary-content/20"]}
           href={inLanguage(path, locale)}
@@ -46,7 +46,7 @@ const items = [
 
   function addSections(menu: HTMLElement, entries: Section[], path: string, current: boolean) {
     const template = document.querySelector<HTMLTemplateElement>("#page-sections-template");
-    if (!template || entries.length < 2 || menu.querySelector(".page-sections")) return;
+    if (menu.dataset.sectionMenu === "off" || !template || entries.length < 2 || menu.querySelector(".page-sections")) return;
     const fragment = template.content.cloneNode(true) as DocumentFragment;
     const details = fragment.querySelector("details")!;
     const summary = details.querySelector("summary")!;
@@ -127,9 +127,14 @@ const items = [
 
   .menu [data-page-menu]:has(> .page-sections) {
     position: relative;
+    --page-menu-row: 3.25rem;
   }
 
   .menu [data-page-menu]:has(> .page-sections) > a {
+    display: flex;
+    align-items: center;
+    min-height: var(--page-menu-row);
+    padding-block: 0;
     padding-inline-end: 3.5rem;
   }
 
@@ -143,6 +148,8 @@ const items = [
     cursor: pointer;
   }
 
+  .menu .page-sections > summary::-webkit-details-marker { display: none; }
+
   .menu .page-sections > summary::after {
     display: none;
   }
@@ -153,8 +160,11 @@ const items = [
     inset-inline-end: 0;
     display: grid;
     place-items: center;
+    place-content: center;
     width: 3.15rem;
-    height: 3rem;
+    height: var(--page-menu-row);
+    padding: 0;
+    list-style: none;
   }
 
   .menu .page-sections[open] > summary svg {
