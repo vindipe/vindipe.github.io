@@ -8,6 +8,7 @@ const language = locale === "it" ? "it-IT" : "en-US";
 
 const skills = [
   {
+    glyph: "M4 5h16v14H4zM4 9h16M8 13l2 2-2 2m5 0h3",
     name: t("Web and interfaces", "Web e interfacce"),
     tools: [
       { label: "HTML", icon: "html5", color: "#bd3c17" },
@@ -15,16 +16,20 @@ const skills = [
       { label: "JavaScript", icon: "javascript", color: "#715c00" },
       { label: "TypeScript", icon: "typescript", color: "#245c9d" },
       { label: "Astro" },
+      { label: "Tailwind CSS" },
       { label: t("Responsive interfaces", "Interfacce responsive") },
     ],
   },
   {
+    glyph: "M4 4h16v6H4zM4 14h16v6H4zM7 7h1m-1 10h1m4-10h5m-5 10h5",
     name: t("Infrastructure and deployment", "Infrastruttura e pubblicazione"),
     tools: [
       { label: "Linux", icon: "linux" },
       { label: "Docker", icon: "docker", color: "#1768b3" },
       { label: "Kubernetes", icon: "kubernetes", color: "#2855b8" },
       { label: "Git", icon: "git", color: "#ba3820" },
+      { label: "Git LFS" },
+      { label: "GitHub Pages" },
       { label: "GitHub Actions", icon: "githubactions", color: "#245c9d" },
       { label: t("Networking and cloud", "Reti e cloud") },
       { label: "Terraform" },
@@ -34,6 +39,7 @@ const skills = [
     ],
   },
   {
+    glyph: "M4 4v16h16M8 16v-4m4 4V8m4 8v-6m4 6V5",
     name: t("Automation, data and testing", "Automazione, dati e test"),
     tools: [
       { label: "Python", icon: "python", color: "#27608d" },
@@ -48,71 +54,79 @@ const skills = [
     ],
   },
   {
+    glyph: "M5 5h14v10H9l-4 4zM8 9h8m-8 3h5",
     name: t("Consulting, training and support", "Consulenza, formazione e supporto"),
     tools: [
       { label: t("Digital strategy", "Strategia digitale") },
       { label: t("Technical training", "Formazione tecnica") },
       { label: t("Remote assistance", "Assistenza da remoto") },
       { label: "Code review" },
+      { label: t("Digital problem solving", "Problem solving digitale") },
+      { label: t("AI tool training", "Formazione sugli strumenti di IA") },
+    ],
+  },
+  {
+    glyph: "m12 3 8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9",
+    name: t("Distributed systems and blockchain", "Sistemi distribuiti e blockchain"),
+    tools: [
       { label: "Blockchain / DLT" },
       { label: t("Blockchain nodes", "Nodi blockchain") },
       { label: t("Protocol evaluation", "Valutazione di protocolli") },
       { label: "Ethereum / EVM", icon: "ethereum", color: "#485374" },
+      { label: t("Consensus and permissioned networks", "Consenso e reti ad accesso autorizzato") },
+      { label: t("Network emulation and topologies", "Emulazione e topologie di rete") },
+      { label: t("Throughput and latency", "Throughput e latenza") },
+      { label: t("Energy per transaction", "Consumo energetico per transazione") },
     ],
+    href: "/research/lilith-benchmarking-framework/",
+    reference: "Lilith",
+  },
+  {
+    glyph: "M5 4h11l3 3v13H5zM15 4v4h4M8 12h8m-8 4h6",
+    name: t("Research methods and artifacts", "Metodi di ricerca e artefatti"),
+    tools: [
+      { label: t("Workload design", "Progettazione dei carichi di lavoro") },
+      { label: t("Experiment orchestration", "Orchestrazione degli esperimenti") },
+      { label: t("Repeatability and predictability", "Ripetibilità e prevedibilità") },
+      { label: t("Dataset preparation and release", "Preparazione e pubblicazione di dataset") },
+      { label: t("Scientific figures and reporting", "Grafici e documentazione scientifica") },
+      { label: t("Digital asset data analysis", "Analisi dei dati sugli asset digitali") },
+    ],
+    href: "/research/blockchain-repeatability-dataset/",
+    reference: t("Benchmark dataset", "Dataset dei benchmark"),
   },
 ];
 
 const services = [
   {
+    id: "mentoring",
+    name: t("Consulting, mentoring and tutoring", "Consulenza, mentoring e tutoring"),
+    detail: t("Individual guidance on programming, digital tools or a technical decision.", "Sessioni individuali su programmazione, strumenti digitali o scelte tecniche."),
+    marketUsd: [70, 130],
+    hourly: { EUR: 45, USD: 50, CHF: 45 },
+  },
+  {
     id: "strategy",
-    name: t("Digital strategy and planning", "Consulenza e pianificazione della strategia digitale"),
+    name: t("Digital strategy planning", "Pianificazione strategia digitale"),
     detail: t("Review your tools and define priorities and next steps.", "Analisi degli strumenti, scelta delle priorità e piano d’azione."),
     marketUsd: [90, 375],
-    source: "https://www.upwork.com/hire/digital-strategy-freelancers/cost/",
-    basis: "3–5 h × $30–75/h",
     hourly: { EUR: 55, USD: 65, CHF: 55 },
-    hours: [1, 3],
   },
   {
     id: "infrastructure",
-    name: t("Digital infrastructure setup", "Creazione e implementazione di infrastrutture digitali"),
+    name: t("Implement digital infrastructure", "Implementare infrastruttura digitale"),
     detail: t("Configure and deploy an application with Docker and an automated publishing workflow.", "Configurazione e pubblicazione di un’applicazione con Docker e una procedura di rilascio automatizzata."),
     marketUsd: [160, 600],
-    source: "https://www.upwork.com/hire/devops-engineers/cost/",
-    basis: "4–6 h × $40–100/h",
     hourly: { EUR: 60, USD: 70, CHF: 60 },
-    hours: [4, 6],
   },
   {
     id: "support",
     name: t("Digital support", "Supporto digitale"),
     detail: t("Get remote help with a specific issue on your computer.", "Assistenza da remoto per un problema al PC."),
     marketUsd: [15, 60],
-    source: "https://www.upwork.com/hire/technical-support-agents/cost/",
-    basis: "1–2 h × $15–30/h",
     hourly: { EUR: 35, USD: 40, CHF: 35 },
-    hours: [0.5, 1.5],
   },
-  {
-    id: "website",
-    name: t("Website development", "Realizzazione di siti web"),
-    detail: t("A single page with supplied content, mobile checks and deployment.", "Una pagina con contenuti già pronti, verifica su mobile e messa online."),
-    marketUsd: [150, 600],
-    source: "https://www.upwork.com/hire/landing-pages-freelancers/",
-    basis: null,
-    hourly: { EUR: 50, USD: 60, CHF: 50 },
-    hours: [1.5, 3],
-  },
-  {
-    id: "mentoring",
-    name: t("Mentoring and tutoring", "Mentoring e tutoraggio"),
-    detail: t("Two one-to-one sessions on programming, digital tools or a project of your own.", "Due incontri individuali su programmazione, strumenti digitali o un tuo progetto."),
-    marketUsd: [70, 130],
-    source: "https://www.wyzant.com/tutors/computer-programming",
-    basis: "2 h × $35–65/h",
-    hourly: { EUR: 45, USD: 50, CHF: 45 },
-    hours: [1.5, 2.5],
-  },
+
 ];
 
 const currencies = ["EUR", "USD", "CHF"] as const;
@@ -123,7 +137,6 @@ const marketRange = (range: number[], currency: keyof typeof marketFx) =>
 const formatRate = new Intl.NumberFormat(language, {
   style: "currency", currency: "EUR", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0,
 });
-const formatHours = new Intl.NumberFormat(language);
 const hourLabel = t("/hour", "/ora");
 const appointmentHours = [[9, 12], [14, 17]];
 const slots = appointmentHours.map(([start, end]) => (
@@ -139,8 +152,8 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
 <BaseLayout
   title={t("Freelancing | Independent services | Vincenzo Di Perna", "Freelancing | Servizi indipendenti | Vincenzo Di Perna")}
   description={t(
-    "Independent technical consulting, mentoring, tutoring and web development. Explore hourly rates and request a free 30-minute call.",
-    "Consulenza tecnica, mentoring, tutoraggio e sviluppo web come attività indipendente. Consulta le tariffe orarie e richiedi un colloquio gratuito di 30 minuti."
+    "Independent consulting, tutoring, digital strategy, infrastructure and support. Explore hourly rates and request a free 30-minute call.",
+    "Consulenza, mentoring, tutoring, strategia digitale, infrastruttura e supporto. Consulta le tariffe orarie e richiedi un colloquio gratuito di 30 minuti."
   )}
   sideBarActiveItemID="services"
 >
@@ -172,9 +185,8 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
           <thead role="rowgroup">
             <tr role="row">
               <th scope="col" role="columnheader">{t("Service", "Servizio")}</th>
-              <th scope="col" role="columnheader">{t("Market benchmark", "Riferimento di mercato")}</th>
+              <th scope="col" role="columnheader">{t("Estimated market cost", "Stima di mercato")}</th>
               <th scope="col" role="columnheader">{t("My hourly rate", "La mia tariffa oraria")}</th>
-              <th scope="col" role="columnheader">{t("Estimated time", "Tempo stimato")}</th>
             </tr>
           </thead>
           <tbody role="rowgroup">
@@ -190,59 +202,44 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
                   </label>
                 </th>
                 <td role="cell">
-                  <span class="mobile-price-label" aria-hidden="true">{t("Market benchmark", "Riferimento di mercato")}</span>
+                  <span class="mobile-price-label" aria-hidden="true">{t("Estimated market cost", "Stima di mercato")}</span>
                   <strong data-rate data-eur={marketRange(service.marketUsd, "EUR").join(",")} data-usd={service.marketUsd.join(",")} data-chf={marketRange(service.marketUsd, "CHF").join(",")}>{formatRate.formatRange(marketRange(service.marketUsd, "EUR")[0], marketRange(service.marketUsd, "EUR")[1])}</strong>
                 </td>
                 <td role="cell">
                   <span class="mobile-price-label" aria-hidden="true">{t("My hourly rate", "La mia tariffa oraria")}</span>
                   <strong class="hourly-price" data-rate data-eur={service.hourly.EUR} data-usd={service.hourly.USD} data-chf={service.hourly.CHF}>{formatRate.format(service.hourly.EUR)}</strong><span class="rate-unit"> {hourLabel}</span>
                 </td>
-                <td role="cell">
-                  <span class="mobile-price-label" aria-hidden="true">{t("Estimated time", "Tempo stimato")}</span>
-                  <span>{formatHours.formatRange(service.hours[0], service.hours[1])} h</span>
-                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p class="studio-note">{t(
-        "I work by the hour. Select a service to include it in your appointment request. Market figures show the indicative total cost of a comparable assignment.",
-        "Lavoro a ore. Puoi selezionare un servizio per includerlo nella richiesta di appuntamento. Le fasce di mercato indicano il costo totale orientativo di un incarico comparabile."
-      )}</p>
-      <details class="studio-note">
-        <summary class="cursor-pointer underline">{t("Sources and calculation", "Fonti e calcolo")}</summary>
-        <ul class="list-disc pl-5 mt-2">
-          {services.map(({ name, source, basis }) => (
-            <li><a class="underline" href={source}>{name}</a> · {basis ?? t("Published range for single-page design", "Fascia pubblicata per il design di una pagina")}</li>
-          ))}
-        </ul>
-        <p class="mt-2">{t(
-          "Where a source lists hourly rates, the total uses the assumed duration shown here. EUR and CHF values use rounded ECB conversions from 12 November 2026.",
-          "Quando la fonte indica una tariffa oraria, il totale usa la durata ipotizzata qui sopra. EUR e CHF sono conversioni arrotondate al cambio BCE del 12 novembre 2026."
-        )} <a class="underline" href="https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html">{t("ECB exchange rates", "Cambi BCE")}</a></p>
-      </details>
     </section>
 
     <section class="mb-10" aria-labelledby="skills">
       <h2 id="skills" class="text-3xl font-bold mb-4">{t("Skills", "Competenze")}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {skills.map(({ name, tools }) => (
+        {skills.map(({ name, tools, glyph, href, reference }) => (
           <div class="card bg-base-100 shadow-md">
             <div class="card-body skill-card">
               <h3 class="card-title">{name}</h3>
               <ul class="skill-list">
                 {tools.map((tool) => (
                   <li>
-                    {"icon" in tool && (
+                    {"icon" in tool ? (
                       <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" style={`color: ${tool.color ?? "currentColor"}`}>
                         <use href={`/icons/freelancing-skills.svg#${tool.icon}`} />
+                      </svg>
+                    ) : (
+                      <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24">
+                        <path d={glyph} fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
                       </svg>
                     )}
                     {tool.label}
                   </li>
                 ))}
               </ul>
+              {href && <a class="text-sm underline" href={inLanguage(href, locale)}>{reference}</a>}
             </div>
           </div>
         ))}
@@ -516,7 +513,7 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
       white-space: nowrap;
     }
     .service-table tbody { display: block; border-top: 0; }
-    .service-table tr { display: grid; grid-template-columns: 1.1fr 1fr 0.8fr; }
+    .service-table tr { display: grid; grid-template-columns: 1fr 1fr; }
     .service-table :is(th, td) { padding: 0.52rem 0.5rem; }
     .service-table tbody th { grid-column: 1 / -1; padding-bottom: 0.15rem; }
     .service-table td { width: auto; }
