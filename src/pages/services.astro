@@ -99,28 +99,28 @@ const skills = [
 
 const services = [
   {
-    id: "strategy",
+
     name: t("Consulting and digital strategy planning", "Consulenza e pianificazione strategia digitale"),
     detail: t("Review your tools, explore options and define practical next steps.", "Analisi degli strumenti, valutazione delle opzioni e definizione dei prossimi passi."),
     marketUsd: [90, 375],
     hourly: { EUR: 20, USD: 22, CHF: 18 },
   },
   {
-    id: "infrastructure",
+
     name: t("Implement digital infrastructure", "Implementare infrastruttura digitale"),
     detail: t("Configure and deploy an application with Docker and an automated publishing workflow.", "Configurazione e pubblicazione di un’applicazione con Docker e una procedura di rilascio automatizzata."),
     marketUsd: [160, 600],
     hourly: { EUR: 60, USD: 70, CHF: 60 },
   },
   {
-    id: "support",
+
     name: t("Digital support", "Supporto digitale"),
     detail: t("Get remote help with a specific issue on your computer.", "Assistenza da remoto per un problema al PC."),
     marketUsd: [15, 60],
     hourly: { EUR: 35, USD: 40, CHF: 35 },
   },
   {
-    id: "mentoring",
+
     name: t("Mentoring and tutoring", "Mentoring e tutoring"),
     detail: t("Individual sessions on programming, digital tools or your own project.", "Sessioni individuali su programmazione, strumenti digitali o un tuo progetto."),
     marketUsd: [70, 130],
@@ -156,7 +156,7 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
   )}
   sideBarActiveItemID="services"
 >
-  <freelancing-page class="studio" data-language={language} data-email={email} data-general-topic={generalTopic}>
+  <freelancing-page class="studio" data-language={language} data-email={email}>
     <header class="mb-7">
       <h1 class="text-4xl font-bold mb-4">Freelancing</h1>
       <p class="text-lg leading-relaxed opacity-90">{t(
@@ -192,13 +192,8 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
             {services.map((service) => (
               <tr role="row">
                 <th scope="row" role="rowheader">
-                  <label class="service-choice">
-                    <input type="radio" name="studio-service" value={service.id} data-name={service.name} />
-                    <span>
-                      <strong>{service.name}</strong>
-                      <span class="service-detail">{service.detail}</span>
-                    </span>
-                  </label>
+                  <strong>{service.name}</strong>
+                  <span class="service-detail">{service.detail}</span>
                 </th>
                 <td role="cell">
                   <span class="mobile-price-label" aria-hidden="true">{t("Estimated market cost", "Stima di mercato")}</span>
@@ -370,8 +365,7 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
       const bookingButton = this.querySelector<HTMLButtonElement>("[data-open-booking]")!;
       bookingButton.hidden = false;
       bookingButton.addEventListener("click", () => {
-        const service = this.querySelector<HTMLInputElement>('[name="studio-service"]:checked');
-        summary.textContent = service?.dataset.name ?? this.dataset.generalTopic!;
+
         updateTimes();
         dialog.showModal();
       });
@@ -440,10 +434,7 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
   .service-table thead th:last-child { border-start-end-radius: 0.9rem; }
   .service-table thead th { font-size: 0.83rem; }
   .service-table tr + tr, .service-table tbody { border-top: 1px solid oklch(var(--b3)); }
-  .service-table tbody tr:has(input:checked) { background: oklch(var(--p) / 0.12); }
   .service-table td { width: 18%; font-variant-numeric: tabular-nums; }
-  .service-choice { display: flex; align-items: start; gap: 0.5rem; cursor: pointer; }
-  .service-choice input { flex: none; margin-top: 0.24em; accent-color: #865500; }
   .service-detail { display: block; font-weight: 400; opacity: 0.78; }
   .hourly-price { font-size: 1.03rem; }
   .rate-unit { font-size: 0.83rem; opacity: 0.77; }
