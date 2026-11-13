@@ -8,47 +8,89 @@ const language = locale === "it" ? "it-IT" : "en-US";
 
 const skills = [
   {
-    name: t("Web development", "Sviluppo web"),
-    detail: t("Interfaces, responsive layouts and deployment.", "Interfacce, layout per mobile e desktop, messa online."),
+    name: t("Web and interfaces", "Web e interfacce"),
+    tools: [
+      { label: "HTML", icon: "html5", color: "#bd3c17" },
+      { label: "CSS", icon: "css", color: "#663399" },
+      { label: "JavaScript", icon: "javascript", color: "#715c00" },
+      { label: "TypeScript", icon: "typescript", color: "#245c9d" },
+    ],
   },
   {
-    name: t("Programming and automation", "Programmazione e automazione"),
-    detail: t("Scripts, integrations and AI tools.", "Script, integrazione tra strumenti e uso dell’IA."),
+    name: t("Infrastructure and deployment", "Infrastruttura e pubblicazione"),
+    tools: [
+      { label: "Linux", icon: "linux" },
+      { label: "Docker", icon: "docker", color: "#1768b3" },
+      { label: "Kubernetes", icon: "kubernetes", color: "#2855b8" },
+      { label: "Git", icon: "git", color: "#ba3820" },
+      { label: "GitHub Actions", icon: "githubactions", color: "#245c9d" },
+      { label: t("Networking and cloud", "Reti e cloud") },
+    ],
   },
   {
-    name: t("Experiments and data analysis", "Sperimentazione e analisi dei dati"),
-    detail: t("Test design, measurement and interpretation.", "Progettazione dei test, misurazione e lettura dei risultati."),
+    name: t("Automation, data and testing", "Automazione, dati e test"),
+    tools: [
+      { label: "Python", icon: "python", color: "#27608d" },
+      { label: "Bash" },
+      { label: "Jupyter", icon: "jupyter", color: "#a8491c" },
+      { label: t("Dashboards", "Dashboard") },
+      { label: "Benchmarking" },
+      { label: t("Reproducible experiments", "Esperimenti riproducibili") },
+    ],
   },
   {
-    name: t("Teaching and mentoring", "Formazione e affiancamento"),
-    detail: t("Technical explanations, hands-on exercises and code review.", "Spiegazioni tecniche, esercizi pratici e revisione del codice."),
+    name: t("Consulting, training and support", "Consulenza, formazione e supporto"),
+    tools: [
+      { label: t("Digital strategy", "Strategia digitale") },
+      { label: t("Technical training", "Formazione tecnica") },
+      { label: t("Remote assistance", "Assistenza da remoto") },
+      { label: "Code review" },
+      { label: "Blockchain / DLT" },
+      { label: "Ethereum / EVM", icon: "ethereum", color: "#485374" },
+    ],
   },
 ];
 
 const services = [
   {
-    id: "consulting",
-    name: t("Technical consulting", "Consulenza tecnica"),
-    detail: t("Evaluate a technology choice or work through a specific problem.", "Valutare una scelta tecnica o affrontare un problema concreto."),
-    rates: { EUR: 55, USD: 65 },
+    id: "strategy",
+    name: t("Digital strategy and planning", "Consulenza e pianificazione della strategia digitale"),
+    detail: t("Review your tools and define priorities and next steps.", "Analisi degli strumenti, scelta delle priorità e piano d’azione."),
+    project: { EUR: 250, USD: 300 },
+    hourly: { EUR: 55, USD: 65 },
+    hours: 2,
   },
   {
-    id: "mentoring",
-    name: "Mentoring",
-    detail: t("Plan your next steps and get feedback as you build your own project.", "Impostare i prossimi passi e ricevere un riscontro mentre lavori al tuo progetto."),
-    rates: { EUR: 45, USD: 50 },
+    id: "infrastructure",
+    name: t("Digital infrastructure setup", "Creazione e implementazione di infrastrutture digitali"),
+    detail: t("Configure and deploy an application with Docker and an automated publishing workflow.", "Configurazione e pubblicazione di un’applicazione con Docker e una procedura di rilascio automatizzata."),
+    project: { EUR: 600, USD: 720 },
+    hourly: { EUR: 60, USD: 70 },
+    hours: 5,
   },
   {
-    id: "tutoring",
-    name: t("Tutoring", "Tutoraggio"),
-    detail: t("One-to-one lessons in programming, AI tools or blockchain.", "Lezioni individuali su programmazione, strumenti di IA o blockchain."),
-    rates: { EUR: 35, USD: 40 },
+    id: "support",
+    name: t("Digital support", "Supporto digitale"),
+    detail: t("Get remote help with a specific issue on your computer.", "Assistenza da remoto per un problema al PC."),
+    project: { EUR: 75, USD: 90 },
+    hourly: { EUR: 35, USD: 40 },
+    hours: 1,
   },
   {
     id: "website",
     name: t("Website development", "Realizzazione di siti web"),
-    detail: t("Build a website, add a page or improve an existing site.", "Creare un sito, aggiungere una pagina o migliorare un sito esistente."),
-    rates: { EUR: 50, USD: 60 },
+    detail: t("A single page with supplied content, mobile checks and deployment.", "Una pagina con contenuti già pronti, verifica su mobile e messa online."),
+    project: { EUR: 500, USD: 600 },
+    hourly: { EUR: 50, USD: 60 },
+    hours: 2,
+  },
+  {
+    id: "mentoring",
+    name: t("Mentoring and tutoring", "Mentoring e tutoraggio"),
+    detail: t("Two one-to-one sessions on programming, digital tools or a project of your own.", "Due incontri individuali su programmazione, strumenti digitali o un tuo progetto."),
+    project: { EUR: 120, USD: 140 },
+    hourly: { EUR: 45, USD: 50 },
+    hours: 2,
   },
 ];
 
@@ -56,21 +98,7 @@ const currencies = ["EUR", "USD"] as const;
 const formatRate = new Intl.NumberFormat(language, {
   style: "currency", currency: "EUR", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0,
 });
-const websiteRate = services.find((service) => service.id === "website")!.rates;
-const example = {
-  fixed: { EUR: 500, USD: 600 },
-  stages: [
-    { label: t("Structure and layout", "Struttura e layout"), manual: 2, assisted: 0.5 },
-    { label: t("Build and add content", "Sviluppo e inserimento dei contenuti"), manual: 4, assisted: 1 },
-    { label: t("Checks and deployment", "Verifiche e messa online"), manual: 2, assisted: 0.5 },
-  ],
-};
-const manualHours = example.stages.reduce((sum, stage) => sum + stage.manual, 0);
-const assistedHours = example.stages.reduce((sum, stage) => sum + stage.assisted, 0);
-const assistedTotal = { EUR: assistedHours * websiteRate.EUR, USD: assistedHours * websiteRate.USD };
-const saving = { EUR: example.fixed.EUR - assistedTotal.EUR, USD: example.fixed.USD - assistedTotal.USD };
-const savingPercent = Math.round(saving.EUR / example.fixed.EUR * 100);
-const formatHours = (hours: number) => new Intl.NumberFormat(language).format(hours) + " h";
+const hourLabel = t("/hour", "/ora");
 const appointmentHours = [[9, 12], [14, 17]];
 const slots = appointmentHours.map(([start, end]) => (
   Array.from({ length: (end - start) * 2 }, (_, index) => {
@@ -91,24 +119,18 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
   sideBarActiveItemID="services"
 >
   <freelancing-page class="studio" data-language={language} data-email={email} data-general-topic={generalTopic}>
-    <header class="studio-header">
-      <h1>Freelancing</h1>
-      <p class="studio-lead">{t(
-        "I build websites, help solve technical problems and teach one-to-one. I use AI where it saves time, and bill for the hours the work actually takes.",
-        "Sviluppo siti web, risolvo problemi tecnici e faccio formazione individuale. Uso l’IA dove fa risparmiare tempo e fatturo le ore effettive di lavoro."
-      )}</p>
-      <a class="studio-link" href="#rates" data-astro-reload>{t("See hourly rates", "Vedi il tariffario")} <span aria-hidden="true">↓</span></a>
+    <header class="mb-7">
+      <h1 class="text-4xl font-bold mb-4">Freelancing</h1>
+      <p class="text-lg leading-relaxed opacity-90">{t(
+        "As AI becomes part of everyday workflows, some tasks take less time. That changes how we can price a project. For a defined task, paying by the hour lets you benefit from the time saved.",
+        "L’IA sta riducendo il tempo necessario per molte attività e questo cambia il modo di valutare il costo di un progetto. Per un incarico circoscritto, la tariffa oraria ti permette di beneficiare del tempo risparmiato."
+      )}<sup><a class="passion-link" href="#passion" data-astro-reload aria-label={t("A personal note", "Una nota personale")}>*</a></sup></p>
+      <p id="passion" class="passion-note" tabindex="-1">{t("* I do it for the love of the work, too.", "* Lo faccio per passione, prima di tutto.")}</p>
     </header>
 
-    <section class="studio-section comparison" aria-labelledby="pricing">
-      <div class="comparison-header">
-        <div>
-          <h2 id="pricing">{t("How much can an hour save?", "Quanto incide il tempo sul prezzo?")}</h2>
-          <p>{t(
-            "Example estimate for the same one-page site, with copy and images supplied, mobile checks and deployment.",
-            "Esempio di stima per la stessa pagina web, con testi e immagini già pronti, verifica su mobile e messa online."
-          )}</p>
-        </div>
+    <section class="mb-10" aria-labelledby="rates">
+      <div class="rate-heading">
+        <h2 id="rates" class="text-3xl font-bold">{t("Services and prices", "Servizi e prezzi")}</h2>
         <fieldset class="currency-switch">
           <legend class="sr-only">{t("Currency", "Valuta")}</legend>
           {currencies.map((currency) => (
@@ -119,123 +141,97 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
           ))}
         </fieldset>
       </div>
-
-      <div class="comparison-body">
-        <div class="comparison-prices">
-          <div class="comparison-price">
-            <h3>{t("Without AI", "Senza IA")}</h3>
-            <p>{t("Fixed project quote", "Preventivo a progetto")}</p>
-            <strong data-rate data-eur={example.fixed.EUR} data-usd={example.fixed.USD}>{formatRate.format(example.fixed.EUR)}</strong>
-            <span>{t("Estimated work", "Lavoro stimato")} · {formatHours(manualHours)}</span>
-            <div class="time-track" aria-hidden="true"><span style="width: 100%"></span></div>
-          </div>
-          <div class="comparison-price comparison-offer">
-            <h3>{t("My offer, with AI assistance", "La mia proposta, con l’aiuto dell’IA")}</h3>
-            <p>{t("Hourly billing", "Pagamento a ore")}</p>
-            <strong data-rate data-eur={assistedTotal.EUR} data-usd={assistedTotal.USD}>{formatRate.format(assistedTotal.EUR)}</strong>
-            <span>{formatHours(assistedHours)} × <span data-rate data-eur={websiteRate.EUR} data-usd={websiteRate.USD}>{formatRate.format(websiteRate.EUR)}</span>{t("/hour", "/ora")}</span>
-            <div class="time-track" aria-hidden="true"><span style={`width: ${assistedHours / manualHours * 100}%`}></span></div>
-          </div>
-        </div>
-
-        <table class="comparison-table">
-          <caption class="sr-only">{t("Estimated work by stage", "Stima delle ore per fase")}</caption>
-          <thead>
-            <tr>
-              <th scope="col">{t("Work", "Fase")}</th>
-              <th scope="col">{t("Without AI", "Senza IA")}</th>
-              <th scope="col">{t("With AI", "Con IA")}</th>
+      <div class="card bg-base-100 shadow-md service-prices" aria-live="polite">
+        <table class="service-table" role="table">
+          <caption class="sr-only">{t("Indicative project prices and my hourly rates", "Prezzi indicativi a progetto e mie tariffe orarie")}</caption>
+          <thead role="rowgroup">
+            <tr role="row">
+              <th scope="col" role="columnheader">{t("Service", "Servizio")}</th>
+              <th scope="col" role="columnheader">{t("Fixed project price", "A progetto")}</th>
+              <th scope="col" role="columnheader">{t("My hourly rate", "La mia tariffa oraria")}</th>
             </tr>
           </thead>
-          <tbody>
-            {example.stages.map(({ label, manual, assisted }) => (
-              <tr>
-                <th scope="row">{label}</th>
-                <td>{formatHours(manual)}</td>
-                <td>{formatHours(assisted)}</td>
+          <tbody role="rowgroup">
+            {services.map((service) => (
+              <tr role="row">
+                <th scope="row" role="rowheader">
+                  <label class="service-choice">
+                    <input type="radio" name="studio-service" value={service.id} data-name={service.name} />
+                    <span>
+                      <strong>{service.name}</strong>
+                      <span class="service-detail">{service.detail}</span>
+                    </span>
+                  </label>
+                </th>
+                <td role="cell">
+                  <span class="mobile-price-label" aria-hidden="true">{t("Fixed project price", "A progetto")}</span>
+                  <strong data-rate data-eur={service.project.EUR} data-usd={service.project.USD}>{formatRate.format(service.project.EUR)}</strong>
+                </td>
+                <td role="cell">
+                  <span class="mobile-price-label" aria-hidden="true">{t("My hourly rate", "La mia tariffa oraria")}</span>
+                  <strong class="hourly-price" data-rate data-eur={service.hourly.EUR} data-usd={service.hourly.USD}>{formatRate.format(service.hourly.EUR)}</strong><span class="rate-unit"> {hourLabel}</span>
+                  <span class="estimated-total">
+                    {service.hours} h ≈ <span data-rate data-eur={service.hourly.EUR * service.hours} data-usd={service.hourly.USD * service.hours}>{formatRate.format(service.hourly.EUR * service.hours)}</span>
+                  </span>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-
-        <p class="comparison-saving" aria-live="polite">
-          <strong><span data-rate data-eur={saving.EUR} data-usd={saving.USD}>{formatRate.format(saving.EUR)}</span> {t("less", "in meno")} ({savingPercent}%)</strong>
-          <span>{t("in this illustrative example", "in questo esempio indicativo")}</span>
-        </p>
       </div>
-
-      <p class="pricing-note">{t(
-        "I use AI for drafts and repetitive steps, then review, test and deliver the work myself. We agree on an estimate and a spending limit up front. When the deliverables are clear, I can also quote a fixed price.",
-        "Uso l’IA per le bozze e i passaggi ripetitivi. Mi occupo personalmente di revisione, test e consegna. Concordiamo in anticipo una stima e un limite di spesa. Per un incarico ben definito posso anche proporre un prezzo fisso."
+      <p class="studio-note">{t(
+        "Prices and hours are indicative. With a fixed quote, we agree on the total for the scope listed. With hourly billing, we agree on a spending limit and you pay for the time spent. You can select a service to add it to your appointment request.",
+        "Prezzi e ore sono indicativi. A progetto concordiamo un totale per l’attività descritta. A ore concordiamo un limite di spesa e paghi il tempo impiegato. Puoi selezionare un servizio per includerlo nella richiesta di appuntamento."
       )}</p>
     </section>
 
-    <section class="studio-section" aria-labelledby="rates">
-      <div class="rate-heading">
-        <div>
-          <h2 id="rates">{t("Services and hourly rates", "Servizi e tariffe orarie")}</h2>
-          <p>{t("Select a service to include it in your request. Rates are indicative.", "Seleziona un servizio per indicarlo nella richiesta. Le tariffe sono indicative.")}</p>
-        </div>
-        <fieldset class="currency-switch">
-          <legend class="sr-only">{t("Rate currency", "Valuta del tariffario")}</legend>
-          {currencies.map((currency) => (
-            <label>
-              <input class="sr-only" type="radio" name="rate-currency" value={currency} checked={currency === "EUR"} />
-              <span>{currency}</span>
-            </label>
-          ))}
-        </fieldset>
-      </div>
-      <fieldset class="service-list">
-        <legend class="sr-only">{t("Choose a service", "Scegli un servizio")}</legend>
-        {services.map((service) => (
-          <label class="service-row">
-            <input type="radio" name="studio-service" value={service.id} data-name={service.name} />
-            <span class="service-text">
-              <strong>{service.name}</strong>
-              <span>{service.detail}</span>
-            </span>
-            <span class="rate-cell">
-              <strong data-rate data-eur={service.rates.EUR} data-usd={service.rates.USD}>{formatRate.format(service.rates.EUR)}</strong>
-              <span>{t("/ hour", "/ ora")}</span>
-            </span>
-          </label>
-        ))}
-      </fieldset>
-    </section>
-
-    <section class="studio-section skills" aria-labelledby="skills">
-      <h2 id="skills">{t("Skills you can hire me for", "Competenze che metto a disposizione")}</h2>
-      <p>{t(
-        "Bring me in for one task or combine skills for a larger project. A website can include design, development and deployment. An experiment can include test design, automation and data analysis.",
-        "Puoi coinvolgermi per una singola attività o combinare più competenze. Un sito può includere progettazione, sviluppo e pubblicazione. Un esperimento può richiedere la definizione dei test, l’automazione e l’analisi dei dati."
+    <section class="mb-10" aria-labelledby="skills">
+      <h2 id="skills" class="text-3xl font-bold mb-4">{t("Skills", "Competenze")}</h2>
+      <p class="mb-4">{t(
+        "You can ask me to help with a single task or bring several skills together for a website, a deployment or a reproducible experiment.",
+        "Puoi chiedermi un intervento mirato oppure combinare più competenze per un sito, una messa online o un esperimento riproducibile."
       )}</p>
-      <dl class="skill-list">
-        {skills.map(({ name, detail }) => (
-          <div>
-            <dt>{name}</dt>
-            <dd>{detail}</dd>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {skills.map(({ name, tools }) => (
+          <div class="card bg-base-100 shadow-md">
+            <div class="card-body skill-card">
+              <h3 class="card-title">{name}</h3>
+              <ul class="skill-list">
+                {tools.map((tool) => (
+                  <li>
+                    {"icon" in tool && (
+                      <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" style={`color: ${tool.color ?? "currentColor"}`}>
+                        <use href={`/icons/freelancing-skills.svg#${tool.icon}`} />
+                      </svg>
+                    )}
+                    {tool.label}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         ))}
-      </dl>
+      </div>
       <p class="studio-note">{t(
-        "I offer these services independently of my job and academic research. Before accepting an assignment, I check for conflicts of interest and respect my professional and confidentiality obligations.",
-        "Offro questi servizi come attività indipendente dal mio lavoro e dalla mia ricerca accademica. Prima di accettare un incarico, verifico eventuali conflitti di interesse e la compatibilità con i miei impegni professionali e di riservatezza."
+        "Freelancing is independent of my job and academic research. Before accepting an assignment, I check for conflicts of interest and compatibility with my professional and confidentiality obligations.",
+        "Questa attività è indipendente dal mio lavoro e dalla mia ricerca accademica. Prima di accettare un incarico, verifico eventuali conflitti di interesse e la compatibilità con i miei impegni professionali e gli obblighi di riservatezza."
       )}</p>
     </section>
 
-    <section class="studio-section studio-booking" aria-labelledby="appointment">
-      <div>
-        <h2 id="appointment">{t("A free 30-minute call", "Un colloquio gratuito di 30 minuti")}</h2>
-        <p>{t(
-          "Tell me what you have in mind. We’ll discuss the work and how to price it.",
-          "Raccontami cosa ti serve. Vediamo insieme cosa c’è da fare e come stimare il costo."
-        )}</p>
+    <section class="card bg-base-100 shadow-md mb-6" aria-labelledby="appointment">
+      <div class="card-body studio-booking">
+        <div>
+          <h2 id="appointment" class="text-3xl font-bold mb-2">{t("A free 30-minute call", "Un colloquio gratuito di 30 minuti")}</h2>
+          <p>{t(
+            "Tell me what you have in mind. We’ll discuss the work and how to price it.",
+            "Raccontami cosa ti serve. Vediamo insieme cosa c’è da fare e come stimare il costo."
+          )}</p>
+        </div>
+        <button class="btn btn-primary studio-cta" type="button" data-open-booking aria-haspopup="dialog" hidden>
+          {t("Book an appointment", "Prenota un appuntamento")}
+        </button>
+        <noscript><a href={inLanguage("/contact/", locale)}>{t("Request an appointment by email", "Richiedi un appuntamento via email")}</a></noscript>
       </div>
-      <button class="btn btn-primary studio-cta" type="button" data-open-booking aria-haspopup="dialog" hidden>
-        {t("Book an appointment", "Prenota un appuntamento")}
-      </button>
-      <noscript><a href={inLanguage("/contact/", locale)}>{t("Request an appointment by email", "Richiedi un appuntamento via email")}</a></noscript>
     </section>
 
     <dialog class="booking-dialog" aria-labelledby="booking-title" aria-describedby="booking-note">
@@ -309,7 +305,6 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
 
       const currencyInputs = this.querySelectorAll<HTMLInputElement>('.currency-switch input');
       const updateRates = (currency: string) => {
-        for (const input of currencyInputs) input.checked = input.value === currency;
         const format = new Intl.NumberFormat(this.dataset.language, {
           style: "currency", currency, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0,
         });
@@ -369,172 +364,88 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
 <style>
   .studio {
     display: block;
-    width: min(53rem, 100%);
+    width: min(52rem, 100%);
     margin-inline: auto;
-    color: #232637;
   }
 
-  .studio-header {
-    max-width: 47rem;
-    padding: clamp(1rem, 3vw, 2rem) 0 0.2rem;
-  }
-
-  .studio-header h1 {
-    margin-bottom: 0.6rem;
-    font-size: clamp(2.9rem, 8vw, 4.85rem);
-    line-height: 1.02;
-    letter-spacing: -0.065em;
-    font-weight: 750;
-  }
-
-  .studio p, .studio dd { text-align: start; hyphens: none; }
-  .studio-lead { max-width: 37rem; font-size: 1.13rem; line-height: 1.6; }
-  .studio-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    margin-top: 0.85rem;
-    padding: 0.25rem 0;
+  .passion-link {
+    margin-inline-start: 0.1em;
     font-weight: 700;
     text-decoration: underline;
-    text-decoration-color: #a66c16;
-    text-underline-offset: 0.2em;
+    text-underline-offset: 0.12em;
   }
-  .studio-note { margin-top: 0.65rem; font-size: 0.91rem; color: #505362; }
-
-  .studio-section {
-    margin-top: clamp(1.35rem, 4vw, 2rem);
-    padding: clamp(1rem, 3vw, 1.45rem);
-    border: 1px solid #dfe1e7;
-    border-radius: 0.75rem;
-    background: #fff;
-  }
-
-  .studio-section h2 {
-    margin-bottom: 0.4rem;
-    font-size: clamp(1.28rem, 4vw, 1.65rem);
-    line-height: 1.2;
-    font-weight: 750;
-    letter-spacing: -0.035em;
-  }
-
-  .comparison { padding: 0; border-color: #262b3e; }
-  .comparison-header, .comparison-body { padding-inline: clamp(1rem, 3.6vw, 1.55rem); }
-  .comparison-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    gap: 0.6rem 1.2rem;
-    flex-wrap: wrap;
-    padding-block: clamp(1rem, 3vw, 1.4rem);
-    border-radius: 0.7rem 0.7rem 0 0;
-    background: #222738;
-    color: #fff;
-  }
-  .comparison-header p { max-width: 35rem; color: #e0e3ec; font-size: 0.92rem; }
-  .comparison-body { padding-block: 1rem; background: #f8f8fa; }
-  .comparison-prices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.7rem; }
-  .comparison-price {
-    display: grid;
-    grid-template-rows: auto auto 1fr auto auto;
-    gap: 0.15rem;
-    min-width: 0;
-    padding: 0.75rem 0.85rem;
-    border: 1px solid #dbdee7;
-    border-radius: 0.45rem;
-    background: #fff;
-  }
-  .comparison-price h3 { font-size: 1rem; line-height: 1.25; font-weight: 750; }
-  .comparison-price p, .comparison-price > span { color: #505362; font-size: 0.85rem; }
-  .comparison-price > strong {
-    align-self: end;
-    padding-block: 0.28rem;
-    font-size: clamp(1.5rem, 4.7vw, 2.55rem);
-    line-height: 1.05;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -0.06em;
-  }
-  .comparison-offer { border-color: #d9b95f; background: #fff2c9; }
-  .time-track { height: 0.25rem; margin-top: 0.45rem; background: #e4e5ea; }
-  .time-track span { display: block; height: 100%; background: #52596f; }
-  .comparison-offer .time-track { background: #ebdca9; }
-  .comparison-offer .time-track span { background: #895600; }
-
-  .comparison-table { width: 100%; margin-top: 0.85rem; border-collapse: collapse; font-size: 0.88rem; }
-  .comparison-table :is(th, td) { padding: 0.32rem 0.25rem; border-bottom: 1px solid #e0e2e9; text-align: end; }
-  .comparison-table :is(th, td):first-child { text-align: start; }
-  .comparison-table :is(th, td):not(:first-child) { width: 22%; }
-  .comparison-table tbody th { font-weight: 500; }
-  .comparison-table td { font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .comparison-saving { display: flex; gap: 0.2rem 0.45rem; flex-wrap: wrap; align-items: baseline; margin-top: 0.72rem; font-size: 0.9rem; }
-  .comparison-saving strong { font-size: 1.1rem; color: #6c4609; }
-  .pricing-note { padding: 0.85rem clamp(1rem, 3.6vw, 1.55rem); font-size: 0.92rem; }
+  .passion-note { margin-top: 0.42rem; font-size: 0.88rem; font-style: italic; opacity: 0.75; }
+  .studio-note { margin-top: 0.75rem; font-size: 0.88rem; opacity: 0.8; }
 
   .rate-heading {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: start;
-    gap: 0.45rem 1rem;
     flex-wrap: wrap;
-    padding-bottom: 0.65rem;
-    border-bottom: 1px solid #dfe1e7;
+    gap: 0.55rem 1rem;
+    margin-bottom: 0.8rem;
   }
 
-  .currency-switch { display: inline-flex; gap: 0.15rem; }
+  .currency-switch { display: inline-flex; gap: 0.2rem; }
   .currency-switch span, .slot span {
     display: block;
     padding: 0.4rem 0.55rem;
-    border-radius: 0.25rem;
+    border-radius: 0.3rem;
     text-align: center;
-    font-size: 0.87rem;
+    font-size: 0.85rem;
     font-weight: 650;
     cursor: pointer;
   }
-
   .currency-switch input:checked + span, .slot input:checked + span {
-    background: #ffdf73;
-    color: #322507;
+    background: oklch(var(--p));
+    color: oklch(var(--pc));
   }
-
   .currency-switch input:focus-visible + span, .slot input:focus-visible + span {
-    outline: 2px solid #805000;
+    outline: 2px solid currentColor;
     outline-offset: 2px;
   }
-  .comparison-header .currency-switch input:focus-visible + span { outline-color: #fff; }
 
-  .service-list { min-width: 0; }
-  .service-row {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr) auto;
-    align-items: start;
-    gap: 0.65rem;
-    padding: 0.7rem 0.45rem;
-    border-bottom: 1px solid #e3e5eb;
-    cursor: pointer;
-  }
-  .service-row:last-child { border-bottom: 0; }
-  .service-row:hover, .service-row:has(input:checked) { background: #fff8e2; }
-  .service-row input { width: 1rem; height: 1rem; margin-top: 0.22rem; accent-color: #805000; }
-  .service-text > span { display: block; color: #505362; font-size: 0.92rem; }
-  .rate-cell { text-align: end; font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .rate-cell > span { font-size: 0.85rem; color: #505362; }
+  .service-prices { border: 1px solid oklch(var(--b3)); }
+  .service-table { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
+  .service-table :is(th, td) { padding: 0.65rem 0.85rem; vertical-align: top; text-align: start; }
+  .service-table thead { background: oklch(var(--b2)); }
+  .service-table thead th:first-child { border-start-start-radius: 0.9rem; }
+  .service-table thead th:last-child { border-start-end-radius: 0.9rem; }
+  .service-table thead th { font-size: 0.83rem; }
+  .service-table tr + tr, .service-table tbody { border-top: 1px solid oklch(var(--b3)); }
+  .service-table tbody tr:has(input:checked) { background: oklch(var(--p) / 0.12); }
+  .service-table td { width: 23%; font-variant-numeric: tabular-nums; }
+  .service-choice { display: flex; align-items: start; gap: 0.5rem; cursor: pointer; }
+  .service-choice input { flex: none; margin-top: 0.24em; accent-color: #865500; }
+  .service-detail { display: block; font-weight: 400; opacity: 0.78; }
+  .hourly-price { font-size: 1.03rem; }
+  .rate-unit, .estimated-total { font-size: 0.83rem; opacity: 0.77; }
+  .estimated-total { display: block; }
+  .mobile-price-label { display: none; }
 
-  .skill-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.65rem 1.25rem;
-    margin: 0.85rem 0 1rem;
+  .skill-card { padding: 0.95rem 1rem; }
+  .skill-card h3 { font-size: 1rem; }
+  .skill-list { display: flex; flex-wrap: wrap; gap: 0.38rem; }
+  .skill-list li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.45rem;
+    border: 1px solid oklch(var(--b3));
+    border-radius: 0.35rem;
+    font-size: 0.82rem;
+    line-height: 1.25;
+    text-align: start;
   }
-  .skill-list dt { font-weight: 700; }
-  .skill-list dd { color: #505362; font-size: 0.91rem; }
+  .skill-list svg { flex: none; fill: currentColor; }
 
   .studio-booking {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
     gap: 0.8rem 1rem;
     flex-wrap: wrap;
-    margin-bottom: 0.6rem;
   }
   .studio-cta[hidden] { display: none; }
 
@@ -565,12 +476,20 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
   .slot input:disabled + span, .booking-times:disabled .slot span { opacity: 0.45; cursor: default; }
   .booking-form > button { justify-self: start; }
 
-  @media (max-width: 34rem) {
-    .skill-list { grid-template-columns: 1fr; }
-    .service-row { gap: 0.5rem; }
-    .comparison-price { padding-inline: 0.55rem; }
-    .comparison-price > span { min-height: 2.55em; }
-    .comparison-table :is(th, td):not(:first-child) { width: 23%; }
-    .rate-cell > span { display: block; }
+  @media (max-width: 36rem) {
+    .service-table thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+    .service-table tbody { display: block; border-top: 0; }
+    .service-table tr { display: grid; grid-template-columns: 1fr 1fr; }
+    .service-table :is(th, td) { padding: 0.52rem 0.7rem; }
+    .service-table tbody th { grid-column: 1 / -1; padding-bottom: 0.15rem; }
+    .service-table td { width: auto; }
+    .mobile-price-label { display: block; font-size: 0.77rem; opacity: 0.8; }
   }
 </style>

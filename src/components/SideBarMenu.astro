@@ -26,7 +26,6 @@ const items = [
         >{label}</a>
       </li>
     ))}
-    <li data-current-sections hidden></li>
   </ul>
   <template id="page-sections-template">
     <details class="page-sections">
@@ -52,9 +51,7 @@ const items = [
     const summary = details.querySelector("summary")!;
     const list = details.querySelector("ul")!;
     const title = menu.querySelector(":scope > a")?.textContent?.trim();
-
-    if (title) summary.setAttribute("aria-label", `${summary.getAttribute("aria-label")} · ${title}`);
-    else summary.prepend(document.querySelector("#main-content h1")?.textContent?.trim() ?? "");
+    summary.setAttribute("aria-label", `${summary.getAttribute("aria-label")} · ${title}`);
     details.open = current;
 
     for (const { id, label } of entries) {
@@ -69,19 +66,19 @@ const items = [
     }
 
     menu.append(fragment);
-    menu.hidden = false;
   }
 
   async function showPageSections() {
     const path = location.pathname.replace(/\/?$/, "/");
     const menus = [...document.querySelectorAll<HTMLElement>("[data-page-menu]")];
-    const current = menus.find((menu) => menu.dataset.pageMenu === path) ??
-      document.querySelector<HTMLElement>("[data-current-sections]");
-    const sections = [...document.querySelectorAll<HTMLElement>("#main-content h2[id]")].map((heading) => ({
-      id: heading.dataset.sectionTarget ?? heading.id,
-      label: heading.textContent?.trim() ?? "",
-    }));
-    if (current) addSections(current, sections, path, true);
+    const current = menus.find((menu) => menu.dataset.pageMenu === path);
+    if (current && current.dataset.sectionMenu !== "off") {
+      const sections = [...document.querySelectorAll<HTMLElement>("#main-content h2[id]")].map((heading) => ({
+        id: heading.dataset.sectionTarget ?? heading.id,
+        label: heading.textContent?.trim() ?? "",
+      }));
+      addSections(current, sections, path, true);
+    }
     if (!menus.length) return;
 
     navigation ??= fetch("/site-index/navigation.json").then((response) => {
