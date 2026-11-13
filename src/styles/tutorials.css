@@ -24,6 +24,11 @@
     min-width: 0;
 }
 
+.lab-disclosure .select {
+    width: 100%;
+    min-width: 0;
+}
+
 .tutorial-disclosure-icon {
     display: inline-grid;
     flex: none;

@@ -39,9 +39,9 @@ const perspectives = [
 >
   <section class="mb-10" aria-labelledby="blockchain-intro">
     <h1 class="text-4xl font-bold mb-4" id="blockchain-intro">Blockchain 101</h1>
-    <h2 class="text-2xl font-bold mb-2">{t("What is a blockchain and when is it useful?", "Che cos’è una blockchain e quando serve?")}</h2>
+    <h2 id="what-is-a-blockchain" class="text-2xl font-bold mb-2">{t("What is a blockchain and when is it useful?", "Che cos’è una blockchain e quando serve?")}</h2>
 
-    <div class="max-w-prose space-y-3 leading-relaxed">
+    <div class="intro-copy space-y-3 leading-relaxed">
       <p>
         {t("A blockchain is a shared ledger maintained by a network of computers. Transactions are grouped into blocks. Each block refers to the one before it through a cryptographic fingerprint, so changes to the history are detectable. The network uses a consensus protocol to agree on which history to follow.", "Una blockchain è un registro condiviso e mantenuto da una rete di computer. Le transazioni sono raccolte in blocchi, ciascuno legato al precedente da un’impronta crittografica. Questo legame rende rilevabili le modifiche alla cronologia. Un protocollo di consenso permette alla rete di concordare quale versione del registro seguire.")}
       </p>
@@ -59,18 +59,6 @@ const perspectives = [
       ))}
     </div>
 
-    <p class="mt-3 text-sm">
-      {t("Further reading", "Per approfondire")}
-      <span aria-hidden="true"> · </span>
-      <a class="link" href="https://csrc.nist.gov/pubs/ir/8202/final">NIST IR 8202</a>
-      <span aria-hidden="true"> · </span>
-      <a class="link" href="https://www.research-collection.ethz.ch/entities/publication/5d4f315f-68a9-4a5a-a345-316df0eb2655">Do you need a blockchain?</a>
-    </p>
-
-    <nav class="mt-4 flex flex-wrap gap-2" aria-label={t("On this page", "In questa pagina")}>
-      <a class="btn btn-sm btn-outline" href="#blockchain-concepts">{t("Key concepts", "Concetti chiave")}</a>
-      <a class="btn btn-sm btn-outline" href="#blockchain-interactive-labs">{t("Interactive labs", "Laboratori interattivi")}</a>
-    </nav>
   </section>
 
   <BlockchainKeyConcepts />
@@ -79,7 +67,7 @@ const perspectives = [
   <PillsOfBlockchainInstagram />
 
   <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-2">{t("Suggest a topic", "Proponi un argomento")}</h2>
+    <h2 id="suggest-a-topic" class="text-3xl font-bold mb-2">{t("Suggest a topic", "Proponi un argomento")}</h2>
 
     <p class="mb-5 opacity-80">
       {t("This learning area can grow around new blockchain, distributed systems, digital assets, Web3, RWA, DeFi, CBDCs, quantum security, benchmarking, governance, scalability, and real-world deployment topics.", "Puoi proporre argomenti legati a blockchain, sistemi distribuiti, finanza decentralizzata, valute digitali, sicurezza post-quantistica o applicazioni concrete.")}

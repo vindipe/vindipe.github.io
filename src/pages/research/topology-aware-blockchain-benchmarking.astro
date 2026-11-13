@@ -124,7 +124,7 @@ const dynamics = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Context", "Contesto")}</h2>
+        <h2 id="context" class="card-title text-2xl">{t("Context", "Contesto")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("Blockchain systems are usually evaluated through throughput, latency, commit rate, and resource consumption. However, those measurements can change significantly depending on the network conditions under which the blockchain is executed. Public clouds are useful for realistic deployments, but they also introduce cost, opacity, and time-dependent variability. This paper addresses that problem by combining reproducible cluster-based execution with programmable network emulation.", "Le prestazioni delle blockchain si misurano in throughput, latenza, tasso di conferma e consumo di risorse. Questi valori possono cambiare molto con le condizioni di rete. Il cloud offre scenari realistici, ma i costi e la variabilità rendono difficile ripetere gli esperimenti. Lo studio esegue quindi le prove su un cluster e riproduce condizioni di rete configurabili.")}
@@ -149,7 +149,7 @@ const dynamics = [
       </figure>
 
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Why network control matters", "Perché controllare la rete")}</h2>
+        <h2 id="network-control" class="card-title text-2xl">{t("Why network control matters", "Perché controllare la rete")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The paper starts from a practical benchmarking problem: cloud network conditions vary across regions and over time. This makes blockchain experiments difficult to reproduce if the network layer is not explicitly modelled. The heatmap motivates the need for controlled experiments that can reproduce cloud-inspired latency and throughput conditions without depending entirely on live cloud variability.", "La latenza e il throughput del cloud cambiano fra regioni e nel tempo. Le mappe mostrano l’entità di queste variazioni. Con l’emulazione possiamo riprodurre condizioni simili in laboratorio e ripetere le prove.")}
@@ -170,7 +170,7 @@ const dynamics = [
       </figure>
 
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Lilith architecture", "Architettura di Lilith")}</h2>
+        <h2 id="lilith-architecture" class="card-title text-2xl">{t("Lilith architecture", "Architettura di Lilith")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The work introduces Lilith as a topology-aware benchmarking framework. Lilith connects experiment parameters, topology generation, network datasets, Docker-based execution, Kollaps network emulation, monitoring and export modules, and Diablo-based blockchain workload execution. This creates a repeatable pipeline for running blockchain experiments under programmable network conditions.", "Lilith prende la configurazione dell’esperimento e genera la topologia. Esegue i nodi in Docker, emula la rete con Kollaps, genera i carichi con Diablo e raccoglie le misure. In questo modo è possibile ripetere l’intero esperimento.")}
@@ -191,7 +191,7 @@ const dynamics = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Topologies evaluated", "Topologie valutate")}</h2>
+        <h2 id="topologies" class="card-title text-2xl">{t("Topologies evaluated", "Topologie valutate")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The evaluation compares blockchain behaviour across five network topologies. These topologies are not presented as perfect representations of every real blockchain deployment. Instead, they are controlled network shapes used to expose how different communication structures influence performance and robustness.", "Le cinque topologie permettono di isolare l’effetto della struttura della rete sulle prestazioni e sulla capacità di reagire ai guasti.")}
@@ -234,7 +234,7 @@ const dynamics = [
       </figure>
 
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("What the experiments show", "Che cosa mostrano gli esperimenti")}</h2>
+        <h2 id="results" class="card-title text-2xl">{t("What the experiments show", "Che cosa mostrano gli esperimenti")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The experiments compare how blockchain systems behave under different workloads and network topologies. The results show that topology is not a secondary detail: the communication structure of the network can change throughput, latency, commit behaviour, and network load. The paper highlights that full mesh, hypercube, and torus-like structures can improve performance under demanding workloads, while different blockchain systems react differently to the same network conditions.", "La topologia incide su throughput, latenza, tasso di conferma e traffico. Con i carichi più impegnativi, maglia completa, ipercubo e toro possono migliorare le prestazioni. Ogni blockchain reagisce in modo diverso alle stesse condizioni.")}
@@ -246,7 +246,7 @@ const dynamics = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Network dynamics", "Dinamiche di rete")}</h2>
+        <h2 id="network-dynamics" class="card-title text-2xl">{t("Network dynamics", "Dinamiche di rete")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("Beyond static topologies, the paper also evaluates dynamic network conditions such as packet drop, bandwidth congestion, and node crash. This is important because real distributed systems do not operate in perfectly stable networks. The goal is to understand which systems remain robust and which systems are more sensitive when the network degrades.", "Abbiamo simulato perdita di pacchetti, congestione e guasti per vedere quali sistemi mantengono le prestazioni quando la rete peggiora e quali risentono maggiormente del cambiamento.")}
@@ -280,7 +280,7 @@ const dynamics = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Contribution", "Contributi")}</h2>
+        <h2 id="contributions" class="card-title text-2xl">{t("Contribution", "Contributi")}</h2>
 
         <ul class="list-disc pl-5 space-y-2 opacity-90">
           <li>
@@ -306,7 +306,7 @@ const dynamics = [
   <section class="mb-12">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Links", "Collegamenti")}</h2>
+        <h2 id="links" class="card-title text-2xl">{t("Links", "Collegamenti")}</h2>
 
         <div class="flex flex-wrap gap-3 mt-2">
           <a

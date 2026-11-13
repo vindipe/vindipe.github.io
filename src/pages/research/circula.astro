@@ -24,7 +24,7 @@ const lifecycleUrl = locale === "it" ? "/circula-lifecycle.html?lang=it" : "/cir
     <p class="text-lg leading-relaxed max-w-3xl">{t("What if a digital resource had a lifetime designed into the system? CIRCULA will investigate how expiry and renewal can be represented and studied in programmable distributed ledgers.", "E se un registro distribuito potesse stabilire fino a quando una risorsa digitale è valida? CIRCULA studierà come definire scadenza e rinnovo nei registri programmabili e quali effetti hanno sul funzionamento del sistema.")}</p>
   </section>
   <section class="mb-10">
-    <h2 class="text-3xl font-bold mb-4">{t("A new dimension: time", "Una nuova dimensione: il tempo")}</h2>
+    <h2 id="time" class="text-3xl font-bold mb-4">{t("A new dimension: time", "Una nuova dimensione: il tempo")}</h2>
     <div class="space-y-4 leading-relaxed max-w-3xl">
       <p>{t("During my PhD, I studied how network topology affects the behaviour and evaluation of blockchain systems. CIRCULA starts from another question: how might a system handle a resource whose validity is meant to end or be renewed?", "Nel dottorato ho studiato come la struttura della rete cambi il comportamento delle blockchain e le misure con cui le confrontiamo. Con CIRCULA entra in gioco un’altra variabile: il tempo. Come dovrebbe comportarsi il sistema quando una risorsa scade o viene rinnovata?")}</p>
       <p>{t("For example, a digital entitlement might be valid for a defined period and later require renewal. CIRCULA will study the rules and system implications of lifetimes such as these, including the assumptions and boundaries of different approaches.", "Pensa a un diritto di accesso valido fino a una certa data. Che cosa accade se il titolare ne chiede il rinnovo? CIRCULA studierà quali regole può applicare il sistema, quali ipotesi richiedono e che cosa succede nei casi limite.")}</p>
@@ -32,13 +32,13 @@ const lifecycleUrl = locale === "it" ? "/circula-lifecycle.html?lang=it" : "/cir
     </div>
   </section>
   <section class="mb-10">
-    <h2 class="text-3xl font-bold mb-4">{t("Explore expiry and renewal", "Simula scadenza e rinnovo")}</h2>
+    <h2 id="expiry-and-renewal" class="text-3xl font-bold mb-4">{t("Explore expiry and renewal", "Simula scadenza e rinnovo")}</h2>
     <p class="mb-4">{t("Compare what happens to a digital right with and without renewal. This illustrative tool is adapted from the CIRCULA website.", "Nella simulazione puoi confrontare due scenari per lo stesso diritto digitale: la scadenza alla data iniziale e il rinnovo prima di quella data. Il simulatore proviene dal sito di CIRCULA.")}</p>
     <iframe src={lifecycleUrl} title={t("CIRCULA expiry and renewal interactive demonstration", "Simulazione interattiva di CIRCULA su scadenza e rinnovo")} id="lifecycle-frame" loading="lazy" style="display:block;width:100%;height:900px;border:0;border-radius:1rem;background:#121a17"></iframe>
     <p class="mt-2"><a class="link link-primary" href={lifecycleUrl}>{t("Open the interactive demonstration on its own", "Apri la simulazione in una pagina dedicata")}</a></p>
   </section>
   <section class="mb-10">
-    <h2 class="text-3xl font-bold mb-4">{t("Explore the project", "Approfondisci il progetto")}</h2>
+    <h2 id="project-links" class="text-3xl font-bold mb-4">{t("Explore the project", "Approfondisci il progetto")}</h2>
     <p class="mb-5 leading-relaxed">{t("CIRCULA is funded by the Swiss National Science Foundation and hosted by the University of Neuchâtel.", "L’Università di Neuchâtel ospita CIRCULA, con il finanziamento del Fondo nazionale svizzero per la ricerca scientifica.")}</p>
     <div class="flex flex-wrap gap-3">
       <a class="btn btn-primary" href={locale === "it" ? "https://circula.unine.ch/it/" : "https://circula.unine.ch/"} target="_blank" rel="noopener noreferrer">{t("Official CIRCULA website", "Sito ufficiale di CIRCULA")}</a>

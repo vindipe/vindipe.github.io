@@ -21,6 +21,7 @@ const externalLinks = [
 
 const sections = [
   {
+    id: "experimental-matrix",
     title: t("Experimental matrix", "Matrice sperimentale"),
     body: t("The dataset contains 300 aggregate configuration rows and 50 columns. It covers five blockchain systems, five network topologies, six workloads, and deployments with 10 and 40 nodes.", "Il dataset ha 50 colonne e 300 righe, una per ogni configurazione sperimentale. Comprende cinque blockchain, cinque topologie di rete, sei carichi di lavoro e reti da 10 o 40 nodi."),
     items: [
@@ -31,10 +32,12 @@ const sections = [
     ],
   },
   {
+    id: "repeatability-and-predictability",
     title: t("Repeatability and predictability", "Ripetibilità e prevedibilità"),
     body: t("Each row summarizes repeated benchmark executions through counts, means, extrema, quartiles, standard deviations, absolute ranges, and relative-dispersion measures. The resulting evidence supports analysis of variability, repeatability, and performance predictability under controlled network conditions.", "Ogni riga riassume più esecuzioni dello stesso benchmark. Include conteggi, medie, valori minimi e massimi, quartili, deviazioni standard, intervalli e misure di dispersione relativa. Si possono così confrontare variabilità, ripetibilità e prevedibilità in condizioni di rete controllate."),
   },
   {
+    id: "reproducibility-resources",
     title: t("Reproducibility resources", "Risorse per la riproducibilità"),
     body: t("The GitHub repository provides the released CSV, a data dictionary, methodology and provenance notes, citation metadata, and the CC BY 4.0 license. The experiments were conducted with Lilith, the topology-aware blockchain benchmarking framework.", "Su GitHub trovi il CSV, il significato delle colonne, le note su metodo e provenienza dei dati, le indicazioni per la citazione e la licenza CC BY 4.0. Per eseguire gli esperimenti abbiamo usato Lilith."),
   },

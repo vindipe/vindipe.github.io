@@ -17,7 +17,7 @@ const items = [
 <nav aria-label={t("Main navigation", "Navigazione principale")} class="grow shrink overflow-y-auto">
   <ul class="menu menu-md">
     {items.map(({ id, path, label }) => (
-      <li>
+      <li data-page-menu={id === sideBarActiveItemID ? "" : undefined}>
         <a
           class:list={["py-3 text-base font-medium", id === sideBarActiveItemID && "bg-primary-content/20"]}
           href={inLanguage(path, locale)}
@@ -25,5 +25,77 @@ const items = [
         >{label}</a>
       </li>
     ))}
+    {!sideBarActiveItemID && <li data-page-menu hidden></li>}
   </ul>
+  <template id="page-sections-template">
+    <details class="page-sections" open>
+      <summary>{t("On this page", "In questa pagina")}</summary>
+      <ul></ul>
+    </details>
+  </template>
 </nav>
+
+<script>
+  function showPageSections() {
+    const menu = document.querySelector<HTMLElement>("[data-page-menu]");
+    const template = document.querySelector<HTMLTemplateElement>("#page-sections-template");
+    const headings = document.querySelectorAll<HTMLElement>("#main-content h2[id]");
+    if (!menu || !template || headings.length < 2 || menu.querySelector(".page-sections")) return;
+
+    const sections = template.content.cloneNode(true) as DocumentFragment;
+    const list = sections.querySelector("ul")!;
+
+    for (const heading of headings) {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = "#" + (heading.dataset.sectionTarget ?? heading.id);
+      link.textContent = heading.textContent?.trim() ?? "";
+      link.dataset.sectionLink = "";
+      link.dataset.astroReload = "";
+      item.append(link);
+      list.append(item);
+    }
+
+    menu.append(sections);
+    menu.hidden = false;
+  }
+
+  showPageSections();
+  document.addEventListener("astro:page-load", showPageSections);
+
+  document.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element) || event.defaultPrevented ||
+        event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const link = event.target.closest<HTMLAnchorElement>("a[data-section-link]");
+    if (!link) return;
+
+    const drawer = document.querySelector<HTMLInputElement>("#my-drawer");
+    if (drawer?.checked) drawer.checked = false;
+    const section = document.getElementById(link.hash.slice(1));
+    if (section) {
+      section.tabIndex = -1;
+      requestAnimationFrame(() => section.focus({ preventScroll: true }));
+    }
+  });
+</script>
+
+<style is:global>
+  .menu .page-sections {
+    display: block;
+    padding: 0 0.25rem 0.3rem;
+  }
+
+  .menu .page-sections > summary {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .menu .page-sections li > a {
+    display: block;
+    padding: 0.55rem 0.6rem;
+    font-size: 0.875rem;
+    line-height: 1.25;
+  }
+</style>

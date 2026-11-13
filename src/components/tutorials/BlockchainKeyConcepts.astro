@@ -7,7 +7,7 @@ const groups = getBlockchainConcepts(Astro.url.pathname);
 ---
 
 <section class="tutorial-section mb-10" id="blockchain-concepts" aria-labelledby="blockchain-concepts-title">
-  <h2 class="text-3xl font-bold mb-4" id="blockchain-concepts-title">{t("Key concepts", "Concetti chiave")}</h2>
+  <h2 class="text-3xl font-bold mb-4" id="blockchain-concepts-title" data-section-target="blockchain-concepts">{t("Key concepts", "Concetti chiave")}</h2>
 
   <div class="grid items-start gap-3 xl:grid-cols-2">
     {groups.map((group) => (

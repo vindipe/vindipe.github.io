@@ -168,7 +168,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Context", "Contesto")}</h2>
+        <h2 id="context" class="card-title text-2xl">{t("Context", "Contesto")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("Blockchain efficiency is often discussed in terms of transactions per second, latency, scalability, or energy consumption. Cryptocurrencies, however, are also economic systems: they have supply dynamics, user participation, transfer activity, wealth concentration, market value, and different forms of asset usage.", "Le misure tecniche di una blockchain includono transazioni al secondo, latenza, scalabilità e consumi. Per studiare le criptovalute come sistemi economici servono anche dati su offerta, partecipazione, trasferimenti, concentrazione della ricchezza e valore di mercato.")}
@@ -184,7 +184,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("The EB-index idea", "Come funziona l’EB-index")}</h2>
+        <h2 id="eb-index" class="card-title text-2xl">{t("The EB-index idea", "Come funziona l’EB-index")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The proposed Entropy Balance index uses Shannon entropy to measure how balanced a selected set of economic qualities is. Each quality is first normalized, then transformed into a probability distribution. Entropy is then used to quantify whether the selected qualities are concentrated around one dominant dimension or more evenly balanced.", "L’EB-index usa l’entropia di Shannon per misurare quanto siano equilibrati gli indicatori scelti. Dopo la normalizzazione, ogni indicatore rappresenta una quota del totale. L’entropia indica se una quota prevale sulle altre o se i valori sono distribuiti in modo uniforme.")}
@@ -231,7 +231,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Data and attribute sets", "Dati e insiemi di attributi")}</h2>
+        <h2 id="data-and-attributes" class="card-title text-2xl">{t("Data and attribute sets", "Dati e insiemi di attributi")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The illustrative evaluation uses on-chain data from Coin Metrics and compares six major cryptoassets: Bitcoin, Ethereum, Ripple, USD Coin, Dogecoin, and Cardano. The paper defines two different sets of attributes to show that the framework can be adapted to different interpretations of economic efficiency.", "L’esempio usa dati on-chain di Coin Metrics e confronta sei cryptoasset: Bitcoin, Ethereum, Ripple, USD Coin, Dogecoin e Cardano. Due insiemi di attributi mostrano come il metodo si possa adattare a interpretazioni diverse dell’efficienza economica.")}
@@ -269,7 +269,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Entropy results", "Risultati dell’analisi dell’entropia")}</h2>
+        <h2 id="results" class="card-title text-2xl">{t("Entropy results", "Risultati dell’analisi dell’entropia")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The four plots below compare unweighted and weighted entropy for the two attribute sets. The unweighted version highlights balance among the selected qualities. The weighted version also accounts for the relative strength of the normalized attributes, changing the interpretation from pure balance to balance plus magnitude.", "I quattro grafici confrontano entropia semplice e ponderata per i due insiemi. La prima evidenzia l’equilibrio fra le caratteristiche selezionate. La seconda considera anche l’ampiezza relativa degli attributi normalizzati.")}
@@ -303,7 +303,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Representative attribute distributions", "Distribuzioni rappresentative degli attributi")}</h2>
+        <h2 id="attribute-distributions" class="card-title text-2xl">{t("Representative attribute distributions", "Distribuzioni rappresentative degli attributi")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The probability-distribution plots show how the selected qualities contribute to each asset's entropy score. They help explain why two cryptoassets can obtain similar entropy values for different internal reasons, or why the same asset can behave differently across Set1 and Set2.", "I grafici mostrano il contributo di ogni indicatore al punteggio. Due criptovalute possono ottenere punteggi simili per ragioni diverse, e la stessa criptovaluta può cambiare posizione fra Set1 e Set2.")}
@@ -337,7 +337,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Main contribution", "Contributo principale")}</h2>
+        <h2 id="contribution" class="card-title text-2xl">{t("Main contribution", "Contributo principale")}</h2>
 
         <ul class="list-disc pl-5 space-y-2 opacity-90">
           {findings.map((finding) => <li>{finding}</li>)}
@@ -349,7 +349,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Relationship with my broader research", "Come si collega alle mie altre ricerche")}</h2>
+        <h2 id="related-research" class="card-title text-2xl">{t("Relationship with my broader research", "Come si collega alle mie altre ricerche")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("This paper extends my blockchain evaluation work beyond protocol-level performance and energy analysis. While the DEBS and ICBC works study how blockchain systems behave under different network conditions, this work moves to the economic layer and asks how the internal behaviour of cryptoasset economies can be measured through a transparent, customizable, and theoretically grounded index.", "Negli studi DEBS e ICBC ho esaminato prestazioni e consumi delle blockchain al variare della rete. Qui applico un’idea simile alla dimensione economica: rendo esplicito quali indicatori contano e come vengono combinati.")}
@@ -379,7 +379,7 @@ const findings = [
       <div class="card-body">
         <div class="flex flex-wrap gap-3 items-start justify-between">
           <div class="max-w-3xl">
-            <h2 class="card-title text-2xl">{t("Try the EB-index interactively", "Prova l’EB-index")}</h2>
+            <h2 id="try-eb-index" class="card-title text-2xl">{t("Try the EB-index interactively", "Prova l’EB-index")}</h2>
 
             <p class="leading-relaxed opacity-90 mt-2">
               {t("The CryptoEntropy Explorer turns the paper into a small interactive lab. Users can toggle cryptoassets, choose one of the paper attribute sets, build their own custom set from the available attributes, assign utility weights, and immediately see how the EB-index changes over time.", "Con CryptoEntropy Explorer puoi scegliere le criptovalute, usare gli indicatori dello studio o selezionarne altri, impostare i pesi e osservare l’andamento dell’indice.")}
@@ -429,7 +429,7 @@ const findings = [
   <section class="mb-12">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Links and reproducibility material", "Collegamenti e materiali per la riproducibilità")}</h2>
+        <h2 id="links" class="card-title text-2xl">{t("Links and reproducibility material", "Collegamenti e materiali per la riproducibilità")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The paper is accompanied by a public GitHub repository containing the normalized and entropy-derived datasets, documentation, citation metadata, and a plotting script for reproducing the main figures.", "Il repository pubblico su GitHub contiene i dataset normalizzati e derivati dall’entropia, la documentazione, i metadati per la citazione e lo script per riprodurre i grafici principali.")}

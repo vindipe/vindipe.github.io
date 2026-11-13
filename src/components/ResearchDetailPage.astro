@@ -104,7 +104,7 @@ const researchStructuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{previewTitle}</h2>
+        <h2 id="overview" class="card-title text-2xl">{previewTitle}</h2>
         <p class="leading-relaxed opacity-90">{previewBody}</p>
       </div>
     </div>
@@ -115,7 +115,7 @@ const researchStructuredData = {
       <section class="mb-8">
         <div class="network-protected card bg-base-100 shadow-md">
           <div class="card-body">
-            <h2 class="card-title text-2xl">{section.title}</h2>
+            <h2 id={section.id} class="card-title text-2xl">{section.title}</h2>
 
             {section.body && (
               <p class="leading-relaxed opacity-90">{section.body}</p>

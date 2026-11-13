@@ -233,7 +233,7 @@ const structuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Research problem", "Domanda di ricerca")}</h2>
+        <h2 id="research-problem" class="card-title text-2xl">{t("Research problem", "Domanda di ricerca")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("Blockchain efficiency cannot be represented by a single headline metric. Results depend on the interaction between protocol design, network conditions, workload semantics, infrastructure, and the economic ecosystem. Comparisons based only on average transactions per second can therefore hide variability, deployment assumptions, energy trade-offs, and structural differences between crypto-assets.", "La media delle transazioni al secondo dice poco su quanto varino le prestazioni, quanta energia serva o come cambino i risultati al variare della configurazione. Per confrontare le blockchain occorre tenere conto del protocollo, della rete, del carico e delle caratteristiche economiche degli asset.")}
@@ -247,7 +247,7 @@ const structuredData = {
   </section>
 
   <section class="mb-8">
-    <h2 class="text-3xl font-bold mb-5">{t("Four dimensions of efficiency", "Quattro dimensioni dell’efficienza")}</h2>
+    <h2 id="dimensions-of-efficiency" class="text-3xl font-bold mb-5">{t("Four dimensions of efficiency", "Quattro dimensioni dell’efficienza")}</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
       {
@@ -266,7 +266,7 @@ const structuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Experimental scope", "Come sono stati condotti gli esperimenti")}</h2>
+        <h2 id="experimental-scope" class="card-title text-2xl">{t("Experimental scope", "Come sono stati condotti gli esperimenti")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The technical studies compare Algorand, Diem, Ethereum Clique, Quorum IBFT, and Solana under five logical network topologies: fat-tree, full mesh, hypercube, scale-free, and torus. The systems are exercised with transfer and smart-contract workloads inspired by DDoS, FIFA, GAFAM, gaming, PayPal, and VISA scenarios, using both 10-node and 40-node configurations.", "Gli esperimenti confrontano Algorand, Diem, Ethereum Clique, Quorum IBFT e Solana su reti da 10 o 40 nodi. Ho usato cinque topologie logiche: fat-tree, maglia completa, ipercubo, rete a invarianza di scala e toro. I carichi di trasferimenti e smart contract si ispirano a scenari DDoS, FIFA, GAFAM, gaming, PayPal e VISA.")}
@@ -289,7 +289,7 @@ const structuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Main contributions", "Contributi principali")}</h2>
+        <h2 id="contributions" class="card-title text-2xl">{t("Main contributions", "Contributi principali")}</h2>
 
         <ol class="list-decimal pl-5 space-y-3 opacity-90">
           {contributions.map((contribution) => <li>{contribution}</li>)}
@@ -301,7 +301,7 @@ const structuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Supervision", "Supervisione")}</h2>
+        <h2 id="supervision" class="card-title text-2xl">{t("Supervision", "Supervisione")}</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
           <div>
@@ -323,7 +323,7 @@ const structuredData = {
   </section>
 
   <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-5">{t("Related research and artifacts", "Studi e materiali correlati")}</h2>
+    <h2 id="related-research" class="text-3xl font-bold mb-5">{t("Related research and artifacts", "Studi e materiali correlati")}</h2>
 
     <div class="grid gap-5">
       {

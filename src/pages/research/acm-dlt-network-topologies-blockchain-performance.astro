@@ -117,7 +117,7 @@ const structuredData = {
         <img src="/research/dlt26/table4-overall-blockchain-variability-v2.webp" width="1001" height="404" decoding="async" alt={t("Table 4 from the ACM DLT journal article, reporting overall blockchain-level variability for throughput, latency, and energy consumption.", "La tabella 4 dell’articolo ACM DLT mostra la variabilità complessiva di throughput, latenza e consumi energetici per ogni blockchain.")} class="rounded-xl border border-base-300 bg-base-200" loading="lazy" />
       </figure>
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("What the journal article highlights", "Che cosa mostra l’articolo")}</h2>
+        <h2 id="article-highlights" class="card-title text-2xl">{t("What the journal article highlights", "Che cosa mostra l’articolo")}</h2>
         <p class="leading-relaxed opacity-90">
           {t("Blockchain performance is not only a property of the protocol or the machines used during an experiment. It also depends on how nodes are connected, how messages propagate, how workloads stress the system, and how stable the experimental environment is. This publication makes that dependency explicit by placing network topology at the centre of the evaluation methodology.", "Come sono collegati i nodi? Quanto tempo impiegano i messaggi a propagarsi? Le risposte contano per le prestazioni quanto il protocollo e l’hardware. Lo studio controlla la struttura della rete, il carico e la stabilità dell’ambiente per distinguere questi effetti.")}
         </p>
@@ -131,7 +131,7 @@ const structuredData = {
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Experimental perspective", "Come sono stati condotti gli esperimenti")}</h2>
+        <h2 id="experimental-perspective" class="card-title text-2xl">{t("Experimental perspective", "Come sono stati condotti gli esperimenti")}</h2>
         <p class="leading-relaxed opacity-90">
           {t("The research line compares blockchain systems under controlled network topologies such as fat-tree, full mesh, hypercube, scale-free, and torus. These topologies are used as experimental lenses: they make it possible to observe how different communication structures affect throughput, latency, commit ratio, network load, and robustness.", "Abbiamo confrontato le blockchain in cinque topologie: fat-tree, maglia completa, ipercubo, rete a invarianza di scala e toro. Per ciascuna abbiamo misurato throughput, latenza, tasso di conferma, traffico e robustezza.")}
         </p>
@@ -150,7 +150,7 @@ const structuredData = {
         <img src="/research/debs/network-load-workloads.webp" width="3600" height="4500" decoding="async" alt={t("Network load during blockchain workload execution across workloads and topologies.", "Traffico di rete durante l’esecuzione dei benchmark, per diversi carichi e topologie.")} class="rounded-xl border border-base-300 bg-base-200" loading="lazy" />
       </figure>
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Connection to my PhD work", "Il legame con il dottorato")}</h2>
+        <h2 id="phd-research" class="card-title text-2xl">{t("Connection to my PhD work", "Il legame con il dottorato")}</h2>
         <p class="leading-relaxed opacity-90">
           {t("This publication is directly connected to my doctoral dissertation, which compares blockchain systems across performance, energy, repeatability, predictability, and economic-efficiency dimensions. It represents the journal-facing part of the broader topology-aware benchmarking contribution, alongside the Lilith artifact and the conference publications on performance and energy evaluation.", "L’articolo approfondisce la parte della mia tesi dedicata a prestazioni e consumi delle blockchain. Gli esperimenti si inseriscono nello stesso filone del framework Lilith e degli studi presentati a DEBS e ICBC.")}
         </p>
@@ -161,7 +161,7 @@ const structuredData = {
   <section class="mb-12">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Links", "Collegamenti")}</h2>
+        <h2 id="links" class="card-title text-2xl">{t("Links", "Collegamenti")}</h2>
         <div class="flex flex-wrap gap-3 mt-2">
           {
             researchLinks.map((link) => (

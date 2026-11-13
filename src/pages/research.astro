@@ -163,13 +163,13 @@ const academicTheses = [
   <section class="mb-10">
     <h1 class="text-4xl font-bold mb-4">{t("Research", "Ricerca")}</h1>
 
-    <div class="space-y-3 text-lg leading-relaxed opacity-90">
+    <div class="intro-copy space-y-3 text-lg leading-relaxed opacity-90">
       <p>{t("During my PhD, I studied how network topology and workload affected blockchain performance and energy use. I used realistic network topologies in a controlled environment to measure how results varied across runs and how repeatable and predictable they were. I also studied the economic efficiency of cryptocurrencies.", "Durante il dottorato ho studiato come topologia di rete e carico di lavoro incidessero sulle prestazioni e sui consumi delle blockchain. Ho usato topologie realistiche in un ambiente controllato per capire quanto variassero i risultati da una prova all’altra e quanto fossero ripetibili e prevedibili. Mi sono occupato anche dell’efficienza economica delle criptovalute.")}</p>
       <p>{t("My next line of research is CIRCULA. We will study how blockchains can represent and enforce expiry and renewal for digital resources.", "Con CIRCULA apro un nuovo filone di ricerca. Studieremo come definire e applicare regole di scadenza e rinnovo per le risorse digitali nelle blockchain.")}</p>
     </div>
   </section>
 
-  <section class="mb-12"><h2 class="text-3xl font-bold mb-5">{t("Research direction", "Nuovo filone di ricerca")}</h2>
+  <section class="mb-12"><h2 id="research-direction" class="text-3xl font-bold mb-5">{t("Research direction", "Nuovo filone di ricerca")}</h2>
     <article class="network-protected card bg-base-100 shadow-md"><div class="card-body">
   <div class="flex flex-wrap items-center gap-2"><h3 class="card-title">{t("CIRCULA - Expiry-Aware System Design for Blockchains", "CIRCULA – Scadenza e rinnovo delle risorse nelle blockchain")}</h3><span class="badge badge-primary">{t("Expected start · 1 February 2027", "Avvio previsto · 1° febbraio 2027")}</span></div>
   <p>{t("What if digital resources had an explicit lifetime? CIRCULA will investigate expiry and renewal in blockchain systems through formal semantics, prototypes and controlled evaluation. The project is funded by the SNSF and hosted at the University of Neuchâtel.", "Che cosa succede quando una risorsa digitale ha una data di scadenza? CIRCULA studierà come rappresentare e verificare scadenza e rinnovo con modelli formali, prototipi ed esperimenti controllati. Il progetto è ospitato dall’Università di Neuchâtel e finanziato dal Fondo nazionale svizzero.")}</p>
@@ -179,7 +179,7 @@ const academicTheses = [
   </section>
 
   <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-5">{t("Publications", "Pubblicazioni")}</h2>
+    <h2 id="publications" class="text-3xl font-bold mb-5">{t("Publications", "Pubblicazioni")}</h2>
 
     <div class="grid gap-5">
       {
@@ -213,7 +213,7 @@ const academicTheses = [
   </section>
 
   <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-5">{t("Artifacts & Datasets", "Materiali e dataset")}</h2>
+    <h2 id="artifacts-and-datasets" class="text-3xl font-bold mb-5">{t("Artifacts & Datasets", "Materiali e dataset")}</h2>
 
     <div class="grid gap-5">
       {
@@ -271,7 +271,7 @@ const academicTheses = [
   </section>
 
   <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-5">{t("Academic Theses", "Tesi")}</h2>
+    <h2 id="theses" class="text-3xl font-bold mb-5">{t("Academic Theses", "Tesi")}</h2>
 
     <div class="grid gap-5">
       {
@@ -333,7 +333,7 @@ const academicTheses = [
   </section>
 
   <section class="mb-12">
-    <h2 class="text-3xl font-bold mb-5">{t("Research Experience", "Esperienza di ricerca")}</h2>
+    <h2 id="research-experience" class="text-3xl font-bold mb-5">{t("Research Experience", "Esperienza di ricerca")}</h2>
 
     <a
       href={localPath("/research/ccaf-experience")}

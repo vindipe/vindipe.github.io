@@ -114,7 +114,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Context", "Contesto")}</h2>
+        <h2 id="context" class="card-title text-2xl">{t("Context", "Contesto")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("Blockchain energy consumption is often discussed in relation to consensus mechanisms and hardware requirements. However, the network layer also affects how validators communicate, how workloads are distributed, and how efficiently transactions are processed.", "Consenso e hardware influiscono sui consumi, ma anche la rete ha un ruolo: determina come comunicano i validatori, come si distribuisce il carico e quante transazioni vengono elaborate.")}
@@ -139,7 +139,7 @@ const findings = [
       </figure>
 
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Topology-aware energy evaluation", "Valutazione energetica con topologie controllate")}</h2>
+        <h2 id="topology-aware-evaluation" class="card-title text-2xl">{t("Topology-aware energy evaluation", "Valutazione energetica con topologie controllate")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The evaluation considers five controlled network topologies: fat-tree, full mesh, hypercube, scale-free, and torus. Each topology changes how blockchain nodes communicate, which can affect latency, message propagation, committed transactions, and therefore energy per transaction.", "Le cinque topologie cambiano il modo in cui comunicano i nodi. Questo può influire sui tempi di propagazione, sul numero di transazioni confermate e sull’energia impiegata per ciascuna.")}
@@ -155,7 +155,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Experimental setup", "Configurazione sperimentale")}</h2>
+        <h2 id="experimental-setup" class="card-title text-2xl">{t("Experimental setup", "Configurazione sperimentale")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The experiments evaluate Algorand, Diem, Ethereum Clique, Quorum IBFT, and Solana. The workload set includes two transaction-processing workloads inspired by PayPal and VISA, and one smart-contract workload inspired by GAFAM-style stock-market interactions.", "Gli esperimenti confrontano Algorand, Diem, Ethereum Clique, Quorum IBFT e Solana. Due carichi di trasferimenti riproducono scenari ispirati a PayPal e VISA. Il terzo simula operazioni di borsa tramite smart contract.")}
@@ -200,7 +200,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Energy per transaction", "Energia per transazione")}</h2>
+        <h2 id="energy-per-transaction" class="card-title text-2xl">{t("Energy per transaction", "Energia per transazione")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The most important metric in the paper is not just total energy consumption, but energy per committed transaction. This captures whether a blockchain is merely consuming more energy, or whether that energy is translated into useful committed work.", "Il consumo per transazione confermata indica quanta energia serve al sistema per completare una transazione e aiuta a interpretare il dato sui consumi complessivi.")}
@@ -237,7 +237,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Main findings", "Risultati principali")}</h2>
+        <h2 id="findings" class="card-title text-2xl">{t("Main findings", "Risultati principali")}</h2>
 
         <ul class="list-disc pl-5 space-y-2 opacity-90">
           {findings.map((finding) => <li>{finding}</li>)}
@@ -249,7 +249,7 @@ const findings = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Relationship with the DEBS work", "Il legame con lo studio DEBS")}</h2>
+        <h2 id="debs-research" class="card-title text-2xl">{t("Relationship with the DEBS work", "Il legame con lo studio DEBS")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("This paper is closely connected to the topology-aware benchmarking line of work. While the DEBS paper focuses more broadly on blockchain performance under network topologies and dynamics, this ICBC paper isolates the energy dimension and studies how topology affects energy consumption and energy per transaction.", "Lo studio DEBS esamina le prestazioni al variare della topologia e delle condizioni di rete. Lo studio ICBC approfondisce i consumi totali e quelli per transazione.")}
@@ -270,7 +270,7 @@ const findings = [
   <section class="mb-12">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Links", "Collegamenti")}</h2>
+        <h2 id="links" class="card-title text-2xl">{t("Links", "Collegamenti")}</h2>
 
         <div class="flex flex-wrap gap-3 mt-2">
           <a

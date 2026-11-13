@@ -5,17 +5,17 @@ const t = translator(Astro.url.pathname);
 const { labelledBy } = Astro.props;
 ---
 
-<section id="quantum-blockchain-lab" aria-labelledby={labelledBy} class="card">
+<section id="quantum-blockchain-lab" aria-labelledby={labelledBy} class="card quantum-lab">
   <div class="card-body p-3 sm:p-4">
-    <div class="grid grid-cols-1 lg:grid-cols-[0.9fr_1fr] gap-4">
-      <div class="grid gap-3">
+    <div class="quantum-layout grid grid-cols-1 gap-4">
+      <div class="grid grid-cols-1 gap-3">
         <label class="form-control">
           <span class="label-text font-semibold">{t("Blockchain component", "Componente della blockchain")}</span>
           <select class="select select-bordered" data-quantum-component>
             <option value="hashes">{t("Hashes and block fingerprints", "Hash e impronte dei blocchi")}</option>
             <option value="signatures">{t("User transaction signatures", "Firme delle transazioni degli utenti")}</option>
             <option value="validators">{t("Validator signatures and consensus keys", "Firme dei validatori e chiavi di consenso")}</option>
-            <option value="mempool">{t("Mempool and exposed pending transactions", "Mempool e dati visibili prima della conferma")}</option>
+            <option value="mempool">{t("Mempool and pending transactions", "Mempool e transazioni in attesa")}</option>
             <option value="migration">{t("Post-quantum migration strategy", "Strategia di migrazione post-quantistica")}</option>
           </select>
         </label>
@@ -23,9 +23,9 @@ const { labelledBy } = Astro.props;
         <label class="form-control">
           <span class="label-text font-semibold">Scenario</span>
           <select class="select select-bordered" data-quantum-scenario>
-            <option value="today">{t("Today: no large fault-tolerant quantum attacker", "Oggi: l’attaccante non dispone di un computer quantistico abbastanza potente e tollerante ai guasti")}</option>
-            <option value="future">{t("Future: powerful quantum attacker exists", "Scenario futuro: l’attaccante dispone di un computer quantistico abbastanza potente")}</option>
-            <option value="pq">{t("Migration: post-quantum signatures deployed", "Dopo la migrazione: la rete usa firme post-quantistiche")}</option>
+            <option value="today">{t("Today: limited quantum hardware", "Oggi: capacità quantistiche limitate")}</option>
+            <option value="future">{t("Future: powerful quantum computer", "Futuro: computer quantistico potente")}</option>
+            <option value="pq">{t("After migration: post-quantum signatures", "Dopo la migrazione: firme post-quantistiche")}</option>
           </select>
         </label>
 
@@ -57,6 +57,18 @@ const { labelledBy } = Astro.props;
     </div>
   </div>
 </section>
+
+<style>
+  .quantum-lab {
+    container-type: inline-size;
+  }
+
+  @container (min-width: 43rem) {
+    .quantum-layout {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+  }
+</style>
 
 <script>
   const isItalian = () => document.documentElement.lang === "it";

@@ -196,7 +196,7 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Context", "Contesto")}</h2>
+        <h2 id="context" class="card-title text-2xl">{t("Context", "Contesto")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The thesis starts from a practical problem: accounting and document management in small and medium-sized businesses can be costly, manual, error-prone, and difficult to verify. In a restaurant scenario, payments, invoices, orders, customer interactions, and supplier operations create a flow of documents that must remain consistent, auditable, and accessible to the right actors.", "In un ristorante, ordini, pagamenti e fatture di clienti e fornitori devono corrispondere e poter essere verificati. Per una piccola impresa, farlo con procedure manuali costa tempo e aumenta il rischio di errori.")}
@@ -212,7 +212,7 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Conceptual background", "Concetti di base")}</h2>
+        <h2 id="conceptual-background" class="card-title text-2xl">{t("Conceptual background", "Concetti di base")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The work connects multiple concepts: ERP systems, electronic billing, Ethereum, smart contracts, Web3, Solid Pods, QR codes, and digital wallets. The key design idea is to avoid treating blockchain as a general-purpose database: verifiable payment events can be anchored on-chain, while sensitive documents remain stored in controlled, access-managed Pods.", "Il lavoro collega sistemi ERP, fatturazione elettronica, Ethereum, smart contract, Web3, Solid Pods, codici QR e wallet. La blockchain registra gli eventi di pagamento verificabili, mentre i documenti sensibili rimangono in Pod con accesso controllato.")}
@@ -246,7 +246,7 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Architecture and design", "Architettura e progettazione")}</h2>
+        <h2 id="architecture" class="card-title text-2xl">{t("Architecture and design", "Architettura e progettazione")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The prototype models the restaurant as an interaction between physical space, customer actions, digital ordering, document storage, and payment confirmation. QR codes connect tables and invoices to the web interface, Solid manages private resources, and the blockchain layer handles payment-related verification.", "Il codice QR collega il tavolo all’interfaccia web. Solid conserva ordini e documenti riservati, mentre la blockchain permette di verificare il pagamento.")}
@@ -280,7 +280,7 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Prototype workflow", "Come funziona il prototipo")}</h2>
+        <h2 id="prototype-workflow" class="card-title text-2xl">{t("Prototype workflow", "Come funziona il prototipo")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("The implemented prototype follows the customer journey: access the table-specific interface, browse the menu, manage the cart, generate the bill, confirm payment, and obtain a digital document that can be connected to the accounting workflow.", "Il cliente apre l’interfaccia del tavolo, consulta il menu, gestisce il carrello, genera il conto, conferma il pagamento e ottiene un documento digitale collegabile alla contabilità.")}
@@ -314,7 +314,7 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Implementation stack", "Tecnologie utilizzate")}</h2>
+        <h2 id="technologies" class="card-title text-2xl">{t("Implementation stack", "Tecnologie utilizzate")}</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div class="card bg-base-200/50 border border-base-300">
@@ -351,7 +351,7 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Main contribution", "Contributo principale")}</h2>
+        <h2 id="contribution" class="card-title text-2xl">{t("Main contribution", "Contributo principale")}</h2>
 
         <ul class="list-disc pl-5 space-y-2 opacity-90">
           {contributions.map((item) => <li>{item}</li>)}
@@ -363,7 +363,7 @@ const contributions = [
   <section class="mb-8">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Relationship with later research", "Legame con le ricerche successive")}</h2>
+        <h2 id="later-research" class="card-title text-2xl">{t("Relationship with later research", "Legame con le ricerche successive")}</h2>
 
         <p class="leading-relaxed opacity-90">
           {t("This thesis anticipates several directions that later became central in my research profile: blockchain systems, experimental prototypes, digital assets, privacy-aware data management, and the connection between technical infrastructure and real organisational workflows.", "La tesi anticipa temi che sono poi diventati centrali nel mio lavoro: blockchain, prototipi sperimentali, asset digitali, riservatezza dei dati e integrazione delle infrastrutture tecniche nei processi organizzativi.")}
@@ -391,7 +391,7 @@ const contributions = [
   <section class="mb-12">
     <div class="network-protected card bg-base-100 shadow-md">
       <div class="card-body">
-        <h2 class="card-title text-2xl">{t("Links", "Collegamenti")}</h2>
+        <h2 id="links" class="card-title text-2xl">{t("Links", "Collegamenti")}</h2>
 
         <div class="flex flex-wrap gap-3 mt-2">
           <a
