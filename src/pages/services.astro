@@ -9,27 +9,31 @@ const language = locale === "it" ? "it-IT" : "en-US";
 const services = [
   {
     name: t("Consulting and digital strategy planning", "Consulenza e pianificazione strategia digitale"),
-    detail: t("Review your tools, explore options and define practical next steps.", "Analisi degli strumenti, valutazione delle opzioni e definizione dei prossimi passi."),
+    detail: t(
+      "If you’re choosing between building a website, improving the one you have or using a ready-made tool, I’ll help you compare costs and effort and decide where to start.",
+      "Se stai valutando se creare un sito, migliorare quello che hai o usare uno strumento già pronto, ti aiuto a confrontare costi e impegno e a decidere da dove partire."
+    ),
   },
   {
     name: t("Implement digital infrastructure", "Implementare infrastruttura digitale"),
-    detail: t("Configure and deploy an application with Docker and an automated publishing workflow.", "Configurazione e pubblicazione di un’applicazione con Docker e una procedura di rilascio automatizzata."),
-    example: {
-      name: t("This website", "Questo sito"),
-      detail: t(
-        "I built this bilingual site with Astro and automated deployments to GitHub Pages.",
-        "Ho realizzato questo sito bilingue con Astro e ne ho automatizzato la pubblicazione su GitHub Pages."
-      ),
-      href: inLanguage("/", locale),
-    },
+    detail: t(
+      "I set up what you need to get a website or application online, including hosting, domain setup and a way to publish updates without repeating the same manual steps.",
+      "Predispongo quello che serve per mettere online un sito o un’applicazione: configuro l’hosting, collego il dominio e preparo un sistema per pubblicare gli aggiornamenti senza rifare ogni volta gli stessi passaggi."
+    ),
   },
   {
     name: t("Digital support", "Supporto digitale"),
-    detail: t("Get remote help with a specific issue on your computer.", "Assistenza da remoto per un problema al PC."),
+    detail: t(
+      "I help you troubleshoot issues remotely, such as a shared folder that won’t sync or an online tool that has stopped working.",
+      "Ti aiuto da remoto a individuare e risolvere problemi come una cartella condivisa che non si sincronizza o uno strumento online che ha smesso di funzionare."
+    ),
   },
   {
-    name: t("Mentoring and tutoring", "Mentoring e tutoring"),
-    detail: t("Individual sessions on programming, digital tools or your own project.", "Sessioni individuali su programmazione, strumenti digitali o un tuo progetto."),
+    name: "Training",
+    detail: t(
+      "In hands-on sessions, we work on a task you want to learn to do independently, such as analysing data in a spreadsheet or writing your first script.",
+      "Nelle sessioni pratiche lavoriamo su un’attività che vuoi imparare a svolgere in autonomia, per esempio analizzare dei dati in un foglio di calcolo o scrivere il tuo primo script."
+    ),
   },
 ];
 
@@ -46,8 +50,8 @@ const email = "vincenzopaolo.diperna@outlook.com";
 <BaseLayout
   title={t("Digital Services | Vincenzo Di Perna", "Servizi digitali | Vincenzo Di Perna")}
   description={t(
-    "Digital strategy, infrastructure implementation, remote support, mentoring and tutoring from Vincenzo Di Perna.",
-    "Consulenza per la strategia digitale, implementazione di infrastrutture, supporto da remoto, mentoring e tutoring con Vincenzo Di Perna."
+    "Digital strategy, infrastructure implementation, remote support and hands-on training from Vincenzo Di Perna.",
+    "Consulenza per la strategia digitale, implementazione di infrastrutture, supporto da remoto e formazione pratica con Vincenzo Di Perna."
   )}
   sideBarActiveItemID="services"
 >
@@ -61,16 +65,10 @@ const email = "vincenzopaolo.diperna@outlook.com";
     </header>
 
     <ul class="mb-9 divide-y divide-base-300">
-      {services.map(({ name, detail, example }) => (
+      {services.map(({ name, detail }) => (
         <li class="py-5 first:pt-0 last:pb-0">
           <h2 class="text-xl font-bold mb-1">{name}</h2>
           <p>{detail}</p>
-          {example && (
-            <p class="mt-2 text-sm">
-              <a class="link" href={example.href}>{example.name}</a>
-              {". "}{example.detail}
-            </p>
-          )}
         </li>
       ))}
     </ul>
