@@ -99,18 +99,11 @@ const skills = [
 
 const services = [
   {
-    id: "mentoring",
-    name: t("Consulting, mentoring and tutoring", "Consulenza, mentoring e tutoring"),
-    detail: t("Individual guidance on programming, digital tools or a technical decision.", "Sessioni individuali su programmazione, strumenti digitali o scelte tecniche."),
-    marketUsd: [70, 130],
-    hourly: { EUR: 45, USD: 50, CHF: 45 },
-  },
-  {
     id: "strategy",
-    name: t("Digital strategy planning", "Pianificazione strategia digitale"),
-    detail: t("Review your tools and define priorities and next steps.", "Analisi degli strumenti, scelta delle priorità e piano d’azione."),
+    name: t("Consulting and digital strategy planning", "Consulenza e pianificazione strategia digitale"),
+    detail: t("Review your tools, explore options and define practical next steps.", "Analisi degli strumenti, valutazione delle opzioni e definizione dei prossimi passi."),
     marketUsd: [90, 375],
-    hourly: { EUR: 55, USD: 65, CHF: 55 },
+    hourly: { EUR: 20, USD: 22, CHF: 18 },
   },
   {
     id: "infrastructure",
@@ -126,7 +119,13 @@ const services = [
     marketUsd: [15, 60],
     hourly: { EUR: 35, USD: 40, CHF: 35 },
   },
-
+  {
+    id: "mentoring",
+    name: t("Mentoring and tutoring", "Mentoring e tutoring"),
+    detail: t("Individual sessions on programming, digital tools or your own project.", "Sessioni individuali su programmazione, strumenti digitali o un tuo progetto."),
+    marketUsd: [70, 130],
+    hourly: { EUR: 20, USD: 22, CHF: 18 },
+  },
 ];
 
 const currencies = ["EUR", "USD", "CHF"] as const;
@@ -216,6 +215,22 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
       </div>
     </section>
 
+    <section class="card bg-base-100 shadow-md mb-6" aria-labelledby="appointment">
+      <div class="card-body studio-booking">
+        <div>
+          <h2 id="appointment" class="text-3xl font-bold mb-2">{t("A free 30-minute call", "Un colloquio gratuito di 30 minuti")}</h2>
+          <p>{t(
+            "Tell me what you have in mind. We’ll discuss the work and how to price it.",
+            "Raccontami cosa ti serve. Vediamo insieme cosa c’è da fare e come stimare il costo."
+          )}</p>
+        </div>
+        <button class="btn btn-primary studio-cta" type="button" data-open-booking aria-haspopup="dialog" hidden>
+          {t("Book an appointment", "Prenota un appuntamento")}
+        </button>
+        <noscript><a href={inLanguage("/contact/", locale)}>{t("Request an appointment by email", "Richiedi un appuntamento via email")}</a></noscript>
+      </div>
+    </section>
+
     <section class="mb-10" aria-labelledby="skills">
       <h2 id="skills" class="text-3xl font-bold mb-4">{t("Skills", "Competenze")}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -243,22 +258,6 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
             </div>
           </div>
         ))}
-      </div>
-    </section>
-
-    <section class="card bg-base-100 shadow-md mb-6" aria-labelledby="appointment">
-      <div class="card-body studio-booking">
-        <div>
-          <h2 id="appointment" class="text-3xl font-bold mb-2">{t("A free 30-minute call", "Un colloquio gratuito di 30 minuti")}</h2>
-          <p>{t(
-            "Tell me what you have in mind. We’ll discuss the work and how to price it.",
-            "Raccontami cosa ti serve. Vediamo insieme cosa c’è da fare e come stimare il costo."
-          )}</p>
-        </div>
-        <button class="btn btn-primary studio-cta" type="button" data-open-booking aria-haspopup="dialog" hidden>
-          {t("Book an appointment", "Prenota un appuntamento")}
-        </button>
-        <noscript><a href={inLanguage("/contact/", locale)}>{t("Request an appointment by email", "Richiedi un appuntamento via email")}</a></noscript>
       </div>
     </section>
 
