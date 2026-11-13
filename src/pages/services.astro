@@ -102,37 +102,29 @@ const services = [
 
     name: t("Consulting and digital strategy planning", "Consulenza e pianificazione strategia digitale"),
     detail: t("Review your tools, explore options and define practical next steps.", "Analisi degli strumenti, valutazione delle opzioni e definizione dei prossimi passi."),
-    marketUsd: [90, 375],
     hourly: { EUR: 20, USD: 22, CHF: 18 },
   },
   {
 
     name: t("Implement digital infrastructure", "Implementare infrastruttura digitale"),
     detail: t("Configure and deploy an application with Docker and an automated publishing workflow.", "Configurazione e pubblicazione di un’applicazione con Docker e una procedura di rilascio automatizzata."),
-    marketUsd: [160, 600],
     hourly: { EUR: 60, USD: 70, CHF: 60 },
   },
   {
 
     name: t("Digital support", "Supporto digitale"),
     detail: t("Get remote help with a specific issue on your computer.", "Assistenza da remoto per un problema al PC."),
-    marketUsd: [15, 60],
     hourly: { EUR: 35, USD: 40, CHF: 35 },
   },
   {
 
     name: t("Mentoring and tutoring", "Mentoring e tutoring"),
     detail: t("Individual sessions on programming, digital tools or your own project.", "Sessioni individuali su programmazione, strumenti digitali o un tuo progetto."),
-    marketUsd: [70, 130],
     hourly: { EUR: 20, USD: 22, CHF: 18 },
   },
 ];
 
 const currencies = ["EUR", "USD", "CHF"] as const;
-// ECB reference rates on 12 November 2026, quoted per euro.
-const marketFx = { EUR: 1 / 1.1081, USD: 1, CHF: 0.9232 / 1.1081 };
-const marketRange = (range: number[], currency: keyof typeof marketFx) =>
-  range.map((amount) => Math.round(amount * marketFx[currency]));
 const formatRate = new Intl.NumberFormat(language, {
   style: "currency", currency: "EUR", currencyDisplay: "narrowSymbol", maximumFractionDigits: 0,
 });
@@ -160,8 +152,8 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
     <header class="mb-7">
       <h1 class="text-4xl font-bold mb-4">Freelancing</h1>
       <p class="text-lg leading-relaxed opacity-90">{t(
-        "I’ve developed a range of digital skills, from software and infrastructure to training and technical support. I offer them as a freelancer to people who need specialist help. Bringing AI into my day-to-day work helps me shorten some development tasks and offer hourly services that can cost less than a traditional fixed-price project.",
-        "Ho sviluppato competenze in diversi ambiti del digitale, dal software e dalle infrastrutture alla formazione e al supporto tecnico. Come freelance le metto a disposizione di chi cerca un aiuto specialistico. Integrare l’IA nel mio lavoro quotidiano mi permette di ridurre i tempi di alcune attività di sviluppo e di offrire servizi a ore con costi che possono essere inferiori a quelli di un preventivo a progetto."
+        "I’ve developed a range of digital skills, from software and infrastructure to training and technical support. I offer them as a freelancer to people who need specialist help. With a fixed-price quote, the total is agreed up front. I charge for the time I spend on the work, so when AI helps me finish a development task faster, you pay for fewer hours.",
+        "Ho sviluppato competenze in diversi ambiti del digitale, dal software e dalle infrastrutture alla formazione e al supporto tecnico. Come freelance le metto a disposizione di chi cerca un aiuto specialistico. Con un preventivo a progetto, il prezzo si stabilisce in anticipo. Io fatturo il tempo effettivo: se l’IA mi aiuta a completare più in fretta un’attività di sviluppo, paghi meno ore."
       )}<sup><a class="underline" href="#engagement-note" data-astro-reload aria-label={t("Note on assignments", "Nota sugli incarichi")}>*</a></sup></p>
     </header>
 
@@ -180,11 +172,10 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
       </div>
       <div class="card bg-base-100 shadow-md service-prices" aria-live="polite">
         <table class="service-table" role="table">
-          <caption class="sr-only">{t("Market cost benchmarks and my hourly rates", "Costi di mercato e mie tariffe orarie")}</caption>
+          <caption class="sr-only">{t("Hourly rates", "Tariffe orarie")}</caption>
           <thead role="rowgroup">
             <tr role="row">
               <th scope="col" role="columnheader">{t("Service", "Servizio")}</th>
-              <th scope="col" role="columnheader">{t("Estimated market cost", "Stima di mercato")}</th>
               <th scope="col" role="columnheader">{t("My hourly rate", "La mia tariffa oraria")}</th>
             </tr>
           </thead>
@@ -195,10 +186,6 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
                   <strong>{service.name}</strong>
                   <span class="service-detail">{service.detail}</span>
                 </th>
-                <td role="cell">
-                  <span class="mobile-price-label" aria-hidden="true">{t("Estimated market cost", "Stima di mercato")}</span>
-                  <strong data-rate data-eur={marketRange(service.marketUsd, "EUR").join(",")} data-usd={service.marketUsd.join(",")} data-chf={marketRange(service.marketUsd, "CHF").join(",")}>{formatRate.formatRange(marketRange(service.marketUsd, "EUR")[0], marketRange(service.marketUsd, "EUR")[1])}</strong>
-                </td>
                 <td role="cell">
                   <span class="mobile-price-label" aria-hidden="true">{t("My hourly rate", "La mia tariffa oraria")}</span>
                   <strong class="hourly-price" data-rate data-eur={service.hourly.EUR} data-usd={service.hourly.USD} data-chf={service.hourly.CHF}>{formatRate.format(service.hourly.EUR)}</strong><span class="rate-unit"> {hourLabel}</span>
@@ -336,8 +323,7 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
           style: "currency", currency, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0,
         });
         for (const price of this.querySelectorAll<HTMLElement>("[data-rate]")) {
-          const [amount, upper] = price.dataset[currency.toLowerCase()]!.split(",").map(Number);
-          price.textContent = upper === undefined ? format.format(amount) : format.formatRange(amount, upper);
+          price.textContent = format.format(Number(price.dataset[currency.toLowerCase()]));
         }
       };
 
@@ -503,7 +489,7 @@ const generalTopic = t("Discuss a project", "Parlare di un progetto");
       white-space: nowrap;
     }
     .service-table tbody { display: block; border-top: 0; }
-    .service-table tr { display: grid; grid-template-columns: 1fr 1fr; }
+    .service-table tr { display: grid; grid-template-columns: 1fr; }
     .service-table :is(th, td) { padding: 0.52rem 0.5rem; }
     .service-table tbody th { grid-column: 1 / -1; padding-bottom: 0.15rem; }
     .service-table td { width: auto; }
