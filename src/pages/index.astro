@@ -174,20 +174,6 @@ const latestWorks = getRecentWorks(Astro.url.pathname)
 
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
-          <h3 id="research-in-practice" class="card-title" data-section-anchor>{t("How I study blockchain systems", "Come studio i sistemi blockchain")}</h3>
-          <p>{t(
-            "I compare protocols under controlled conditions to see how node placement, network delays and transaction workloads affect performance. I publish the tools and data so others can inspect the setup and repeat the measurements.",
-            "Confronto i protocolli in condizioni controllate per capire come la posizione dei nodi, i ritardi di rete e i carichi di transazioni incidono sulle prestazioni. Pubblico strumenti e dati per permettere a chi legge di esaminare la configurazione e ripetere le misure."
-          )}</p>
-          <div class="card-actions justify-end mt-4">
-            <a class="btn btn-sm btn-outline" href={localPath("/research/lilith-benchmarking-framework")}>{t("Lilith benchmarking framework", "Framework di benchmark Lilith")}</a>
-            <a class="btn btn-sm btn-outline" href={localPath("/research/blockchain-repeatability-dataset")}>{t("Repeatability dataset", "Dataset sulla ripetibilità")}</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="card bg-base-100 shadow-md">
-        <div class="card-body">
           <h3 class="card-title">{t("Freelance Services", "Servizi freelance")}</h3>
           <p>{t(
             "I start by asking what you want to achieve and what tools you already use. From there I can help you choose a solution, build and launch a website or application, fix a technical problem, or learn a tool through hands-on practice.",
