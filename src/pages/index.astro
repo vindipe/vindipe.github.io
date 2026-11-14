@@ -167,11 +167,30 @@ const latestWorks = getRecentWorks(Astro.url.pathname)
           </p>
 
           <div class="card-actions justify-end mt-4">
-            <a class="btn btn-sm btn-outline" href={localPath("/cv")}> {t("View CV", "Consulta il CV")} </a>
+            <a class="btn btn-sm btn-outline" href={localPath("/cv")}> {t("Explore my experience", "Scopri la mia esperienza")} </a>
           </div>
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="mb-12" aria-labelledby="research-in-practice">
+    <h2 id="research-in-practice" class="text-3xl font-bold mb-5">{t("How I study blockchain systems", "Come studio i sistemi blockchain")}</h2>
+    <div class="space-y-4 leading-relaxed">
+      <p>{t(
+        "When comparing blockchain protocols, I start by defining the conditions of the experiment. The number and placement of nodes, the delays between them and the transactions they have to process can all affect the result. In my doctoral work I used controlled network topologies to examine how those conditions changed protocol performance. This helps explain why two studies can report different results for the same protocol.",
+        "Quando confronto protocolli blockchain, parto dalle condizioni dell’esperimento. Il numero e la posizione dei nodi, i ritardi di comunicazione e le transazioni da elaborare possono influenzare il risultato. Durante il dottorato ho usato topologie di rete controllate per studiare come queste condizioni cambiano le prestazioni dei protocolli. È anche un modo per capire perché due studi possano ottenere risultati diversi sullo stesso protocollo."
+      )}</p>
+      <p>{t(
+        "I publish the software and data used in my experiments so others can inspect the setup and repeat the measurements. The Lilith benchmarking framework lets you run tests under controlled network conditions. The repeatability dataset gives readers access to the experiment results, including the variation between runs. These resources can help you design a protocol comparison or check how much confidence to place in a reported performance figure.",
+        "Pubblico software e dati degli esperimenti per permettere a chi legge di esaminare la configurazione e ripetere le misure. Con il framework Lilith puoi eseguire test in condizioni di rete controllate. Il dataset sulla ripetibilità permette di consultare i risultati e osservare quanto variano tra un’esecuzione e l’altra. Questi materiali possono servire a progettare un confronto tra protocolli o a valutare quanto sia rappresentativo un dato sulle prestazioni."
+      )}</p>
+    </div>
+    <ul class="mt-4 flex flex-wrap gap-3">
+      <li><a class="btn btn-sm btn-outline" href={localPath("/research/lilith-benchmarking-framework")}>{t("Lilith benchmarking framework", "Framework di benchmark Lilith")}</a></li>
+      <li><a class="btn btn-sm btn-outline" href={localPath("/research/blockchain-repeatability-dataset")}>{t("Blockchain repeatability dataset", "Dataset sulla ripetibilità")}</a></li>
+      <li><a class="btn btn-sm btn-outline" href={localPath("/services")}>{t("See freelance services", "Scopri i servizi freelance")}</a></li>
+    </ul>
   </section>
 
   <section class="mb-12 text-center">
