@@ -27,7 +27,7 @@ export function getRecentWorks(pathname: string): RecentWork[] {
   },
   {
     title:
-      t("The Impact of Network Topology on Performance Metrics and Energy Consumption for Blockchains: Towards Repeatable Benchmarking", "L’effetto della topologia di rete sulle prestazioni e sui consumi delle blockchain"),
+      t("Network topology in blockchain benchmarks", "Topologia di rete nei benchmark blockchain"),
     desc: t("ACM DLT journal article on topology-aware blockchain benchmarking, showing why network structure and dynamics should be treated as first-class variables in reproducible blockchain performance evaluation.", "Che cosa cambia nelle misure quando i nodi comunicano su una rete diversa? L’articolo su ACM DLT mostra perché la topologia e le condizioni di rete contano per ottenere risultati riproducibili."),
     url: "/research/acm-dlt-network-topologies-blockchain-performance",
     img: "/research/dlt26/table4-overall-blockchain-variability-v2.webp",
@@ -37,7 +37,7 @@ export function getRecentWorks(pathname: string): RecentWork[] {
     target: "_self",
   },
   {
-    title: t("Comparing Blockchains: Performance, Energy, and Economic Efficiencies", "Confrontare le blockchain: prestazioni, consumi ed efficienza economica"),
+    title: t("PhD thesis: Comparing blockchains", "Tesi di dottorato: confrontare le blockchain"),
     desc: t("PhD dissertation on topology-aware blockchain benchmarking, performance and energy efficiency, experimental repeatability, performance predictability, and an entropy-based approach to economic efficiency.", "La mia tesi confronta prestazioni e consumi delle blockchain, studia quanto siano ripetibili e prevedibili le misure e propone un indice di efficienza economica basato sull’entropia."),
     url: "/research/comparing-blockchains",
     img: "/research/theses/phd-thesis-preview.svg",

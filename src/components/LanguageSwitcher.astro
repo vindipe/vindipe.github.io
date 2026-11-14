@@ -2,6 +2,7 @@
 import { getLocale, inLanguage, translator } from "../i18n/locale";
 
 const { pathname } = Astro.url;
+const { fullLabels = false } = Astro.props;
 const locale = getLocale(pathname);
 const t = translator(pathname);
 ---
@@ -17,7 +18,7 @@ const t = translator(pathname);
         aria-current={language === locale ? "page" : undefined}
         aria-label={language === "it" ? "Italiano" : "English"}
         data-language-link
-      >{language.toUpperCase()}</a>
+      >{fullLabels ? (language === "it" ? "Italiano" : "English") : language.toUpperCase()}</a>
     ))}
   </nav>
 )}
