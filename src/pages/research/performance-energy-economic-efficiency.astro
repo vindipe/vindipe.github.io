@@ -206,7 +206,7 @@ const findings = [
           {t("The most important metric in the paper is not just total energy consumption, but energy per committed transaction. This captures whether a blockchain is merely consuming more energy, or whether that energy is translated into useful committed work.", "Il consumo per transazione confermata indica quanta energia serve al sistema per completare una transazione e aiuta a interpretare il dato sui consumi complessivi.")}
         </p>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5 lg:[&>.card:nth-child(odd):last-child]:col-span-2 lg:[&>.card:nth-child(odd):last-child>figure]:max-w-sm">
           {
             blockchainEnergyProfiles.map((item) => (
               <div class="card bg-base-200/50 border border-base-300">

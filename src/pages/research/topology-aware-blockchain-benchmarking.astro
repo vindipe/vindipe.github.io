@@ -197,7 +197,7 @@ const dynamics = [
           {t("The evaluation compares blockchain behaviour across five network topologies. These topologies are not presented as perfect representations of every real blockchain deployment. Instead, they are controlled network shapes used to expose how different communication structures influence performance and robustness.", "Le cinque topologie permettono di isolare l’effetto della struttura della rete sulle prestazioni e sulla capacità di reagire ai guasti.")}
         </p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-5 sm:max-lg:[&>.card:nth-child(odd):last-child]:col-span-2 sm:max-lg:[&>.card:nth-child(odd):last-child>figure]:max-w-xs">
           {
             topologies.map((topology) => (
               <div class="card bg-base-200/50 border border-base-300">

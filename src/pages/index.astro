@@ -109,7 +109,7 @@ const latestWorks = getRecentWorks(Astro.url.pathname)
   <section class="mb-12">
     <h2 id="my-work" class="text-3xl w-full font-bold mb-5">{t("More about me", "Il mio lavoro")}</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:[&>.card:nth-child(odd):last-child]:col-span-2">
       <div class="card bg-base-100 shadow-md">
         <div class="card-body">
           <h3 class="card-title">{t("Projects and Tools", "Progetti e strumenti")}</h3>
