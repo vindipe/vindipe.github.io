@@ -77,30 +77,6 @@ const services = [
   },
 ];
 
-const productionSteps = [
-  {
-    name: t("Checks before launch", "Verifiche prima del rilascio"),
-    detail: t(
-      "I test the main tasks users need to complete, including forms or sign-in where relevant, on desktop and mobile.",
-      "Verifico da computer e da telefono che le persone riescano a completare le operazioni principali, come compilare un modulo o accedere a un’area riservata."
-    ),
-  },
-  {
-    name: t("Go-live", "Messa in produzione"),
-    detail: t(
-      "I publish the site or application on its final domain over HTTPS and check that updates can be released.",
-      "Pubblico il sito o l’applicazione sul dominio definitivo con HTTPS e verifico che gli aggiornamenti si possano rilasciare."
-    ),
-  },
-  {
-    name: t("Handover", "Consegna"),
-    detail: t(
-      "I hand over the information you need to access the service, make updates or pass its maintenance to someone else.",
-      "Ti lascio le informazioni per accedere al servizio, aggiornarlo o affidarne la gestione a un’altra persona."
-    ),
-  },
-];
-
 const appointmentHours = [[9, 12], [14, 17]];
 const slots = appointmentHours.map(([start, end]) => (
   Array.from({ length: (end - start) * 2 }, (_, index) => {
@@ -114,75 +90,50 @@ const email = "vincenzopaolo.diperna@outlook.com";
 <BaseLayout
   title={t("Digital Services | Vincenzo Di Perna", "Servizi digitali | Vincenzo Di Perna")}
   description={t(
-    "Digital consulting, production-ready websites and applications, technical support and hands-on training from Vincenzo Di Perna.",
+    "Digital consulting, website and application development and deployment, technical support and hands-on training from Vincenzo Di Perna.",
     "Consulenza digitale, realizzazione e messa in produzione di siti e applicazioni, supporto tecnico e formazione pratica con Vincenzo Di Perna."
   )}
   sideBarActiveItemID="services"
-  showNetworkBackground={false}
 >
-  <digital-services class="studio" data-language={language} data-email={email}>
-    <header class="services-hero">
-      <div class="hero-copy">
-        <h1>{t("Digital Services", "Servizi digitali")}</h1>
-        <p>{t(
-          "I help you choose, build and manage the digital tools you rely on at work. I take websites and applications through to launch and offer technical support and hands-on training.",
-          "Ti aiuto a scegliere, realizzare e gestire gli strumenti digitali con cui lavori. Seguo la messa in produzione di siti e applicazioni e offro supporto tecnico e formazione pratica."
-        )}</p>
-        <a class="services-action" href="#choose-service" data-astro-reload>
-          {t("Explore the services", "Esplora i servizi")} <span aria-hidden="true">↓</span>
-        </a>
-      </div>
-      <div class="hero-image">
-        <img src="/services/workbench.webp" width="1100" height="733" alt="" fetchpriority="high" decoding="async" />
-      </div>
+  <digital-services class="block" data-language={language} data-email={email}>
+    <header class="mb-10">
+      <h1 class="text-4xl font-bold mb-4">{t("Digital Services", "Servizi digitali")}</h1>
+      <p class="text-lg leading-relaxed opacity-90">{t(
+        "I help you choose, build and manage the digital tools you rely on at work. I take websites and applications through to launch and offer technical support and hands-on training.",
+        "Ti aiuto a scegliere, realizzare e gestire gli strumenti digitali con cui lavori. Seguo la messa in produzione di siti e applicazioni e offro supporto tecnico e formazione pratica."
+      )}</p>
     </header>
 
-    <section class="services-section" aria-labelledby="choose-service">
-      <div class="section-heading">
-        <h2 id="choose-service">{t("What do you need help with?", "Di cosa hai bisogno?")}</h2>
-        <p>{t(
-          "Open a service to see when it can help and what you can expect.",
-          "Apri una voce per capire quando ti serve quel servizio e cosa puoi ottenere."
-        )}</p>
-      </div>
-      <div class="service-list">
+    <section class="mb-12" aria-labelledby="choose-service">
+      <h2 id="choose-service" class="text-3xl font-bold mb-5">{t("What do you need help with?", "Di cosa hai bisogno?")}</h2>
+      <div class="grid gap-4">
         {services.map(({ name, question, need, work, outcome }) => (
-          <details class="service-option">
-            <summary class="service-summary">
-              <span class="service-label">
-                <span class="service-name">{name}</span>
-                <span class="service-question">{question}</span>
-              </span>
-              <span class="service-toggle" aria-hidden="true"></span>
+          <details class="network-protected collapse collapse-arrow bg-base-100 shadow-md motion-safe:transition-shadow hover:shadow-2xl">
+            <summary class="collapse-title rounded-box focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-4">
+              <span class="card-title">{name}</span>
+              <span class="block mt-1">{question}</span>
             </summary>
-            <div class="service-detail">
-              <div class="service-detail-grid">
+            <div class="collapse-content">
+              <div class="border-t border-base-300 pt-4 space-y-4">
                 <div>
-                  <h3>{t("When it’s useful", "Quando ti serve")}</h3>
-                  <p>{need}</p>
+                  <h3 class="font-semibold">{t("When it’s useful", "Quando ti serve")}</h3>
+                  <p class="mt-1">{need}</p>
                 </div>
                 <div>
-                  <h3>{t("What I can do for you", "Su cosa ti aiuto")}</h3>
-                  <ul>
+                  <h3 class="font-semibold">{t("What I can do for you", "Su cosa ti aiuto")}</h3>
+                  <ul class="list-disc pl-5 mt-1 space-y-1">
                     {work.map((item) => <li>{item}</li>)}
                   </ul>
                 </div>
-              </div>
-              <div class="service-outcome">
                 <div>
-                  <h3>{t("What you get", "Cosa ottieni")}</h3>
-                  <p>{outcome}</p>
+                  <h3 class="font-semibold">{t("What you get", "Cosa ottieni")}</h3>
+                  <p class="mt-1">{outcome}</p>
                 </div>
-                <button
-                  class="service-request"
-                  type="button"
-                  data-open-booking
-                  data-service={name}
-                  aria-haspopup="dialog"
-                  hidden
-                >
-                  {t("Request an appointment", "Richiedi un appuntamento")} <span aria-hidden="true">→</span>
-                </button>
+                <div class="card-actions justify-end">
+                  <button class="btn btn-sm btn-outline" type="button" data-open-booking data-service={name} aria-haspopup="dialog" hidden>
+                    {t("Request an appointment", "Richiedi un appuntamento")}
+                  </button>
+                </div>
               </div>
             </div>
           </details>
@@ -190,89 +141,69 @@ const email = "vincenzopaolo.diperna@outlook.com";
       </div>
     </section>
 
-    <section class="services-section production" aria-labelledby="production-ready">
-      <div class="section-heading">
-        <h2 id="production-ready">
-          {locale === "it"
-            ? <>Cosa significa «<span lang="en">production ready</span>»</>
-            : "What “production ready” means"}
-        </h2>
-        <p>{t(
-          "A website or application is ready for production when people can use it at its final address and you know how to manage it after launch.",
-          "Un sito o un’applicazione è pronto per la produzione quando le persone possono usarlo all’indirizzo definitivo e tu sai come gestirlo dopo il lancio."
-        )}</p>
-      </div>
-      <div class="production-grid">
-        {productionSteps.map(({ name, detail }) => (
-          <div>
-            <h3>{name}</h3>
-            <p>{detail}</p>
+    <section class="mb-10" aria-labelledby="appointment">
+      <h2 id="appointment" class="text-3xl font-bold mb-5">{t("Tell me what you need", "Raccontami cosa ti serve")}</h2>
+      <div class="network-protected card bg-base-100 shadow-md">
+        <div class="card-body">
+          <p>{t(
+            "In a free 30-minute call, we can go over what you want to achieve, what you already have and where I can help.",
+            "In un primo colloquio gratuito di 30 minuti possiamo capire cosa vuoi ottenere, da cosa parti e come posso aiutarti."
+          )}</p>
+          <div class="card-actions justify-end mt-2">
+            <button class="btn btn-primary" type="button" data-open-booking aria-haspopup="dialog" hidden>
+              {t("Request an appointment", "Richiedi un appuntamento")}
+            </button>
+            <noscript>
+              <a class="btn btn-primary" href={inLanguage("/contact/", locale)}>{t("Contact me", "Contattami")}</a>
+            </noscript>
           </div>
-        ))}
+        </div>
       </div>
     </section>
 
-    <section class="services-section studio-booking" aria-labelledby="appointment">
-      <div class="section-heading">
-        <h2 id="appointment">{t("Tell me what you need", "Raccontami cosa ti serve")}</h2>
-        <p>{t(
-          "In a free 30-minute call, we can go over what you want to achieve, what you already have and where I can help.",
-          "In un primo colloquio gratuito di 30 minuti possiamo capire cosa vuoi ottenere, da cosa parti e come posso aiutarti."
+    <dialog class="modal modal-bottom sm:modal-middle" aria-labelledby="booking-title" aria-describedby="booking-topic booking-note">
+      <div class="modal-box">
+        <div class="flex items-center justify-between gap-2">
+          <h3 id="booking-title" class="card-title">{t("Request a free appointment", "Richiedi un appuntamento gratuito")}</h3>
+          <form method="dialog">
+            <button class="btn btn-ghost btn-circle btn-sm" aria-label={t("Close", "Chiudi")}>×</button>
+          </form>
+        </div>
+        <p id="booking-topic" class="mt-2 font-semibold" data-booking-topic hidden></p>
+        <p id="booking-note" class="mt-2">{t(
+          "Choose a time for your free 30-minute call. I’ll confirm the appointment by email.",
+          "Scegli un orario per il colloquio gratuito di 30 minuti. Ti confermerò l’appuntamento via email."
         )}</p>
-      </div>
-      <div class="booking-action">
-        <button class="services-action" type="button" data-open-booking aria-haspopup="dialog" hidden>
-          {t("Request an appointment", "Richiedi un appuntamento")} <span aria-hidden="true">→</span>
-        </button>
-        <noscript>
-          <a class="services-action" href={inLanguage("/contact/", locale)}>
-            {t("Contact me", "Contattami")} <span aria-hidden="true">→</span>
-          </a>
-        </noscript>
-      </div>
-    </section>
 
-    <dialog class="booking-dialog" aria-labelledby="booking-title" aria-describedby="booking-topic booking-note">
-      <div class="booking-header">
-        <h3 id="booking-title">{t("Request a free appointment", "Richiedi un appuntamento gratuito")}</h3>
-        <form method="dialog">
-          <button class="btn btn-ghost btn-circle btn-sm" aria-label={t("Close", "Chiudi")}>×</button>
+        <form class="grid gap-3 mt-4" data-booking-form data-subject={t("Digital services · Appointment request", "Servizi digitali · Richiesta appuntamento")}>
+          <label class="grid gap-1 font-semibold">
+            {t("Preferred date", "Data preferita")}
+            <input class="input input-bordered w-full max-w-[13rem] font-normal" type="date" name="date" required />
+          </label>
+          <fieldset class="booking-times min-w-0" aria-describedby="booking-timezone" disabled>
+            <legend class="font-semibold">{t("Start time", "Ora di inizio")}</legend>
+            <p id="booking-timezone" class="text-sm opacity-80 mb-2">{t(
+              "Italy time (Europe/Rome) · 09:00–12:00 and 14:00–17:00",
+              "Ora italiana (Europe/Rome) · 09:00–12:00 e 14:00–17:00"
+            )}</p>
+            {slots.map((times, index) => (
+              <div class="grid grid-cols-3 sm:grid-cols-6 gap-1.5 mb-1.5" role="group" aria-label={index === 0 ? t("Morning", "Mattina") : t("Afternoon", "Pomeriggio")}>
+                {times.map((time) => (
+                  <label class="min-w-0">
+                    <input type="radio" class="peer sr-only" name="time" value={time} required />
+                    <span class="btn btn-outline btn-sm w-full px-0 peer-checked:btn-active peer-focus-visible:outline peer-focus-visible:outline-2 peer-disabled:opacity-40 peer-disabled:cursor-default">{time}</span>
+                  </label>
+                ))}
+              </div>
+            ))}
+          </fieldset>
+          <p class="text-sm opacity-80" data-no-times hidden>{t(
+            "Choose another date to see more times.",
+            "Scegli un’altra data per vedere altri orari."
+          )}</p>
+          <button class="btn btn-primary justify-self-start" type="submit">{t("Open email", "Apri email")}</button>
         </form>
       </div>
-      <p id="booking-topic" class="booking-topic" data-booking-topic hidden></p>
-      <p id="booking-note">{t(
-        "Choose a time for your free 30-minute call. I’ll confirm the appointment by email.",
-        "Scegli un orario per il colloquio gratuito di 30 minuti. Ti confermerò l’appuntamento via email."
-      )}</p>
-
-      <form class="booking-form" data-booking-form data-subject={t("Digital services · Appointment request", "Servizi digitali · Richiesta appuntamento")}>
-        <label class="booking-date">
-          {t("Preferred date", "Data preferita")}
-          <input class="input input-bordered" type="date" name="date" required />
-        </label>
-        <fieldset class="booking-times" aria-describedby="booking-timezone" disabled>
-          <legend>{t("Start time", "Ora di inizio")}</legend>
-          <p id="booking-timezone">{t(
-            "Italy time (Europe/Rome) · 09:00–12:00 and 14:00–17:00",
-            "Ora italiana (Europe/Rome) · 09:00–12:00 e 14:00–17:00"
-          )}</p>
-          {slots.map((times, index) => (
-            <div class="slot-group" role="group" aria-label={index === 0 ? t("Morning", "Mattina") : t("Afternoon", "Pomeriggio")}>
-              {times.map((time) => (
-                <label class="slot">
-                  <input type="radio" class="sr-only" name="time" value={time} required />
-                  <span>{time}</span>
-                </label>
-              ))}
-            </div>
-          ))}
-        </fieldset>
-        <p class="studio-note" data-no-times hidden>{t(
-          "Choose another date to see more times.",
-          "Scegli un’altra data per vedere altri orari."
-        )}</p>
-        <button class="btn btn-primary" type="submit">{t("Open email", "Apri email")}</button>
-      </form>
     </dialog>
   </digital-services>
 </BaseLayout>
@@ -347,303 +278,7 @@ const email = "vincenzopaolo.diperna@outlook.com";
 </script>
 
 <style>
-  .studio {
-    --ink: #282624;
-    --muted: #514d46;
-    --line: #dfdad1;
-    --accent: #f7ca57;
-    display: block;
-    width: min(56rem, 100%);
-    margin-inline: auto;
-    color: var(--ink);
+  [data-open-booking][hidden], dialog:not([open]) {
+    display: none;
   }
-
-  .studio :is(p, li) {
-    text-align: start;
-    hyphens: manual;
-  }
-
-  .services-hero {
-    display: grid;
-    grid-template-columns: minmax(0, 1.16fr) minmax(0, 1fr);
-    overflow: hidden;
-    border-radius: 1rem;
-    background: #232120;
-    color: #fff;
-  }
-
-  .hero-copy {
-    align-self: center;
-    padding: clamp(1.5rem, 4vw, 2.8rem);
-  }
-
-  .hero-copy h1 {
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    font-weight: 750;
-    line-height: 1.03;
-    letter-spacing: -0.045em;
-    text-wrap: balance;
-  }
-
-  .hero-copy p {
-    margin: 0.85rem 0 1.35rem;
-    max-width: 35ch;
-    color: #e8e1d9;
-    font-size: 1.05rem;
-    line-height: 1.6;
-  }
-
-  .hero-image {
-    position: relative;
-    overflow: hidden;
-    background: #39322b;
-  }
-
-  .hero-image img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 50% 57%;
-  }
-
-  .services-action {
-    display: inline-flex;
-    min-height: 44px;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    padding: 0.65rem 0.9rem;
-    border-radius: 0.4rem;
-    background: var(--accent);
-    color: #232120;
-    font-size: 0.96rem;
-    font-weight: 700;
-    text-align: start;
-  }
-
-  .services-action:hover { background: #ffda78; }
-  .services-action[hidden], .service-request[hidden] { display: none; }
-  .services-action > span, .service-request > span { flex: none; }
-
-  .services-section { margin-top: clamp(2rem, 4vw, 3rem); }
-  .section-heading { margin-bottom: 1rem; }
-  .section-heading h2 {
-    font-size: clamp(1.65rem, 3vw, 2.25rem);
-    font-weight: 750;
-    line-height: 1.14;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-  }
-  .section-heading p {
-    max-width: 62ch;
-    margin-top: 0.45rem;
-    color: var(--muted);
-    line-height: 1.55;
-  }
-
-  .service-list { display: grid; gap: 0.65rem; }
-  .service-option {
-    border: 1px solid var(--line);
-    border-radius: 0.65rem;
-    background: #fff;
-  }
-
-  .service-summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1.05rem clamp(1rem, 3vw, 1.55rem);
-    border-radius: inherit;
-    cursor: pointer;
-    list-style: none;
-  }
-  .service-summary::-webkit-details-marker { display: none; }
-  .service-summary:hover, .service-option[open] > .service-summary { background: #fcf7ec; }
-  .service-option[open] {
-    border-color: #c7a95f;
-  }
-  .service-option[open] > .service-summary {
-    border-end-start-radius: 0;
-    border-end-end-radius: 0;
-  }
-
-  .service-label { display: grid; gap: 0.25rem; }
-  .service-name {
-    font-size: 0.86rem;
-    font-weight: 700;
-    color: #624810;
-  }
-  .service-question {
-    font-size: clamp(1.07rem, 2.25vw, 1.35rem);
-    font-weight: 700;
-    line-height: 1.24;
-    letter-spacing: -0.015em;
-  }
-  .service-toggle {
-    position: relative;
-    display: grid;
-    flex: none;
-    place-items: center;
-    width: 2rem;
-    height: 2rem;
-    border: 1px solid #d3c7aa;
-    border-radius: 50%;
-    color: #5f4310;
-  }
-  .service-toggle::before, .service-toggle::after {
-    position: absolute;
-    width: 0.7rem;
-    height: 2px;
-    background: currentColor;
-    content: "";
-  }
-  .service-toggle::after { transform: rotate(90deg); }
-  .service-option[open] .service-toggle {
-    border-color: transparent;
-    background: var(--accent);
-    color: #232120;
-  }
-  .service-option[open] .service-toggle::after { transform: none; }
-
-  .service-detail {
-    border-top: 1px solid #eadfc2;
-    padding: clamp(1rem, 3vw, 1.55rem);
-  }
-  .service-detail-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
-    gap: clamp(1.1rem, 3.5vw, 2.25rem);
-  }
-  .service-detail h3, .production h3 {
-    margin-bottom: 0.3rem;
-    font-size: 1rem;
-    font-weight: 750;
-    line-height: 1.25;
-  }
-  .service-detail :is(p, li), .production-grid p {
-    color: var(--muted);
-    line-height: 1.55;
-  }
-  .service-detail ul {
-    list-style: disc;
-    padding-inline-start: 1.15em;
-  }
-  .service-detail li + li { margin-top: 0.28rem; }
-
-  .service-outcome {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.6rem 1rem;
-    margin-top: 1rem;
-    padding: 0.85rem 1rem;
-    border-radius: 0.45rem;
-    background: #f7f4ed;
-  }
-  .service-request {
-    display: inline-flex;
-    flex: none;
-    align-items: center;
-    gap: 0.4rem;
-    min-height: 44px;
-    color: #63460b;
-    font-weight: 700;
-    text-align: start;
-    text-decoration: underline;
-    text-underline-offset: 0.18em;
-  }
-  .service-request:hover { color: #232120; }
-
-  .production {
-    padding: clamp(1.15rem, 4vw, 2.15rem);
-    border: 1px solid var(--line);
-    border-radius: 0.85rem;
-    background: #f7f4ee;
-  }
-  .production-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.9rem 1.2rem;
-  }
-  .production-grid > div {
-    padding-top: 0.7rem;
-    border-top: 2px solid #b69546;
-  }
-
-  .studio-booking {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem 1.35rem;
-    margin-bottom: 0.65rem;
-    padding: clamp(1.15rem, 4vw, 1.9rem);
-    border-radius: 0.85rem;
-    background: #232120;
-    color: #fff;
-  }
-  .studio-booking .section-heading { margin: 0; }
-  .studio-booking .section-heading p { color: #e8e1d9; }
-  .booking-action { flex: none; max-width: 100%; }
-
-  :is(.services-action, .service-summary, .service-request):focus-visible {
-    outline: 2px solid #8e660f;
-    outline-offset: 3px;
-  }
-  .services-action:focus-visible { outline-color: var(--accent); }
-
-  @media (max-width: 43rem) {
-    .services-hero { grid-template-columns: minmax(0, 1fr); }
-    .hero-image { aspect-ratio: 2.1; }
-    .hero-copy p { max-width: 52ch; }
-    .service-detail-grid, .production-grid { grid-template-columns: minmax(0, 1fr); }
-    .service-outcome, .studio-booking { flex-direction: column; align-items: flex-start; }
-  }
-
-  .booking-dialog {
-    width: min(33rem, calc(100% - 2rem));
-    max-height: calc(100dvh - 2rem);
-    padding: clamp(1rem, 4vw, 1.65rem);
-    border: 1px solid #e2ded4;
-    border-radius: 0.5rem;
-    background: #fff;
-    color: #282723;
-  }
-
-  .booking-dialog::backdrop { background: #22221ea3; }
-  .booking-header { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
-  .booking-header h3 { font-size: 1.3rem; line-height: 1.25; font-weight: 700; }
-  .booking-header button { font-size: 1.3rem; }
-  .booking-topic { margin-top: 0.35rem; font-weight: 650; }
-  #booking-note { margin-top: 0.35rem; }
-  .booking-form { display: grid; gap: 0.75rem; margin-top: 0.9rem; }
-  .booking-date { display: grid; gap: 0.3rem; font-weight: 650; }
-  .booking-date input { width: min(100%, 13rem); min-width: 0; font-weight: 400; }
-  .booking-times { min-width: 0; }
-  .booking-times legend { font-weight: 650; }
-  #booking-timezone { margin: 0.2rem 0 0.55rem; font-size: 0.85rem; color: #5c5850; }
-  .slot-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(3.65rem, 1fr)); gap: 0.35rem; }
-  .slot-group + .slot-group { margin-top: 0.35rem; }
-  .slot span {
-    display: block;
-    padding: 0.4rem 0.25rem;
-    border: 1px solid #d5d0c3;
-    border-radius: 0.3rem;
-    text-align: center;
-    font-size: 0.85rem;
-    font-weight: 650;
-    cursor: pointer;
-  }
-  .slot input:checked + span {
-    background: oklch(var(--p));
-    color: oklch(var(--pc));
-  }
-  .slot input:focus-visible + span {
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
-  }
-  .slot input:disabled + span, .booking-times:disabled .slot span { opacity: 0.45; cursor: default; }
-  .booking-form > button { justify-self: start; }
-  .studio-note { margin-top: 0.75rem; font-size: 0.88rem; opacity: 0.8; }
 </style>
