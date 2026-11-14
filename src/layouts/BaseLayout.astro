@@ -36,7 +36,7 @@ const t = translator(Astro.url.pathname);
 
   <body>
     <a class="sr-only focus:not-sr-only focus:fixed focus:z-50 focus:bg-base-100 focus:p-3" href="#main-content">{t("Skip to content", "Vai al contenuto")}</a>
-    <NetworkBackground animated />
+    <NetworkBackground />
 
     <div class="relative z-[1] drawer lg:drawer-open">
       <input id="my-drawer" type="checkbox" class="drawer-toggle" />

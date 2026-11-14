@@ -1,12 +1,34 @@
 ---
-const { animated = false } = Astro.props;
+import { translator } from "../i18n/locale";
+
+const t = translator(Astro.url.pathname);
 ---
 
 <div class="network-background" aria-hidden="true">
-    <canvas id="network-background-canvas" data-animated={String(animated)}></canvas>
+    <canvas id="network-background-canvas" data-animated="true"></canvas>
 </div>
+<button
+    class="network-motion btn btn-xs btn-ghost bg-base-100"
+    type="button"
+    data-network-motion
+    data-pause={t("Pause background", "Pausa sfondo")}
+    data-resume={t("Resume background", "Riprendi sfondo")}
+    hidden
+>{t("Pause background", "Pausa sfondo")}</button>
 
 <style>
+    .network-motion {
+        position: fixed;
+        z-index: 25;
+        inset-inline-end: max(4.2rem, env(safe-area-inset-right));
+        inset-block-end: max(0.75rem, env(safe-area-inset-bottom));
+        min-height: 2rem;
+    }
+
+    .network-motion[hidden] {
+        display: none;
+    }
+
     .network-background {
         position: fixed;
         inset: 0;
@@ -52,8 +74,8 @@ const { animated = false } = Astro.props;
         const pulses = [];
         const edges = [];
         const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-        const animated = canvas.dataset.animated === "true";
-        const shouldAnimate = () => animated && !reducedMotion.matches && !document.hidden;
+        const motionButton = document.querySelector("[data-network-motion]");
+        const shouldAnimate = () => !window.__networkBackgroundPaused && !document.hidden;
         let lastGraphUpdate = -Infinity;
 
         function random(min, max) {
@@ -105,18 +127,19 @@ const { animated = false } = Astro.props;
         function updateNodes() {
             const scrollWave = scrollY * 0.003;
 
+            const speed = reducedMotion.matches ? 0.35 : 1;
             for (const node of nodes) {
                 node.x +=
-                    node.vx + Math.sin(scrollWave + node.y * 0.012) * 0.035;
+                    (node.vx + Math.sin(scrollWave + node.y * 0.012) * 0.035) * speed;
                 node.y +=
-                    node.vy + Math.cos(scrollWave + node.x * 0.012) * 0.035;
+                    (node.vy + Math.cos(scrollWave + node.x * 0.012) * 0.035) * speed;
 
                 if (node.x < -20) node.x = width + 20;
                 if (node.x > width + 20) node.x = -20;
                 if (node.y < -20) node.y = height + 20;
                 if (node.y > height + 20) node.y = -20;
 
-                if (mouseX !== null && mouseY !== null) {
+                if (!reducedMotion.matches && mouseX !== null && mouseY !== null) {
                     const dx = node.x - mouseX;
                     const dy = node.y - mouseY;
                     const d = Math.sqrt(dx * dx + dy * dy);
@@ -304,7 +327,7 @@ const { animated = false } = Astro.props;
         const handleTouchStart = (event) => {
             const touch = event.touches[0];
 
-            if (!touch || !shouldAnimate()) {
+            if (!touch || reducedMotion.matches || !shouldAnimate()) {
                 return;
             }
 
@@ -319,13 +342,27 @@ const { animated = false } = Astro.props;
         const listeners = new AbortController();
         const { signal } = listeners;
         window.addEventListener("resize", handleResize, { signal });
-        if (animated) {
-            reducedMotion.addEventListener("change", refresh, { signal });
-            document.addEventListener("visibilitychange", refresh, { signal });
-            window.addEventListener("mousemove", handleMouseMove, { passive: true, signal });
-            window.addEventListener("mouseleave", handleMouseLeave, { signal });
-            window.addEventListener("scroll", handleScroll, { passive: true, signal });
-            window.addEventListener("touchstart", handleTouchStart, { passive: true, signal });
+        reducedMotion.addEventListener("change", refresh, { signal });
+        document.addEventListener("visibilitychange", refresh, { signal });
+        window.addEventListener("pageshow", refresh, { signal });
+        window.addEventListener("mousemove", handleMouseMove, { passive: true, signal });
+        window.addEventListener("mouseleave", handleMouseLeave, { signal });
+        window.addEventListener("scroll", handleScroll, { passive: true, signal });
+        window.addEventListener("touchstart", handleTouchStart, { passive: true, signal });
+
+        if (motionButton) {
+            const updateMotionButton = () => {
+                motionButton.textContent = window.__networkBackgroundPaused
+                    ? motionButton.dataset.resume
+                    : motionButton.dataset.pause;
+            };
+            updateMotionButton();
+            motionButton.hidden = false;
+            motionButton.addEventListener("click", () => {
+                window.__networkBackgroundPaused = !window.__networkBackgroundPaused;
+                updateMotionButton();
+                refresh();
+            }, { signal });
         }
 
         window.__networkBackgroundCleanup = () => {
