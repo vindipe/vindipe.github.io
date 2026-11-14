@@ -6,8 +6,36 @@ const locale = getLocale(Astro.url.pathname);
 const t = translator(Astro.url.pathname);
 const language = locale === "it" ? "it-IT" : "en-US";
 
+const technologies = [
+  ["github", "GitHub"], ["git", "Git"], ["githubactions", "GitHub Actions"],
+  ["docker", "Docker"], ["kubernetes", "Kubernetes"], ["linux", "Linux"],
+  ["gnubash", "Bash"], ["python", "Python"], ["rust", "Rust"], ["go", "Go"],
+  ["c", "C"], ["cplusplus", "C++"], ["javascript", "JavaScript"], ["typescript", "TypeScript"],
+  ["html5", "HTML"], ["css", "CSS"], ["astro", "Astro"], ["tailwindcss", "Tailwind CSS"],
+  ["githubpages", "GitHub Pages"], ["cloudflare", "Cloudflare"], ["jupyter", "Jupyter"],
+  ["ethereum", "Ethereum"], ["solana", "Solana"], ["algorand", "Algorand"],
+];
+
+const roles = [
+  t("Software Engineer", "Ingegnere del software"),
+  t("Research Software Engineer", "Ingegnere del software per la ricerca"),
+  t("Backend Developer", "Sviluppatore backend"),
+  t("Python Developer", "Sviluppatore Python"),
+  t("Rust Developer", "Sviluppatore Rust"),
+  t("Go Developer", "Sviluppatore Go"),
+  t("Web Developer", "Sviluppatore web"),
+  t("Blockchain Infrastructure Engineer", "Ingegnere delle infrastrutture blockchain"),
+  t("Protocol Engineer", "Ingegnere dei protocolli"),
+  t("Distributed Systems Engineer", "Ingegnere dei sistemi distribuiti"),
+  t("DevOps Engineer", "Ingegnere DevOps"),
+  t("Performance Engineer", "Ingegnere delle prestazioni software"),
+  t("Technical Consultant", "Consulente tecnico"),
+  t("Technical Trainer", "Formatore tecnico"),
+];
+
 const services = [
   {
+    image: "strategy",
     name: t("Consulting and digital strategy planning", "Consulenza e pianificazione strategia digitale"),
     question: t("What solution do I need, and where should I start?", "Quale soluzione mi serve e da dove comincio?"),
     need: t(
@@ -25,6 +53,7 @@ const services = [
     ),
   },
   {
+    image: "infrastructure",
     name: t("Implement digital infrastructure", "Implementare infrastruttura digitale"),
     question: t("How do I build and launch my website or application?", "Come realizzo e metto online il sito o l’applicazione che mi serve?"),
     need: t(
@@ -42,6 +71,7 @@ const services = [
     ),
   },
   {
+    image: "support",
     name: t("Digital support", "Supporto digitale"),
     question: t("Something has stopped working. Who can help?", "Uno strumento che uso si è bloccato. Come riprendo a lavorare?"),
     need: t(
@@ -59,7 +89,8 @@ const services = [
     ),
   },
   {
-    name: "Training",
+    image: "training",
+    name: t("Training", "Formazione"),
     question: t("How can I get better at using the tools I need?", "Come imparo a usare meglio gli strumenti che mi servono?"),
     need: t(
       "You want to learn a new tool or skill and practise it on a task you actually do at work.",
@@ -104,29 +135,54 @@ const email = "vincenzopaolo.diperna@outlook.com";
       )}</p>
     </header>
 
+    <div class="service-profile network-protected mb-12 rounded-box bg-base-100 shadow-md">
+      <ul class="technology-medals" aria-label={t("Technologies I know", "Tecnologie che conosco")}>
+        {technologies.map(([icon, name]) => (
+          <li title={name}>
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24">
+              <use href={`/services/technology-logos.svg#${icon}`} />
+            </svg>
+            <span class="sr-only">{name}</span>
+          </li>
+        ))}
+      </ul>
+      <ul class="service-roles" aria-label={t("Roles I’m open to", "Ruoli che posso ricoprire")}>
+        {roles.map((role) => <li>{role}</li>)}
+      </ul>
+    </div>
+
     <section class="mb-12" aria-labelledby="choose-service">
       <h2 id="choose-service" class="text-3xl font-bold mb-5">{t("What do you need help with?", "Di cosa hai bisogno?")}</h2>
       <div class="grid gap-4">
-        {services.map(({ name, question, need, work, outcome }) => (
+        {services.map(({ image, name, question, need, work, outcome }) => (
           <details class="network-protected collapse collapse-arrow bg-base-100 shadow-md motion-safe:transition-shadow hover:shadow-2xl">
             <summary class="collapse-title rounded-box focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-4">
-              <span class="card-title">{name}</span>
+              <h3 class="card-title">{name}</h3>
               <span class="block mt-1">{question}</span>
             </summary>
             <div class="collapse-content">
               <div class="border-t border-base-300 pt-4 space-y-4">
+                <img
+                  class="service-photo"
+                  src={`/services/${image}.webp`}
+                  width="960"
+                  height="360"
+                  loading="lazy"
+                  decoding="async"
+                  alt=""
+                />
                 <div>
-                  <h3 class="font-semibold">{t("When it’s useful", "Quando ti serve")}</h3>
+                  <h4 class="font-semibold">{t("When it’s useful", "Quando ti serve")}</h4>
                   <p class="mt-1">{need}</p>
                 </div>
                 <div>
-                  <h3 class="font-semibold">{t("What I can do for you", "Su cosa ti aiuto")}</h3>
+                  <h4 class="font-semibold">{t("What I can do for you", "Su cosa ti aiuto")}</h4>
                   <ul class="list-disc pl-5 mt-1 space-y-1">
                     {work.map((item) => <li>{item}</li>)}
                   </ul>
                 </div>
                 <div>
-                  <h3 class="font-semibold">{t("What you get", "Cosa ottieni")}</h3>
+                  <h4 class="font-semibold">{t("What you get", "Cosa ottieni")}</h4>
                   <p class="mt-1">{outcome}</p>
                 </div>
                 <div class="card-actions justify-end">
@@ -201,6 +257,69 @@ const email = "vincenzopaolo.diperna@outlook.com";
     </dialog>
   </digital-services>
 </BaseLayout>
+
+<style>
+  .service-profile {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: 1.15rem;
+    padding: 1.15rem;
+  }
+
+  .technology-medals {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 2.25rem);
+    gap: 0.35rem;
+  }
+
+  .technology-medals li {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid oklch(var(--bc) / 0.12);
+    border-radius: 50%;
+    background-color: oklch(var(--b2));
+  }
+
+  .service-roles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    border-inline-start: 1px solid oklch(var(--bc) / 0.15);
+    padding-inline-start: 1.15rem;
+  }
+
+  .service-roles li {
+    padding: 0.25rem 0.55rem;
+    border-radius: 0.45rem;
+    background-color: oklch(var(--b2));
+    font-size: 0.8rem;
+    line-height: 1.35;
+    text-align: start;
+    hyphens: none;
+  }
+
+  .service-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 8 / 3;
+    border-radius: 0.65rem;
+    object-fit: cover;
+  }
+
+  @media (max-width: 36rem) {
+    .service-profile { grid-template-columns: 1fr; }
+    .service-roles {
+      border-inline-start: 0;
+      border-block-start: 1px solid oklch(var(--bc) / 0.15);
+      padding-inline-start: 0;
+      padding-block-start: 1rem;
+    }
+  }
+</style>
 
 <script>
   const romeClock = new Intl.DateTimeFormat("en-CA", {

@@ -8,7 +8,7 @@ import { getLocale, inLanguage, translator } from "../i18n/locale";
 const locale = getLocale(Astro.url.pathname);
 const t = translator(Astro.url.pathname);
 
-const { sideBarActiveItemID } = Astro.props;
+const { sideBarActiveItemID, sideBarPageLabel } = Astro.props;
 ---
 
 <div class="drawer-side z-40">
@@ -43,7 +43,7 @@ const { sideBarActiveItemID } = Astro.props;
     </div>
 
     <SearchTrigger />
-    <SideBarMenu sideBarActiveItemID={sideBarActiveItemID} />
+    <SideBarMenu {sideBarActiveItemID} {sideBarPageLabel} />
     <div class="hidden justify-center pt-2 lg:flex"><LanguageSwitcher fullLabels /></div>
     <SideBarFooter />
   </aside>

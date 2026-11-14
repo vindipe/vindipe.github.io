@@ -18,6 +18,7 @@ const {
   description = SITE_DESCRIPTION,
   includeSidebar = true,
   sideBarActiveItemID,
+  sideBarPageLabel = title.replace(/ \| Vincenzo Di Perna$/, ""),
   ogType = "website",
   enableTransitions = true,
 } = Astro.props;
@@ -53,7 +54,7 @@ const t = translator(Astro.url.pathname);
         <Footer />
       </div>
 
-      {includeSidebar && <SideBar sideBarActiveItemID={sideBarActiveItemID} />}
+      {includeSidebar && <SideBar {sideBarActiveItemID} {sideBarPageLabel} />}
       <ScrollControls />
     </div>
 

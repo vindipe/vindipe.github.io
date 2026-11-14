@@ -188,107 +188,109 @@ const localPath = (href: string) => inLanguage(href, locale);
   </div>
 </div>
   </section>
-  <h2 id="research-interests" class="text-3xl font-bold mb-5">{t("Research interests", "Interessi di ricerca")}</h2>
-  <p class="mb-5 opacity-80">{t("Areas I am interested in exploring alongside my projects and tools.", "Altri temi che mi interessa studiare.")}</p>
+  <section class="mb-12" aria-labelledby="research-interests">
+    <h2 id="research-interests" class="text-3xl font-bold mb-5">{t("Research interests", "Interessi di ricerca")}</h2>
+    <p class="mb-5 opacity-80">{t("Areas I am interested in exploring alongside my projects and tools.", "Altri temi che mi interessa studiare.")}</p>
 
-  <section class="mb-12">
-    <div class="flex flex-wrap items-center gap-2 mb-2">
-      <h3 class="text-2xl flex-1 min-w-[12rem] font-bold">{t("Countering Wealth Concentration", "Ridurre la concentrazione della ricchezza")}</h3>
-      <span class="badge badge-warning shrink-0 whitespace-nowrap">{t("Research interest", "Tema di ricerca")}</span
-      >
-    </div>
+    <div class="mb-8">
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <h3 class="text-2xl flex-1 min-w-[12rem] font-bold">{t("Countering Wealth Concentration", "Ridurre la concentrazione della ricchezza")}</h3>
+        <span class="badge badge-warning shrink-0 whitespace-nowrap">{t("Research interest", "Tema di ricerca")}</span
+        >
+      </div>
 
-    <p class="mb-5 opacity-80">
-      {t("Exploratory work on how blockchain systems, digital assets, incentive mechanisms, and decentralized infrastructures can be designed or evaluated to reduce excessive concentration of value, ownership, governance power, and access to economic opportunities.", "Vorrei capire se blockchain, asset digitali e incentivi possano distribuire più ampiamente proprietà, valore e potere decisionale, rendendo più accessibili le opportunità economiche.")}
-    </p>
+      <p class="mb-5 opacity-80">
+        {t("Exploratory work on how blockchain systems, digital assets, incentive mechanisms, and decentralized infrastructures can be designed or evaluated to reduce excessive concentration of value, ownership, governance power, and access to economic opportunities.", "Vorrei capire se blockchain, asset digitali e incentivi possano distribuire più ampiamente proprietà, valore e potere decisionale, rendendo più accessibili le opportunità economiche.")}
+      </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="network-protected card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap items-center gap-2">
-            <h3 class="card-title">{t("Wealth concentration analysis toolkit", "Strumenti per analizzare la concentrazione della ricchezza")}</h3>
-            <span class="badge badge-warning">{t("Interest", "Da approfondire")}</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="network-protected card bg-base-100 shadow-md">
+          <div class="card-body">
+            <div class="flex flex-wrap items-center gap-2">
+              <h4 class="card-title text-lg">{t("Wealth concentration analysis toolkit", "Strumenti per analizzare la concentrazione della ricchezza")}</h4>
+              <span class="badge badge-warning">{t("Interest", "Da approfondire")}</span>
+            </div>
+
+            <p>
+              {t("A planned set of data-analysis workflows for studying concentration patterns in token ownership, protocol governance, and digital-asset ecosystems.", "Strumenti di analisi per capire in quali mani si concentrano i token e il potere decisionale nei protocolli e negli ecosistemi di asset digitali.")}
+            </p>
+
+            <div class="card-actions justify-end mt-4">
+              <span class="badge badge-outline">{t("Token distribution", "Distribuzione dei token")}</span>
+              <span class="badge badge-outline">Governance</span>
+              <span class="badge badge-outline">{t("Analytics", "Analisi dei dati")}</span>
+            </div>
           </div>
+        </div>
 
-          <p>
-            {t("A planned set of data-analysis workflows for studying concentration patterns in token ownership, protocol governance, and digital-asset ecosystems.", "Strumenti di analisi per capire in quali mani si concentrano i token e il potere decisionale nei protocolli e negli ecosistemi di asset digitali.")}
-          </p>
+        <div class="network-protected card bg-base-100 shadow-md">
+          <div class="card-body">
+            <div class="flex flex-wrap items-center gap-2">
+              <h4 class="card-title text-lg">{t("Fair value distribution models", "Modelli per distribuire il valore in modo più equo")}</h4>
+              <span class="badge badge-warning">{t("Interest", "Da approfondire")}</span>
+            </div>
 
-          <div class="card-actions justify-end mt-4">
-            <span class="badge badge-outline">{t("Token distribution", "Distribuzione dei token")}</span>
-            <span class="badge badge-outline">Governance</span>
-            <span class="badge badge-outline">{t("Analytics", "Analisi dei dati")}</span>
+            <p>
+              {t("Conceptual and experimental work on mechanisms that could support broader participation, fairer access, and less extractive forms of digital value creation.", "Studio di meccanismi che allarghino la partecipazione e l’accesso e distribuiscano in modo più equo il valore generato.")}
+            </p>
+
+            <div class="card-actions justify-end mt-4">
+              <span class="badge badge-outline">{t("Mechanism design", "Progettazione degli incentivi")}</span>
+              <span class="badge badge-outline">{t("Digital assets", "Asset digitali")}</span>
+              <span class="badge badge-outline">{t("Economic fairness", "Equità economica")}</span>
+            </div>
           </div>
         </div>
       </div>
-
-      <div class="network-protected card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap items-center gap-2">
-            <h3 class="card-title">{t("Fair value distribution models", "Modelli per distribuire il valore in modo più equo")}</h3>
-            <span class="badge badge-warning">{t("Interest", "Da approfondire")}</span>
-          </div>
-
-          <p>
-            {t("Conceptual and experimental work on mechanisms that could support broader participation, fairer access, and less extractive forms of digital value creation.", "Studio di meccanismi che allarghino la partecipazione e l’accesso e distribuiscano in modo più equo il valore generato.")}
-          </p>
-
-          <div class="card-actions justify-end mt-4">
-            <span class="badge badge-outline">{t("Mechanism design", "Progettazione degli incentivi")}</span>
-            <span class="badge badge-outline">{t("Digital assets", "Asset digitali")}</span>
-            <span class="badge badge-outline">{t("Economic fairness", "Equità economica")}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="mb-12">
-    <div class="flex flex-wrap items-center gap-2 mb-2">
-      <h3 class="text-2xl flex-1 min-w-[12rem] font-bold">{t("Real-World Assets - RWA", "Beni e attività del mondo reale (RWA)")}</h3>
-      <span class="badge badge-warning shrink-0 whitespace-nowrap">{t("Research interest", "Tema di ricerca")}</span
-      >
     </div>
 
-    <p class="mb-5 opacity-80">
-      {t("Early-stage work on the representation, evaluation, and possible tokenization of real-world assets within blockchain-based infrastructures, with attention to ownership, verification, governance, market structure, and practical deployment constraints.", "Come si possono rappresentare, valutare e tokenizzare beni e attività del mondo reale su una blockchain? La ricerca riguarda proprietà, verifica, governance, struttura dei mercati e ostacoli all’adozione.")}
-    </p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="network-protected card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap items-center gap-2">
-            <h3 class="card-title">{t("RWA system design notes", "Progettazione di sistemi per gli RWA")}</h3>
-            <span class="badge badge-warning">{t("Interest", "Da approfondire")}</span>
-          </div>
-
-          <p>
-            {t("A developing research and engineering track focused on how physical or off-chain assets can be represented, verified, transferred, and governed through digital-asset infrastructures.", "Studio di come rappresentare, verificare e trasferire beni fisici o attività fuori dalla blockchain, e di come stabilire chi può gestirli.")}
-          </p>
-
-          <div class="card-actions justify-end mt-4">
-            <span class="badge badge-outline">{t("Asset tokenization", "Tokenizzazione degli asset")}</span>
-            <span class="badge badge-outline">{t("Verification", "Verifica")}</span>
-            <span class="badge badge-outline">Governance</span>
-          </div>
-        </div>
+    <div>
+      <div class="flex flex-wrap items-center gap-2 mb-2">
+        <h3 class="text-2xl flex-1 min-w-[12rem] font-bold">{t("Real-World Assets - RWA", "Beni e attività del mondo reale (RWA)")}</h3>
+        <span class="badge badge-warning shrink-0 whitespace-nowrap">{t("Research interest", "Tema di ricerca")}</span
+        >
       </div>
 
-      <div class="network-protected card bg-base-100 shadow-md">
-        <div class="card-body">
-          <div class="flex flex-wrap items-center gap-2">
-            <h3 class="card-title">{t("RWA benchmarking perspective", "Benchmarking delle piattaforme RWA")}</h3>
-            <span class="badge badge-warning">{t("Interest", "Da approfondire")}</span>
+      <p class="mb-5 opacity-80">
+        {t("Early-stage work on the representation, evaluation, and possible tokenization of real-world assets within blockchain-based infrastructures, with attention to ownership, verification, governance, market structure, and practical deployment constraints.", "Come si possono rappresentare, valutare e tokenizzare beni e attività del mondo reale su una blockchain? La ricerca riguarda proprietà, verifica, governance, struttura dei mercati e ostacoli all’adozione.")}
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="network-protected card bg-base-100 shadow-md">
+          <div class="card-body">
+            <div class="flex flex-wrap items-center gap-2">
+              <h4 class="card-title text-lg">{t("RWA system design notes", "Progettazione di sistemi per gli RWA")}</h4>
+              <span class="badge badge-warning">{t("Interest", "Da approfondire")}</span>
+            </div>
+
+            <p>
+              {t("A developing research and engineering track focused on how physical or off-chain assets can be represented, verified, transferred, and governed through digital-asset infrastructures.", "Studio di come rappresentare, verificare e trasferire beni fisici o attività fuori dalla blockchain, e di come stabilire chi può gestirli.")}
+            </p>
+
+            <div class="card-actions justify-end mt-4">
+              <span class="badge badge-outline">{t("Asset tokenization", "Tokenizzazione degli asset")}</span>
+              <span class="badge badge-outline">{t("Verification", "Verifica")}</span>
+              <span class="badge badge-outline">Governance</span>
+            </div>
           </div>
+        </div>
 
-          <p>
-            {t("A planned evaluation angle connecting RWA platforms with system performance, operational assumptions, transaction costs, settlement behavior, and infrastructure reliability.", "Valutazione delle piattaforme RWA in base a prestazioni, condizioni operative, costi e regolamento delle transazioni e affidabilità dell’infrastruttura.")}
-          </p>
+        <div class="network-protected card bg-base-100 shadow-md">
+          <div class="card-body">
+            <div class="flex flex-wrap items-center gap-2">
+              <h4 class="card-title text-lg">{t("RWA benchmarking perspective", "Benchmarking delle piattaforme RWA")}</h4>
+              <span class="badge badge-warning">{t("Interest", "Da approfondire")}</span>
+            </div>
 
-          <div class="card-actions justify-end mt-4">
-            <span class="badge badge-outline">Benchmarking</span>
-            <span class="badge badge-outline">{t("Settlement", "Regolamento")}</span>
-            <span class="badge badge-outline">{t("Infrastructure", "Infrastrutture")}</span>
+            <p>
+              {t("A planned evaluation angle connecting RWA platforms with system performance, operational assumptions, transaction costs, settlement behavior, and infrastructure reliability.", "Valutazione delle piattaforme RWA in base a prestazioni, condizioni operative, costi e regolamento delle transazioni e affidabilità dell’infrastruttura.")}
+            </p>
+
+            <div class="card-actions justify-end mt-4">
+              <span class="badge badge-outline">Benchmarking</span>
+              <span class="badge badge-outline">{t("Settlement", "Regolamento")}</span>
+              <span class="badge badge-outline">{t("Infrastructure", "Infrastrutture")}</span>
+            </div>
           </div>
         </div>
       </div>

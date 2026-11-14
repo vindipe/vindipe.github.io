@@ -4,8 +4,8 @@ module.exports = {
 	theme: {
 		extend: {
 			fontSize: {
-				"3xl": ["1.75rem", { lineHeight: "1.2" }],
-				"4xl": ["2rem", { lineHeight: "1.15" }],
+				"3xl": ["1.875rem", { lineHeight: "1.2" }],
+				"4xl": ["2.125rem", { lineHeight: "1.15" }],
 				"5xl": ["2.5rem", { lineHeight: "1.1" }],
 			},
 		},

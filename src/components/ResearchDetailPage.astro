@@ -9,6 +9,7 @@ const localPath = (href: string) => inLanguage(href, locale);
 const {
   title,
   pageTitle,
+  sideBarPageLabel = pageTitle ?? title,
   subtitle = "",
   description = "",
   badge = "",
@@ -53,6 +54,7 @@ const researchStructuredData = {
   title={pageTitle ?? `${title} | ${t("Research", "Ricerca")} | Vincenzo Di Perna`}
   description={description || subtitle || title}
   sideBarActiveItemID="research"
+  {sideBarPageLabel}
 >
   <script type="application/ld+json" set:html={JSON.stringify(researchStructuredData)}></script>
 

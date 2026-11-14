@@ -1,9 +1,10 @@
 ---
 import { getLocale, inLanguage, translator } from "../i18n/locale";
 
-const { sideBarActiveItemID } = Astro.props;
+const { sideBarActiveItemID, sideBarPageLabel } = Astro.props;
 const locale = getLocale(Astro.url.pathname);
 const t = translator(Astro.url.pathname);
+const currentPath = Astro.url.pathname.replace(/\/?$/, "/");
 const items = [
   { id: "home", path: "/", label: "Home" },
   { id: "projects", path: "/projects/", label: t("Projects and Tools", "Progetti e strumenti") },
@@ -12,18 +13,29 @@ const items = [
   { id: "cv", path: "/cv/", label: "CV" },
   { id: "services", path: "/services/", label: t("Freelance Services", "Servizi freelance"), sectionMenu: false },
   { id: "contact", path: "/contact/", label: t("Contact me", "Contatti") },
-];
+].map((item) => ({ ...item, path: inLanguage(item.path, locale) }));
+const parent = items.find(({ id, path }) =>
+  id === sideBarActiveItemID && path !== currentPath && currentPath.startsWith(path)
+);
 ---
 
-<nav aria-label={t("Main navigation", "Navigazione principale")} class="grow shrink overflow-y-auto">
+<nav aria-label={t("Main navigation", "Navigazione principale")} class="grow shrink overflow-y-auto" data-nested-menu={parent ? "" : undefined}>
   <ul class="menu menu-md">
     {items.map(({ id, path, label, sectionMenu }) => (
-      <li data-page-menu={inLanguage(path, locale)} data-section-menu={sectionMenu === false ? "off" : undefined}>
+      <li data-page-menu={path} data-section-menu={sectionMenu === false ? "off" : undefined}>
         <a
           class:list={["py-3 text-base font-medium", id === sideBarActiveItemID && "bg-primary-content/20"]}
-          href={inLanguage(path, locale)}
-          aria-current={Astro.url.pathname === inLanguage(path, locale) ? "page" : undefined}
+          href={path}
+          aria-current={currentPath === path ? "page" : undefined}
         >{label}</a>
+        {parent?.id === id && (
+          <ul class="nested-page-menu">
+            <li>
+              <a class="font-mono" href={path} aria-label={t(`Go up to ${label}`, `Torna a ${label}`)} title={t(`Go up to ${label}`, `Torna a ${label}`)}>../</a>
+            </li>
+            <li><a class="bg-primary-content/20 font-semibold" href={currentPath} aria-current="page">{sideBarPageLabel}</a></li>
+          </ul>
+        )}
       </li>
     ))}
   </ul>
@@ -70,7 +82,8 @@ const items = [
 
   async function showPageSections() {
     const path = location.pathname.replace(/\/?$/, "/");
-    const menus = [...document.querySelectorAll<HTMLElement>("[data-page-menu]")];
+    const menus = [...document.querySelectorAll<HTMLElement>("nav:not([data-nested-menu]) [data-page-menu]")];
+    if (!menus.length) return;
     const current = menus.find((menu) => menu.dataset.pageMenu === path);
     if (current && current.dataset.sectionMenu !== "off") {
       const sections = [...document.querySelectorAll<HTMLElement>("#main-content h2[id]")].map((heading) => ({
@@ -79,8 +92,6 @@ const items = [
       }));
       addSections(current, sections, path, true);
     }
-    if (!menus.length) return;
-
     navigation ??= fetch("/site-index/navigation.json").then((response) => {
       if (!response.ok) throw new Error("Section index unavailable");
       return response.json();
@@ -117,6 +128,14 @@ const items = [
 </script>
 
 <style is:global>
+  .menu .nested-page-menu li > a {
+    display: block;
+    padding: 0.5rem 0.65rem;
+    font-size: 0.875rem;
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+
   .menu .page-sections {
     display: block;
     padding: 0 0.25rem 0.3rem;

@@ -22,9 +22,9 @@ const latestWorks = getRecentWorks(Astro.url.pathname)
   <section class="pb-12 mt-5">
     <div class="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-8 items-center">
       <div class="order-2 lg:order-1">
-        <h1>
-          <span class="block text-5xl font-bold leading-tight">Vincenzo Di Perna</span>
-          <span class="block text-3xl py-3 font-bold">
+        <h1 class="text-5xl font-bold leading-tight">
+          <span class="block">Vincenzo Di Perna</span>
+          <span class="block text-3xl py-3">
             {t("Research Software Engineer", "Ingegnere del software")}<br />
             {t("Distributed Systems, Blockchain & DLT", "Sistemi distribuiti, blockchain e DLT")}
           </span>
@@ -171,26 +171,34 @@ const latestWorks = getRecentWorks(Astro.url.pathname)
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="mb-12" aria-labelledby="research-in-practice">
-    <h2 id="research-in-practice" class="text-3xl font-bold mb-5">{t("How I study blockchain systems", "Come studio i sistemi blockchain")}</h2>
-    <div class="space-y-4 leading-relaxed">
-      <p>{t(
-        "When comparing blockchain protocols, I start by defining the conditions of the experiment. The number and placement of nodes, the delays between them and the transactions they have to process can all affect the result. In my doctoral work I used controlled network topologies to examine how those conditions changed protocol performance. This helps explain why two studies can report different results for the same protocol.",
-        "Quando confronto protocolli blockchain, parto dalle condizioni dell’esperimento. Il numero e la posizione dei nodi, i ritardi di comunicazione e le transazioni da elaborare possono influenzare il risultato. Durante il dottorato ho usato topologie di rete controllate per studiare come queste condizioni cambiano le prestazioni dei protocolli. È anche un modo per capire perché due studi possano ottenere risultati diversi sullo stesso protocollo."
-      )}</p>
-      <p>{t(
-        "I publish the software and data used in my experiments so others can inspect the setup and repeat the measurements. The Lilith benchmarking framework lets you run tests under controlled network conditions. The repeatability dataset gives readers access to the experiment results, including the variation between runs. These resources can help you design a protocol comparison or check how much confidence to place in a reported performance figure.",
-        "Pubblico software e dati degli esperimenti per permettere a chi legge di esaminare la configurazione e ripetere le misure. Con il framework Lilith puoi eseguire test in condizioni di rete controllate. Il dataset sulla ripetibilità permette di consultare i risultati e osservare quanto variano tra un’esecuzione e l’altra. Questi materiali possono servire a progettare un confronto tra protocolli o a valutare quanto sia rappresentativo un dato sulle prestazioni."
-      )}</p>
+      <div class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <h3 id="research-in-practice" class="card-title" data-section-anchor>{t("How I study blockchain systems", "Come studio i sistemi blockchain")}</h3>
+          <p>{t(
+            "I compare protocols under controlled conditions to see how node placement, network delays and transaction workloads affect performance. I publish the tools and data so others can inspect the setup and repeat the measurements.",
+            "Confronto i protocolli in condizioni controllate per capire come la posizione dei nodi, i ritardi di rete e i carichi di transazioni incidono sulle prestazioni. Pubblico strumenti e dati per permettere a chi legge di esaminare la configurazione e ripetere le misure."
+          )}</p>
+          <div class="card-actions justify-end mt-4">
+            <a class="btn btn-sm btn-outline" href={localPath("/research/lilith-benchmarking-framework")}>{t("Lilith benchmarking framework", "Framework di benchmark Lilith")}</a>
+            <a class="btn btn-sm btn-outline" href={localPath("/research/blockchain-repeatability-dataset")}>{t("Repeatability dataset", "Dataset sulla ripetibilità")}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card bg-base-100 shadow-md">
+        <div class="card-body">
+          <h3 class="card-title">{t("How I work with clients", "Come lavoro con i clienti")}</h3>
+          <p>{t(
+            "I start by asking what you want to achieve and what tools you already use. From there I can help you choose a solution, build and launch a website or application, fix a technical problem, or learn a tool through hands-on practice.",
+            "Parto da quello che vuoi ottenere e dagli strumenti che usi già. Posso aiutarti a scegliere una soluzione, mettere online un sito o un’applicazione, risolvere un problema tecnico o imparare a usare uno strumento facendo pratica."
+          )}</p>
+          <div class="card-actions justify-end mt-4">
+            <a class="btn btn-sm btn-outline" href={localPath("/services")}>{t("Freelance Services", "Servizi freelance")}</a>
+          </div>
+        </div>
+      </div>
     </div>
-    <ul class="mt-4 flex flex-wrap gap-3">
-      <li><a class="btn btn-sm btn-outline" href={localPath("/research/lilith-benchmarking-framework")}>{t("Lilith benchmarking framework", "Framework di benchmark Lilith")}</a></li>
-      <li><a class="btn btn-sm btn-outline" href={localPath("/research/blockchain-repeatability-dataset")}>{t("Blockchain repeatability dataset", "Dataset sulla ripetibilità")}</a></li>
-      <li><a class="btn btn-sm btn-outline" href={localPath("/services")}>{t("See freelance services", "Scopri i servizi freelance")}</a></li>
-    </ul>
   </section>
 
   <section class="mb-12 text-center">
