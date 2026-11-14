@@ -18,7 +18,7 @@ const technologies = [
 
 const roles = [
   t("Software Engineer", "Ingegnere del software"),
-  t("Research Software Engineer", "Ingegnere del software per la ricerca"),
+  t("Researcher", "Ricercatore"),
   t("Backend Developer", "Sviluppatore backend"),
   t("Python Developer", "Sviluppatore Python"),
   t("Rust Developer", "Sviluppatore Rust"),
@@ -29,6 +29,10 @@ const roles = [
   t("Distributed Systems Engineer", "Ingegnere dei sistemi distribuiti"),
   t("DevOps Engineer", "Ingegnere DevOps"),
   t("Performance Engineer", "Ingegnere delle prestazioni software"),
+  t("AI & LLM Consultant", "Consulente IA e LLM"),
+  t("LLM Application Developer", "Sviluppatore di applicazioni con LLM"),
+  t("DeFi Analyst", "Analista DeFi"),
+  t("Digital Asset Analyst", "Analista di asset digitali"),
   t("Technical Consultant", "Consulente tecnico"),
   t("Technical Trainer", "Formatore tecnico"),
 ];
@@ -135,7 +139,7 @@ const email = "vincenzopaolo.diperna@outlook.com";
       )}</p>
     </header>
 
-    <div class="service-profile network-protected mb-12 rounded-box bg-base-100 shadow-md">
+    <div class="service-profile mb-12">
       <ul class="technology-medals" aria-label={t("Technologies I know", "Tecnologie che conosco")}>
         {technologies.map(([icon, name]) => (
           <li title={name}>
@@ -264,7 +268,6 @@ const email = "vincenzopaolo.diperna@outlook.com";
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     align-items: center;
     gap: 1.15rem;
-    padding: 1.15rem;
   }
 
   .technology-medals {
