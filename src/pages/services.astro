@@ -141,24 +141,18 @@ const email = "vincenzopaolo.diperna@outlook.com";
       </div>
     </section>
 
-    <section class="mb-10" aria-labelledby="appointment">
-      <h2 id="appointment" class="text-3xl font-bold mb-5">{t("Tell me what you need", "Raccontami cosa ti serve")}</h2>
-      <div class="network-protected card bg-base-100 shadow-md">
-        <div class="card-body">
-          <p>{t(
-            "In a free 30-minute call, we can go over what you want to achieve, what you already have and where I can help.",
-            "In un primo colloquio gratuito di 30 minuti possiamo capire cosa vuoi ottenere, da cosa parti e come posso aiutarti."
-          )}</p>
-          <div class="card-actions justify-end mt-2">
-            <button class="btn btn-primary" type="button" data-open-booking aria-haspopup="dialog" hidden>
-              {t("Request an appointment", "Richiedi un appuntamento")}
-            </button>
-            <noscript>
-              <a class="btn btn-primary" href={inLanguage("/contact/", locale)}>{t("Contact me", "Contattami")}</a>
-            </noscript>
-          </div>
-        </div>
-      </div>
+    <section class="mb-12 text-center" aria-labelledby="appointment">
+      <h2 id="appointment" class="text-3xl font-bold mb-4">{t("Let's connect", "Parliamone")}</h2>
+      <p class="max-w-prose mx-auto mb-4 text-center">{t(
+        "In a free 30-minute call, we can go over what you want to achieve, what you already have and where I can help.",
+        "In un primo colloquio gratuito di 30 minuti possiamo capire cosa vuoi ottenere, da cosa parti e come posso aiutarti."
+      )}</p>
+      <button class="btn btn-primary" type="button" data-open-booking aria-haspopup="dialog" hidden>
+        {t("Request an appointment", "Richiedi un appuntamento")}
+      </button>
+      <noscript>
+        <a class="btn btn-primary" href={inLanguage("/contact/", locale)}>{t("Contact me", "Contattami")}</a>
+      </noscript>
     </section>
 
     <dialog class="modal modal-bottom sm:modal-middle" aria-labelledby="booking-title" aria-describedby="booking-topic booking-note">
