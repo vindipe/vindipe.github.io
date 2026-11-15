@@ -27,6 +27,21 @@ const localPath = (href: string) => inLanguage(href, locale);
   
   <div class="card-actions mt-3"><a class="btn btn-sm btn-primary" href={localPath("/research/circula")}>{t("Explore CIRCULA", "Scopri CIRCULA")}</a><a class="btn btn-sm btn-outline" href="https://circula.unine.ch/" target="_blank" rel="noopener noreferrer">{t("Project website", "Sito del progetto")}</a></div>
 </div></article>
+    <article id="nirvana" class="network-protected card bg-base-100 shadow-md mt-4">
+      <div class="card-body">
+        <div class="flex flex-wrap items-center gap-2">
+          <h3 class="card-title">NiRvAna – Noninterference and Reversibility Analysis in Private Blockchains</h3>
+          <span class="badge badge-outline">PRIN 2020</span>
+        </div>
+        <p>
+          {t("I participated in NiRvAna during my PhD in Blockchain and Distributed Ledger Technology. Coordinated by the University of Urbino Carlo Bo, the project investigated how to model and verify noninterference and reversibility in private blockchains.", "Durante il dottorato in Blockchain e tecnologie a registro distribuito ho partecipato a NiRvAna. Il progetto, coordinato dall’Università degli Studi di Urbino Carlo Bo, ha studiato come modellare e verificare la non interferenza e la reversibilità nelle blockchain private.")}
+        </p>
+        <div class="card-actions mt-3">
+          <a class="btn btn-sm btn-outline" href="https://www.uniurb.it/progetto-di-ricerca/607" target="_blank" rel="noopener noreferrer">{t("Official project profile", "Scheda ufficiale del progetto")}</a>
+          <a class="btn btn-sm btn-outline" href={localPath("/research/comparing-blockchains")}>{t("PhD thesis", "Tesi di dottorato")}</a>
+        </div>
+      </div>
+    </article>
   </section>
 
   <section class="mb-12">
