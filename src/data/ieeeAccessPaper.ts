@@ -6,6 +6,7 @@ export const ieeeAccessPaper = {
   doi: "10.1109/ACCESS.2026.3756802",
   doiUrl: "https://doi.org/10.1109/ACCESS.2026.3756802",
   path: "/research/ieee-access-blockchain-repeatability/",
+  graphicalAbstract: "/research/ieee-access/graphical-abstract.jpg",
   cover: "/og/ieee-access-blockchain-repeatability.png",
   description: [
     "What happens when you rerun the same blockchain benchmark? We analysed 4,080 runs to see how stable throughput, confirmation latency and energy use were under controlled network conditions.",

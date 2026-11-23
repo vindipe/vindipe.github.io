@@ -7,6 +7,7 @@ export type RecentWork = {
   url: string;
   img: string;
   imgAlt?: string;
+  containImage?: boolean;
   badge: string;
   date: string;
   target?: "_blank" | "_self";
@@ -20,7 +21,9 @@ export function getRecentWorks(pathname: string): RecentWork[] {
     title: t("How repeatable are blockchain benchmarks?", "Quanto sono ripetibili i benchmark delle blockchain?"),
     desc: t(...ieeeAccessPaper.description),
     url: ieeeAccessPaper.path,
-    img: ieeeAccessPaper.cover,
+    img: ieeeAccessPaper.graphicalAbstract,
+    imgAlt: t("Graphical abstract showing throughput deviations for PayPal and VISA workloads across five blockchains with 40 validators.", "Abstract grafico con gli scostamenti di throughput per i carichi PayPal e VISA su cinque blockchain con 40 validatori."),
+    containImage: true,
     badge: ieeeAccessPaper.journal,
     date: "2026-11-23",
     target: "_self",

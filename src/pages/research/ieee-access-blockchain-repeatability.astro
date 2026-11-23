@@ -16,16 +16,36 @@ const experiment = [
   { label: t("Validator sets", "Gruppi di validatori"), value: t("10 or 40 validators", "10 o 40 validatori") },
 ];
 
-// Mean confirmation latency (seconds) for each of the 17 qualifying runs in
-// the Quorum IBFT / PayPal / hypercube / 10-validator cell (public plot manifest).
-const latencies = [5.44, 6.90, 6.92, 6.93, 7.02, 7.03, 7.10, 7.14, 7.24, 7.36, 7.46, 7.52, 9.39, 13.13, 13.27, 18.64, 90.74];
-const counts = Array.from({ length: 10 }, (_, index) =>
-  latencies.filter((value) => Math.floor(value / 10) === index).length,
-);
-const maxCount = Math.max(...counts);
-const seconds = new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-const meanLatency = seconds.format(latencies.reduce((sum, value) => sum + value, 0) / latencies.length);
-const maxLatency = seconds.format(Math.max(...latencies));
+// Positive-commit and observed executions from the paper's outcome accounting table.
+const outcomes = [
+  { blockchain: "Algorand", small: [399, 399], large: [388, 388] },
+  { blockchain: "Diem", small: [383, 383], large: [439, 440] },
+  { blockchain: "Ethereum Clique", small: [402, 403], large: [390, 390] },
+  { blockchain: "Quorum IBFT", small: [150, 401], large: [176, 428] },
+  { blockchain: "Solana", small: [328, 458], large: [70, 390] },
+];
+
+const number = new Intl.NumberFormat(locale);
+const showOutcomes = (commits: number, observed: number) =>
+  `${number.format(commits)}/${number.format(observed)}`;
+
+const figures = [
+  {
+    file: "throughput",
+    title: t("Throughput", "Throughput"),
+    summary: t("Differences in committed transactions per second (TPS).", "Differenze nelle transazioni confermate al secondo (TPS)."),
+  },
+  {
+    file: "latency",
+    title: t("Confirmation latency", "Latenza di conferma"),
+    summary: t("Differences in time to confirm transactions, in seconds.", "Differenze nei tempi di conferma delle transazioni, in secondi."),
+  },
+  {
+    file: "energy",
+    title: t("Energy", "Consumi energetici"),
+    summary: t("Differences in processor-package energy, in kWh.", "Differenze nell’energia assorbita dai processori, in kWh."),
+  },
+];
 
 const citation = `${paper.authors.join(", ")}. (${paper.year}). ${paper.title}. ${paper.journal}.`;
 const structuredData = {
@@ -60,10 +80,19 @@ const structuredData = {
       </a>
       <div class="network-protected card bg-base-100 border-t-4 border-primary shadow-md">
         <div class="card-body p-6 sm:p-9 gap-4">
-          <p class="text-sm font-semibold">{paper.journal} · {paper.year}</p>
+          <span class="badge badge-secondary">{paper.journal} · {paper.year}</span>
           <h1 class="text-3xl sm:text-4xl font-bold leading-tight" lang="en">{paper.title}</h1>
           <p class="text-lg leading-relaxed">{description}</p>
-          <p class="text-sm opacity-80">{paper.authors.join(", ")}</p>
+          <dl class="grid gap-3 rounded-xl border border-base-300 bg-base-200/50 p-4 sm:grid-cols-[minmax(0,1fr)_auto]">
+            <div>
+              <dt class="text-sm font-semibold">{t("Authors", "Autori")}</dt>
+              <dd class="text-sm mt-1">{paper.authors.join(", ")}</dd>
+            </div>
+            <div>
+              <dt class="text-sm font-semibold">DOI</dt>
+              <dd class="text-sm mt-1 break-words">{paper.doi}</dd>
+            </div>
+          </dl>
           <div class="flex flex-wrap gap-3 mt-2">
             <a class="btn btn-primary" href={paper.doiUrl} target="_blank" rel="noopener noreferrer">
               {t("Read on IEEE Xplore", "Leggi su IEEE Xplore")}
@@ -108,44 +137,82 @@ const structuredData = {
     </section>
 
     <section class="network-protected card bg-base-100 shadow-md" aria-labelledby="findings">
-      <div class="card-body p-6 sm:p-8 gap-5">
-        <h2 id="findings" class="text-2xl font-bold">{t("What the averages hide", "Che cosa nascondono le medie")}</h2>
-        <figure class="!block rounded-xl border border-base-300 bg-base-200 p-4 sm:p-6">
-          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-            <h3 class="font-bold">{t("Confirmation latency in 17 runs", "Latenza di conferma in 17 esecuzioni")}</h3>
-            <span class="text-sm opacity-80">Quorum IBFT · PayPal · {t("hypercube · 10 validators", "ipercubo · 10 validatori")}</span>
-          </div>
-          <div class="mt-4" aria-hidden="true">
-            <div class="grid grid-cols-10 gap-1 h-24 border-b border-base-content/30">
-              {counts.map((count, index) => (
-                <div class="flex items-end h-full">
-                  {count > 0 && <div class:list={["relative w-full rounded-t", index === 9 ? "bg-base-content" : "bg-primary"]}
-                    style={`height: ${count / maxCount * 76}%`}>
-                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 pb-0.5 text-xs font-semibold tabular-nums">{count}</span>
-                  </div>}
-                </div>
+      <div class="card-body p-5 sm:p-8 gap-5">
+        <h2 id="findings" class="text-2xl font-bold">{t("Results across five blockchains", "Risultati sulle cinque blockchain")}</h2>
+        <p class="leading-relaxed">
+          {t("The table shows how often each blockchain confirmed at least one transaction, grouping all workloads and topologies by validator-set size. This puts the performance plots in context, since those plots show measurements from runs that provided service.", "La tabella mostra quante esecuzioni hanno portato alla conferma di almeno una transazione, raggruppando carichi e topologie per numero di validatori. Il confronto aiuta a leggere i grafici delle prestazioni, che riportano misure ottenute nelle esecuzioni con conferme.")}
+        </p>
+        <div class="rounded-xl border border-base-300">
+          <table class="w-full table-fixed text-xs sm:text-sm" aria-describedby="commit-outcomes-note">
+            <caption class="bg-base-200 rounded-t-xl px-3 py-3 text-left font-semibold sm:px-4">
+              {t("Runs with at least one commit / observed runs", "Esecuzioni con almeno una conferma / esecuzioni osservate")}
+            </caption>
+            <thead class="bg-base-200/60">
+              <tr class="border-b border-base-300">
+                <th scope="col" class="w-[34%] px-2 py-2 text-left sm:w-[38%] sm:px-4">Blockchain</th>
+                <th scope="col" class="px-1 py-2 text-right sm:px-4">10 <span class="block sm:inline">{t("validators", "validatori")}</span></th>
+                <th scope="col" class="px-1 py-2 text-right sm:px-4">40 <span class="block sm:inline">{t("validators", "validatori")}</span></th>
+                <th scope="col" class="px-2 py-2 text-right sm:px-4">{t("Total", "Totale")}</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-base-300 tabular-nums">
+              {outcomes.map(({ blockchain, small, large }) => (
+                <tr>
+                  <th scope="row" class="px-2 py-3 text-left font-medium sm:px-4">{blockchain}</th>
+                  <td class="whitespace-nowrap px-1 py-3 text-right sm:px-4">{showOutcomes(small[0], small[1])}</td>
+                  <td class="whitespace-nowrap px-1 py-3 text-right sm:px-4">{showOutcomes(large[0], large[1])}</td>
+                  <td class="whitespace-nowrap px-1 py-3 text-right font-semibold sm:px-4">{showOutcomes(small[0] + large[0], small[1] + large[1])}</td>
+                </tr>
               ))}
-            </div>
-            <div class="flex justify-between mt-1 text-xs tabular-nums opacity-80"><span>0 s</span><span>20 s</span><span>40 s</span><span>60 s</span><span>80 s</span><span>100 s</span></div>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-sm leading-relaxed opacity-80" id="commit-outcomes-note">
+          {t("Data from the paper’s execution-outcomes table. Across all five blockchains, 3,125 runs committed at least one transaction, 953 recorded submissions with zero commits and 2 recorded no submissions.", "Dati dalla tabella del paper sugli esiti delle esecuzioni. In totale, 3.125 esecuzioni hanno registrato almeno una conferma, 953 hanno registrato invii e zero conferme e 2 non hanno registrato invii.")}
+        </p>
+      </div>
+    </section>
+
+    <section class="network-protected card bg-base-100 shadow-md" aria-labelledby="paper-figures">
+      <div class="card-body p-5 sm:p-8 gap-5">
+        <h2 id="paper-figures" class="text-2xl font-bold">{t("Variability across repeated runs", "Variabilità tra le ripetizioni")}</h2>
+        <p class="leading-relaxed">
+          {t("The three figures from the paper cover all five blockchains and six workloads, with separate panels for 10 and 40 validators. Each dot represents one eligible run. Its height shows the signed difference from the mean of its own configuration, in absolute units on the left and as a percentage on the right.", "Le tre figure del paper coprono tutte e cinque le blockchain e tutti e sei i carichi, con pannelli distinti per 10 e 40 validatori. Ogni punto rappresenta un’esecuzione con una misura valida. La sua altezza indica lo scostamento con segno dalla media della stessa configurazione, in unità assolute a sinistra e in percentuale a destra.")}
+        </p>
+        <div class="grid gap-4 sm:grid-cols-3">
+          {figures.map(({ file, title, summary }) => (
+            <figure class="relative !grid grid-cols-[38%_minmax(0,1fr)] !items-stretch !justify-start rounded-xl border border-base-300 bg-base-200/60 transition-colors hover:bg-base-200 sm:grid-cols-1 sm:grid-rows-[auto_1fr]">
+              <div class="grid place-items-center bg-white p-2">
+                <img
+                  class="w-full h-auto"
+                  src={`/research/ieee-access/${file}-deviations.webp`}
+                  width="640"
+                  height="800"
+                  loading="lazy"
+                  decoding="async"
+                  alt=""
+                />
+              </div>
+              <figcaption class="flex flex-col gap-1 p-3 sm:p-4">
+                <h3 class="font-bold">{title}</h3>
+                <p class="text-sm leading-relaxed">{summary}</p>
+                <a class="link link-hover mt-auto pt-2 text-sm font-semibold after:absolute after:inset-0 after:rounded-xl" href={`/research/ieee-access/${file}-deviations.pdf`} target="_blank" rel="noopener noreferrer" aria-label={`${title} · ${t("Open full figure (PDF)", "Apri la figura ingrandita (PDF)")}`}>
+                  {t("Open figure (PDF)", "Apri figura (PDF)")}
+                </a>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+        <dl class="grid gap-4 sm:grid-cols-2">
+          <div class="rounded-lg border-l-4 border-primary bg-base-200/60 p-4">
+            <dt class="font-bold">{t("Throughput and latency", "Throughput e latenza")}</dt>
+            <dd class="mt-1 text-sm leading-relaxed">{t("Blockchain, workload and their interaction had the largest effects. The largest upward deviations observed across the study were about 497% for throughput and 573% for latency, relative to the respective configuration means.", "Blockchain, carico e la loro interazione hanno avuto gli effetti maggiori. Nell’insieme degli esperimenti, gli scostamenti più alti sono stati circa il 497% per il throughput e il 573% per la latenza, rispetto alle medie delle rispettive configurazioni.")}</dd>
           </div>
-          <figcaption class="mt-3 text-sm leading-relaxed">
-            {t(`Thirteen runs averaged under 10 s and three averaged between 10 and 20 s. In one run, the average reached ${maxLatency} s, about 573% above the mean of ${meanLatency} s for this configuration.`, `In tredici esecuzioni la latenza media è stata inferiore a 10 s, in tre tra 10 e 20 s. In una sola esecuzione ha raggiunto ${maxLatency} s, circa il 573% in più della media di ${meanLatency} s per questa configurazione.`)}
-          </figcaption>
-        </figure>
-        <ul class="space-y-3 text-base leading-relaxed">
-          <li>
-            <h3 class="font-bold">{t("Throughput and latency", "Throughput e latenza")}</h3>
-            <p>{t("The largest observed upward deviations were about 497% for throughput and 573% for confirmation latency, each relative to its own configuration mean. The blockchain, the workload and their interaction accounted for the largest effects on both metrics.", "Gli scostamenti massimi osservati verso l’alto sono stati circa il 497% per il throughput e il 573% per la latenza di conferma, rispetto alla media della rispettiva configurazione. Blockchain, carico e interazione tra i due hanno avuto gli effetti maggiori su entrambe le misure.")}</p>
-          </li>
-          <li>
-            <h3 class="font-bold">{t("Energy use", "Consumi energetici")}</h3>
-            <p>{t("Processor-package energy varied less across repetitions. The workload had the largest effect on energy in the statistical model.", "L’energia assorbita dai processori variava meno tra le ripetizioni. Nel modello statistico, il carico aveva l’effetto maggiore sul consumo.")}</p>
-          </li>
-          <li>
-            <h3 class="font-bold">{t("Transaction outcomes", "Esito delle transazioni")}</h3>
-            <p>{t("Of the 4,080 runs, 3,125 committed at least one transaction. Another 953 submitted transactions without recording a commit, and two recorded no submissions. We counted these outcomes separately and analysed throughput and confirmation latency among eligible runs with commits.", "Delle 4.080 esecuzioni, 3.125 hanno confermato almeno una transazione. In 953 sono state inviate transazioni senza registrare conferme e in due non sono stati registrati invii. Abbiamo contato separatamente i tre esiti e analizzato throughput e latenza nelle esecuzioni con conferme e misure utilizzabili.")}</p>
-          </li>
-        </ul>
+          <div class="rounded-lg border-l-4 border-primary bg-base-200/60 p-4">
+            <dt class="font-bold">{t("Energy", "Consumi energetici")}</dt>
+            <dd class="mt-1 text-sm leading-relaxed">{t("Energy use varied less across repetitions and was most strongly associated with workload in the fitted model.", "I consumi variavano meno tra le ripetizioni. Nel modello statistico, il carico di lavoro era il fattore più legato al consumo.")}</dd>
+          </div>
+        </dl>
       </div>
     </section>
 
