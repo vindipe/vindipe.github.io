@@ -1,6 +1,7 @@
 ---
 import { translator } from "../../i18n/locale";
 import ResearchDetailPage from "../../components/ResearchDetailPage.astro";
+import { ieeeAccessPaper } from "../../data/ieeeAccessPaper";
 
 const t = translator(Astro.url.pathname);
 
@@ -13,6 +14,7 @@ const githubUrl =
 const externalLinks = [
   { label: t("Open dataset on Zenodo", "Apri il dataset su Zenodo"), href: zenodoUrl },
   { label: t("Open GitHub repository", "Apri il repository GitHub"), href: githubUrl },
+  { label: t("IEEE Access study", "Studio su IEEE Access"), href: ieeeAccessPaper.path, internal: true },
   {
     label: t("Associated ACM DLT article", "Articolo di riferimento su ACM DLT"),
     href: "https://doi.org/10.1145/3828757",
@@ -39,7 +41,7 @@ const sections = [
   {
     id: "reproducibility-resources",
     title: t("Reproducibility resources", "Risorse per la riproducibilità"),
-    body: t("The GitHub repository provides the released CSV, a data dictionary, methodology and provenance notes, citation metadata, and the CC BY 4.0 license. The experiments were conducted with Lilith, the topology-aware blockchain benchmarking framework.", "Su GitHub trovi il CSV, il significato delle colonne, le note su metodo e provenienza dei dati, le indicazioni per la citazione e la licenza CC BY 4.0. Per eseguire gli esperimenti abbiamo usato Lilith."),
+    body: t("GitHub provides both the aggregate CSV and the individual runs, along with the analysis used in the IEEE Access study, a data dictionary, methodology notes and the CC BY 4.0 data license. We ran the experiments with Lilith, the topology-aware blockchain benchmarking framework.", "Su GitHub trovi il CSV con i dati aggregati e quello con le singole esecuzioni, il codice di analisi usato per lo studio su IEEE Access, il dizionario dei dati, le note sul metodo e la licenza CC BY 4.0 per i dati. Abbiamo condotto gli esperimenti con il framework Lilith."),
   },
 ];
 ---
@@ -47,7 +49,7 @@ const sections = [
 <ResearchDetailPage
   pageTitle={t("Blockchain Benchmark Repeatability Dataset", "Dataset sulla ripetibilità dei benchmark blockchain")}
   {title}
-  subtitle={t("Public research dataset associated with the ACM Distributed Ledger Technologies: Research and Practice journal article on topology-aware blockchain benchmarking.", "Dataset pubblico associato all’articolo su ACM Distributed Ledger Technologies: Research and Practice dedicato al benchmarking delle blockchain con topologie controllate.")}
+  subtitle={t("Public benchmark data for the ACM DLT study on network topology and the IEEE Access study on run-to-run variability.", "Dati pubblici per lo studio su ACM DLT dedicato alla topologia di rete e quello su IEEE Access dedicato alla variabilità tra esecuzioni.")}
   description={t("Download a public dataset for comparing blockchain benchmark repeatability and performance predictability across controlled network conditions.", "Dataset pubblico per confrontare ripetibilità e prevedibilità dei benchmark blockchain al variare di piattaforme, carichi e condizioni di rete.")}
   badge="Dataset"
   tags={[

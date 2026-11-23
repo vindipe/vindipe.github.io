@@ -1,4 +1,5 @@
 import { translator } from "../i18n/locale";
+import { ieeeAccessPaper } from "./ieeeAccessPaper";
 
 export type RecentWork = {
   title: string;
@@ -15,6 +16,15 @@ export function getRecentWorks(pathname: string): RecentWork[] {
   const t = translator(pathname);
 
   return [
+  {
+    title: t("How repeatable are blockchain benchmarks?", "Quanto sono ripetibili i benchmark delle blockchain?"),
+    desc: t(...ieeeAccessPaper.description),
+    url: ieeeAccessPaper.path,
+    img: ieeeAccessPaper.cover,
+    badge: ieeeAccessPaper.journal,
+    date: "2026-11-23",
+    target: "_self",
+  },
   {
     title: t("A new research line: time", "Un nuovo filone di ricerca: il tempo"),
     desc: t("Discover CIRCULA, an SNSF-funded project exploring expiry and renewal in blockchain systems.", "CIRCULA studia come gestire scadenza e rinnovo nelle blockchain. Il progetto è finanziato dal Fondo nazionale svizzero."),

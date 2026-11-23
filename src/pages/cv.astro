@@ -2,12 +2,23 @@
 import { getLocale, inLanguage, translator } from "../i18n/locale";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TimeLineElement from "../components/cv/TimeLine.astro";
+import { ieeeAccessPaper } from "../data/ieeeAccessPaper";
 
 const t = translator(Astro.url.pathname);
 const locale = getLocale(Astro.url.pathname);
 const localPath = (href: string) => inLanguage(href, locale);
 
 const publications = [
+  {
+    title: ieeeAccessPaper.title,
+    badge: ieeeAccessPaper.journal,
+    authors: `${ieeeAccessPaper.authors.join(", ")}.`,
+    venue: `${ieeeAccessPaper.journal}, ${ieeeAccessPaper.year}.`,
+    links: [
+      { label: t("Research page", "Scheda dello studio"), href: ieeeAccessPaper.path, primary: true },
+      { label: t("DOI / Paper", "Leggi l’articolo (DOI)"), href: ieeeAccessPaper.doiUrl, external: true },
+    ],
+  },
   {
     title:
       "The Impact of Network Topology on Performance Metrics and Energy Consumption for Blockchains: Towards Repeatable Benchmarking",
@@ -133,7 +144,7 @@ const publications = [
     <div class="mt-6 flex flex-wrap gap-3">
       <a
         class="btn btn-primary"
-        href={t("/cv/Vincenzo_Di_Perna_CV_2026.pdf?v=20260901", "/cv/Vincenzo_Di_Perna_CV_IT.pdf")}
+        href={t("/cv/Vincenzo_Di_Perna_CV_2026.pdf", "/cv/Vincenzo_Di_Perna_CV_IT.pdf") + "?v=20261123"}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -199,7 +210,7 @@ const publications = [
         title={t("Blockchain Benchmarking & Distributed Systems Research", "Valutazione sperimentale delle blockchain e ricerca sui sistemi distribuiti")}
         subtitle={t("PhD research and related publications", "Ricerca di dottorato e pubblicazioni")}
       >
-        {t("Designed, executed, and analyzed reproducible blockchain experiments across multiple platforms, workloads, and network conditions. Evaluated throughput, latency, energy usage, variability, repeatability, and performance predictability under controlled experimental settings. Recent outputs include an ACM DLT journal article on topology-aware blockchain performance evaluation.", "Ho progettato, condotto e analizzato esperimenti riproducibili con più piattaforme blockchain, carichi di lavoro e condizioni di rete. In ambiente controllato ho misurato throughput, latenza e consumi energetici e studiato la variabilità, la ripetibilità e la prevedibilità delle prestazioni. Un articolo sulla rivista ACM DLT approfondisce l’effetto della topologia di rete.")}
+        {t("Designed, executed, and analyzed reproducible blockchain experiments across multiple platforms, workloads, and network conditions. Evaluated throughput, latency, energy usage, variability, repeatability, and performance predictability under controlled experimental settings. The results led to articles in ACM DLT on network topology and in IEEE Access on run-to-run variability.", "Ho progettato, condotto e analizzato esperimenti riproducibili con più piattaforme blockchain, carichi di lavoro e condizioni di rete. In ambiente controllato ho misurato throughput, latenza e consumi energetici e studiato la variabilità, la ripetibilità e la prevedibilità delle prestazioni. Lo studio su ACM DLT riguarda la topologia di rete e quello su IEEE Access la variabilità tra esecuzioni.")}
       </TimeLineElement>
 
       <TimeLineElement

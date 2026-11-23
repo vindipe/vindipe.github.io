@@ -1,6 +1,7 @@
 ---
 import { getLocale, inLanguage, translator } from "../../i18n/locale";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { ieeeAccessPaper } from "../../data/ieeeAccessPaper";
 
 const t = translator(Astro.url.pathname);
 const locale = getLocale(Astro.url.pathname);
@@ -19,6 +20,7 @@ const keyPoints = [
 
 const researchLinks = [
   { label: t("Open ACM DOI", "Leggi l’articolo su ACM (DOI)"), href: doiUrl, primary: true },
+  { label: t("Follow-up study in IEEE Access", "Studio successivo su IEEE Access"), href: ieeeAccessPaper.path, internal: true },
   { label: t("Related DEBS paper", "Articolo DEBS correlato"), href: debsUrl },
   { label: t("Lilith artifact DOI", "DOI del framework Lilith"), href: lilithUrl },
   { label: t("Lilith research page", "Scheda di Lilith"), href: "/research/lilith-benchmarking-framework", internal: true },

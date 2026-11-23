@@ -1,0 +1,183 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { ieeeAccessPaper as paper } from "../../data/ieeeAccessPaper";
+import { getLocale, inLanguage, translator } from "../../i18n/locale";
+
+const locale = getLocale(Astro.url.pathname);
+const t = translator(Astro.url.pathname);
+const localPath = (href: string) => inLanguage(href, locale);
+const description = t(...paper.description);
+const datasetPage = localPath("/research/blockchain-repeatability-dataset/");
+
+const experiment = [
+  { label: t("Blockchain systems", "Blockchain"), value: "Algorand, Diem, Ethereum Clique, Quorum IBFT, Solana" },
+  { label: t("Network topologies", "Topologie di rete"), value: t("Fat-tree, full mesh, hypercube, scale-free, torus", "Fat-tree, maglia completa, ipercubo, rete a invarianza di scala, toro") },
+  { label: t("Workloads", "Carichi di lavoro"), value: "DDoS, FIFA, GAFAM, Gaming, PayPal, VISA" },
+  { label: t("Validator sets", "Gruppi di validatori"), value: t("10 or 40 validators", "10 o 40 validatori") },
+];
+
+// Mean confirmation latency (seconds) for each of the 17 qualifying runs in
+// the Quorum IBFT / PayPal / hypercube / 10-validator cell (public plot manifest).
+const latencies = [5.44, 6.90, 6.92, 6.93, 7.02, 7.03, 7.10, 7.14, 7.24, 7.36, 7.46, 7.52, 9.39, 13.13, 13.27, 18.64, 90.74];
+const counts = Array.from({ length: 10 }, (_, index) =>
+  latencies.filter((value) => Math.floor(value / 10) === index).length,
+);
+const maxCount = Math.max(...counts);
+const seconds = new Intl.NumberFormat(locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const meanLatency = seconds.format(latencies.reduce((sum, value) => sum + value, 0) / latencies.length);
+const maxLatency = seconds.format(Math.max(...latencies));
+
+const citation = `${paper.authors.join(", ")}. (${paper.year}). ${paper.title}. ${paper.journal}.`;
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ScholarlyArticle",
+  headline: paper.title,
+  description,
+  url: new URL(localPath(paper.path), Astro.site ?? Astro.url).href,
+  sameAs: paper.doiUrl,
+  identifier: paper.doi,
+  datePublished: String(paper.year),
+  inLanguage: "en",
+  author: paper.authors.map((name) => ({ "@type": "Person", name })),
+  isPartOf: { "@type": "Periodical", name: paper.journal },
+};
+---
+
+<BaseLayout
+  title={`${paper.title} | Vincenzo Di Perna`}
+  {description}
+  image={paper.cover}
+  ogType="article"
+  sideBarActiveItemID="research"
+  sideBarPageLabel={t("IEEE Access · Repeatability", "IEEE Access · Ripetibilità")}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+
+  <article class="space-y-8">
+    <header>
+      <a class="btn btn-sm btn-outline mb-5" href={localPath("/research/")}>
+        {t("← Back to Research", "← Torna alla ricerca")}
+      </a>
+      <div class="network-protected card bg-base-100 border-t-4 border-primary shadow-md">
+        <div class="card-body p-6 sm:p-9 gap-4">
+          <p class="text-sm font-semibold">{paper.journal} · {paper.year}</p>
+          <h1 class="text-3xl sm:text-4xl font-bold leading-tight" lang="en">{paper.title}</h1>
+          <p class="text-lg leading-relaxed">{description}</p>
+          <p class="text-sm opacity-80">{paper.authors.join(", ")}</p>
+          <div class="flex flex-wrap gap-3 mt-2">
+            <a class="btn btn-primary" href={paper.doiUrl} target="_blank" rel="noopener noreferrer">
+              {t("Read on IEEE Xplore", "Leggi su IEEE Xplore")}
+            </a>
+            <a class="btn btn-outline" href={datasetPage}>{t("Explore the dataset", "Esplora il dataset")}</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="network-protected card bg-base-100 shadow-md" aria-labelledby="experimental-design">
+      <div class="card-body p-6 sm:p-8 gap-4">
+        <h2 id="experimental-design" class="text-2xl font-bold">{t("Experimental design", "Come abbiamo condotto gli esperimenti")}</h2>
+        <p class="leading-relaxed">
+          {t("We used", "Abbiamo usato")}
+          <a class="link font-medium" href={localPath("/research/lilith-benchmarking-framework/")}>Lilith</a>
+          {t("to run blockchain clients under emulated geographic network conditions. We reset the system state between runs and measured committed throughput, transaction confirmation latency and processor-package energy.", "per eseguire i client blockchain emulando reti distribuite geograficamente. Abbiamo ripristinato lo stato a ogni esecuzione e misurato le transazioni confermate al secondo, la latenza di conferma e l’energia assorbita dai processori.")}
+        </p>
+        <dl class="grid grid-cols-1 sm:grid-cols-3 gap-px rounded-xl overflow-hidden bg-base-300 border border-base-300">
+          <div class="bg-base-200 p-4 flex flex-col-reverse">
+            <dt class="text-sm">{t("benchmark runs", "esecuzioni analizzate")}</dt>
+            <dd class="text-2xl font-bold tabular-nums">{t("4,080", "4.080")}</dd>
+          </div>
+          <div class="bg-base-200 p-4 flex flex-col-reverse">
+            <dt class="text-sm">{t("configurations", "configurazioni")}</dt>
+            <dd class="text-2xl font-bold tabular-nums">300</dd>
+          </div>
+          <div class="bg-base-200 p-4 flex flex-col-reverse">
+            <dt class="text-sm">{t("runs per configuration", "esecuzioni per configurazione")}</dt>
+            <dd class="text-2xl font-bold tabular-nums">9–26</dd>
+          </div>
+        </dl>
+        <dl class="grid sm:grid-cols-2 gap-x-8 gap-y-3">
+          {experiment.map(({ label, value }) => (
+            <div>
+              <dt class="font-semibold">{label}</dt>
+              <dd class="text-sm leading-relaxed opacity-80">{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="network-protected card bg-base-100 shadow-md" aria-labelledby="findings">
+      <div class="card-body p-6 sm:p-8 gap-5">
+        <h2 id="findings" class="text-2xl font-bold">{t("What the averages hide", "Che cosa nascondono le medie")}</h2>
+        <figure class="!block rounded-xl border border-base-300 bg-base-200 p-4 sm:p-6">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <h3 class="font-bold">{t("Confirmation latency in 17 runs", "Latenza di conferma in 17 esecuzioni")}</h3>
+            <span class="text-sm opacity-80">Quorum IBFT · PayPal · {t("hypercube · 10 validators", "ipercubo · 10 validatori")}</span>
+          </div>
+          <div class="mt-4" aria-hidden="true">
+            <div class="grid grid-cols-10 gap-1 h-24 border-b border-base-content/30">
+              {counts.map((count, index) => (
+                <div class="flex items-end h-full">
+                  {count > 0 && <div class:list={["relative w-full rounded-t", index === 9 ? "bg-base-content" : "bg-primary"]}
+                    style={`height: ${count / maxCount * 76}%`}>
+                    <span class="absolute bottom-full left-1/2 -translate-x-1/2 pb-0.5 text-xs font-semibold tabular-nums">{count}</span>
+                  </div>}
+                </div>
+              ))}
+            </div>
+            <div class="flex justify-between mt-1 text-xs tabular-nums opacity-80"><span>0 s</span><span>20 s</span><span>40 s</span><span>60 s</span><span>80 s</span><span>100 s</span></div>
+          </div>
+          <figcaption class="mt-3 text-sm leading-relaxed">
+            {t(`Thirteen runs averaged under 10 s and three averaged between 10 and 20 s. In one run, the average reached ${maxLatency} s, about 573% above the mean of ${meanLatency} s for this configuration.`, `In tredici esecuzioni la latenza media è stata inferiore a 10 s, in tre tra 10 e 20 s. In una sola esecuzione ha raggiunto ${maxLatency} s, circa il 573% in più della media di ${meanLatency} s per questa configurazione.`)}
+          </figcaption>
+        </figure>
+        <ul class="space-y-3 text-base leading-relaxed">
+          <li>
+            <h3 class="font-bold">{t("Throughput and latency", "Throughput e latenza")}</h3>
+            <p>{t("The largest observed upward deviations were about 497% for throughput and 573% for confirmation latency, each relative to its own configuration mean. The blockchain, the workload and their interaction accounted for the largest effects on both metrics.", "Gli scostamenti massimi osservati verso l’alto sono stati circa il 497% per il throughput e il 573% per la latenza di conferma, rispetto alla media della rispettiva configurazione. Blockchain, carico e interazione tra i due hanno avuto gli effetti maggiori su entrambe le misure.")}</p>
+          </li>
+          <li>
+            <h3 class="font-bold">{t("Energy use", "Consumi energetici")}</h3>
+            <p>{t("Processor-package energy varied less across repetitions. The workload had the largest effect on energy in the statistical model.", "L’energia assorbita dai processori variava meno tra le ripetizioni. Nel modello statistico, il carico aveva l’effetto maggiore sul consumo.")}</p>
+          </li>
+          <li>
+            <h3 class="font-bold">{t("Transaction outcomes", "Esito delle transazioni")}</h3>
+            <p>{t("Of the 4,080 runs, 3,125 committed at least one transaction. Another 953 submitted transactions without recording a commit, and two recorded no submissions. We counted these outcomes separately and analysed throughput and confirmation latency among eligible runs with commits.", "Delle 4.080 esecuzioni, 3.125 hanno confermato almeno una transazione. In 953 sono state inviate transazioni senza registrare conferme e in due non sono stati registrati invii. Abbiamo contato separatamente i tre esiti e analizzato throughput e latenza nelle esecuzioni con conferme e misure utilizzabili.")}</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="network-protected card bg-base-100 shadow-md" aria-labelledby="analysis">
+      <div class="card-body p-6 sm:p-8 gap-4">
+        <h2 id="analysis" class="text-2xl font-bold">{t("From repeated runs to predictable performance", "Dalle ripetizioni alla prevedibilità delle prestazioni")}</h2>
+        <p class="leading-relaxed">
+          {t("Our", "Il nostro")}
+          <a class="link font-medium" href={localPath("/research/acm-dlt-network-topologies-blockchain-performance/")}>
+            {t("ACM DLT study", "studio su ACM DLT")}
+          </a>
+          {t("introduced the P0–P3 predictability ladder. Here we revisited the shared benchmark data one run at a time. We measured how often each configuration committed transactions, then estimated dispersion and extreme deviations for each performance metric.", "ha introdotto la scala di prevedibilità P0–P3. In questo articolo abbiamo rianalizzato gli stessi dati a livello di singola esecuzione. Abbiamo misurato quanto spesso ogni configurazione portava a conferme, poi abbiamo stimato la dispersione e gli scostamenti estremi per ogni misura di prestazione.")}
+        </p>
+        <p class="leading-relaxed">
+          {t("We used logistic regression for the chance of observing a commit and robust analysis of variance for the measured performance. We resampled the data to estimate uncertainty and repeated the analysis with nine runs per configuration to check the effect of uneven sample sizes. The largest deviations describe individual observations in this testbed.", "Abbiamo usato la regressione logistica per stimare la probabilità di osservare una conferma e l’analisi della varianza robusta per studiare le prestazioni misurate. Abbiamo ricampionato i dati per stimare l’incertezza e ripetuto l’analisi con nove esecuzioni per configurazione per capire quanto contassero le differenze di numerosità. Gli scostamenti massimi descrivono singole osservazioni in questo ambiente sperimentale.")}
+        </p>
+      </div>
+    </section>
+
+    <section class="network-protected card bg-base-100 shadow-md" aria-labelledby="citation">
+      <div class="card-body p-6 sm:p-8 gap-4">
+        <h2 id="citation" class="text-2xl font-bold">{t("Citation and materials", "Citazione e materiali")}</h2>
+        <p class="leading-relaxed" lang="en">{citation} <a class="link break-words" href={paper.doiUrl}>{paper.doi}</a></p>
+        <div class="flex flex-wrap gap-3">
+          <a class="btn btn-sm btn-outline" href="https://doi.org/10.5281/zenodo.17681717" target="_blank" rel="noopener noreferrer">
+            {t("Dataset on Zenodo", "Dataset su Zenodo")}
+          </a>
+          <a class="btn btn-sm btn-outline" href="https://github.com/vindipe/blockchain-repeatability-benchmarking" target="_blank" rel="noopener noreferrer">
+            {t("Data and analysis on GitHub", "Dati e analisi su GitHub")}
+          </a>
+        </div>
+      </div>
+    </section>
+  </article>
+</BaseLayout>

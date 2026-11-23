@@ -1,6 +1,7 @@
 ---
 import { translator } from "../../i18n/locale";
 import ResearchDetailPage from "../../components/ResearchDetailPage.astro";
+import { ieeeAccessPaper } from "../../data/ieeeAccessPaper";
 
 const t = translator(Astro.url.pathname);
 ---
@@ -32,6 +33,11 @@ const t = translator(Astro.url.pathname);
     {
       label: t("ACM DLT journal article", "Articolo sulla rivista ACM DLT"),
       href: "https://dl.acm.org/doi/10.1145/3828757",
+    },
+    {
+      label: t("IEEE Access study", "Studio su IEEE Access"),
+      href: ieeeAccessPaper.path,
+      internal: true,
     },
     {
       label: t("Related DEBS '25 paper", "Articolo DEBS ’25 correlato"),
@@ -80,7 +86,7 @@ const t = translator(Astro.url.pathname);
     {
       id: "phd-research",
       title: t("Connection to my PhD work", "Il legame con il dottorato"),
-      body: t("Lilith was developed as part of my doctoral research on comparing blockchains through performance, energy, repeatability, predictability, and economic-efficiency perspectives. The framework supports the topology-aware benchmarking line of work behind my ACM DLT journal article, DEBS '25, and ICBC '25 research outputs.", "Ho sviluppato Lilith durante il dottorato per studiare prestazioni, consumi, ripetibilità e prevedibilità delle blockchain. Il framework è alla base degli esperimenti descritti negli studi ACM DLT, DEBS ’25 e ICBC ’25."),
+      body: t("Lilith was developed as part of my doctoral research on comparing blockchains through performance, energy, repeatability, predictability, and economic-efficiency perspectives. The framework supports the experiments behind the IEEE Access and ACM DLT articles, and the DEBS ’25 and ICBC ’25 papers.", "Ho sviluppato Lilith durante il dottorato per studiare prestazioni, consumi, ripetibilità e prevedibilità delle blockchain. Il framework è alla base degli esperimenti descritti negli articoli IEEE Access, ACM DLT, DEBS ’25 e ICBC ’25."),
     },
   ]}
 />

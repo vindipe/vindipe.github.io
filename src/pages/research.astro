@@ -1,12 +1,24 @@
 ---
 import { getLocale, inLanguage, translator } from "../i18n/locale";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { ieeeAccessPaper } from "../data/ieeeAccessPaper";
 
 const t = translator(Astro.url.pathname);
 const locale = getLocale(Astro.url.pathname);
 const localPath = (href: string) => inLanguage(href, locale);
 
 const publications = [
+  {
+    title: ieeeAccessPaper.title,
+    badge: ieeeAccessPaper.journal,
+    href: ieeeAccessPaper.path,
+    desc: t(...ieeeAccessPaper.description),
+    tags: [
+      t("Blockchain benchmarking", "Benchmarking delle blockchain"),
+      t("Repeatability", "Ripetibilità"),
+      t("Performance predictability", "Prevedibilità delle prestazioni"),
+    ],
+  },
   {
     title:
       t("The Impact of Network Topology on Performance Metrics and Energy Consumption for Blockchains: Towards Repeatable Benchmarking", "L’effetto della topologia di rete sulle prestazioni e sui consumi delle blockchain"),

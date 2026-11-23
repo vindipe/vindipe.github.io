@@ -90,8 +90,8 @@ const researchStructuredData = {
                 <a
                   class="btn btn-sm btn-outline"
                   href={localPath(link.href)}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={link.internal ? undefined : "_blank"}
+                  rel={link.internal ? undefined : "noopener noreferrer"}
                 >
                   {link.label}
                 </a>
