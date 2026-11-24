@@ -11,7 +11,7 @@ const datasetPage = localPath("/research/blockchain-repeatability-dataset/");
 
 const experiment = [
   { label: t("Blockchain systems", "Blockchain"), value: "Algorand, Diem, Ethereum Clique, Quorum IBFT, Solana" },
-  { label: t("Network topologies", "Topologie di rete"), value: t("Fat-tree, full mesh, hypercube, scale-free, torus", "Fat-tree, maglia completa, ipercubo, rete a invarianza di scala, toro") },
+  { label: t("Network topologies", "Topologie di rete"), value: "Fat Tree, Full Mesh, Hypercube, Scale-Free, Torus" },
   { label: t("Workloads", "Carichi di lavoro"), value: "DDoS, FIFA, GAFAM, Gaming, PayPal, VISA" },
   { label: t("Validator sets", "Gruppi di validatori"), value: t("10 or 40 validators", "10 o 40 validatori") },
 ];
@@ -109,7 +109,7 @@ const structuredData = {
         <p class="leading-relaxed">
           {t("We used", "Abbiamo usato")}
           <a class="link font-medium" href={localPath("/research/lilith-benchmarking-framework/")}>Lilith</a>
-          {t("to run blockchain clients under emulated geographic network conditions. We reset the system state between runs and measured committed throughput, transaction confirmation latency and processor-package energy.", "per eseguire i client blockchain emulando reti distribuite geograficamente. Abbiamo ripristinato lo stato a ogni esecuzione e misurato le transazioni confermate al secondo, la latenza di conferma e l’energia assorbita dai processori.")}
+          {t("to run blockchain clients under emulated geographic network conditions. We reset the system state between runs and measured committed throughput, transaction confirmation latency and processor-package energy.", "per avviare i client delle blockchain e riprodurre in laboratorio le condizioni di reti distribuite geograficamente. Tra un’esecuzione e l’altra abbiamo ripristinato lo stato iniziale. Per ogni prova abbiamo raccolto misure di throughput, latenza di conferma e consumo energetico dei processori.")}
         </p>
         <dl class="grid grid-cols-1 sm:grid-cols-3 gap-px rounded-xl overflow-hidden bg-base-300 border border-base-300">
           <div class="bg-base-200 p-4 flex flex-col-reverse">
@@ -140,7 +140,7 @@ const structuredData = {
       <div class="card-body p-5 sm:p-8 gap-5">
         <h2 id="findings" class="text-2xl font-bold">{t("Results across five blockchains", "Risultati sulle cinque blockchain")}</h2>
         <p class="leading-relaxed">
-          {t("The table shows how often each blockchain confirmed at least one transaction, grouping all workloads and topologies by validator-set size. This puts the performance plots in context, since those plots show measurements from runs that provided service.", "La tabella mostra quante esecuzioni hanno portato alla conferma di almeno una transazione, raggruppando carichi e topologie per numero di validatori. Il confronto aiuta a leggere i grafici delle prestazioni, che riportano misure ottenute nelle esecuzioni con conferme.")}
+          {t("The table shows how often each blockchain confirmed at least one transaction, grouping all workloads and topologies by validator-set size. This puts the performance plots in context, since those plots show measurements from runs that provided service.", "Per ciascuna blockchain, la tabella riporta quante esecuzioni hanno confermato almeno una transazione sul totale delle prove. I conteggi sono distinti per numero di validatori e comprendono tutti i carichi e tutte le topologie. I grafici riportano le misure delle esecuzioni con almeno una conferma.")}
         </p>
         <div class="rounded-xl border border-base-300">
           <table class="w-full table-fixed text-xs sm:text-sm" aria-describedby="commit-outcomes-note">
@@ -168,7 +168,7 @@ const structuredData = {
           </table>
         </div>
         <p class="text-sm leading-relaxed opacity-80" id="commit-outcomes-note">
-          {t("Data from the paper’s execution-outcomes table. Across all five blockchains, 3,125 runs committed at least one transaction, 953 recorded submissions with zero commits and 2 recorded no submissions.", "Dati dalla tabella del paper sugli esiti delle esecuzioni. In totale, 3.125 esecuzioni hanno registrato almeno una conferma, 953 hanno registrato invii e zero conferme e 2 non hanno registrato invii.")}
+          {t("Data from the paper’s execution-outcomes table. Across all five blockchains, 3,125 runs committed at least one transaction, 953 recorded submissions with zero commits and 2 recorded no submissions.", "La tabella riprende i dati dell’articolo su IEEE Access. Su 4.080 esecuzioni, 3.125 hanno registrato almeno una conferma, in 953 sono state inviate transazioni senza alcuna conferma e in 2 non sono stati registrati invii.")}
         </p>
       </div>
     </section>
@@ -177,7 +177,7 @@ const structuredData = {
       <div class="card-body p-5 sm:p-8 gap-5">
         <h2 id="paper-figures" class="text-2xl font-bold">{t("Variability across repeated runs", "Variabilità tra le ripetizioni")}</h2>
         <p class="leading-relaxed">
-          {t("The three figures from the paper cover all five blockchains and six workloads, with separate panels for 10 and 40 validators. Each dot represents one eligible run. Its height shows the signed difference from the mean of its own configuration, in absolute units on the left and as a percentage on the right.", "Le tre figure del paper coprono tutte e cinque le blockchain e tutti e sei i carichi, con pannelli distinti per 10 e 40 validatori. Ogni punto rappresenta un’esecuzione con una misura valida. La sua altezza indica lo scostamento con segno dalla media della stessa configurazione, in unità assolute a sinistra e in percentuale a destra.")}
+          {t("The three figures from the paper cover all five blockchains and six workloads, with separate panels for 10 and 40 validators. Each dot represents one eligible run. Its height shows the signed difference from the mean of its own configuration, in absolute units on the left and as a percentage on the right.", "Le figure dell’articolo mostrano i risultati per cinque blockchain e sei carichi di lavoro, con pannelli distinti per 10 e 40 validatori. Ogni punto corrisponde a un’esecuzione con una misura valida. I valori sopra e sotto lo zero indicano rispettivamente misure superiori e inferiori alla media della stessa configurazione. A sinistra lo scostamento è espresso nell’unità di misura originale, a destra in percentuale.")}
         </p>
         <div class="grid gap-4 sm:grid-cols-3">
           {figures.map(({ file, title, summary }) => (
@@ -206,7 +206,7 @@ const structuredData = {
         <dl class="grid gap-4 sm:grid-cols-2">
           <div class="rounded-lg border-l-4 border-primary bg-base-200/60 p-4">
             <dt class="font-bold">{t("Throughput and latency", "Throughput e latenza")}</dt>
-            <dd class="mt-1 text-sm leading-relaxed">{t("Blockchain, workload and their interaction had the largest effects. The largest upward deviations observed across the study were about 497% for throughput and 573% for latency, relative to the respective configuration means.", "Blockchain, carico e la loro interazione hanno avuto gli effetti maggiori. Nell’insieme degli esperimenti, gli scostamenti più alti sono stati circa il 497% per il throughput e il 573% per la latenza, rispetto alle medie delle rispettive configurazioni.")}</dd>
+            <dd class="mt-1 text-sm leading-relaxed">{t("Blockchain, workload and their interaction had the largest effects. The largest upward deviations observed across the study were about 497% for throughput and 573% for latency, relative to the respective configuration means.", "La blockchain, il carico di lavoro e la loro interazione hanno avuto gli effetti maggiori. I massimi osservati hanno superato la media della rispettiva configurazione di circa il 497% per il throughput e del 573% per la latenza.")}</dd>
           </div>
           <div class="rounded-lg border-l-4 border-primary bg-base-200/60 p-4">
             <dt class="font-bold">{t("Energy", "Consumi energetici")}</dt>
@@ -227,7 +227,7 @@ const structuredData = {
           {t("introduced the P0–P3 predictability ladder. Here we revisited the shared benchmark data one run at a time. We measured how often each configuration committed transactions, then estimated dispersion and extreme deviations for each performance metric.", "ha introdotto la scala di prevedibilità P0–P3. In questo articolo abbiamo rianalizzato gli stessi dati a livello di singola esecuzione. Abbiamo misurato quanto spesso ogni configurazione portava a conferme, poi abbiamo stimato la dispersione e gli scostamenti estremi per ogni misura di prestazione.")}
         </p>
         <p class="leading-relaxed">
-          {t("We used logistic regression for the chance of observing a commit and robust analysis of variance for the measured performance. We resampled the data to estimate uncertainty and repeated the analysis with nine runs per configuration to check the effect of uneven sample sizes. The largest deviations describe individual observations in this testbed.", "Abbiamo usato la regressione logistica per stimare la probabilità di osservare una conferma e l’analisi della varianza robusta per studiare le prestazioni misurate. Abbiamo ricampionato i dati per stimare l’incertezza e ripetuto l’analisi con nove esecuzioni per configurazione per capire quanto contassero le differenze di numerosità. Gli scostamenti massimi descrivono singole osservazioni in questo ambiente sperimentale.")}
+          {t("We used logistic regression for the chance of observing a commit and robust analysis of variance for the measured performance. We resampled the data to estimate uncertainty and repeated the analysis with nine runs per configuration to check the effect of uneven sample sizes. The largest deviations describe individual observations in this testbed.", "Abbiamo usato la regressione logistica per stimare la probabilità di osservare almeno una conferma e l’analisi della varianza con stime robuste per confrontare le prestazioni. Abbiamo stimato l’incertezza tramite ricampionamento e ripetuto l’analisi con nove esecuzioni per configurazione, così da valutare l’effetto del diverso numero di prove. Gli scostamenti massimi si riferiscono alle condizioni sperimentali dello studio.")}
         </p>
       </div>
     </section>
